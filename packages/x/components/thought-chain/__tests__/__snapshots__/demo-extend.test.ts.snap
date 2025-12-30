@@ -2019,6 +2019,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       loading status:
     </span>
@@ -2140,6 +2141,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       success status:
     </span>
@@ -2270,6 +2272,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       error status:
     </span>
@@ -2394,6 +2397,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       abort status
     </span>
@@ -2524,6 +2528,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       custom icon:
     </span>
@@ -2648,6 +2653,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       click:
     </span>
@@ -2943,6 +2949,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       blink:
     </span>
@@ -3072,6 +3079,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
   >
     <span
       class="ant-typography css-var-_r_9_"
+      style="white-space: nowrap;"
     >
       disabled:
     </span>
@@ -3079,7 +3087,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
       class="ant-flex css-var-_r_9_ ant-flex-wrap-wrap ant-flex-align-center ant-flex-gap-middle"
     >
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-click ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status"
@@ -3116,7 +3124,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-click ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status"
@@ -3153,7 +3161,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-click ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status"
@@ -3195,7 +3203,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-click ant-thought-chain-item-error ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-error ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status ant-thought-chain-status-error"
@@ -3237,7 +3245,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-click ant-thought-chain-item-error ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-error ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status ant-thought-chain-status-error"
@@ -3279,7 +3287,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-click ant-thought-chain-item-error ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-error ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status ant-thought-chain-status-error"
@@ -3321,7 +3329,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-click ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-solid ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -3360,7 +3368,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-click ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-outlined ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status ant-thought-chain-status-success"
@@ -3399,7 +3407,7 @@ exports[`renders components/thought-chain/demo/simple.tsx extend context correct
         </div>
       </div>
       <div
-        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-click ant-thought-chain-item-disabled"
+        class="ant-thought-chain css-var-_r_9_ ant-thought-chain-item ant-thought-chain-item-text ant-thought-chain-item-disabled"
       >
         <div
           class="ant-thought-chain-status ant-thought-chain-status-success"
