@@ -64,6 +64,16 @@ export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends 
    * @description Whether to manually run the request
    */
   manual?: boolean;
+
+  /**
+   * @description The interval after the request is failed
+   */
+  retryInterval?: number;
+
+  /**
+   * @description Retry times limit, valid when retryInterval is set or onError returns a number
+   */
+  retryTimes?: number;
 }
 
 export type XRequestGlobalOptions<Input, Output> = Pick<
@@ -95,6 +105,8 @@ export function setXRequestGlobalOptions<Input, Output>(
 ) {
   Object.assign(globalOptions, options);
 }
+
+const LastEventId = 'Last-Event-ID';
 
 export abstract class AbstractXRequestClass<Input, Output> {
   baseURL!: string;
@@ -129,6 +141,10 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
   private abortController!: AbortController;
   private _isRequesting = false;
   private _manual = false;
+  private lastManualParams?: Partial<Input>;
+  private retryTimes = 0;
+  private retryTimer!: ReturnType<typeof setTimeout>;
+  private lastEventId = '';
 
   public get asyncHandler() {
     return this._asyncHandler;
@@ -168,6 +184,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
 
   public run(params?: Input) {
     if (this.manual) {
+      this.lastManualParams = params;
       this.init(params);
     } else {
       console.warn('The request is not manual, so it cannot be run!');
@@ -258,7 +275,31 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
           error instanceof Error || error instanceof DOMException
             ? error
             : new Error('Unknown error!');
-        callbacks?.onError?.(err);
+        // get retry interval from return of onError or options
+        const returnOfOnError = callbacks?.onError?.(err);
+        const retryInterval =
+          typeof returnOfOnError === 'number' ? returnOfOnError : this.options.retryInterval;
+        if (retryInterval && retryInterval > 0) {
+          // if retry times limit is set, check if the retry times is reached
+          if (
+            typeof this.options.retryTimes === 'number' &&
+            this.retryTimes >= this.options.retryTimes
+          ) {
+            return;
+          }
+          clearTimeout(this.retryTimer);
+          this.retryTimer = setTimeout(() => {
+            if (this.lastEventId) {
+              if (!this.options.headers) {
+                this.options.headers = {};
+              }
+              // automatically set Last-Event-ID for retry request
+              this.options.headers[LastEventId] = this.lastEventId;
+            }
+            this.init(this.lastManualParams);
+          }, retryInterval);
+          this.retryTimes = this.retryTimes + 1;
+        }
       });
   }
 
@@ -315,6 +356,10 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
       }
       result = await iterator.next();
       chunks.push(result.value);
+      if (result.value?.id) {
+        // cache Last-Event-ID for retry request
+        this.lastEventId = result.value.id;
+      }
       callbacks?.onUpdate?.(result.value, response.headers);
       clearTimeout(this.streamTimeoutHandler);
       if (this.isStreamTimeout) {
