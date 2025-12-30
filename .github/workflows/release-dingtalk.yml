@@ -20,7 +20,10 @@ jobs:
           branch: 'main'
           tag: '2*'
           latest: '2*'
-          dingding-token: ${{ secrets.DINGDING_BOT_TOKEN }} ${{ secrets.DINGDING_BOT_INTERNAL_TOKEN }} ${{ secrets.DINGDING_BOT_XMARKDOWN_TOKEN }}
+          dingding-token: |
+            ${{ secrets.DINGDING_BOT_TOKEN }}
+            ${{ secrets.DINGDING_BOT_INTERNAL_TOKEN }}
+            ${{ secrets.DINGDING_BOT_XMARKDOWN_TOKEN }}
           dingding-msg: CHANGELOG.zh-CN.md
           msg-title: '# Ant Design X {{v}} 发布日志'
           msg-poster: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*kjHUSYIdsnUAAAAAAAAAAAAADgCCAQ/original'
