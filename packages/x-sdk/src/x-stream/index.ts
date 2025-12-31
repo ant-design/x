@@ -30,7 +30,7 @@ const isValidString = (str: string) => (str ?? '').trim() !== '';
  *
  * `
  */
-function splitStream() {
+function splitStream(streamSeparator = DEFAULT_STREAM_SEPARATOR) {
   // Buffer to store incomplete data chunks between transformations
   let buffer = '';
 
@@ -39,8 +39,7 @@ function splitStream() {
       buffer += streamChunk;
 
       // Split the buffer based on the separator
-      const parts = buffer.split(DEFAULT_STREAM_SEPARATOR);
-
+      const parts = buffer.split(streamSeparator);
       // Enqueue all complete parts except for the last incomplete one
       parts.slice(0, -1).forEach((part) => {
         // Skip empty parts
@@ -93,19 +92,19 @@ export interface JSONOutPut extends Partial<Record<SSEFields, any>> {
  * - Double newline characters (`\n\n`) are used to separate individual events.
  * - Single newline characters (`\n`) are employed to separate line within an event.
  */
-function splitPart() {
+function splitPart(partSeparator = DEFAULT_PART_SEPARATOR, kvSeparator = DEFAULT_KV_SEPARATOR) {
   return new TransformStream<string, SSEOutput>({
     transform(partChunk, controller) {
       // Split the chunk into key-value pairs using the partSeparator
-      const lines = partChunk.split(DEFAULT_PART_SEPARATOR);
-
+      const lines = partChunk.split(partSeparator);
       const sseEvent = lines.reduce<SSEOutput>((acc, line) => {
-        const separatorIndex = line.indexOf(DEFAULT_KV_SEPARATOR);
+        const separatorIndex = line.indexOf(kvSeparator);
 
         if (separatorIndex === -1) {
-          throw new Error(
-            `The key-value separator "${DEFAULT_KV_SEPARATOR}" is not found in the sse line chunk!`,
+          console.warn(
+            `The key-value separator "${kvSeparator}" is not found in the sse line: ${line} !`,
           );
+          return acc;
         }
 
         // Extract the key from the beginning of the line up to the separator
@@ -141,23 +140,51 @@ export interface XStreamOptions<Output> {
    * @link https://developer.mozilla.org/en-US/docs/Web/API/TransformStream
    */
   transformStream?: TransformStream<string, Output>;
+  /**
+   * @description Separator for stream data parsing
+   */
+  streamSeparator?: string;
+  /**
+   * @description Separator for different parts within the stream
+   */
+  partSeparator?: string;
+  /**
+   * @description Separator for key-value pairs in the stream data
+   */
+  kvSeparator?: string;
 }
 
 export type XReadableStream<R = SSEOutput> = ReadableStream<R> & AsyncGenerator<R>;
+
+function createDecoderStream() {
+  if (typeof TextDecoderStream !== 'undefined') {
+    return new TextDecoderStream();
+  }
+
+  const decoder = new TextDecoder('utf-8');
+  return new TransformStream({
+    transform(chunk, controller) {
+      controller.enqueue(decoder.decode(chunk, { stream: true }));
+    },
+    flush(controller) {
+      controller.enqueue(decoder.decode());
+    },
+  });
+}
 
 /**
  * @description Transform Uint8Array binary stream to {@link SSEOutput} by default
  * @warning The `XStream` only support the `utf-8` encoding. More encoding support maybe in the future.
  */
 function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
-  const { readableStream, transformStream } = options;
+  const { readableStream, transformStream, streamSeparator, partSeparator, kvSeparator } = options;
 
   if (!(readableStream instanceof ReadableStream)) {
     throw new Error('The options.readableStream must be an instance of ReadableStream.');
   }
 
   // Default encoding is `utf-8`
-  const decoderStream = new TextDecoderStream();
+  const decoderStream = createDecoderStream();
 
   const stream = (
     transformStream
@@ -172,8 +199,8 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
          */
         readableStream
           .pipeThrough(decoderStream as TransformStream<Uint8Array, string>)
-          .pipeThrough(splitStream())
-          .pipeThrough(splitPart())
+          .pipeThrough(splitStream(streamSeparator))
+          .pipeThrough(splitPart(partSeparator, kvSeparator))
   ) as XReadableStream<Output>;
 
   /** support async iterator */
