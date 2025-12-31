@@ -9,7 +9,7 @@ import {
   type XModelResponse,
   XRequest,
 } from '@ant-design/x-sdk';
-import { Button, Flex, Tooltip } from 'antd';
+import { Button, Divider, Flex, Tooltip } from 'antd';
 import React from 'react';
 
 /**
@@ -17,7 +17,7 @@ import React from 'react';
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/big_model_glm-4.5-flash';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_THUDM_glm-4-9b-chat';
 
 /**
  * 🔔 当前请求中 MODEL 是固定的，请替换为您自己的 BASE_URL 和 MODEL
@@ -49,11 +49,13 @@ const useLocale = () => {
     qaCompleted: isCN ? '问答完成' : 'Q&A completed',
     retry: isCN ? '重试' : 'Retry',
     currentStatus: isCN ? '当前状态：' : 'Current status:',
-    historyUserMessage: isCN ? '这是一条历史消息' : 'This is a historical message',
-    historyAIResponse: isCN
-      ? '这是一条历史回答消息，请发送新消息。'
-      : 'This is a historical response message, please send a new message.',
-    deleteFirstMessage: isCN ? '删除第一条消息' : 'Delete the first message',
+    newUserMessage: isCN ? '添加新的用户消息' : 'Add a new user message',
+    newAIResponse: isCN ? '添加新的AI回复' : 'Add a new AI response',
+    newSystemMessage: isCN ? '添加新的系统消息' : 'Add a new system message',
+    editMessage: isCN ? '编辑消息' : 'Edit a message',
+    developerMessage: isCN
+      ? '你是一个AI助手，能够回答用户的问题。'
+      : 'You are an AI assistant capable of answering user questions.',
   };
 };
 
@@ -76,6 +78,7 @@ const role: BubbleListProps['role'] = {
 
 const App = () => {
   const [content, setContent] = React.useState('');
+  const locale = useLocale();
   // 创建OpenAI聊天提供者：配置请求参数和模型
   // Create OpenAI chat provider: configure request parameters and model
   const [provider] = React.useState(
@@ -89,14 +92,29 @@ const App = () => {
       }),
     }),
   );
-  const locale = useLocale();
 
-  // 聊天消息管理：处理消息列表、历史消息、错误处理等
-  // Chat message management: handle message list, historical messages, error handling, etc.
+  // 获取历史消息列表：从服务器加载历史聊天记录
+  // Get history message list: load historical chat records from server
+  const getHistoryMessageList = async () => {
+    const response = await fetch(
+      `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}`,
+      {
+        method: 'GET',
+      },
+    );
+    const responseJson = await response.json();
+    if (responseJson?.success) {
+      return responseJson?.data || [];
+    }
+    return [];
+  };
+
+  // 聊天消息管理：处理消息列表、错误处理等
+  // Chat message management: handle message list, default messages, error handling, etc.
   const {
     onRequest,
+    isDefaultMessagesRequesting,
     messages,
-    removeMessage,
     setMessages,
     setMessage,
     isRequesting,
@@ -104,20 +122,7 @@ const App = () => {
     onReload,
   } = useXChat({
     provider,
-    // 默认消息：包含历史对话作为示例
-    // Default messages: include historical conversation as examples
-    defaultMessages: [
-      {
-        id: '1',
-        message: { role: 'user', content: locale.historyUserMessage },
-        status: 'success',
-      },
-      {
-        id: '2',
-        message: { role: 'assistant', content: locale.historyAIResponse },
-        status: 'success',
-      },
-    ],
+    defaultMessages: getHistoryMessageList,
     requestFallback: (_, { error, errorInfo, messageInfo }) => {
       // 请求失败时的回退处理：区分中止错误和其他错误
       // Fallback handling for request failure: distinguish between abort error and other errors
@@ -149,7 +154,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { role: 'user', content: locale.addUserMessage },
+        message: { role: 'user', content: locale.newUserMessage },
         status: 'success',
       },
     ]);
@@ -162,7 +167,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { role: 'assistant', content: locale.addAIMessage },
+        message: { role: 'assistant', content: locale.newAIResponse },
         status: 'success',
       },
     ]);
@@ -175,7 +180,7 @@ const App = () => {
       ...messages,
       {
         id: Date.now(),
-        message: { role: 'system', content: locale.addSystemMessage },
+        message: { role: 'system', content: locale.newSystemMessage },
         status: 'success',
       },
     ]);
@@ -186,9 +191,13 @@ const App = () => {
   const editLastMessage = () => {
     const lastMessage = messages[messages.length - 1];
     setMessage(lastMessage.id, {
-      message: { role: lastMessage.message.role, content: locale.editLastMessage },
+      message: { role: lastMessage.message.role, content: locale.editMessage },
     });
   };
+
+  // 过滤聊天消息：排除开发者消息，只显示用户和助手的对话消息
+  // Filter chat messages: exclude developer messages, only show user and assistant conversation messages
+  const chatMessages = messages.filter((m) => m.message.role !== 'developer');
 
   return (
     <Flex vertical gap="middle">
@@ -217,23 +226,15 @@ const App = () => {
           <Button disabled={!messages.length} onClick={editLastMessage}>
             {locale.editLastMessage}
           </Button>
-          <Button
-            disabled={!messages.length}
-            onClick={() => {
-              removeMessage(messages?.[0]?.id);
-            }}
-          >
-            {locale.deleteFirstMessage}
-          </Button>
         </Flex>
       </Flex>
-
-      {/* 消息列表：显示所有聊天消息，包括历史消息 */}
-      {/* Message list: display all chat messages, including historical messages */}
+      <Divider />
+      {/* 消息列表：显示所有聊天消息，包括默认消息 */}
+      {/* Message list: display all chat messages, including default messages */}
       <Bubble.List
-        style={{ height: 500 }}
         role={role}
-        items={messages.map(({ id, message, status }) => ({
+        style={{ height: 500 }}
+        items={chatMessages.map(({ id, message, status }) => ({
           key: id,
           role: message.role,
           status: status,
@@ -263,15 +264,23 @@ const App = () => {
               : {},
         }))}
       />
+      {/* 发送器：用户输入区域，支持发送消息和中止请求 */}
+      {/* Sender: user input area, supports sending messages and aborting requests */}
       <Sender
         loading={isRequesting}
+        // 禁用状态：历史消息请求进行中时禁用发送器
+        disabled={isDefaultMessagesRequesting}
         value={content}
         onCancel={() => {
+          // 取消当前请求
+          // Cancel current request
           abort();
         }}
         onChange={setContent}
         placeholder={locale.placeholder}
         onSubmit={(nextContent) => {
+          // 发送用户消息：构建消息格式并清空输入框
+          // Send user message: build message format and clear input field
           onRequest({
             messages: [
               {
@@ -279,11 +288,6 @@ const App = () => {
                 content: nextContent,
               },
             ],
-            frequency_penalty: 0,
-            max_tokens: 1024,
-            thinking: {
-              type: 'disabled',
-            },
           });
           setContent('');
         }}

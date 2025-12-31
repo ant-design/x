@@ -2,9 +2,11 @@ import type { ConversationItemType } from '@ant-design/x';
 import { Bubble, Conversations, Sender } from '@ant-design/x';
 import {
   DeepSeekChatProvider,
+  type DefaultMessageInfo,
   type SSEFields,
   useXChat,
   useXConversations,
+  type XModelMessage,
   type XModelParams,
   type XModelResponse,
   XRequest,
@@ -22,24 +24,6 @@ const useLocale = () => {
       ? '会话项目 3，你可以点击我！'
       : "This's Conversation Item 3, you can click me!",
     conversationItem4: isCN ? '会话项目 4' : 'Conversation Item 4',
-    helloConversation1: isCN ? '你好，这是会话 1！' : 'Hello, this is Conversation 1!',
-    welcomeConversation1: isCN
-      ? '你好！这是会话 1 的欢迎消息。我可以帮助你回答各种问题。'
-      : 'Hello! This is the welcome message for Conversation 1. I can help you answer various questions.',
-    conversation2Started: isCN ? '会话 2 已启动' : 'Conversation 2 has started',
-    welcomeConversation2: isCN
-      ? '欢迎来到会话 2！在这里我们可以讨论与技术相关的话题。'
-      : 'Welcome to Conversation 2! Here we can discuss technology-related topics.',
-    clickedConversation3: isCN ? '点击了会话 3' : 'Clicked on Conversation 3',
-    specialConversation3: isCN
-      ? '你选择了会话 3！这是一个特殊的会话。我该如何帮助你？'
-      : 'You selected Conversation 3! This is a special conversation. How can I help you?',
-    conversation4Initialized: isCN ? '会话 4 已初始化' : 'Conversation 4 initialized',
-    conversation4Disabled: isCN
-      ? '这是会话 4。虽然它被禁用了，但你仍然可以查看历史消息。'
-      : 'This is Conversation 4. Although it is disabled, you can still view historical messages.',
-    helloDefault: isCN ? '你好！' : 'hello!',
-    howCanAssist: isCN ? '你好！我今天能为你做些什么？' : 'Hello! How can I assist you today?',
     thinking: isCN ? '思考中' : 'Thinking',
     requestAborted: isCN ? '请求已中止' : 'Request aborted',
     somethingWrong: isCN ? '出了点问题' : 'Something went wrong',
@@ -51,19 +35,19 @@ const App = () => {
   const { token } = theme.useToken();
   const items: ConversationItemType[] = [
     {
-      key: 'item1_1',
+      key: 'item2_1',
       label: locale.conversationItem1,
     },
     {
-      key: 'item1_2',
+      key: 'item2_2',
       label: locale.conversationItem2,
     },
     {
-      key: 'item1_3',
+      key: 'item2_3',
       label: locale.conversationItem3,
     },
     {
-      key: 'item1_4',
+      key: 'item2_4',
       label: locale.conversationItem4,
       disabled: true, // 禁用此项目，用户无法点击
     },
@@ -99,85 +83,6 @@ const App = () => {
     return providerCaches.get(conversationKey);
   };
 
-  // 根据激活的会话key提供不同的默认消息
-  // Provide different default messages based on active conversation key
-  const getDefaultMessages = (conversationKey: string) => {
-    // 会话消息映射：为每个会话定义独特的欢迎消息
-    // Conversation message mapping: define unique welcome messages for each conversation
-    const messagesMap: Record<string, any[]> = {
-      item1_1: [
-        {
-          message: { role: 'user', content: locale.helloConversation1 },
-          status: 'success',
-        },
-        {
-          message: {
-            role: 'assistant',
-            content: locale.welcomeConversation1,
-          },
-          status: 'success',
-        },
-      ],
-      item1_2: [
-        {
-          message: { role: 'user', content: locale.conversation2Started },
-          status: 'success',
-        },
-        {
-          message: {
-            role: 'assistant',
-            content: locale.welcomeConversation2,
-          },
-          status: 'success',
-        },
-      ],
-      item1_3: [
-        {
-          message: { role: 'user', content: locale.clickedConversation3 },
-          status: 'success',
-        },
-        {
-          message: {
-            role: 'assistant',
-            content: locale.specialConversation3,
-          },
-          status: 'success',
-        },
-      ],
-      item1_4: [
-        {
-          message: { role: 'user', content: locale.conversation4Initialized },
-          status: 'success',
-        },
-        {
-          message: {
-            role: 'assistant',
-            content: locale.conversation4Disabled,
-          },
-          status: 'success',
-        },
-      ],
-    };
-
-    // 返回对应会话的默认消息，如果没有则使用默认欢迎消息
-    // Return default messages for corresponding conversation, or use default welcome messages if not found
-    return (
-      messagesMap[conversationKey] || [
-        {
-          message: { role: 'user', content: locale.helloDefault },
-          status: 'success',
-        },
-        {
-          message: {
-            role: 'assistant',
-            content: locale.howCanAssist,
-          },
-          status: 'success',
-        },
-      ]
-    );
-  };
-
   // 会话管理：使用会话钩子管理会话列表和激活状态
   // Conversation management: use conversation hook to manage conversation list and active state
   const { conversations, activeConversationKey, setActiveConversationKey } = useXConversations({
@@ -193,12 +98,30 @@ const App = () => {
     borderRadius: token.borderRadius,
   };
 
+  // 获取历史消息列表：从服务器加载历史聊天记录
+  // Get history message list: load historical chat records from server
+  const getHistoryMessageList: (info: {
+    conversationKey?: string;
+  }) => Promise<DefaultMessageInfo<XModelMessage>[]> = async ({ conversationKey }) => {
+    const response = await fetch(
+      `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}&sessionId=${conversationKey}`,
+      {
+        method: 'GET',
+      },
+    );
+    const responseJson = await response.json();
+    if (responseJson?.success) {
+      return responseJson?.data || [];
+    }
+    return [];
+  };
+
   // 聊天管理：使用聊天钩子管理消息和请求
   // Chat management: use chat hook to manage messages and requests
-  const { onRequest, messages, isRequesting, abort } = useXChat({
+  const { onRequest, messages, isDefaultMessagesRequesting, isRequesting, abort } = useXChat({
     provider: providerFactory(activeConversationKey), // 每个会话都有独立的提供者
     conversationKey: activeConversationKey,
-    defaultMessages: getDefaultMessages(activeConversationKey),
+    defaultMessages: getHistoryMessageList,
     requestPlaceholder: () => {
       return {
         content: locale.thinking,
@@ -221,8 +144,6 @@ const App = () => {
     },
   });
 
-  // 副作用：当激活的会话改变时清空发送器内容
-  // Side effect: clear sender content when active conversation changes
   useEffect(() => {
     senderRef.current?.clear();
   }, [activeConversationKey]);
@@ -241,7 +162,7 @@ const App = () => {
       {/* 聊天区域：右侧显示当前会话的聊天内容 */}
       {/* Chat area: display chat content for current conversation on the right */}
       <Flex style={{ width: 500 }} vertical gap="small" align="flex-start">
-        <div style={{ width: '100%', height: 300, display: 'flex', flexDirection: 'column' }}>
+        <div style={{ width: '100%', height: 350, display: 'flex', flexDirection: 'column' }}>
           <Bubble.List
             items={messages?.map((i) => ({
               ...i.message,
@@ -267,6 +188,7 @@ const App = () => {
         {/* 发送器：用户输入区域，支持发送消息和中止请求 */}
         {/* Sender: user input area, supports sending messages and aborting requests */}
         <Sender
+          disabled={isDefaultMessagesRequesting}
           ref={senderRef}
           onSubmit={(val: string) => {
             if (!val) return;
