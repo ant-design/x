@@ -3,7 +3,6 @@ import type { ThoughtChainItemType } from '@ant-design/x';
 import { ThoughtChain } from '@ant-design/x';
 import { XRequest } from '@ant-design/x-sdk';
 import { Button, Splitter } from 'antd';
-import { error } from 'console';
 import React from 'react';
 
 const BASE_URL = 'https://api.example.com';
