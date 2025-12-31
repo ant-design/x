@@ -1,3 +1,4 @@
+import { waitFakeTimer } from '../../../tests/utils';
 import type { SSEOutput } from '../../x-stream';
 import type { XRequestCallbacks, XRequestOptions } from '../index';
 import XRequest, { setXRequestGlobalOptions } from '../index';
@@ -362,5 +363,46 @@ describe('XRequest Class', () => {
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onError).toHaveBeenCalledWith(new Error(`StreamTimeoutError`));
     expect(request.isStreamTimeout).toBe(true);
+  });
+
+  test('should retry when request failed', async () => {
+    jest.useFakeTimers();
+    const headers = {
+      get: jest.fn().mockReturnValue('text/event-stream'),
+    };
+    mockedXFetch.mockRejectedValueOnce(new Error('Fetch failed')).mockResolvedValueOnce({
+      headers,
+      body: mockSSEReadableStream(),
+    });
+    const request = XRequest(baseURL, {
+      ...options,
+      retryInterval: 500,
+      retryTimes: 2,
+    });
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed`));
+    // wait to retry
+    await waitFakeTimer(500, 1);
+    expect(callbacks.onSuccess).toHaveBeenCalledWith([sseEvent], headers);
+  });
+
+  test('should not retry when request failed', async () => {
+    jest.useFakeTimers();
+    const headers = {
+      get: jest.fn().mockReturnValue('text/event-stream'),
+    };
+    mockedXFetch.mockRejectedValueOnce(new Error('Fetch failed')).mockResolvedValueOnce({
+      headers,
+      body: mockSSEReadableStream(),
+    });
+    const request = XRequest(baseURL, {
+      ...options,
+    });
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed`));
+    await waitFakeTimer(1000, 1);
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
   });
 });
