@@ -128,7 +128,6 @@ export default function FileList(props: FileListProps) {
   const showExtension =
     !disabled && (typeof upload.maxCount === 'undefined' || upload.maxCount > items.length);
   // ================================= Render =================================
-  console.log(list, '1111');
   return (
     <FileCard.List
       items={list}
