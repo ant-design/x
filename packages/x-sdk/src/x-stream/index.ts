@@ -108,13 +108,13 @@ function splitPart(partSeparator = DEFAULT_PART_SEPARATOR, kvSeparator = DEFAULT
         }
 
         // Extract the key from the beginning of the line up to the separator
-        const key = line.slice(0, separatorIndex);
+        const key = line.slice(0, separatorIndex).trim();
 
         // The colon is used for comment lines, skip directly
         if (!isValidString(key)) return acc;
 
         // Extract the value from the line after the separator
-        const value = line.slice(separatorIndex + 1);
+        const value = line.slice(separatorIndex + 1).trim();
 
         return { ...acc, [key]: value };
       }, {});

@@ -363,4 +363,27 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).toHaveBeenCalledWith(new Error(`StreamTimeoutError`));
     expect(request.isStreamTimeout).toBe(true);
   });
+  test('should not run with no manual', async () => {
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      headers: {
+        get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+      },
+      json: jest.fn().mockResolvedValueOnce(options.params),
+    });
+
+    const request = XRequest(baseURL, {
+      ...options,
+      manual: false, // 设置 manual 为 false，表示自动运行（默认行为）
+    });
+
+    // 由于 manual 为 false，请求应该自动开始执行
+    expect(request.manual).toBe(false);
+    expect(request.isRequesting).toBe(true); // 应该自动开始请求
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    // 等待请求完成
+    await request.run();
+    expect(consoleSpy).toHaveBeenCalledWith('The request is not manual, so it cannot be run!');
+  });
 });
