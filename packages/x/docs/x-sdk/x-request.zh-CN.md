@@ -22,8 +22,10 @@ demo:
 <code src="./demos/x-request/basic.tsx">基础使用</code> 
 <code src="./demos/x-request/custom-params-headers.tsx">请求定制</code> 
 <code src="./demos/x-request/custom-transformer.tsx">自定义转换器</code>
+<code src="./demos/x-request/stream-separator.tsx">流解析配置</code>
  <code src="./demos/x-request/manual.tsx">手动触发</code> 
  <code src="./demos/x-request/timeout.tsx">超时配置</code>
+ <code src="./demos/x-request/stream-timeout.tsx">chunk 超时配置</code>
 
 ## API
 
@@ -55,6 +57,9 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | fetch | 自定义fetch对象 | `typeof fetch` | - | - |
 | middlewares | 中间件，支持请求前和请求后处理 | XFetchMiddlewares | - | - |
 | transformStream | stream处理器 | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |
+| streamSeparator | 流分隔符，用于分隔不同的数据流，transformStream 有值时不生效 | string | \\n\\n | 2.2.0 |
+| partSeparator | 部分分隔符，用于分隔数据的不同部分，transformStream 有值时不生效 | string | \\n | 2.2.0 |
+| kvSeparator | 键值分隔符，用于分隔键和值，transformStream 有值时不生效 | string | : | 2.2.0 |
 | manual | 是否手动控制发出请求，为`true`时，需要手动调用`run`方法 | boolean | false | - |
 
 ### XRequestCallbacks
