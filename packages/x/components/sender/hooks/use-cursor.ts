@@ -75,7 +75,25 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     }
     return window.getSelection();
   }, []);
+  const findOuterContainer = (node: Node, editableDom: HTMLElement): HTMLElement => {
+    let currentNode: Node | null = node;
+    let lastSpan: HTMLElement | null = null;
 
+    // 如果当前节点是文本节点，从父节点开始
+    if (currentNode.nodeType === Node.TEXT_NODE) {
+      currentNode = currentNode.parentElement;
+    }
+
+    // 向上遍历DOM树，找到最外层的span元素
+    while (currentNode && currentNode !== editableDom) {
+      if (currentNode instanceof HTMLElement && currentNode.tagName === 'SPAN') {
+        lastSpan = currentNode;
+      }
+      currentNode = currentNode.parentElement;
+    }
+
+    return lastSpan || editableDom;
+  };
   const getRange = useCallback((): { range: Range | null; selection: Selection | null } => {
     const selection = getSelection();
     if (!selection) {
@@ -378,18 +396,22 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         return { type: 'end', selection };
       }
 
-      const container =
-        range.endContainer.nodeType === Node.TEXT_NODE
-          ? range.endContainer.parentElement
-          : (range.endContainer as HTMLElement);
+      const endContainer = findOuterContainer(range.endContainer, editableDom);
+      const startContainer = findOuterContainer(range.startContainer, editableDom);
 
-      if (!container) {
+      // 首先检查是否在可编辑区域内
+      const isInEditableBox = editableDom.contains(range.endContainer);
+      if (!isInEditableBox) {
         return { type: 'end', selection };
       }
 
-      if (options?.getNodeInfo) {
-        const { slotKey, slotConfig } = options.getNodeInfo(container) || {};
-
+      // 只有在可编辑区域内才检查slot信息
+      if (
+        endContainer === startContainer &&
+        startContainer !== editableDom &&
+        options?.getNodeInfo
+      ) {
+        const { slotKey, slotConfig } = options.getNodeInfo(endContainer) || {};
         if (slotKey) {
           return {
             type: 'slot',
@@ -401,12 +423,8 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         }
       }
 
-      const isInEditableBox = editableDom.contains(range.endContainer);
-      if (isInEditableBox) {
-        return { type: 'box', range, selection };
-      }
-
-      return { type: 'end', selection };
+      // 在可编辑区域内但不是slot，返回box
+      return { type: 'box', range, selection };
     },
     [options, getRange, getSelection],
   );
