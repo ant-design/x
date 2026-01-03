@@ -707,7 +707,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
       // 获取插入位置和范围
       const insertContext = getInsertContext(position, editableDom);
-
       if (!insertContext.range || !insertContext.selection) return;
 
       const { range, selection } = insertContext;

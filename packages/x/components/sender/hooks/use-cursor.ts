@@ -396,16 +396,25 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         return { type: 'end', selection };
       }
 
-      const endContainer = findOuterContainer(range.endContainer, editableDom);
-      const startContainer = findOuterContainer(range.startContainer, editableDom);
+      // 检查是否在可编辑区域内，如果不在则设置对应的光标位置
+      const isEndInEditableBox = editableDom.contains(range.endContainer);
+      const isStartInEditableBox = editableDom.contains(range.startContainer);
 
-      // 首先检查是否在可编辑区域内
-      const isInEditableBox = editableDom.contains(range.endContainer);
-      if (!isInEditableBox) {
+      if (!isEndInEditableBox) {
+        setEndCursor(editableDom, true);
         return { type: 'end', selection };
       }
 
-      // 只有在可编辑区域内才检查slot信息
+      if (!isStartInEditableBox) {
+        setStartCursor(editableDom, true);
+        return { type: 'end', selection };
+      }
+
+      // 获取容器信息
+      const endContainer = findOuterContainer(range.endContainer, editableDom);
+      const startContainer = findOuterContainer(range.startContainer, editableDom);
+
+      // 检查是否是 slot 类型
       if (
         endContainer === startContainer &&
         startContainer !== editableDom &&
@@ -423,10 +432,10 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         }
       }
 
-      // 在可编辑区域内但不是slot，返回box
+      // 在可编辑区域内但不是 slot，返回 box
       return { type: 'box', range, selection };
     },
-    [options, getRange, getSelection],
+    [options, getRange, getSelection, setEndCursor, setStartCursor, findOuterContainer],
   );
 
   /**
