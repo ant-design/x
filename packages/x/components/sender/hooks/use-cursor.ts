@@ -407,7 +407,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
 
       if (!isStartInEditableBox) {
         setStartCursor(editableDom, true);
-        return { type: 'end', selection };
+        return { type: 'start', selection };
       }
 
       // 获取容器信息
