@@ -602,7 +602,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     // 处理全选 (支持 Ctrl+A 和 Cmd+A)
-    if (e.key === 'a' && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey) {
+    if ((e.key === 'a' || e.key === 'A') && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey) {
       setAllSelectCursor(editableRef.current, skillDomRef.current);
       e.preventDefault();
       return;
@@ -786,6 +786,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       startOffset,
     } = getTextBeforeCursor(editableDom);
     const cursorPosition = textBeforeCursor.length;
+    console.log('textBeforeCursor', textBeforeCursor, cursorPosition);
     if (
       cursorPosition >= replaceCharacters.length &&
       textBeforeCursor.endsWith(replaceCharacters) &&
