@@ -82,13 +82,16 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         >
           <span
             class="ant-dropdown-trigger ant-sender-slot-select placeholder"
+            data-slot-key="writing_type"
           >
             <span
               class="ant-sender-slot-select-value"
               data-placeholder="Please enter a topic"
+              data-slot-key="writing_type"
             />
             <span
               class="ant-sender-slot-select-arrow"
+              data-slot-key="writing_type"
             >
               <span
                 aria-label="caret-down"
@@ -787,13 +790,16 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         >
           <span
             class="ant-dropdown-trigger ant-sender-slot-select placeholder"
+            data-slot-key="writing_type"
           >
             <span
               class="ant-sender-slot-select-value"
               data-placeholder="请输入主题"
+              data-slot-key="writing_type"
             />
             <span
               class="ant-sender-slot-select-arrow"
+              data-slot-key="writing_type"
             >
               <span
                 aria-label="caret-down"
@@ -1808,13 +1814,16 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx extend context cor
         >
           <span
             class="ant-dropdown-trigger ant-sender-slot-select placeholder"
+            data-slot-key="search_type"
           >
             <span
               class="ant-sender-slot-select-value"
               data-placeholder="Please select a category"
+              data-slot-key="search_type"
             />
             <span
               class="ant-sender-slot-select-arrow"
+              data-slot-key="search_type"
             >
               <span
                 aria-label="caret-down"
@@ -3399,15 +3408,18 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         >
           <span
             class="ant-dropdown-trigger ant-sender-slot-select ant-sender-slot-select-selector-value"
+            data-slot-key="transportation"
           >
             <span
               class="ant-sender-slot-select-value"
               data-placeholder="Please choose a mode of transportation"
+              data-slot-key="transportation"
             >
               airplane
             </span>
             <span
               class="ant-sender-slot-select-arrow"
+              data-slot-key="transportation"
             >
               <span
                 aria-label="caret-down"
@@ -3596,6 +3608,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         >
           <span
             class="ant-sender-slot-tag"
+            data-slot-key="tag"
           >
             @Travel Planner 
           </span>
@@ -3609,6 +3622,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
           <input
             class="ant-input ant-input-sm ant-input-borderless ant-sender-slot-input css-var-_r_1b_ ant-input-css-var"
             data-slot-input="account"
+            data-slot-key="account"
             placeholder="Please enter a account"
             spellcheck="false"
             tabindex="0"
@@ -3741,13 +3755,16 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
           >
             <span
               class="ant-dropdown-trigger ant-sender-slot-select placeholder"
+              data-slot-key="search_type"
             >
               <span
                 class="ant-sender-slot-select-value"
                 data-placeholder="Please select a category"
+                data-slot-key="search_type"
               />
               <span
                 class="ant-sender-slot-select-arrow"
+                data-slot-key="search_type"
               >
                 <span
                   aria-label="caret-down"

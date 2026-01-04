@@ -205,6 +205,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
               className={`${prefixCls}-slot-input`}
               placeholder={config.props?.placeholder || ''}
               data-slot-input={config.key}
+              data-slot-key={config.key}
               size="small"
               variant="borderless"
               value={value || ''}
@@ -238,14 +239,16 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
                   placeholder: !value,
                   [`${prefixCls}-slot-select-selector-value`]: value,
                 })}
+                data-slot-key={config.key}
               >
                 <span
                   data-placeholder={config.props?.placeholder}
+                  data-slot-key={config.key}
                   className={`${prefixCls}-slot-select-value`}
                 >
                   {value || ''}
                 </span>
-                <span className={`${prefixCls}-slot-select-arrow`}>
+                <span className={`${prefixCls}-slot-select-arrow`} data-slot-key={config.key}>
                   <CaretDownFilled />
                 </span>
               </span>
@@ -253,7 +256,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           );
         case 'tag':
           return (
-            <span className={`${prefixCls}-slot-tag`}>
+            <span className={`${prefixCls}-slot-tag`} data-slot-key={config.key}>
               {config.props?.label || config.props?.value || ''}
             </span>
           );
