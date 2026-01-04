@@ -175,7 +175,7 @@
     "http-server": "^14.1.1",
     "identity-obj-proxy": "^3.0.0",
     "immer": "^10.1.1",
-    "inquirer": "^12.1.0",
+    "inquirer": "^13.1.0",
     "is-ci": "^4.1.0",
     "isomorphic-fetch": "^3.0.0",
     "jest": "^30.2.0",
