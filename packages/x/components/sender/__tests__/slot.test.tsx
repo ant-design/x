@@ -315,7 +315,7 @@ describe('Sender Slot Component', () => {
 
       // 使用配置化的 mock
       const mockRange = createMockRange({
-        startContainer: textDom,
+        startContainer: document.body,
         endContainer: textDom,
         startOffset: 2,
         endOffset: 2,
