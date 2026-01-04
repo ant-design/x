@@ -31,6 +31,28 @@ if (typeof window !== 'undefined') {
       fontSize: '14px',
       fontFamily: 'Arial',
     }));
+  window.getSelection =
+    window.getSelection ||
+    jest.fn(() => ({
+      getRangeAt: jest.fn(() => ({
+        startContainer: document.createElement('div'),
+        startOffset: 0,
+        endContainer: document.createElement('div'),
+        endOffset: 0,
+        commonAncestorContainer: document.createElement('div'),
+        setStart: jest.fn(),
+        setEnd: jest.fn(),
+        deleteContents: jest.fn(),
+        insertNode: jest.fn(),
+        cloneRange: jest.fn(),
+        selectNodeContents: jest.fn(),
+        collapse: jest.fn(),
+      })),
+      removeAllRanges: jest.fn(),
+      addRange: jest.fn(),
+      rangeCount: 1,
+      type: 'Range',
+    }));
 }
 
 // Mock document APIs
@@ -351,6 +373,26 @@ describe('Sender Component', () => {
           fontSize: '14px',
           fontFamily: 'Arial',
         })),
+        getSelection: jest.fn(() => ({
+          getRangeAt: jest.fn(() => ({
+            startContainer: document.createElement('div'),
+            startOffset: 0,
+            endContainer: document.createElement('div'),
+            endOffset: 0,
+            commonAncestorContainer: document.createElement('div'),
+            setStart: jest.fn(),
+            setEnd: jest.fn(),
+            deleteContents: jest.fn(),
+            insertNode: jest.fn(),
+            cloneRange: jest.fn(),
+            selectNodeContents: jest.fn(),
+            collapse: jest.fn(),
+          })),
+          removeAllRanges: jest.fn(),
+          addRange: jest.fn(),
+          rangeCount: 1,
+          type: 'Range',
+        })),
       };
 
       global.navigator = {
@@ -413,6 +455,26 @@ describe('Sender Component', () => {
           query: jest.fn().mockResolvedValue({ state: 'granted' }),
         },
       };
+      (global as any).window.getSelection = jest.fn(() => ({
+        getRangeAt: jest.fn(() => ({
+          startContainer: document.createElement('div'),
+          startOffset: 0,
+          endContainer: document.createElement('div'),
+          endOffset: 0,
+          commonAncestorContainer: document.createElement('div'),
+          setStart: jest.fn(),
+          setEnd: jest.fn(),
+          deleteContents: jest.fn(),
+          insertNode: jest.fn(),
+          cloneRange: jest.fn(),
+          selectNodeContents: jest.fn(),
+          collapse: jest.fn(),
+        })),
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+        rangeCount: 1,
+        type: 'Range',
+      }));
       const { container } = render(<Sender allowSpeech />);
       const speechButton = container.querySelectorAll('.ant-sender-actions-btn');
       expect(speechButton).toHaveLength(2);

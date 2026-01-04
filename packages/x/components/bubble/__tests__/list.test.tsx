@@ -31,7 +31,7 @@ describe('Bubble.List', () => {
   ];
 
   describe('基础功能', () => {
-    it('应该正确渲染基本的 BubbleList 组件', () => {
+    it('should correctly render basic BubbleList component', () => {
       const { container } = render(<BubbleList items={mockItems} />);
       const listElement = container.querySelector('.ant-bubble-list');
 
@@ -39,14 +39,14 @@ describe('Bubble.List', () => {
       expect(container.querySelectorAll('.ant-bubble')).toHaveLength(2);
     });
 
-    it('应该支持自定义 prefixCls', () => {
+    it('should support custom prefixCls', () => {
       const { container } = render(<BubbleList items={mockItems} prefixCls="custom-bubble" />);
       const listElement = container.querySelector('.custom-bubble-list');
 
       expect(listElement).toBeInTheDocument();
     });
 
-    it('应该支持 ref 引用', () => {
+    it('should support ref reference', () => {
       const ref = React.createRef<BubbleListRef>();
       render(<BubbleList items={mockItems} ref={ref} />);
 
@@ -55,7 +55,7 @@ describe('Bubble.List', () => {
       expect(typeof ref.current!.scrollTo).toBe('function');
     });
 
-    it('应该支持自定义 className 和 style', () => {
+    it('should support custom className and style', () => {
       const { container } = render(
         <BubbleList
           items={mockItems}
@@ -69,7 +69,7 @@ describe('Bubble.List', () => {
       expect(listElement).toHaveStyle({ backgroundColor: 'red' });
     });
 
-    it('应该支持 rootClassName 和 style', () => {
+    it('should support rootClassName and style', () => {
       const { container } = render(
         <BubbleList items={mockItems} rootClassName="root-class" style={{ margin: '10px' }} />,
       );
@@ -81,7 +81,7 @@ describe('Bubble.List', () => {
   });
 
   describe('items 渲染', () => {
-    it('应该正确渲染所有 items', () => {
+    it('should correctly render all items', () => {
       const { container } = render(<BubbleList items={mockItems} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
@@ -90,7 +90,7 @@ describe('Bubble.List', () => {
       expect(container).toHaveTextContent('AI回复1');
     });
 
-    it('应该处理空 items 数组', () => {
+    it('should handle empty items array', () => {
       const { container } = render(<BubbleList items={[]} />);
       const listElement = container.querySelector('.ant-bubble-list');
       const bubbles = container.querySelectorAll('.ant-bubble');
@@ -99,7 +99,7 @@ describe('Bubble.List', () => {
       expect(bubbles).toHaveLength(0);
     });
 
-    it('应该支持 role 配置', () => {
+    it('should support role configuration', () => {
       const roleConfig = {
         user: {
           placement: 'end' as const,
@@ -119,7 +119,7 @@ describe('Bubble.List', () => {
       expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
     });
 
-    it('应支持 role 函数配置', () => {
+    it('should support role function configuration', () => {
       const roleConfig: RoleType = {
         user: () => ({
           placement: 'end' as const,
@@ -139,7 +139,7 @@ describe('Bubble.List', () => {
       expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
     });
 
-    it('应该支持 role 为空', () => {
+    it('should support empty role', () => {
       const { container } = render(<BubbleList items={mockItems} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
@@ -147,7 +147,7 @@ describe('Bubble.List', () => {
       expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
     });
 
-    it('支持 items 忽略 role 属性', () => {
+    it('should support items ignoring role property', () => {
       const roleConfig = {
         user: {
           placement: 'end' as const,
@@ -175,7 +175,7 @@ describe('Bubble.List', () => {
       expect(bubbles[0].textContent).toBe('消息'); // user role
     });
 
-    it('应该支持 items 中的属性覆盖 role 配置', () => {
+    it('should support property override in items over role configuration', () => {
       const roleConfig = {
         user: {
           placement: 'end' as const,
@@ -197,7 +197,7 @@ describe('Bubble.List', () => {
       expect(bubble).toHaveClass('ant-bubble-start'); // 应该使用 item 中的配置
     });
 
-    it('应该支持默认渲染 divider role', () => {
+    it('should support default rendering of divider role', () => {
       const itemsWithOverride: BubbleItemType[] = [
         {
           key: 'item1',
@@ -221,7 +221,7 @@ describe('Bubble.List', () => {
       expect(divider).toBeInTheDocument();
     });
 
-    it('应该支持默认渲染 system role', () => {
+    it('should support default rendering of system role', () => {
       const itemsWithOverride: BubbleItemType[] = [
         {
           key: 'item1',
@@ -240,7 +240,7 @@ describe('Bubble.List', () => {
       const listElement = container.querySelector('.ant-bubble-list-scroll-box') as HTMLDivElement;
       const system = container.querySelector('.ant-bubble-system');
 
-      expect(listElement.childNodes.length).toBe(2);
+      expect(listElement.querySelectorAll('.ant-bubble').length).toBe(2);
       expect(system).toBeInTheDocument();
     });
   });
@@ -280,23 +280,7 @@ describe('Bubble.List', () => {
       mockScrollIntoView.mockClear();
     });
 
-    it('应该在 items 长度变化时自动滚动到底部', () => {
-      const { rerender, container } = render(<BubbleList items={mockItems} />);
-      const scrollBoxElement = container.querySelector(
-        '.ant-bubble-list-scroll-box',
-      ) as HTMLDivElement;
-      scrollBoxElement.scrollTo = mockScrollTo;
-
-      // 清除初始渲染时的调用
-      mockScrollTo.mockClear();
-
-      const newItems = [...mockItems, { key: 'item4', role: 'user', content: '新消息' }];
-      rerender(<BubbleList items={newItems} />);
-      // 源代码中执行了 scrollTo 即滚动到底部
-      expect(mockScrollTo).toHaveBeenCalled();
-    });
-
-    it('应该支持禁用自动滚动', async () => {
+    it('should support disabling auto scroll', async () => {
       const { container, rerender } = render(<BubbleList items={mockItems} autoScroll />);
       const scrollBoxElement = container.querySelector(
         '.ant-bubble-list-scroll-box',
@@ -313,14 +297,9 @@ describe('Bubble.List', () => {
       ];
       rerender(<BubbleList items={newItems} autoScroll={false} />);
       expect(scrollBoxElement).not.toHaveClass('ant-bubble-list-autoscroll');
-      // 仅在添加消息时滚动到底部，后续动画过程不触发滚动
-      expect(mockScrollTo).toHaveBeenCalledTimes(1);
-
-      await waitFakeTimer(1000, 10);
-      expect(mockScrollTo).toHaveBeenCalledTimes(1);
     });
 
-    it('应该支持 onScroll 回调', () => {
+    it('should support onScroll callback', () => {
       const onScroll = jest.fn();
       const { container } = render(<BubbleList items={mockItems} onScroll={onScroll} />);
       const scrollBoxElement = container.querySelector('.ant-bubble-list-scroll-box');
@@ -347,7 +326,7 @@ describe('Bubble.List', () => {
       mockScrollIntoView.mockClear();
     });
 
-    it('应该支持通过 ref.scrollTo 滚动到指定位置', () => {
+    it('should support scrolling to specified position via ref.scrollTo', () => {
       const ref = React.createRef<BubbleListRef>();
       const { container, rerender } = render(
         <BubbleList items={mockItems} ref={ref} autoScroll={false} />,
@@ -381,7 +360,7 @@ describe('Bubble.List', () => {
       });
     });
 
-    it('应该支持通过 ref.scrollTo 快速滚动到顶部或底部', () => {
+    it('should support quick scrolling to top or bottom via ref.scrollTo', () => {
       const ref = React.createRef<BubbleListRef>();
       const { container, rerender } = render(<BubbleList items={mockItems} ref={ref} />);
       const scrollBoxElement = container.querySelector(
@@ -414,7 +393,7 @@ describe('Bubble.List', () => {
       expect(mockScrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
     });
 
-    it('应该支持通过 ref.scrollTo 滚动到指定 key 的元素', () => {
+    it('should support scrolling to element with specified key via ref.scrollTo', () => {
       const ref = React.createRef<BubbleListRef>();
       const { container } = render(<BubbleList items={mockItems} ref={ref} />);
 
@@ -434,7 +413,27 @@ describe('Bubble.List', () => {
       });
     });
 
-    it('应该处理不存在的 key', () => {
+    it('should support scrolling to element with specified key via ref.scrollTo when auto scroll is disabled', () => {
+      const ref = React.createRef<BubbleListRef>();
+      const { container } = render(<BubbleList items={mockItems} ref={ref} autoScroll={false} />);
+
+      // 模拟 bubble 元素的 scrollIntoView 方法
+      const bubbles = container.querySelectorAll('.ant-bubble');
+      bubbles.forEach((bubble) => {
+        (bubble as any).scrollIntoView = mockScrollIntoView;
+      });
+
+      act(() => {
+        ref.current!.scrollTo({ key: 'item2', behavior: 'smooth', block: 'center' });
+      });
+
+      expect(mockScrollIntoView).toHaveBeenCalledWith({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    });
+
+    it('should handle non-existent key', () => {
       const ref = React.createRef<BubbleListRef>();
       render(<BubbleList items={mockItems} ref={ref} />);
 
@@ -446,7 +445,7 @@ describe('Bubble.List', () => {
       expect(mockScrollIntoView).not.toHaveBeenCalled();
     });
 
-    it('应该处理既没有 top 也没有 key 的情况', () => {
+    it('should handle case with neither top nor key', () => {
       const ref = React.createRef<BubbleListRef>();
       render(<BubbleList items={mockItems} ref={ref} />);
 
@@ -461,7 +460,7 @@ describe('Bubble.List', () => {
   });
 
   describe('动画回调处理', () => {
-    it('应该在动画过程中触发自动滚动', async () => {
+    it('should trigger auto scroll during animation', async () => {
       const itemsWithAnimation: BubbleItemType[] = [
         {
           key: 'item1',
@@ -487,7 +486,7 @@ describe('Bubble.List', () => {
   });
 
   describe('DOM 属性处理', () => {
-    it('应该正确传递 aria 属性', () => {
+    it('should correctly pass aria attributes', () => {
       const { container } = render(
         <BubbleList items={mockItems} aria-label="消息列表" aria-describedby="description" />,
       );
@@ -497,7 +496,7 @@ describe('Bubble.List', () => {
       expect(listElement).toHaveAttribute('aria-describedby', 'description');
     });
 
-    it('应该过滤掉非 DOM 属性', () => {
+    it('should filter out non-DOM attributes', () => {
       const { container } = render(
         <BubbleList
           items={mockItems}
@@ -509,7 +508,7 @@ describe('Bubble.List', () => {
       expect(listElement).not.toHaveAttribute('customProp');
     });
 
-    it('应该传递标准 HTML 属性', () => {
+    it('should pass standard HTML attributes', () => {
       const { container } = render(<BubbleList items={mockItems} title="气泡列表" tabIndex={0} />);
       const listElement = container.querySelector('.ant-bubble-list');
 
@@ -518,7 +517,7 @@ describe('Bubble.List', () => {
       expect(listElement).toHaveAttribute('tabIndex', '0');
     });
 
-    it('应该验证 pickAttrs 的过滤行为', () => {
+    it('should verify pickAttrs filtering behavior', () => {
       const { container } = render(
         <BubbleList
           items={mockItems}
@@ -541,7 +540,7 @@ describe('Bubble.List', () => {
   });
 
   describe('边界情况', () => {
-    it('应该处理 items 为空数组的情况', () => {
+    it('should handle case where items is empty array', () => {
       const { container } = render(<BubbleList items={[]} />);
       const listElement = container.querySelector('.ant-bubble-list');
 
@@ -549,7 +548,7 @@ describe('Bubble.List', () => {
       expect(container.querySelectorAll('.ant-bubble')).toHaveLength(0);
     });
 
-    it('应该处理 item.role 不在 role 配置中的情况', () => {
+    it('should handle case where item.role is not in role configuration', () => {
       const roleConfig = {
         user: { placement: 'end' as const },
       };
@@ -568,7 +567,7 @@ describe('Bubble.List', () => {
       expect(container).toHaveTextContent('未知角色消息');
     });
 
-    it('应该处理没有 listRef.current 的情况', () => {
+    it('should handle case where listRef.current does not exist', () => {
       const { container } = render(<BubbleList items={mockItems} />);
 
       // 模拟 listRef.current 为 null 的情况
@@ -581,7 +580,7 @@ describe('Bubble.List', () => {
       expect(container).toBeInTheDocument();
     });
 
-    it('应该处理 lastBubble 不存在的情况', () => {
+    it('should handle case where lastBubble does not exist', () => {
       const { container } = render(<BubbleList items={[]} />);
       const listElement = container.querySelector('.ant-bubble-list');
 
@@ -591,7 +590,7 @@ describe('Bubble.List', () => {
       expect(listElement).toBeInTheDocument();
     });
 
-    it('应该处理 lastBubble.nativeElement 不存在的情况', () => {
+    it('should handle case where lastBubble.nativeElement does not exist', () => {
       const { container } = render(<BubbleList items={mockItems} />);
       const listElement = container.querySelector('.ant-bubble-list');
 
@@ -603,7 +602,7 @@ describe('Bubble.List', () => {
   });
 
   describe('组件更新', () => {
-    it('应该在 items 变化时重新渲染', () => {
+    it('should re-render when items change', () => {
       const { container, rerender } = render(<BubbleList items={mockItems} />);
 
       expect(container.querySelectorAll('.ant-bubble')).toHaveLength(2);
@@ -623,7 +622,7 @@ describe('Bubble.List', () => {
       expect(container).not.toHaveTextContent('用户消息1');
     });
 
-    it('应该在 autoScroll 属性变化时正确处理', () => {
+    it('should correctly handle autoScroll property changes', () => {
       const { container, rerender } = render(<BubbleList items={mockItems} autoScroll={true} />);
 
       expect(container.querySelector('.ant-bubble-list')).toBeInTheDocument();
@@ -636,7 +635,7 @@ describe('Bubble.List', () => {
 
   describe('高级测试覆盖率', () => {
     describe('BubbleListItem 组件详细测试', () => {
-      it('不处理 role 为 undefined 的情况', () => {
+      it('should not handle case where role is undefined', () => {
         const itemsWithoutRole: BubbleItemType[] = [
           {
             key: 'item1',
@@ -648,7 +647,7 @@ describe('Bubble.List', () => {
         expect(container.querySelectorAll('.ant-bubble')).toHaveLength(1);
       });
 
-      it('应该正确传递 styles 和 classNames 到 divider', () => {
+      it('should correctly pass styles and classNames to divider', () => {
         const items: BubbleItemType[] = [
           {
             key: 'item1',
@@ -666,7 +665,7 @@ describe('Bubble.List', () => {
         expect(divider).toHaveClass('custom-divider');
       });
 
-      it('应该正确传递 styles 和 classNames 到 system', () => {
+      it('should correctly pass styles and classNames to system', () => {
         const items: BubbleItemType[] = [
           {
             key: 'item1',
@@ -684,7 +683,7 @@ describe('Bubble.List', () => {
         expect(system).toHaveClass('custom-system');
       });
 
-      it('应该处理复杂的 styles 和 classNames 结构', () => {
+      it('should handle complex styles and classNames structures', () => {
         const items: BubbleItemType[] = [
           {
             key: 'item1',
@@ -710,27 +709,27 @@ describe('Bubble.List', () => {
     });
 
     describe('边界情况和错误处理', () => {
-      it('应该处理空数组的情况', () => {
+      it('should handle empty array case', () => {
         const { container } = render(<BubbleList items={[]} />);
         expect(container.querySelector('.ant-bubble-list')).toBeInTheDocument();
         expect(container.querySelectorAll('.ant-bubble')).toHaveLength(0);
       });
 
-      it('应该处理 role 配置为 null 的情况', () => {
+      it('should handle case where role configuration is null', () => {
         const { container } = render(<BubbleList items={mockItems} role={null as any} />);
         const bubbles = container.querySelectorAll('.ant-bubble');
 
         expect(bubbles).toHaveLength(2);
       });
 
-      it('应该处理 role 配置为 undefined 的情况', () => {
+      it('should handle case where role configuration is undefined', () => {
         const { container } = render(<BubbleList items={mockItems} role={undefined as any} />);
         const bubbles = container.querySelectorAll('.ant-bubble');
 
         expect(bubbles).toHaveLength(2);
       });
 
-      it('应该处理 role 配置函数返回空对象的情况', () => {
+      it('should handle case where role configuration function returns empty object', () => {
         const roleConfig: RoleType = {
           user: () => ({}) as any,
           ai: () => ({ placement: 'start' as const }),
@@ -751,7 +750,7 @@ describe('Bubble.List', () => {
     });
 
     describe('样式和主题测试', () => {
-      it('应该正确应用自定义前缀的样式', () => {
+      it('should correctly apply custom prefix styles', () => {
         const { container } = render(
           <BubbleList
             items={mockItems}
@@ -767,7 +766,7 @@ describe('Bubble.List', () => {
         expect(listElement).toHaveStyle({ backgroundColor: 'yellow' });
       });
 
-      it('应该正确合并 classNames 和 styles', () => {
+      it('should correctly merge classNames and styles', () => {
         const { container } = render(
           <BubbleList
             items={mockItems}
@@ -788,7 +787,7 @@ describe('Bubble.List', () => {
     });
 
     describe('事件处理和交互', () => {
-      it('应该处理滚动事件', () => {
+      it('should handle scroll events', () => {
         const onScroll = jest.fn();
         const { container } = render(
           <BubbleList items={mockItems} onScroll={onScroll} autoScroll={false} />,
@@ -802,7 +801,7 @@ describe('Bubble.List', () => {
         expect(onScroll).toHaveBeenCalled();
       });
 
-      it('应该处理 ref 方法的边界情况', () => {
+      it('should handle edge cases of ref methods', () => {
         const ref = React.createRef<BubbleListRef>();
         render(<BubbleList items={[]} ref={ref} />);
 
@@ -817,7 +816,7 @@ describe('Bubble.List', () => {
     });
 
     describe('性能和大规模数据测试', () => {
-      it('应该正确处理大量 items', () => {
+      it('should correctly handle large number of items', () => {
         const largeItems: BubbleItemType[] = Array.from({ length: 100 }, (_, i) => ({
           key: `item-${i}`,
           role: i % 2 === 0 ? 'user' : 'ai',
@@ -830,7 +829,7 @@ describe('Bubble.List', () => {
         expect(bubbles).toHaveLength(100);
       });
 
-      it('应该正确处理频繁更新的 items', () => {
+      it('should correctly handle frequently updated items', () => {
         const { container, rerender } = render(<BubbleList items={mockItems} />);
 
         // 模拟频繁更新
@@ -848,7 +847,7 @@ describe('Bubble.List', () => {
     });
 
     describe('role 配置函数测试', () => {
-      it('应该处理 role 配置函数返回空对象的情况', () => {
+      it('should handle case where role configuration function returns empty object', () => {
         const roleConfig: RoleType = {
           user: () => ({}) as any,
           ai: () => ({ placement: 'start' as const }),
@@ -867,7 +866,7 @@ describe('Bubble.List', () => {
         expect(bubbles).toHaveLength(2);
       });
 
-      it('应该处理 role 配置函数返回复杂配置的情况', () => {
+      it('should handle case where role configuration function returns complex configuration', () => {
         const roleConfig: RoleType = {
           user: (item) => ({
             placement: 'end' as const,

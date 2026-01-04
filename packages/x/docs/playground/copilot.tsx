@@ -25,6 +25,7 @@ import {
   Think,
   Welcome,
 } from '@ant-design/x';
+import { BubbleListRef } from '@ant-design/x/es/bubble';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
 import type { SSEFields } from '@ant-design/x-sdk';
 import {
@@ -141,7 +142,6 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     // chatSend 样式
     chatSend: css`
       padding: ${token.padding}px;
-      
     `,
     speechButton: css`
       font-size: 18px;
@@ -249,6 +249,8 @@ const Copilot = (props: CopilotProps) => {
 
   const [inputValue, setInputValue] = useState('');
 
+  const listRef = useRef<BubbleListRef>(null);
+
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort } = useXChat({
@@ -279,6 +281,7 @@ const Copilot = (props: CopilotProps) => {
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
+    listRef.current?.scrollTo({ top: 'bottom' });
 
     // session title mock
     const conversation = getConversation(activeConversationKey);
@@ -345,6 +348,7 @@ const Copilot = (props: CopilotProps) => {
       {messages?.length ? (
         /** 消息列表 */
         <Bubble.List
+          ref={listRef}
           style={{ paddingInline: 16 }}
           items={messages?.map((i) => ({
             ...i.message,

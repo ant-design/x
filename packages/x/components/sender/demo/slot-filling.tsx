@@ -1,5 +1,5 @@
 import { Sender, type SenderProps, XProvider } from '@ant-design/x';
-import { Button, Flex, GetRef, Slider } from 'antd';
+import { Button, Flex, GetRef, message, Slider } from 'antd';
 import React, { useRef, useState } from 'react';
 
 type SlotConfig = SenderProps['slotConfig'];
@@ -102,6 +102,7 @@ const App: React.FC = () => {
   const [slotConfigKey, setSlotConfigKey] = useState<keyof typeof slotConfig | false>(
     'otherSlotConfig',
   );
+  const [messageApi, contextHolder] = message.useMessage();
   const senderRef = useRef<GetRef<typeof Sender>>(null);
   const [value, setValue] = useState<string>('');
   const [skill, setSkill] = useState<SenderProps['skill']>(skillConfig);
@@ -109,6 +110,7 @@ const App: React.FC = () => {
   const [slotValue, setSlotValue] = useState<string>('');
   return (
     <Flex vertical gap={16}>
+      {contextHolder}
       {/* 操作按钮区 */}
       <Flex wrap gap={8}>
         <Button
@@ -132,7 +134,7 @@ const App: React.FC = () => {
         </Button>
         <Button
           onClick={() => {
-            senderRef.current?.insert?.([{ type: 'text', value: ' some text ' }]);
+            senderRef.current?.insert?.([{ type: 'text', value: ' some text A' }]);
           }}
         >
           Insert Text
@@ -140,10 +142,20 @@ const App: React.FC = () => {
         <Button
           onClick={() => {
             senderRef.current?.insert?.([
+              { type: 'text', value: ' some text B' },
+              { type: 'content', key: `partner_3_${Date.now()}`, props: { defaultValue: '11' } },
+            ]);
+          }}
+        >
+          Insert Slots
+        </Button>
+        <Button
+          onClick={() => {
+            senderRef.current?.insert?.([
               {
-                type: 'input',
-                key: `partner_2_${Date.now()}`,
-                props: { placeholder: 'Enter a name' },
+                type: 'content',
+                key: `partner_1_${Date.now()}`,
+                props: { defaultValue: 'NingNing', placeholder: 'Enter a name' },
               },
             ]);
           }}
@@ -300,6 +312,11 @@ const App: React.FC = () => {
           onSubmit={(value) => {
             setValue(value);
             setSlotConfigKey(false);
+            messageApi.open({
+              type: 'success',
+              content: `Send message success: ${value}`,
+            });
+            senderRef.current?.clear?.();
           }}
           onChange={(value, event, slotConfig, skill) => {
             console.log(value, event, slotConfig, skill);

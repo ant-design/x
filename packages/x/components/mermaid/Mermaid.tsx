@@ -1,11 +1,12 @@
 import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import { Button, Segmented, Tooltip } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import throttle from 'lodash.throttle';
 import mermaid from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import warning from '../_util/warning';
 import Actions from '../actions';
 import type { ItemType } from '../actions/interface';
 import locale_EN from '../locale/en_US';
@@ -76,7 +77,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const contextConfig = useXComponentConfig('mermaid');
 
   // ============================ style ============================
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     prefixCls,
     contextConfig.className,
     contextConfig.classNames?.root,
@@ -101,7 +102,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
       const { svg } = await mermaid.render(id, newText, containerRef.current);
       containerRef.current.innerHTML = svg;
     } catch (error) {
-      console.warn(`Mermaid render failed: ${error}`);
+      warning(false, 'Mermaid', `Render failed: ${error}`);
     }
   }, 100);
 
@@ -269,7 +270,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
 
     return (
       <div
-        className={classnames(
+        className={clsx(
           `${prefixCls}-header`,
           contextConfig.classNames?.header,
           classNames?.header,
@@ -296,7 +297,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     return (
       <>
         <div
-          className={classnames(
+          className={clsx(
             `${prefixCls}-graph`,
             contextConfig.classNames?.graph,
             renderType === RenderType.Code && `${prefixCls}-graph-hidden`,
@@ -311,11 +312,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
         />
         {renderType === RenderType.Code ? (
           <div
-            className={classnames(
-              `${prefixCls}-code`,
-              contextConfig.classNames?.code,
-              classNames?.code,
-            )}
+            className={clsx(`${prefixCls}-code`, contextConfig.classNames?.code, classNames?.code)}
             style={{ ...contextConfig.styles?.code, ...styles.code }}
           >
             <SyntaxHighlighter

@@ -1,4 +1,4 @@
-import { useEvent } from 'rc-util';
+import { useEvent } from '@rc-component/util';
 import React, { useEffect, useState } from 'react';
 import type { AnyObject } from '../_util/type';
 import { AbstractChatProvider } from '../chat-providers';
@@ -42,7 +42,12 @@ export interface XChatConfig<
 > {
   provider?: AbstractChatProvider<ChatMessage, Input, Output>;
   conversationKey?: ConversationData['key'];
-  defaultMessages?: DefaultMessageInfo<ChatMessage>[];
+  defaultMessages?:
+    | DefaultMessageInfo<ChatMessage>[]
+    | ((info: {
+        conversationKey?: ConversationData['key'];
+      }) => Promise<DefaultMessageInfo<ChatMessage>[]>)
+    | ((info?: { conversationKey?: ConversationData['key'] }) => DefaultMessageInfo<ChatMessage>[]);
   /** Convert agent message to bubble usage message type */
   parser?: (message: ChatMessage) => BubbleMessage | BubbleMessage[];
   requestPlaceholder?: ChatMessage | RequestPlaceholderFn<Input, ChatMessage>;
@@ -109,15 +114,24 @@ export default function useXChat<
     }
   }, [originalConversationKey]);
 
-  const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
-    () =>
-      (defaultMessages || []).map((info, index) => ({
-        id: `default_${index}`,
-        status: 'local',
-        ...info,
-      })),
-    conversationKey,
-  );
+  const {
+    messages,
+    isDefaultMessagesRequesting,
+    removeMessage,
+    setMessages,
+    getMessages,
+    setMessage,
+  } = useChatStore<MessageInfo<ChatMessage>>(async () => {
+    const messageList =
+      typeof defaultMessages === 'function'
+        ? await defaultMessages({ conversationKey: originalConversationKey })
+        : defaultMessages;
+    return (messageList || []).map((info, index) => ({
+      id: `default_${index}`,
+      status: 'local',
+      ...info,
+    }));
+  }, conversationKey);
 
   const createMessage = (message: ChatMessage, status: MessageStatus, extraInfo?: AnyObject) => {
     const msg: MessageInfo<ChatMessage> = {
@@ -392,9 +406,11 @@ export default function useXChat<
 
   return {
     onRequest,
+    isDefaultMessagesRequesting,
     messages,
     parsedMessages,
     setMessages,
+    removeMessage,
     setMessage,
     abort: () => {
       if (!provider) {

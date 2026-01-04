@@ -3,7 +3,7 @@ import { Flex, Segmented } from 'antd';
 import React from 'react';
 
 const App = () => {
-  const images = Array.from({ length: 11 }).map((_, index) => ({
+  const images = Array.from({ length: 50 }).map((_, index) => ({
     name: `image-file-${index}.png`,
     src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
     byte: 1024,

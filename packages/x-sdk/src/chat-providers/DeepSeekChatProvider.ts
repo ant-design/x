@@ -27,7 +27,7 @@ export default class DeepSeekChatProvider<
   }
 
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
-    const { originMessage, chunk, chunks, responseHeaders } = info;
+    const { originMessage, chunk, responseHeaders } = info;
     let currentContent = '';
     let currentThink = '';
     let role = 'assistant';
@@ -38,7 +38,7 @@ export default class DeepSeekChatProvider<
           message = JSON.parse(chunk.data);
         }
       } else {
-        message = chunk || chunks[0];
+        message = chunk;
       }
       if (message) {
         message?.choices?.forEach((choice: any) => {

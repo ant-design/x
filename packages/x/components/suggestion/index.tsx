@@ -1,7 +1,7 @@
+import { useEvent, useMergedState } from '@rc-component/util';
 import type { CascaderProps } from 'antd';
 import { Cascader, Flex } from 'antd';
-import classnames from 'classnames';
-import { useEvent, useMergedState } from 'rc-util';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { AnyObject } from '../_util/type';
@@ -171,17 +171,9 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       placement={isRTL ? 'topRight' : 'topLeft'}
       {...compatibleProps}
       optionRender={optionRender}
-      rootClassName={classnames(
-        rootClassName,
-        className,
-        classNames.root,
-        prefixCls,
-        hashId,
-        cssVarCls,
-        {
-          [`${prefixCls}-block`]: block,
-        },
-      )}
+      rootClassName={clsx(rootClassName, className, classNames.root, prefixCls, hashId, cssVarCls, {
+        [`${prefixCls}-block`]: block,
+      })}
       classNames={{
         root: classNames.root,
         popup: {
@@ -198,7 +190,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       popupMatchSelectWidth={block}
     >
       <div
-        className={classnames(
+        className={clsx(
           prefixCls,
           rootClassName,
           contextConfig.classNames.content,

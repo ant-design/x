@@ -22,11 +22,12 @@ import {
 } from '@ant-design/x-sdk';
 import { Flex, GetRef, message } from 'antd';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+import { BubbleListRef } from '@ant-design/x/es/bubble';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 import locale from './_utils/local';
 
@@ -272,6 +273,8 @@ const App = () => {
 
   const [activeConversation, setActiveConversation] = useState<string>();
 
+  const listRef = useRef<BubbleListRef>(null);
+
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload } = useXChat({
@@ -378,6 +381,7 @@ const App = () => {
               {messages?.length !== 0 && (
                 /* 🌟 消息列表 */
                 <Bubble.List
+                  ref={listRef}
                   style={{
                     height: 'calc(100% - 160px)',
                   }}
@@ -399,7 +403,7 @@ const App = () => {
               )}
               <div
                 style={{ width: '100%', maxWidth: 840 }}
-                className={classNames({ [styles.startPage]: messages.length === 0 })}
+                className={clsx({ [styles.startPage]: messages.length === 0 })}
               >
                 {messages.length === 0 && (
                   <div className={styles.agentName}>{locale.agentName}</div>
@@ -418,6 +422,7 @@ const App = () => {
                         type: 'disabled',
                       },
                     });
+                    listRef.current?.scrollTo({ top: 'bottom' });
                     setActiveConversation(curConversation);
                     senderRef.current?.clear?.();
                   }}

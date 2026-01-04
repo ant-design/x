@@ -20,6 +20,60 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         tabindex="0"
         value="Please write an article about . The requirement is  800  words."
       >
+        <span
+          class="ant-sender-skill"
+          contenteditable="false"
+          data-placeholder="Press Enter to send message"
+          data-skill-key="writing"
+        >
+          <div
+            class="ant-sender-skill-wrapper"
+            contenteditable="false"
+          >
+            <div
+              class="ant-sender-skill-tag"
+              contenteditable="false"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="ant-sender-skill-tag-text"
+              >
+                Writing Assistant
+              </span>
+              <div
+                aria-label="Close skill"
+                class="ant-sender-skill-close"
+                role="button"
+                tabindex="0"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close ant-sender-skill-close-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-sender-skill-holder"
+            />
+          </div>
+        </span>
         Please write an article about 
         <span
           class="ant-sender-slot"
@@ -671,6 +725,60 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
         tabindex="0"
         value="请帮我写一篇关于的文章。要求是 800 字。"
       >
+        <span
+          class="ant-sender-skill"
+          contenteditable="false"
+          data-placeholder=""
+          data-skill-key="writing"
+        >
+          <div
+            class="ant-sender-skill-wrapper"
+            contenteditable="false"
+          >
+            <div
+              class="ant-sender-skill-tag"
+              contenteditable="false"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="ant-sender-skill-tag-text"
+              >
+                写作助手
+              </span>
+              <div
+                aria-label="Close skill"
+                class="ant-sender-skill-close"
+                role="button"
+                tabindex="0"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close ant-sender-skill-close-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-sender-skill-holder"
+            />
+          </div>
+        </span>
         请帮我写一篇关于
         <span
           class="ant-sender-slot"
@@ -1467,6 +1575,41 @@ exports[`renders components/sender/demo/basic.tsx extend context correctly 1`] =
           <div
             class="ant-sender-actions-list-presets ant-flex css-var-_r_2l_"
           >
+            <button
+              class="ant-btn css-var-_r_2l_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              disabled=""
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="audio-muted"
+                  class="anticon anticon-audio-muted"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="audio-muted"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <defs>
+                      <style />
+                    </defs>
+                    <path
+                      d="M682 455V311l-76 76v68c-.1 50.7-42 92.1-94 92a95.8 95.8 0 01-52-15l-54 55c29.1 22.4 65.9 36 106 36 93.8 0 170-75.1 170-168z"
+                    />
+                    <path
+                      d="M833 446h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254-63 0-120.7-23-165-61l-54 54a334.01 334.01 0 00179 81v102H326c-13.9 0-24.9 14.3-25 32v36c.1 4.4 2.9 8 6 8h408c3.2 0 6-3.6 6-8v-36c0-17.7-11-32-25-32H547V782c165.3-17.9 294-157.9 294-328 0-4.4-3.6-8-8-8zm13.1-377.7l-43.5-41.9a8 8 0 00-11.2.1l-129 129C634.3 101.2 577 64 511 64c-93.9 0-170 75.3-170 168v224c0 6.7.4 13.3 1.2 19.8l-68 68A252.33 252.33 0 01258 454c-.2-4.4-3.8-8-8-8h-60c-4.4 0-8 3.6-8 8 0 53 12.5 103 34.6 147.4l-137 137a8.03 8.03 0 000 11.3l42.7 42.7c3.1 3.1 8.2 3.1 11.3 0L846.2 79.8l.1-.1c3.1-3.2 3-8.3-.2-11.4zM417 401V232c0-50.6 41.9-92 94-92 46 0 84.1 32.3 92.3 74.7L417 401z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
             <button
               class="ant-btn css-var-_r_2l_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
@@ -3023,6 +3166,14 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
       type="button"
     >
       <span>
+        Insert Slots
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_1a_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
         Insert Slot
       </span>
     </button>
@@ -3139,6 +3290,84 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
         tabindex="0"
         value="I want to travel to  Beijing byairplanewith a group of 3 people, and each person has a budget ofbetween 3000 and 6000 RMB.PleasetravelToolhelp me create a travel itinerary,Use account ."
       >
+        <span
+          class="ant-sender-skill"
+          contenteditable="false"
+          data-placeholder="Enter to send message"
+          data-skill-key="travelId"
+        >
+          <div
+            class="ant-sender-skill-wrapper"
+            contenteditable="false"
+          >
+            <div
+              class="ant-sender-skill-tag"
+              contenteditable="false"
+              role="button"
+              tabindex="0"
+            >
+              <span
+                class="ant-sender-skill-tag-text"
+              >
+                <span
+                  aria-describedby="test-id"
+                >
+                  Travel Planner
+                </span>
+                <div
+                  class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1b_ ant-tooltip-placement-top"
+                  style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                >
+                  <div
+                    class="ant-tooltip-arrow"
+                    style="position: absolute; bottom: 0px; left: 0px;"
+                  >
+                    <span
+                      class="ant-tooltip-arrow-content"
+                    />
+                  </div>
+                  <div
+                    class="ant-tooltip-container"
+                    id="test-id"
+                    role="tooltip"
+                  >
+                    Travel Skill
+                  </div>
+                </div>
+              </span>
+              <div
+                aria-label="Close skill"
+                class="ant-sender-skill-close"
+                role="button"
+                tabindex="0"
+              >
+                <span
+                  aria-label="close"
+                  class="anticon anticon-close ant-sender-skill-close-icon"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="close"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div
+              class="ant-sender-skill-holder"
+            />
+          </div>
+        </span>
         I want to travel to 
         <span
           class="ant-sender-slot-before ant-sender-slot-no-width"
@@ -3365,11 +3594,11 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
           contenteditable="false"
           data-slot-key="tag"
         >
-          <div
+          <span
             class="ant-sender-slot-tag"
           >
             @Travel Planner 
-          </div>
+          </span>
         </span>
         help me create a travel itinerary,Use account 
         <span
@@ -3479,11 +3708,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
 </div>
 `;
 
-exports[`renders components/sender/demo/slot-filling.tsx extend context correctly 2`] = `
-[
-  "Warning: trigger element and popup element should in same shadow root.",
-]
-`;
+exports[`renders components/sender/demo/slot-filling.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context correctly 1`] = `
 <div

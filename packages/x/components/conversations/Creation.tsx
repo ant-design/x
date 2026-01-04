@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import * as React from 'react';
 import type { ShortcutKeyInfoType } from '../_util/hooks/use-shortcut-keys';
 import useCreation, { CreationLabelProps } from './hooks/useCreation';
@@ -48,7 +48,7 @@ const Creation: React.FC<CreationProps> = ({
         onClick?.(e);
       }}
       style={style}
-      className={classNames(prefixCls, className, `${prefixCls}-${mergeAlign}`, {
+      className={clsx(prefixCls, className, `${prefixCls}-${mergeAlign}`, {
         [`${prefixCls}-disabled`]: disabled,
       })}
     >
