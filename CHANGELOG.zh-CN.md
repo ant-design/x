@@ -21,7 +21,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
-- 🐛 修复 Sender 应用未声明的依赖，将 classnames 改为 clsx，并配置 biome.json 文件新增依赖引用检查。[#1608](https://github.com/ant-design/x/pull/1608) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复了 Sender 未声明依赖问题，将 `classnames` 替换为 `clsx` 并为 `biome.json` 配置了依赖引用检查。[#1608](https://github.com/ant-design/x/pull/1608) 由 [kimteayon](https://github.com/kimteayon) 提交
 - 📖 优化官网站点提升用户体验。[#1605](https://github.com/ant-design/x/pull/1605) 由 [kimteayon](https://github.com/kimteayon) 提交
 
 ## 2.1.2
