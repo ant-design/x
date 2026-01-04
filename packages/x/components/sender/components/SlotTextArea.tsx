@@ -704,7 +704,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       if (replaceCharacters?.length) {
         handleCharacterReplacement(range, replaceCharacters, editableDom);
       }
-      selection.deleteFromDocument();
+      range.deleteContents();
       // 执行节点插入
       insertNodesWithPosition(slotNodes, range, insertContext);
 

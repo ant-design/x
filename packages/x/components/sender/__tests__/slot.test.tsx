@@ -74,7 +74,6 @@ interface MockRange {
   collapsed: boolean;
   collapse: jest.MockedFunction<() => void>;
   selectNodeContents: jest.MockedFunction<(node: Node) => void>;
-  deleteContents: jest.MockedFunction<() => void>;
   insertNode: jest.MockedFunction<(node: Node) => void>;
   setStart: jest.MockedFunction<(node: Node, offset: number) => void>;
   setEnd: jest.MockedFunction<(node: Node, offset: number) => void>;
@@ -82,7 +81,7 @@ interface MockRange {
   setEndAfter: jest.MockedFunction<(node: Node) => void>;
   cloneRange: jest.MockedFunction<() => MockRange>;
   toString: any;
-  deleteFromDocument: jest.MockedFunction<() => void>;
+  deleteContents: jest.MockedFunction<() => void>;
 }
 
 // Mock 配置工具函数
@@ -103,7 +102,6 @@ const createMockRange = (config: Partial<MockRange> = {}): MockRange => {
     setEndAfter: jest.fn(),
     cloneRange: jest.fn(),
     toString: jest.fn(() => ''),
-    deleteFromDocument: jest.fn(),
     ...config,
   };
 
@@ -150,7 +148,7 @@ const setupDOMMocks = (selectionConfig: any = {}, rangeConfig: Partial<MockRange
     value: () => ({
       rangeCount: 1,
       getRangeAt: () => mockRange,
-      deleteFromDocument: jest.fn(),
+      deleteContents: jest.fn(),
       removeAllRanges: jest.fn(),
       addRange: jest.fn(),
       collapse: jest.fn(),

@@ -76,6 +76,9 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
     return window.getSelection();
   }, []);
   const findOuterContainer = (node: Node, editableDom: HTMLElement): HTMLElement => {
+    if (!node || !editableDom) {
+      return editableDom;
+    }
     let currentNode: Node | null = node;
     let lastSpan: HTMLElement | null = null;
 
