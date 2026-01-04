@@ -53,12 +53,18 @@ const customSlotConfig: SlotConfigType = {
     defaultValue: 'Custom Value',
   },
   customRender: (value: any, onChange: (value: any) => void) => (
-    <button type="button" data-testid="custom-btn" onClick={() => onChange('custom-value')}>
+    <button type="button" data-testid="custom-btn" onClick={() => onChange('Custom Value Change')}>
       {value || 'Custom'}
     </button>
   ),
   formatResult: (v: any) => `[${v}]`,
 };
+
+const errorTypeSlotConfig: any = {
+  type: 'error',
+  key: 'error1',
+};
+
 describe('Sender Slot Component', () => {
   // Set up global DOM API mock
   beforeEach(() => {
@@ -134,7 +140,7 @@ describe('Sender Slot Component', () => {
       tagSlotConfig,
       customSlotConfig,
     ];
-    const { getByText, getByPlaceholderText, getByDisplayValue } = render(
+    const { getByText, getByTestId, getByPlaceholderText, getByDisplayValue } = render(
       <Sender slotConfig={slotConfig} onChange={onChange} />,
     );
     expect(getByText('Text Value')).toBeInTheDocument();
@@ -144,21 +150,28 @@ describe('Sender Slot Component', () => {
     expect(getByText('Tag Label')).toBeInTheDocument();
     expect(getByText('Custom Value')).toBeInTheDocument();
     expect(getByText('A')).toBeInTheDocument();
+    // input
 
     const input = getByPlaceholderText('Enter input') as HTMLInputElement;
     expect(input).toBeInTheDocument();
     fireEvent.change(input, { target: { value: 'New Value' } });
     expect(input.value).toBe('New Value');
 
+    // select
     const selectPlaceholder = document.querySelector(
       '[data-placeholder="Select option"]',
     ) as HTMLInputElement;
     expect(selectPlaceholder).toBeInTheDocument();
-
     fireEvent.click(selectPlaceholder);
     const optionB = await waitFor(() => getByText('B'));
     fireEvent.click(optionB);
     expect(onChange).toHaveBeenCalled();
+
+    // custom
+    const customBtn = getByTestId('custom-btn');
+    expect(customBtn.textContent).toBe('Custom Value');
+    fireEvent.click(customBtn);
+    expect(customBtn.textContent).toBe('Custom Value Change');
   });
   it('should ref can be used', () => {
     const ref = createRef<SenderRef>();
@@ -172,6 +185,7 @@ describe('Sender Slot Component', () => {
       selectSlotConfig,
       tagSlotConfig,
       customSlotConfig,
+      errorTypeSlotConfig,
     ];
     const onFocus = jest.fn();
     const onBlur = jest.fn();
@@ -213,7 +227,7 @@ describe('Sender Slot Component', () => {
     // ====================== focus =======================
     const fullValue = ref.current?.getValue();
     expect(fullValue?.value).toBe('Text ValueAInput Value Content Value   tag1[Custom Value]');
-    expect(fullValue?.slotConfig).toHaveLength(9);
+    expect(fullValue?.slotConfig).toHaveLength(10);
     // ====================== clear =======================
     ref?.current?.clear();
     const clearedValue = ref.current?.getValue();
