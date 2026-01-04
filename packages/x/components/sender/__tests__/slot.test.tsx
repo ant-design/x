@@ -582,10 +582,8 @@ describe('Sender Slot Component', () => {
     });
     it('should handle onCompositionEnd event', () => {
       const slotConfig = [textSlotConfig];
-      const { container } = render(<Sender slotConfig={slotConfig} />);
-
-      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
-
+      const ref = createRef<SenderRef>();
+      render(<Sender ref={ref} slotConfig={slotConfig} />);
       // Directly trigger compositionend event on the DOM element
       const compositionEvent = new CompositionEvent('compositionend', {
         data: '测试文本',
@@ -593,10 +591,17 @@ describe('Sender Slot Component', () => {
         cancelable: true,
       });
 
-      inputArea.dispatchEvent(compositionEvent);
+      ref.current?.inputElement?.dispatchEvent(compositionEvent);
 
+      const compositionStartEvent = new CompositionEvent('compositionstart', {
+        data: '测试文本',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      ref.current?.inputElement?.dispatchEvent(compositionStartEvent);
       // The event should be handled without errors
-      expect(inputArea).toBeInTheDocument();
+      expect(ref.current?.inputElement).toBeInTheDocument();
     });
     it('should handle paste events', () => {
       const onPasteFile = jest.fn();
