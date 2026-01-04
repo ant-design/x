@@ -637,6 +637,7 @@ describe('useCursor', () => {
       const mockTextNode = document.createTextNode('test');
       const mockRange = {
         endContainer: mockTextNode,
+        startContainer: mockTextNode,
         endOffset: 2,
       };
       const mockSelection = {
@@ -656,6 +657,8 @@ describe('useCursor', () => {
 
       const mockEditableDom = document.createElement('div');
       mockEditableDom.appendChild(mockTextNode);
+      // Mock contains method to return true for the text node
+      mockEditableDom.contains = jest.fn().mockReturnValue(true);
       const mockRef = { current: mockEditableDom };
 
       mockGetNodeInfo.mockReturnValue(null);
@@ -741,6 +744,7 @@ describe('useCursor', () => {
       const mockTextNode = document.createTextNode('test');
       const mockRange = {
         endContainer: mockTextNode,
+        startContainer: mockTextNode,
         endOffset: 2,
       };
       const mockSelection = {
@@ -760,6 +764,8 @@ describe('useCursor', () => {
 
       const mockEditableDom = document.createElement('div');
       mockEditableDom.appendChild(mockTextNode);
+      // Mock contains method to return true for the text node
+      mockEditableDom.contains = jest.fn().mockReturnValue(true);
       const mockRef = { current: mockEditableDom };
 
       const { result } = renderHook(() => useCursor(options));

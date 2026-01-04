@@ -715,7 +715,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       if (replaceCharacters?.length) {
         handleCharacterReplacement(range, replaceCharacters, editableDom);
       }
-
+      selection.deleteFromDocument();
       // 执行节点插入
       insertNodesWithPosition(slotNodes, range, insertContext);
 
@@ -809,7 +809,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const { type, slotKey, slotType } = context;
 
     let shouldSkipFirstNode = true;
-
     slotNodes.forEach((node) => {
       // 处理slot插入的特殊逻辑
       if (
@@ -837,8 +836,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     selection: Selection,
     preventScroll?: boolean,
   ): void => {
-    selection.deleteFromDocument();
-
     const lastNode = slotNodes[slotNodes.length - 1] as HTMLDivElement;
     setAfterNodeFocus(lastNode, editableRef.current!, range, selection, preventScroll);
 
