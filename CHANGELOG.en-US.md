@@ -16,6 +16,15 @@ tag: vVERSION
 
 ---
 
+## 2.1.3
+
+`2026-01-04`
+
+### @ant-design/x
+
+- 🐛 Fixed an undeclared dependency issue in Sender by replacing `classnames` with `clsx` and enabling dependency checks in `biome.json`. [#1608](https://github.com/ant-design/x/pull/1608) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1605](https://github.com/ant-design/x/pull/1605) by [kimteayon](https://github.com/kimteayon)
+
 ## 2.1.2
 
 `2025-12-30`
