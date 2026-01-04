@@ -56,7 +56,7 @@ interface UseCursorReturn {
     editableRef?: React.RefObject<HTMLDivElement | null>,
     lastSelectionRef?: React.RefObject<Range | null>,
   ) => {
-    type: 'box' | 'slot' | 'end' | 'start' | 'content';
+    type: 'box' | 'slot' | 'end' | 'start';
     slotType?: SlotConfigBaseType['type'];
     range?: Range;
     slotKey?: string;

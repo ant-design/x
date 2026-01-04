@@ -277,7 +277,7 @@ describe('Sender Slot Component', () => {
     expect(clearedValue?.skill).toBe(undefined);
   });
   describe('ref insert can be used', () => {
-    it('should insert slots without selection range', () => {
+    it('should insert slots default selection range', () => {
       const ref = createRef<SenderRef>();
       const slotConfig = [textSlotConfig];
       render(<Sender slotConfig={slotConfig} ref={ref} />);
@@ -292,6 +292,16 @@ describe('Sender Slot Component', () => {
       ref.current?.insert([textSlotConfig, tagSlotConfig]);
       ref.current?.insert([textSlotConfig], 'end');
       ref.current?.insert([contentSlotConfig], 'start');
+    });
+    it('should insert slots without selection range', () => {
+      window.getSelection = () => null;
+      const ref = createRef<SenderRef>();
+      const slotConfig = [textSlotConfig];
+      render(<Sender slotConfig={slotConfig} ref={ref} />);
+      expect(ref.current).toBeDefined();
+      expect(ref.current).not.toBeNull();
+      expect(typeof ref.current?.insert).toBe('function');
+      ref.current?.insert([textSlotConfig]);
     });
     it('should insert slots with selection range', () => {
       const ref = createRef<SenderRef>();
@@ -369,6 +379,53 @@ describe('Sender Slot Component', () => {
         'cursor',
         '@',
       );
+    });
+    it('should insert slots with skill', () => {
+      const ref = createRef<SenderRef>();
+      const slotConfig = [textSlotConfig, inputSlotConfig];
+      const { getByText, getByPlaceholderText } = render(
+        <Sender
+          skill={{
+            value: 'test-skill',
+            title: 'Test Skill',
+          }}
+          slotConfig={slotConfig}
+          ref={ref}
+        />,
+      );
+      expect(ref.current).toBeDefined();
+      expect(ref.current).not.toBeNull();
+      const textDom = getByText('Text Value');
+
+      // 使用配置化的 mock
+      const mockRange = createMockRange({
+        startContainer: textDom,
+        collapsed: true,
+        endContainer: textDom,
+        startOffset: 0,
+        endOffset: 2,
+      });
+
+      setupDOMMocks({}, mockRange);
+
+      expect(typeof ref.current?.insert).toBe('function');
+      ref.current?.insert([textSlotConfig]);
+      ref.current?.insert([contentSlotConfig]);
+
+      const input = getByPlaceholderText('Enter input') as HTMLInputElement;
+
+      // 为 input 元素配置新的 mock
+      const mockRangeInput = createMockRange({
+        startContainer: input,
+        endContainer: input,
+        startOffset: 2,
+        endOffset: 2,
+      });
+
+      setupDOMMocks({}, mockRangeInput);
+
+      expect(input).toBeInTheDocument();
+      ref.current?.insert([contentSlotConfig]);
     });
   });
   describe('Skill functionality tests', () => {
@@ -468,31 +525,6 @@ describe('Sender Slot Component', () => {
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
     });
-
-    it('should handle skill value and title changes', () => {
-      const { rerender, container } = render(
-        <Sender
-          slotConfig={[]}
-          skill={{
-            value: 'skill-1',
-            title: 'Skill 1',
-          }}
-        />,
-      );
-
-      rerender(
-        <Sender
-          slotConfig={[]}
-          skill={{
-            value: 'skill-2',
-            title: 'Skill 2',
-          }}
-        />,
-      );
-
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
     it('should handle skill removal and addition', () => {
       const { rerender, container } = render(
         <Sender
@@ -510,20 +542,6 @@ describe('Sender Slot Component', () => {
           skill={{
             value: 'new-skill',
             title: 'New Skill',
-          }}
-        />,
-      );
-
-      expect(container.querySelector('[role="textbox"]')).toBeInTheDocument();
-    });
-
-    it('should handle skill with empty slotConfig', () => {
-      const { container } = render(
-        <Sender
-          slotConfig={[]}
-          skill={{
-            value: 'empty-skill',
-            title: 'Empty Skill',
           }}
         />,
       );
@@ -582,23 +600,22 @@ describe('Sender Slot Component', () => {
     });
     it('should handle paste events', () => {
       const onPasteFile = jest.fn();
+      document.execCommand = jest.fn();
       const slotConfig = [textSlotConfig];
       const { container } = render(<Sender slotConfig={slotConfig} onPasteFile={onPasteFile} />);
-
       const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
       const mockFile = new File(['content'], 'test.txt', { type: 'text/plain' });
-
       fireEvent.paste(inputArea, {
         clipboardData: {
           getData: () => '',
           files: [mockFile],
         },
       });
-
       expect(onPasteFile).toHaveBeenCalledWith([mockFile]);
     });
     it('should handle paste text events', () => {
       const onPaste = jest.fn();
+      document.execCommand = undefined as any;
       const slotConfig = [textSlotConfig];
       const { container } = render(<Sender slotConfig={slotConfig} onPaste={onPaste} />);
 

@@ -577,10 +577,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
 
-    // 确保事件目标是可编辑区域
-    if (e.target !== editableRef.current && !editableRef.current?.contains(e.target as Node)) {
-      return;
-    }
     // 处理退格键删除
     if (e.key === 'Backspace') {
       if (handleDeleteOperation(e, 'backspace')) return;
@@ -760,8 +756,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           range.setStartAfter(skillDomRef.current);
         }
         break;
-      default:
-        range = getEndRange(editableDom);
     }
 
     return { range, selection, type, slotKey, slotType };
