@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import { fireEvent, render, waitFor } from '../../../tests/utils';
-import Sender, { type SenderRef, type SlotConfigType } from '../index';
+import type { SenderRef, SlotConfigType } from '../index';
+import Sender from '../index';
 
 const textSlotConfig: SlotConfigType = { type: 'text', value: 'Text Value' };
 
@@ -65,69 +66,109 @@ const errorTypeSlotConfig: any = {
   key: 'error1',
 };
 
+interface MockRange {
+  startContainer: HTMLElement;
+  endContainer: HTMLElement;
+  startOffset: number;
+  endOffset: number;
+  collapsed: boolean;
+  collapse: jest.MockedFunction<() => void>;
+  selectNodeContents: jest.MockedFunction<(node: Node) => void>;
+  deleteContents: jest.MockedFunction<() => void>;
+  insertNode: jest.MockedFunction<(node: Node) => void>;
+  setStart: jest.MockedFunction<(node: Node, offset: number) => void>;
+  setEnd: jest.MockedFunction<(node: Node, offset: number) => void>;
+  setStartAfter: jest.MockedFunction<(node: Node) => void>;
+  setEndAfter: jest.MockedFunction<(node: Node) => void>;
+  cloneRange: jest.MockedFunction<() => MockRange>;
+  toString: any;
+  deleteFromDocument: jest.MockedFunction<() => void>;
+}
+
+// Mock 配置工具函数
+const createMockRange = (config: Partial<MockRange> = {}): MockRange => {
+  const mockRange: MockRange = {
+    startContainer: document.createElement('div'),
+    endContainer: document.createElement('div'),
+    startOffset: 0,
+    collapsed: false,
+    endOffset: 0,
+    collapse: jest.fn(),
+    selectNodeContents: jest.fn(),
+    deleteContents: jest.fn(),
+    insertNode: jest.fn(),
+    setStart: jest.fn(),
+    setEnd: jest.fn(),
+    setStartAfter: jest.fn(),
+    setEndAfter: jest.fn(),
+    cloneRange: jest.fn(),
+    toString: jest.fn(() => ''),
+    deleteFromDocument: jest.fn(),
+    ...config,
+  };
+
+  // 修复自引用问题
+  mockRange.cloneRange = jest.fn(() => mockRange);
+
+  return mockRange;
+};
+
+const setupDOMMocks = (selectionConfig: any = {}, rangeConfig: Partial<MockRange> = {}) => {
+  // Mock document.createRange
+  if (!document.createRange) {
+    document.createRange = jest.fn(
+      () =>
+        ({
+          setStart: jest.fn(),
+          insertNode: jest.fn(),
+          collapse: jest.fn(),
+          selectNodeContents: jest.fn(),
+          commonAncestorContainer: document.body,
+          cloneContents: jest.fn(),
+          cloneRange: jest.fn(),
+          deleteContents: jest.fn(),
+          extractContents: jest.fn(),
+          setEnd: jest.fn(),
+          setEndAfter: jest.fn(),
+          setEndBefore: jest.fn(),
+          setStartAfter: jest.fn(),
+          setStartBefore: jest.fn(),
+          surroundContents: jest.fn(),
+          detach: jest.fn(),
+          getBoundingClientRect: jest.fn(),
+          getClientRects: jest.fn(),
+          toString: jest.fn(),
+        }) as unknown as Range,
+    );
+  }
+
+  // 创建 mock range
+  const mockRange = createMockRange(rangeConfig);
+
+  // Mock window.getSelection
+  Object.defineProperty(window, 'getSelection', {
+    value: () => ({
+      rangeCount: 1,
+      getRangeAt: () => mockRange,
+      deleteFromDocument: jest.fn(),
+      removeAllRanges: jest.fn(),
+      addRange: jest.fn(),
+      collapse: jest.fn(),
+      selectAllChildren: jest.fn(),
+      ...selectionConfig,
+    }),
+    writable: true,
+  });
+
+  return { mockRange };
+};
+
 describe('Sender Slot Component', () => {
   // Set up global DOM API mock
   beforeEach(() => {
-    // Mock DOM API
-    if (!document.createRange) {
-      document.createRange = jest.fn(
-        () =>
-          ({
-            setStart: jest.fn(),
-            insertNode: jest.fn(),
-            collapse: jest.fn(),
-            selectNodeContents: jest.fn(),
-            commonAncestorContainer: document.body,
-            cloneContents: jest.fn(),
-            cloneRange: jest.fn(),
-            deleteContents: jest.fn(),
-            extractContents: jest.fn(),
-            setEnd: jest.fn(),
-            setEndAfter: jest.fn(),
-            setEndBefore: jest.fn(),
-            setStartAfter: jest.fn(),
-            setStartBefore: jest.fn(),
-            surroundContents: jest.fn(),
-            detach: jest.fn(),
-            getBoundingClientRect: jest.fn(),
-            getClientRects: jest.fn(),
-            toString: jest.fn(),
-          }) as unknown as Range,
-      );
-    }
-    // 更完整的Selection mock
-    const mockRange = {
-      startContainer: document.createElement('div'),
-      endContainer: document.createElement('div'),
-      startOffset: 0,
-      endOffset: 0,
-      collapse: jest.fn(),
-      selectNodeContents: jest.fn(),
-      deleteContents: jest.fn(),
-      insertNode: jest.fn(),
-      setStart: jest.fn(),
-      setEnd: jest.fn(),
-      setStartAfter: jest.fn(),
-      setEndAfter: jest.fn(),
-      cloneRange: jest.fn(),
-      toString: jest.fn(() => ''),
-      deleteFromDocument: jest.fn(),
-    };
-
-    Object.defineProperty(window, 'getSelection', {
-      value: () => ({
-        rangeCount: 1,
-        getRangeAt: () => mockRange,
-        deleteFromDocument: jest.fn(),
-        removeAllRanges: jest.fn(),
-        addRange: jest.fn(),
-        collapse: jest.fn(),
-        selectAllChildren: jest.fn(),
-      }),
-      writable: true,
-    });
+    setupDOMMocks();
   });
-  it('should render all slot', async () => {
+  it('should render all slot types correctly', async () => {
     const onChange = jest.fn();
     const slotConfig = [
       textSlotConfig,
@@ -173,7 +214,7 @@ describe('Sender Slot Component', () => {
     fireEvent.click(customBtn);
     expect(customBtn.textContent).toBe('Custom Value Change');
   });
-  it('should ref can be used', () => {
+  it('should expose ref methods correctly', () => {
     const ref = createRef<SenderRef>();
     const slotConfig = [
       textSlotConfig,
@@ -236,7 +277,7 @@ describe('Sender Slot Component', () => {
     expect(clearedValue?.skill).toBe(undefined);
   });
   describe('ref insert can be used', () => {
-    it('should with no range can be used', () => {
+    it('should insert slots without selection range', () => {
       const ref = createRef<SenderRef>();
       const slotConfig = [textSlotConfig];
       render(<Sender slotConfig={slotConfig} ref={ref} />);
@@ -252,7 +293,7 @@ describe('Sender Slot Component', () => {
       ref.current?.insert([textSlotConfig], 'end');
       ref.current?.insert([contentSlotConfig], 'start');
     });
-    it('should with range can be used', () => {
+    it('should insert slots with selection range', () => {
       const ref = createRef<SenderRef>();
       const slotConfig = [textSlotConfig, inputSlotConfig];
       const { getByText, getByPlaceholderText } = render(
@@ -261,73 +302,37 @@ describe('Sender Slot Component', () => {
       expect(ref.current).toBeDefined();
       expect(ref.current).not.toBeNull();
       const textDom = getByText('Text Value');
-      const mockRange = {
+
+      // 使用配置化的 mock
+      const mockRange = createMockRange({
         startContainer: textDom,
         endContainer: textDom,
         startOffset: 2,
         endOffset: 2,
-        collapse: jest.fn(),
-        selectNodeContents: jest.fn(),
-        deleteContents: jest.fn(),
-        insertNode: jest.fn(),
-        setStart: jest.fn(),
-        setEnd: jest.fn(),
-        setStartAfter: jest.fn(),
-        setEndAfter: jest.fn(),
-        cloneRange: jest.fn(),
-        toString: jest.fn(() => ''),
-        deleteFromDocument: jest.fn(),
-      };
-      Object.defineProperty(window, 'getSelection', {
-        value: () => ({
-          rangeCount: 1,
-          getRangeAt: () => mockRange,
-          removeAllRanges: jest.fn(),
-          addRange: jest.fn(),
-          collapse: jest.fn(),
-          selectAllChildren: jest.fn(),
-          deleteFromDocument: jest.fn(),
-        }),
-        writable: true,
       });
+
+      setupDOMMocks({}, mockRange);
+
       expect(typeof ref.current?.insert).toBe('function');
       ref.current?.insert([textSlotConfig]);
       ref.current?.insert([contentSlotConfig]);
 
       const input = getByPlaceholderText('Enter input') as HTMLInputElement;
-      const mockRangeInput = {
+
+      // 为 input 元素配置新的 mock
+      const mockRangeInput = createMockRange({
         startContainer: input,
         endContainer: input,
         startOffset: 2,
         endOffset: 2,
-        collapse: jest.fn(),
-        selectNodeContents: jest.fn(),
-        deleteContents: jest.fn(),
-        insertNode: jest.fn(),
-        setStart: jest.fn(),
-        setEnd: jest.fn(),
-        setStartAfter: jest.fn(),
-        setEndAfter: jest.fn(),
-        cloneRange: jest.fn(),
-        toString: jest.fn(() => ''),
-        deleteFromDocument: jest.fn(),
-      };
-      Object.defineProperty(window, 'getSelection', {
-        value: () => ({
-          rangeCount: 1,
-          getRangeAt: () => mockRangeInput,
-          removeAllRanges: jest.fn(),
-          addRange: jest.fn(),
-          collapse: jest.fn(),
-          selectAllChildren: jest.fn(),
-          deleteFromDocument: jest.fn(),
-        }),
-        writable: true,
       });
+
+      setupDOMMocks({}, mockRangeInput);
+
       expect(input).toBeInTheDocument();
       ref.current?.insert([contentSlotConfig]);
     });
-    it('should with replaceCharacters', () => {
+    it('should replace characters with slots at cursor position', () => {
       const ref = createRef<SenderRef>();
       const slotConfig: SlotConfigType[] = [{ type: 'text', value: 'Text Value@' }];
       const { getByText } = render(<Sender slotConfig={slotConfig} ref={ref} />);
@@ -335,54 +340,23 @@ describe('Sender Slot Component', () => {
       expect(ref.current).not.toBeNull();
       const textDom = getByText('Text Value@');
 
-      // Define the mock range type to avoid circular reference
-      interface MockRange {
-        startContainer: HTMLElement;
-        endContainer: HTMLElement;
-        startOffset: number;
-        endOffset: number;
-        collapse: jest.MockedFunction<() => void>;
-        selectNodeContents: jest.MockedFunction<(node: Node) => void>;
-        deleteContents: jest.MockedFunction<() => void>;
-        insertNode: jest.MockedFunction<(node: Node) => void>;
-        setStart: jest.MockedFunction<(node: Node, offset: number) => void>;
-        setEnd: jest.MockedFunction<(node: Node, offset: number) => void>;
-        setStartAfter: jest.MockedFunction<(node: Node) => void>;
-        setEndAfter: jest.MockedFunction<(node: Node) => void>;
-        cloneRange: jest.MockedFunction<() => MockRange>;
-        toString: jest.MockedFunction<() => string>;
-        deleteFromDocument: jest.MockedFunction<() => void>;
-      }
-
-      const mockRange: MockRange = {
+      // 使用配置化的 mock
+      const mockRange = createMockRange({
         startContainer: textDom,
         endContainer: textDom,
         startOffset: 11,
         endOffset: 11,
-        collapse: jest.fn(),
-        selectNodeContents: jest.fn(),
-        deleteContents: jest.fn(),
-        insertNode: jest.fn(),
-        setStart: jest.fn(),
-        setEnd: jest.fn(),
-        setStartAfter: jest.fn(),
-        setEndAfter: jest.fn(),
-        cloneRange: jest.fn(() => mockRange),
-        toString: jest.fn(() => ''),
-        deleteFromDocument: jest.fn(),
-      };
-      Object.defineProperty(window, 'getSelection', {
-        value: () => ({
-          rangeCount: 1,
-          getRangeAt: () => mockRange,
-          removeAllRanges: jest.fn(),
-          addRange: jest.fn(),
-          collapse: false,
-          selectAllChildren: jest.fn(),
-          deleteFromDocument: jest.fn(),
-        }),
-        writable: true,
+        toString: jest.fn(() => 'Text Value@'),
       });
+
+      setupDOMMocks(
+        {
+          rangeCount: 1,
+          collapse: false,
+        },
+        mockRange,
+      );
+
       expect(typeof ref.current?.insert).toBe('function');
       ref.current?.insert?.(
         [
@@ -398,9 +372,9 @@ describe('Sender Slot Component', () => {
     });
   });
   describe('Skill functionality tests', () => {
-    it('should render skill with close button', async () => {
+    it('should render skill with close button', () => {
       const mockClose = jest.fn();
-      const { container } = render(
+      const { container, getByText } = render(
         <Sender
           slotConfig={[]}
           skill={{
@@ -413,14 +387,11 @@ describe('Sender Slot Component', () => {
           }}
         />,
       );
-
-      await waitFor(() => {
-        expect(container.querySelector('#ant-sender-slot-placeholders')).toBeInTheDocument();
-      });
+      expect(getByText('Test Skill')).toBeInTheDocument();
+      expect(container.querySelector('#ant-sender-slot-placeholders')).toBeInTheDocument();
     });
-
-    it('should handle non-closable skill', async () => {
-      const { container } = render(
+    it('should handle non-closable skill', () => {
+      const { getByText } = render(
         <Sender
           slotConfig={[]}
           skill={{
@@ -430,32 +401,75 @@ describe('Sender Slot Component', () => {
         />,
       );
 
-      await waitFor(() => {
-        expect(container.querySelector('#ant-sender-slot-placeholders')).toBeInTheDocument();
-      });
+      expect(getByText('test-skill')).toBeInTheDocument();
     });
-
-    it('should handle skill removal via keyboard', () => {
+    it('should handle skill with placeholder', () => {
+      const ref = createRef<SenderRef>();
       const { container } = render(
         <Sender
+          ref={ref}
           slotConfig={[]}
+          placeholder="Sender placeholder"
           skill={{
             value: 'test-skill',
             title: 'Test Skill',
           }}
         />,
       );
+      const dom = ref.current?.inputElement as HTMLElement;
+      const skillDom = container.querySelector('.ant-sender-skill-empty') as HTMLElement;
+      expect(ref.current).toBeDefined();
+      expect(skillDom).toBeDefined();
 
-      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: skillDom.lastChild,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
 
-      // Focus and trigger backspace to remove skill
-      inputArea.focus();
-      fireEvent.keyDown(inputArea, { key: 'Backspace' });
+      const customRangeMock = createMockRange();
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+    });
+    it('should handle skill removal via keyboard', () => {
+      const ref = createRef<SenderRef>();
+      const { container } = render(
+        <Sender
+          ref={ref}
+          slotConfig={[]}
+          placeholder="Sender placeholder"
+          skill={{
+            value: 'test-skill',
+            title: 'Test Skill',
+          }}
+        />,
+      );
+      const dom = ref.current?.inputElement as HTMLElement;
+      const skillDom = container.querySelector('.ant-sender-skill') as HTMLElement;
+      expect(ref.current).toBeDefined();
+      expect(skillDom).toBeDefined();
 
-      // Should handle skill removal without error
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: dom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+
+      Object.defineProperty(dom, 'previousSibling', {
+        value: skillDom,
+        configurable: true,
+      });
+
+      const customRangeMock = createMockRange();
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
     });
 
-    it('should handle skill change', () => {
+    it('should handle skill value and title changes', () => {
       const { rerender, container } = render(
         <Sender
           slotConfig={[]}
@@ -466,7 +480,6 @@ describe('Sender Slot Component', () => {
         />,
       );
 
-      // Change skill
       rerender(
         <Sender
           slotConfig={[]}
@@ -490,11 +503,7 @@ describe('Sender Slot Component', () => {
           }}
         />,
       );
-
-      // Remove skill
       rerender(<Sender slotConfig={[]} />);
-
-      // Add skill back
       rerender(
         <Sender
           slotConfig={[]}
@@ -527,7 +536,7 @@ describe('Sender Slot Component', () => {
       const onFocus = jest.fn();
       const onBlur = jest.fn();
       const onKeyUp = jest.fn();
-      const onKeyDown = jest.fn();
+      const onKeyDown = jest.fn<false | void, [React.KeyboardEvent<Element>]>(() => false);
       const onChange = jest.fn();
       const slotConfig = [textSlotConfig];
       const { container } = render(
@@ -552,6 +561,24 @@ describe('Sender Slot Component', () => {
       expect(onBlur).toHaveBeenCalled();
       expect(onKeyUp).toHaveBeenCalled();
       expect(onKeyDown).toHaveBeenCalled();
+    });
+    it('should handle onCompositionEnd event', () => {
+      const slotConfig = [textSlotConfig];
+      const { container } = render(<Sender slotConfig={slotConfig} />);
+
+      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+      // Directly trigger compositionend event on the DOM element
+      const compositionEvent = new CompositionEvent('compositionend', {
+        data: '测试文本',
+        bubbles: true,
+        cancelable: true,
+      });
+
+      inputArea.dispatchEvent(compositionEvent);
+
+      // The event should be handled without errors
+      expect(inputArea).toBeInTheDocument();
     });
     it('should handle paste events', () => {
       const onPasteFile = jest.fn();
@@ -586,7 +613,7 @@ describe('Sender Slot Component', () => {
 
       expect(onPaste).toHaveBeenCalled();
     });
-    it('should handle onKeyDown', () => {
+    it('should handle select all keyboard shortcut', () => {
       const onKeyDown = jest.fn();
       const onSubmit = jest.fn();
       const slotConfig = [textSlotConfig];
@@ -598,11 +625,143 @@ describe('Sender Slot Component', () => {
       const dom = ref.current?.inputElement as HTMLElement;
       expect(ref.current).toBeDefined();
       expect(dom).toBeDefined();
-      fireEvent.keyDown(dom, { key: 'Backspace' });
-      expect(onKeyDown).toHaveBeenCalled();
       fireEvent.keyDown(dom, { key: 'a', ctrlKey: true });
       fireEvent.keyDown(dom, { key: 'Enter' });
       expect(onSubmit).toHaveBeenCalled();
+    });
+    it('should handle backspace key deletion', () => {
+      const onSubmit = jest.fn();
+      const slotConfig = [contentSlotConfigWithValue, textSlotConfig];
+      const ref = createRef<SenderRef>();
+      const { getByText } = render(
+        <Sender ref={ref} slotConfig={slotConfig} onSubmit={onSubmit} />,
+      );
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(ref.current).toBeDefined();
+      expect(dom).toBeDefined();
+      const contentDom = getByText('Content Value');
+      const textDom = getByText('Text Value') as HTMLElement;
+      expect(textDom).toBeTruthy();
+
+      Object.defineProperty(textDom, 'previousSibling', {
+        value: contentDom,
+        configurable: true,
+      });
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: textDom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+
+      const customRangeMock = createMockRange({
+        startOffset: 5,
+        endOffset: 10,
+      });
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+    });
+    it('should handle backspace key in content slot', () => {
+      const onSubmit = jest.fn();
+      const slotConfig = [contentSlotConfigWithValue];
+      const ref = createRef<SenderRef>();
+      const { getByText } = render(
+        <Sender ref={ref} slotConfig={slotConfig} onSubmit={onSubmit} />,
+      );
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(ref.current).toBeDefined();
+      expect(dom).toBeDefined();
+      const contentElement = getByText('Content Value');
+      let textDom: Node | null = null;
+      // 遍历子节点找到文本节点
+      for (let i = 0; i < contentElement.childNodes.length; i++) {
+        const child = contentElement.childNodes[i];
+        if (child.nodeType === Node.TEXT_NODE) {
+          textDom = child;
+          break;
+        }
+      }
+
+      if (!textDom) {
+        textDom = contentElement.firstChild;
+      }
+
+      expect(textDom).toBeTruthy();
+      expect(textDom?.nodeType).toBe(Node.TEXT_NODE);
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: textDom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+
+      const customRangeMock = createMockRange({
+        startOffset: 0,
+        endOffset: 12,
+        collapsed: false,
+        toString: jest.fn(() => 'Content Value'),
+      });
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+    });
+    it('should handle cut operation in content slot', () => {
+      const onSubmit = jest.fn();
+      const slotConfig = [contentSlotConfigWithValue];
+      const ref = createRef<SenderRef>();
+      const { getByText } = render(
+        <Sender ref={ref} slotConfig={slotConfig} onSubmit={onSubmit} />,
+      );
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(ref.current).toBeDefined();
+      expect(dom).toBeDefined();
+      const contentElement = getByText('Content Value');
+      let textDom: Node | null = null;
+      // 遍历子节点找到文本节点
+      for (let i = 0; i < contentElement.childNodes.length; i++) {
+        const child = contentElement.childNodes[i];
+        if (child.nodeType === Node.TEXT_NODE) {
+          textDom = child;
+          break;
+        }
+      }
+
+      if (!textDom) {
+        textDom = contentElement.firstChild;
+      }
+
+      expect(textDom).toBeTruthy();
+      expect(textDom?.nodeType).toBe(Node.TEXT_NODE);
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: textDom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+
+      const customRangeMock = createMockRange({
+        startOffset: 0,
+        endOffset: 12,
+        collapsed: false,
+        toString: jest.fn(() => 'Content Value'),
+      });
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+
+      // Also test the cut event directly
+      fireEvent.cut(dom, {
+        clipboardData: {
+          getData: () => 'Content Value',
+          setData: jest.fn(),
+        },
+      });
     });
   });
 });

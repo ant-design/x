@@ -323,6 +323,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     const childNodes = editableDom.childNodes;
     if (childNodes.length === 0) {
+      editableDom.innerHTML = '';
+      skillDomRef.current = null;
       return emptyRes;
     }
 
@@ -364,13 +366,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
-
-    if (resultIndex === 0) {
-      editableDom.innerHTML = '';
-      skillDomRef.current = null;
-      return emptyRes;
-    }
-
     const finalValue = result.slice(0, resultIndex).join('');
 
     if (!currentSkillConfig) {
@@ -483,10 +478,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     operationType: 'backspace' | 'cut' | 'delete',
   ): boolean => {
     if (!editableRef.current) return false;
-
     const { range, selection } = getRange();
-    if (!selection || selection.rangeCount === 0) return false;
 
+    if (!selection || selection.rangeCount === 0) return false;
     const { focusOffset, anchorNode } = selection;
     if (!anchorNode || !editableRef.current.contains(anchorNode)) {
       return false;
@@ -546,6 +540,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   //  处理skill区域的键盘事件
+
   const handleSkillAreaKeyEvent = () => {
     if (
       !skillDomRef.current ||
@@ -579,7 +574,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     // 检查是否应该跳过处理
     if (shouldSkipKeyHandling(e)) {
-      onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
       return;
     }
 
@@ -587,7 +581,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     if (e.target !== editableRef.current && !editableRef.current?.contains(e.target as Node)) {
       return;
     }
-
     // 处理退格键删除
     if (e.key === 'Backspace') {
       if (handleDeleteOperation(e, 'backspace')) return;
@@ -786,7 +779,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       startOffset,
     } = getTextBeforeCursor(editableDom);
     const cursorPosition = textBeforeCursor.length;
-    console.log('textBeforeCursor', textBeforeCursor, cursorPosition);
     if (
       cursorPosition >= replaceCharacters.length &&
       textBeforeCursor.endsWith(replaceCharacters) &&
