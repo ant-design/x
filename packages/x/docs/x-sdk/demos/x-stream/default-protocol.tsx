@@ -5,7 +5,7 @@ import { Button, Flex, Radio, Splitter } from 'antd';
 import React from 'react';
 
 const contentChunks = ['Hello', ' ', 'I', ' ', 'am', ' ', 'Ant', ' ', 'Design', ' ', 'X', '!'];
-function createRealisticStream(mockReadableStream: string, streamSeparator: string) {
+function createRealisticStream(partSeparator: string, streamSeparator: string) {
   let index = 0;
 
   return new ReadableStream({
@@ -19,7 +19,7 @@ function createRealisticStream(mockReadableStream: string, streamSeparator: stri
       await new Promise((resolve) => setTimeout(resolve, Math.random() * 100 + 50));
 
       const chunk = contentChunks[index];
-      const sseData = `event:message${mockReadableStream}data:{"id":"${index}","content":"${chunk}"}${streamSeparator}`;
+      const sseData = `event:message${partSeparator}data:{"id":"${index}","content":"${chunk}"}${streamSeparator}`;
 
       controller.enqueue(new TextEncoder().encode(sseData));
       index++;
@@ -28,8 +28,8 @@ function createRealisticStream(mockReadableStream: string, streamSeparator: stri
 }
 
 // 保持向后兼容
-function mockReadableStream(mockReadableStream: string, streamSeparator: string) {
-  return createRealisticStream(mockReadableStream, streamSeparator);
+function mockReadableStream(partSeparator: string, streamSeparator: string) {
+  return createRealisticStream(partSeparator, streamSeparator);
 }
 
 const App = () => {
