@@ -52,9 +52,7 @@ const getNodeInfoBySlotConfigMap = (
   slotConfigMap: Map<string, SlotConfigType>,
 ): NodeInfo | null => {
   if (!targetNode?.dataset) return null;
-
   const { dataset } = targetNode;
-
   return {
     slotKey: dataset.slotKey,
     placeholder: dataset.placeholder,

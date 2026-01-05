@@ -1,9 +1,10 @@
-import { useEvent, useMergedState } from '@rc-component/util';
-import { type GetProp, GetRef, Upload, type UploadProps } from 'antd';
+import { useControlledState, useEvent } from '@rc-component/util';
+import type { GetProp, GetRef, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
-import { FileCardProps } from '../file-card';
+import type { FileCardProps } from '../file-card';
 import { SemanticType as FileCardSemanticType } from '../file-card/FileCard';
 import { SemanticType as FileCardListSemanticType } from '../file-card/List';
 import { useXProviderContext } from '../x-provider';
@@ -17,13 +18,14 @@ import PlaceholderUploader, {
 import SilentUploader from './SilentUploader';
 import useStyle from './style';
 export type SemanticType = 'list' | 'placeholder' | 'upload';
+export interface Attachment<T = any>
+  extends UploadFile<T>,
+    Omit<FileCardProps, 'size' | 'byte' | 'type'> {
+  description?: React.ReactNode;
+  cardType?: FileCardProps['type'];
+}
 
-export type Attachment = GetProp<UploadProps, 'fileList'>[number] &
-  Omit<FileCardProps, 'size' | 'byte'> & {
-    description?: React.ReactNode;
-  };
-
-export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
+export interface AttachmentsProps<T = any> extends Omit<UploadProps, 'fileList'> {
   prefixCls?: string;
 
   rootClassName?: string;
@@ -47,7 +49,7 @@ export interface AttachmentsProps extends Omit<UploadProps, 'fileList'> {
   getDropContainer?: null | (() => HTMLElement | null | undefined);
 
   // ============== File List ==============
-  items?: Attachment[];
+  items?: Attachment<T>[];
   overflow?: FileListProps['overflow'];
 }
 
@@ -126,9 +128,7 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
   const cssinjsCls = clsx(hashId, cssVarCls);
 
   // ============================ Upload ============================
-  const [fileList, setFileList] = useMergedState([], {
-    value: items,
-  });
+  const [fileList, setFileList] = useControlledState([], items);
 
   const triggerChange: GetProp<AttachmentsProps, 'onChange'> = useEvent((info) => {
     setFileList(info.fileList);
