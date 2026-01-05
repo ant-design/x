@@ -52,6 +52,13 @@ interface PlaceholderType {
 }
 ```
 
+```tsx | pure
+interface Attachment<T = any> extends UploadFile<T>, Omit<FileCardProps, 'size' | 'byte' | 'type'> {
+  description?: React.ReactNode;
+  cardType?: FileCardProps['type'];
+}
+```
+
 ### AttachmentsRef
 
 | 属性 | 说明 | 类型 | 版本 |

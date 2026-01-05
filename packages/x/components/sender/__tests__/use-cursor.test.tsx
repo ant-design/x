@@ -591,7 +591,20 @@ describe('useCursor', () => {
       const position = result.current.getInsertPosition('start');
       expect(position.type).toBe('start');
     });
+    it('should handle has range', () => {
+      const mockRange: any = {
+        current: {
+          endContainer: document.createTextNode('test'),
+          endOffset: 2,
+        },
+      };
 
+      const { result } = renderHook(() => useCursor());
+      const mockEditableDom = document.createElement('div');
+      const mockRef = { current: mockEditableDom };
+      const position = result.current.getInsertPosition('cursor', mockRef, mockRange);
+      expect(position.type).toBe('end');
+    });
     it('should handle end position', () => {
       const { result } = renderHook(() => useCursor());
 
@@ -637,6 +650,7 @@ describe('useCursor', () => {
       const mockTextNode = document.createTextNode('test');
       const mockRange = {
         endContainer: mockTextNode,
+        startContainer: mockTextNode,
         endOffset: 2,
       };
       const mockSelection = {
@@ -656,6 +670,8 @@ describe('useCursor', () => {
 
       const mockEditableDom = document.createElement('div');
       mockEditableDom.appendChild(mockTextNode);
+      // Mock contains method to return true for the text node
+      mockEditableDom.contains = jest.fn().mockReturnValue(true);
       const mockRef = { current: mockEditableDom };
 
       mockGetNodeInfo.mockReturnValue(null);
@@ -741,6 +757,7 @@ describe('useCursor', () => {
       const mockTextNode = document.createTextNode('test');
       const mockRange = {
         endContainer: mockTextNode,
+        startContainer: mockTextNode,
         endOffset: 2,
       };
       const mockSelection = {
@@ -760,6 +777,8 @@ describe('useCursor', () => {
 
       const mockEditableDom = document.createElement('div');
       mockEditableDom.appendChild(mockTextNode);
+      // Mock contains method to return true for the text node
+      mockEditableDom.contains = jest.fn().mockReturnValue(true);
       const mockRef = { current: mockEditableDom };
 
       const { result } = renderHook(() => useCursor(options));

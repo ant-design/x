@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { useCallback } from 'react';
 import type { SlotConfigBaseType, SlotConfigType } from '../interface';
 
@@ -50,7 +50,7 @@ const useSlotBuilder = (options: UseSlotBuilderOptions): UseSlotBuilderReturn =>
       const span = document.createElement('span');
       span.setAttribute('contenteditable', 'true');
       span.dataset.slotKey = config.key;
-      span.className = classnames(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
+      span.className = clsx(`${prefixCls}-slot`, `${prefixCls}-slot-content`);
       return span;
     },
     [prefixCls],
@@ -81,7 +81,7 @@ const useSlotBuilder = (options: UseSlotBuilderOptions): UseSlotBuilderReturn =>
       span.setAttribute('contenteditable', 'false');
       span.dataset.slotKey = slotKey;
       span.dataset.nodeType = 'nbsp';
-      span.className = classnames(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
+      span.className = clsx(`${prefixCls}-slot-${positions}`, `${prefixCls}-slot-no-width`);
       span.textContent = '\u00A0';
       return span;
     },

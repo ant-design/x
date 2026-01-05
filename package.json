@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
@@ -29,6 +29,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@testing-library/react": "^16.3.0",
     "@ant-design/tools": "^19.1.0",
     "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",

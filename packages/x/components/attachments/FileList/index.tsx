@@ -105,7 +105,8 @@ export default function FileList(props: FileListProps) {
           description: clsx(`${cardCls}-desc`, classNames.description),
         },
         byte: items[i].size,
-        ...(omit(items[i], ['type']) as FileCardProps),
+        ...(omit(items[i], ['type', 'cardType']) as FileCardProps),
+        type: items[i].cardType,
         size: undefined,
         imageProps: {
           preview: preview,
