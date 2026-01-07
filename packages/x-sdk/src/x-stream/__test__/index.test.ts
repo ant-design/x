@@ -15,7 +15,31 @@ describe('XStream', () => {
       result.push(value);
     }
 
-    expect(result).toEqual([{ event: ' test' }, { data: ' value' }]);
+    expect(result).toEqual([{ event: 'test' }, { data: 'value' }]);
+  });
+
+  it('handles TextDecoderStream unavailability by using fallback', async () => {
+    // Mock TextDecoderStream to be undefined
+    const originalTextDecoderStream = (global as any).TextDecoderStream;
+    (global as any).TextDecoderStream = undefined;
+
+    const textEncoder = new TextEncoder();
+    const readableStream = new ReadableStream({
+      start(controller) {
+        controller.enqueue(textEncoder.encode('event: fallback\n\ndata: test\n\n'));
+        controller.close();
+      },
+    });
+
+    const result: any[] = [];
+    for await (const value of XStream({ readableStream })) {
+      result.push(value);
+    }
+
+    expect(result).toEqual([{ event: 'fallback' }, { data: 'test' }]);
+
+    // Restore TextDecoderStream
+    (global as any).TextDecoderStream = originalTextDecoderStream;
   });
 
   it('make compatible with incomplete SSE data. ', async () => {
@@ -40,8 +64,8 @@ describe('XStream', () => {
     }
 
     expect(result).toEqual([
-      { event: ' message', data: '1' },
-      { event: ' end', data: '2' },
+      { event: 'message', data: '1' },
+      { event: 'end', data: '2' },
     ]);
   });
 
@@ -82,22 +106,30 @@ describe('XStream', () => {
     ).rejects.toThrow('The options.readableStream must be an instance of ReadableStream.');
   });
 
-  it('throws an error when key-value separator is not ":"', async () => {
-    await expect(
-      (async () => {
-        const result: any[] = [];
-        for await (const value of XStream({
-          readableStream: new ReadableStream({
-            async start(controller) {
-              controller.enqueue(new TextEncoder().encode('event: message\n\nincomplete'));
-              controller.close();
-            },
-          }),
-        })) {
-          result.push(value);
-        }
-      })(),
-    ).rejects.toThrow('The key-value separator ":" is not found in the sse line chunk!');
+  it('handles lines without key-value separator by logging warning', async () => {
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+    const result: any[] = [];
+    for await (const value of XStream({
+      readableStream: new ReadableStream({
+        async start(controller) {
+          controller.enqueue(new TextEncoder().encode('event: message\n\nincomplete'));
+          controller.close();
+        },
+      }),
+    })) {
+      result.push(value);
+    }
+
+    // Verify that console.warn was called with the expected message
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'The key-value separator ":" is not found in the sse line: incomplete !',
+    );
+
+    // Verify that the valid event was processed and invalid line was skipped
+    expect(result).toEqual([{ event: 'message' }]);
+
+    consoleSpy.mockRestore();
   });
 
   it('should return an instance of ReadableStream', () => {

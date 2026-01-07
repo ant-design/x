@@ -59,7 +59,18 @@ export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends 
   transformStream?:
     | XStreamOptions<Output>['transformStream']
     | ((baseURL: string, responseHeaders: Headers) => XStreamOptions<Output>['transformStream']);
-
+  /**
+   * @description Separator for stream data parsing
+   */
+  streamSeparator?: string;
+  /**
+   * @description Separator for different parts within the stream
+   */
+  partSeparator?: string;
+  /**
+   * @description Separator for key-value pairs in the stream data
+   */
+  kvSeparator?: string;
   /**
    * @description Whether to manually run the request
    */
@@ -191,8 +202,12 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
       timeout,
       streamTimeout,
       middlewares,
+      streamSeparator,
+      partSeparator,
+      kvSeparator,
       ...otherOptions
     } = this.options;
+
     const requestInit: XRequestOptions<Input, Output> = {
       ...otherOptions,
       method: 'POST',
@@ -232,7 +247,15 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
           if (typeof transformStream === 'function') {
             transformer = transformStream(this.baseURL, response.headers);
           }
-          await this.customResponseHandler<Output>(response, callbacks, transformer, streamTimeout);
+          await this.customResponseHandler<Output>(
+            response,
+            callbacks,
+            transformer,
+            streamTimeout,
+            streamSeparator,
+            partSeparator,
+            kvSeparator,
+          );
           return;
         }
         const contentType = response.headers.get('content-type') || '';
@@ -240,7 +263,14 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
         switch (mimeType) {
           /** SSE */
           case 'text/event-stream':
-            await this.sseResponseHandler<Output>(response, callbacks, streamTimeout);
+            await this.sseResponseHandler<Output>(
+              response,
+              callbacks,
+              streamTimeout,
+              streamSeparator,
+              partSeparator,
+              kvSeparator,
+            );
             break;
           /** JSON */
           case 'application/json':
@@ -275,10 +305,16 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     callbacks?: XRequestCallbacks<Output>,
     transformStream?: XStreamOptions<Output>['transformStream'],
     streamTimeout?: number | undefined,
+    streamSeparator?: string,
+    partSeparator?: string,
+    kvSeparator?: string,
   ) => {
     const stream = XStream<Output>({
       readableStream: response.body!,
       transformStream,
+      streamSeparator,
+      partSeparator,
+      kvSeparator,
     });
     await this.processStream<Output>(stream, response, callbacks, streamTimeout);
   };
@@ -287,9 +323,15 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     response: Response,
     callbacks?: XRequestCallbacks<Output>,
     streamTimeout?: number,
+    streamSeparator?: string,
+    partSeparator?: string,
+    kvSeparator?: string,
   ) => {
     const stream = XStream<Output>({
       readableStream: response.body!,
+      streamSeparator,
+      partSeparator,
+      kvSeparator,
     });
     await this.processStream<Output>(stream, response, callbacks, streamTimeout);
   };
@@ -313,12 +355,17 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
           callbacks?.onError?.(new Error('StreamTimeoutError'));
         }, streamTimeout);
       }
+
       result = await iterator.next();
-      chunks.push(result.value);
-      callbacks?.onUpdate?.(result.value, response.headers);
+
       clearTimeout(this.streamTimeoutHandler);
       if (this.isStreamTimeout) {
         break;
+      }
+
+      if (result.value) {
+        chunks.push(result.value);
+        callbacks?.onUpdate?.(result.value, response.headers);
       }
     } while (!result.done);
     if (streamTimeout) {
