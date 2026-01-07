@@ -184,11 +184,13 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
 
   public run(params?: Input) {
     if (this.manual) {
+      this.resetRetry();
       this.lastManualParams = params;
       this.init(params);
-    } else {
-      console.warn('The request is not manual, so it cannot be run!');
+      return true;
     }
+    console.warn('The request is not manual, so it cannot be run!');
+    return false;
   }
 
   public abort() {
@@ -289,14 +291,17 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
           }
           clearTimeout(this.retryTimer);
           this.retryTimer = setTimeout(() => {
+            const originalHeaders = this.options.headers;
             if (this.lastEventId) {
-              if (!this.options.headers) {
-                this.options.headers = {};
-              }
-              // automatically set Last-Event-ID for retry request
-              this.options.headers[LastEventId] = this.lastEventId;
+              // Temporarily add Last-Event-ID header for retry
+              this.options.headers = {
+                ...(originalHeaders || {}),
+                [LastEventId]: this.lastEventId,
+              };
             }
             this.init(this.lastManualParams);
+            // Restore original headers after initiating the retry request
+            this.options.headers = originalHeaders;
           }, retryInterval);
           this.retryTimes = this.retryTimes + 1;
         }
@@ -356,7 +361,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
       }
       result = await iterator.next();
       chunks.push(result.value);
-      if (result.value?.id) {
+      if (typeof result?.value?.id !== 'undefined') {
         // cache Last-Event-ID for retry request
         this.lastEventId = result.value.id;
       }
@@ -394,6 +399,12 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
       callbacks?.onSuccess?.([chunk], response.headers);
     }
   };
+
+  private resetRetry() {
+    clearTimeout(this.retryTimer);
+    this.retryTimes = 0;
+    this.lastEventId = '';
+  }
 }
 
 function XRequest<Input = AnyObject, Output = SSEOutput>(

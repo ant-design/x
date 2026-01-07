@@ -10,7 +10,7 @@ const SSE_SEPARATOR = '\n\n';
 
 const ND_JSON_SEPARATOR = '\n';
 
-const sseEvent: SSEOutput = { event: 'message', data: '{"id":"0","content":"He"}' };
+const sseEvent: SSEOutput = { event: 'message', data: '{"id":"0","content":"He"}', id: '0' };
 
 const sseData = `${Object.keys(sseEvent)
   .map((key) => `${key}:${sseEvent[key as keyof SSEOutput]}`)
@@ -76,10 +76,30 @@ describe('XRequest Class', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    mockedXFetch.mockReset();
   });
 
   test('should throw error on invalid baseURL', () => {
     expect(() => XRequest('')).toThrow('The baseURL is not valid!');
+  });
+
+  test('should manual mode works correctly', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+    };
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      headers,
+      json: jest.fn().mockResolvedValueOnce(options.params),
+    });
+    const request = XRequest(baseURL, {
+      ...options,
+      manual: true,
+    });
+    request.run();
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).toHaveBeenCalledWith([options.params], headers);
   });
 
   test('should create request and handle successful JSON response', async () => {
@@ -97,6 +117,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onSuccess).toHaveBeenCalledWith([options.params], headers);
     expect(callbacks.onError).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).toHaveBeenCalledWith(options.params, headers);
+    expect(request.run()).toBe(false);
   });
 
   test('should handle JSON response with success false and custom error fields', async () => {
@@ -403,6 +424,33 @@ describe('XRequest Class', () => {
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
     expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed`));
     await waitFakeTimer(1000, 1);
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+  });
+
+  test('should not retry when reach limit times', async () => {
+    jest.useFakeTimers();
+    const headers = {
+      get: jest.fn().mockReturnValue('text/event-stream'),
+    };
+    mockedXFetch
+      .mockRejectedValueOnce(new Error('Fetch failed'))
+      .mockRejectedValueOnce(new Error('Fetch failed2'))
+      .mockResolvedValueOnce({
+        headers,
+        body: mockSSEReadableStream(),
+      });
+    const request = XRequest(baseURL, {
+      ...options,
+      retryInterval: 500,
+      retryTimes: 1,
+    });
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed`));
+    // wait to retry
+    await waitFakeTimer(500, 1);
+    expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed2`));
+    await waitFakeTimer(500, 1);
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
   });
 });
