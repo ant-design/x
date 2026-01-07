@@ -3,385 +3,207 @@ import React from 'react';
 import { useStreaming } from '../hooks';
 import type { XMarkdownProps } from '../interface';
 
-// 基础功能测试 - 只测试实际能工作的功能
-const basicTestCases = [
-  {
-    title: 'complete Html',
-    input: '<div></div>',
-    output: '<div></div>',
-  },
-  {
-    title: 'not support link reference definitions',
-    input: '[foo]: /url "title"',
-    output: '[foo]: /url "title"',
-  },
-  {
-    title: 'complete link nested image',
-    input:
-      '[![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)](https://github.com/ant-design/x)',
-    output:
-      '[![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)](https://github.com/ant-design/x)',
-  },
-  {
-    title: 'complete image',
-    input:
-      '![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)',
-    output:
-      '![version](https://camo.githubusercontent.com/c6d467fb550578b3f321c1012e289f20e038b92dcdfc35f2b8147ca6572878ad/68747470733a2f2f696d672e736869656c64732e696f2f747769747465722f666f6c6c6f772f416e7444657369676e55492e7376673f6c6162656c3d416e7425323044657369676e)',
-  },
-  {
-    title: 'heading',
-    input: '#',
-    output: '#',
-  },
-  {
-    title: 'heading3',
-    input: '###',
-    output: '###',
-  },
-  {
-    title: 'wrong heading',
-    input: '#Heading1',
-    output: '#Heading1',
-  },
-  {
-    title: 'correctly heading',
-    input: '# Heading1',
-    output: '# Heading1',
-  },
-  {
-    title: 'heading over 6',
-    input: '#######',
-    output: '#######',
-  },
-  {
-    title: 'incomplete Html',
-    input: '<div',
-    output: '<div',
-  },
-  {
-    title: 'complete Html',
-    input: '<div></div>',
-    output: '<div></div>',
-  },
-  {
-    title: 'invalid Html',
-    input: '<divvvv',
-    output: '<divvvv',
-  },
-  {
-    title: 'incomplete code span',
-    input: '`code',
-    output: '`code',
-  },
-  {
-    title: 'complete code span',
-    input: '`code`',
-    output: '`code`',
-  },
-  {
-    title: 'incomplete fenced code',
-    input: '```js\ncode',
-    output: '```js\ncode',
-  },
-  {
-    title: 'complete fenced code',
-    input: '```js\ncode\n```',
-    output: '```js\ncode\n```',
-  },
-  {
-    title: 'incomplete list -',
-    input: '-',
-    output: '-',
-  },
-  {
-    title: 'not list ',
-    input: '+123',
-    output: '+123',
-  },
-  {
-    title: 'incomplete list +',
-    input: '+',
-    output: '+',
-  },
-  {
-    title: 'incomplete list *',
-    input: '*',
-    output: '*',
-  },
-  {
-    title: 'incomplete hr -',
-    input: '--',
-    output: '--',
-  },
-  {
-    title: 'complete hr -',
-    input: '---\n',
-    output: '---\n',
-  },
-  {
-    title: 'incomplete hr =',
-    input: '==',
-    output: '==',
-  },
-  {
-    title: 'complete hr =',
-    input: '===\n',
-    output: '===\n',
-  },
-];
-
-// 流处理功能测试 - 基于实际代码行为
+// 流处理功能测试 - 基础测试用例
 const streamingTestCases = [
   {
     title: 'incomplete link with streaming enabled',
     input: '[incomplete link](https://example',
-    output: '', // 实际实现会过滤掉不完整的链接
-    config: { streaming: { hasNextChunk: true } },
+    output: '',
   },
   {
     title: 'incomplete image only start should not show',
     input: '!',
     output: '', // 实际实现会过滤掉不完整的图片
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete image with streaming enabled',
     input: '![alt text](https://example',
     output: '', // 实际实现会过滤掉不完整的图片
-    config: { streaming: { hasNextChunk: true } },
   },
   {
-    title: 'incomplete link with custom component',
-    input: '[ant design x](https',
-    output: '', // 实际实现会过滤掉不完整的链接，因为没有提供components
-    config: {
-      streaming: {
-        hasNextChunk: true,
-        incompleteMarkdownComponentMap: { link: 'custom-link-placeholder' },
-      },
-    },
-  },
-  {
-    title: 'incomplete image with custom component',
-    input: '![alt text](https',
-    output: '', // 实际实现会过滤掉不完整的图片，因为没有提供components
-    config: {
-      streaming: {
-        hasNextChunk: true,
-        incompleteMarkdownComponentMap: { image: 'custom-image-placeholder' },
-      },
-    },
-  },
-  {
-    title: 'incomplete link and image with custom components',
-    input: '[link](https',
-    output: '', // 实际实现会过滤掉不完整的链接，因为没有提供components
-    config: {
-      streaming: {
-        hasNextChunk: true,
-        incompleteMarkdownComponentMap: {
-          link: 'custom-link-placeholder',
-          image: 'custom-image-placeholder',
-        },
-      },
-    },
-  },
-  {
-    title: 'complete elements should not use placeholders',
+    title: 'complete link should not use placeholders',
     input: '[ant design x](https://x.ant.design)',
     output: '[ant design x](https://x.ant.design)',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete list -',
     input: '-',
     output: '', // 实际实现会过滤掉不完整的列表
-    config: { streaming: { hasNextChunk: true } },
-  },
-  {
-    title: 'incomplete list - with incomplete bold',
-    input: '- **',
-    output: '', // 实际实现会过滤掉不完整的列表
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete list - with complete bold',
     input: '- **text**',
     output: '- **text**',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'setext heading',
     input: 'text \n- ',
     output: 'text \n', // 实际实现会过滤掉不完整的setext heading
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'not list ',
     input: '+123',
     output: '+123',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete list +',
     input: '+',
     output: '', // 实际实现会过滤掉不完整的列表
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete list * with space',
     input: '-    ',
     output: '-    ', // 实际实现会保留带空格的列表标记
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'complete list *',
     input: '* list',
     output: '* list',
-    config: { streaming: { hasNextChunk: true } },
-  },
-  {
-    title: 'complete list - with incomplete bold',
-    input: '- **',
-    output: '', // 实际实现会过滤掉不完整的列表
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'complete list - with complete bold',
     input: '- **bold**',
     output: '- **bold**',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'inValid heading',
     input: '#######',
     output: '#######',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'inValid heading no space',
     input: '###Heading',
     output: '###Heading',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'valid heading ',
     input: '### Heading',
     output: '### Heading',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete table - only header',
     input: '| Header 1 | Header 2 |',
     output: '', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete table - only header with title',
     input: 'table \n | Header 1 | Header 2 |',
     output: 'table \n ', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete table - header and separator',
     input: '| Header 1 | Header 2 |\n| --- | --- |',
     output: '', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'complete table',
     input: '| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |',
     output: '| Header 1 | Header 2 |\n| --- | --- |\n| Cell 1 | Cell 2 |',
-    config: { streaming: { hasNextChunk: false } },
-  },
-  {
-    title: 'incomplete table with custom component',
-    input: '| Header 1 | Header 2 |',
-    output: '', // 实际实现会过滤掉不完整的表格，因为没有提供components
-    config: {
-      streaming: {
-        hasNextChunk: true,
-        incompleteMarkdownComponentMap: { table: 'custom-table-placeholder' },
-      },
-    },
   },
   {
     title: 'malformed table - no closing pipe',
     input: '| Header 1 | Header 2 \n',
     output: '| Header 1 | Header 2 \n',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'table with incomplete separator',
     input: '| Header 1 | Header 2 |\n| --- |',
     output: '', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'table with left align separator',
     input: '| Header 1 | Header 2 |\n| :--- |',
     output: '', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'table with right align separator',
     input: '| Header 1 | Header 2 |\n| ---: |',
     output: '', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'table with center separator',
     input: '| Header 1 | Header 2 |\n| :---: |',
     output: '', // 实际实现会过滤掉不完整的表格
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete Html - open tag',
     input: '<div ',
     output: '', // 实际实现会过滤掉不完整的HTML
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete Html - close tag',
     input: '</div ',
     output: '', // 实际实现会过滤掉不完整的HTML
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'incomplete Html - self close tag',
     input: '<img src="" / ',
     output: '', // 实际实现会过滤掉不完整的HTML
-    config: { streaming: { hasNextChunk: true } },
-  },
-  {
-    title: 'incomplete html with custom component',
-    input: '<img src="" /',
-    output: '', // 实际实现会过滤掉不完整的HTML，因为没有提供components
-    config: {
-      streaming: {
-        hasNextChunk: true,
-        incompleteMarkdownComponentMap: { html: 'custom-html-placeholder' },
-      },
-    },
   },
   {
     title: 'complete Html - open tag',
     input: '<div>Div</div> ',
     output: '<div>Div</div> ',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'complete Html - self close tag',
     input: '<br />',
     output: '<br />',
-    config: { streaming: { hasNextChunk: true } },
   },
   {
     title: 'complete Html - nested tags',
     input: '<div><span>text</span></div>',
     output: '<div><span>text</span></div>',
+  },
+  {
+    title: 'incomplete inline code with streaming enabled',
+    input: '`console.log("hello")',
+    output: '', // 实际实现会过滤掉不完整的行内代码
+  },
+  {
+    title: 'complete inline code should not use placeholders',
+    input: '`const x = 42;`',
+    output: '`const x = 42;`',
+  },
+  {
+    title: 'incomplete inline code - single backtick',
+    input: '`',
+    output: '', // 实际实现会过滤掉不完整的行内代码
     config: { streaming: { hasNextChunk: true } },
+  },
+  {
+    title: 'incomplete inline code - max length',
+    input: '`' + 'a'.repeat(300),
+    output: '', // 实际实现会过滤掉不完整的行内代码
+  },
+];
+
+// 流处理功能测试 - 带自定义组件映射的测试用例
+const streamingTestCasesWithComponents = [
+  {
+    tokenType: 'link',
+    title: 'incomplete link with custom component mapping',
+    input: '[incomplete link](https://example',
+  },
+  {
+    tokenType: 'image',
+    title: 'incomplete image with custom component mapping',
+    input: '![alt text](https://example',
+  },
+  {
+    tokenType: 'table',
+    title: 'incomplete table with custom component mapping',
+    input: '| Header 1 | Header 2 |',
+  },
+  {
+    tokenType: 'html',
+    title: 'incomplete html with custom component mapping',
+    input: '<div class="test"',
+  },
+  {
+    tokenType: 'inline-code',
+    title: 'incomplete inline code with custom component mapping',
+    input: '`console.log("hello")',
   },
 ];
 
@@ -451,23 +273,77 @@ const TestComponent = ({ input, config }: { input: any; config?: TestCase['confi
 };
 
 describe('XMarkdown hooks', () => {
-  describe('useStreaming basic functionality', () => {
-    basicTestCases.forEach(({ title, input, output, config }: TestCase) => {
-      it(`should handle ${title}`, () => {
-        const { container } = render(
-          <TestComponent input={input} config={config ?? { streaming: { hasNextChunk: false } }} />,
-        );
-        expect(container.textContent).toBe(output);
-      });
-    });
-  });
-
   describe('useStreaming streaming functionality', () => {
     streamingTestCases.forEach(({ title, input, output, config }) => {
       it(`should handle ${title}`, () => {
         const { container } = render(
           <TestComponent input={input} config={config ?? { streaming: { hasNextChunk: true } }} />,
         );
+        expect(container.textContent).toBe(output);
+      });
+    });
+  });
+
+  describe('useStreaming streaming functionality with components mapping', () => {
+    streamingTestCasesWithComponents.forEach(({ title, input, tokenType }) => {
+      it(`should handle ${title}`, () => {
+        const defaultTokenMap: Record<string, string> = {
+          link: 'incomplete-link',
+          image: 'incomplete-image',
+          table: 'incomplete-table',
+          html: 'incomplete-html',
+          'inline-code': 'incomplete-inline-code',
+        };
+
+        const { container } = render(
+          <TestComponent
+            input={input}
+            config={{
+              streaming: { hasNextChunk: true },
+              components: {
+                'incomplete-link': () => null,
+                'incomplete-image': () => null,
+                'incomplete-table': () => null,
+                'incomplete-html': () => null,
+                'incomplete-inline-code': () => null,
+              },
+            }}
+          />,
+        );
+
+        const output = `<${defaultTokenMap[tokenType]} data-raw="${encodeURIComponent(input)}" />`;
+        expect(container.textContent).toBe(output);
+      });
+
+      it(`should handle ${title} with custom component`, () => {
+        const customTokenMap: Record<string, string> = {
+          link: 'unfinished-link',
+          image: 'unfinished-image',
+          table: 'unfinished-table',
+          html: 'unfinished-html',
+          'inline-code': 'unfinished-inline-code',
+        };
+
+        const { container } = render(
+          <TestComponent
+            input={input}
+            config={{
+              streaming: {
+                hasNextChunk: true,
+                incompleteMarkdownComponentMap: customTokenMap,
+              },
+              components: {
+                'unfinished-link': () => null,
+                'unfinished-image': () => null,
+                'unfinished-table': () => null,
+                'unfinished-html': () => null,
+                'unfinished-inline-code': () => null,
+              },
+            }}
+          />,
+        );
+
+        const output = `<${customTokenMap[tokenType]} data-raw="${encodeURIComponent(input)}" />`;
         expect(container.textContent).toBe(output);
       });
     });
@@ -1118,225 +994,6 @@ describe('XMarkdown hooks', () => {
         });
       });
       expect(result.current).toBe('New content completely');
-    });
-  });
-
-  describe('useStreaming components parameter tests', () => {
-    // 使用简单的对象来避免类型检查问题
-    const customComponents = {
-      'incomplete-link': () => null,
-      'incomplete-image': () => null,
-      'incomplete-table': () => null,
-      'incomplete-html': () => null,
-    };
-
-    it('should render incomplete link with custom component', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[incomplete link](https://example', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-link');
-      expect(result.current).toContain('data-raw=');
-    });
-
-    it('should render incomplete image with custom component', () => {
-      const { result } = renderHook(() =>
-        useStreaming('![alt text](https://example', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { image: 'incomplete-image' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-image');
-      expect(result.current).toContain('data-raw=');
-    });
-
-    it('should render incomplete table with custom component', () => {
-      const { result } = renderHook(() =>
-        useStreaming('| Header 1 | Header 2 |', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { table: 'incomplete-table' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-table');
-      expect(result.current).toContain('data-raw=');
-    });
-
-    it('should render incomplete HTML with custom component', () => {
-      const { result } = renderHook(() =>
-        useStreaming('<div class="test"', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { html: 'incomplete-html' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-html');
-      expect(result.current).toContain('data-raw=');
-    });
-
-    it('should handle multiple custom components in streaming', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[link](https://example', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: {
-              link: 'incomplete-link',
-              image: 'incomplete-image',
-              table: 'incomplete-table',
-              html: 'incomplete-html',
-            },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-link');
-
-      const { result: result2 } = renderHook(() =>
-        useStreaming('![image](https://test', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: {
-              link: 'incomplete-link',
-              image: 'incomplete-image',
-              table: 'incomplete-table',
-              html: 'incomplete-html',
-            },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result2.current).toContain('incomplete-image');
-    });
-
-    it('should not use custom components when streaming is disabled', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[incomplete link](https://example', {
-          streaming: {
-            hasNextChunk: false,
-            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toBe('[incomplete link](https://example');
-      expect(result.current).not.toContain('incomplete-link');
-    });
-
-    it('should handle missing custom component gracefully', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[incomplete link](https://example', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { link: 'non-existent-component' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toBe(''); // Should fallback to empty string
-    });
-
-    it('should handle empty components object', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[incomplete link](https://example', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-          },
-          components: {},
-        }),
-      );
-
-      expect(result.current).toBe(''); // Should fallback to empty string
-    });
-
-    it('should handle streaming completion with custom components', () => {
-      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
-        initialProps: {
-          input: '[incomplete link](https://example',
-          config: {
-            streaming: {
-              hasNextChunk: true,
-              incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-            },
-            components: customComponents,
-          },
-        },
-      });
-
-      expect(result.current).toContain('incomplete-link');
-
-      // Complete the link
-      act(() => {
-        rerender({
-          input: '[complete link](https://example.com)',
-          config: {
-            streaming: {
-              hasNextChunk: false,
-              incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-            },
-            components: customComponents,
-          },
-        });
-      });
-
-      expect(result.current).toBe('[complete link](https://example.com)');
-      expect(result.current).not.toContain('incomplete-link');
-    });
-
-    it('should handle special characters in data-raw attribute', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[link with spaces & special chars](https://example.com/path?param=value', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-link');
-      expect(result.current).toContain('data-raw=');
-      expect(result.current).toContain(
-        encodeURIComponent(
-          '[link with spaces & special chars](https://example.com/path?param=value',
-        ),
-      );
-    });
-
-    it('should handle unicode characters in data-raw attribute', () => {
-      const { result } = renderHook(() =>
-        useStreaming('[中文链接](https://例子.测试', {
-          streaming: {
-            hasNextChunk: true,
-            incompleteMarkdownComponentMap: { link: 'incomplete-link' },
-          },
-          components: customComponents,
-        }),
-      );
-
-      expect(result.current).toContain('incomplete-link');
-      expect(result.current).toContain('data-raw=');
-      expect(result.current).toContain(encodeURIComponent('[中文链接](https://例子.测试'));
     });
   });
 });

@@ -12,6 +12,8 @@ const demos = [
     
 Ant Design X is a comprehensive toolkit for AI applications, integrating a UI component library, streaming Markdown rendering engine, and AI SDK.
 
+\`npm install @ant-design/x-markdown\`
+
 ### @ant-design/x
 
 A React UI library based on the Ant Design system, designed for **AI-driven interfaces**. [Click here for details.](/components/introduce/).
@@ -59,6 +61,10 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
     content:
       'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
   },
+  {
+    title: 'InlineCode',
+    content: 'This is inline code: `npm install @ant-design/x-markdown`',
+  },
 ];
 
 const ImageSkeleton = () => <Skeleton.Image active style={{ width: 60, height: 60 }} />;
@@ -104,6 +110,13 @@ const IncompleteEmphasis = (props: ComponentProps) => {
     default:
       return null;
   }
+};
+
+const IncompleteInlineCode = (props: ComponentProps) => {
+  const text = decodeURIComponent(String(props['data-raw'] || ''));
+
+  if (!text) return;
+  return <code>{text.slice(1)}</code>;
 };
 
 const WelcomeCard = (props: Record<string, any>) => (
@@ -185,7 +198,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
           <XMarkdown
             content={displayText}
             className={className}
-            // paragraphTag="div"
+            paragraphTag="div"
             openLinksInNewTab
             dompurifyConfig={{ ADD_ATTR: ['icon', 'description'] }}
             components={{
@@ -194,6 +207,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
               'incomplete-table': TableSkeleton,
               'incomplete-html': HtmlSkeleton,
               'incomplete-emphasis': IncompleteEmphasis,
+              'incomplete-inline-code': IncompleteInlineCode,
               welcome: WelcomeCard,
             }}
             streaming={{ hasNextChunk: isStreaming }}

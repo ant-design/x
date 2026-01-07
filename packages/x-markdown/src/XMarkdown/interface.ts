@@ -26,6 +26,7 @@ export enum StreamCacheTokenType {
   Emphasis = 'emphasis',
   List = 'list',
   Table = 'table',
+  InlineCode = 'inline-code',
 }
 
 type Token = Tokens.Generic;

@@ -17,8 +17,6 @@ interface Recognizer {
 }
 
 /* ------------ Constants ------------ */
-const FENCED_CODE_REGEX = /^(`{3,}|~{3,})/;
-
 // Validates whether a token is still incomplete in the streaming context.
 // Returns true if the token is syntactically incomplete; false if it is complete or invalid.
 const STREAM_INCOMPLETE_REGEX = {
@@ -28,6 +26,7 @@ const STREAM_INCOMPLETE_REGEX = {
   commonEmphasis: [/^(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
   // regex2 matches cases like "- **"
   list: [/^[-+*]\s{0,3}$/, /^[-+*]\s{1,3}(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
+  'inline-code': [/^`[^`\r\n]{0,300}$/],
 } as const;
 
 const isTableInComplete = (markdown: string) => {
@@ -90,6 +89,12 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
     isStartOfToken: (markdown: string) => markdown.startsWith('|'),
     isStreamingValid: isTableInComplete,
   },
+  [StreamCacheTokenType.InlineCode]: {
+    tokenType: StreamCacheTokenType.InlineCode,
+    isStartOfToken: (markdown: string) => markdown.startsWith('`'),
+    isStreamingValid: (markdown: string) =>
+      STREAM_INCOMPLETE_REGEX['inline-code'].some((re) => re.test(markdown)),
+  },
 };
 
 const recognize = (cache: StreamCache, tokenType: StreamCacheTokenType): void => {
@@ -128,29 +133,40 @@ const commitCache = (cache: StreamCache): void => {
   cache.token = StreamCacheTokenType.Text;
 };
 
-const isInCodeBlock = (text: string): boolean => {
+const isInCodeBlock = (text: string, isFinalChunk = false): boolean => {
   const lines = text.split('\n');
   let inFenced = false;
   let fenceChar = '';
   let fenceLen = 0;
 
-  for (const rawLine of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
     const line = rawLine.endsWith('\r') ? rawLine.slice(0, -1) : rawLine;
 
-    const fenceMatch = line.match(FENCED_CODE_REGEX);
-    if (fenceMatch) {
-      const currentFence = fenceMatch[1];
-      const char = currentFence[0];
-      const len = currentFence.length;
+    const match = line.match(/^(`{3,}|～{3,})(.*)$/);
+    if (match) {
+      const fence = match[1];
+      const after = match[2];
+      const char = fence[0];
+      const len = fence.length;
 
       if (!inFenced) {
         inFenced = true;
         fenceChar = char;
         fenceLen = len;
-      } else if (char === fenceChar && len >= fenceLen) {
-        inFenced = false;
-        fenceChar = '';
-        fenceLen = 0;
+      } else {
+        // 检查是否满足结束条件
+        const isValidEnd = char === fenceChar && len >= fenceLen && /^\s*$/.test(after);
+
+        if (isValidEnd) {
+          // 如果是最后一块，或者这一行不是整个文本的最后一行 → 可以关闭
+          if (isFinalChunk || i < lines.length - 1) {
+            inFenced = false;
+            fenceChar = '';
+            fenceLen = 0;
+          }
+          // 否则（流式中间状态 + 最后一行是围栏）→ 暂不关闭
+        }
       }
     }
   }
@@ -231,6 +247,8 @@ const useStreaming = (
       const componentName = componentMap[token] || `incomplete-${token}`;
       const encodedPending = safeEncodeURIComponent(pending);
 
+      console.log('componentName', componentName);
+
       return components?.[componentName]
         ? `<${componentName} data-raw="${encodedPending}" />`
         : undefined;
@@ -257,15 +275,13 @@ const useStreaming = (
       if (!chunk) return;
 
       cache.processedLength += chunk.length;
-      const isTextInBlock = isInCodeBlock(text);
       for (const char of chunk) {
         cache.pending += char;
-        // Skip processing if inside code block
-        if (isTextInBlock) {
+        const isContentInCodeBlock = isInCodeBlock(cache.completeMarkdown + cache.pending);
+        if (isContentInCodeBlock) {
           commitCache(cache);
           continue;
         }
-
         if (cache.token === StreamCacheTokenType.Text) {
           for (const handler of recognizeHandlers) handler.recognize(cache);
         } else {
