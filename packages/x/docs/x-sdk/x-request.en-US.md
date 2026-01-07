@@ -22,8 +22,10 @@ tag: 2.0.0
 <code src="./demos/x-request/basic.tsx">Basic Usage</code>
 <code src="./demos/x-request/custom-params-headers.tsx">Custom Parameters</code>
 <code src="./demos/x-request/custom-transformer.tsx">Custom Transformer</code>
+<code src="./demos/x-request/stream-separator.tsx">Stream Parsing Configuration</code>
 <code src="./demos/x-request/manual.tsx">Manual Trigger</code>
 <code src="./demos/x-request/timeout.tsx">Timeout Configuration</code>
+<code src="./demos/x-request/stream-timeout.tsx">Chunk Timeout Configuration</code>
 
 ## API
 
@@ -55,6 +57,9 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | fetch | Custom fetch object | `typeof fetch` | - | - |
 | middlewares | Middlewares for pre- and post-request processing | XFetchMiddlewares | - | - |
 | transformStream | Stream processor | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |
+| streamSeparator | Stream separator, used to separate different data streams | string | \n\n | 2.2.0 |
+| partSeparator | Part separator, used to separate different parts of data | string | \n | 2.2.0 |
+| kvSeparator | Key-value separator, used to separate keys and values | string | : | 2.2.0 |
 | manual | Whether to manually control request sending. When `true`, need to manually call `run` method | boolean | false | - |
 | retryInterval | Retry interval when request is interrupted or fails, in milliseconds. If not set, automatic retry will not occur | number | - | - |
 | retryTimes | Maximum number of retry attempts. No further retries will be attempted after exceeding this limit | number | - | - |

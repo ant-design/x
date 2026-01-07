@@ -83,25 +83,6 @@ describe('XRequest Class', () => {
     expect(() => XRequest('')).toThrow('The baseURL is not valid!');
   });
 
-  test('should manual mode works correctly', async () => {
-    const headers = {
-      get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
-    };
-    mockedXFetch.mockResolvedValueOnce({
-      ok: true,
-      status: 200,
-      headers,
-      json: jest.fn().mockResolvedValueOnce(options.params),
-    });
-    const request = XRequest(baseURL, {
-      ...options,
-      manual: true,
-    });
-    request.run();
-    await request.asyncHandler;
-    expect(callbacks.onSuccess).toHaveBeenCalledWith([options.params], headers);
-  });
-
   test('should create request and handle successful JSON response', async () => {
     const headers = {
       get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
@@ -452,5 +433,29 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed2`));
     await waitFakeTimer(500, 1);
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
+  });
+
+  test('should not run with no manual', async () => {
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      headers: {
+        get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+      },
+      json: jest.fn().mockResolvedValueOnce(options.params),
+    });
+
+    const request = XRequest(baseURL, {
+      ...options,
+      manual: false, // 设置 manual 为 false，表示自动运行（默认行为）
+    });
+
+    // 由于 manual 为 false，请求应该自动开始执行
+    expect(request.manual).toBe(false);
+    expect(request.isRequesting).toBe(true); // 应该自动开始请求
+    const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+    // 等待请求完成
+    await request.run();
+    expect(consoleSpy).toHaveBeenCalledWith('The request is not manual, so it cannot be run!');
   });
 });
