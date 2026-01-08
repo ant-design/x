@@ -155,7 +155,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
   private lastManualParams?: Partial<Input>;
   private retryTimes = 0;
   private retryTimer!: ReturnType<typeof setTimeout>;
-  private lastEventId = '';
+  private lastEventId = undefined;
 
   public get asyncHandler() {
     return this._asyncHandler;
@@ -210,7 +210,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     this.abortController.abort();
   }
 
-  private init(extraParams?: Partial<Input>) {
+  private init(extraParams?: Partial<Input>, extraHeaders?: Record<string, string>) {
     this.abortController = new AbortController();
     const {
       callbacks,
@@ -238,7 +238,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
         ...params,
         ...extraParams,
       } as Input,
-      headers: Object.assign({}, globalOptions.headers || {}, headers),
+      headers: Object.assign({}, globalOptions.headers || {}, headers, extraHeaders || {}),
       signal: this.abortController.signal,
       middlewares,
     };
@@ -309,31 +309,29 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
             : new Error('Unknown error!');
         // get retry interval from return of onError or options
         const returnOfOnError = callbacks?.onError?.(err);
-        const retryInterval =
-          typeof returnOfOnError === 'number' ? returnOfOnError : this.options.retryInterval;
-        if (retryInterval && retryInterval > 0) {
-          // if retry times limit is set, check if the retry times is reached
-          if (
-            typeof this.options.retryTimes === 'number' &&
-            this.retryTimes >= this.options.retryTimes
-          ) {
-            return;
-          }
-          clearTimeout(this.retryTimer);
-          this.retryTimer = setTimeout(() => {
-            const originalHeaders = this.options.headers;
-            if (this.lastEventId) {
-              // Temporarily add Last-Event-ID header for retry
-              this.options.headers = {
-                ...(originalHeaders || {}),
-                [LastEventId]: this.lastEventId,
-              };
+        // ignore abort error
+        if (err.name !== 'AbortError') {
+          const retryInterval =
+            typeof returnOfOnError === 'number' ? returnOfOnError : this.options.retryInterval;
+          if (retryInterval && retryInterval > 0) {
+            // if retry times limit is set, check if the retry times is reached
+            if (
+              typeof this.options.retryTimes === 'number' &&
+              this.retryTimes >= this.options.retryTimes
+            ) {
+              return;
             }
-            this.init(this.lastManualParams);
-            // Restore original headers after initiating the retry request
-            this.options.headers = originalHeaders;
-          }, retryInterval);
-          this.retryTimes = this.retryTimes + 1;
+            clearTimeout(this.retryTimer);
+            this.retryTimer = setTimeout(() => {
+              const extraHeaders: Record<string, string> = {};
+              if (typeof this.lastEventId !== 'undefined') {
+                // add Last-Event-ID header for retry
+                extraHeaders[LastEventId] = this.lastEventId;
+              }
+              this.init(this.lastManualParams, extraHeaders);
+            }, retryInterval);
+            this.retryTimes = this.retryTimes + 1;
+          }
         }
       });
   }
@@ -449,7 +447,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
   private resetRetry() {
     clearTimeout(this.retryTimer);
     this.retryTimes = 0;
-    this.lastEventId = '';
+    this.lastEventId = undefined;
   }
 }
 

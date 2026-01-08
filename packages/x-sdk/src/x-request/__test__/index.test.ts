@@ -63,7 +63,7 @@ function mockSSEReadableStreamTimeout() {
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve('');
-        }, 2000);
+        }, 1100);
       });
       controller.enqueue(new TextEncoder().encode(chunks[1]));
       controller.close();
@@ -358,7 +358,7 @@ describe('XRequest Class', () => {
     });
     const request = XRequest(baseURL, {
       ...options,
-      streamTimeout: 1500,
+      streamTimeout: 1000,
     });
     expect(request.isStreamTimeout).toBe(false);
     await request.asyncHandler;
