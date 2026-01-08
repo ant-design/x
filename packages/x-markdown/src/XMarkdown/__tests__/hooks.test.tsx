@@ -213,12 +213,28 @@ const fencedCodeTestCases = [
     title: 'incomplete link in fenced code block should not be replaced',
     input: '```markdown\nThis is a [link](https://example.com that is incomplete\n```',
     output: '```markdown\nThis is a [link](https://example.com that is incomplete\n```',
+  },
+  {
+    title: 'fenced code block with tilde fences',
+    input: '~~~json\n{"key": "value"}\n~~~',
+    output: '~~~json\n{"key": "value"}\n~~~',
     config: { streaming: { hasNextChunk: true } },
   },
   {
-    title: 'incomplete link outside fenced code block should be replaced',
-    input: 'Here is a [link](https://example',
-    output: 'Here is a ', // 实际实现会过滤掉不完整的链接
+    title: 'incomplete fenced code block - missing closing fence',
+    input: '```javascript\nconsole.log("hello");',
+    output: '```javascript\nconsole.log("hello");',
+  },
+  {
+    title: 'fenced code block with trailing spaces after closing fence',
+    input: '```css\nbody { margin: 0; }\n```   ',
+    output: '```css\nbody { margin: 0; }\n```   ',
+    config: { streaming: { hasNextChunk: true } },
+  },
+  {
+    title: 'streaming mode with fenced code block and incomplete content after',
+    input: '```typescript\ninterface Test {\n  name: string;\n}\n```\n\nThis is [incomplete',
+    output: '```typescript\ninterface Test {\n  name: string;\n}\n```\n\nThis is ',
     config: { streaming: { hasNextChunk: true } },
   },
 ];
@@ -570,6 +586,67 @@ describe('XMarkdown hooks', () => {
 
       // Verify final table is rendered correctly
       expect(result.current).toBe(tableText);
+    });
+
+    it('should handle streaming fenced code blocks character by character with fence end logic', async () => {
+      const codeBlockText =
+        '```javascript\nconsole.log("streaming test");\nconsole.log("fence end logic");\n```';
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: '',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      // Stream character by character to test fence end detection
+      for (let i = 0; i <= codeBlockText.length; i++) {
+        const partialText = codeBlockText.slice(0, i);
+
+        act(() => {
+          rerender({
+            input: partialText,
+            config: { streaming: { hasNextChunk: i < codeBlockText.length } },
+          });
+        });
+
+        if (i < codeBlockText.length) {
+          await new Promise((resolve) => setTimeout(resolve, 5));
+        }
+      }
+
+      // Verify complete code block is preserved
+      expect(result.current).toBe(codeBlockText);
+    });
+
+    it('should handle streaming fenced code blocks with incomplete closing in non-final chunk', async () => {
+      const incompleteCodeBlock = '```python\ndef test():\n    return "incomplete"\n``';
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: '',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      // Stream incomplete code block (missing final backtick)
+      act(() => {
+        rerender({
+          input: incompleteCodeBlock,
+          config: { streaming: { hasNextChunk: true } }, // Not final chunk
+        });
+      });
+
+      // Should preserve the incomplete code block since it's not the final chunk
+      expect(result.current).toBe(incompleteCodeBlock);
+
+      // Complete the code block
+      act(() => {
+        rerender({
+          input: incompleteCodeBlock + '`',
+          config: { streaming: { hasNextChunk: false } }, // Final chunk
+        });
+      });
+
+      expect(result.current).toBe(incompleteCodeBlock + '`');
     });
   });
 

@@ -155,17 +155,18 @@ const isInCodeBlock = (text: string, isFinalChunk = false): boolean => {
         fenceChar = char;
         fenceLen = len;
       } else {
-        // 检查是否满足结束条件
+        // Check if this is a valid closing fence
         const isValidEnd = char === fenceChar && len >= fenceLen && /^\s*$/.test(after);
 
         if (isValidEnd) {
-          // 如果是最后一块，或者这一行不是整个文本的最后一行 → 可以关闭
+          // In streaming context, only close if this is the final chunk
+          // or if there are more lines after this fence
           if (isFinalChunk || i < lines.length - 1) {
             inFenced = false;
             fenceChar = '';
             fenceLen = 0;
           }
-          // 否则（流式中间状态 + 最后一行是围栏）→ 暂不关闭
+          // Otherwise, keep the fence open for potential streaming continuation
         }
       }
     }
@@ -246,8 +247,6 @@ const useStreaming = (
       const componentMap = incompleteMarkdownComponentMap || {};
       const componentName = componentMap[token] || `incomplete-${token}`;
       const encodedPending = safeEncodeURIComponent(pending);
-
-      console.log('componentName', componentName);
 
       return components?.[componentName]
         ? `<${componentName} data-raw="${encodedPending}" />`
