@@ -113,10 +113,11 @@ const IncompleteEmphasis = (props: ComponentProps) => {
 };
 
 const IncompleteInlineCode = (props: ComponentProps) => {
-  const text = decodeURIComponent(String(props['data-raw'] || ''));
+  const rawData = String(props['data-raw'] || '');
+  if (!rawData) return null;
 
-  if (!text) return;
-  return <code>{text.slice(1)}</code>;
+  const decodedText = decodeURIComponent(rawData)?.slice(1);
+  return <code className="inline-code">{decodedText}</code>;
 };
 
 const WelcomeCard = (props: Record<string, any>) => (
