@@ -147,12 +147,13 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
       </div>
       <CSSMotion {...collapseMotion} visible={isExpand}>
         {({ className: motionClassName, style }, motionRef) => (
-          <div
-            className={clsx(`${prefixCls}-content`, motionClassName, classNames.content)}
-            ref={motionRef}
-            style={{ ...style, ...styles.content }}
-          >
-            {children}
+          <div className={clsx(motionClassName)} ref={motionRef} style={{ ...style }}>
+            <div
+              className={clsx(`${prefixCls}-content`, classNames.content)}
+              style={{ ...styles.content }}
+            >
+              {children}
+            </div>
           </div>
         )}
       </CSSMotion>
