@@ -18,7 +18,10 @@ const App: React.FC = () => {
   return (
     <>
       <Divider style={{ margin: 0, padding: 0 }} />
-      <SemanticPreview componentName="Actions" semantics={[{ name: 'root', desc: locale.root }]}>
+      <SemanticPreview
+        componentName="Actions.Copy"
+        semantics={[{ name: 'root', desc: locale.root }]}
+      >
         <Actions.Copy />
       </SemanticPreview>
     </>
