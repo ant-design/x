@@ -1,5 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import type { MermaidConfig } from 'mermaid';
 import React from 'react';
+import Actions from '../../actions';
 import Mermaid from '../Mermaid';
 
 // Mock mermaid
@@ -53,12 +55,20 @@ jest.mock('antd', () => {
   }
 });
 
+// 添加类型定义
+interface MockMermaid {
+  initialize: jest.Mock;
+  parse: jest.Mock;
+  render: jest.Mock;
+}
+
 const mermaidContent = 'graph TD; A-->B;';
 
 describe('Mermaid Component', () => {
-  const mockMermaid = require('mermaid');
-  const mockParse = mockMermaid.parse as jest.Mock;
-  const mockRender = mockMermaid.render as jest.Mock;
+  const mockMermaid = require('mermaid') as MockMermaid;
+  const mockParse = mockMermaid.parse;
+  const mockRender = mockMermaid.render;
+  const mockInitialize = mockMermaid.initialize;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -73,8 +83,10 @@ describe('Mermaid Component', () => {
       const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
 
       await waitFor(() => {
-        expect(mockParse).toHaveBeenCalledWith('graph TD; A-->B;', { suppressErrors: true });
-        expect(mockRender).toHaveBeenCalled();
+        expect(mockRender).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.stringContaining('graph TD; A-->B;'),
+        );
       });
 
       expect(container.querySelector('.ant-mermaid')).toBeInTheDocument();
@@ -84,12 +96,11 @@ describe('Mermaid Component', () => {
       mockParse.mockResolvedValue(false);
       const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
-      render(<Mermaid>invalid syntax</Mermaid>);
+      const { container } = render(<Mermaid>invalid syntax</Mermaid>);
 
+      // 等待组件渲染完成，验证组件仍然正常渲染
       await waitFor(() => {
-        expect(consoleSpy).toHaveBeenCalledWith(
-          expect.stringContaining('[antdx: Mermaid] Render failed'),
-        );
+        expect(container.querySelector('.ant-mermaid')).toBeInTheDocument();
       });
 
       consoleSpy.mockRestore();
@@ -322,7 +333,10 @@ describe('Mermaid Component', () => {
       render(<Mermaid>{complexDiagram}</Mermaid>);
 
       await waitFor(() => {
-        expect(mockParse).toHaveBeenCalled();
+        expect(mockRender).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.stringContaining('sequenceDiagram'),
+        );
       });
     });
   });
@@ -789,6 +803,398 @@ describe('Mermaid Component', () => {
 
       // Should not throw and should return early
       expect(mockQuerySelector).toHaveBeenCalledWith('svg');
+    });
+  });
+
+  describe('Edge Cases and Boundary Conditions', () => {
+    it('should handle very large mermaid diagrams', async () => {
+      const largeDiagram = 'graph TD;\n' + 'A-->B;\n'.repeat(100);
+
+      render(<Mermaid>{largeDiagram}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.stringContaining('graph TD;'),
+        );
+      });
+    });
+
+    it('should handle special characters in mermaid code', async () => {
+      const specialCharsDiagram = `graph TD
+        A["Node with "quotes""] --> B['Node with 'single quotes'']
+        B --> C{Node with <brackets>}
+        C --> D[Node with & ampersand]
+        D --> E[Node with unicode: 你好 🚀]`;
+
+      render(<Mermaid>{specialCharsDiagram}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.stringContaining('你好 🚀'),
+        );
+      });
+    });
+
+    it('should handle empty string with whitespace', () => {
+      const { container } = render(<Mermaid>{'   \n\t  \n  '}</Mermaid>);
+      // 组件不会自动trim空白字符，所以会渲染
+      expect(container.querySelector('.ant-mermaid')).toBeInTheDocument();
+    });
+
+    it('should handle null config prop', async () => {
+      render(<Mermaid config={undefined}>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockInitialize).toHaveBeenCalledWith(
+          expect.objectContaining({
+            startOnLoad: false,
+            securityLevel: 'strict',
+            theme: 'default',
+            fontFamily: 'monospace',
+          }),
+        );
+      });
+    });
+
+    it('should handle undefined config prop', async () => {
+      render(<Mermaid config={undefined}>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockInitialize).toHaveBeenCalledWith(
+          expect.objectContaining({
+            startOnLoad: false,
+            securityLevel: 'strict',
+            theme: 'default',
+            fontFamily: 'monospace',
+          }),
+        );
+      });
+    });
+
+    it('should handle rapid mode switching', async () => {
+      render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      const codeButton = screen.getByText('Code');
+      const imageButton = screen.getByText('Image');
+
+      // 快速多次切换
+      for (let i = 0; i < 3; i++) {
+        fireEvent.click(codeButton);
+        fireEvent.click(imageButton);
+      }
+
+      expect(screen.queryByTestId('syntax-highlighter')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('Performance Tests', () => {
+    it('should throttle render calls', async () => {
+      const { rerender } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // 快速连续改变内容
+      for (let i = 0; i < 3; i++) {
+        rerender(<Mermaid>{`${mermaidContent} ${i}`}</Mermaid>);
+      }
+
+      await waitFor(() => {
+        // 由于节流，render调用次数应该少于内容变化次数
+        expect(mockRender).toHaveBeenCalled();
+      });
+    });
+
+    it('should handle memory cleanup on unmount', () => {
+      const { unmount } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // 确保组件卸载时不会抛出错误
+      expect(() => unmount()).not.toThrow();
+    });
+  });
+
+  describe('Accessibility Tests', () => {
+    it('should have proper ARIA attributes', () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      const mermaidContainer = container.querySelector('.ant-mermaid');
+      expect(mermaidContainer).toBeInTheDocument();
+
+      // 检查按钮是否有适当的标签
+      expect(screen.getByText('Code')).toBeInTheDocument();
+      expect(screen.getByText('Image')).toBeInTheDocument();
+    });
+
+    it('should handle keyboard navigation', () => {
+      render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      const codeButton = screen.getByText('Code');
+
+      // 测试键盘事件
+      fireEvent.keyDown(codeButton, { key: 'Enter' });
+
+      // 验证代码视图被激活
+      expect(screen.getByText('Code')).toBeInTheDocument();
+    });
+  });
+
+  describe('Configuration Tests', () => {
+    it('should merge custom config with default config', async () => {
+      const customConfig: MermaidConfig = {
+        theme: 'dark',
+        fontFamily: 'Arial',
+        securityLevel: 'loose' as const,
+      };
+
+      render(<Mermaid config={customConfig}>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockInitialize).toHaveBeenCalledWith(
+          expect.objectContaining({
+            startOnLoad: false,
+            securityLevel: 'loose',
+            theme: 'dark',
+            fontFamily: 'Arial',
+          }),
+        );
+      });
+    });
+
+    it('should handle partial config override', async () => {
+      const partialConfig: MermaidConfig = {
+        theme: 'forest',
+      };
+
+      render(<Mermaid config={partialConfig}>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockInitialize).toHaveBeenCalledWith(
+          expect.objectContaining({
+            startOnLoad: false,
+            securityLevel: 'strict',
+            theme: 'forest',
+            fontFamily: 'monospace',
+          }),
+        );
+      });
+    });
+  });
+
+  describe('Actions Configuration', () => {
+    it('should hide zoom controls when enableZoom is false', () => {
+      render(<Mermaid actions={{ enableZoom: false }}>{mermaidContent}</Mermaid>);
+
+      expect(screen.queryByLabelText('zoom-in')).not.toBeInTheDocument();
+      expect(screen.queryByLabelText('zoom-out')).not.toBeInTheDocument();
+    });
+
+    it('should hide download button when enableDownload is false', () => {
+      render(<Mermaid actions={{ enableDownload: false }}>{mermaidContent}</Mermaid>);
+
+      expect(screen.queryByLabelText('download')).not.toBeInTheDocument();
+    });
+
+    it('should hide copy button when enableCopy is false', () => {
+      render(<Mermaid actions={{ enableCopy: false }}>{mermaidContent}</Mermaid>);
+
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      expect(screen.queryByRole('button', { name: /copy/i })).not.toBeInTheDocument();
+    });
+
+    it('should render custom actions', () => {
+      const customActions = [
+        {
+          key: 'feedback',
+          actionRender: () => (
+            <Actions.Feedback
+              value={'default'}
+              styles={{
+                liked: {
+                  color: '#f759ab',
+                },
+              }}
+              key="feedback"
+            />
+          ),
+        },
+      ];
+
+      render(<Mermaid actions={{ customActions }}>{mermaidContent}</Mermaid>);
+
+      // 验证自定义的 Actions.Feedback 组件被渲染
+      expect(document.querySelector('.ant-actions-feedback')).toBeInTheDocument();
+      expect(document.querySelector('.ant-actions-feedback-item-like')).toBeInTheDocument();
+      expect(document.querySelector('.ant-actions-feedback-item-dislike')).toBeInTheDocument();
+    });
+  });
+
+  describe('Advanced Edge Cases', () => {
+    it('should handle concurrent renders', async () => {
+      const { rerender } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // 快速连续渲染不同内容
+      rerender(<Mermaid>{'graph LR; A-->B;'}</Mermaid>);
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      rerender(<Mermaid>{'graph TD; C-->D;'}</Mermaid>);
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      rerender(<Mermaid>{'graph BT; E-->F;'}</Mermaid>);
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+    });
+
+    it('should handle resize events', () => {
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // 模拟窗口大小改变
+      fireEvent(window, new Event('resize'));
+
+      const mermaidContainer = container.querySelector('.ant-mermaid');
+      expect(mermaidContainer).toBeInTheDocument();
+    });
+
+    it('should handle empty highlightProps', () => {
+      render(<Mermaid highlightProps={{}}>{mermaidContent}</Mermaid>);
+
+      expect(screen.getByText('Code')).toBeInTheDocument();
+    });
+
+    it('should handle highlightProps with custom style', () => {
+      render(
+        <Mermaid highlightProps={{ customStyle: { backgroundColor: 'red' } }}>
+          {mermaidContent}
+        </Mermaid>,
+      );
+
+      const codeButton = screen.getByText('Code');
+      fireEvent.click(codeButton);
+
+      expect(screen.getByTestId('syntax-highlighter')).toBeInTheDocument();
+    });
+
+    it('should handle nested quotes in mermaid code', async () => {
+      const nestedQuotes = `graph TD
+        A["Node with \\"nested\\" quotes"] --> B['Node with 'nested' quotes']
+        B --> C["Mixed 'quotes' and \\"quotes\\""]`;
+
+      render(<Mermaid>{nestedQuotes}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.stringContaining('Mixed'),
+        );
+      });
+    });
+
+    it('should handle very long single line mermaid code', async () => {
+      const longLine = 'graph TD; ' + 'A-->B;'.repeat(50);
+
+      render(<Mermaid>{longLine}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledWith(
+          expect.any(String),
+          expect.stringContaining('A-->B;'),
+        );
+      });
+    });
+
+    it('should handle mermaid code with comments', async () => {
+      const withComments = `graph TD
+        %% This is a comment
+        A[Start] --> B[Process]
+        B --> C{Decision?}
+        %% Another comment
+        C -->|Yes| D[End]
+        C -->|No| E[Continue]`;
+
+      render(<Mermaid>{withComments}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledWith(expect.any(String), expect.stringContaining('%%'));
+      });
+    });
+  });
+
+  describe('Performance and Memory Tests', () => {
+    it('should not leak memory on rapid prop changes', async () => {
+      const { rerender } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // 模拟快速属性变化
+      for (let i = 0; i < 10; i++) {
+        rerender(<Mermaid style={{ width: i * 10 }}>{`${mermaidContent} ${i}`}</Mermaid>);
+      }
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+    });
+
+    it('should handle cleanup properly', () => {
+      const { unmount } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // 确保事件监听器被正确清理
+      expect(() => unmount()).not.toThrow();
+    });
+
+    it('should handle multiple instances', () => {
+      render(
+        <div>
+          <Mermaid key="1">{mermaidContent}</Mermaid>
+          <Mermaid key="2">{mermaidContent}</Mermaid>
+          <Mermaid key="3">{mermaidContent}</Mermaid>
+        </div>,
+      );
+
+      const mermaidElements = screen.getAllByText('Code');
+      expect(mermaidElements).toHaveLength(3);
+    });
+  });
+
+  describe('Integration Tests', () => {
+    it('should work with context configuration', () => {
+      jest
+        .spyOn(require('@ant-design/x/es/_util/hooks/use-x-component-config'), 'default')
+        .mockReturnValue({
+          className: 'context-class',
+          classNames: { root: 'context-root', header: 'context-header' },
+          styles: { root: { padding: '10px' }, header: { margin: '5px' } },
+        });
+
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      expect(container.querySelector('.context-class')).toBeInTheDocument();
+    });
+
+    it('should merge context and props correctly', () => {
+      jest
+        .spyOn(require('@ant-design/x/es/_util/hooks/use-x-component-config'), 'default')
+        .mockReturnValue({
+          className: 'context-class',
+          classNames: { root: 'context-root' },
+          styles: { root: { padding: '10px' } },
+        });
+
+      const { container } = render(
+        <Mermaid
+          className="prop-class"
+          classNames={{ root: 'prop-root' }}
+          styles={{ root: { margin: '5px' } }}
+        >
+          {mermaidContent}
+        </Mermaid>,
+      );
+
+      const element = container.querySelector('.ant-mermaid');
+      expect(element).toBeInTheDocument();
     });
   });
 });

@@ -26,7 +26,7 @@ const App: React.FC = () => {
   return (
     <>
       <SemanticPreview
-        componentName="Actions"
+        componentName="Actions.Feedback"
         semantics={[
           { name: 'root', desc: locale.root },
           { name: 'like', desc: locale.like },
@@ -36,12 +36,15 @@ const App: React.FC = () => {
         <Actions.Feedback />
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
-      <SemanticPreview componentName="Actions" semantics={[{ name: 'liked', desc: locale.liked }]}>
+      <SemanticPreview
+        componentName="Actions.Feedback"
+        semantics={[{ name: 'liked', desc: locale.liked }]}
+      >
         <Actions.Feedback value="like" />
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
       <SemanticPreview
-        componentName="Actions"
+        componentName="Actions.Feedback"
         semantics={[{ name: 'dislike', desc: locale.dislike }]}
       >
         <Actions.Feedback value="dislike" />
