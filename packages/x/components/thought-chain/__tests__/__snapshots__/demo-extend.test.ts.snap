@@ -1205,11 +1205,15 @@ exports[`renders components/thought-chain/demo/customization.tsx extend context 
                     </span>
                   </div>
                   <div
-                    class="ant-think-content"
+                    class=""
                   >
-                    1. Analyze task, understand task workflow
+                    <div
+                      class="ant-think-content"
+                    >
+                      1. Analyze task, understand task workflow
 2. Task creation, files needed for task
 3. Task execution, using new component
+                    </div>
                   </div>
                 </div>
                 <span

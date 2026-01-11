@@ -63,9 +63,13 @@ exports[`Think Component Think component work 1`] = `
     </span>
   </div>
   <div
-    class="ant-think-content"
+    class=""
   >
-    test
+    <div
+      class="ant-think-content"
+    >
+      test
+    </div>
   </div>
 </div>
 `;
@@ -131,7 +135,11 @@ exports[`Think Component rtl render component should be rendered correctly in RT
     </span>
   </div>
   <div
-    class="ant-think-content"
-  />
+    class=""
+  >
+    <div
+      class="ant-think-content"
+    />
+  </div>
 </div>
 `;
