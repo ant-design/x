@@ -26,6 +26,5 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
   },
   layer: {
     name: 'antdx',
-    dependencies: ['antd'],
   },
 });

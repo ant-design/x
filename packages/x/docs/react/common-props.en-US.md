@@ -3,7 +3,7 @@ group:
   order: 4
   title: Advanced Usage
 title: Common Props
-order: 1
+order: 2
 ---
 
 > Tips: The following common props apply to most Ant Design X components. Components that do not support them will be specified separately.

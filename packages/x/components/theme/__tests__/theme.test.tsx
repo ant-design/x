@@ -19,7 +19,6 @@ describe('bubble', () => {
         <Bubble content="test" />
       </StyleProvider>,
     );
-    expect(document.head.innerHTML).toContain('@layer antd,antdx;');
     expect(document.head.innerHTML).toContain('<style ');
     expect(document.head.innerHTML).toContain('@layer antdx{');
   });
