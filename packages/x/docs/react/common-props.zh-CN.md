@@ -3,7 +3,7 @@ group:
   order: 4
   title: 进阶使用
 title: 通用属性
-order: 1
+order: 2
 ---
 
 > Tips: 以下通用属性适用于 Ant Design X 大部分组件，不支持的组件会单独说明。
