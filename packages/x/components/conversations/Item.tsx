@@ -2,9 +2,9 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import type { MenuProps } from 'antd';
 import { Dropdown, Typography } from 'antd';
-import type { DirectionType } from 'antd/es/config-provider';
 import { clsx } from 'clsx';
 import React from 'react';
+import type { DirectionType } from '../_util/type';
 import type { ConversationsProps } from '.';
 import type { ConversationItemType } from './interface';
 

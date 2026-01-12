@@ -1,7 +1,4 @@
-import type {
-  ConfigProviderProps as AntdConfigProviderProps,
-  ThemeConfig,
-} from 'antd/es/config-provider';
+import type { ConfigProviderProps as AntdConfigProviderProps, ThemeConfig } from 'antd';
 import React from 'react';
 import type { AnyObject, ShortcutKeys } from '../_util/type';
 import type { ActionsProps } from '../actions/interface';
@@ -16,8 +13,8 @@ import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SourcesProps } from '../sources';
 import type { SuggestionProps } from '../suggestion';
-import { OverrideToken } from '../theme/cssinjs-utils';
-import { MappingAlgorithm } from '../theme/interface';
+
+import { MappingAlgorithm, OverrideToken } from '../theme/interface';
 import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';

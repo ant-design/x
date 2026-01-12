@@ -1,6 +1,6 @@
 import { genStyleUtils } from '@ant-design/cssinjs-utils';
 import { useXProviderContext } from '../x-provider';
-import type { AliasToken, SeedToken } from './cssinjs-utils';
+import { AliasToken, SeedToken } from './interface';
 import type { ComponentTokenMap } from './interface/components';
 import { useInternalToken } from './useToken';
 
