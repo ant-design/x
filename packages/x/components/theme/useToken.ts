@@ -89,8 +89,8 @@ export function useInternalToken(): [
     cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
   const cssVar = {
-    prefix: ctxCssVar?.prefix || 'ant',
-    key: ctxCssVar?.key || 'css-var-root',
+    prefix: ctxCssVar?.prefix ?? 'ant',
+    key: ctxCssVar?.key ?? 'css-var-root',
   };
 
   const mergedTheme = theme || defaultTheme;
