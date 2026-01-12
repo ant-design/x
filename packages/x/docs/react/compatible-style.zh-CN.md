@@ -6,8 +6,6 @@ order: 1
 title: 样式兼容
 ---
 
-更多详细的细节可以参考 [antd 样式兼容](https://ant-design.antgroup.com/docs/react/compatible-style-cn)。
-
 ## `@layer` 样式优先级降权
 
 - 支持版本：`>=5.17.0`
@@ -46,3 +44,35 @@ antd 和 antdx 的样式会被封装在 `@layer` 中，以降低优先级：
       }
 ++  }
 ```
+
+使用时需要手动调整 `@layer` 来控制样式的覆盖顺序需要调整
+
+```css
+@layer antd, antdx;
+```
+
+### TailwindCSS v3
+
+在 global.css 中，调整 @layer 来控制样式的覆盖顺序。让 tailwind-base 置于 antd, antdx 之前：
+
+```css
+@layer tailwind-base, antd, antdx;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+@tailwind components;
+@tailwind utilities;
+```
+
+### TailwindCSS v4
+
+在 global.css 中，调整 @layer 来控制样式的覆盖顺序，让 antd, antdx 置于恰当位置：
+
+```css
+@layer theme, base, antd, antdx, components, utilities;
+
+@import 'tailwindcss';
+```
+
+更多可以参考 [antd 样式兼容](https://ant-design.antgroup.com/docs/react/compatible-style-cn)。

@@ -6,8 +6,6 @@ order: 1
 title: Style Compatibility
 ---
 
-For more detailed information, please refer to [antd Style Compatibility](https://ant.design/docs/react/compatible-style).
-
 ## `@layer` Style Priority Demotion
 
 - Supported version: `>=5.17.0`
@@ -46,3 +44,35 @@ antd and antdx styles will be encapsulated in `@layer` to reduce priority:
       }
 ++  }
 ```
+
+When using, you need to manually adjust `@layer` to control the style override order:
+
+```css
+@layer antd, antdx;
+```
+
+### TailwindCSS v3
+
+In global.css, adjust @layer to control the style override order. Place tailwind-base before antd and antdx:
+
+```css
+@layer tailwind-base, antd, antdx;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+@tailwind components;
+@tailwind utilities;
+```
+
+### TailwindCSS v4
+
+In global.css, adjust @layer to control the style override order, placing antd and antdx in appropriate positions:
+
+```css
+@layer theme, base, antd, antdx, components, utilities;
+
+@import 'tailwindcss';
+```
+
+For more information, please refer to [antd Style Compatibility](https://ant-design.antgroup.com/docs/react/compatible-style).
