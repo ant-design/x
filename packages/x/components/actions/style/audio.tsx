@@ -1,4 +1,4 @@
-import { GenerateStyle } from '../../theme/interface';
+import type { GenerateStyle } from '../../theme/interface';
 import type { ActionsToken } from '.';
 
 const genActionsAudioStyle: GenerateStyle<ActionsToken> = (token) => {
