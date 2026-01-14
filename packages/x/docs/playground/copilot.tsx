@@ -13,10 +13,9 @@ import {
   ReloadOutlined,
   ScheduleOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ConversationItemType } from '@ant-design/x';
+import type { AttachmentsProps, BubbleListProps, ConversationItemType } from '@ant-design/x';
 import {
   Attachments,
-  type AttachmentsProps,
   Bubble,
   Conversations,
   Prompts,
@@ -27,7 +26,7 @@ import {
 } from '@ant-design/x';
 import { BubbleListRef } from '@ant-design/x/es/bubble';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import type { SSEFields } from '@ant-design/x-sdk';
+import type { DefaultMessageInfo, SSEFields, XModelMessage } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   useXChat,
@@ -70,9 +69,7 @@ const DEFAULT_CONVERSATIONS_ITEMS: ConversationItemType[] = [
   },
 ];
 
-const HISTORY_MESSAGES: {
-  [key: string]: any[];
-} = {
+const HISTORY_MESSAGES: Record<string, DefaultMessageInfo<XModelMessage>[]> = {
   '5': [
     {
       message: { role: 'user', content: locale.newSession },
@@ -81,7 +78,7 @@ const HISTORY_MESSAGES: {
     {
       message: {
         role: 'assistant',
-        content: `${locale.helloImAntDesignX}！${locale.baseOnAntDesign} 我可以帮助你：写报告、画图、查看知识，或者回答关于 Ant Design X 的任何问题。`,
+        content: `${locale.helloImAntDesignX}！${locale.baseOnAntDesign}`,
       },
       status: 'success',
     },
@@ -134,7 +131,7 @@ const HISTORY_MESSAGES: {
   ],
 };
 
-const historyMessageFactory = (conversationKey: string): any[] => {
+const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
   return HISTORY_MESSAGES[conversationKey] || [];
 };
 
