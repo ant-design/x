@@ -72,6 +72,33 @@ const zhCN = {
   helloImAntDesignX: '你好，我是 Ant Design X',
   baseOnAntDesign: '基于 Ant Design，AGI 产品界面解决方案，创造更智能的视觉体验~',
   iCanHelp: '我可以帮助：',
+
+  // 历史消息内容
+  historyMessages: {
+    newSession: {
+      user: '新会话',
+      assistant:
+        '你好，我是 Ant Design X！基于 Ant Design，AGI 产品界面解决方案，创造更智能的视觉体验~',
+    },
+    whatHasAntDesignXUpgraded: {
+      user: 'Ant Design X 有哪些升级？',
+      assistant: 'RICH 设计范式 \n [查看详情](/docs/spec/introduce-cn})',
+    },
+    newAgiHybridInterface: {
+      user: '新的 AGI 混合界面',
+      assistant: `# 快速安装和导入组件 \n\n \`npm install @ant-design/x --save \` \n\n [查看详情](/components/introduce-cn}/)\n\n <br />\n\n## 导入方式 \n\n \`\`\`tsx \n\n import { Bubble } from '@ant-design/x';\n\n \`\`\`\n\n ## 组件使用 \n\n \`\`\`tsx\n\n import React from 'react';\n\nimport { Bubble } from '@ant-design/x';\n\nconst App: React.FC = () => ( \n\n <div className="App"> \n\n  <Bubble content="Hello world!" />\n\n </div>\n\n  );\n\n export default App;`,
+    },
+    howToQuicklyInstallAndImportComponents: {
+      user: '如何快速安装和导入组件？',
+      assistant:
+        "Ant Design X 提供了丰富的组件库。安装很简单：`npm install @ant-design/x --save`。然后你可以导入需要的组件，比如：`import { Bubble, Sender, Conversations } from '@ant-design/x'`。每个组件都有详细的文档和示例。",
+    },
+    whatIsAntDesignX: {
+      user: '什么是 Ant Design X？',
+      assistant:
+        '什么是 Ant Design X？ 它是基于 Ant Design 的 AGI 产品界面解决方案，专为 AI 时代设计的 React 组件库。包含了对话、气泡、发送器等核心组件，帮助开发者快速构建智能对话界面。',
+    },
+  },
 };
 
 const enUS = {
@@ -144,6 +171,33 @@ const enUS = {
   baseOnAntDesign:
     'Base on Ant Design, AGI product interface solution, create a better intelligent vision~',
   iCanHelp: 'I can help:',
+
+  // 历史消息内容
+  historyMessages: {
+    newSession: {
+      user: 'New session',
+      assistant:
+        "Hello, I'm Ant Design X! Base on Ant Design, AGI product interface solution, create a better intelligent vision~",
+    },
+    whatHasAntDesignXUpgraded: {
+      user: 'What has Ant Design X upgraded?',
+      assistant: 'RICH Design Paradigm \n [View Details](/docs/spec/induction})',
+    },
+    newAgiHybridInterface: {
+      user: 'New AGI Hybrid Interface',
+      assistant: `# Quickly install and import components \n\n \`npm install @ant-design/x --save\` \n\n [View details](/components/introduce)\n\n <br /> \n\n ## Import Method \n\n \`\`\`tsx \n\n import { Bubble } from '@ant-design/x';\n\n \`\`\`\n\n ## Component Usage \n\n \`\`\`tsx\n\n import React from 'react';\n\nimport { Bubble } from '@ant-design/x';\n\nconst App: React.FC = () => ( \n\n <div className="App"> \n\n  <Bubble content="Hello world!" />\n\n </div>\n\n  );\n\n export default App;`,
+    },
+    howToQuicklyInstallAndImportComponents: {
+      user: 'How to quickly install and import components?',
+      assistant:
+        "Ant Design X provides a rich component library. Installation is simple: `npm install @ant-design/x --save`. Then you can import the components you need, such as: `import { Bubble, Sender, Conversations } from '@ant-design/x'`. Each component has detailed documentation and examples.",
+    },
+    whatIsAntDesignX: {
+      user: 'What is Ant Design X?',
+      assistant:
+        'What is Ant Design X? It is an AGI product interface solution based on Ant Design, a React component library designed for the AI era. It includes core components such as conversations, bubbles, and senders to help developers quickly build intelligent conversation interfaces.',
+    },
+  },
 };
 
 export const isZhCN =

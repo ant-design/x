@@ -69,70 +69,87 @@ const DEFAULT_CONVERSATIONS_ITEMS: ConversationItemType[] = [
   },
 ];
 
-const HISTORY_MESSAGES: Record<string, DefaultMessageInfo<XModelMessage>[]> = {
-  '5': [
-    {
-      message: { role: 'user', content: locale.newSession },
-      status: 'success',
-    },
-    {
-      message: {
-        role: 'assistant',
-        content: `${locale.helloImAntDesignX}！${locale.baseOnAntDesign}`,
+// 使用国际化配置生成历史消息
+const generateHistoryMessages = (
+  locale: any,
+): Record<string, DefaultMessageInfo<XModelMessage>[]> => {
+  const { historyMessages } = locale;
+
+  return {
+    '5': [
+      {
+        message: { role: 'user', content: historyMessages.newSession.user },
+        status: 'success',
       },
-      status: 'success',
-    },
-  ],
-  '4': [
-    {
-      message: { role: 'user', content: locale.whatHasAntDesignXUpgraded },
-      status: 'success',
-    },
-    {
-      message: {
-        role: 'assistant',
-        content: locale.aiMessage_1,
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.newSession.assistant,
+        },
+        status: 'success',
       },
-      status: 'success',
-    },
-  ],
-  '3': [
-    { message: { role: 'user', content: locale.newAgiHybridInterface }, status: 'success' },
-    {
-      message: {
-        role: 'assistant',
-        content: locale.aiMessage_2,
+    ],
+    '4': [
+      {
+        message: { role: 'user', content: historyMessages.whatHasAntDesignXUpgraded.user },
+        status: 'success',
       },
-      status: 'success',
-    },
-  ],
-  '2': [
-    {
-      message: { role: 'user', content: locale.howToQuicklyInstallAndImportComponents },
-      status: 'success',
-    },
-    {
-      message: {
-        role: 'assistant',
-        content: `Ant Design X 提供了丰富的组件库。安装很简单：\`npm install @ant-design/x --save\`。然后你可以导入需要的组件，比如：\`import { Bubble, Sender, Conversations } from '@ant-design/x'\`。每个组件都有详细的文档和示例。`,
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.whatHasAntDesignXUpgraded.assistant,
+        },
+        status: 'success',
       },
-      status: 'success',
-    },
-  ],
-  '1': [
-    { message: { role: 'user', content: locale.whatIsAntDesignX }, status: 'success' },
-    {
-      message: {
-        role: 'assistant',
-        content: `${locale.whatIsAntDesignX} 它是基于 Ant Design 的 AGI 产品界面解决方案，专为 AI 时代设计的 React 组件库。包含了对话、气泡、发送器等核心组件，帮助开发者快速构建智能对话界面。`,
+    ],
+    '3': [
+      {
+        message: { role: 'user', content: historyMessages.newAgiHybridInterface.user },
+        status: 'success',
       },
-      status: 'success',
-    },
-  ],
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.newAgiHybridInterface.assistant,
+        },
+        status: 'success',
+      },
+    ],
+    '2': [
+      {
+        message: {
+          role: 'user',
+          content: historyMessages.howToQuicklyInstallAndImportComponents.user,
+        },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.howToQuicklyInstallAndImportComponents.assistant,
+        },
+        status: 'success',
+      },
+    ],
+    '1': [
+      {
+        message: { role: 'user', content: historyMessages.whatIsAntDesignX.user },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.whatIsAntDesignX.assistant,
+        },
+        status: 'success',
+      },
+    ],
+  };
 };
 
 const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
-  return HISTORY_MESSAGES[conversationKey] || [];
+  const historyMessages = generateHistoryMessages(locale);
+  return historyMessages[conversationKey] || [];
 };
 
 const MOCK_SUGGESTIONS = [
