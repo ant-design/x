@@ -152,7 +152,7 @@ const enUS = {
   agentName: 'Ant Design X Assistant',
   slotTextStart: 'Please help me introduce the usage of ',
   slotTextEnd: 'in Ant Design X.',
-  aiMessage_1: `RICH Design Paradigm \n [View Details](/docs/spec/induction})`,
+  aiMessage_1: `RICH Design Paradigm \n [View Details](/docs/spec/induction)`,
   aiMessage_2: `# Quickly install and import components \n\n \`npm install @ant-design/x --save\` \n [View details](/components/introduce)\n\n <br /> \n\n ## Import Method \n\n \`\`\`tsx \n\n import { Bubble } from '@ant-design/x';\n\n \`\`\`\n\n ## Component Usage \n\n \`\`\`tsx\n\n import React from 'react';\n\nimport { Bubble } from '@ant-design/x';\n\nconst App: React.FC = () => ( \n\n <div className="App"> \n\n  <Bubble content="Hello world!" />\n\n </div>\n\n  );\n\n export default App;`,
   welcome: `Hello,I'm Ant Design X`,
   welcomeDescription: `Base on Ant Design, AGI product interface solution, create a better intelligent vision~`,
@@ -181,7 +181,7 @@ const enUS = {
     },
     whatHasAntDesignXUpgraded: {
       user: 'What has Ant Design X upgraded?',
-      assistant: 'RICH Design Paradigm \n [View Details](/docs/spec/induction})',
+      assistant: 'RICH Design Paradigm \n [View Details](/docs/spec/induction)',
     },
     newAgiHybridInterface: {
       user: 'New AGI Hybrid Interface',
