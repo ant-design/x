@@ -22,18 +22,18 @@ export interface DesignTokenProviderProps {
    * @descCN 开启零运行时模式，不会在运行时产生样式，需要手动引入 CSS 文件。
    * @descEN Enable zero-runtime mode, which will not generate style at runtime, need to import additional CSS file.
    * @default true
-   * @since 6.0.0
+   * @since 2.0.0
    * @example
    * ```tsx
-   * import { ConfigProvider } from 'antd';
-   * import 'antd/dist/antd.css';
+   * import { XProvider } from '@ant-design/x';
+   * todo: 导出 antd 样式文件
    *
    * const Demo = () => (
-   *   <ConfigProvider theme={{ zeroRuntime: true }}>
+   *   <XProvider theme={{ zeroRuntime: true }}>
    *     <App />
-   *   </ConfigProvider>
+   *   </XProvider>
    *);
    * ```
    */
-  zeroRuntime?: boolean;
+  // zeroRuntime?: boolean;
 }
