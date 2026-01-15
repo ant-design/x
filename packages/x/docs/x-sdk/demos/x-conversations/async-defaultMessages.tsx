@@ -103,15 +103,27 @@ const App = () => {
   const getHistoryMessageList: (info: {
     conversationKey?: string;
   }) => Promise<DefaultMessageInfo<XModelMessage>[]> = async ({ conversationKey }) => {
-    const response = await fetch(
-      `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}&sessionId=${conversationKey}`,
-      {
-        method: 'GET',
-      },
-    );
-    const responseJson = await response.json();
-    if (responseJson?.success) {
-      return responseJson?.data || [];
+    // 在构建环境中返回空数组，避免网络请求失败
+    // Return empty array in build environment to avoid network request failure
+    if (typeof window === 'undefined') {
+      return [];
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}&sessionId=${conversationKey}`,
+        {
+          method: 'GET',
+        },
+      );
+      const responseJson = await response.json();
+      if (responseJson?.success) {
+        return responseJson?.data || [];
+      }
+    } catch (error) {
+      // 网络请求失败时返回空数组
+      // Return empty array when network request fails
+      console.warn('Failed to load history messages:', error);
     }
     return [];
   };
