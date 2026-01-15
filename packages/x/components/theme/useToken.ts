@@ -4,7 +4,7 @@ import { theme as antdTheme } from 'antd';
 import React from 'react';
 import version from '../version';
 import { DesignTokenProviderProps } from './context';
-import { AliasToken, GlobalToken, SeedToken } from './interface';
+import type { AliasToken, GlobalToken, SeedToken } from './interface';
 import formatToken from './util/alias';
 
 export const unitless: {
