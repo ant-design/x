@@ -81,8 +81,5 @@
   "overrides": {
     "@emotion/hash": "^0.9.2",
     "react-is": "^18.3.1"
-  },
-  "dependencies": {
-    "@antv/infographic": "^0.2.0"
   }
 }
