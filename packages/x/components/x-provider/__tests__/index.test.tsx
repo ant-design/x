@@ -57,7 +57,7 @@ describe('XProvider Component', () => {
   it('conversations.locale', () => {
     const onClick = jest.fn();
     const { getByText } = render(
-      <XProvider locale={zhCN_X}>
+      <XProvider theme={{ token: { motion: false } }} locale={zhCN_X}>
         <Conversations
           creation={{
             onClick,

@@ -1,16 +1,8 @@
 import type { Theme } from '@ant-design/cssinjs';
-import React from 'react';
 
 import type { AliasToken, MapToken, OverrideToken, SeedToken } from './interface';
-import defaultSeedToken from './themes/seed';
 
 // ================================ Context =================================
-// To ensure snapshot stable. We disable hashed in test env.
-export const defaultConfig = {
-  token: defaultSeedToken,
-  override: { override: defaultSeedToken },
-  hashed: true,
-};
 
 export type ComponentsToken = {
   [key in keyof OverrideToken]?: OverrideToken[key] & {
@@ -45,5 +37,3 @@ export interface DesignTokenProviderProps {
    */
   zeroRuntime?: boolean;
 }
-
-export const DesignTokenContext = React.createContext<DesignTokenProviderProps>(defaultConfig);
