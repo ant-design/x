@@ -96,12 +96,6 @@ const App = () => {
   // 获取历史消息列表：从服务器加载历史聊天记录
   // Get history message list: load historical chat records from server
   const getHistoryMessageList = async () => {
-    // 在构建环境中返回空数组，避免网络请求失败
-    // Return empty array in build environment to avoid network request failure
-    if (typeof window === 'undefined') {
-      return [];
-    }
-
     try {
       const response = await fetch(
         `https://api.x.ant.design/api/history_messages?isZH_CN=${typeof location !== 'undefined' && location.pathname.endsWith('-cn')}`,
