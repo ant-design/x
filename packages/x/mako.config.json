@@ -5,5 +5,16 @@
   },
   "codeSplitting": {
     "strategy": "auto"
+  },
+  "module": {
+    "rules": [
+      {
+        "test": "\\.json$",
+        "type": "json"
+      }
+    ]
+  },
+  "experiments": {
+    "importAttributes": true
   }
 }
