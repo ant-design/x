@@ -1,6 +1,6 @@
+import { Mermaid } from '@ant-design/x';
 import { Button, Space } from 'antd';
 import React from 'react';
-import Mermaid from '../Mermaid';
 
 const App: React.FC = () => {
   const header = (

@@ -1,7 +1,7 @@
 import { EditOutlined, ShareAltOutlined } from '@ant-design/icons';
+import { Mermaid } from '@ant-design/x';
 import { Checkbox, message, Space } from 'antd';
 import React, { useState } from 'react';
-import Mermaid from '../Mermaid';
 
 const App: React.FC = () => {
   const [enableZoom, setEnableZoom] = useState(true);
