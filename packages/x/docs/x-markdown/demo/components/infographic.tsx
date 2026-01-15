@@ -41,7 +41,6 @@ type ReactInfographicProps = {
 
 function ReactInfographic(props: ReactInfographicProps) {
   const { children } = props;
-
   const $container = React.useRef<HTMLDivElement>(null);
   const infographicInstance = React.useRef<Infographic>(null);
 
