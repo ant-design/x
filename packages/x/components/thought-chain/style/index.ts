@@ -103,7 +103,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
       [`${componentCls}-node-footer`]: {
         marginBottom: token.margin,
       },
-      [`${componentCls}-node-content`]: {
+      [`${componentCls}-node-content-box`]: {
         marginBottom: token.margin,
       },
       [`${componentCls}-node-collapse-icon`]: {
