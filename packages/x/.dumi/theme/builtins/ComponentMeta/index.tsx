@@ -104,13 +104,13 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
       }
       case 'x-markdown':
         return [
-          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/${component}`,
-          `x-markdown/src/${component}`,
+          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/${kebabComponent}`,
+          `x-markdown/src/${kebabComponent}`,
         ];
       case 'x-markdown/plugins':
         return [
-          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/plugins/${component}`,
-          `x-markdown/src/plugins/${component}`,
+          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/plugins/${kebabComponent}`,
+          `x-markdown/src/plugins/${kebabComponent}`,
         ];
       default:
         return [
@@ -133,18 +133,18 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     return [source, source];
   }, [component, source, packageName]);
 
-  const transformComponentName = (componentNam: string) => {
-    if (componentNam === 'Notification') {
-      return componentNam.toLowerCase();
+  const transformComponentName = (componentName: string) => {
+    if (componentName === 'Notification') {
+      return componentName.toLowerCase();
     }
-    return componentNam;
+    return componentName;
   };
 
   // ======================== Render ========================
   const importList =
     packageName !== 'x-markdown/plugins'
       ? `import { ${transformComponentName(component)} } from "@ant-design/${packageName}";`
-      : `import ${transformComponentName(component)}  from "@ant-design/x-markdown/plugins/${transformComponentName(component)}";`;
+      : `import ${transformComponentName(component)} from "@ant-design/x-markdown/plugins/${transformComponentName(component)}";`;
 
   return (
     <Descriptions
