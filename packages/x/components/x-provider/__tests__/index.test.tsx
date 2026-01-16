@@ -57,7 +57,7 @@ describe('XProvider Component', () => {
   it('conversations.locale', () => {
     const onClick = jest.fn();
     const { getByText } = render(
-      <XProvider theme={{ token: { motion: false } }} locale={zhCN_X}>
+      <XProvider iconPrefixCls="tom-icon" locale={zhCN_X}>
         <Conversations
           creation={{
             onClick,
@@ -68,6 +68,21 @@ describe('XProvider Component', () => {
     const creationDom = getByText(zhCN_X.Conversations.create);
     fireEvent.click(creationDom);
     expect(creationDom).toBeTruthy();
+    expect(onClick).toHaveBeenCalled();
+  });
+  it('some other config', () => {
+    const onClick = jest.fn();
+    const { container } = render(
+      <XProvider iconPrefixCls="tom-icon" theme={{ token: { motion: false } }}>
+        <Conversations
+          creation={{
+            onClick,
+          }}
+        />
+      </XProvider>,
+    );
+
+    expect(container.querySelector('.tom-icon')).toBeTruthy();
     expect(onClick).toHaveBeenCalled();
   });
 });
