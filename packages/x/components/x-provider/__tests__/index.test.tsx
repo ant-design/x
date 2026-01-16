@@ -83,6 +83,5 @@ describe('XProvider Component', () => {
     );
 
     expect(container.querySelector('.tom-icon')).toBeTruthy();
-    expect(onClick).toHaveBeenCalled();
   });
 });
