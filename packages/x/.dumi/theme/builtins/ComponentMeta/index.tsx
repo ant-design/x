@@ -107,6 +107,11 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/${component}`,
           `x-markdown/src/${component}`,
         ];
+      case 'x-markdown/plugins':
+        return [
+          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/plugins/${component}`,
+          `x-markdown/src/plugins/${component}`,
+        ];
       default:
         return [
           `https://github.com/ant-design/x/blob/main/packages/x/components/${kebabComponent}`,
@@ -136,7 +141,10 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
   };
 
   // ======================== Render ========================
-  const importList = `import { ${transformComponentName(component)} } from "@ant-design/${packageName}";`;
+  const importList =
+    packageName !== 'x-markdown/plugins'
+      ? `import { ${transformComponentName(component)} } from "@ant-design/${packageName}";`
+      : `import ${transformComponentName(component)}  from "@ant-design/x-markdown/plugins/${transformComponentName(component)}";`;
 
   return (
     <Descriptions
