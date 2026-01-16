@@ -8,8 +8,7 @@ order: 1
 subtitle: 请求
 description: 通用流式请求工具。
 tag: 2.0.0
-demo:
-  cols: 1
+packageName: x-sdk
 ---
 
 ## 何时使用

@@ -1,6 +1,10 @@
 ---
 title: Code Examples
 order: 2
+tag: 2.0.0
+category: Components
+componentName: XMarkdown
+packageName: x-markdown
 ---
 
 ## When to Use

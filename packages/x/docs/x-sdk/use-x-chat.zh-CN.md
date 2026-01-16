@@ -6,10 +6,9 @@ group:
 title: useXChat
 order: 1
 subtitle: 会话数据
+packageName: x-sdk
 description: 单对话的数据管理。
 tag: 2.0.0
-demo:
-  cols: 1
 ---
 
 ## 何时使用

@@ -7,9 +7,8 @@ title: useXChat
 order: 1
 subtitle: Conversation Data
 description: Data management for single conversations.
-demo:
-  cols: 1
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 ## When to Use

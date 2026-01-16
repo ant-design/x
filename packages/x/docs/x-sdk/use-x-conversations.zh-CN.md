@@ -7,8 +7,7 @@ title: useXConversations
 order: 2
 subtitle: 会话管理
 description: 用于多会话的对话保持和增删改查。
-demo:
-  cols: 1
+packageName: x-sdk
 tag: 2.0.0
 ---
 
