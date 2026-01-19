@@ -5,7 +5,7 @@
 ## 🚀 快速开始
 
 ```bash
-cd packages/x-markdown/benchmark
+cd packages/x-markdown
 npm run benchmark    # 一键运行完整测试
 ```
 
