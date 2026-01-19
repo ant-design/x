@@ -29,12 +29,12 @@
     "packages/*"
   ],
   "devDependencies": {
-    "@testing-library/react": "^16.3.0",
     "@ant-design/tools": "^19.1.0",
     "@biomejs/biome": "^2.0.5",
     "@codecov/webpack-plugin": "^1.4.0",
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "@size-limit/file": "^12.0.0",
+    "@testing-library/react": "^16.3.0",
     "antd": "^6.1.1",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",

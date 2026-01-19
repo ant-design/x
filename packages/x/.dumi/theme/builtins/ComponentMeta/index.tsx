@@ -69,11 +69,12 @@ export interface ComponentMetaProps {
   source: string | true;
   filename?: string;
   version?: string;
+  packageName?: string;
   designUrl?: string;
 }
 
 const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
-  const { component, source, filename, version, designUrl } = props;
+  const { component, packageName = 'x', source, filename, version, designUrl } = props;
   const { token } = theme.useToken();
   const [locale, lang] = useLocale(locales);
   const isZhCN = lang === 'cn';
@@ -92,14 +93,37 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     }
   };
 
+  const getPackageCodeUrl = (kebabComponent: string, packageName: string) => {
+    switch (packageName) {
+      case 'x-sdk': {
+        const sdkComponent = kebabComponent.replace('use-', '');
+        return [
+          `https://github.com/ant-design/x/blob/main/packages/x-sdk/src/${sdkComponent}`,
+          `x-sdk/src/${sdkComponent}`,
+        ];
+      }
+      case 'x-markdown':
+        return [
+          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/${kebabComponent}`,
+          `x-markdown/src/${kebabComponent}`,
+        ];
+      case 'x-markdown/plugins':
+        return [
+          `https://github.com/ant-design/x/blob/main/packages/x-markdown/src/plugins/${kebabComponent}`,
+          `x-markdown/src/plugins/${kebabComponent}`,
+        ];
+      default:
+        return [
+          `https://github.com/ant-design/x/blob/main/packages/x/components/${kebabComponent}`,
+          `x/components/${kebabComponent}`,
+        ];
+    }
+  };
   // ======================== Source ========================
   const [filledSource, abbrSource] = React.useMemo(() => {
     if (String(source) === 'true') {
       const kebabComponent = kebabCase(component);
-      return [
-        `https://github.com/ant-design/x/blob/main/packages/x/components/${kebabComponent}`,
-        `components/${kebabComponent}`,
-      ];
+      return getPackageCodeUrl(kebabComponent, packageName);
     }
 
     if (typeof source !== 'string') {
@@ -107,17 +131,20 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
     }
 
     return [source, source];
-  }, [component, source]);
+  }, [component, source, packageName]);
 
   const transformComponentName = (componentName: string) => {
-    if (componentName === 'Notification' || componentName === 'Message') {
+    if (componentName === 'Notification') {
       return componentName.toLowerCase();
     }
     return componentName;
   };
 
   // ======================== Render ========================
-  const importList = `import { ${transformComponentName(component)} } from "@ant-design/x";`;
+  const importList =
+    packageName !== 'x-markdown/plugins'
+      ? `import { ${transformComponentName(component)} } from "@ant-design/${packageName}";`
+      : `import ${transformComponentName(component)} from "@ant-design/x-markdown/plugins/${transformComponentName(component)}";`;
 
   return (
     <Descriptions
@@ -133,10 +160,7 @@ const ComponentMeta: React.FC<ComponentMetaProps> = (props) => {
           {
             label: locale.import,
             children: (
-              <CopyToClipboard
-                text={`import { ${component} } from "@ant-design/x";`}
-                onCopy={onCopy}
-              >
+              <CopyToClipboard text={importList} onCopy={onCopy}>
                 <Tooltip
                   placement="right"
                   title={copied ? locale.copied : locale.copy}

@@ -1,7 +1,7 @@
-import { CSSInterpolation, Keyframes } from '@ant-design/cssinjs';
-import { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
+import { type CSSInterpolation, Keyframes } from '@ant-design/cssinjs';
+import type { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
-import { AliasToken } from '../../theme/cssinjs-utils';
+import type { AliasToken } from '../../theme/interface';
 import { initMotion } from './init';
 
 export const fadeInLeft = new Keyframes('antXFadeInLeft', {

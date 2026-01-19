@@ -7,8 +7,7 @@ title: XStream
 subtitle: Stream
 order: 2
 description: Transform readable data streams.
-demo:
-  cols: 1
+packageName: x-sdk
 tag: 2.0.0
 ---
 

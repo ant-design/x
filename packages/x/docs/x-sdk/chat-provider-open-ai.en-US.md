@@ -6,6 +6,7 @@ group:
 title: OpenAIChatProvider
 order: 2
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 `OpenAIChatProvider` is a `Chat Provider` compatible with the `OpenAI` interface. It automatically converts request parameters and response data into the OpenAI API format.
