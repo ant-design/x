@@ -142,6 +142,12 @@ interface XMarkdownProps {
    * @description DOMPurify configuration for HTML sanitization and XSS protection
    */
   dompurifyConfig?: DOMPurifyConfig;
+  /**
+   * @description 是否保护自定义标签中的换行符
+   * @description Whether to protect newlines in custom tags
+   * @default false
+   */
+  protectCustomTagNewlines?: boolean;
 }
 
 export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };
