@@ -143,7 +143,7 @@ const isInCodeBlock = (text: string, isFinalChunk = false): boolean => {
     const rawLine = lines[i];
     const line = rawLine.endsWith('\r') ? rawLine.slice(0, -1) : rawLine;
 
-    const match = line.match(/^(`{3,}|～{3,})(.*)$/);
+    const match = line.match(/^(`{3,}|~{3,})(.*)$/);
     if (match) {
       const fence = match[1];
       const after = match[2];

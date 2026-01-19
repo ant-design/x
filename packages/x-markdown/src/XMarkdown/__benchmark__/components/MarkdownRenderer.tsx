@@ -10,7 +10,6 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { Streamdown } from 'streamdown';
 import getLatex from '../../../plugins/Latex';
-import getLatexPlugin from '../../../plugins/Latex';
 import XMarkdown from '../../index';
 
 type MarkdownRendererProps = {
@@ -50,7 +49,7 @@ const XMarkdownRenderer: FC<MarkdownRendererProps> = (props) => (
   <div className="markdown-container">
     <XMarkdown
       streaming={{ hasNextChunk: props?.hasNextChunk, enableAnimation: true }}
-      config={{ extensions: getLatexPlugin() }}
+      config={{ extensions: getLatex() }}
     >
       {props.md}
     </XMarkdown>
