@@ -808,7 +808,7 @@ describe('Mermaid Component', () => {
 
   describe('Edge Cases and Boundary Conditions', () => {
     it('should handle very large mermaid diagrams', async () => {
-      const largeDiagram = 'graph TD;\n' + 'A-->B;\n'.repeat(100);
+      const largeDiagram = `graph TD;\n${'A-->B;\n'.repeat(100)}`;
 
       render(<Mermaid>{largeDiagram}</Mermaid>);
 

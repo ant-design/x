@@ -7,6 +7,7 @@ title: useXConversations
 order: 2
 description: Manage conversation persistence and CRUD operations for multiple sessions.
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 ## When To Use

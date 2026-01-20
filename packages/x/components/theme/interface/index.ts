@@ -5,6 +5,8 @@ import type { AliasToken } from './alias';
 import type { MapToken } from './maps';
 import type { SeedToken } from './seeds';
 
+export type { TokenWithCommonCls } from '@ant-design/cssinjs-utils';
+
 export type MappingAlgorithm = DerivativeFunc<SeedToken, MapToken>;
 
 export type { AliasToken } from './alias';

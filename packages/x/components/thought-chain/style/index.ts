@@ -3,8 +3,8 @@ import { unit } from '@ant-design/cssinjs/lib/util';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import { blinkMotion, genCollapseMotion } from '../../style';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
 import genThoughtChainItemStyle from './item';
 
 export interface ComponentToken {
@@ -103,7 +103,7 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
       [`${componentCls}-node-footer`]: {
         marginBottom: token.margin,
       },
-      [`${componentCls}-node-content`]: {
+      [`${componentCls}-node-content-box`]: {
         marginBottom: token.margin,
       },
       [`${componentCls}-node-collapse-icon`]: {

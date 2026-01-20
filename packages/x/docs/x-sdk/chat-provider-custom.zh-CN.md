@@ -7,6 +7,7 @@ title: Custom Chat Provider
 order: 4
 subtitle: 自定义
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 当内置的 Chat Provider 不满足需求时，可以通过实现抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，可以将不同的模型提供商、或者 Agentic 服务数据转换为可被 `useXChat` 消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。

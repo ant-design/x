@@ -10,3 +10,5 @@ export type CodeKeyType = number | 'number' | keyof PrefixKeysType;
 export type ShortcutKeys<CustomKey = number | 'number'> =
   | [keyof PrefixKeysType, keyof PrefixKeysType, CustomKey]
   | [keyof PrefixKeysType, CustomKey];
+
+export type DirectionType = 'ltr' | 'rtl' | undefined;
