@@ -434,7 +434,6 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
           };
         }
         if (skillKey) {
-          setStartCursor(editableDom, true);
           return { type: 'start', selection };
         }
       }
