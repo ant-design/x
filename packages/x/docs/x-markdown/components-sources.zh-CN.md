@@ -3,7 +3,7 @@ group:
   title: 组件
   order: 5
 title: Sources
-subtitle: 来源应用
+subtitle: 来源引用
 order: 6
 ---
 
