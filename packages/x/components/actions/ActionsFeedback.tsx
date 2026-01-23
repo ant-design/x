@@ -100,7 +100,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
   return (
     <div {...domProps} className={mergedCls} style={{ ...style, ...styles.root }}>
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
-        <Tooltip title={contextLocale.feedbackLike}>
+        <Tooltip key={`like_${value}`} title={contextLocale.feedbackLike}>
           <span
             onClick={() =>
               onChange?.(
@@ -125,7 +125,7 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
       )}
 
       {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.dislike].includes(value as FEEDBACK_VALUE) && (
-        <Tooltip title={contextLocale.feedbackDislike}>
+        <Tooltip key={`dislike_${value}`} title={contextLocale.feedbackDislike}>
           <span
             onClick={onFeedBacKClick}
             style={{ ...styles.dislike, ...(value === 'dislike' ? styles.disliked : {}) }}

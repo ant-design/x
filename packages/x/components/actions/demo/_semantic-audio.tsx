@@ -26,7 +26,7 @@ const App: React.FC = () => {
   return (
     <>
       <SemanticPreview
-        componentName="Actions"
+        componentName="Actions.Audio"
         semantics={[
           { name: 'root', desc: locale.root },
           { name: 'default', desc: locale.default },
@@ -36,20 +36,23 @@ const App: React.FC = () => {
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
       <SemanticPreview
-        componentName="Actions"
+        componentName="Actions.Audio"
         semantics={[{ name: 'loading', desc: locale.loading }]}
       >
         <Actions.Audio status="loading" />
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
       <SemanticPreview
-        componentName="Actions"
+        componentName="Actions.Audio"
         semantics={[{ name: 'running', desc: locale.running }]}
       >
         <Actions.Audio status="running" />
       </SemanticPreview>
       <Divider style={{ margin: 0, padding: 0 }} />
-      <SemanticPreview componentName="Actions" semantics={[{ name: 'error', desc: locale.error }]}>
+      <SemanticPreview
+        componentName="Actions.Audio"
+        semantics={[{ name: 'error', desc: locale.error }]}
+      >
         <Actions.Audio status="error" />
       </SemanticPreview>
     </>

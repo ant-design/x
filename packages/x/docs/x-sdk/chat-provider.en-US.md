@@ -7,6 +7,7 @@ title: Chat Provider
 description: Data transformation for sending and receiving.
 order: 1
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 `Chat Provider` is used to provide unified request management and data format conversion for `useXChat`. Currently, it includes built-in `Chat Provider` implementations for `OpenAI` and `DeepSeek` model service providers that you can use directly.

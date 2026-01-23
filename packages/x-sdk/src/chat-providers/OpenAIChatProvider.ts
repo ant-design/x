@@ -27,7 +27,7 @@ export default class OpenAIChatProvider<
   }
 
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
-    const { originMessage, chunk, chunks, responseHeaders } = info;
+    const { originMessage, chunk, responseHeaders } = info;
     let currentContent = '';
     let role = 'assistant';
     try {
@@ -37,7 +37,7 @@ export default class OpenAIChatProvider<
           message = JSON.parse(chunk.data);
         }
       } else {
-        message = chunk || chunks[0];
+        message = chunk;
       }
       if (message) {
         message?.choices?.forEach((choice: any) => {

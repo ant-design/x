@@ -16,6 +16,47 @@ tag: vVERSION
 
 ---
 
+## 2.1.3
+
+`2026-01-04`
+
+### @ant-design/x
+
+- 🐛 Fixed an undeclared dependency issue in Sender by replacing `classnames` with `clsx` and enabling dependency checks in `biome.json`. [#1608](https://github.com/ant-design/x/pull/1608) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1605](https://github.com/ant-design/x/pull/1605) by [kimteayon](https://github.com/kimteayon)
+
+## 2.1.2
+
+`2025-12-30`
+
+### @ant-design/x
+
+- 💄 Fixed Actions `disliked` className error issue. [#1521](https://github.com/ant-design/x/pull/1521) by [kimteayon](https://github.com/kimteayon)
+- Sender
+  - 🛠 Overall refactoring of Sender component implementation, while fixing some detailed cursor issues. [#1515](https://github.com/ant-design/x/pull/1515) [#1548](https://github.com/ant-design/x/pull/1548) by [kimteayon](https://github.com/kimteayon)
+  - 💄 Fixed Sender component actions style conflict with antd Button causing rendering errors. [#1535](https://github.com/ant-design/x/pull/1535) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where cursor was too small when placeholder was empty in slot mode `skill`. [#1537](https://github.com/ant-design/x/pull/1537) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where undo stack was not updated when pasting text. [#1527](https://github.com/ant-design/x/pull/1527) by [Chiaki-xps](https://github.com/Chiaki-xps)
+- 🐛 Removed Bubble.List automatic scrolling to bottom logic for new messages, changed to manual control. [#1548](https://github.com/ant-design/x/pull/1548) by [anxLiang](https://github.com/anxLiang)
+- 💄 Fixed Prompts component animation demo not working issue. [#1580](https://github.com/ant-design/x/pull/1580) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Actions.Feedback tooltip display anomaly issue. [#1591](https://github.com/ant-design/x/pull/1591) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Attachments calling `ref.select()` error when no parameters passed. [#1587](https://github.com/ant-design/x/pull/1587) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed FileCard `overflow` display button not updating issue, and Image display failure when no `src` in image display. [#1587](https://github.com/ant-design/x/pull/1587) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-sdk
+
+- 🐛 Fixed XChat unable to remotely load historical messages issue. [#1593](https://github.com/ant-design/x/pull/1593) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed OpenAIChatProvider and DeepSeekChatProvider non-streaming requests rendering content twice issue. [#1593](https://github.com/ant-design/x/pull/1593) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 💄 Fixed XMarkdown animation font color error issue. [#1531](https://github.com/ant-design/x/pull/1531) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 🛠 Overall dependency refactoring and upgrade. [#1448](https://github.com/ant-design/x/pull/1448) by [yoyo837](https://github.com/yoyo837)
+- 📖 Optimized official website to improve user experience. [#1508](https://github.com/ant-design/x/pull/1508) by [kimteayon](https://github.com/kimteayon), [#1516](https://github.com/ant-design/x/pull/1516) by [kimteayon](https://github.com/kimteayon), [#1529](https://github.com/ant-design/x/pull/1529) by [fireairforce](https://github.com/fireairforce), [#1549](https://github.com/ant-design/x/pull/1549) by [kimteayon](https://github.com/kimteayon), [#1551](https://github.com/ant-design/x/pull/1551) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1553](https://github.com/ant-design/x/pull/1553) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1555](https://github.com/ant-design/x/pull/1555) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1543](https://github.com/ant-design/x/pull/1543) by [IsDyh01](https://github.com/IsDyh01), [#1558](https://github.com/ant-design/x/pull/1558) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1557](https://github.com/ant-design/x/pull/1557) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1562](https://github.com/ant-design/x/pull/1562) by [hustcc](https://github.com/hustcc), [#1569](https://github.com/ant-design/x/pull/1569) by [kimteayon](https://github.com/kimteayon), [#1561](https://github.com/ant-design/x/pull/1561) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1584](https://github.com/ant-design/x/pull/1584) by [kimteayon](https://github.com/kimteayon), [#1581](https://github.com/ant-design/x/pull/1581) by [teimurjan](https://github.com/teimurjan)
+
 ## 2.1.1
 
 `2025-12-10`

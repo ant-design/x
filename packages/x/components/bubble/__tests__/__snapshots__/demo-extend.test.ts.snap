@@ -35,6 +35,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </span>
     <div
       class="ant-radio-group ant-radio-group-outline css-var-_r_3v_ ant-radio-css-var"
+      role="radiogroup"
     >
       <label
         class="ant-radio-wrapper ant-radio-wrapper-checked css-var-_r_3v_ ant-radio-css-var"

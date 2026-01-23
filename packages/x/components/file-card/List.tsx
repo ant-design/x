@@ -1,5 +1,6 @@
 import { CloseCircleFilled, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { CSSMotionList } from '@rc-component/motion';
+import ResizeObserver from '@rc-component/resize-observer';
 import { Button } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
@@ -83,10 +84,6 @@ const List: React.FC<FileCardListProps> = (props) => {
     }
   };
 
-  React.useEffect(() => {
-    checkPing();
-  }, [overflow, items.length]);
-
   const onScrollOffset = (offset: -1 | 1) => {
     const containerEle = containerRef.current;
 
@@ -115,72 +112,79 @@ const List: React.FC<FileCardListProps> = (props) => {
 
   return (
     <div className={clsx(mergedCls)}>
-      <div
-        className={clsx(`${compCls}-content`, {
-          [`${compCls}-overflow-${props.overflow}`]: overflow,
-          [`${compCls}-overflow-ping-start`]: pingStart,
-          [`${compCls}-overflow-ping-end`]: pingEnd,
-          [`${compCls}-small`]: size === 'small',
-        })}
-        dir={direction}
-        style={{ ...style, ...styles?.root }}
-        ref={containerRef}
-        onScroll={checkPing}
+      <ResizeObserver
+        disabled={!overflow || overflow === 'wrap'}
+        onResize={() => {
+          checkPing();
+        }}
       >
-        <CSSMotionList
-          keys={list.map((item) => ({ key: item.key, item }))}
-          motionName={`${compCls}-motion`}
-          component={false}
-          motionAppear={false}
-          motionLeave
-          motionEnter
+        <div
+          className={clsx(`${compCls}-content`, {
+            [`${compCls}-overflow-${props.overflow}`]: overflow,
+            [`${compCls}-overflow-ping-start`]: pingStart,
+            [`${compCls}-overflow-ping-end`]: pingEnd,
+            [`${compCls}-small`]: size === 'small',
+          })}
+          dir={direction}
+          style={{ ...style, ...styles?.root }}
+          ref={containerRef}
+          onScroll={checkPing}
         >
-          {({ key, item, className: motionCls, style: motionStyle }) => {
-            return (
-              <div
-                className={clsx(`${compCls}-item`, motionCls)}
-                style={{ ...motionStyle, ...root }}
-                key={key}
-              >
-                <FileCard
-                  {...item}
-                  size={size}
+          <CSSMotionList
+            keys={list.map((item) => ({ key: item.key, item }))}
+            motionName={`${compCls}-motion`}
+            component={false}
+            motionAppear={false}
+            motionLeave
+            motionEnter
+          >
+            {({ key, item, className: motionCls, style: motionStyle }) => {
+              return (
+                <div
+                  className={clsx(`${compCls}-item`, motionCls)}
+                  style={{ ...motionStyle, ...root }}
                   key={key}
-                  className={clsx(item.className, classNameCard)}
-                  classNames={{ ...classNameOther, ...item.classNames }}
-                  style={{ ...item.style, ...styles?.card }}
-                  styles={other}
-                />
-                {(typeof removable === 'function' ? removable(item) : removable) && (
-                  <div className={`${compCls}-remove`} onClick={() => handleRemove(item, key)}>
-                    <CloseCircleFilled />
-                  </div>
-                )}
-              </div>
-            );
-          }}
-        </CSSMotionList>
+                >
+                  <FileCard
+                    {...item}
+                    size={size}
+                    key={key}
+                    className={clsx(item.className, classNameCard)}
+                    classNames={{ ...classNameOther, ...item.classNames }}
+                    style={{ ...item.style, ...styles?.card }}
+                    styles={other}
+                  />
+                  {(typeof removable === 'function' ? removable(item) : removable) && (
+                    <div className={`${compCls}-remove`} onClick={() => handleRemove(item, key)}>
+                      <CloseCircleFilled />
+                    </div>
+                  )}
+                </div>
+              );
+            }}
+          </CSSMotionList>
 
-        {overflow === 'scrollX' && (
-          <>
-            <Button
-              size="small"
-              shape="circle"
-              className={`${compCls}-prev-btn`}
-              icon={<LeftOutlined />}
-              onClick={onScrollLeft}
-            />
-            <Button
-              size="small"
-              shape="circle"
-              className={`${compCls}-next-btn`}
-              icon={<RightOutlined />}
-              onClick={onScrollRight}
-            />
-          </>
-        )}
-        {extension}
-      </div>
+          {overflow === 'scrollX' && (
+            <>
+              <Button
+                size="small"
+                shape="circle"
+                className={`${compCls}-prev-btn`}
+                icon={<LeftOutlined />}
+                onClick={onScrollLeft}
+              />
+              <Button
+                size="small"
+                shape="circle"
+                className={`${compCls}-next-btn`}
+                icon={<RightOutlined />}
+                onClick={onScrollRight}
+              />
+            </>
+          )}
+          {extension}
+        </div>
+      </ResizeObserver>
     </div>
   );
 };

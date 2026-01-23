@@ -1,5 +1,5 @@
 import { Keyframes, unit } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {

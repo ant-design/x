@@ -8,8 +8,7 @@ subtitle: 流
 order: 2
 description: 转换可读数据流。
 tag: 2.0.0
-demo:
-  cols: 1
+packageName: x-sdk
 ---
 
 ## 何时使用

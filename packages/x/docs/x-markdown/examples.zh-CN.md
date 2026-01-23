@@ -1,6 +1,10 @@
 ---
 title: 代码示例
 order: 2
+tag: 2.0.0
+category: Components
+componentName: XMarkdown
+packageName: x-markdown
 ---
 
 ## 何时使用

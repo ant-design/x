@@ -15,6 +15,47 @@ tag: vVERSION
 
 ---
 
+## 2.1.3
+
+`2026-01-04`
+
+### @ant-design/x
+
+- 🐛 修复了 Sender 未声明依赖问题，将 `classnames` 替换为 `clsx` 并为 `biome.json` 配置了依赖引用检查。[#1608](https://github.com/ant-design/x/pull/1608) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1605](https://github.com/ant-design/x/pull/1605) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+## 2.1.2
+
+`2025-12-30`
+
+### @ant-design/x
+
+- 💄 修复 Actions `disliked` 类名错误问题。[#1521](https://github.com/ant-design/x/pull/1521) 由 [kimteayon](https://github.com/kimteayon) 提交
+- Sender
+  - 🛠 整体重构 Sender 组件实现，同时修复一些细节光标问题。[#1515](https://github.com/ant-design/x/pull/1515) [#1548](https://github.com/ant-design/x/pull/1548) 由 [kimteayon](https://github.com/kimteayon) 提交
+  - 💄 修复 Sender 组件 actions 与 antd Button 样式冲突导致渲染错误问题。[#1535](https://github.com/ant-design/x/pull/1535) 由 [kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复词槽模式 `skill` 情况下 placeholder 为空时光标太小异常的问题。[#1537](https://github.com/ant-design/x/pull/1537) 由 [kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复粘贴文字时撤销栈（undo）未更新问题。[#1527](https://github.com/ant-design/x/pull/1527) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交
+- 🐛 移除 Bubble.List 新消息自动滚动到最底部的逻辑，改为手动控制。[#1548](https://github.com/ant-design/x/pull/1548) 由 [anxLiang](https://github.com/anxLiang) 提交
+- 💄 修复 Prompts 组件动画演示不生效问题。 [#1580](https://github.com/ant-design/x/pull/1580) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Actions.Feedback tooltip 展示异常问题。[#1591](https://github.com/ant-design/x/pull/1591) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Attachments 调用 `ref.select()` 未传参数时报错问题 [#1587](https://github.com/ant-design/x/pull/1587) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 FileCard `overflow` 展示时按钮未更新问题，以及图片展示时无 `src` 导致 Image 展示失败问题。 [#1587](https://github.com/ant-design/x/pull/1587) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-sdk
+
+- 🐛 修复 XChat 无法远程加载历史消息问题。[#1593](https://github.com/ant-design/x/pull/1593) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 OpenAIChatProvider 和 DeepSeekChatProvider 非流式请求渲染了两次内容问题。[#1593](https://github.com/ant-design/x/pull/1593) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 💄 修复 XMarkdown 动画字体颜色错误问题。[#1531](https://github.com/ant-design/x/pull/1531) 由 [Div627](https://github.com/Div627) 提交
+
+### 其他
+
+- 🛠 整体的依赖重构升级。[#1448](https://github.com/ant-design/x/pull/1448) 由 [yoyo837](https://github.com/yoyo837) 提交
+- 📖 优化官网站点提升用户体验。[#1508](https://github.com/ant-design/x/pull/1508) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1516](https://github.com/ant-design/x/pull/1516) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1529](https://github.com/ant-design/x/pull/1529) 由 [fireairforce](https://github.com/fireairforce) 提交、[#1549](https://github.com/ant-design/x/pull/1549) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1551](https://github.com/ant-design/x/pull/1551) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1553](https://github.com/ant-design/x/pull/1553) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1555](https://github.com/ant-design/x/pull/1555) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1543](https://github.com/ant-design/x/pull/1543) 由 [IsDyh01](https://github.com/IsDyh01) 提交、[#1558](https://github.com/ant-design/x/pull/1558) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1557](https://github.com/ant-design/x/pull/1557) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1562](https://github.com/ant-design/x/pull/1562) 由 [hustcc](https://github.com/hustcc) 提交、[#1569](https://github.com/ant-design/x/pull/1569) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1561](https://github.com/ant-design/x/pull/1561) 由 [Chiaki-xps](https://github.com/Chiaki-xps) 提交、[#1584](https://github.com/ant-design/x/pull/1584) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1581](https://github.com/ant-design/x/pull/1581) 由 [teimurjan](https://github.com/teimurjan) 提交
+
 ## 2.1.1
 
 `2025-12-10`

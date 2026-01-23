@@ -2,10 +2,10 @@
 
 exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_v_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_28_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_v_"
+    class="ant-file-card css-var-_r_28_"
   >
     <audio
       class="ant-file-card-audio"
@@ -14,7 +14,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_v_"
+    class="ant-file-card css-var-_r_28_"
   >
     <video
       class="ant-file-card-video"
@@ -23,7 +23,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_v_"
+    class="ant-file-card css-var-_r_28_"
   >
     <div
       class="ant-file-card-file"
@@ -85,7 +85,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_v_"
+    class="ant-file-card css-var-_r_28_"
   >
     <div
       class="ant-file-card-file"
@@ -153,10 +153,10 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_u_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_27_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -211,7 +211,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -266,7 +266,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -321,7 +321,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -376,7 +376,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -431,7 +431,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -486,7 +486,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -541,7 +541,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -597,7 +597,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -653,7 +653,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -712,7 +712,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_u_"
+    class="ant-file-card css-var-_r_27_"
   >
     <div
       class="ant-file-card-file"
@@ -774,10 +774,10 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_t_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_26_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_t_"
+    class="ant-file-card css-var-_r_26_"
   >
     <div
       class="ant-file-card-file"
@@ -832,7 +832,7 @@ exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_t_"
+    class="ant-file-card css-var-_r_26_"
   >
     <div
       class="ant-file-card-file"
@@ -894,16 +894,16 @@ exports[`renders components/file-card/demo/icon.tsx extend context correctly 2`]
 
 exports[`renders components/file-card/demo/image.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_p_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_20_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_p_"
+    class="ant-file-card css-var-_r_20_"
   >
     <div
       class="ant-file-card-image"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_p_ ant-image-css-var"
+        class="ant-image ant-file-card-image-img css-var-_r_20_ ant-image-css-var"
       >
         <img
           alt="image-file.png"
@@ -917,14 +917,14 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_p_"
+    class="ant-file-card css-var-_r_20_"
   >
     <div
       class="ant-file-card-image"
       style="width: 100px; height: 100px;"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_p_ ant-image-css-var"
+        class="ant-image ant-file-card-image-img css-var-_r_20_ ant-image-css-var"
         style="width: 100px; height: 100px;"
       >
         <img
@@ -942,7 +942,7 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_p_"
+    class="ant-file-card css-var-_r_20_"
   >
     <div
       class="ant-file-card-file"
@@ -1003,16 +1003,16 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/image-loading.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_s_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_23_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_s_"
+    class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_23_"
   >
     <div
       class="ant-space-item"
     >
       <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_23_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         disabled=""
         type="button"
       >
@@ -1025,7 +1025,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
       class="ant-space-item"
     >
       <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_23_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1035,18 +1035,52 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_s_"
+    class="ant-file-card css-var-_r_23_"
   >
     <div
       class="ant-file-card-image ant-file-card-loading"
       style="width: 200px;"
     >
       <div
+        class="ant-image ant-file-card-image-img css-var-_r_23_ ant-image-css-var"
+        style="width: 200px;"
+      >
+        <img
+          alt="image-file.png"
+          class="ant-image-img"
+          width="200"
+        />
+        <div
+          aria-hidden="true"
+          class="ant-image-placeholder"
+        >
+          <div
+            class="ant-file-card css-var-_r_23_"
+          >
+            <div
+              class="ant-file-card-image"
+            >
+              <div
+                class="ant-image ant-file-card-image-img css-var-_r_23_ ant-image-css-var"
+              >
+                <img
+                  alt="placeholder image"
+                  class="ant-image-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-image-cover ant-image-cover-center"
+        />
+      </div>
+      <div
         class="ant-file-card-image-loading"
         style="width: 200px;"
       >
         <div
-          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_s_"
+          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_23_"
           style="width: 100%; height: 100%;"
         >
           <div
@@ -1054,12 +1088,12 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             style="width: 100%; height: 100%;"
           >
             <div
-              class="ant-file-card-image-spin ant-file-card-image-spin-small ant-flex css-var-_r_s_ ant-flex-align-center ant-flex-gap-small"
+              class="ant-file-card-image-spin ant-file-card-image-spin-small ant-flex css-var-_r_23_ ant-flex-align-center ant-flex-gap-small"
             >
               <div
                 aria-busy="true"
                 aria-live="polite"
-                class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_s_"
+                class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_23_"
               >
                 <span
                   class="ant-spin-dot-holder"
@@ -1115,16 +1149,48 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_s_"
+    class="ant-file-card css-var-_r_23_"
   >
     <div
       class="ant-file-card-image ant-file-card-loading"
     >
       <div
+        class="ant-image ant-file-card-image-img css-var-_r_23_ ant-image-css-var"
+      >
+        <img
+          alt="image-file.png"
+          class="ant-image-img"
+        />
+        <div
+          aria-hidden="true"
+          class="ant-image-placeholder"
+        >
+          <div
+            class="ant-file-card css-var-_r_23_"
+          >
+            <div
+              class="ant-file-card-image"
+            >
+              <div
+                class="ant-image ant-file-card-image-img css-var-_r_23_ ant-image-css-var"
+              >
+                <img
+                  alt="placeholder image"
+                  class="ant-image-img"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-image-cover ant-image-cover-center"
+        />
+      </div>
+      <div
         class="ant-file-card-image-loading"
       >
         <div
-          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_s_"
+          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_23_"
           style="width: 100%; height: 100%;"
         >
           <div
@@ -1132,12 +1198,12 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             style="width: 100%; height: 100%;"
           >
             <div
-              class="ant-file-card-image-spin ant-file-card-image-spin-default ant-flex css-var-_r_s_ ant-flex-align-center ant-flex-gap-small"
+              class="ant-file-card-image-spin ant-file-card-image-spin-default ant-flex css-var-_r_23_ ant-flex-align-center ant-flex-gap-small"
             >
               <div
                 aria-busy="true"
                 aria-live="polite"
-                class="ant-spin ant-spin-spinning css-var-_r_s_"
+                class="ant-spin ant-spin-spinning css-var-_r_23_"
               >
                 <span
                   class="ant-spin-dot-holder"
@@ -1195,15 +1261,19 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
 </div>
 `;
 
-exports[`renders components/file-card/demo/image-loading.tsx extend context correctly 2`] = `[]`;
+exports[`renders components/file-card/demo/image-loading.tsx extend context correctly 2`] = `
+[
+  "An empty string ("") was passed to the %s attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to %s instead of an empty string.",
+]
+`;
 
 exports[`renders components/file-card/demo/list.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_f_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_1m_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   style="width: 900px;"
 >
   <div
-    class="ant-file-card-list css-var-_r_f_"
+    class="ant-file-card-list css-var-_r_1m_"
   >
     <div
       class="ant-file-card-list-content"
@@ -1212,7 +1282,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file"
@@ -1295,7 +1365,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file"
@@ -1378,7 +1448,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file"
@@ -1461,7 +1531,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file"
@@ -1544,7 +1614,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file"
@@ -1627,7 +1697,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file"
@@ -1709,7 +1779,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list css-var-_r_f_"
+    class="ant-file-card-list css-var-_r_1m_"
   >
     <div
       class="ant-file-card-list-content ant-file-card-list-small"
@@ -1718,7 +1788,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -1801,7 +1871,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -1884,7 +1954,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -1967,7 +2037,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2050,7 +2120,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2133,7 +2203,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2215,7 +2285,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list css-var-_r_f_"
+    class="ant-file-card-list css-var-_r_1m_"
   >
     <div
       class="ant-file-card-list-content"
@@ -2224,13 +2294,13 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
             >
               <img
                 alt="image-file.png"
@@ -2248,13 +2318,13 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
             >
               <img
                 alt="image-file.png"
@@ -2272,13 +2342,13 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
             >
               <img
                 alt="image-file.png"
@@ -2296,13 +2366,13 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
             >
               <img
                 alt="image-file.png"
@@ -2320,13 +2390,13 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
             >
               <img
                 alt="image-file.png"
@@ -2344,13 +2414,13 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
             >
               <img
                 alt="image-file.png"
@@ -2367,7 +2437,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list css-var-_r_f_"
+    class="ant-file-card-list css-var-_r_1m_"
   >
     <div
       class="ant-file-card-list-content"
@@ -2376,14 +2446,14 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
               style="width: 230px; height: 230px;"
             >
               <img
@@ -2405,14 +2475,14 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
               style="width: 230px; height: 230px;"
             >
               <img
@@ -2434,14 +2504,14 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_f_"
+          class="ant-file-card css-var-_r_1m_"
         >
           <div
             class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_f_ ant-image-css-var"
+              class="ant-image ant-file-card-image-img css-var-_r_1m_ ant-image-css-var"
               style="width: 230px; height: 230px;"
             >
               <img
@@ -2468,7 +2538,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 2`]
 
 exports[`renders components/file-card/demo/mask.tsx extend context correctly 1`] = `
 <div
-  class="ant-file-card css-var-_r_e_"
+  class="ant-file-card css-var-_r_1l_"
 >
   <div
     class="ant-file-card-file"
@@ -3118,6 +3188,1878 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             >
               <img
                 alt="image-file-10.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-11.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-12.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-13.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-14.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-15.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-16.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-17.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-18.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-19.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-20.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-21.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-22.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-23.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-24.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-25.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-26.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-27.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-28.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-29.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-30.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-31.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-32.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-33.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-34.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-35.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-36.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-37.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-38.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-39.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-40.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-41.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-42.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-43.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-44.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-45.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-46.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-47.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-48.png"
+                class="ant-image-img"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <div
+                class="ant-image-cover ant-image-cover-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-file-card-list-remove"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-file-card-list-item"
+      >
+        <div
+          class="ant-file-card css-var-_r_1_"
+        >
+          <div
+            class="ant-file-card-image"
+          >
+            <div
+              class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+            >
+              <img
+                alt="image-file-49.png"
                 class="ant-image-img"
                 src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
               />

@@ -7,9 +7,8 @@ title: useXChat
 order: 1
 subtitle: Conversation Data
 description: Data management for single conversations.
-demo:
-  cols: 1
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 ## When to Use
@@ -22,6 +21,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <code src="./demos/x-chat/openai.tsx">OpenAI Model Integration</code>
 <code src="./demos/x-chat/deepSeek.tsx">Thinking Model Integration</code>
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
+<code src="./demos/x-chat/async-defaultMessages.tsx">Request Remote Historical Messages</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">Custom XRequest.fetch</code>
 <code src="./demos/x-chat/request-openai-node.tsx">Custom request</code>
@@ -53,10 +53,21 @@ type useXChat<
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | provider | Data provider used to convert data and requests of different structures into formats that useXChat can consume. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, and you can also implement your own Provider by inheriting `AbstractChatProvider`. See: [Chat Provider Documentation](/x-sdks/chat-provider) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
-| defaultMessages | Default display messages | { message: ChatMessage, status: MessageStatus }[] | - | - |
+| conversationKey | Session unique identifier (globally unique), used to distinguish different sessions | string | Symbol('ConversationKey') | - |
+| defaultMessages | Default display messages | DefaultMessagesType[] \| (info: { conversationKey?: string }) => DefaultMessagesType[] \| (info: { conversationKey?: string }) => Promise\<DefaultMessagesType[]\> | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error;errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
 | requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { messages: Message[] }) => ChatMessage \| Promise\<Message\> | - | - |
+
+#### DefaultMessagesType
+
+```ts
+type DefaultMessagesType = {
+  id: string | number;
+  message: ChatMessage;
+  status: MessageStatus;
+};
+```
 
 ### XChatConfigReturnType
 
@@ -64,12 +75,14 @@ type useXChat<
 | --- | --- | --- | --- | --- |
 | abort | Cancel request | () => void | - | - |
 | isRequesting | Whether a request is in progress | boolean | - | - |
+| isDefaultMessagesRequesting | Whether the default message list is requesting | boolean | false | 2.2.0 |
 | messages | Current managed message list content | MessageInfo\<ChatMessage\>[] | - | - |
 | parsedMessages | Content translated through `parser` | MessageInfo\<ParsedMessages\>[] | - | - |
 | onReload | Regenerate, will send request to backend and update the message with new returned data | (id: string \| number, requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
 | onRequest | Add a Message and trigger request | (requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
 | setMessages | Directly modify messages without triggering requests | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
+| removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => void | - | - |
 
 #### MessageInfo
 
