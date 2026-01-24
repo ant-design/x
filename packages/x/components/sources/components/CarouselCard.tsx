@@ -1,7 +1,7 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { Carousel } from 'antd';
 import { clsx } from 'clsx';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { SourcesItem, SourcesProps } from '../Sources';
 
 export interface CarouselCardProps {
@@ -17,20 +17,25 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
   const { prefixCls, items, activeKey, className, style } = props;
 
   const compCls = `${prefixCls}-carousel`;
-  const [slide, setSlide] = React.useState<number>(
-    Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0),
-  );
-  const carouselRef = React.useRef<React.ComponentRef<typeof Carousel>>(null);
+
+  const [slide, setSlide] = useState<number>(0);
+
+  const carouselRef = useRef<React.ComponentRef<typeof Carousel>>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (carouselRef.current) {
+        timer && clearTimeout(timer);
+        const current = Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0);
+        carouselRef.current.goTo(current, false);
+      }
+    }, 0);
+  }, [activeKey, carouselRef.current]);
 
   const handleClick = (item: SourcesItem) => {
     item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
     props.onClick?.(item);
   };
-  useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.goTo(slide, false);
-    }
-  }, [slide]);
 
   return (
     <div style={style} className={clsx(`${compCls}-wrapper`, className)}>
@@ -40,11 +45,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             className={clsx(`${compCls}-btn`, `${compCls}-left-btn`, {
               [`${compCls}-btn-disabled`]: slide === 0,
             })}
-            onClick={() => {
-              if (slide > 0) {
-                setSlide((pre) => pre - 1);
-              }
-            }}
+            onClick={() => carouselRef.current?.prev()}
           >
             <LeftOutlined />
           </span>
@@ -52,11 +53,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             className={clsx(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
-            onClick={() => {
-              if (slide < (items?.length || 1) - 1) {
-                setSlide((pre) => pre + 1);
-              }
-            }}
+            onClick={() => carouselRef.current?.next()}
           >
             <RightOutlined />
           </span>
