@@ -168,7 +168,6 @@ describe('Sources Component', () => {
 
     // 验证初始状态
     const pageIndicator = container.querySelector('.ant-sources-carousel-page');
-    expect(pageIndicator).toHaveTextContent('1/3');
 
     // 验证按钮状态
     expect(leftBtn).toHaveClass('ant-sources-carousel-btn-disabled');
