@@ -15,6 +15,40 @@ tag: vVERSION
 
 ---
 
+## 2.2.0
+
+`2026-01-26`
+
+### @ant-design/x
+
+- Sender
+  - 🐛 修复光标在技能位置时插入位置错误问题。[#1633](https://github.com/ant-design/x/pull/1633) 由 [IsDyh01](https://github.com/IsDyh01) 提交
+  - 🛠 重构插入节点位置能力，同时重写测试用例。[#1612](https://github.com/ant-design/x/pull/1612) 由 [kimteayon](https://github.com/kimteayon) 提交
+- XProvider
+  - 🐛 修复设置 `iconPrefixCls` 不生效问题。[#1656](https://github.com/ant-design/x/pull/1656) 由 [kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复设置 `prefix` 不生效问题。[#1642](https://github.com/ant-design/x/pull/1642) 由 [kimteayon](https://github.com/kimteayon) 提交
+  - 🐛 修复 `layer` 设置问题。 [#1616](https://github.com/ant-design/x/pull/1616) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复强制 `antd` 依赖 `es` 路径导致 Node 环境构建报错问题。[#1645](https://github.com/ant-design/x/pull/1645) 由 [kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复 ThoughtChain 布局导致动画卡顿问题。[#1641](https://github.com/ant-design/x/pull/1641) 由 [IsDyh01](https://github.com/IsDyh01) 提交
+- 🐛 修复 Think 布局导致动画卡顿问题。[#1636](https://github.com/ant-design/x/pull/1636) 由 [IsDyh01](https://github.com/IsDyh01) 提交
+- 🆕 新增 Mermaid 设置初始化配置和操作栏功能。[#1631](https://github.com/ant-design/x/pull/1631) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 新增 Attachments 设置卡片类型能力。[#1610](https://github.com/ant-design/x/pull/1610) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-sdk
+
+- 🆕 XRequest 新增重连接能力。[#1629](https://github.com/ant-design/x/pull/1629) 由 [hylin](https://github.com/hylin) 提交
+- 🆕 XRequest 和 XStream 支持流数据解析引入了可配置的分隔符 `streamSeparator`、`partSeparator`,`kvSeparator` 能力，同时为 TextDecoderStream 添加了 polyfill 以提高兼容性，修复了 undefined 值被添加到流结果中的问题。 [#1611](https://github.com/ant-design/x/pull/1611) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 增强 XMarkdown 解析器，使其支持带占位符保护的自定义组件。[#1668](https://github.com/ant-design/x/pull/1668) 由 [yanghuanrong](https://github.com/yanghuanrong) 提交
+- 🆕 新增 XMarkdown 基于 Playwright Component Testing 实现流式 Markdown 渲染的性能基准测试能力。[#1314](https://github.com/ant-design/x/pull/1314) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 新增 XMarkdown 流式语法对行内代码缓存的功能。[#1630](https://github.com/ant-design/x/pull/1630) 由 [Div627](https://github.com/Div627) 提交
+
+### 其他
+
+- 📖 优化官网站点提升用户体验。[#1675](https://github.com/ant-design/x/pull/1675) 由 [hongxuWei](https://github.com/hongxuWei) 提交、[#1644](https://github.com/ant-design/x/pull/1644) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1658](https://github.com/ant-design/x/pull/1658) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1646](https://github.com/ant-design/x/pull/1646) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1651](https://github.com/ant-design/x/pull/1651) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1650](https://github.com/ant-design/x/pull/1650) 由 [Div627](https://github.com/Div627) 提交、[#1635](https://github.com/ant-design/x/pull/1635) 由 [IsDyh01](https://github.com/IsDyh01) 提交、[#1627](https://github.com/ant-design/x/pull/1627) 由 [Alexzjt](https://github.com/Alexzjt) 提交、[#1615](https://github.com/ant-design/x/pull/1615) 由 [Yx0201](https://github.com/Yx0201) 提交
+
 ## 2.1.3
 
 `2026-01-04`
