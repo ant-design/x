@@ -257,6 +257,30 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).toHaveBeenCalledWith(new Error('Fetch failed'));
   });
 
+  test('should convert unknown error to Error instance', async () => {
+    mockedXFetch.mockRejectedValueOnce('boom');
+    const request = XRequest(baseURL, options);
+    await request.asyncHandler;
+    expect(callbacks.onSuccess).not.toHaveBeenCalled();
+    expect(callbacks.onError).toHaveBeenCalledWith(new Error('Unknown error!'));
+  });
+
+  test('should warn when running a non-manual request', () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    mockedXFetch.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      headers: {
+        get: jest.fn().mockReturnValue('application/json; charset=utf-8'),
+      },
+      json: jest.fn().mockResolvedValueOnce(options.params),
+    });
+    const request = XRequest(baseURL, options);
+    request.run(options.params as any);
+    expect(warnSpy).toHaveBeenCalledWith('The request is not manual, so it cannot be run!');
+    warnSpy.mockRestore();
+  });
+
   test('should throw error for unsupported content type', async () => {
     const contentType = 'text/plain';
     mockedXFetch.mockResolvedValueOnce({

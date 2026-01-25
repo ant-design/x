@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs/lib/util';
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { ThoughtChainToken } from '.';
 
 const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (

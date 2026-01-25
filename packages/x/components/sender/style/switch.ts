@@ -1,4 +1,4 @@
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { SenderToken } from '.';
 
 const genSenderSwitchStyle: GenerateStyle<SenderToken> = (token) => {

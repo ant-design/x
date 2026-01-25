@@ -1,4 +1,4 @@
-import { AnyObject } from '../../_util/type';
+import type { AnyObject } from '../../_util/type';
 import {
   DeepSeekChatProvider,
   DefaultChatProvider,

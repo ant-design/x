@@ -7,8 +7,7 @@ title: XRequest
 order: 1
 subtitle: Request
 description: Make requests to backend service APIs and handle responses.
-demo:
-  cols: 1
+packageName: x-sdk
 tag: 2.0.0
 ---
 

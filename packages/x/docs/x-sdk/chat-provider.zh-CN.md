@@ -7,6 +7,7 @@ title: Chat Provider
 subtitle: 数据提供
 description: 发送和接收的数据转换。
 order: 1
+packageName: x-sdk
 tag: 2.0.0
 ---
 

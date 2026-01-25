@@ -1,3 +1,5 @@
+import { StyleContext as CssInJsStyleContext } from '@ant-design/cssinjs';
+import IconContext from '@ant-design/icons/lib/components/Context';
 import { ConfigProvider as AntdConfigProvider } from 'antd';
 import React from 'react';
 import LocaleProvider, { ANT_MARK } from '../locale';
@@ -23,6 +25,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     children,
     mermaid,
     codeHighlighter,
+    iconPrefixCls,
     ...antdConfProps
   } = props;
 
@@ -64,6 +67,23 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       <LocaleProvider locale={locale} _ANT_MARK__={ANT_MARK}>
         {childNode}
       </LocaleProvider>
+    );
+  }
+
+  const { layer } = React.useContext(CssInJsStyleContext);
+
+  const memoIconContextValue = React.useMemo(
+    () => ({
+      prefixCls: iconPrefixCls,
+      csp: antdConfProps.csp,
+      layer: layer ? 'antdx' : undefined,
+    }),
+    [iconPrefixCls, antdConfProps.csp, layer],
+  );
+
+  if (iconPrefixCls || antdConfProps.csp) {
+    childNode = (
+      <IconContext.Provider value={memoIconContextValue}>{childNode}</IconContext.Provider>
     );
   }
 

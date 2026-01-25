@@ -592,6 +592,45 @@ describe('useCursor', () => {
       expect(position.type).toBe('start');
     });
 
+    it('should return start when startContainer is outside editable but endContainer is inside', () => {
+      const startTextNode = document.createTextNode('start');
+      const endTextNode = document.createTextNode('end');
+      const mockRange = {
+        endContainer: endTextNode,
+        startContainer: startTextNode,
+        endOffset: 2,
+        startOffset: 1,
+      };
+      const mockSelection = {
+        rangeCount: 1,
+        getRangeAt: jest.fn().mockReturnValue(mockRange),
+      };
+
+      (window.getSelection as jest.Mock).mockReturnValue(mockSelection);
+
+      const { result } = renderHook(() => useCursor());
+      const mockEditableDom = document.createElement('div');
+      mockEditableDom.contains = jest.fn().mockImplementation((node: any) => node === endTextNode);
+      const mockRef = { current: mockEditableDom };
+
+      const position = result.current.getInsertPosition('cursor', mockRef as any);
+      expect(position.type).toBe('start');
+    });
+
+    it('should handle has range', () => {
+      const mockRange: any = {
+        current: {
+          endContainer: document.createTextNode('test'),
+          endOffset: 2,
+        },
+      };
+
+      const { result } = renderHook(() => useCursor());
+      const mockEditableDom = document.createElement('div');
+      const mockRef = { current: mockEditableDom };
+      const position = result.current.getInsertPosition('cursor', mockRef, mockRange);
+      expect(position.type).toBe('end');
+    });
     it('should handle end position', () => {
       const { result } = renderHook(() => useCursor());
 
@@ -637,6 +676,7 @@ describe('useCursor', () => {
       const mockTextNode = document.createTextNode('test');
       const mockRange = {
         endContainer: mockTextNode,
+        startContainer: mockTextNode,
         endOffset: 2,
       };
       const mockSelection = {
@@ -656,6 +696,8 @@ describe('useCursor', () => {
 
       const mockEditableDom = document.createElement('div');
       mockEditableDom.appendChild(mockTextNode);
+      // Mock contains method to return true for the text node
+      mockEditableDom.contains = jest.fn().mockReturnValue(true);
       const mockRef = { current: mockEditableDom };
 
       mockGetNodeInfo.mockReturnValue(null);
@@ -741,6 +783,7 @@ describe('useCursor', () => {
       const mockTextNode = document.createTextNode('test');
       const mockRange = {
         endContainer: mockTextNode,
+        startContainer: mockTextNode,
         endOffset: 2,
       };
       const mockSelection = {
@@ -760,12 +803,49 @@ describe('useCursor', () => {
 
       const mockEditableDom = document.createElement('div');
       mockEditableDom.appendChild(mockTextNode);
+      // Mock contains method to return true for the text node
+      mockEditableDom.contains = jest.fn().mockReturnValue(true);
       const mockRef = { current: mockEditableDom };
 
       const { result } = renderHook(() => useCursor(options));
 
       const position = result.current.getInsertPosition('cursor', mockRef);
       expect(position.type).toBe('box');
+    });
+
+    it('should return start when skillKey is detected in the same outer span container', () => {
+      const mockTextNode = document.createTextNode('test');
+      const mockRange = {
+        endContainer: mockTextNode,
+        startContainer: mockTextNode,
+        endOffset: 2,
+        startOffset: 1,
+      };
+      const mockSelection = {
+        rangeCount: 1,
+        getRangeAt: jest.fn().mockReturnValue(mockRange),
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+      (window.getSelection as jest.Mock).mockReturnValue(mockSelection);
+
+      const options = {
+        prefixCls: 'test',
+        getSlotDom: mockGetSlotDom,
+        slotConfigMap: mockSlotConfigMap,
+        getNodeInfo: jest.fn().mockReturnValue({ skillKey: 'skill' }),
+        getEditorValue: mockGetEditorValue,
+      };
+
+      const mockEditableDom = document.createElement('div');
+      const span = document.createElement('span');
+      span.appendChild(mockTextNode);
+      mockEditableDom.appendChild(span);
+      const mockRef = { current: mockEditableDom };
+
+      const { result } = renderHook(() => useCursor(options));
+      const position = result.current.getInsertPosition('cursor', mockRef as any);
+      expect(position.type).toBe('start');
     });
   });
 

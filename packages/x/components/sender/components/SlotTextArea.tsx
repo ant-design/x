@@ -323,6 +323,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     const childNodes = editableDom.childNodes;
     if (childNodes.length === 0) {
+      editableDom.innerHTML = '';
+      skillDomRef.current = null;
       return emptyRes;
     }
 
@@ -364,13 +366,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         }
       }
     }
-
-    if (resultIndex === 0) {
-      editableDom.innerHTML = '';
-      skillDomRef.current = null;
-      return emptyRes;
-    }
-
     const finalValue = result.slice(0, resultIndex).join('');
 
     if (!currentSkillConfig) {
@@ -483,10 +478,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     operationType: 'backspace' | 'cut' | 'delete',
   ): boolean => {
     if (!editableRef.current) return false;
-
     const { range, selection } = getRange();
-    if (!selection || selection.rangeCount === 0) return false;
 
+    if (!selection || selection.rangeCount === 0) return false;
     const { focusOffset, anchorNode } = selection;
     if (!anchorNode || !editableRef.current.contains(anchorNode)) {
       return false;
@@ -546,6 +540,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   //  处理skill区域的键盘事件
+
   const handleSkillAreaKeyEvent = () => {
     if (
       !skillDomRef.current ||
@@ -579,12 +574,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     // 检查是否应该跳过处理
     if (shouldSkipKeyHandling(e)) {
-      onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLTextAreaElement>);
-      return;
-    }
-
-    // 确保事件目标是可编辑区域
-    if (e.target !== editableRef.current && !editableRef.current?.contains(e.target as Node)) {
       return;
     }
 
@@ -602,7 +591,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     // 处理全选 (支持 Ctrl+A 和 Cmd+A)
-    if (e.key === 'a' && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey) {
+    if ((e.key === 'a' || e.key === 'A') && (e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey) {
       setAllSelectCursor(editableRef.current, skillDomRef.current);
       e.preventDefault();
       return;
@@ -715,7 +704,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       if (replaceCharacters?.length) {
         handleCharacterReplacement(range, replaceCharacters, editableDom);
       }
-
+      range.deleteContents();
       // 执行节点插入
       insertNodesWithPosition(slotNodes, range, insertContext);
 
@@ -767,8 +756,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           range.setStartAfter(skillDomRef.current);
         }
         break;
-      default:
-        range = getEndRange(editableDom);
     }
 
     return { range, selection, type, slotKey, slotType };
@@ -809,7 +796,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     const { type, slotKey, slotType } = context;
 
     let shouldSkipFirstNode = true;
-
     slotNodes.forEach((node) => {
       // 处理slot插入的特殊逻辑
       if (
@@ -837,8 +823,6 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     selection: Selection,
     preventScroll?: boolean,
   ): void => {
-    selection.deleteFromDocument();
-
     const lastNode = slotNodes[slotNodes.length - 1] as HTMLDivElement;
     setAfterNodeFocus(lastNode, editableRef.current!, range, selection, preventScroll);
 
