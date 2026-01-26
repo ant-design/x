@@ -32,6 +32,7 @@ tag: vVERSION
 - 🐛 修复 ThoughtChain 布局导致动画卡顿问题。[#1641](https://github.com/ant-design/x/pull/1641) 由 [IsDyh01](https://github.com/IsDyh01) 提交
 - 🐛 修复 Think 布局导致动画卡顿问题。[#1636](https://github.com/ant-design/x/pull/1636) 由 [IsDyh01](https://github.com/IsDyh01) 提交
 - 🐛 修复 Sources 设置了位置但无法定位内容问题。 [#1683](https://github.com/ant-design/x/pull/1683) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复 Bubble.List 内部高度变化滚动条变化错误问题。[#1690](https://github.com/ant-design/x/pull/1690) 由 [anxLiang](https://github.com/anxLiang) 提交
 - 🆕 新增 Mermaid 设置初始化配置和操作栏功能。[#1631](https://github.com/ant-design/x/pull/1631) 由 [Div627](https://github.com/Div627) 提交
 - 🆕 新增 Attachments 设置卡片类型能力。[#1610](https://github.com/ant-design/x/pull/1610) 由 [kimteayon](https://github.com/kimteayon) 提交
 
