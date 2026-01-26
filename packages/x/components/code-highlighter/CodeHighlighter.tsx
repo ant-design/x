@@ -1,5 +1,5 @@
 import { clsx } from 'clsx';
-import React from 'react';
+import React, { lazy, Suspense, useMemo } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -27,6 +27,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     styles = {},
     style = {},
     highlightProps,
+    usePrismLight = false,
     ...restProps
   } = props;
 
@@ -34,9 +35,54 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('codeHighlighter', customizePrefixCls);
   const [hashId, cssVarCls] = useStyle(prefixCls);
-
-  // ===================== Component Config =========================
   const contextConfig = useXComponentConfig('codeHighlighter');
+
+  // Create async highlighter when usePrismLight is true
+  const AsyncHighlighter = useMemo(() => {
+    if (!usePrismLight) {
+      return SyntaxHighlighter;
+    }
+
+    // Create async component for dynamic import
+    const AsyncSyntaxHighlighter = lazy(async () => {
+      try {
+        // Try to import the language if lang exists
+        if (lang) {
+          const langModule = await import(`prismjs/components/prism-${lang}`);
+
+          if (langModule) {
+            // Return the highlighter with the loaded language
+            return {
+              default: (props: any) => (
+                <SyntaxHighlighter {...props} language={lang} PreTag="div" />
+              ),
+            };
+          }
+        }
+      } catch (error) {
+        if (lang) {
+          console.warn(`[CodeHighlighter] Failed to load language: ${lang}`, error);
+        }
+      }
+
+      // Fallback to default highlighter if language loading fails or no lang
+      return {
+        default: (props: any) => <SyntaxHighlighter {...props} language={lang} PreTag="div" />,
+      };
+    });
+
+    return AsyncSyntaxHighlighter;
+  }, [usePrismLight, lang]);
+
+  // ============================ Early Returns ============================
+  if (!children) {
+    return null;
+  }
+
+  // No lang means no highlighting needed, return plain code directly
+  if (!lang) {
+    return <code>{children}</code>;
+  }
 
   // ============================ style ============================
   const mergedCls = clsx(
@@ -85,13 +131,29 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   };
 
   // ============================ render ============================
-  if (!children) {
-    return null;
-  }
+  const Highlighter = AsyncHighlighter;
+  const codeElement = (
+    <Highlighter
+      language={lang}
+      wrapLines={true}
+      style={customOneLight}
+      codeTagProps={{ style: { background: 'transparent' } }}
+      {...highlightProps}
+    >
+      {children.replace(/\n$/, '')}
+    </Highlighter>
+  );
 
-  if (!lang) {
-    return <code>{children}</code>;
-  }
+  // Wrap with Suspense when using async highlighter
+  const highlightedCode = usePrismLight ? (
+    <Suspense
+      fallback={<code style={{ whiteSpace: 'pre-wrap' }}>{children.replace(/\n$/, '')}</code>}
+    >
+      {codeElement}
+    </Suspense>
+  ) : (
+    codeElement
+  );
 
   return (
     <div ref={ref} className={mergedCls} style={mergedStyle} {...restProps}>
@@ -100,14 +162,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
         className={clsx(`${prefixCls}-code`, contextConfig.classNames?.code, classNames.code)}
         style={{ ...contextConfig.styles.code, ...styles.code }}
       >
-        <SyntaxHighlighter
-          language={lang}
-          wrapLines={true}
-          style={customOneLight}
-          {...highlightProps}
-        >
-          {children.replace(/\n$/, '')}
-        </SyntaxHighlighter>
+        {highlightedCode}
       </div>
     </div>
   );
