@@ -38,7 +38,7 @@ tag: vVERSION
 ### @ant-design/x-sdk
 
 - 🆕 XRequest 新增重连接能力。[#1629](https://github.com/ant-design/x/pull/1629) 由 [hylin](https://github.com/hylin) 提交
-- 🆕 XRequest 和 XStream 支持流数据解析引入了可配置的分隔符 `streamSeparator`、`partSeparator`,`kvSeparator` 能力，同时为 TextDecoderStream 添加了 polyfill 以提高兼容性，修复了 undefined 值被添加到流结果中的问题。 [#1611](https://github.com/ant-design/x/pull/1611) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🆕 XRequest 和 XStream 支持流数据解析引入了可配置的分隔符 `streamSeparator`、`partSeparator`、`kvSeparator` 能力，同时为 TextDecoderStream 添加了 polyfill 以提高兼容性，修复了 undefined 值被添加到流结果中的问题。 [#1611](https://github.com/ant-design/x/pull/1611) 由 [kimteayon](https://github.com/kimteayon) 提交
 
 ### @ant-design/x-markdown
 
