@@ -18,6 +18,37 @@ export interface AnimationConfig {
   easing?: string;
 }
 
+/**
+ * @description 语义化打字机效果的配置
+ * @description Configuration for semantic typewriter effect
+ */
+export interface SemanticConfig {
+  /**
+   * @description 语义分割的正则表达式模式字符串
+   * @description Regular expression pattern string for semantic delimiter
+   * @default '[。？！……；：——，]'
+   */
+  delimiterPattern?: string;
+  /**
+   * @description 最大字符数，超过此长度的文本将作为单独的语义块
+   * @description Maximum chunk length, text exceeding this will be treated as a separate semantic chunk
+   * @default 18
+   */
+  maxChunkLength?: number;
+  /**
+   * @description 每个语义块之间的停顿间隔（毫秒），数组的 index 对应第几个语义块，最后一个值用于后续所有语义块
+   * @description Delay between semantic chunks in milliseconds, array index corresponds to chunk number, last value applies to all remaining chunks
+   * @default [300, 200, 100, 0]
+   */
+  chunkDelays?: number[];
+  /**
+   * @description 每个语义块内字符的延迟时间（毫秒），数组的 index 对应字符位置，最后一个值用于后续所有字符
+   * @description Character delay within each semantic chunk in milliseconds, array index corresponds to character position, last value applies to all remaining characters
+   * @default [50, 30, 20, 10, 5]
+   */
+  charDelays?: number[];
+}
+
 export enum StreamCacheTokenType {
   Text = 'text',
   Link = 'link',
@@ -49,6 +80,11 @@ interface StreamingOption {
    * @description Configuration for text appearance animation effects
    */
   animationConfig?: AnimationConfig;
+  /**
+   * @description 语义化配置，根据语义化结构（如标点符号、最大长度）分割文本，并以打字机效果逐字显示
+   * @description Configuration for semantic, splits text by semantic structure (punctuation, max length) and displays character by character
+   */
+  semantic?: boolean | SemanticConfig;
   /**
    * @description 未完成的 Markdown 格式转换为自定义加载组件的映射配置，用于在流式渲染过程中为未闭合的链接和图片提供自定义loading组件
    * @description Mapping configuration to convert incomplete Markdown formats to custom loading components, used to provide custom loading components for unclosed links and images during streaming rendering

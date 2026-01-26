@@ -1,8 +1,7 @@
 import { clsx } from 'clsx';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Parser, Renderer } from './core';
 import DebugPanel from './DebugPanel';
-import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 import './index.css';
 
@@ -22,13 +21,12 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     protectCustomTagNewlines,
     debug,
   } = props;
+  const [renderedContent, setRenderedContent] = useState<React.ReactNode>(null);
 
   // ============================ style ============================
   const mergedCls = clsx('x-markdown', rootClassName, className);
 
-  // ============================ Streaming ============================
-  const displayContent = useStreaming(content || children || '', { streaming, components });
-  // ============================ Render ============================
+  // ============================ Parser ============================
   const parser = useMemo(
     () =>
       new Parser({
@@ -37,31 +35,52 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
         openLinksInNewTab,
         components,
         protectCustomTagNewlines,
+        streaming,
       }),
-    [config, paragraphTag, openLinksInNewTab, components, protectCustomTagNewlines],
+    [config, paragraphTag, openLinksInNewTab, components, protectCustomTagNewlines, streaming],
   );
 
+  // ============================ Renderer ============================
   const renderer = useMemo(
     () =>
       new Renderer({
-        components: components,
+        components,
         dompurifyConfig,
         streaming,
       }),
     [components, dompurifyConfig, streaming],
   );
 
-  const htmlString = useMemo(() => {
-    if (!displayContent) return '';
-    return parser.parse(displayContent);
-  }, [displayContent, parser]);
+  useEffect(() => {
+    const displayContent = content || children;
+    if (!displayContent) {
+      setRenderedContent(null);
+      return;
+    }
 
-  if (!displayContent) return null;
+    let isCancelled = false;
+
+    parser
+      .parse(displayContent, (html) => {
+        if (!isCancelled) {
+          setRenderedContent(renderer.render(html));
+        }
+      })
+      .catch((error) => {
+        if (!isCancelled) {
+          console.error('Failed to parse or render markdown:', error);
+        }
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [content, children, parser, renderer]);
 
   return (
     <>
       <div className={mergedCls} style={style}>
-        {renderer.render(htmlString)}
+        {renderedContent}
       </div>
       {debug ? <DebugPanel /> : null}
     </>
