@@ -28,9 +28,10 @@ tag: vVERSION
   - 🐛 修复设置 `iconPrefixCls` 不生效问题。[#1656](https://github.com/ant-design/x/pull/1656) 由 [kimteayon](https://github.com/kimteayon) 提交
   - 🐛 修复设置 `prefix` 不生效问题。[#1642](https://github.com/ant-design/x/pull/1642) 由 [kimteayon](https://github.com/kimteayon) 提交
   - 🐛 修复 `layer` 设置问题。 [#1616](https://github.com/ant-design/x/pull/1616) 由 [kimteayon](https://github.com/kimteayon) 提交
-- 🐛 修复强制 `antd` 依赖 `es` 路径导致 Node 环境构建报错问题。[#1645](https://github.com/ant-design/x/pull/1645) 由 [kimteayon](https://github.com/kimteayon) 提交。
+- 🐛 修复强制 `antd` 依赖 `es` 路径导致 Node 环境构建报错问题。[#1645](https://github.com/ant-design/x/pull/1645) 由 [kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复 ThoughtChain 布局导致动画卡顿问题。[#1641](https://github.com/ant-design/x/pull/1641) 由 [IsDyh01](https://github.com/IsDyh01) 提交
 - 🐛 修复 Think 布局导致动画卡顿问题。[#1636](https://github.com/ant-design/x/pull/1636) 由 [IsDyh01](https://github.com/IsDyh01) 提交
+- 🐛 修复 Sources 设置了位置但无法定位内容问题。 [#1683](https://github.com/ant-design/x/pull/1683) 由 [kimteayon](https://github.com/kimteayon) 提交
 - 🆕 新增 Mermaid 设置初始化配置和操作栏功能。[#1631](https://github.com/ant-design/x/pull/1631) 由 [Div627](https://github.com/Div627) 提交
 - 🆕 新增 Attachments 设置卡片类型能力。[#1610](https://github.com/ant-design/x/pull/1610) 由 [kimteayon](https://github.com/kimteayon) 提交
 

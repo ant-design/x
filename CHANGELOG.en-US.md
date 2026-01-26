@@ -32,6 +32,7 @@ tag: vVERSION
 - 🐛 Fixed forced `antd` dependency on `es` path causing Node environment build errors. [#1645](https://github.com/ant-design/x/pull/1645) by [kimteayon](https://github.com/kimteayon)
 - 🐛 Fixed ThoughtChain layout causing animation stuttering. [#1641](https://github.com/ant-design/x/pull/1641) by [IsDyh01](https://github.com/IsDyh01)
 - 🐛 Fixed Think layout causing animation stuttering. [#1636](https://github.com/ant-design/x/pull/1636) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed Sources setting position but unable to locate content issue. [#1683](https://github.com/ant-design/x/pull/1683) by [kimteayon](https://github.com/kimteayon)
 - 🆕 Added Mermaid settings initialization configuration and operation bar functionality. [#1631](https://github.com/ant-design/x/pull/1631) by [Div627](https://github.com/Div627)
 - 🆕 Added Attachments card type setting capability. [#1610](https://github.com/ant-design/x/pull/1610) by [kimteayon](https://github.com/kimteayon)
 
