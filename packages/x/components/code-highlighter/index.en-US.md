@@ -38,6 +38,7 @@ For common properties, refer to: [Common Properties](/docs/react/common-props).
 | className | Style class name | `string` |  |
 | classNames | Style class names | `string` | - |
 | highlightProps | Code highlighting configuration | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
+| prismLightMode | Whether to use Prism light mode to automatically load language support based on lang prop for smaller bundle size | `boolean` | `false` |
 
 ### CodeHighlighterRef
 

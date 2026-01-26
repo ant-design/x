@@ -111,4 +111,59 @@ describe('CodeHighlighter', () => {
     );
     expect(ref.current).toBe(container.firstChild);
   });
+
+  describe('prismLightMode', () => {
+    it('should render code with prismLightMode enabled', () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" prismLightMode>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      expect(container.querySelector('code')).toBeInTheDocument();
+      expect(container.textContent).toContain('console.log("test");');
+    });
+
+    it('should render code with prismLightMode disabled (default)', () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" prismLightMode={false}>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      expect(container.querySelector('code')).toBeInTheDocument();
+      expect(container.textContent).toContain('console.log("test");');
+    });
+
+    it('should work with prismLightMode and custom header', () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" prismLightMode header={null}>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      expect(container.querySelector('code')).toBeInTheDocument();
+      expect(container.querySelector('.ant-codeHighlighter-header')).toBeNull();
+    });
+
+    it('should work with prismLightMode and custom classNames', () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" prismLightMode classNames={{ code: 'customCodeClass' }}>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      expect(container.querySelector('.customCodeClass')).toBeInTheDocument();
+    });
+
+    it('should work with prismLightMode and custom styles', () => {
+      const { container } = render(
+        <CodeHighlighter
+          lang="javascript"
+          prismLightMode
+          styles={{ root: { backgroundColor: 'blue' } }}
+        >
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      const root = container.firstChild as HTMLElement;
+      expect(root.style.backgroundColor).toBe('blue');
+    });
+  });
 });

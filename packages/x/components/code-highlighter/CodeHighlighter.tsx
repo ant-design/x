@@ -27,7 +27,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     styles = {},
     style = {},
     highlightProps,
-    usePrismLight = false,
+    prismLightMode = false,
     ...restProps
   } = props;
 
@@ -37,9 +37,9 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   const [hashId, cssVarCls] = useStyle(prefixCls);
   const contextConfig = useXComponentConfig('codeHighlighter');
 
-  // Create async highlighter when usePrismLight is true
+  // Create async highlighter when prismLightMode is true
   const AsyncHighlighter = useMemo(() => {
-    if (!usePrismLight) {
+    if (!prismLightMode) {
       return SyntaxHighlighter;
     }
 
@@ -72,7 +72,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     });
 
     return AsyncSyntaxHighlighter;
-  }, [usePrismLight, lang]);
+  }, [prismLightMode, lang]);
 
   // ============================ Early Returns ============================
   if (!children) {
@@ -145,7 +145,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   );
 
   // Wrap with Suspense when using async highlighter
-  const highlightedCode = usePrismLight ? (
+  const highlightedCode = prismLightMode ? (
     <Suspense
       fallback={<code style={{ whiteSpace: 'pre-wrap' }}>{children.replace(/\n$/, '')}</code>}
     >
