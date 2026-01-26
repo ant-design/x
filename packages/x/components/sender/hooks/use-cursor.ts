@@ -423,7 +423,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         startContainer !== editableDom &&
         options?.getNodeInfo
       ) {
-        const { slotKey, slotConfig } = options.getNodeInfo(endContainer) || {};
+        const { slotKey, slotConfig, skillKey } = options.getNodeInfo(endContainer) || {};
         if (slotKey) {
           return {
             type: 'slot',
@@ -432,6 +432,9 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
             range,
             selection,
           };
+        }
+        if (skillKey) {
+          return { type: 'start', selection };
         }
       }
 
