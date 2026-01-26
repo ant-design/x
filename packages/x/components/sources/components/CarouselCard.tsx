@@ -25,12 +25,13 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       if (carouselRef.current) {
-        timer && clearTimeout(timer);
         const current = Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0);
+        setSlide(current);
         carouselRef.current.goTo(current, false);
       }
     }, 0);
-  }, [activeKey, carouselRef.current]);
+    return () => clearTimeout(timer);
+  }, [activeKey, items, setSlide]);
 
   const handleClick = (item: SourcesItem) => {
     item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
@@ -66,6 +67,7 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
         arrows={false}
         infinite={false}
         dots={false}
+        afterChange={setSlide}
         beforeChange={(_, nextSlide) => setSlide(nextSlide)}
       >
         {items?.map((item, index) => (
