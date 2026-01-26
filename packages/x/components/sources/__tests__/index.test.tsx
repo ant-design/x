@@ -224,6 +224,7 @@ describe('Sources Component', () => {
     // 而不验证具体的状态变化，因为这在测试环境中很难模拟
     expect(rightBtn).toBeTruthy();
     expect(leftBtn).toBeTruthy();
+    fireEvent.click(leftBtn!);
   });
 
   it('Sources should support onClick', () => {
