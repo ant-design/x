@@ -1672,7 +1672,7 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
     </div>
   </div>
   <div
-    class="ant-flex css-var-_r_f_ ant-flex-gap-small"
+    class="ant-flex css-var-_r_f_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
     <button
       class="ant-btn css-var-_r_f_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
@@ -1724,414 +1724,132 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
     </button>
   </div>
   <div
-    class="ant-bubble-list css-var-_r_f_"
-    style="height: 620px;"
+    style="display: flex; min-height: 0; flex-grow: 1; flex-shrink: 1; flex-basis: 0%;"
   >
     <div
-      class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
+      class="ant-bubble-list css-var-_r_f_"
+      style="height: 620px;"
     >
       <div
-        style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
-      />
-      <div
-        class="ant-bubble-list-scroll-content"
+        class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
       >
         <div
-          class="ant-bubble css-var-_r_f_ ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
-        >
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default ant-bubble-content-string"
-            >
-              Welcome to use Ant Design X
-            </div>
-          </div>
-        </div>
+          style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+        />
         <div
-          class="ant-bubble css-var-_r_f_ ant-bubble-end"
+          class="ant-bubble-list-scroll-content"
         >
           <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
+            class="ant-bubble css-var-_r_f_ ant-bubble-system ant-bubble css-var-_r_f_ ant-bubble-start"
           >
             <div
-              class="ant-bubble-header"
-            >
-              User-bubble_7
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              8 : Mock user content.
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-end"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_f_"
+                class="ant-bubble-content ant-bubble-content-shadow ant-bubble-content-default ant-bubble-content-string"
               >
-                <div
-                  class="ant-actions-list ant-actions-variant-borderless"
-                >
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="edit"
-                        class="anticon anticon-edit"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="edit"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                    >
-                      <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        edit
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                Welcome to use Ant Design X
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_f_ ant-bubble-start"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_f_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              AI
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              9 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-start"
-            >
-              <div
-                class="ant-actions css-var-_r_f_"
-              >
-                <div
-                  class="ant-actions-list ant-actions-variant-borderless"
-                >
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="redo"
-                        class="anticon anticon-redo"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="redo"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                    >
-                      <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Retry
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="copy"
-                        class="anticon anticon-copy"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="copy"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                    >
-                      <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
-                      >
-                        <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Copy
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_f_ ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
-        >
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-content ant-bubble-content-borderless"
-            >
-              <div
-                class="ant-divider css-var-_r_f_ ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
-                role="separator"
-              >
-                <div
-                  class="ant-divider-rail ant-divider-rail-start"
-                />
                 <span
-                  class="ant-divider-inner-text"
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  divider
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
                 </span>
-                <div
-                  class="ant-divider-rail ant-divider-rail-end"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_f_ ant-bubble-end"
-        >
-          <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User-bubble_10
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              11 : Mock user content.
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-end"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_f_"
+                class="ant-bubble-header"
+              >
+                User-bubble_7
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                8 : Mock user content.
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-end"
               >
                 <div
-                  class="ant-actions-list ant-actions-variant-borderless"
+                  class="ant-actions css-var-_r_f_"
                 >
                   <div
-                    class="ant-actions-item"
+                    class="ant-actions-list ant-actions-variant-borderless"
                   >
                     <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="edit"
-                        class="anticon anticon-edit"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="edit"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
+                          aria-label="edit"
+                          class="anticon anticon-edit"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="edit"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                            />
+                          </svg>
+                        </span>
                       </div>
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                       >
-                        edit
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          edit
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -2139,50 +1857,336 @@ exports[`renders components/bubble/demo/list.tsx extend context correctly 1`] = 
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_f_ ant-bubble-start ant-bubble-loading"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_f_ ant-bubble-start"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
                 >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
               </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                AI
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                9 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-start"
+              >
+                <div
+                  class="ant-actions css-var-_r_f_"
+                >
+                  <div
+                    class="ant-actions-list ant-actions-variant-borderless"
+                  >
+                    <div
+                      class="ant-actions-item"
+                    >
+                      <div
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
+                      >
+                        <span
+                          aria-label="redo"
+                          class="anticon anticon-redo"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="redo"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="ant-actions-item"
+                    >
+                      <div
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
+                      >
+                        <span
+                          aria-label="copy"
+                          class="anticon anticon-copy"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="copy"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_f_ ant-bubble ant-bubble-divider css-var-_r_f_ ant-bubble-start"
+          >
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-content ant-bubble-content-borderless"
+              >
+                <div
+                  class="ant-divider css-var-_r_f_ ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center"
+                  role="separator"
+                >
+                  <div
+                    class="ant-divider-rail ant-divider-rail-start"
+                  />
+                  <span
+                    class="ant-divider-inner-text"
+                  >
+                    divider
+                  </span>
+                  <div
+                    class="ant-divider-rail ant-divider-rail-end"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_f_ ant-bubble-end"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                User-bubble_10
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                11 : Mock user content.
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-end"
+              >
+                <div
+                  class="ant-actions css-var-_r_f_"
+                >
+                  <div
+                    class="ant-actions-list ant-actions-variant-borderless"
+                  >
+                    <div
+                      class="ant-actions-item"
+                    >
+                      <div
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
+                      >
+                        <span
+                          aria-label="edit"
+                          class="anticon anticon-edit"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="edit"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_f_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          edit
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_f_ ant-bubble-start ant-bubble-loading"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_f_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <span
+              class="ant-bubble-dot"
+            >
+              <i
+                class="ant-bubble-dot-item"
+              />
+              <i
+                class="ant-bubble-dot-item"
+              />
+              <i
+                class="ant-bubble-dot-item"
+              />
             </span>
           </div>
-          <span
-            class="ant-bubble-dot"
-          >
-            <i
-              class="ant-bubble-dot-item"
-            />
-            <i
-              class="ant-bubble-dot-item"
-            />
-            <i
-              class="ant-bubble-dot-item"
-            />
-          </span>
         </div>
       </div>
     </div>
@@ -2800,271 +2804,271 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
   style="height: 720px;"
 >
   <div
-    class="ant-flex css-var-_r_s_ ant-flex-justify-space-between ant-flex-gap-small"
+    class="ant-flex css-var-_r_s_ ant-flex-wrap-wrap ant-flex-gap-small"
   >
-    <div
-      class="ant-flex css-var-_r_s_ ant-flex-gap-small"
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      type="button"
     >
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
-        type="button"
-      >
-        <span>
-          Add Long Bubble
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Top
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Bottom smooth
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Bottom instant
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Random
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Second Bubble
-        </span>
-      </button>
-      <button
-        class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
-        type="button"
-      >
-        <span>
-          Scroll To Last Bubble
-        </span>
-      </button>
-    </div>
+      <span>
+        Add Long Bubble
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Top
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Bottom smooth
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Bottom instant
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Random
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Second Bubble
+      </span>
+    </button>
+    <button
+      class="ant-btn css-var-_r_s_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      type="button"
+    >
+      <span>
+        Scroll To Last Bubble
+      </span>
+    </button>
   </div>
   <div
-    class="ant-bubble-list css-var-_r_s_"
+    style="display: flex; min-height: 0; flex-grow: 1; flex-shrink: 1; flex-basis: 0%;"
   >
     <div
-      class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
+      class="ant-bubble-list css-var-_r_s_"
     >
       <div
-        style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
-      />
-      <div
-        class="ant-bubble-list-scroll-content"
+        class="ant-bubble-list-scroll-box ant-bubble-list-autoscroll"
       >
         <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-end"
-        >
-          <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              12 : Mock user content.
-            </div>
-          </div>
-        </div>
+          style="bottom: 0px; flex-shrink: 0; pointer-events: none; height: 10px; visibility: hidden;"
+        />
         <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-start"
+          class="ant-bubble-list-scroll-content"
         >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_s_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              AI
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              13 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-start"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_s_"
+                class="ant-bubble-header"
+              >
+                User
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                12 : Mock user content.
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_s_ ant-bubble-start"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                AI
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                13 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-start"
               >
                 <div
-                  class="ant-actions-list ant-actions-variant-borderless"
+                  class="ant-actions css-var-_r_s_"
                 >
                   <div
-                    class="ant-actions-item"
+                    class="ant-actions-list ant-actions-variant-borderless"
                   >
                     <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="redo"
-                        class="anticon anticon-redo"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="redo"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Retry
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="copy"
-                        class="anticon anticon-copy"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="copy"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
+                          aria-label="redo"
+                          class="anticon anticon-redo"
+                          role="img"
                         >
-                          <path
-                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          <svg
+                            aria-hidden="true"
+                            data-icon="redo"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
                           />
-                        </svg>
-                      </span>
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
+                      </div>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
+                          aria-label="copy"
+                          class="anticon anticon-copy"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="copy"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                            />
+                          </svg>
+                        </span>
                       </div>
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3072,197 +3076,197 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-end"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_s_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              14 : Mock user content.
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-start"
-        >
-          <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              AI
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              15 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-start"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_s_"
+                class="ant-bubble-header"
+              >
+                User
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                14 : Mock user content.
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_s_ ant-bubble-start"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                AI
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                15 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-start"
               >
                 <div
-                  class="ant-actions-list ant-actions-variant-borderless"
+                  class="ant-actions css-var-_r_s_"
                 >
                   <div
-                    class="ant-actions-item"
+                    class="ant-actions-list ant-actions-variant-borderless"
                   >
                     <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="redo"
-                        class="anticon anticon-redo"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="redo"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Retry
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="copy"
-                        class="anticon anticon-copy"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="copy"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
+                          aria-label="redo"
+                          class="anticon anticon-redo"
+                          role="img"
                         >
-                          <path
-                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          <svg
+                            aria-hidden="true"
+                            data-icon="redo"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
                           />
-                        </svg>
-                      </span>
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
+                      </div>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
+                          aria-label="copy"
+                          class="anticon anticon-copy"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="copy"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                            />
+                          </svg>
+                        </span>
                       </div>
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3270,197 +3274,197 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-end"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_s_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              16 : Mock user content.
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-start"
-        >
-          <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              AI
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              17 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-start"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_s_"
+                class="ant-bubble-header"
+              >
+                User
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                16 : Mock user content.
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_s_ ant-bubble-start"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                AI
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                17 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-start"
               >
                 <div
-                  class="ant-actions-list ant-actions-variant-borderless"
+                  class="ant-actions css-var-_r_s_"
                 >
                   <div
-                    class="ant-actions-item"
+                    class="ant-actions-list ant-actions-variant-borderless"
                   >
                     <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="redo"
-                        class="anticon anticon-redo"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="redo"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Retry
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="copy"
-                        class="anticon anticon-copy"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="copy"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
+                          aria-label="redo"
+                          class="anticon anticon-redo"
+                          role="img"
                         >
-                          <path
-                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          <svg
+                            aria-hidden="true"
+                            data-icon="redo"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
                           />
-                        </svg>
-                      </span>
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
+                      </div>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
+                          aria-label="copy"
+                          class="anticon anticon-copy"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="copy"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                            />
+                          </svg>
+                        </span>
                       </div>
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3468,197 +3472,197 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-end"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_s_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              18 : Mock user content.
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-start"
-        >
-          <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              AI
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              19 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-start"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_s_"
+                class="ant-bubble-header"
+              >
+                User
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                18 : Mock user content.
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_s_ ant-bubble-start"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                AI
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                19 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-start"
               >
                 <div
-                  class="ant-actions-list ant-actions-variant-borderless"
+                  class="ant-actions css-var-_r_s_"
                 >
                   <div
-                    class="ant-actions-item"
+                    class="ant-actions-list ant-actions-variant-borderless"
                   >
                     <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="redo"
-                        class="anticon anticon-redo"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="redo"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Retry
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="copy"
-                        class="anticon anticon-copy"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="copy"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
+                          aria-label="redo"
+                          class="anticon anticon-redo"
+                          role="img"
                         >
-                          <path
-                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          <svg
+                            aria-hidden="true"
+                            data-icon="redo"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
                           />
-                        </svg>
-                      </span>
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
+                      </div>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
+                          aria-label="copy"
+                          class="anticon anticon-copy"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="copy"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                            />
+                          </svg>
+                        </span>
                       </div>
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3666,197 +3670,197 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-end"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_s_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              20 : Mock user content.
-            </div>
-          </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-start"
-        >
-          <div
-            class="ant-bubble-avatar"
-          >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
-            >
-              <span
-                aria-label="ant-design"
-                class="anticon anticon-ant-design"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="ant-design"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
-                  />
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              AI
-            </div>
-            <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
-            >
-              21 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
-            </div>
-            <div
-              class="ant-bubble-footer ant-bubble-footer-start"
+              class="ant-bubble-body"
             >
               <div
-                class="ant-actions css-var-_r_s_"
+                class="ant-bubble-header"
+              >
+                User
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                20 : Mock user content.
+              </div>
+            </div>
+          </div>
+          <div
+            class="ant-bubble css-var-_r_s_ ant-bubble-start"
+          >
+            <div
+              class="ant-bubble-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+              >
+                <span
+                  aria-label="ant-design"
+                  class="anticon anticon-ant-design"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="ant-design"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M716.3 313.8c19-18.9 19-49.7 0-68.6l-69.9-69.9.1.1c-18.5-18.5-50.3-50.3-95.3-95.2-21.2-20.7-55.5-20.5-76.5.5L80.9 474.2a53.84 53.84 0 000 76.4L474.6 944a54.14 54.14 0 0076.5 0l165.1-165c19-18.9 19-49.7 0-68.6a48.7 48.7 0 00-68.7 0l-125 125.2c-5.2 5.2-13.3 5.2-18.5 0L189.5 521.4c-5.2-5.2-5.2-13.3 0-18.5l314.4-314.2c.4-.4.9-.7 1.3-1.1 5.2-4.1 12.4-3.7 17.2 1.1l125.2 125.1c19 19 49.8 19 68.7 0zM408.6 514.4a106.3 106.2 0 10212.6 0 106.3 106.2 0 10-212.6 0zm536.2-38.6L821.9 353.5c-19-18.9-49.8-18.9-68.7.1a48.4 48.4 0 000 68.6l83 82.9c5.2 5.2 5.2 13.3 0 18.5l-81.8 81.7a48.4 48.4 0 000 68.6 48.7 48.7 0 0068.7 0l121.8-121.7a53.93 53.93 0 00-.1-76.4z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+            <div
+              class="ant-bubble-body"
+            >
+              <div
+                class="ant-bubble-header"
+              >
+                AI
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                21 : Mock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI contentMock AI content
+              </div>
+              <div
+                class="ant-bubble-footer ant-bubble-footer-start"
               >
                 <div
-                  class="ant-actions-list ant-actions-variant-borderless"
+                  class="ant-actions css-var-_r_s_"
                 >
                   <div
-                    class="ant-actions-item"
+                    class="ant-actions-list ant-actions-variant-borderless"
                   >
                     <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="redo"
-                        class="anticon anticon-redo"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="redo"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
-                        >
-                          <path
-                            d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
-                          />
-                        </svg>
-                      </span>
-                    </div>
-                    <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
-                      </div>
-                      <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
-                      >
-                        Retry
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="ant-actions-item"
-                  >
-                    <div
-                      aria-describedby="test-id"
-                      class="ant-actions-icon"
-                    >
-                      <span
-                        aria-label="copy"
-                        class="anticon anticon-copy"
-                        role="img"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          data-icon="copy"
-                          fill="currentColor"
-                          focusable="false"
-                          height="1em"
-                          viewBox="64 64 896 896"
-                          width="1em"
+                          aria-label="redo"
+                          class="anticon anticon-redo"
+                          role="img"
                         >
-                          <path
-                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          <svg
+                            aria-hidden="true"
+                            data-icon="redo"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      >
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
                           />
-                        </svg>
-                      </span>
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Retry
+                        </div>
+                      </div>
                     </div>
                     <div
-                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
-                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+                      class="ant-actions-item"
                     >
                       <div
-                        class="ant-tooltip-arrow"
-                        style="position: absolute; bottom: 0px; left: 0px;"
+                        aria-describedby="test-id"
+                        class="ant-actions-icon"
                       >
                         <span
-                          class="ant-tooltip-arrow-content"
-                        />
+                          aria-label="copy"
+                          class="anticon anticon-copy"
+                          role="img"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            data-icon="copy"
+                            fill="currentColor"
+                            focusable="false"
+                            height="1em"
+                            viewBox="64 64 896 896"
+                            width="1em"
+                          >
+                            <path
+                              d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                            />
+                          </svg>
+                        </span>
                       </div>
                       <div
-                        class="ant-tooltip-container"
-                        id="test-id"
-                        role="tooltip"
+                        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_s_ ant-tooltip-placement-top"
+                        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                       >
-                        Copy
+                        <div
+                          class="ant-tooltip-arrow"
+                          style="position: absolute; bottom: 0px; left: 0px;"
+                        >
+                          <span
+                            class="ant-tooltip-arrow-content"
+                          />
+                        </div>
+                        <div
+                          class="ant-tooltip-container"
+                          id="test-id"
+                          role="tooltip"
+                        >
+                          Copy
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3864,49 +3868,49 @@ exports[`renders components/bubble/demo/list-scroll.tsx extend context correctly
               </div>
             </div>
           </div>
-        </div>
-        <div
-          class="ant-bubble css-var-_r_s_ ant-bubble-end"
-        >
           <div
-            class="ant-bubble-avatar"
+            class="ant-bubble css-var-_r_s_ ant-bubble-end"
           >
-            <span
-              class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
+            <div
+              class="ant-bubble-avatar"
             >
               <span
-                aria-label="user"
-                class="anticon anticon-user"
-                role="img"
+                class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_s_ ant-avatar-css-var"
               >
-                <svg
-                  aria-hidden="true"
-                  data-icon="user"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
+                <span
+                  aria-label="user"
+                  class="anticon anticon-user"
+                  role="img"
                 >
-                  <path
-                    d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
-                  />
-                </svg>
+                  <svg
+                    aria-hidden="true"
+                    data-icon="user"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"
+                    />
+                  </svg>
+                </span>
               </span>
-            </span>
-          </div>
-          <div
-            class="ant-bubble-body"
-          >
-            <div
-              class="ant-bubble-header"
-            >
-              User
             </div>
             <div
-              class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              class="ant-bubble-body"
             >
-              22 : Mock user content.
+              <div
+                class="ant-bubble-header"
+              >
+                User
+              </div>
+              <div
+                class="ant-bubble-content ant-bubble-content-filled ant-bubble-content-default ant-bubble-content-string"
+              >
+                22 : Mock user content.
+              </div>
             </div>
           </div>
         </div>
