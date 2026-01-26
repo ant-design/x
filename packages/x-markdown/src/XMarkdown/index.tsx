@@ -1,6 +1,7 @@
 import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { Parser, Renderer } from './core';
+import DebugPanel from './DebugPanel';
 import { useStreaming } from './hooks';
 import { XMarkdownProps } from './interface';
 import './index.css';
@@ -18,6 +19,8 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     style,
     openLinksInNewTab,
     dompurifyConfig,
+    protectCustomTagNewlines,
+    debug,
   } = props;
 
   // ============================ style ============================
@@ -25,7 +28,6 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
 
   // ============================ Streaming ============================
   const displayContent = useStreaming(content || children || '', { streaming, components });
-
   // ============================ Render ============================
   const parser = useMemo(
     () =>
@@ -33,8 +35,10 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
         markedConfig: config,
         paragraphTag,
         openLinksInNewTab,
+        components,
+        protectCustomTagNewlines,
       }),
-    [config, paragraphTag, openLinksInNewTab],
+    [config, paragraphTag, openLinksInNewTab, components, protectCustomTagNewlines],
   );
 
   const renderer = useMemo(
@@ -55,9 +59,12 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   if (!displayContent) return null;
 
   return (
-    <div className={mergedCls} style={style}>
-      {renderer.render(htmlString)}
-    </div>
+    <>
+      <div className={mergedCls} style={style}>
+        {renderer.render(htmlString)}
+      </div>
+      {debug ? <DebugPanel /> : null}
+    </>
   );
 });
 

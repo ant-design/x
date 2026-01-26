@@ -1,6 +1,5 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import { Infographic } from '@antv/infographic';
 import { Button, Flex } from 'antd';
 import React from 'react';
 
@@ -41,24 +40,35 @@ type ReactInfographicProps = {
 
 function ReactInfographic(props: ReactInfographicProps) {
   const { children } = props;
+  const [isClient, setIsClient] = React.useState(false);
+
   const $container = React.useRef<HTMLDivElement>(null);
-  const infographicInstance = React.useRef<Infographic>(null);
+  const infographicInstance = React.useRef<any>(null);
 
   React.useEffect(() => {
-    if ($container.current) {
-      infographicInstance.current = new Infographic({
-        container: $container.current,
-      });
-    }
-
-    return () => {
-      infographicInstance.current?.destroy();
-    };
+    setIsClient(true);
   }, []);
 
   React.useEffect(() => {
-    infographicInstance.current?.render(children as string);
-  }, [children]);
+    if (!isClient || !$container.current) return;
+    // 动态导入 Infographic 以避免 SSR 问题
+    import('@antv/infographic').then(({ Infographic }) => {
+      // 确保 container 不为 null
+      if ($container.current) {
+        infographicInstance.current = new Infographic({
+          container: $container.current,
+        });
+        infographicInstance.current?.render(children as string);
+      }
+    });
+    return () => {
+      infographicInstance.current?.destroy?.();
+    };
+  }, [isClient, children]);
+
+  if (!isClient) {
+    return <div style={{ minHeight: 400 }}>Loading infographic...</div>;
+  }
 
   return <div ref={$container} />;
 }

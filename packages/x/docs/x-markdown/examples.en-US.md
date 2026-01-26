@@ -39,9 +39,11 @@ Used for rendering streaming Markdown format returned by LLM.
 | config | Marked.js configuration for Markdown parsing and extensions | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | Whether to add `target="_blank"` to all a tags | `boolean` | `false` |
 | dompurifyConfig | DOMPurify configuration for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
+| debug | Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics | `boolean` | `false` |
 | className | Additional CSS class for root container | `string` | - |
 | rootClassName | Alias for `className`, additional CSS class for root element | `string` | - |
 | style | Inline styles for root container | `CSSProperties` | - |
+| protectCustomTagNewlines | Whether to protect newlines in custom tags | `boolean` | `false` |
 
 ### StreamingOption
 

@@ -39,9 +39,11 @@ packageName: x-markdown
 | config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | 是否为所有 a 标签添加 `target="_blank"` | `boolean` | `false` |
 | dompurifyConfig | HTML 净化和 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
+| debug | 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标 | `boolean` | `false` |
 | className | 根容器的额外 CSS 类名 | `string` | - |
 | rootClassName | `className` 的别名，根元素的额外 CSS 类 | `string` | - |
 | style | 根容器的内联样式 | `CSSProperties` | - |
+| protectCustomTagNewlines | 是否保护自定义标记中的换行符 | `boolean` | `false` |
 
 ### StreamingOption
 
