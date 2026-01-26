@@ -18,11 +18,13 @@ packageName: x-sdk
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demos/x-request/basic.tsx">基础使用</code> 
-<code src="./demos/x-request/custom-params-headers.tsx">请求定制</code> 
+<code src="./demos/x-request/basic.tsx">基础使用</code>
+<code src="./demos/x-request/custom-params-headers.tsx">请求定制</code>
 <code src="./demos/x-request/custom-transformer.tsx">自定义转换器</code>
- <code src="./demos/x-request/manual.tsx">手动触发</code> 
+<code src="./demos/x-request/stream-separator.tsx">流解析配置</code>
+ <code src="./demos/x-request/manual.tsx">手动触发</code>
  <code src="./demos/x-request/timeout.tsx">超时配置</code>
+ <code src="./demos/x-request/stream-timeout.tsx">chunk 超时配置</code>
 
 ## API
 
@@ -54,15 +56,20 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | fetch | 自定义fetch对象 | `typeof fetch` | - | - |
 | middlewares | 中间件，支持请求前和请求后处理 | XFetchMiddlewares | - | - |
 | transformStream | stream处理器 | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |
+| streamSeparator | 流分隔符，用于分隔不同的数据流，transformStream 有值时不生效 | string | \\n\\n | 2.2.0 |
+| partSeparator | 部分分隔符，用于分隔数据的不同部分，transformStream 有值时不生效 | string | \\n | 2.2.0 |
+| kvSeparator | 键值分隔符，用于分隔键和值，transformStream 有值时不生效 | string | : | 2.2.0 |
 | manual | 是否手动控制发出请求，为`true`时，需要手动调用`run`方法 | boolean | false | - |
+| retryInterval | 请求中断或者失败时，重试的间隔时间，单位ms，不设置将不会自动重试 | number | - | - |
+| retryTimes | 重试的次数限制，超过次数后不在进行重试 | number | - | - |
 
 ### XRequestCallbacks
 
-| 属性      | 描述           | 类型                                   | 默认值 | 版本 |
-| --------- | -------------- | -------------------------------------- | ------ | ---- |
-| onSuccess | 成功时的回调   | (chunks: Output[]) => void             | -      | -    |
-| onError   | 错误处理的回调 | (error: Error, errorInfo: any) => void | -      | -    |
-| onUpdate  | 消息更新的回调 | (chunk: Output) => void                | -      | -    |
+| 属性 | 描述 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| onSuccess | 成功时的回调 | (chunks: Output[]) => void | - | - |
+| onError | 错误处理的回调，`onError`可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval`同时存在时，`onError`返回值优先级更高 | (error: Error, errorInfo: any) => number \| void | - | - |
+| onUpdate | 消息更新的回调 | (chunk: Output) => void | - | - |
 
 ### XRequestClass
 

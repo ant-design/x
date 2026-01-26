@@ -114,9 +114,8 @@ describe('Bubble.List', () => {
       const { container } = render(<BubbleList items={mockItems} role={roleConfig} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
-      // autoScroll 启用情况下，数据渲染是倒序的
-      expect(bubbles[1]).toHaveClass('ant-bubble-end'); // user role
-      expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
+      expect(bubbles[0]).toHaveClass('ant-bubble-end');
+      expect(bubbles[1]).toHaveClass('ant-bubble-start');
     });
 
     it('should support role function configuration', () => {
@@ -134,9 +133,8 @@ describe('Bubble.List', () => {
       const { container } = render(<BubbleList items={mockItems} role={roleConfig} />);
       const bubbles = container.querySelectorAll('.ant-bubble');
 
-      // autoScroll 启用情况下，数据渲染是倒序的
-      expect(bubbles[1]).toHaveClass('ant-bubble-end'); // user role
-      expect(bubbles[0]).toHaveClass('ant-bubble-start'); // ai role
+      expect(bubbles[0]).toHaveClass('ant-bubble-end');
+      expect(bubbles[1]).toHaveClass('ant-bubble-start');
     });
 
     it('should support empty role', () => {
@@ -172,7 +170,7 @@ describe('Bubble.List', () => {
       const bubbles = container.querySelectorAll('.ant-bubble');
 
       expect(bubbles.length).toBe(2);
-      expect(bubbles[0].textContent).toBe('消息'); // user role
+      expect(bubbles[0].textContent).toBe('用户消息'); // user role
     });
 
     it('should support property override in items over role configuration', () => {

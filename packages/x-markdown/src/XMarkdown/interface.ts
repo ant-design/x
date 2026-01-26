@@ -26,6 +26,7 @@ export enum StreamCacheTokenType {
   Emphasis = 'emphasis',
   List = 'list',
   Table = 'table',
+  InlineCode = 'inline-code',
 }
 
 type Token = Tokens.Generic;
@@ -142,6 +143,18 @@ interface XMarkdownProps {
    * @description DOMPurify configuration for HTML sanitization and XSS protection
    */
   dompurifyConfig?: DOMPurifyConfig;
+  /**
+   * @description 是否保护自定义标签中的换行符
+   * @description Whether to protect newlines in custom tags
+   * @default false
+   */
+  protectCustomTagNewlines?: boolean;
+  /*
+   * @description 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标
+   * @description Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics
+   * @default false
+   */
+  debug?: boolean;
 }
 
 export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };
