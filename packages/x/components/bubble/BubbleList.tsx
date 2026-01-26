@@ -139,7 +139,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
 
   // ============================= States =============================
   const [scrollBoxDom, setScrollBoxDom] = React.useState<HTMLDivElement | null>();
-  const { scrollTo } = useCompatibleScroll(scrollBoxDom);
+  const [scrollContentDom, setScrollContentDom] = React.useState<HTMLDivElement | null>();
+  const { scrollTo } = useCompatibleScroll(scrollBoxDom, scrollContentDom);
 
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
@@ -191,7 +192,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     };
   });
 
-  const renderData = autoScroll ? [...items].reverse() : items;
+  // const renderData = autoScroll ? [...items].reverse() : items;
 
   // ============================ Render ============================
   return (
@@ -204,25 +205,31 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         ref={(node) => setScrollBoxDom(node)}
         onScroll={onScroll}
       >
-        {renderData.map((item) => {
-          let mergedProps: BubbleItemType;
-          if (item.role && role) {
-            const cfg = role[item.role];
-            mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };
-          } else {
-            mergedProps = item;
-          }
-          return (
-            <BubbleListItem
-              classNames={classNames}
-              styles={styles}
-              {...omit(mergedProps, ['key'])}
-              key={item.key}
-              _key={item.key}
-              bubblesRef={bubblesRef}
-            />
-          );
-        })}
+        {/* 映射 scrollHeight 到 dom.height，以使用 ResizeObserver 来监听高度变化 */}
+        <div
+          ref={(node) => setScrollContentDom(node)}
+          className={clsx(`${listPrefixCls}-scroll-content`)}
+        >
+          {items.map((item) => {
+            let mergedProps: BubbleItemType;
+            if (item.role && role) {
+              const cfg = role[item.role];
+              mergedProps = { ...(roleCfgIsFunction(cfg) ? cfg(item) : cfg), ...item };
+            } else {
+              mergedProps = item;
+            }
+            return (
+              <BubbleListItem
+                classNames={classNames}
+                styles={styles}
+                {...omit(mergedProps, ['key'])}
+                key={item.key}
+                _key={item.key}
+                bubblesRef={bubblesRef}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
