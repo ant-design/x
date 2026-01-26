@@ -192,8 +192,6 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     };
   });
 
-  // const renderData = autoScroll ? [...items].reverse() : items;
-
   // ============================ Render ============================
   return (
     <div {...domProps} className={mergedClassNames} style={mergedStyle} ref={listRef}>

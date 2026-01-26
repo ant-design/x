@@ -104,7 +104,7 @@ export function useCompatibleScroll(
       }
       setTimer();
     },
-    [scrollDom],
+    [setTimer],
   );
 
   useLayoutEffect(() => {
