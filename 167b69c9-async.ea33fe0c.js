@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["167b69c9"],{"167b69c9":function(e,n,l){"use strict";l.d(n,"__esModule",{value:!0}),l.d(n,"demos",{enumerable:!0,get:function(){return s;}}),l("9ad5d9c2");let s={};}}]);
+//# sourceMappingURL=167b69c9-async.ea33fe0c.js.map
