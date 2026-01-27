@@ -27,6 +27,7 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       [`${componentCls}-list-scroll-box`]: {
         overflowY: 'auto',
         display: 'flex',
+        width: '100%',
         maxHeight: '100%',
         flexDirection: 'column',
         scrollbarWidth: 'thin',

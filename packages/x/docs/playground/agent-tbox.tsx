@@ -787,8 +787,8 @@ const AgentTbox: React.FC = () => {
             key: i.id,
           }))}
           styles={{
-            bubble: {
-              maxWidth: 840,
+            root: {
+              maxWidth: 940,
             },
           }}
           role={role}

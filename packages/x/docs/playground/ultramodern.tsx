@@ -382,8 +382,12 @@ const App = () => {
                 /* 🌟 消息列表 */
                 <Bubble.List
                   ref={listRef}
-                  style={{
-                    height: 'calc(100% - 160px)',
+                  styles={{
+                    root: {
+                      maxWidth: 940,
+                      height: 'calc(100% - 160px)',
+                      marginBlockEnd: 24,
+                    },
                   }}
                   items={messages?.map((i) => ({
                     ...i.message,
@@ -392,12 +396,6 @@ const App = () => {
                     loading: i.status === 'loading',
                     extraInfo: i.message.extraInfo,
                   }))}
-                  styles={{
-                    root: {
-                      marginBlockEnd: 24,
-                    },
-                    bubble: { maxWidth: 840 },
-                  }}
                   role={getRole(className)}
                 />
               )}
