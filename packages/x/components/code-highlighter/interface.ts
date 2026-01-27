@@ -46,16 +46,16 @@ export interface CodeHighlighterProps
    */
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   /**
-   * @desc 是否使用 Prism 轻量模式（PrismAsyncLight），根据 lang 自动按需加载语言支持，大幅减少打包体积
-   * @descEN Whether to use Prism light mode (PrismAsyncLight), automatically loads language support based on lang prop to significantly reduce bundle size
-   * @default false
+   * @desc 是否使用 Prism 轻量模式（PrismLight），根据 lang 自动按需加载语言支持，大幅减少打包体积
+   * @descEN Whether to use Prism light mode (PrismLight), automatically loads language support based on lang prop to significantly reduce bundle size
+   * @default true
    * @example
    * ```tsx
-   * // 使用默认模式（包含所有语言，打包体积较大）
+   * // 使用轻量模式（默认，只加载需要的语言，打包体积小）
    * <CodeHighlighter lang="javascript">{code}</CodeHighlighter>
    *
-   * // 使用轻量模式（只加载需要的语言，打包体积小）
-   * <CodeHighlighter lang="javascript" prismLightMode>
+   * // 使用全量模式（包含所有语言，打包体积较大）
+   * <CodeHighlighter lang="javascript" prismLightMode={false}>
    *   {code}
    * </CodeHighlighter>
    * ```
