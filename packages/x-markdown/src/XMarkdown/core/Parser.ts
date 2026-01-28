@@ -160,6 +160,16 @@ class Parser {
     const result: string[] = [];
     let lastIndex = 0;
 
+    const NEWLINE_REGEX = /\n/g;
+    const protectNewlines = (text: string): string => {
+      if (!text) return text;
+      return text.replace(NEWLINE_REGEX, () => {
+        const ph = `\u2063X_MD_PLACEHOLDER_${placeholderIndex++}\u2063`;
+        placeholders.set(ph, '\n');
+        return ph;
+      });
+    };
+
     positions.forEach((pos) => {
       if (pos.type === 'open') {
         // Self-closing tags don't have inner content, so they shouldn't be pushed to the stack.
@@ -183,16 +193,8 @@ class Parser {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          if (innerContent.includes('\n\n')) {
-            const protectedInner = innerContent.replace(/\n\n/g, () => {
-              const ph = `__X_MD_PLACEHOLDER_${placeholderIndex++}__`;
-              placeholders.set(ph, '\n\n');
-              return ph;
-            });
-            result.push(openTag + protectedInner + closeTag);
-          } else {
-            result.push(openTag + innerContent + closeTag);
-          }
+          const protectedInner = protectNewlines(innerContent);
+          result.push(openTag + protectedInner + closeTag);
 
           lastIndex = endPos;
         }
@@ -200,7 +202,23 @@ class Parser {
     });
 
     if (lastIndex < content.length) {
-      result.push(content.slice(lastIndex));
+      if (stack.length > 0) {
+        // 处理未闭合的标签（栈中的标签应该是嵌套的，只处理最外层）
+        const firstUnclosed = stack[0];
+        const startPos = firstUnclosed.start;
+
+        if (lastIndex < startPos) {
+          result.push(content.slice(lastIndex, startPos));
+        }
+
+        // 处理从第一个未闭合标签开始到内容末尾的所有内容
+        // 这包括所有嵌套的未闭合标签
+        const unclosedContent = content.slice(startPos + firstUnclosed.openTag.length);
+        const protectedUnclosed = protectNewlines(unclosedContent);
+        result.push(firstUnclosed.openTag + protectedUnclosed);
+      } else {
+        result.push(content.slice(lastIndex));
+      }
     }
 
     return { protected: result.join(''), placeholders };
@@ -211,7 +229,7 @@ class Parser {
       return content;
     }
     return content.replace(
-      /__X_MD_PLACEHOLDER_\d+__/g,
+      /\u2063X_MD_PLACEHOLDER_\d+\u2063/g,
       (match) => placeholders.get(match) ?? match,
     );
   }
