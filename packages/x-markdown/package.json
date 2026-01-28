@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.2.0",
+  "version": "2.2.0-beta.0",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
@@ -22,7 +22,7 @@
     "token:meta": "tsx scripts/generate-token-meta.ts",
     "token:statistic": "tsx scripts/collect-token-statistic.ts",
     "benchmark": "cd src/XMarkdown/__benchmark__ && node scripts/run-benchmark.js",
-     "benchmark:check": "cd src/XMarkdown/__benchmark__ && node scripts/check-performance.js ./test-results/benchmark-results.json ./benchmark-check-report.txt"
+    "benchmark:check": "cd src/XMarkdown/__benchmark__ && node scripts/check-performance.js ./test-results/benchmark-results.json ./benchmark-check-report.txt"
   },
   "sideEffects": [
     "**/*.css"
