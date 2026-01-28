@@ -1,5 +1,5 @@
-import omit from '@rc-component/util/es/omit';
-import pickAttrs from '@rc-component/util/es/pickAttrs';
+import omit from '@rc-component/util/lib/omit';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { clsx } from 'clsx';
 import * as React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
