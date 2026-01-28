@@ -56,18 +56,111 @@ describe('Parser', () => {
   });
 
   describe('protectCustomTagNewlines', () => {
-    it('should protect newlines inside custom tags (both single and double)', () => {
+    it('should protect double newlines inside custom tags (block separation)', () => {
       const parser = new Parser({
         protectCustomTagNewlines: true,
         components: { CustomComponent: 'div' },
       });
-      const result1 = parser.parse('<CustomComponent>First line\n\nSecond line</CustomComponent>');
-      expect(result1).toContain('<CustomComponent>First line\n\nSecond line</CustomComponent>');
-      expect(result1).not.toMatch(/<CustomComponent>First line<\/p>\s*<p>Second line/);
+      const result = parser.parse('<CustomComponent>First line\n\nSecond line</CustomComponent>');
+      expect(result).toContain('<CustomComponent>First line\n\nSecond line</CustomComponent>');
+      expect(result).not.toMatch(/<CustomComponent>First line<\/p>\s*<p>Second line/);
+    });
 
-      const result2 = parser.parse('<CustomComponent>Line1\nLine2</CustomComponent>');
-      expect(result2).toContain('<CustomComponent>Line1\nLine2</CustomComponent>');
-      expect(result2).not.toMatch(/<CustomComponent>Line1<\/p>\s*<p>Line2/);
+    it('single newline alone does not cause block separation per CommonMark spec', () => {
+      const parserWithProtect = new Parser({
+        protectCustomTagNewlines: true,
+        components: { CustomComponent: 'div' },
+      });
+      const parserWithoutProtect = new Parser({
+        protectCustomTagNewlines: false,
+        components: { CustomComponent: 'div' },
+      });
+      const content = '<CustomComponent>Line1\nLine2</CustomComponent>';
+
+      const resultWith = parserWithProtect.parse(content);
+      const resultWithout = parserWithoutProtect.parse(content);
+
+      expect(resultWith).toContain('<CustomComponent>Line1\nLine2</CustomComponent>');
+      expect(resultWithout).toContain('<CustomComponent>Line1\nLine2</CustomComponent>');
+    });
+
+    it('why protect all newlines: \\n followed by list marker causes block change', () => {
+      const parserWithProtect = new Parser({
+        protectCustomTagNewlines: true,
+        components: { CustomComponent: 'div' },
+      });
+      const parserWithoutProtect = new Parser({
+        protectCustomTagNewlines: false,
+        components: { CustomComponent: 'div' },
+      });
+      const content = '<CustomComponent>Text\n- item1</CustomComponent>';
+
+      const resultWithout = parserWithoutProtect.parse(content);
+      expect(resultWithout).toContain('<ul>');
+      expect(resultWithout).toContain('<li>');
+
+      const resultWith = parserWithProtect.parse(content);
+      expect(resultWith).toContain('<CustomComponent>Text\n- item1</CustomComponent>');
+      expect(resultWith).not.toContain('<ul>');
+    });
+
+    it('why protect all newlines: \\n followed by ordered list marker causes block change', () => {
+      const parserWithProtect = new Parser({
+        protectCustomTagNewlines: true,
+        components: { CustomComponent: 'div' },
+      });
+      const parserWithoutProtect = new Parser({
+        protectCustomTagNewlines: false,
+        components: { CustomComponent: 'div' },
+      });
+      const content = '<CustomComponent>Text\n1. first</CustomComponent>';
+
+      const resultWithout = parserWithoutProtect.parse(content);
+      expect(resultWithout).toContain('<ol>');
+      expect(resultWithout).toContain('<li>');
+
+      const resultWith = parserWithProtect.parse(content);
+      expect(resultWith).toContain('<CustomComponent>Text\n1. first</CustomComponent>');
+      expect(resultWith).not.toContain('<ol>');
+    });
+
+    it('why protect all newlines: \\n followed by heading marker causes block change', () => {
+      const parserWithProtect = new Parser({
+        protectCustomTagNewlines: true,
+        components: { CustomComponent: 'div' },
+      });
+      const parserWithoutProtect = new Parser({
+        protectCustomTagNewlines: false,
+        components: { CustomComponent: 'div' },
+      });
+      const content = '<CustomComponent>Text\n# heading</CustomComponent>';
+
+      const resultWithout = parserWithoutProtect.parse(content);
+      expect(resultWithout).toContain('<h1>');
+
+      const resultWith = parserWithProtect.parse(content);
+      expect(resultWith).toContain('<CustomComponent>Text\n# heading</CustomComponent>');
+      expect(resultWith).not.toContain('<h1>');
+    });
+
+    it('why protect all newlines: \\n followed by code fence causes block change', () => {
+      const parserWithProtect = new Parser({
+        protectCustomTagNewlines: true,
+        components: { CustomComponent: 'div' },
+      });
+      const parserWithoutProtect = new Parser({
+        protectCustomTagNewlines: false,
+        components: { CustomComponent: 'div' },
+      });
+      const content = '<CustomComponent>Text\n```\ncode\n```</CustomComponent>';
+
+      const resultWithout = parserWithoutProtect.parse(content);
+      expect(resultWithout).toMatch(/<pre>|<code>/);
+
+      const resultWith = parserWithProtect.parse(content);
+      expect(resultWith).toContain('<CustomComponent>');
+      expect(resultWith).toContain('code');
+      expect(resultWith).not.toContain('<pre>');
     });
 
     it('should not protect newlines when protectCustomTagNewlines is false', () => {
@@ -78,6 +171,17 @@ describe('Parser', () => {
       const content = '<CustomComponent>First line\n\nSecond line</CustomComponent>';
       const result = parser.parse(content);
       expect(result).toContain('<p>');
+    });
+
+    it('blockquote marker (>) inside custom tags is escaped by marked', () => {
+      const parser = new Parser({
+        protectCustomTagNewlines: true,
+        components: { CustomComponent: 'div' },
+      });
+      const content = '<CustomComponent>Text\n> quote here</CustomComponent>';
+      const result = parser.parse(content);
+      expect(result).toContain('&gt;');
+      expect(result).not.toContain('<blockquote>');
     });
 
     it('should work normally when protectCustomTagNewlines is true but no custom components', () => {
