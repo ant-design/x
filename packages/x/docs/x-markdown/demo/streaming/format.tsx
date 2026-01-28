@@ -1,8 +1,7 @@
 import { Welcome } from '@ant-design/x';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import { Button, Card, Skeleton } from 'antd';
+import { Button, Card, Skeleton, theme } from 'antd';
 import React, { useState } from 'react';
-import { useMarkdownTheme } from '../_utils';
 
 const demos = [
   {
@@ -132,7 +131,8 @@ const WelcomeCard = (props: Record<string, any>) => (
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   const [displayText, setDisplayText] = useState(content);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
 
   const startStream = React.useCallback(() => {
     setDisplayText('');

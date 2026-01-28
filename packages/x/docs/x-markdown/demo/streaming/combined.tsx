@@ -1,8 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Button, Flex, Skeleton, Space, Switch, Typography } from 'antd';
+import { Button, Flex, Skeleton, Space, Switch, Typography, theme } from 'antd';
 import React, { useState } from 'react';
-import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
@@ -32,7 +31,8 @@ const App: React.FC = () => {
   const [enableCache, setEnableCache] = useState(true);
   const [isStreaming, setIsStreaming] = useState(false);
   const [index, setIndex] = useState(0);
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
   const timer = React.useRef<any>(-1);
 
   const renderStream = () => {
