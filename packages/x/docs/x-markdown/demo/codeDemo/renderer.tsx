@@ -1,8 +1,8 @@
 import type { ComponentProps } from '@ant-design/x-markdown';
 import { XMarkdown } from '@ant-design/x-markdown';
+import { theme } from 'antd';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
@@ -15,7 +15,8 @@ const DataRender: React.FC<ComponentProps> = (props) => {
 };
 
 const App: React.FC = () => {
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
   const { locale } = useIntl();
   const content = locale === 'zh-CN' ? ZH_Markdown : EN_Markdown;
 

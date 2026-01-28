@@ -1,4 +1,4 @@
-import type { LocaleComponentName as AntdLocaleContextProps } from 'antd/es/locale/useLocale';
+import type { LocaleComponentName as AntdLocaleContextProps } from 'antd/lib/locale/useLocale';
 import defaultAntdEnUS from 'antd/locale/en_US';
 import * as React from 'react';
 import type { Locale, xLocale } from '.';

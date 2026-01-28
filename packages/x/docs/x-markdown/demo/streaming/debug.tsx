@@ -1,8 +1,7 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Button, Flex, Space } from 'antd';
+import { Button, Flex, Space, theme } from 'antd';
 import React from 'react';
-import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
@@ -60,7 +59,8 @@ Based on the RICH interaction paradigm, we provide many atomic components for di
 `;
 
 const App = () => {
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
   const [index, setIndex] = React.useState(0);
   const [hasNextChunk, setHasNextChunk] = React.useState(false);
   const timer = React.useRef<NodeJS.Timeout | null>(null);

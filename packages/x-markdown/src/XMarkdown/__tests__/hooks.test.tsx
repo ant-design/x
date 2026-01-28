@@ -176,6 +176,41 @@ const streamingTestCases = [
     input: '`' + 'a'.repeat(300),
     output: '', // 实际实现会过滤掉不完整的行内代码
   },
+  {
+    title: 'incomplete list with inline-code - single backtick',
+    input: '- `',
+    output: '', // 实际实现会过滤掉不完整的列表+行内代码
+  },
+  {
+    title: 'incomplete list with inline-code - partial content',
+    input: '- `code',
+    output: '', // 实际实现会过滤掉不完整的列表+行内代码
+  },
+  {
+    title: 'complete list with inline-code',
+    input: '- `code`',
+    output: '- `code`',
+  },
+  {
+    title: 'complete list with inline-code and text',
+    input: '- item with `code`',
+    output: '- item with `code`',
+  },
+  {
+    title: 'incomplete list with inline-code - text before backtick',
+    input: '- item text `',
+    output: '- item text ', // incomplete inline-code should be filtered
+  },
+  {
+    title: 'incomplete list with inline-code and bold combination',
+    input: '- **bold** and `code',
+    output: '- **bold** and ', // complete bold is kept, incomplete inline-code is filtered
+  },
+  {
+    title: 'complete list with inline-code and bold',
+    input: '- **bold** and `code`',
+    output: '- **bold** and `code`',
+  },
 ];
 
 // 流处理功能测试 - 带自定义组件映射的测试用例
