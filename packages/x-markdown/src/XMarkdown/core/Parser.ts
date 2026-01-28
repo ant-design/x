@@ -86,7 +86,8 @@ class Parser {
   public configureCodeRenderer() {
     const renderer = {
       code({ text, raw, lang, escaped, codeBlockStyle }: Tokens.Code): string {
-        const langString = (lang || '').match(other.notSpaceStart)?.[0];
+        const infoString = (lang || '').trim();
+        const langString = infoString.match(other.notSpaceStart)?.[0];
         const code = `${text.replace(other.endingNewline, '')}\n`;
         const isIndentedCode = codeBlockStyle === 'indented';
         // if code is indented, it's done because it has no end tag
@@ -95,8 +96,11 @@ class Parser {
         const escapedCode = escaped ? code : escapeHtml(code, true);
 
         const classAttr = langString ? ` class="language-${escapeHtml(langString)}"` : '';
+        const dataAttrs =
+          ` data-block="true" data-state="${streamStatus}"` +
+          (infoString ? ` data-lang="${escapeHtml(infoString)}"` : '');
 
-        return `<pre><code data-block="true" data-state="${streamStatus}"${classAttr}>${escapedCode}</code></pre>\n`;
+        return `<pre><code${dataAttrs}${classAttr}>${escapedCode}</code></pre>\n`;
       },
     };
     this.markdownInstance.use({ renderer });

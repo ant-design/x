@@ -81,56 +81,54 @@ const App = () => {
 
   return (
     <Flex vertical style={{ height: 720 }} gap="small">
-      <Flex gap="small" justify="space-between">
-        <Flex gap="small">
-          <Button
-            type="primary"
-            onClick={() => {
-              const isAI = !!(items.length % 2);
-              add(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }, 500));
-            }}
-          >
-            Add Long Bubble
-          </Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: 'top' })}>Scroll To Top</Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'smooth' })}>
-            Scroll To Bottom smooth
-          </Button>
-          <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })}>
-            Scroll To Bottom instant
-          </Button>
-          <Button
-            onClick={() =>
-              listRef.current?.scrollTo({
-                top: Math.random() * listRef.current.scrollBoxNativeElement.scrollHeight,
-              })
-            }
-          >
-            Scroll To Random
-          </Button>
-          <Button
-            onClick={() => listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' })}
-          >
-            Scroll To Second Bubble
-          </Button>
-          <Button
-            onClick={() =>
-              listRef.current?.scrollTo({ key: items[items.length - 1].key, block: 'end' })
-            }
-          >
-            Scroll To Last Bubble
-          </Button>
-        </Flex>
+      <Flex gap="small" wrap>
+        <Button
+          type="primary"
+          onClick={() => {
+            const isAI = !!(items.length % 2);
+            add(genItem(isAI, { typing: { effect: 'fade-in', step: [20, 50] } }, 500));
+          }}
+        >
+          Add Long Bubble
+        </Button>
+        <Button onClick={() => listRef.current?.scrollTo({ top: 'top' })}>Scroll To Top</Button>
+        <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'smooth' })}>
+          Scroll To Bottom smooth
+        </Button>
+        <Button onClick={() => listRef.current?.scrollTo({ top: 'bottom', behavior: 'instant' })}>
+          Scroll To Bottom instant
+        </Button>
+        <Button
+          onClick={() =>
+            listRef.current?.scrollTo({
+              top: Math.random() * listRef.current.scrollBoxNativeElement.scrollHeight,
+            })
+          }
+        >
+          Scroll To Random
+        </Button>
+        <Button onClick={() => listRef.current?.scrollTo({ key: items[1].key, block: 'nearest' })}>
+          Scroll To Second Bubble
+        </Button>
+        <Button
+          onClick={() =>
+            listRef.current?.scrollTo({ key: items[items.length - 1].key, block: 'end' })
+          }
+        >
+          Scroll To Last Bubble
+        </Button>
       </Flex>
 
-      <Bubble.List
-        ref={listRef}
-        role={memoRole}
-        items={items}
-        onScroll={(e) => {
-          console.log('scroll', (e.target as HTMLDivElement).scrollTop);
-        }}
-      />
+      <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+        <Bubble.List
+          ref={listRef}
+          role={memoRole}
+          items={items}
+          onScroll={(e) => {
+            console.log('scroll', (e.target as HTMLDivElement).scrollTop);
+          }}
+        />
+      </div>
     </Flex>
   );
 };

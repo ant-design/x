@@ -608,7 +608,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
                 class="ant-sources-carousel-btn-wrapper"
               >
                 <span
-                  class="ant-sources-carousel-btn ant-sources-carousel-left-btn"
+                  class="ant-sources-carousel-btn ant-sources-carousel-left-btn ant-sources-carousel-btn-disabled"
                 >
                   <span
                     aria-label="left"
@@ -657,7 +657,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
               <div
                 class="ant-sources-carousel-page"
               >
-                2/3
+                1/3
               </div>
             </div>
             <div
