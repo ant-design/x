@@ -174,7 +174,7 @@
     "html2sketch": "^1.0.2",
     "http-server": "^14.1.1",
     "identity-obj-proxy": "^3.0.0",
-    "immer": "^10.1.1",
+    "immer": "^11.1.3",
     "inquirer": "^13.1.0",
     "is-ci": "^4.1.0",
     "isomorphic-fetch": "^3.0.0",
