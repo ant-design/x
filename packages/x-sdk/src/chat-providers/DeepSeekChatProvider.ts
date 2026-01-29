@@ -14,7 +14,10 @@ export default class DeepSeekChatProvider<
   Input extends XModelParams = XModelParams,
   Output extends Partial<Record<SSEFields, any>> = Partial<Record<SSEFields, any>>,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     return {
       ...(options?.params || {}),
       ...requestParams,

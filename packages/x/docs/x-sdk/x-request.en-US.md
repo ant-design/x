@@ -6,7 +6,7 @@ group:
 title: XRequest
 order: 1
 subtitle: Request
-description: Make requests to backend service APIs and handle responses.
+description: Universal streaming request utility.
 packageName: x-sdk
 tag: 2.0.0
 ---
@@ -56,9 +56,9 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | fetch | Custom fetch object | `typeof fetch` | - | - |
 | middlewares | Middlewares for pre- and post-request processing | XFetchMiddlewares | - | - |
 | transformStream | Stream processor | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |
-| streamSeparator | Stream separator, used to separate different data streams | string | \n\n | 2.2.0 |
-| partSeparator | Part separator, used to separate different parts of data | string | \n | 2.2.0 |
-| kvSeparator | Key-value separator, used to separate keys and values | string | : | 2.2.0 |
+| streamSeparator | Stream separator, used to separate different data streams. Does not take effect when transformStream has a value | string | \n\n | 2.2.0 |
+| partSeparator | Part separator, used to separate different parts of data. Does not take effect when transformStream has a value | string | \n | 2.2.0 |
+| kvSeparator | Key-value separator, used to separate keys and values. Does not take effect when transformStream has a value | string | : | 2.2.0 |
 | manual | Whether to manually control request sending. When `true`, need to manually call `run` method | boolean | false | - |
 | retryInterval | Retry interval when request is interrupted or fails, in milliseconds. If not set, automatic retry will not occur | number | - | - |
 | retryTimes | Maximum number of retry attempts. No further retries will be attempted after exceeding this limit | number | - | - |
@@ -67,9 +67,9 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| onSuccess | Success callback | (chunks: Output[]) => void | - | - |
-| onError | Error handling callback. `onError` can return a number indicating the retry interval (in milliseconds) when a request exception occurs. When both `onError` return value and `options.retryInterval` exist, the `onError` return value takes precedence | (error: Error, errorInfo: any) => number \| void | - | - |
-| onUpdate | Message update callback | (chunk: Output) => void | - | - |
+| onSuccess | Success callback. When used with Chat Provider, additionally gets the assembled message | (chunks: Output[], responseHeaders: Headers, message: ChatMessage) => void | - | - |
+| onError | Error handling callback. `onError` can return a number indicating the retry interval (in milliseconds) when a request exception occurs. When both `onError` return value and `options.retryInterval` exist, the `onError` return value takes precedence. When used with Chat Provider, additionally gets the assembled fail back message | (error: Error, errorInfo: any, responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
+| onUpdate | Message update callback. When used with Chat Provider, additionally gets the assembled message | (chunk: Output, responseHeaders: Headers, message: ChatMessage) => void | - | - |
 
 ### XRequestClass
 
