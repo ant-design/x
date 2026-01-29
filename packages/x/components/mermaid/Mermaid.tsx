@@ -4,11 +4,12 @@ import { clsx } from 'clsx';
 import throttle from 'lodash.throttle';
 import mermaid, { type MermaidConfig } from 'mermaid';
 import React, { useEffect, useRef, useState } from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import Actions from '../actions';
 import type { ItemType } from '../actions/interface';
+import CodeHighlighter from '../code-highlighter';
+import type { CodeHighlighterProps } from '../code-highlighter/interface';
 import locale_EN from '../locale/en_US';
 import useLocale from '../locale/useLocale';
 import { useXProviderContext } from '../x-provider';
@@ -22,7 +23,7 @@ export interface MermaidProps {
   prefixCls?: string;
   style?: React.CSSProperties;
   className?: string;
-  highlightProps?: Partial<React.ComponentProps<typeof SyntaxHighlighter>>;
+  highlightProps?: CodeHighlighterProps['highlightProps'];
   config?: MermaidConfig;
   actions?: {
     enableZoom?: boolean;
@@ -344,17 +345,26 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
             className={clsx(`${prefixCls}-code`, contextConfig.classNames?.code, classNames?.code)}
             style={{ ...contextConfig.styles?.code, ...styles.code }}
           >
-            <SyntaxHighlighter
-              customStyle={{
-                padding: 0,
-                background: 'transparent',
+            <CodeHighlighter
+              lang="mermaid"
+              header={null}
+              styles={{
+                code: {
+                  background: 'transparent',
+                  border: 'none',
+                  borderRadius: 0,
+                },
               }}
-              language="mermaid"
-              wrapLines={true}
-              {...highlightProps}
+              highlightProps={{
+                customStyle: {
+                  padding: 0,
+                  background: 'transparent',
+                },
+                ...highlightProps,
+              }}
             >
-              {children.replace(/\n$/, '')}
-            </SyntaxHighlighter>
+              {children}
+            </CodeHighlighter>
           </div>
         ) : null}
       </>

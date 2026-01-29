@@ -11,11 +11,20 @@ jest.mock('mermaid', () => ({
   render: jest.fn(),
 }));
 
-// Mock SyntaxHighlighter
-jest.mock('react-syntax-highlighter', () => ({
+// Mock CodeHighlighter
+jest.mock('../../code-highlighter', () => ({
   __esModule: true,
-  default: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="syntax-highlighter">{children}</div>
+  default: ({
+    children,
+    header,
+  }: {
+    children: React.ReactNode;
+    header: React.ReactNode | null;
+  }) => (
+    <div data-testid="syntax-highlighter">
+      {header}
+      {children}
+    </div>
   ),
 }));
 
@@ -1095,7 +1104,7 @@ describe('Mermaid Component', () => {
     });
 
     it('should handle very long single line mermaid code', async () => {
-      const longLine = 'graph TD; ' + 'A-->B;'.repeat(50);
+      const longLine = `graph TD; ${'A-->B;'.repeat(50)}`;
 
       render(<Mermaid>{longLine}</Mermaid>);
 

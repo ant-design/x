@@ -39,6 +39,7 @@ CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场�
 | className | 样式类名 | `string` |  |
 | classNames | 样式类名 | `string` | - |
 | highlightProps | 代码高亮配置 | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
+| prismLightMode | 是否使用 Prism 轻量模式，根据 lang 自动加载语言支持以减少打包体积 | `boolean` | `true` |
 
 ### CodeHighlighterRef
 
