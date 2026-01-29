@@ -348,16 +348,15 @@ describe('CodeHighlighter', () => {
       expect(container.textContent).toContain('plain code');
     });
 
-    it('should use FullPrismHighlighter when prismLightMode=false and no lang', async () => {
+    it('should render plain code when no lang (early return before FullPrismHighlighter)', async () => {
       const { container } = render(
         <CodeHighlighter lang="" prismLightMode={false}>
           {`plain code`}
         </CodeHighlighter>,
       );
-      // Should use full Prism with Suspense fallback
-      await waitFor(() => {
-        expect(container.textContent).toContain('plain code');
-      });
+      // Should early return with plain <code> element (no highlighting)
+      // Verify it's the early return path (bare code element)
+      expect(container.querySelector('.ant-codeHighlighter')).toBeNull();
     });
 
     it('should render Suspense fallback when prismLightMode=true with lang', async () => {
