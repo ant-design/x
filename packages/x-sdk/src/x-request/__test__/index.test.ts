@@ -122,11 +122,15 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
     const error = new Error('Invalid input parameters');
     error.name = 'ValidationError';
-    expect(callbacks.onError).toHaveBeenCalledWith(error, {
-      message: 'Invalid input parameters',
-      name: 'ValidationError',
-      success: false,
-    });
+    expect(callbacks.onError).toHaveBeenCalledWith(
+      error,
+      {
+        message: 'Invalid input parameters',
+        name: 'ValidationError',
+        success: false,
+      },
+      headers,
+    );
   });
 
   test('should handle JSON response with success false and default error fields', async () => {
@@ -148,7 +152,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
     const error = new Error('System error');
     error.name = 'SystemError';
-    expect(callbacks.onError).toHaveBeenCalledWith(error, { success: false });
+    expect(callbacks.onError).toHaveBeenCalledWith(error, { success: false }, headers);
   });
 
   test('should handle JSON response with success false and partial error fields', async () => {
@@ -171,10 +175,14 @@ describe('XRequest Class', () => {
     expect(callbacks.onUpdate).not.toHaveBeenCalled();
     const error = new Error('Custom error message');
     error.name = 'SystemError';
-    expect(callbacks.onError).toHaveBeenCalledWith(error, {
-      message: 'Custom error message',
-      success: false,
-    });
+    expect(callbacks.onError).toHaveBeenCalledWith(
+      error,
+      {
+        message: 'Custom error message',
+        success: false,
+      },
+      headers,
+    );
   });
 
   test('should create request and handle streaming response', async () => {
@@ -374,10 +382,11 @@ describe('XRequest Class', () => {
   });
 
   test('should throw error when stream timeout', async () => {
+    const headers = {
+      get: jest.fn().mockReturnValue('text/event-stream'),
+    };
     mockedXFetch.mockResolvedValueOnce({
-      headers: {
-        get: jest.fn().mockReturnValue('text/event-stream'),
-      },
+      headers,
       body: mockSSEReadableStreamTimeout(),
     });
     const request = XRequest(baseURL, {
@@ -387,7 +396,11 @@ describe('XRequest Class', () => {
     expect(request.isStreamTimeout).toBe(false);
     await request.asyncHandler;
     expect(callbacks.onSuccess).not.toHaveBeenCalled();
-    expect(callbacks.onError).toHaveBeenCalledWith(new Error(`StreamTimeoutError`));
+    expect(callbacks.onError).toHaveBeenCalledWith(
+      new Error(`StreamTimeoutError`),
+      undefined,
+      headers,
+    );
     expect(request.isStreamTimeout).toBe(true);
   });
 

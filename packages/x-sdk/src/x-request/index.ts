@@ -270,7 +270,7 @@ export class XRequestClass<
       this.timeoutHandler = window.setTimeout(() => {
         this.isTimeout = true;
         this.finishRequest();
-        callbacks?.onError?.(new Error('TimeoutError'), {});
+        callbacks?.onError?.(new Error('TimeoutError'));
       }, timeout);
     }
     this.startRequest();
@@ -332,7 +332,7 @@ export class XRequestClass<
             ? error
             : new Error('Unknown error!');
         // get retry interval from return of onError or options
-        const returnOfOnError = callbacks?.onError?.(err, {});
+        const returnOfOnError = callbacks?.onError?.(err);
         // ignore abort error
         if (err.name !== 'AbortError') {
           const retryInterval =
@@ -420,7 +420,7 @@ export class XRequestClass<
         this.streamTimeoutHandler = window.setTimeout(() => {
           this.isStreamTimeout = true;
           this.finishRequest();
-          callbacks?.onError?.(new Error('StreamTimeoutError'), {}, response.headers);
+          callbacks?.onError?.(new Error('StreamTimeoutError'), undefined, response.headers);
         }, streamTimeout);
       }
 
