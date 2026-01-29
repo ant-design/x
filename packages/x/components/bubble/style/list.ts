@@ -5,6 +5,7 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
   const { componentCls, padding } = token;
   return {
     [`${componentCls}-list`]: {
+      display: 'flex',
       gap: padding,
       maxHeight: '100%',
       width: '100%',
@@ -26,13 +27,10 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       [`${componentCls}-list-scroll-box`]: {
         overflowY: 'auto',
         display: 'flex',
-        alignItems: 'center',
         width: '100%',
-        scrollbarWidth: 'thin',
         maxHeight: '100%',
         flexDirection: 'column',
-        boxSizing: 'border-box',
-        paddingInline: token.paddingXS,
+        scrollbarWidth: 'thin',
         scrollbarColor: `${token.colorTextTertiary} transparent`,
         '&::-webkit-scrollbar': {
           width: 8,
@@ -46,6 +44,14 @@ const genBubbleListStyle: GenerateStyle<BubbleToken> = (token) => {
       },
       [`${componentCls}-list-autoscroll`]: {
         flexDirection: 'column-reverse',
+      },
+      [`${componentCls}-list-scroll-content`]: {
+        display: 'flex',
+        width: '100%',
+        height: 'fit-content',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+        paddingInline: token.paddingXS,
       },
     },
   };
