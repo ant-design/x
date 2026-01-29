@@ -1,12 +1,13 @@
-import { AnyObject } from '../_util/type';
-import { MessageStatus } from '../x-chat';
-import { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../x-request';
+import type { MessageStatus, SimpleType } from '../x-chat';
+import type { AbstractXRequestClass, XRequestCallbacks, XRequestOptions } from '../x-request';
 
-export interface ChatProviderConfig<Input, Output> extends AnyObject {
-  request: AbstractXRequestClass<Input, Output> | (() => AbstractXRequestClass<Input, Output>);
+export interface ChatProviderConfig<Input, Output, ChatMessage extends SimpleType = any> {
+  request:
+    | AbstractXRequestClass<Input, Output, ChatMessage>
+    | (() => AbstractXRequestClass<Input, Output, ChatMessage>);
 }
 
-export interface TransformMessage<ChatMessage, Output> {
+export interface TransformMessage<ChatMessage extends SimpleType, Output> {
   originMessage?: ChatMessage;
   chunk: Output;
   chunks: Output[];
@@ -14,16 +15,16 @@ export interface TransformMessage<ChatMessage, Output> {
   responseHeaders: Headers;
 }
 
-export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
-  private _request!: AbstractXRequestClass<Input, Output>;
+export default abstract class AbstractChatProvider<ChatMessage extends SimpleType, Input, Output> {
+  private _request!: AbstractXRequestClass<Input, Output, ChatMessage>;
   private _getMessagesFn!: () => ChatMessage[];
-  private _originalCallbacks?: XRequestCallbacks<Output>;
+  private _originalCallbacks?: XRequestCallbacks<Output, ChatMessage>;
 
   public get request() {
     return this._request;
   }
 
-  constructor(config: ChatProviderConfig<Input, Output>) {
+  constructor(config: ChatProviderConfig<Input, Output, ChatMessage>) {
     const request = typeof config.request === 'function' ? config.request() : config.request;
     if (!request.manual) {
       throw new Error('request must be manual');
@@ -39,7 +40,7 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
    */
   abstract transformParams(
     requestParams: Partial<Input>,
-    options: XRequestOptions<Input, Output>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
   ): Input;
 
   /**
@@ -67,26 +68,26 @@ export default abstract class AbstractChatProvider<ChatMessage, Input, Output> {
     onSuccess,
     onError,
   }: {
-    onUpdate: (data: Output, responseHeaders: Headers) => void;
-    onSuccess: (data: Output[], responseHeaders: Headers) => void;
-    onError: (error: any, errorInfo?: any) => void;
+    onUpdate: (data: Output, responseHeaders: Headers) => any;
+    onSuccess: (data: Output[], responseHeaders: Headers) => any;
+    onError: (error: any, errorInfo?: any) => any;
   }) {
     const originalOnUpdate = this._originalCallbacks?.onUpdate;
     const originalOnSuccess = this._originalCallbacks?.onSuccess;
     const originalOnError = this._originalCallbacks?.onError;
     this._request.options.callbacks = {
       onUpdate: (data: Output, responseHeaders: Headers) => {
-        onUpdate(data, responseHeaders);
-        if (originalOnUpdate) originalOnUpdate(data, responseHeaders);
+        const msg = onUpdate(data, responseHeaders);
+        if (originalOnUpdate) originalOnUpdate(data, responseHeaders, msg);
       },
       onSuccess: (data: Output[], responseHeaders: Headers) => {
-        onSuccess(data, responseHeaders);
-        if (originalOnSuccess) originalOnSuccess(data, responseHeaders);
+        const msg = onSuccess(data, responseHeaders);
+        if (originalOnSuccess) originalOnSuccess(data, responseHeaders, msg);
       },
       onError: (error, errorInfo) => {
-        onError(error, errorInfo);
-        if (originalOnError) originalOnError(error, errorInfo);
+        const fallbackMsg = onError(error, errorInfo);
+        if (originalOnError) originalOnError(error, errorInfo, undefined, fallbackMsg);
       },
-    } as XRequestCallbacks<Output>;
+    } as XRequestCallbacks<Output, any>;
   }
 }

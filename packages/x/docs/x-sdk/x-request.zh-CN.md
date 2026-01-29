@@ -67,9 +67,9 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| onSuccess | 成功时的回调 | (chunks: Output[]) => void | - | - |
-| onError | 错误处理的回调，`onError`可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval`同时存在时，`onError`返回值优先级更高 | (error: Error, errorInfo: any) => number \| void | - | - |
-| onUpdate | 消息更新的回调 | (chunk: Output) => void | - | - |
+| onSuccess | 成功时的回调，当与 Chat Provider 一起使用时会额外获取到组装好的 message | (chunks: Output[], responseHeaders: Headers, message: ChatMessage) => void | - | - |
+| onError | 错误处理的回调，`onError` 可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval`同时存在时，`onError`返回值优先级更高, 当与 Chat Provider 一起使用时会额外获取到组装好的 fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
+| onUpdate | 消息更新的回调，当与 Chat Provider 一起使用时会额外获取到组装好的 message | (chunk: Output,responseHeaders: Headers, message: ChatMessage) => void | - | - |
 
 ### XRequestClass
 
