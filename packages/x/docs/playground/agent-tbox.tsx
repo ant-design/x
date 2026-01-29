@@ -755,7 +755,9 @@ const AgentTbox: React.FC = () => {
           />
         ) : null;
       },
-      footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
+      footer: (content, { status, key }) => (
+        <Footer content={content.ext_text} status={status} id={key} />
+      ),
       contentRender: (content, { status }) => {
         const markdownText = `${content.ext_text ? `<think>\n\n${content.ext_text}${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
         return (
