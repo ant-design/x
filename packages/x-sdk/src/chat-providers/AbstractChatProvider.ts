@@ -84,9 +84,9 @@ export default abstract class AbstractChatProvider<ChatMessage extends SimpleTyp
         const msg = onSuccess(data, responseHeaders);
         if (originalOnSuccess) originalOnSuccess(data, responseHeaders, msg);
       },
-      onError: (error, errorInfo) => {
+      onError: (error, errorInfo, responseHeaders) => {
         const fallbackMsg = onError(error, errorInfo);
-        if (originalOnError) originalOnError(error, errorInfo, undefined, fallbackMsg);
+        if (originalOnError) originalOnError(error, errorInfo, responseHeaders, fallbackMsg);
       },
     } as XRequestCallbacks<Output, any>;
   }

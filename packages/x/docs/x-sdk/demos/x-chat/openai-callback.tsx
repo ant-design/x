@@ -87,7 +87,7 @@ const App = () => {
         manual: true,
         callbacks: {
           onSuccess: (chunks, responseHeaders, message) => {
-            console.log('onError', chunks, responseHeaders, message);
+            console.log('onSuccess', chunks, responseHeaders, message);
             setCallbackMessage(`onSuccess: ${JSON.stringify(message)}`);
           },
           onError: (error, errorInfo, responseHeaders, message) => {
