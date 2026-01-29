@@ -67,6 +67,8 @@ Used for rendering streaming Markdown format returned by LLM.
 | --- | --- | --- | --- |
 | domNode | Component DOM node from html-react-parser, containing parsed DOM node information | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
 | streamStatus | Streaming rendering supports two states: `loading` indicates content is being loaded, `done` indicates loading is complete. Currently only supports HTML format and fenced code blocks. Since indented code blocks have no explicit terminator, they always return `done` status | `'loading' \| 'done'` | - |
+| lang | Code fence info strings | `string` | - |
+| block | Whether it is a block code | `boolean` | - |
 | rest | Component props, supports all standard HTML attributes (e.g., `href`, `title`, `className`) and custom data attributes | `Record<string, any>` | - |
 
 ## FAQ
