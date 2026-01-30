@@ -27,7 +27,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed streaming rendering cache invalidation issue where cache would prematurely commit and cause rendering anomalies when list items contained inline code (like - \code`` ). [#1709](https://github.com/ant-design/x/pull/1709) by [Div627](https://github.com/Div627)
+- 🐛 Fixed streaming rendering cache invalidation issue where cache would prematurely commit and cause rendering anomalies when list items contained inline code (like - \code\`\` ). [#1709](https://github.com/ant-design/x/pull/1709) by [Div627](https://github.com/Div627)
 - 🆕 Custom code rendering now accepts language information. [#1705](https://github.com/ant-design/x/pull/1705) by [Aarebecca](https://github.com/Aarebecca)
 
 ### @ant-design/x-sdk

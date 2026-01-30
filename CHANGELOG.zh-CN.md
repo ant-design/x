@@ -26,7 +26,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🐛 修复流式渲染缓存失效问题，当列表项包含行内代码（如 - \code`` ）时，缓存会提前提交导致渲染异常。[#1709](https://github.com/ant-design/x/pull/1709) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复流式渲染缓存失效问题，当列表项包含行内代码（如 - \code\`\` ）时，缓存会提前提交导致渲染异常。[#1709](https://github.com/ant-design/x/pull/1709) 由 [Div627](https://github.com/Div627) 提交
 - 🆕 自定义代码渲染支持接受语言信息。[#1705](https://github.com/ant-design/x/pull/1705) 由 [Aarebecca](https://github.com/Aarebecca) 提交
 
 ### @ant-design/x-sdk
