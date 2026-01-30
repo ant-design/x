@@ -15,6 +15,28 @@ tag: vVERSION
 
 ---
 
+## 2.2.1
+
+`2026-01-30`
+
+### @ant-design/x
+
+- 💄 修复 Bubble.List 样式问题。[#1713](https://github.com/ant-design/x/pull/1713) 由 [anxLiang](https://github.com/anxLiang) 提交、[#1704](https://github.com/ant-design/x/pull/1704) 由 [anxLiang](https://github.com/anxLiang) 提交
+- 🐛 修复因其他三方依赖 `esm` 路径导致 Node 环境构建报错问题。[#1708](https://github.com/ant-design/x/pull/1708) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 🐛 修复流式渲染缓存失效问题，当列表项包含行内代码（如 - \code`` ）时，缓存会提前提交导致渲染异常。[#1709](https://github.com/ant-design/x/pull/1709) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 自定义代码渲染支持接受语言信息。[#1705](https://github.com/ant-design/x/pull/1705) 由 [Aarebecca](https://github.com/Aarebecca) 提交
+
+### @ant-design/x-sdk
+
+- 🆕 XRequest 与 Chat Provider 一起使用时会额外获取到组装好的 message。[#1714](https://github.com/ant-design/x/pull/1714) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 📖 优化官网站点提升用户体验。[#1717](https://github.com/ant-design/x/pull/1717) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1707](https://github.com/ant-design/x/pull/1707) 由 [Div627](https://github.com/Div627) 提交
+
 ## 2.2.0
 
 `2026-01-26`
@@ -28,7 +50,7 @@ tag: vVERSION
   - 🐛 修复设置 `iconPrefixCls` 不生效问题。[#1656](https://github.com/ant-design/x/pull/1656) 由 [kimteayon](https://github.com/kimteayon) 提交
   - 🐛 修复设置 `prefix` 不生效问题。[#1642](https://github.com/ant-design/x/pull/1642) 由 [kimteayon](https://github.com/kimteayon) 提交
   - 🐛 修复 `layer` 设置问题。 [#1616](https://github.com/ant-design/x/pull/1616) 由 [kimteayon](https://github.com/kimteayon) 提交
-- 🐛 修复强制 `antd` 依赖 `es` 路径导致 Node 环境构建报错问题。[#1645](https://github.com/ant-design/x/pull/1645) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复因强制 `antd` 依赖 `es` 路径导致 Node 环境构建报错问题。[#1645](https://github.com/ant-design/x/pull/1645) 由 [kimteayon](https://github.com/kimteayon) 提交
 - 🐛 修复 ThoughtChain 布局导致动画卡顿问题。[#1641](https://github.com/ant-design/x/pull/1641) 由 [IsDyh01](https://github.com/IsDyh01) 提交
 - 🐛 修复 Think 布局导致动画卡顿问题。[#1636](https://github.com/ant-design/x/pull/1636) 由 [IsDyh01](https://github.com/IsDyh01) 提交
 - 🐛 修复 Sources 设置了位置但无法定位内容问题。 [#1683](https://github.com/ant-design/x/pull/1683) 由 [kimteayon](https://github.com/kimteayon) 提交
