@@ -80,12 +80,17 @@ const App = () => {
           console.log('onUpdate', msg);
         },
       },
-      // 自定义流转换器
-      transformStream: new TransformStream<string, string>({
-        transform(chunk, controller) {
-          controller.enqueue(chunk);
-        },
-      }),
+      // 自定义流转换器 / Custom stream transformer
+      // ReadableStream 只能被一个 reader 锁定，需要注意 Provider 或 XRequest 实例不要被持久化，导致流对象被复用，重复使用会有锁定报错。
+      // A ReadableStream can only be locked by one reader. Note that Provider or XRequest instances should not be persisted to avoid stream object reuse, as repeated use will cause locking errors.
+      transformStream: () =>
+        new TransformStream({
+          transform(chunk, controller) {
+            // 你的自定义处理逻辑
+            // Your custom processing logic
+            controller.enqueue(chunk);
+          },
+        }),
       fetch: mockFetch,
     });
   };
