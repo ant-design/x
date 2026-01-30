@@ -23,6 +23,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">Request Remote Historical Messages</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
+<code src="./demos/x-chat/openai-callback.tsx">Model Request Callback</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">Custom XRequest.fetch</code>
 <code src="./demos/x-chat/request-openai-node.tsx">Custom request</code>
 
