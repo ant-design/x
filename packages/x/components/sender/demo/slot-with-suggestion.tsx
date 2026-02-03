@@ -190,31 +190,16 @@ const App: React.FC = () => {
       <Suggestion
         items={suggestions}
         onSelect={() => {
-          // senderRef.current?.insert?.(
-          //   [
-          //     {
-          //       type: 'content',
-          //       key: `partner_2_${Date.now()}`,
-          //       props: { placeholder: 'Enter a name' },
-          //     },
-          //   ],
-          //   'cursor',
-          //   '@',
-          // );
-
           senderRef.current?.insert?.(
             [
               {
-                type: 'tag',
-                key: `tag_${Date.now()}`,
-                props: {
-                  label: 'tag',
-                  value: 'tag',
-                },
+                type: 'content',
+                key: `partner_2_${Date.now()}`,
+                props: { placeholder: 'Enter a name' },
               },
             ],
             'cursor',
-            '#',
+            '@',
           );
         }}
       >
@@ -274,7 +259,7 @@ const App: React.FC = () => {
                 );
               }}
               onKeyDown={(e) => {
-                if (e.key === '#') {
+                if (e.key === '@') {
                   onTrigger();
                 }
                 return onKeyDown(e);
