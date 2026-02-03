@@ -337,7 +337,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
 
       try {
         let range = selection.getRangeAt(0);
-        let cloneRange = null;
+        let cloneRange = range.cloneRange();
         // 验证光标位置是否在目标节点内
         if (!targetNode.contains(range.startContainer)) {
           return { value: '', startContainer: null, startOffset: 0 };
@@ -346,11 +346,9 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
         if (range.endContainer === targetNode) {
           if (range.endContainer.lastChild?.nodeType === Node.TEXT_NODE) {
             const lastDom = range.endContainer.lastChild as Text;
-            selection.removeAllRanges();
             range = document.createRange();
             range.setStart(lastDom, lastDom.length);
             range.setEnd(lastDom, lastDom.length);
-            selection.addRange(range);
           }
         }
         cloneRange = range.cloneRange();
