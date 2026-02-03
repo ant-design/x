@@ -23,6 +23,7 @@ tag: 2.0.0
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">请求远程历史消息</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
+<code src="./demos/x-chat/openai-callback.tsx">模型的请求回调</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">自定义 XRequest.fetch </code>
 <code src="./demos/x-chat/request-openai-node.tsx"> 自定义 request </code>
 

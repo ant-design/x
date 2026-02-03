@@ -16,6 +16,28 @@ tag: vVERSION
 
 ---
 
+## 2.2.1
+
+`2026-01-30`
+
+### @ant-design/x
+
+- 💄 Fixed Bubble.List style issues. [#1713](https://github.com/ant-design/x/pull/1713) by [anxLiang](https://github.com/anxLiang), [#1704](https://github.com/ant-design/x/pull/1704) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed Node environment build errors caused by other third-party dependencies `esm` paths. [#1708](https://github.com/ant-design/x/pull/1708) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed streaming rendering cache invalidation issue where cache would prematurely commit and cause rendering anomalies when list items contained inline code (like - \code\`\` ). [#1709](https://github.com/ant-design/x/pull/1709) by [Div627](https://github.com/Div627)
+- 🆕 Custom code rendering now accepts language information. [#1705](https://github.com/ant-design/x/pull/1705) by [Aarebecca](https://github.com/Aarebecca)
+
+### @ant-design/x-sdk
+
+- 🆕 When XRequest is used together with Chat Provider, it will additionally obtain the assembled message. [#1714](https://github.com/ant-design/x/pull/1714) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1717](https://github.com/ant-design/x/pull/1717) by [kimteayon](https://github.com/kimteayon), [#1707](https://github.com/ant-design/x/pull/1707) by [Div627](https://github.com/Div627)
+
 ## 2.2.0
 
 `2026-01-26`
