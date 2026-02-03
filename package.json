@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.2.0-beta.2",
+  "version": "2.2.1",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
