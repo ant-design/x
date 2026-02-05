@@ -260,7 +260,6 @@ export type RoleType = Partial<
 
 ## Semantic DOM
 
-<!--
 ### Bubble
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
@@ -275,7 +274,7 @@ export type RoleType = Partial<
 
 ### Bubble.List
 
-<code src="./demo/_semantic-list.tsx" simplify="true"></code> -->
+<code src="./demo/_semantic-list.tsx" simplify="true"></code>
 
 ## 主题变量（Design Token）
 

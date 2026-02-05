@@ -1,3 +1,4 @@
+import { merge } from '@rc-component/util';
 import omit from '@rc-component/util/es/omit';
 import pickAttrs from '@rc-component/util/es/pickAttrs';
 import { clsx } from 'clsx';
@@ -218,8 +219,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
             }
             return (
               <BubbleListItem
-                classNames={classNames}
-                styles={styles}
+                classNames={omit(classNames, ['root'])}
+                styles={omit(styles, ['root'])}
                 {...omit(mergedProps, ['key'])}
                 key={item.key}
                 _key={item.key}

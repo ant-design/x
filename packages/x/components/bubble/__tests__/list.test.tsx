@@ -656,11 +656,22 @@ describe('Bubble.List', () => {
           },
         ];
 
-        const { container } = render(<BubbleList items={items} autoScroll={false} />);
+        const { container } = render(
+          <BubbleList
+            items={items}
+            autoScroll={false}
+            styles={{ root: { fontSize: 14 }, divider: { color: 'blue' } }}
+            classNames={{ root: 'list-root', divider: 'divider-root' }}
+          />,
+        );
         const divider = container.querySelector('.ant-bubble-divider');
 
         expect(divider).toBeInTheDocument();
         expect(divider).toHaveClass('custom-divider');
+        expect(divider).not.toHaveClass('divider-root');
+        expect(divider).not.toHaveClass('list-root');
+        expect(divider).toHaveStyle({ color: 'red' });
+        expect(divider).not.toHaveStyle({ fontSize: '14px', color: 'blue' });
       });
 
       it('should correctly pass styles and classNames to system', () => {
@@ -669,16 +680,23 @@ describe('Bubble.List', () => {
             key: 'item1',
             role: 'system',
             content: '系统消息',
-            styles: { root: { color: 'blue' } },
-            classNames: { root: 'custom-system' },
           },
         ];
 
-        const { container } = render(<BubbleList items={items} autoScroll={false} />);
+        const { container } = render(
+          <BubbleList
+            items={items}
+            autoScroll={false}
+            styles={{ root: { fontSize: 14 }, system: { color: 'blue' } }}
+            classNames={{ root: 'list-root', system: 'system-root' }}
+          />,
+        );
         const system = container.querySelector('.ant-bubble-system');
 
         expect(system).toBeInTheDocument();
-        expect(system).toHaveClass('custom-system');
+        expect(system).toHaveClass('system-root');
+        expect(system).not.toHaveClass('list-root');
+        expect(system).toHaveStyle({ color: 'blue' });
       });
 
       it('should handle complex styles and classNames structures', () => {
@@ -698,11 +716,21 @@ describe('Bubble.List', () => {
           },
         ];
 
-        const { container } = render(<BubbleList items={items} autoScroll={false} />);
+        const { container } = render(
+          <BubbleList
+            items={items}
+            autoScroll={false}
+            styles={{ root: { fontSize: 14 }, bubble: { color: 'blue' } }}
+            classNames={{ root: 'list-root', bubble: 'bubble-root' }}
+          />,
+        );
         const bubble = container.querySelector('.ant-bubble');
 
         expect(bubble).toBeInTheDocument();
         expect(bubble).toHaveClass('custom-bubble');
+        expect(bubble).not.toHaveClass('bubble-root');
+        expect(bubble).toHaveStyle({ padding: '5px' });
+        expect(bubble).not.toHaveStyle({ margin: '10px', fontSize: '14px', color: 'blue' });
       });
     });
 
