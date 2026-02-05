@@ -4641,7 +4641,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
             class="ant-space-item"
           >
             <a
-              class="ant-typography ant-typography-link css-var-_r_1_"
+              class="ant-typography css-var-_r_1_"
             >
               ok
             </a>
@@ -4671,7 +4671,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
             class="ant-space-item"
           >
             <a
-              class="ant-typography ant-typography-link css-var-_r_1_"
+              class="ant-typography css-var-_r_1_"
             >
               cancel
             </a>
