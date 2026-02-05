@@ -660,7 +660,7 @@ describe('Bubble.List', () => {
           <BubbleList
             items={items}
             autoScroll={false}
-            styles={{ root: { fontSize: 14 }, divider: { color: 'blue' } }}
+            styles={{ root: { backgroundColor: '#fff' }, divider: { color: 'blue' } }}
             classNames={{ root: 'list-root', divider: 'divider-root' }}
           />,
         );
@@ -668,10 +668,9 @@ describe('Bubble.List', () => {
 
         expect(divider).toBeInTheDocument();
         expect(divider).toHaveClass('custom-divider');
-        expect(divider).not.toHaveClass('divider-root');
-        expect(divider).not.toHaveClass('list-root');
+        expect(divider).not.toHaveClass('divider-root', 'list-root');
         expect(divider).toHaveStyle({ color: 'red' });
-        expect(divider).not.toHaveStyle({ fontSize: '14px', color: 'blue' });
+        expect(divider).not.toHaveStyle({ backgroundColor: '#fff', color: 'blue' });
       });
 
       it('should correctly pass styles and classNames to system', () => {
@@ -687,7 +686,7 @@ describe('Bubble.List', () => {
           <BubbleList
             items={items}
             autoScroll={false}
-            styles={{ root: { fontSize: 14 }, system: { color: 'blue' } }}
+            styles={{ root: { backgroundColor: '#fff' }, system: { color: 'blue' } }}
             classNames={{ root: 'list-root', system: 'system-root' }}
           />,
         );
@@ -697,6 +696,7 @@ describe('Bubble.List', () => {
         expect(system).toHaveClass('system-root');
         expect(system).not.toHaveClass('list-root');
         expect(system).toHaveStyle({ color: 'blue' });
+        expect(system).not.toHaveStyle({ backgroundColor: '#fff' });
       });
 
       it('should handle complex styles and classNames structures', () => {
@@ -705,14 +705,8 @@ describe('Bubble.List', () => {
             key: 'item1',
             role: 'user',
             content: '测试消息',
-            styles: {
-              root: { margin: '10px' },
-              bubble: { padding: '5px' },
-            },
-            classNames: {
-              root: 'custom-root',
-              bubble: 'custom-bubble',
-            },
+            styles: { root: { margin: '10px' }, body: { color: 'red' } },
+            classNames: { root: 'custom-bubble' },
           },
         ];
 
@@ -720,17 +714,23 @@ describe('Bubble.List', () => {
           <BubbleList
             items={items}
             autoScroll={false}
-            styles={{ root: { fontSize: 14 }, bubble: { color: 'blue' } }}
+            styles={{
+              root: { backgroundColor: '#fff' },
+              bubble: { color: 'blue' },
+              body: { color: 'blue' },
+            }}
             classNames={{ root: 'list-root', bubble: 'bubble-root' }}
           />,
         );
         const bubble = container.querySelector('.ant-bubble');
+        const body = bubble?.querySelector('.ant-bubble-body');
 
         expect(bubble).toBeInTheDocument();
         expect(bubble).toHaveClass('custom-bubble');
         expect(bubble).not.toHaveClass('bubble-root');
-        expect(bubble).toHaveStyle({ padding: '5px' });
-        expect(bubble).not.toHaveStyle({ margin: '10px', fontSize: '14px', color: 'blue' });
+        expect(bubble).toHaveStyle({ margin: '10px' });
+        expect(bubble).not.toHaveStyle({ backgroundColor: '#fff', color: 'blue' });
+        expect(body).toHaveStyle({ color: 'red' });
       });
     });
 

@@ -154,7 +154,7 @@ interface BubbleAnimationOption {
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| items | 气泡数据列表，`key`，`role` 必填 ，当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extraInfo?: AnyObject})[] | - | - |
+| items | 气泡数据列表，`key`，`role` 必填。`styles`、`classNames` 会覆盖 Bubble.List 对应配置。当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extraInfo?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 气泡角色默认配置 | [RoleType](#roletype) | - | - |
 
@@ -232,6 +232,10 @@ export type RoleType = Partial<
 #### Bubble.List role 与自定义 Bubble
 
 **Bubble.List** 的 `role` 和 `items` 两个属性都可以配置气泡，其中 `role` 的配置作为默认配置使用，可缺省。`item.role` 用于指明该条数据的气泡角色，会与 `Bubble.List.role` 进行匹配。`items` 本身也可配置气泡属性，优先级高于 `role` 的配置，最终的气泡配置为：`{ ...role[item.role], ...item }`。
+
+注意， **Bubble.List** 中的[语义化配置](#semantic-dom)也可以为气泡配置样式，但它的优先级最低，会被 `role` 或 `items` 覆盖。
+
+最终配置的优先级为： `items` > `role` > `Bubble.List.styles` = `Bubble.List.classNames`。
 
 特别说明，我们为 `role` 提供了四个默认字段，`ai`、`user`、`system`、`divider`。其中，`system`、`divider` 是保留字段，如果 `item.role` 赋值为它们俩之一，**Bubble.List** 会把这条气泡数据渲染为 **Bubble.System (role = 'system')** 或 **Bubble.Divider (role = 'divider')**。
 

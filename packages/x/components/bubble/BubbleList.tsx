@@ -15,6 +15,7 @@ import {
   BubbleRef,
   FuncRoleProps,
   RoleProps,
+  SemanticType,
 } from './interface';
 import SystemBubble from './System';
 import useBubbleListStyle from './style';
@@ -33,6 +34,8 @@ const MemoedSystemBubble = React.memo(SystemBubble);
 
 const BubbleListItem: React.FC<
   BubbleItemType & {
+    styles?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', React.CSSProperties>>;
+    classNames?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', string>>;
     bubblesRef: React.RefObject<BubblesRecord>;
     // BubbleItemType.key 会在 BubbleList 内渲染时被吞掉，使得 BubbleListItem.props 无法获取到 key
     _key: string | number;
@@ -61,23 +64,28 @@ const BubbleListItem: React.FC<
   );
 
   const {
+    root: rootClassName, // 从 items 配置中获得
+    // 从 Bubble.List 中获得
     bubble: bubbleClassName,
     divider: dividerClassName,
     system: systemClassName,
     ...otherClassNames
   } = classNames;
   const {
+    root: rootStyle, // 从 items 配置中获得
+    // 从 Bubble.List 中获得
     bubble: bubbleStyle,
     divider: dividerStyle,
     system: systemStyle,
     ...otherStyles
   } = styles;
 
+  // items 配置优先级更高，覆盖
   let bubble = (
     <MemoedBubble
       ref={initBubbleRef}
-      style={bubbleStyle}
-      className={bubbleClassName}
+      style={rootStyle || bubbleStyle}
+      className={rootClassName || bubbleClassName}
       classNames={otherClassNames}
       styles={otherStyles}
       {...restProps}
@@ -87,8 +95,8 @@ const BubbleListItem: React.FC<
     bubble = (
       <MemoedDividerBubble
         ref={initBubbleRef}
-        style={dividerStyle}
-        className={dividerClassName}
+        style={rootStyle || dividerStyle}
+        className={rootClassName || dividerClassName}
         classNames={otherClassNames}
         styles={otherStyles}
         {...restProps}
@@ -98,8 +106,8 @@ const BubbleListItem: React.FC<
     bubble = (
       <MemoedSystemBubble
         ref={initBubbleRef}
-        style={systemStyle}
-        className={systemClassName}
+        style={rootStyle || systemStyle}
+        className={rootClassName || systemClassName}
         classNames={otherClassNames}
         styles={otherStyles}
         {...restProps}
@@ -218,8 +226,8 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
             }
             return (
               <BubbleListItem
-                classNames={omit(classNames, ['root'])}
-                styles={omit(styles, ['root'])}
+                classNames={omit(classNames, ['root', 'scroll'])}
+                styles={omit(styles, ['root', 'scroll'])}
                 {...omit(mergedProps, ['key'])}
                 key={item.key}
                 _key={item.key}
