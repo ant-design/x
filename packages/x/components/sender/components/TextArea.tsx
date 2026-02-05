@@ -115,7 +115,9 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     const eventRes = onKeyDown?.(e);
     const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
-    const isJustFinishedComposition = Date.now() - lastCompositionEndTick.current < 100;
+    const COMPOSITION_END_DEBOUNCE_MS = 100;
+    const isJustFinishedComposition =
+      Date.now() - lastCompositionEndTick.current < COMPOSITION_END_DEBOUNCE_MS;
 
     if (
       isCompositionRef.current ||
