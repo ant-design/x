@@ -67,9 +67,9 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| onSuccess | 成功时的回调 | (chunks: Output[]) => void | - | - |
-| onError | 错误处理的回调，`onError`可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval`同时存在时，`onError`返回值优先级更高 | (error: Error, errorInfo: any) => number \| void | - | - |
-| onUpdate | 消息更新的回调 | (chunk: Output) => void | - | - |
+| onSuccess | 成功时的回调，当与 Chat Provider 一起使用时会额外获取到组装好的 message | (chunks: Output[], responseHeaders: Headers, message: ChatMessage) => void | - | - |
+| onError | 错误处理的回调，`onError` 可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval` 同时存在时，`onError`返回值优先级更高, 当与 Chat Provider 一起使用时会额外获取到组装好的 fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
+| onUpdate | 消息更新的回调，当与 Chat Provider 一起使用时会额外获取到组装好的 message | (chunk: Output,responseHeaders: Headers, message: ChatMessage) => void | - | - |
 
 ### XRequestClass
 
@@ -103,4 +103,45 @@ interface XFetchMiddlewares {
   onRequest?: (...ags: Parameters<typeof fetch>) => Promise<Parameters<typeof fetch>>;
   onResponse?: (response: Response) => Promise<Response>;
 }
+```
+
+## FAQ
+
+### XRequest 中使用 transformStream 的时候会造成第二次输入请求的时候流被锁定的问题，怎么解决？
+
+```ts | pure
+onError TypeError: Failed to execute 'getReader' on 'ReadableStream': ReadableStreamDefaultReader constructor can only accept readable streams that are not yet locked to a reader
+```
+
+Web Streams API 规定，一个流在同一时间只能被一个 reader 锁定。复用会报错, 所以在使用 TransformStream 的时候，需要注意以下几点：
+
+1. 确保 transformStream 函数返回的是一个新的 ReadableStream 对象，而不是同一个对象。
+2. 确保 transformStream 函数中没有对 response.body 进行多次读取操作。
+
+**推荐写法**
+
+```tsx | pure
+const [provider] = React.useState(
+  new CustomProvider({
+    request: XRequest(url, {
+      manual: true,
+      // 推荐写法：transformStream 用函数返回新实例
+      transformStream: () =>
+        new TransformStream({
+          transform(chunk, controller) {
+            // 你的自定义处理逻辑
+            controller.enqueue({ data: chunk });
+          },
+        }),
+      // 其他配置...
+    }),
+  }),
+);
+```
+
+```tsx | pure
+const request = XRequest(url, {
+  manual: true,
+  transformStream: new TransformStream({ ... }), // 不要持久化在 Provider/useState
+});
 ```

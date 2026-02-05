@@ -1,8 +1,8 @@
 import { XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
-import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+import { theme } from 'antd';
 
 const content = `
 # Ant Design X: The Ultimate AI Conversation UI Framework
@@ -58,7 +58,8 @@ Based on the RICH interaction paradigm, we provide many atomic components for di
 `;
 
 const App: React.FC = () => {
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
 
   return <XMarkdown content={content} className={className} />;
 };

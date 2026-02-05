@@ -76,6 +76,16 @@ type ComponentProps<T extends Record<string, unknown> = Record<string, unknown>>
      * @description Streaming status, `loading` indicates streaming in progress, `done` indicates streaming complete
      */
     streamStatus: StreamStatus;
+    /**
+     * @description 代码块 info string（包含语言与参数，来自 marked 的 lang）
+     * @description Fenced code info string (language + params, from marked lang)
+     */
+    lang?: string;
+    /**
+     * @description 是否为块级 code（仅 code 组件）
+     * @description Whether it is a block code (code component only)
+     */
+    block?: boolean;
   } & T;
 
 interface XMarkdownProps {

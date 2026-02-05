@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import XMarkdown, { Token } from '../../index';
+import type { ComponentProps } from '../interface';
 
 const testCases = [
   {
@@ -41,7 +42,17 @@ const testCases = [
   {
     title: 'Render code block',
     markdown: '```javascript\nconsole.log(`hello`);\n```\n',
-    html: '<pre><code data-block="true" data-state="done" class="language-javascript">console.log(`hello`);\n</code></pre>\n',
+    html: '<pre><code data-block="true" data-state="done" data-lang="javascript" class="language-javascript">console.log(`hello`);\n</code></pre>\n',
+  },
+  {
+    title: 'Render code block with meta',
+    markdown: '```html preview\n<div>Hello</div>\n```\n',
+    html: '<pre><code data-block="true" data-state="done" data-lang="html preview" class="language-html">&lt;div&gt;Hello&lt;/div&gt;\n</code></pre>\n',
+  },
+  {
+    title: 'Render code block with meta params',
+    markdown: '```html preview mode=iframe\n<div>Hello</div>\n```\n',
+    html: '<pre><code data-block="true" data-state="done" data-lang="html preview mode=iframe" class="language-html">&lt;div&gt;Hello&lt;/div&gt;\n</code></pre>\n',
   },
   {
     title: 'Render link',
@@ -206,6 +217,25 @@ describe('XMarkdown', () => {
   it('support checkbox not checked', () => {
     const { container } = render(<XMarkdown content="- [ ] checkbox" />);
     expect(container).toMatchSnapshot();
+  });
+
+  it('passes code lang to custom code component', () => {
+    let receivedProps: ComponentProps | undefined;
+    const Code = (props: ComponentProps) => {
+      receivedProps = props;
+      return <code>{props.children}</code>;
+    };
+
+    render(
+      <XMarkdown
+        content={'```html preview mode=iframe\n<div>Hello</div>\n```\n'}
+        components={{ code: Code }}
+      />,
+    );
+
+    expect(receivedProps?.lang).toBe('html preview mode=iframe');
+    expect(receivedProps?.block).toBe(true);
+    expect(receivedProps?.streamStatus).toBe('done');
   });
 
   describe('openLinksInNewTab', () => {
@@ -467,6 +497,7 @@ console.log("javascript");
     expect(codeElement).toBeInTheDocument();
     expect(codeElement).toHaveAttribute('data-block', 'true');
     expect(codeElement).toHaveAttribute('data-state', 'done');
+    expect(codeElement).toHaveClass('language-javascript');
   });
 
   it('should use user code renderer when it returns non-false', () => {

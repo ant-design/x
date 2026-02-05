@@ -101,7 +101,8 @@ export default function useXChat<
 
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
-  const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
+  const requestHandlerRef =
+    React.useRef<AbstractXRequestClass<Input, Output, ChatMessage>>(undefined);
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
   // fix #1431, should give a default key to create store
   const [conversationKey, setConversationKey] = useState(
@@ -315,23 +316,25 @@ export default function useXChat<
           });
         });
       }
-
+      msg = getMessages().find((info) => info.id === updatingMsgId) || msg;
       return msg;
     };
     provider.injectRequest({
       onUpdate: (chunk: Output, headers: Headers) => {
-        updateMessage('updating', chunk, [], headers);
+        const msg = updateMessage('updating', chunk, [], headers);
+        return msg;
       },
       onSuccess: (chunks: Output[], headers: Headers) => {
         setIsRequesting(false);
         conversationKey && IsRequestingMap.delete(conversationKey);
-        updateMessage('success', undefined as Output, chunks, headers);
+        const msg = updateMessage('success', undefined as Output, chunks, headers);
+        return msg;
       },
       onError: async (error: Error, errorInfo: any) => {
         setIsRequesting(false);
         conversationKey && IsRequestingMap.delete(conversationKey);
+        let fallbackMsg: ChatMessage;
         if (requestFallback) {
-          let fallbackMsg: ChatMessage;
           // Update as error
           if (typeof requestFallback === 'function') {
             // typescript has bug that not get real return type when use `typeof function` check
@@ -360,6 +363,9 @@ export default function useXChat<
           ]);
         } else {
           // Remove directly
+          fallbackMsg = getMessages().find(
+            (info) => info.id !== loadingMsgId && info.id !== updatingMsgId,
+          ) as ChatMessage;
           setMessages((ori: MessageInfo<ChatMessage>[]) => {
             return ori.map((info: MessageInfo<ChatMessage>) => {
               if (info.id === loadingMsgId || info.id === updatingMsgId) {
@@ -372,6 +378,7 @@ export default function useXChat<
             });
           });
         }
+        return fallbackMsg;
       },
     });
     setIsRequesting(true);

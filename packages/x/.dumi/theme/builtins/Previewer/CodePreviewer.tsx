@@ -298,7 +298,6 @@ createRoot(document.getElementById('container')).render(<Demo />);
       react: '^18.0.0',
       'react-dom': '^18.0.0',
       'react-scripts': '^5.0.0',
-      'html-react-parser': '3.0.10',
     },
     devDependencies: {
       typescript: '^5.0.2',
