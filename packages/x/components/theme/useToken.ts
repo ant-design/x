@@ -100,9 +100,9 @@ export const getComputedToken = (
 };
 export function useInternalToken(): [
   theme: Theme<SeedToken, AliasToken>,
-  token: GlobalToken,
-  hashId: string,
   realToken: GlobalToken,
+  hashId: string,
+  token: GlobalToken,
   cssVar?: DesignTokenProviderProps['cssVar'],
   zeroRuntime?: boolean,
 ] {
