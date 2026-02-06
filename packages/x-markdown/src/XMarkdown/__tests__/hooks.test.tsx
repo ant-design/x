@@ -173,7 +173,7 @@ const streamingTestCases = [
   },
   {
     title: 'incomplete inline code - max length',
-    input: '`' + 'a'.repeat(300),
+    input: `\`${'a'.repeat(300)}`,
     output: '', // 实际实现会过滤掉不完整的行内代码
   },
   {
@@ -676,12 +676,12 @@ describe('XMarkdown hooks', () => {
       // Complete the code block
       act(() => {
         rerender({
-          input: incompleteCodeBlock + '`',
+          input: `${incompleteCodeBlock}\``,
           config: { streaming: { hasNextChunk: false } }, // Final chunk
         });
       });
 
-      expect(result.current).toBe(incompleteCodeBlock + '`');
+      expect(result.current).toBe(`${incompleteCodeBlock}\``);
     });
   });
 
