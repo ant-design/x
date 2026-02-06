@@ -1,6 +1,6 @@
 import type { BubbleListProps } from '@ant-design/x';
 import { Bubble, Sender } from '@ant-design/x';
-import { AbstractChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import { AbstractChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Button, Flex } from 'antd';
 import React from 'react';
 
@@ -9,7 +9,8 @@ import React from 'react';
 interface CustomInput {
   query: string;
   role: 'user';
-  stream?: boolean;
+  stream: boolean;
+  model: string;
 }
 
 interface CustomOutput {
@@ -30,14 +31,14 @@ class CustomProvider<
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
   // 转换请求参数：将用户输入转换为标准格式
   // Transform request parameters: convert user input to standard format
-  transformParams(requestParams: Partial<Input>): Input {
+
+  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
     return {
-      query: requestParams.query || '',
-      role: 'user',
-      stream: requestParams.stream ?? false,
+      ...(options?.params || {}),
+      ...(requestParams || {}),
     } as Input;
   }
 
@@ -146,6 +147,10 @@ const App = () => {
     new CustomProvider<CustomMessage, CustomInput, CustomOutput>({
       request: XRequest('https://api.x.ant.design/api/custom_chat_provider_stream', {
         manual: true,
+        params: {
+          stream: true,
+          model: 'qwen2.5-7b-instruct',
+        },
       }),
     }),
   );
