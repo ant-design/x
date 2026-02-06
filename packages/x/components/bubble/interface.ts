@@ -77,13 +77,14 @@ export type Info = {
   key?: string | number;
   extraInfo?: AnyObject;
 };
+type Placement = 'start' | 'end';
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   rootClassName?: string;
   classNames?: Partial<Record<SemanticType, string>>;
-  placement?: 'start' | 'end';
+  placement?: Placement;
   loading?: boolean;
   loadingRender?: () => React.ReactNode;
   content: ContentType;

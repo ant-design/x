@@ -47,7 +47,7 @@ export interface XRequestOptions<
   /**
    * @description The parameters to be sent
    */
-  params?: Input;
+  params?: Partial<Input>;
   /**
    * @description The custom headers to be sent
    */
