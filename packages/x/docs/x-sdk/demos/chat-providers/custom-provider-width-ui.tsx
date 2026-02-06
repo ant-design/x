@@ -32,7 +32,10 @@ class CustomProvider<
   // 转换请求参数：将用户输入转换为标准格式
   // Transform request parameters: convert user input to standard format
 
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
