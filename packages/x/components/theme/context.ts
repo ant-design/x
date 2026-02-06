@@ -35,5 +35,5 @@ export interface DesignTokenProviderProps {
    *);
    * ```
    */
-  // zeroRuntime?: boolean;
+  zeroRuntime?: boolean;
 }
