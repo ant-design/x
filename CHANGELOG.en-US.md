@@ -16,6 +16,16 @@ tag: vVERSION
 
 ---
 
+## 2.2.2
+
+`2026-02-06`
+
+### @ant-design/x
+
+- 🛠 Fixed some documentation and types to support AI Coding. [#1733](https://github.com/ant-design/x/pull/1733) by [kimteayon](https://github.com/kimteayon)
+- 💄 Fixed Bubble.List style and semantic issues. [#1731](https://github.com/ant-design/x/pull/1731) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed Sender insert node replacement issue when replaceCharacters is configured. [#1727](https://github.com/ant-design/x/pull/1727) by [kimteayon](https://github.com/kimteayon)
+
 ## 2.2.1
 
 `2026-01-30`
