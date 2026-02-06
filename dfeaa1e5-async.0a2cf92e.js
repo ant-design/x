@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["dfeaa1e5"],{dfeaa1e5:function(e,a,l){"use strict";l.d(a,"__esModule",{value:!0}),l.d(a,"texts",{enumerable:!0,get:function(){return n;}}),l("50716e5a");let n=[{value:"Use with ",paraId:0},{value:"Mermaid",paraId:1},{value:" to render graph.",paraId:0}];}}]);
+//# sourceMappingURL=dfeaa1e5-async.0a2cf92e.js.map

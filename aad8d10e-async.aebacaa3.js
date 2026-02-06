@@ -1,0 +1,7 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["aad8d10e"],{aad8d10e:function(e,t,a){"use strict";a.d(t,"__esModule",{value:!0}),a.d(t,"default",{enumerable:!0,get:function(){return c;}});var d=a("777fffbe"),o=a("8090cfc0");a("3f099b26");var r=a("2bcf28f3"),n=d._(a("ce5dd0f9")),l=d._(a("40ff87e3"));let f={cn:{root:"\u6839\u8282\u70B9",header:"\u5934\u90E8\u7684\u5BB9\u5668",headerTitle:"\u6807\u9898",code:"\u4EE3\u7801\u5BB9\u5668"},en:{root:"root",header:"Wrapper element of the header",headerTitle:"Wrapper element of the headerTitle",code:"Wrapper element of the code"}},i=`import React from 'react';
+import { XMarkdown } from '@ant-design/x-markdown';
+
+const App = () => <XMarkdown content='Hello World' />;
+export default App;
+`;var c=()=>{let[e]=(0,l.default)(f);return(0,o.jsx)(n.default,{componentName:"HighlightCode",semantics:[{name:"root",desc:e.root},{name:"header",desc:e.header},{name:"headerTitle",desc:e.headerTitle},{name:"code",desc:e.code}],children:(0,o.jsx)(r.CodeHighlighter,{lang:"typescript",children:i})});};}}]);
+//# sourceMappingURL=aad8d10e-async.aebacaa3.js.map
