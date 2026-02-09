@@ -1,0 +1,32 @@
+{
+  "zh": {
+    "selectLanguage": "请选择语言 (Select language):",
+    "selectSkills": "请选择要安装的技能 (可多选):",
+    "selectSoftware": "请选择目标软件 (可多选)",
+    "selectInstallType": "请选择安装方式:",
+    "installComplete": "安装完成!",
+    "installFailed": "安装失败:",
+    "copyingFiles": "正在拷贝文件...",
+    "globalInstall": "全局安装",
+    "projectInstall": "项目安装",
+    "confirm": "确认选择",
+    "cancel": "取消",
+    "installingTo": "正在安装到",
+    "packageSymbol": "📦"
+  },
+  "en": {
+    "selectLanguage": "Select language:",
+    "selectSkills": "Select skills to install (multiple selection):",
+    "selectSoftware": "Select target software (multiple selection):",
+    "selectInstallType": "Select installation type:",
+    "installComplete": "Installation complete!",
+    "installFailed": "Installation failed:",
+    "copyingFiles": "Copying files...",
+    "globalInstall": "Global install",
+    "projectInstall": "Project install",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "installingTo": "Installing to",
+    "packageSymbol": "📦"
+  }
+}
