@@ -93,7 +93,7 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
     isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
-    // list 后紧跟 ` 时只提交列表前缀，余下留给 inline-code（- * 可能为多级列表，不处理）
+    // On backtick after list, commit only the prefix; treat the rest as inline code.
     getCommitPrefix: (pending: string) => {
       const listPrefix = pending.match(/^([-+*]\s{0,3})/)?.[1];
       const rest = listPrefix ? pending.slice(listPrefix.length) : '';
