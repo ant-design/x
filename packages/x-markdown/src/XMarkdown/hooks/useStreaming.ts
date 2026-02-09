@@ -125,7 +125,7 @@ const recognize = (cache: StreamCache, tokenType: StreamCacheTokenType): void =>
 
   if (token === tokenType && !recognizer.isStreamingValid(pending)) {
     const prefix = recognizer.getCommitPrefix?.(pending);
-    if (prefix != null) {
+    if (prefix) {
       cache.completeMarkdown += prefix;
       cache.pending = pending.slice(prefix.length);
       cache.token = StreamCacheTokenType.Text;

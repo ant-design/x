@@ -1,6 +1,6 @@
 import { Welcome } from '@ant-design/x';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import { Button, Card, Skeleton, theme } from 'antd';
+import { Button, Card, Segmented, Skeleton, theme } from 'antd';
 import React, { useState } from 'react';
 
 const demos = [
@@ -52,8 +52,7 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
   },
   {
     title: 'Table',
-    content: `
-| Repo | Description |
+    content: `| Repo | Description |
 | ------ | ----------- |
 | @ant-design/x   | A React UI library based on the Ant Design system. |
 | @ant-design/x-markdown | An optimized Markdown rendering solution for streaming content. |
@@ -139,6 +138,19 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   const [index, setIndex] = React.useState(0);
   const timer = React.useRef<NodeJS.Timeout | null>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
+  const sourceRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = React.useCallback(
+    (el: HTMLDivElement | null) => {
+      if (el && index > 0) {
+        const { scrollHeight, clientHeight } = el;
+        if (scrollHeight > clientHeight) {
+          el.scrollTo({ top: scrollHeight, behavior: 'smooth' });
+        }
+      }
+    },
+    [index],
+  );
 
   React.useEffect(() => {
     if (index >= content.length) {
@@ -159,32 +171,46 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
   }, [index]);
 
   React.useEffect(() => {
-    if (contentRef.current && index > 0 && index < content.length) {
-      const { scrollHeight, clientHeight } = contentRef.current;
-      if (scrollHeight > clientHeight) {
-        contentRef.current.scrollTo({
-          top: scrollHeight,
-          behavior: 'smooth',
-        });
-      }
+    if (index > 0) {
+      scrollToBottom(sourceRef.current);
+      scrollToBottom(contentRef.current);
     }
-  }, [index]);
+  }, [index, scrollToBottom]);
+
+  const isLongContent = content.length > 500;
+  const previewMinHeight = isLongContent ? 320 : 160;
+  const previewMaxHeight = isLongContent ? 420 : 280;
 
   return (
-    <div style={{ display: 'flex', gap: 16, width: '100%' }}>
-      <Card title="Markdown Source" size="small" style={{ flex: 1 }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: 16,
+        width: '100%',
+        minHeight: previewMinHeight,
+        maxHeight: previewMaxHeight,
+        transition: 'max-height 0.25s ease',
+      }}
+    >
+      <Card
+        title="Markdown Source"
+        size="small"
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}
+        styles={{ body: { flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } }}
+      >
         <div
+          ref={sourceRef}
           style={{
-            background: '#f5f5f5',
+            flex: 1,
+            minHeight: 0,
+            background: 'var(--ant-color-fill-quaternary)',
             padding: 12,
-            borderRadius: 4,
-            fontSize: 13,
-            fontFamily: 'monospace',
+            borderRadius: 6,
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
-            margin: 0,
-            height: 600,
             overflow: 'auto',
+            fontSize: 12,
+            lineHeight: 1.5,
           }}
         >
           {content.slice(0, index)}
@@ -194,26 +220,31 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
       <Card
         title="Rendered Output"
         size="small"
-        style={{ flex: 1, overflow: 'scroll' }}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}
+        styles={{ body: { flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } }}
         extra={
           <Button
-            type="primary"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setIndex(0);
               setHasNextChunk(true);
             }}
+            size="small"
           >
             Re-Render
           </Button>
         }
       >
         <div
+          ref={contentRef}
           style={{
-            border: '1px solid #f0f0f0',
-            borderRadius: 4,
+            flex: 1,
+            minHeight: 0,
+            overflow: 'auto',
             padding: 12,
-            maxHeight: 800,
-            overflow: 'scroll',
+            borderRadius: 6,
+            border: '1px solid var(--ant-color-border-secondary)',
+            background: 'var(--ant-color-bg-container)',
           }}
         >
           <XMarkdown
@@ -243,18 +274,15 @@ const App = () => {
   const [currentDemo, setCurrentDemo] = useState(0);
 
   return (
-    <div style={{ padding: 24 }}>
-      {demos.map((demo, index) => (
-        <Button
-          key={index}
-          type={currentDemo === index ? 'primary' : 'default'}
-          onClick={() => setCurrentDemo(index)}
-          style={{ marginRight: 8, marginBottom: 8 }}
-        >
-          {demo.title}
-        </Button>
-      ))}
-
+    <div style={{ maxWidth: 960, margin: '0 auto' }}>
+      <div style={{ marginBottom: 16 }}>
+        <Segmented
+          value={currentDemo}
+          onChange={(v) => setCurrentDemo(Number(v))}
+          options={demos.map((demo, index) => ({ label: demo.title, value: index }))}
+          block
+        />
+      </div>
       <StreamDemo key={currentDemo} content={demos[currentDemo].content} />
     </div>
   );
