@@ -11,26 +11,30 @@ const demos = [
     
 Ant Design X is a comprehensive toolkit for AI applications, integrating a UI component library, streaming Markdown rendering engine, and AI SDK.
 
-\`npm install @ant-design/x-markdown\`
+- \`npm install @ant-design/x\`
+- \`npm install @ant-design/x-markdown\`
+- \`npm install @ant-design/x-sdk\`
 
-### @ant-design/x
+### \`@ant-design/x\`
 
 A React UI library based on the Ant Design system, designed for **AI-driven interfaces**. [Click here for details.](/components/introduce/).
 
-### @ant-design/x-markdown
+### \`@ant-design/x-markdown\`
 
 An optimized Markdown rendering solution for **streaming content**. [Click here for details.](/x-markdowns/introduce).
 
-### @ant-design/x-sdk
+### \`@ant-design/x-sdk\`
 
 Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/introduce).
-<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
+
 
 | Repo | Description |
 | ------ | ----------- |
 | @ant-design/x   | A React UI library based on the Ant Design system. |
 | @ant-design/x-markdown | An optimized Markdown rendering solution for **streaming content**. |
 | @ant-design/x-sdk    | Provides a complete set of **tool APIs**. |
+
+<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
 `,
   },
   {
@@ -62,7 +66,7 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
   },
   {
     title: 'InlineCode',
-    content: 'This is inline code: `npm install @ant-design/x-markdown`',
+    content: 'This is inline code: `npm install @ant-design/x-markdown`.',
   },
 ];
 
@@ -129,32 +133,42 @@ const WelcomeCard = (props: Record<string, any>) => (
 );
 
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
-  const [displayText, setDisplayText] = useState(content);
-  const [isStreaming, setIsStreaming] = useState(false);
+  const [hasNextChunk, setHasNextChunk] = React.useState(true);
   const { theme: antdTheme } = theme.useToken();
   const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
-
-  const startStream = React.useCallback(() => {
-    setDisplayText('');
-    setIsStreaming(true);
-    let index = 0;
-
-    const stream = () => {
-      if (index <= content.length) {
-        setDisplayText(content.slice(0, index));
-        index++;
-        setTimeout(stream, 30);
-      } else {
-        setIsStreaming(false);
-      }
-    };
-
-    stream();
-  }, [content]);
+  const [index, setIndex] = React.useState(0);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    startStream();
-  }, [startStream]);
+    if (index >= content.length) {
+      setHasNextChunk(false);
+      return;
+    }
+
+    timer.current = setTimeout(() => {
+      setIndex(Math.min(index + 1, content.length));
+    }, 30);
+
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
+    };
+  }, [index]);
+
+  React.useEffect(() => {
+    if (contentRef.current && index > 0 && index < content.length) {
+      const { scrollHeight, clientHeight } = contentRef.current;
+      if (scrollHeight > clientHeight) {
+        contentRef.current.scrollTo({
+          top: scrollHeight,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [index]);
 
   return (
     <div style={{ display: 'flex', gap: 16, width: '100%' }}>
@@ -169,11 +183,11 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
             margin: 0,
-            maxHeight: 800,
+            height: 600,
             overflow: 'auto',
           }}
         >
-          {displayText || 'Click Stream to start'}
+          {content.slice(0, index)}
         </div>
       </Card>
 
@@ -182,7 +196,13 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
         size="small"
         style={{ flex: 1, overflow: 'scroll' }}
         extra={
-          <Button type="primary" onClick={startStream} loading={isStreaming}>
+          <Button
+            type="primary"
+            onClick={() => {
+              setIndex(0);
+              setHasNextChunk(true);
+            }}
+          >
             Re-Render
           </Button>
         }
@@ -197,7 +217,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
           }}
         >
           <XMarkdown
-            content={displayText}
+            content={content.slice(0, index)}
             className={className}
             paragraphTag="div"
             openLinksInNewTab
@@ -211,7 +231,7 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
               'incomplete-inline-code': IncompleteInlineCode,
               welcome: WelcomeCard,
             }}
-            streaming={{ hasNextChunk: isStreaming }}
+            streaming={{ hasNextChunk }}
           />
         </div>
       </Card>

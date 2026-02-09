@@ -179,12 +179,12 @@ const streamingTestCases = [
   {
     title: 'incomplete list with inline-code - single backtick',
     input: '- `',
-    output: '', // 实际实现会过滤掉不完整的列表+行内代码
+    output: '- ', // list 已完成并提交，当前 token 为 inline-code（未完成且无组件时不展示）
   },
   {
     title: 'incomplete list with inline-code - partial content',
     input: '- `code',
-    output: '', // 实际实现会过滤掉不完整的列表+行内代码
+    output: '- ', // list 已完成并提交，当前 token 为 inline-code（未完成且无组件时不展示）
   },
   {
     title: 'complete list with inline-code',

@@ -152,9 +152,9 @@ Incorrect Output:
 </think>
 ```
 
-**Root Cause:** According to [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) specification, HTML block recognition depends on strict formatting rules. Once two consecutive line breaks (i.e., empty lines) appear inside an HTML block and do not meet specific HTML block type continuation conditions (such as <div>, <pre>, etc.), the parser will terminate the current HTML block and process subsequent content as Markdown paragraphs.
+**Root Cause:** According to [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) specification, HTML block recognition depends on strict formatting rules. Once two consecutive line breaks (i.e., empty lines) appear inside an HTML block and do not meet specific HTML block type continuation conditions (such as `<div>`, `<pre>`, etc.), the parser will terminate the current HTML block and process subsequent content as Markdown paragraphs.
 
-Custom tags (like <think>) are typically not recognized as "paragraph-spanning" HTML block types, making them highly susceptible to empty line interference.
+Custom tags (like `<think>` ) are typically not recognized as "paragraph-spanning" HTML block types, making them highly susceptible to empty line interference.
 
 **Solutions:**
 
