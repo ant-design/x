@@ -15,6 +15,16 @@ tag: vVERSION
 
 ---
 
+## 2.2.2
+
+`2026-02-06`
+
+### @ant-design/x
+
+- 🛠 修复一些文档和类型来支持 AI Coding。[#1733](https://github.com/ant-design/x/pull/1733) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 💄 修复 Bubble.List 样式和语义化问题。[#1731](https://github.com/ant-design/x/pull/1731) 由 [anxLiang](https://github.com/anxLiang) 提交
+- 🐛 修复 Sender 插入节点配置了 replaceCharacters 时的替换问题。[#1727](https://github.com/ant-design/x/pull/1727) 由 [kimteayon](https://github.com/kimteayon) 提交
+
 ## 2.2.1
 
 `2026-01-30`

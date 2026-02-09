@@ -122,7 +122,7 @@ export type EventType =
   | React.FormEvent<HTMLTextAreaElement>
   | React.ChangeEvent<HTMLTextAreaElement>;
 export interface SenderProps
-  extends Pick<TextareaProps, 'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'> {
+  extends Partial<Pick<TextareaProps, 'placeholder' | 'onKeyUp' | 'onFocus' | 'onBlur'>> {
   prefixCls?: string;
   defaultValue?: string;
   value?: string;

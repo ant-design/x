@@ -35,6 +35,7 @@ const triggerRaf = () => {
     try {
       cb(16);
     } catch (e) {
+      console.error(e);
       // Ignore errors
     }
   });

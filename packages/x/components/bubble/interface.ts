@@ -3,7 +3,8 @@ import type { AnyObject } from '../_util/type';
 
 export type BubbleContentType = React.ReactNode | AnyObject;
 
-export type SemanticType =
+export type SemanticType = 'root' | 'content' | 'body' | 'header' | 'footer' | 'avatar' | 'extra';
+export type ListSemanticType =
   | 'root'
   | 'content'
   | 'body'
@@ -11,6 +12,8 @@ export type SemanticType =
   | 'footer'
   | 'avatar'
   | 'extra'
+  | 'scroll'
+  | 'bubble'
   | 'system'
   | 'divider';
 
@@ -74,13 +77,14 @@ export type Info = {
   key?: string | number;
   extraInfo?: AnyObject;
 };
+type Placement = 'start' | 'end';
 export interface BubbleProps<ContentType extends BubbleContentType = string>
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   prefixCls?: string;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   rootClassName?: string;
   classNames?: Partial<Record<SemanticType, string>>;
-  placement?: 'start' | 'end';
+  placement?: Placement;
   loading?: boolean;
   loadingRender?: () => React.ReactNode;
   content: ContentType;
@@ -198,8 +202,8 @@ export type BubbleItemType = (Omit<BubbleProps<any>, 'styles' | 'classNames'> &
   role: RemainRole | AnyStr;
   status?: `${MessageStatus}`;
   extraInfo?: AnyObject;
-  styles?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', React.CSSProperties>>;
-  classNames?: Partial<Record<SemanticType | 'bubble' | 'system' | 'divider', string>>;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticType, string>>;
 };
 
 export type RoleProps = Pick<
@@ -240,10 +244,8 @@ export type RoleType = Partial<
   >;
 export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'> {
   prefixCls?: string;
-  styles?: Partial<
-    Record<SemanticType | 'scroll' | 'bubble' | 'system' | 'divider', React.CSSProperties>
-  >;
-  classNames?: Partial<Record<SemanticType | 'scroll' | 'bubble' | 'system' | 'divider', string>>;
+  styles?: Partial<Record<ListSemanticType, React.CSSProperties>>;
+  classNames?: Partial<Record<ListSemanticType, string>>;
   rootClassName?: string;
   items: BubbleItemType[];
   autoScroll?: boolean;
