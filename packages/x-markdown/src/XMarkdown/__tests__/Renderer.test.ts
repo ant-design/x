@@ -22,17 +22,17 @@ describe('Renderer', () => {
       // Test case 1: Unclosed tag
       const html1 = '<custom-tag>content';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('custom-tag')).toBe(true);
+      expect(result1.has('custom-tag-1')).toBe(true);
 
       // Test case 2: Closed tag
       const html2 = '<custom-tag>content</custom-tag>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('custom-tag')).toBe(false);
+      expect(result2.size).toBe(0);
 
       // Test case 3: Self-closing tag
       const html3 = '<custom-tag />';
       const result3 = detectUnclosedTags(html3);
-      expect(result3.has('custom-tag')).toBe(false);
+      expect(result3.size).toBe(0);
     });
 
     it('should handle multiple tags correctly', () => {
@@ -49,8 +49,9 @@ describe('Renderer', () => {
       // Test case: One closed, one unclosed
       const html = '<tag-a>content</tag-a><tag-b>content';
       const result = detectUnclosedTags(html);
-      expect(result.has('tag-a')).toBe(false);
-      expect(result.has('tag-b')).toBe(true);
+      expect(result.size).toBe(1);
+      expect(result.has('tag-a-1')).toBe(false);
+      expect(result.has('tag-b-1')).toBe(true);
     });
 
     it('should ignore non-custom tags', () => {
@@ -67,6 +68,31 @@ describe('Renderer', () => {
       const html = '<div>content<p>paragraph';
       const result = detectUnclosedTags(html);
       expect(result.size).toBe(0);
+    });
+
+    it('should handle void elements correctly', () => {
+      const renderer = new Renderer({
+        components: {
+          'img': MockComponent,
+        },
+      });
+      // Access private method for testing
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Test case: Void elements should not be considered unclosed
+      const html = '<img src="image.png"><img src="image2.png" />';
+      const result = detectUnclosedTags(html);
+      expect(result.size).toBe(0);
+
+      // Test case: Unclosed void element
+      const html2 = '<img src="image.p';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.has('img-1')).toBe(true);
+
+      // Test case: Nested void elements
+      const html3 = '<div><img src="image.png"></div><p>';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.size).toBe(0);
     });
   });
 
@@ -180,6 +206,142 @@ describe('Renderer', () => {
           streamStatus: 'done',
         }),
       );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle multiple instances of the same component with correct streamStatus', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Scenario: First instance is closed (done), second instance is open (loading)
+      const html = '<multi-instance>Instance 1</multi-instance><multi-instance>Instance 2';
+      renderer.processHtml(html);
+
+      // Filter calls to MockComponent
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+
+      expect(calls.length).toBe(2);
+
+      // First instance should be done
+      expect(calls[0][1]).toEqual(
+        expect.objectContaining({
+          streamStatus: 'done',
+        }),
+      );
+
+      // Second instance should be loading
+      expect(calls[1][1]).toEqual(
+        expect.objectContaining({
+          streamStatus: 'loading',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should mark all instances as done when all are closed', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html =
+        '<multi-instance>Instance 1</multi-instance><multi-instance>Instance 2</multi-instance>';
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+
+      expect(calls.length).toBe(2);
+      expect(calls[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      expect(calls[1][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle nested instances of the same component correctly', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Outer open, Inner closed
+      const html = '<multi-instance>Outer <multi-instance>Inner</multi-instance>';
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+      expect(calls.length).toBe(2);
+
+      // Inner instance (processed first as children are created before parent)
+      expect(calls[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      // Outer instance
+      expect(calls[1][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle deep nesting with mixed states', () => {
+      const components = {
+        'multi-instance': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Level 1: Open
+      // Level 2: Open
+      // Level 3: Closed
+      const html = '<multi-instance>1<multi-instance>2<multi-instance>3</multi-instance>';
+      renderer.processHtml(html);
+
+      const calls = createElementSpy.mock.calls.filter((call) => call[0] === MockComponent);
+      expect(calls.length).toBe(3);
+
+      // Level 3 (Inner most) - Done
+      expect(calls[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+
+      // Level 2 - Loading
+      expect(calls[1][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      // Level 1 - Loading
+      expect(calls[2][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle interleaved components correctly', () => {
+      const components = {
+        'comp-a': MockComponent,
+        'comp-b': MockComponent,
+      };
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // comp-a closed, comp-b closed, comp-a open
+      const html = '<comp-a>A1</comp-a><comp-b>B1</comp-b><comp-a>A2';
+      renderer.processHtml(html);
+
+      const callsA = createElementSpy.mock.calls.filter(
+        (call) => call[0] === MockComponent && (call[1] as any).domNode.name === 'comp-a',
+      );
+      const callsB = createElementSpy.mock.calls.filter(
+        (call) => call[0] === MockComponent && (call[1] as any).domNode.name === 'comp-b',
+      );
+
+      expect(callsA.length).toBe(2);
+      expect(callsB.length).toBe(1);
+
+      expect(callsA[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      expect(callsB[0][1]).toEqual(expect.objectContaining({ streamStatus: 'done' }));
+      expect(callsA[1][1]).toEqual(expect.objectContaining({ streamStatus: 'loading' }));
 
       createElementSpy.mockRestore();
     });
@@ -442,14 +604,16 @@ describe('Renderer', () => {
       // Test case: Inner tag unclosed
       const html2 = '<outer-tag><inner-tag>content</outer-tag>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('inner-tag')).toBe(true);
-      expect(result2.has('outer-tag')).toBe(false);
+      expect(result2.size).toBe(1);
+      expect(result2.has('inner-tag-1')).toBe(true);
+      expect(result2.has('outer-tag-1')).toBe(false);
 
       // Test case: Outer tag unclosed
       const html3 = '<outer-tag><inner-tag>content</inner-tag>';
       const result3 = detectUnclosedTags(html3);
-      expect(result3.has('outer-tag')).toBe(true);
-      expect(result3.has('inner-tag')).toBe(false);
+      expect(result3.size).toBe(1);
+      expect(result3.has('outer-tag-1')).toBe(true);
+      expect(result3.has('inner-tag-1')).toBe(false);
     });
 
     it('should handle case insensitive tag names', () => {
@@ -465,11 +629,11 @@ describe('Renderer', () => {
       // Test case: Mixed case tags
       const html1 = '<Test-Tag>content';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('test-tag')).toBe(true);
+      expect(result1.has('test-tag-1')).toBe(true);
 
       const html2 = '<TEST-TAG>content</TEST-TAG>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('test-tag')).toBe(false);
+      expect(result2.size).toBe(0);
     });
 
     it('should handle tags with attributes', () => {
@@ -485,12 +649,12 @@ describe('Renderer', () => {
       // Test case: Tag with attributes, unclosed
       const html1 = '<custom-tag class="test" id="my-id">content';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('custom-tag')).toBe(true);
+      expect(result1.has('custom-tag-1')).toBe(true);
 
       // Test case: Tag with attributes, closed
       const html2 = '<custom-tag class="test" id="my-id">content</custom-tag>';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('custom-tag')).toBe(false);
+      expect(result2.size).toBe(0);
     });
 
     it('should handle malformed HTML gracefully', () => {
@@ -506,17 +670,17 @@ describe('Renderer', () => {
       // Test case: Malformed closing tag
       const html1 = '<custom-tag>content</custom-tag';
       const result1 = detectUnclosedTags(html1);
-      expect(result1.has('custom-tag')).toBe(true);
+      expect(result1.has('custom-tag-1')).toBe(true);
 
       // Test case: Missing closing bracket
       const html2 = '<custom-tag>content';
       const result2 = detectUnclosedTags(html2);
-      expect(result2.has('custom-tag')).toBe(true);
+      expect(result2.has('custom-tag-1')).toBe(true);
 
       // Test case: Extra closing tags
       const html3 = '<custom-tag>content</custom-tag></custom-tag>';
       const result3 = detectUnclosedTags(html3);
-      expect(result3.has('custom-tag')).toBe(false);
+      expect(result3.size).toBe(0);
     });
 
     it('should handle empty string', () => {
@@ -546,7 +710,7 @@ describe('Renderer', () => {
       // Test case: Multiple instances, some closed, some not
       const html = '<custom-tag>first</custom-tag><custom-tag>second';
       const result = detectUnclosedTags(html);
-      expect(result.has('custom-tag')).toBe(true);
+      expect(result.has('custom-tag-2')).toBe(true);
     });
   });
 
@@ -564,7 +728,7 @@ describe('Renderer', () => {
       // Note: Due to html-react-parser behavior, we need to simulate the scenario
       // where we have valid HTML but want to test the streamStatus logic
       // We'll use a mock to control the detectUnclosedTags result
-      const mockUnclosedTags = new Set(['streaming-tag']);
+      const mockUnclosedTags = new Set(['streaming-tag-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const html = '<streaming-tag>content</streaming-tag>';
@@ -967,7 +1131,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate unclosed div
-      const mockUnclosedTags = new Set(['div']);
+      const mockUnclosedTags = new Set(['div-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -1003,7 +1167,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate unclosed span
-      const mockUnclosedTags = new Set(['span']);
+      const mockUnclosedTags = new Set(['span-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -1040,7 +1204,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate unclosed div and span
-      const mockUnclosedTags = new Set(['div', 'span']);
+      const mockUnclosedTags = new Set(['div-1', 'span-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
@@ -1074,7 +1238,7 @@ describe('Renderer', () => {
       const renderer = new Renderer({ components });
 
       // Mock detectUnclosedTags to simulate all tags unclosed
-      const mockUnclosedTags = new Set(['div', 'p', 'a']);
+      const mockUnclosedTags = new Set(['div-1', 'p-1', 'a-1']);
       jest.spyOn(renderer as any, 'detectUnclosedTags').mockReturnValue(mockUnclosedTags);
 
       const createElementSpy = jest.spyOn(React, 'createElement');
