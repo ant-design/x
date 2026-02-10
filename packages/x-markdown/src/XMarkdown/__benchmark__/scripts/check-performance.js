@@ -168,13 +168,13 @@ function generateReport(currentResults) {
   const { failures, warnings } = checkThresholds(currentResults);
 
   let report = '\n📊 Performance Benchmark Report\n';
-  report += '='.repeat(80) + '\n\n';
+  report += `${'='.repeat(80)}\n\n`;
 
   // x-markdown 结果摘要
   const xMarkdownResults = currentResults.filter((r) => r.name === 'x-markdown');
   if (xMarkdownResults.length > 0) {
     report += '🎯 x-markdown Performance Results:\n';
-    report += '-'.repeat(80) + '\n';
+    report += `${'-'.repeat(80)}\n`;
 
     xMarkdownResults.forEach((result) => {
       const memoryDeltaMB = result.memoryDelta / 1024 / 1024;
@@ -213,7 +213,7 @@ function generateReport(currentResults) {
     report += '\n✅ All performance checks passed!\n\n';
   }
 
-  report += '='.repeat(80) + '\n';
+  report += `${'='.repeat(80)}\n`;
 
   return { report, hasFailures: failures.length > 0 };
 }
