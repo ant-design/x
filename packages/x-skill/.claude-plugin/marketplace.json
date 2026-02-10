@@ -1,0 +1,16 @@
+{
+  "name": "x-agent-skills",
+  "metadata": {
+    "description": "Ant Design X skills",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "x-sdk-skills",
+      "description": "Collection of document processing suite including Excel, Word, PowerPoint, and PDF capabilities",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/use-x-chat"]
+    }
+  ]
+}
