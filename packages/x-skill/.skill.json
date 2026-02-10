@@ -16,7 +16,7 @@
       }
     },
     "cursor": {
-      "enabled": false,
+      "enabled": true,
       "paths": {
         "global": ".cursor/skills",
         "project": ".cursor/skills"

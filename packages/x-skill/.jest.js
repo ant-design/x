@@ -8,4 +8,5 @@ module.exports = {
   coveragePathIgnorePatterns: ['/node_modules/', '/coverage/'],
   coverageProvider: 'v8',
   testTimeout: 10000,
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };

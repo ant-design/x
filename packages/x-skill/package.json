@@ -20,10 +20,16 @@
         "react"
     ],
     "scripts": {
+        "compile": "echo '✅ compile success' && exit 0",
         "test": "jest --config .jest.js --no-cache --collect-coverage",
         "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
-        "clean": "rm -rf coverage",
-        "dev": "node bin/index.js"
+        "test:dekko":"tsx scripts/dekko.ts",
+        "version": "tsx scripts/version.ts",
+        "clean": "rm -rf coverage lib es",
+        "start": "node bin/index.js",
+        "prestart": "npm run version",
+        "lint": "biome lint bin/",
+        "tsc": "tsc --noEmit"
     },
     "sideEffects": true,
     "files": [
@@ -37,6 +43,10 @@
     },
     "devDependencies": {
         "jest": "^29.7.0",
-        "mock-fs": "^5.5.0"
+        "mock-fs": "^5.5.0",
+        "tsx": "^4.19.1",
+        "typescript": "~5.9.3",
+        "@types/node": "^24.0.3",
+        "@biomejs/biome": "^2.0.5"
     }
 }

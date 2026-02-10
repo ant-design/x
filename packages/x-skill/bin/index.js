@@ -4,12 +4,13 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const os = require('os');
+const { emojis, messages } = require('./locale/index.js');
 
 class SkillInstaller {
   constructor() {
     this.skills = [];
     this.language = 'zh';
-    this.messages = this.loadI18nMessages();
+    this.messages = this.loadLocaleMessages();
 
     this.rl = readline.createInterface({
       input: process.stdin,
@@ -31,46 +32,12 @@ class SkillInstaller {
     }
   }
 
-  loadI18nMessages() {
-    const i18nPath = path.join(__dirname, '..', 'config', 'i18n.json');
+  loadLocaleMessages() {
     try {
-      const i18nData = fs.readFileSync(i18nPath, 'utf-8');
-      return JSON.parse(i18nData);
+      return messages;
     } catch (error) {
-      console.error('Failed to load i18n messages:', error);
-      // 如果加载失败，返回默认消息
-      return {
-        zh: {
-          selectLanguage: '请选择语言 (Select language):',
-          selectSkills: '请选择要安装的技能 (可多选):',
-          selectSoftware: '请选择目标软件 (可多选)',
-          selectInstallType: '请选择安装方式:',
-          installComplete: '安装完成!',
-          installFailed: '安装失败:',
-          copyingFiles: '正在拷贝文件...',
-          globalInstall: '全局安装',
-          projectInstall: '项目安装',
-          confirm: '确认选择',
-          cancel: '取消',
-          installingTo: '正在安装到',
-          packageSymbol: '📦',
-        },
-        en: {
-          selectLanguage: 'Select language:',
-          selectSkills: 'Select skills to install (multiple selection):',
-          selectSoftware: 'Select target software (multiple selection):',
-          selectInstallType: 'Select installation type:',
-          installComplete: 'Installation complete!',
-          installFailed: 'Installation failed:',
-          copyingFiles: 'Copying files...',
-          globalInstall: 'Global install',
-          projectInstall: 'Project install',
-          confirm: 'Confirm',
-          cancel: 'Cancel',
-          installingTo: 'Installing to',
-          packageSymbol: '📦',
-        },
-      };
+      console.error('Failed to load locale messages:', error);
+      return messages;
     }
   }
 
@@ -92,7 +59,7 @@ class SkillInstaller {
             const content = fs.readFileSync(skillMdPath, 'utf-8');
             const firstLine = content.split('\n')[0];
             description = firstLine.replace(/^#\s*/, '').trim();
-          } catch (e) {
+          } catch (_e) {
             description = skillName;
           }
         }
@@ -111,43 +78,63 @@ class SkillInstaller {
 
   askQuestion(question, options) {
     return new Promise((resolve) => {
-      console.log(`\n${question}`);
+      console.log(`\n${this.colorize(`❓ ${question}`, 'cyan')}`);
+      this.printSeparator();
       options.forEach((option, index) => {
-        console.log(`${index + 1}. ${option}`);
+        const number = this.colorize(`${index + 1}.`, 'yellow');
+        console.log(`   ${number} ${option}`);
       });
+      this.printSeparator();
 
-      this.rl.question('请选择 (Enter number): ', async (answer) => {
-        const index = parseInt(answer.trim()) - 1;
-        if (index >= 0 && index < options.length) {
-          resolve(options[index]);
-        } else {
-          console.log('无效选择，请重试');
-          const result = await this.askQuestion(question, options);
-          resolve(result);
-        }
-      });
+      this.rl.question(
+        this.colorize(this.getMessage('pleaseSelectNumber'), 'green'),
+        async (answer) => {
+          const index = parseInt(answer.trim(), 10) - 1;
+          if (index >= 0 && index < options.length) {
+            console.log(
+              `${emojis.check} ${this.getMessage('yourChoice')} ${this.colorize(options[index], 'green')}`,
+            );
+            resolve(options[index]);
+          } else {
+            console.log(
+              `${emojis.warning} ${this.colorize(this.getMessage('invalidChoice'), 'red')}`,
+            );
+            const result = await this.askQuestion(question, options);
+            resolve(result);
+          }
+        },
+      );
     });
   }
 
   askMultipleChoice(question, options) {
     return new Promise((resolve) => {
-      console.log(`\n${question}`);
+      console.log(`\n${this.colorize(`✨ ${question}`, 'cyan')}`);
+      this.printSeparator();
       options.forEach((option, index) => {
-        console.log(`${index + 1}. ${option}`);
+        const checkbox = this.colorize('[ ]', 'dim');
+        const number = this.colorize(`${index + 1}.`, 'yellow');
+        console.log(`   ${checkbox} ${number} ${option}`);
       });
-      console.log('请输入数字，用逗号分隔 (e.g., 1,3,5)');
+      this.printSeparator();
+      const tipsMsg = this.getMessage('selectFormat');
+      console.log(this.colorize(tipsMsg, 'dim'));
 
-      this.rl.question('选择: ', async (answer) => {
+      this.rl.question(this.colorize(this.getMessage('pleaseSelect'), 'green'), async (answer) => {
         const indices = answer
           .trim()
           .split(',')
-          .map((s) => parseInt(s.trim()) - 1);
+          .map((s) => parseInt(s.trim(), 10) - 1);
         const selected = indices.filter((i) => i >= 0 && i < options.length).map((i) => options[i]);
 
         if (selected.length > 0) {
+          console.log(`\n${emojis.check} ${this.getMessage('yourChoice')}`);
+          selected.forEach((item) => {
+            console.log(`   ${this.colorize(`• ${item}`, 'green')}`);
+          });
           resolve(selected);
         } else {
-          console.log('请至少选择一个选项');
+          console.log(`${emojis.warning} ${this.colorize(this.getMessage('noSelection'), 'red')}`);
           const result = await this.askMultipleChoice(question, options);
           resolve(result);
         }
@@ -155,18 +142,99 @@ class SkillInstaller {
     });
   }
 
-  getMessage(key) {
-    return this.messages[this.language][key];
+  getMessage(key, replacements = {}, lang = null) {
+    const targetLang = lang || this.language;
+    let message = this.messages[targetLang][key] || key;
+    // 替换模板变量
+    Object.keys(replacements).forEach((placeholder) => {
+      message = message.replace(new RegExp(`{${placeholder}}`, 'g'), replacements[placeholder]);
+    });
+    return message;
+  }
+
+  // 添加彩色输出方法
+  colorize(text, color) {
+    const colorMap = {
+      red: '\x1b[31m',
+      green: '\x1b[32m',
+      yellow: '\x1b[33m',
+      blue: '\x1b[34m',
+      magenta: '\x1b[35m',
+      cyan: '\x1b[36m',
+      white: '\x1b[37m',
+      bright: '\x1b[1m',
+      dim: '\x1b[2m',
+      reset: '\x1b[0m',
+    };
+    return `${colorMap[color] || ''}${text}${colorMap.reset}`;
+  }
+
+  // 添加标题艺术字
+  printHeader() {
+    console.log(`
+${this.colorize('╔══════════════════════════════════╗', 'cyan')}
+${this.colorize('║', 'cyan')}    ${emojis.rocket} ${this.colorize('X-Skill 安装器', 'bright')} ${emojis.sparkles}    ${this.colorize('      ║', 'cyan')}
+${this.colorize('║', 'cyan')}    ${this.colorize('让开发变得更简单、更有趣！', 'dim')}    ${this.colorize('║', 'cyan')}
+${this.colorize('╚══════════════════════════════════╝', 'cyan')}
+`);
+  }
+
+  // 添加加载动画
+  startSpinner(text) {
+    const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+    let frameIndex = 0;
+    this.spinnerInterval = setInterval(() => {
+      const frame = frames[frameIndex];
+      process.stdout.write(`\r${this.colorize(frame, 'cyan')} ${text}`);
+      frameIndex = (frameIndex + 1) % frames.length;
+    }, 100);
+  }
+
+  stopSpinner() {
+    if (this.spinnerInterval) {
+      clearInterval(this.spinnerInterval);
+      this.spinnerInterval = null;
+      process.stdout.write('\r');
+    }
+  }
+
+  // 添加进度条
+  printProgressBar(current, total, text = '') {
+    const percentage = Math.round((current / total) * 100);
+    const barLength = 30;
+    const filledLength = Math.round((barLength * current) / total);
+    const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
+
+    process.stdout.write(
+      `\r${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} ${percentage}% ${text}`,
+    );
+    if (current === total) {
+      console.log(); // 换行
+    }
+  }
+
+  // 添加装饰性分隔符
+  printSeparator() {
+    console.log(this.colorize('─'.repeat(50), 'dim'));
   }
 
   async run() {
     try {
+      this.printHeader();
+
+      // 显示欢迎信息（使用默认英文）
+      console.log(`\n${this.colorize(this.getMessage('welcome', {}, 'en'), 'bright')}`);
+      console.log(this.colorize(this.getMessage('welcomeSub', {}, 'en'), 'dim'));
+
+      // 语言选择
       const languageChoice = await this.askQuestion(this.getMessage('selectLanguage'), [
         '中文',
         'English',
       ]);
       this.language = languageChoice === '中文' ? 'zh' : 'en';
 
+      // 显示技能列表
+      console.log(`\n${this.colorize(this.getMessage('foundSkills'), 'cyan')}`);
       const skillOptions = this.skills.map(
         (skill) => `${skill.name}${skill.description ? ` - ${skill.description}` : ''}`,
       );
@@ -177,6 +245,7 @@ class SkillInstaller {
       );
       const selectedSkillNames = selectedSkills.map((s) => s.split(' - ')[0]);
 
+      console.log(`\n${this.colorize(this.getMessage('availableSoftware'), 'cyan')}`);
       const softwareOptions = Object.entries(this.skillConfig.targets)
         .filter(([_, config]) => config.enabled)
         .map(([name]) => name);
@@ -186,6 +255,7 @@ class SkillInstaller {
         softwareOptions,
       );
 
+      // 安装方式选择
       const installTypeOptions = [
         this.getMessage('globalInstall'),
         this.getMessage('projectInstall'),
@@ -197,17 +267,46 @@ class SkillInstaller {
       );
       const isGlobal = selectedInstallType === this.getMessage('globalInstall');
 
-      console.log(`\n${this.getMessage('copyingFiles')}`);
+      // 安装过程
+      console.log(`\n${this.colorize(this.getMessage('copyingFiles'), 'yellow')}`);
+
+      const totalSteps = selectedSoftwareList.length * selectedSkillNames.length;
+      let currentStep = 0;
+
       for (const software of selectedSoftwareList) {
-        console.log(
-          `\n${this.getMessage('packageSymbol')} ${this.getMessage('installingTo')} ${software}...`,
+        const installingMsg = this.messages[this.language].installingSkill.replace(
+          '{software}',
+          software,
         );
-        await this.installSkills(selectedSkillNames, software, isGlobal);
+        console.log(`\n\n${this.colorize(installingMsg, 'blue')}\n`);
+
+        for (let i = 0; i < selectedSkillNames.length; i++) {
+          const skillName = selectedSkillNames[i];
+          this.startSpinner(`正在安装 ${skillName}...`);
+
+          await this.installSkills([skillName], software, isGlobal);
+
+          this.stopSpinner();
+          currentStep++;
+          const progressMsg = `${skillName} -> ${software}`;
+          this.printProgressBar(currentStep, totalSteps, progressMsg);
+        }
       }
-      console.log(`\n✅ ${this.getMessage('installComplete')}`);
+
+      // 完成动画
+      console.log(`\n${this.colorize(this.messages[this.language].allComplete, 'green')}\n\n`);
+      console.log(this.colorize(this.messages[this.language].startUsing, 'bright'));
+      console.log(
+        `\n${this.colorize(this.messages[this.language].thankYou, 'magenta')} ${emojis.heart}\n\n`,
+      );
     } catch (error) {
-      console.error(`\n❌ ${this.getMessage('installFailed')}`, error);
+      this.stopSpinner();
+      console.error(
+        `\n${this.colorize(`${emojis.cross} ${this.getMessage('installFailed')}`, 'red')}\n`,
+        error.message,
+      );
     } finally {
+      console.log(`\n${this.colorize(this.getMessage('goodbye'), 'cyan')}\n\n`);
       this.rl.close();
     }
   }
@@ -215,7 +314,7 @@ class SkillInstaller {
   async installSkills(skillNames, software, isGlobal) {
     const targetConfig = this.skillConfig.targets[software];
     if (!targetConfig) {
-      throw new Error(`Software ${software} not found in config`);
+      throw new Error(`软件 ${software} 在配置中未找到`);
     }
 
     const targetPath = isGlobal ? targetConfig.paths.global : targetConfig.paths.project;
@@ -229,17 +328,36 @@ class SkillInstaller {
 
     for (const skillName of skillNames) {
       const skill = this.skills.find((s) => s.name === skillName);
-      if (!skill) continue;
+      if (!skill) {
+        console.log(`${emojis.warning} ${this.colorize(`技能 ${skillName} 未找到`, 'yellow')}`);
+        continue;
+      }
 
       const sourcePath = skill.path;
       const destPath = path.join(fullTargetPath, skillName);
 
-      if (fs.existsSync(destPath)) {
-        fs.rmSync(destPath, { recursive: true, force: true });
-      }
+      try {
+        if (fs.existsSync(destPath)) {
+          const updateMsg = this.messages[this.language].updatingSkill.replace(
+            '{skill}',
+            skillName,
+          );
+          console.log(`${emojis.info} ${this.colorize(updateMsg, 'dim')}\n`);
+          fs.rmSync(destPath, { recursive: true, force: true });
+        }
 
-      this.copyDirectory(sourcePath, destPath);
-      console.log(`  ✓ ${skillName} -> ${destPath}`);
+        this.copyDirectory(sourcePath, destPath);
+        const detailMsg = this.messages[this.language].installingDetail
+          .replace('{skill}', skillName)
+          .replace('{path}', destPath);
+        console.log(`   ${this.colorize(detailMsg, 'green')}\n\n`);
+      } catch (error) {
+        const errorMsg = this.messages[this.language].installError
+          .replace('{skill}', skillName)
+          .replace('{error}', error.message);
+        console.log(`   ${this.colorize(errorMsg, 'red')}`);
+        throw error;
+      }
     }
   }
 

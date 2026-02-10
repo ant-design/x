@@ -7,6 +7,13 @@ describe('Direct JavaScript Coverage Test', () => {
     installer = new SkillInstaller();
   });
 
+  afterEach(() => {
+    // 清理 readline 接口
+    if (installer.rl) {
+      installer.rl.close();
+    }
+  });
+
   test('should create instance correctly', () => {
     expect(installer).toBeInstanceOf(SkillInstaller);
     expect(installer.skills).toBeDefined();
