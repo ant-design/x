@@ -164,4 +164,30 @@ describe('LaTeX Plugin', () => {
       ),
     ).toMatchSnapshot();
   });
+
+  it('should parse consecutive block formulas with indentation (space after $$)', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {
+          '4. **speed**  \n   $$\n   v_{P,\\perp} = v_0 \\sin\\beta\n   $$ \n   $$\n   v_P = v_0\n   $$'
+        }
+      </XMarkdown>,
+    );
+    const katexElements = container.querySelectorAll('.katex-display');
+    expect(katexElements).toHaveLength(2);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should parse consecutive block formulas with indentation (no space after $$)', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {
+          '4. **speed**  \n   $$\n   v_{P,\\perp} = v_0 \\sin\\beta\n   $$\n   $$\n   v_P = v_0\n   $$'
+        }
+      </XMarkdown>,
+    );
+    const katexElements = container.querySelectorAll('.katex-display');
+    expect(katexElements).toHaveLength(2);
+    expect(container).toMatchSnapshot();
+  });
 });
