@@ -50,9 +50,6 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
             type="radio"
             value="fade-in"
           />
-          <span
-            class="ant-radio-inner"
-          />
         </span>
         <span
           class="ant-radio-label"
@@ -72,9 +69,6 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
             type="radio"
             value="typing"
           />
-          <span
-            class="ant-radio-inner"
-          />
         </span>
         <span
           class="ant-radio-label"
@@ -93,9 +87,6 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
             name="test-id"
             type="radio"
             value="custom-typing"
-          />
-          <span
-            class="ant-radio-inner"
           />
         </span>
         <span
@@ -2765,7 +2756,7 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
           <div
             aria-busy="true"
             aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_1r_"
+            class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-section css-var-_r_1r_"
           >
             <span
               class="ant-spin-dot-holder"
@@ -4176,7 +4167,7 @@ exports[`renders components/bubble/demo/semantic-list-custom.tsx extend context 
           <div
             aria-busy="true"
             aria-live="polite"
-            class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_c_"
+            class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-section css-var-_r_c_"
           >
             <span
               class="ant-spin-dot-holder"
@@ -4641,7 +4632,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
             class="ant-space-item"
           >
             <a
-              class="ant-typography css-var-_r_1_"
+              class="ant-typography ant-typography-link css-var-_r_1_"
             >
               ok
             </a>
@@ -4671,7 +4662,7 @@ exports[`renders components/bubble/demo/system.tsx extend context correctly 1`] 
             class="ant-space-item"
           >
             <a
-              class="ant-typography css-var-_r_1_"
+              class="ant-typography ant-typography-link css-var-_r_1_"
             >
               cancel
             </a>

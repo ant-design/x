@@ -10,10 +10,20 @@ export interface StreamCache {
   completeMarkdown: string;
 }
 
+/**
+ * When a token is about to be committed, if a non-empty string is returned,
+ * only that prefix is committed and the rest of the pending content is left
+ * for subsequent recognition (used for handover scenarios like list followed by `).
+ * Returns null to commit the entire pending content by default.
+ */
 interface Recognizer {
   tokenType: StreamCacheTokenType;
   isStartOfToken: (markdown: string) => boolean;
   isStreamingValid: (markdown: string) => boolean;
+  /** Optional: prefix for partial commit, useful for extending handover logic
+   * when the current token ends and is immediately followed by the start symbol
+   * of the next token */
+  getCommitPrefix?: (pending: string) => string | null;
 }
 
 /* ------------ Constants ------------ */
@@ -24,12 +34,8 @@ const STREAM_INCOMPLETE_REGEX = {
   link: [/^\[[^\]\r\n]{0,1000}$/, /^\[[^\r\n]{0,1000}\]\(*[^)\r\n]{0,1000}$/],
   html: [/^<\/$/, /^<\/?[a-zA-Z][a-zA-Z0-9-]{0,100}[^>\r\n]{0,1000}$/],
   commonEmphasis: [/^(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
-  // regex2 matches cases like "- **"
-  list: [
-    /^[-+*]\s{0,3}$/,
-    /^[-+*]\s{1,3}(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/,
-    /^[-+*]\s{1,3}`[^`\r\n]{0,300}$/,
-  ],
+  // regex2 matches cases like "- **" (list item with emphasis start).
+  list: [/^[-+*]\s{0,3}$/, /^[-+*]\s{1,3}(\*{1,3}|_{1,3})(?!\s)(?!.*\1$)[^\r\n]{0,1000}$/],
   'inline-code': [/^`[^`\r\n]{0,300}$/],
 } as const;
 
@@ -87,6 +93,12 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
     isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
     isStreamingValid: (markdown: string) =>
       STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
+    // On backtick after list, commit only the prefix; treat the rest as inline code.
+    getCommitPrefix: (pending: string) => {
+      const listPrefix = pending.match(/^([-+*]\s{0,3})/)?.[1];
+      const rest = listPrefix ? pending.slice(listPrefix.length) : '';
+      return listPrefix && rest.startsWith('`') ? listPrefix : null;
+    },
   },
   [StreamCacheTokenType.Table]: {
     tokenType: StreamCacheTokenType.Table,
@@ -112,6 +124,13 @@ const recognize = (cache: StreamCache, tokenType: StreamCacheTokenType): void =>
   }
 
   if (token === tokenType && !recognizer.isStreamingValid(pending)) {
+    const prefix = recognizer.getCommitPrefix?.(pending);
+    if (prefix) {
+      cache.completeMarkdown += prefix;
+      cache.pending = pending.slice(prefix.length);
+      cache.token = StreamCacheTokenType.Text;
+      return;
+    }
     commitCache(cache);
   }
 };
@@ -290,6 +309,11 @@ const useStreaming = (
         } else {
           const handler = recognizeHandlers.find((handler) => handler.tokenType === cache.token);
           handler?.recognize(cache);
+          // After commit (e.g. list → Text), re-run all recognizers so pending (e.g. "`") becomes the new token (e.g. inline-code)
+          const tokenAfterRecognize = cache.token as StreamCacheTokenType;
+          if (tokenAfterRecognize === StreamCacheTokenType.Text) {
+            for (const h of recognizeHandlers) h.recognize(cache);
+          }
         }
 
         if (cache.token === StreamCacheTokenType.Text) {

@@ -1095,7 +1095,7 @@ describe('Mermaid Component', () => {
     });
 
     it('should handle very long single line mermaid code', async () => {
-      const longLine = 'graph TD; ' + 'A-->B;'.repeat(50);
+      const longLine = `graph TD; ${'A-->B;'.repeat(50)}`;
 
       render(<Mermaid>{longLine}</Mermaid>);
 
