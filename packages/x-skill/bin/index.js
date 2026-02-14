@@ -394,18 +394,12 @@ ${this.colorize('╚════════════════════
       const sourcePath = skill.path;
       const destPath = path.join(fullTargetPath, skillName);
 
-      try {
-        if (fs.existsSync(destPath)) {
-          // Silently delete existing skills, no update notification
-          fs.rmSync(destPath, { recursive: true, force: true });
-        }
-
-        this.copyDirectory(sourcePath, destPath);
-        // Silently complete installation, no detailed output
-      } catch (error) {
-        // Silently handle errors, let upper layer handle
-        throw error;
+      if (fs.existsSync(destPath)) {
+        // Silently delete existing skills, no update notification
+        fs.rmSync(destPath, { recursive: true, force: true });
       }
+
+      this.copyDirectory(sourcePath, destPath);
     }
   }
 
