@@ -59,7 +59,7 @@ class SkillInstaller {
             const content = fs.readFileSync(skillMdPath, 'utf-8');
             const firstLine = content.split('\n')[0];
             description = firstLine.replace(/^#\s*/, '').trim();
-            // 如果描述为空、只有破折号或与技能名相同，则不显示描述
+            // If description is empty, only dashes, or same as skill name, don't display it
             if (
               !description ||
               description === '-' ||
@@ -152,14 +152,14 @@ class SkillInstaller {
   getMessage(key, replacements = {}, lang = null) {
     const targetLang = lang || this.language;
     let message = this.messages[targetLang][key] || key;
-    // 替换模板变量
+    // Replace template variables
     Object.keys(replacements).forEach((placeholder) => {
       message = message.replace(new RegExp(`{${placeholder}}`, 'g'), replacements[placeholder]);
     });
     return message;
   }
 
-  // 添加彩色输出方法
+  // Add colored output method
   colorize(text, color) {
     const colorMap = {
       red: '\x1b[31m',
@@ -176,7 +176,7 @@ class SkillInstaller {
     return `${colorMap[color] || ''}${text}${colorMap.reset}`;
   }
 
-  // 添加标题艺术字
+  // Add title ASCII art
   printHeader() {
     console.log(`${this.colorize('╔══════════════════════════════════╗', 'cyan')}
 ${this.colorize('║', 'cyan')}    ${emojis.rocket} ${this.colorize('X-Skill 安装器', 'bright')} ${emojis.sparkles}    ${this.colorize('      ║', 'cyan')}
@@ -184,7 +184,7 @@ ${this.colorize('║', 'cyan')}    ${this.colorize('让开发变得更简单、�
 ${this.colorize('╚══════════════════════════════════╝', 'cyan')}`);
   }
 
-  // 添加加载动画
+  // Add loading animation
   startSpinner(text) {
     const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
     let frameIndex = 0;
@@ -203,7 +203,7 @@ ${this.colorize('╚════════════════════
     }
   }
 
-  // 添加进度条 - 只显示一个持续更新的进度条
+  // Add progress bar - display only one continuously updated progress bar
   printProgressBar(current, total, text = '') {
     const percentage = Math.round((current / total) * 100);
     const barLength = 30;
@@ -221,7 +221,7 @@ ${this.colorize('╚════════════════════
     }
   }
 
-  // 严格控制的单行进度条
+  // Strictly controlled single-line progress bar
   updateSingleProgressBar(current, total, text = '') {
     const percentage = Math.round((current / total) * 100);
     const barLength = 30;
@@ -234,7 +234,7 @@ ${this.colorize('╚════════════════════
     process.stdout.write(`\r${line.padEnd(80)}`);
   }
 
-  // 添加装饰性分隔符
+  // Add decorative separator
   printSeparator() {
     console.log(this.colorize('─'.repeat(50), 'dim'));
   }
@@ -243,18 +243,18 @@ ${this.colorize('╚════════════════════
     try {
       this.printHeader();
 
-      // 显示欢迎信息（使用默认英文）
+      // Display welcome message (using default English)
       console.log(`\n${this.colorize(this.getMessage('welcome', {}, 'en'), 'bright')}`);
       console.log(this.colorize(this.getMessage('welcomeSub', {}, 'en'), 'dim'));
 
-      // 语言选择 - 双语显示
+      // Language selection - bilingual display
       const languageChoice = await this.askQuestion(this.getMessage('selectLanguage'), [
         '中文',
         'English',
       ]);
       this.language = languageChoice === '中文' ? 'zh' : 'en';
 
-      // 显示技能列表
+      // Display skills list
       console.log(`\n${this.colorize(this.getMessage('foundSkills'), 'cyan')}`);
       const skillOptions = this.skills.map(
         (skill) =>
@@ -277,7 +277,7 @@ ${this.colorize('╚════════════════════
         softwareOptions,
       );
 
-      // 安装方式选择
+      // Installation method selection
       const installTypeOptions = [
         this.getMessage('globalInstall'),
         this.getMessage('projectInstall'),
@@ -289,13 +289,13 @@ ${this.colorize('╚════════════════════
       );
       const isGlobal = selectedInstallType === this.getMessage('globalInstall');
 
-      // 安装过程
+      // Installation process
       process.stdout.write(`${this.colorize(this.getMessage('copyingFiles'), 'yellow')} `);
 
       const totalSteps = selectedSoftwareList.length * selectedSkillNames.length;
       let currentStep = 0;
 
-      // 只显示一次进度条，持续更新
+      // Display progress bar only once, continuously updated
       const allTasks = [];
       for (const software of selectedSoftwareList) {
         for (const skillName of selectedSkillNames) {
@@ -303,7 +303,7 @@ ${this.colorize('╚════════════════════
         }
       }
 
-      // 开始安装，进度条将在循环中更新
+      // Start installation, progress bar will be updated in the loop
 
       for (const task of allTasks) {
         const { skillName, software } = task;
@@ -317,13 +317,13 @@ ${this.colorize('╚════════════════════
         currentStep++;
       }
 
-      // 完成时显示100%
+      // Show 100% when complete
       // 清理行尾并显示完成
       process.stdout.write(`\r${' '.repeat(80)}\r`);
       process.stdout.write(`\r${' '.repeat(80)}\r`);
       this.updateSingleProgressBar(totalSteps, totalSteps, this.getMessage('allComplete'));
 
-      // 完成动画
+      // Completion animation
       console.log(`\n\n${this.colorize(this.messages[this.language].startUsing, 'bright')}`);
       console.log(
         `\n${this.colorize(this.messages[this.language].thankYou, 'magenta')} ${emojis.heart}`,
@@ -343,7 +343,7 @@ ${this.colorize('╚════════════════════
   async installSkills(skillNames, software, isGlobal) {
     const targetConfig = this.skillConfig.targets[software];
     if (!targetConfig) {
-      throw new Error(`软件 ${software} 在配置中未找到`);
+      throw new Error(`Software ${software} not found in configuration`);
     }
 
     const targetPath = isGlobal ? targetConfig.paths.global : targetConfig.paths.project;
@@ -358,7 +358,7 @@ ${this.colorize('╚════════════════════
     for (const skillName of skillNames) {
       const skill = this.skills.find((s) => s.name === skillName);
       if (!skill) {
-        // 静默跳过未找到的技能，不输出警告
+        // Silently skip skills not found, no warning output
         continue;
       }
 
@@ -367,14 +367,14 @@ ${this.colorize('╚════════════════════
 
       try {
         if (fs.existsSync(destPath)) {
-          // 静默删除已存在的技能，不输出更新提示
+          // Silently delete existing skills, no update notification
           fs.rmSync(destPath, { recursive: true, force: true });
         }
 
         this.copyDirectory(sourcePath, destPath);
-        // 静默完成安装，不输出详细信息
+        // Silently complete installation, no detailed output
       } catch (error) {
-        // 静默处理错误，让上层处理
+        // Silently handle errors, let upper layer handle
         throw error;
       }
     }
@@ -399,10 +399,10 @@ ${this.colorize('╚════════════════════
   }
 }
 
-// 导出类供测试使用
+// Export class for testing purposes
 module.exports = { SkillInstaller };
 
-// 如果是直接运行，则执行
+// If running directly, execute
 if (require.main === module) {
   const installer = new SkillInstaller();
   installer.run().catch(console.error);
