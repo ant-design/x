@@ -35,7 +35,8 @@
   "files": [
     "skills",
     "bin",
-    ".skill.json"
+    ".skill.json",
+    ".claude-plugin"
   ],
   "license": "MIT",
   "repository": {
