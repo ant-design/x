@@ -1,4 +1,44 @@
-### 基础使用
+# 1. 内置默认配置
+
+XRequest 已内置合理的默认配置，**无需额外配置即可使用**。
+
+**内置默认值**:
+
+- `method: 'POST'`
+- `headers: { 'Content-Type': 'application/json' }`
+
+# 2. 安全配置
+
+## 🔐 认证配置对比
+
+| 环境类型       | 配置方式        | 安全性 | 示例                  |
+| -------------- | --------------- | ------ | --------------------- |
+| **前端浏览器** | ❌ 禁止直接配置 | 危险   | 密钥会暴露给用户      |
+| **Node.js**    | ✅ 环境变量     | 安全   | `process.env.API_KEY` |
+| **代理服务**   | ✅ 同域代理     | 安全   | `/api/proxy/chat`     |
+
+## 🛡️ 安全配置模板
+
+**Node.js环境安全配置**:
+
+```typescript
+const nodeConfig = {
+  baseURL: 'https://api.openai.com/v1',
+  headers: {
+    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+  },
+};
+```
+
+**前端环境安全配置**:
+
+```typescript
+const browserConfig = {
+  baseURL: '/api/proxy/openai', // 通过同域代理
+};
+```
+
+# 3. 基础使用
 
 ```typescript
 import { XRequest } from '@ant-design/x-sdk';
@@ -46,7 +86,30 @@ const request = XRequest('https://your-api.com/chat', {
 });
 ````
 
-### 动态请求头
+# 4. 流式配置
+
+## 🔄 流式响应配置
+
+```typescript
+// 流式响应配置（AI对话场景）
+const streamConfig = {
+  params: {
+    stream: true, // 启用流式响应
+    model: 'gpt-3.5-turbo',
+    max_tokens: 1000,
+  },
+  manual: true, // 手动控制请求
+};
+
+// 非流式响应配置（普通API场景）
+const jsonConfig = {
+  params: {
+    stream: false, // 禁用流式响应
+  },
+};
+```
+
+# 5. 动态请求头
 
 ```typescript
 // ❌ 不安全：前端直接暴露 API key
@@ -80,7 +143,7 @@ const request = XRequest('/api/proxy/chat', {
 });
 ```
 
-### 自定义流转换器
+# 6.自定义流转换器
 
 当 AI 服务商返回非标准格式时，使用 `transformStream` 自定义数据转换。
 

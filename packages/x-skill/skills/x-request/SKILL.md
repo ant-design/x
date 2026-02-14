@@ -97,68 +97,7 @@ graph TD
 
 # 🔧 核心配置详解
 
-## 1. 内置默认配置
-
-XRequest 已内置合理的默认配置，**无需额外配置即可使用**。
-
-**内置默认值**:
-
-- `method: 'POST'`
-- `headers: { 'Content-Type': 'application/json' }`
-
-## 2. 安全配置
-
-### 🔐 认证配置对比
-
-| 环境类型       | 配置方式        | 安全性 | 示例                  |
-| -------------- | --------------- | ------ | --------------------- |
-| **前端浏览器** | ❌ 禁止直接配置 | 危险   | 密钥会暴露给用户      |
-| **Node.js**    | ✅ 环境变量     | 安全   | `process.env.API_KEY` |
-| **代理服务**   | ✅ 同域代理     | 安全   | `/api/proxy/chat`     |
-
-### 🛡️ 安全配置模板
-
-**Node.js环境安全配置**:
-
-```typescript
-const nodeConfig = {
-  baseURL: 'https://api.openai.com/v1',
-  headers: {
-    Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-  },
-};
-```
-
-**前端环境安全配置**:
-
-```typescript
-const browserConfig = {
-  baseURL: '/api/proxy/openai', // 通过同域代理
-};
-```
-
-## 3. 流式配置
-
-### 🔄 流式响应配置
-
-```typescript
-// 流式响应配置（AI对话场景）
-const streamConfig = {
-  params: {
-    stream: true, // 启用流式响应
-    model: 'gpt-3.5-turbo',
-    max_tokens: 1000,
-  },
-  manual: true, // 手动控制请求
-};
-
-// 非流式响应配置（普通API场景）
-const jsonConfig = {
-  params: {
-    stream: false, // 禁用流式响应
-  },
-};
-```
+核心功能参考内容 [CORE.md](reference/CORE.md)
 
 # 🛡️ 安全指南
 
@@ -367,7 +306,6 @@ const checkConfig = () => {
 | --- | --- | --- | --- |
 | **官方文档** | [XRequest 文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md) | 最新功能说明 | 独立资源 |
 | **API参考** | [API.md](reference/API.md) | 完整API文档 | 必读 |
-| **示例代码** | [EXAMPLES.md](reference/EXAMPLES.md) | 实战示例 | 推荐 |
 | **服务商配置** | [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) | 各服务商配置示例 | 可选 |
 
 ## 🎯 技能协作
