@@ -31,7 +31,7 @@ describe('Direct JavaScript Coverage Test', () => {
   });
 
   test('should have correct messages', () => {
-    expect(installer.messages.zh.selectLanguage).toBe('🌍 请选择语言 (Select language):');
+    expect(installer.messages.zh.selectLanguage).toBe('🌍 请选择语言 / Please select language:');
     expect(installer.messages.en.selectLanguage).toBe('🌍 Select language:');
   });
 
