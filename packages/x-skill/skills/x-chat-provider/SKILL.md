@@ -341,10 +341,9 @@ export { provider };
 
 | 场景类型 | 难度 | 示例链接 | 说明 |
 | --- | --- | --- | --- |
-| **标准OpenAI** | 🟢 简单 | [内置Provider示例](reference/EXAMPLES.md#openai) | 直接使用内置Provider |
-| **标准DeepSeek** | 🟢 简单 | [内置Provider示例](reference/EXAMPLES.md#deepseek) | 直接使用内置Provider |
-| **私有API** | 🟡 中等 | [自定义Provider示例](reference/EXAMPLES.md#private-api) | 需要四步实现 |
-| **WebSocket** | 🔴 复杂 | [WebSocket适配示例](reference/EXAMPLES.md#websocket) | 需要特殊处理 |
+| **标准OpenAI** | 🟢 简单 | [内置Provider示例](reference/EXAMPLES.md#场景1：OpenAI 格式) | 直接使用内置Provider |
+| **标准DeepSeek** | 🟢 简单 | [内置Provider示例](reference/EXAMPLES.md#场景2 DeepSeek 格式) | 直接使用内置Provider |
+| **私有API** | 🟡 中等 | [自定义Provider的一些细节场景](reference/EXAMPLES.md#场景3：自定义 provider) | 需要四步实现 |
 
 > 📖 **完整示例**：[EXAMPLES.md](reference/EXAMPLES.md) 包含所有实际场景的完整代码
 
@@ -512,7 +511,6 @@ const provider = new MyProvider({
 ## 代码质量规则
 
 - **完成编写后必须检查类型**：运行 `tsc --noEmit` 确保无类型错误
-- **删除无用导出**：清理所有未使用的 `export` 语句和类型定义
 - **保持代码整洁**：移除所有未使用的变量和导入
 
 # 参考文件

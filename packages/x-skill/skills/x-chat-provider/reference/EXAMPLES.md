@@ -10,7 +10,7 @@ const provider = new OpenAIProvider({
 });
 ```
 
-## 场景1 DeepSeek 格式
+## 场景2 DeepSeek 格式
 
 DeepSeek 格式使用内置 Provider，使用 DeepSeekProvider：
 
@@ -22,7 +22,9 @@ const provider = new DeepSeekProvider({
 });
 ```
 
-## 场景2：自定义错误格式
+## 场景3：自定义 provider
+
+### 1. 自定义错误格式
 
 ```ts
 transformMessage(info) {
@@ -46,7 +48,7 @@ transformMessage(info) {
 }
 ```
 
-## 场景3：多字段响应
+### 2. 多字段响应
 
 ```ts
 interface MyOutput {
