@@ -1,6 +1,6 @@
 ---
 name: x-request
-version: 2.2.2-beta.0
+version: 2.2.2-beta.2
 description: 专注讲解 XRequest 的实际配置和使用，基于官方文档提供准确的配置说明
 ---
 

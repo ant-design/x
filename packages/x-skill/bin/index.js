@@ -243,15 +243,44 @@ ${this.colorize('╚════════════════════
     try {
       this.printHeader();
 
-      // Display welcome message (using default English)
-      console.log(`\n${this.colorize(this.getMessage('welcome', {}, 'en'), 'bright')}`);
-      console.log(this.colorize(this.getMessage('welcomeSub', {}, 'en'), 'dim'));
+      // Display bilingual welcome message before language selection
+      console.log(`\n${this.colorize(this.getMessage('welcome', {}, 'zh'), 'bright')}`);
+      console.log(`${this.colorize(this.getMessage('welcome', {}, 'en'), 'bright')}`);
+      console.log(`${this.colorize(this.getMessage('welcomeSub', {}, 'zh'), 'dim')}`);
+      console.log(`${this.colorize(this.getMessage('welcomeSub', {}, 'en'), 'dim')}`);
 
-      // Language selection - bilingual display
-      const languageChoice = await this.askQuestion(this.getMessage('selectLanguage'), [
-        '中文',
-        'English',
-      ]);
+      // Language selection - bilingual display with dual language prompt
+      console.log(`\n${this.colorize('🌍 请选择语言 / Please select language:', 'cyan')}`);
+      this.printSeparator();
+      console.log(`   ${this.colorize('1.', 'yellow')} 中文 (Chinese)`);
+      console.log(`   ${this.colorize('2.', 'yellow')} English`);
+      this.printSeparator();
+
+      const languageChoice = await new Promise((resolve) => {
+        this.rl.question(
+          this.colorize('请选择 / Please select (输入数字/enter number): ', 'green'),
+          async (answer) => {
+            const choice = answer.trim();
+            if (choice === '1' || choice.toLowerCase() === 'zh') {
+              console.log(`\n${emojis.check} 你选择了中文 / You selected Chinese\n`);
+              resolve('中文');
+            } else if (choice === '2' || choice.toLowerCase() === 'en') {
+              console.log(`\n${emojis.check} 你选择了英文 / You selected English\n`);
+              resolve('English');
+            } else {
+              console.log(
+                `${emojis.warning} ${this.colorize('无效选择，请重试 / Invalid choice, please try again', 'red')}`,
+              );
+              const result = await this.askQuestion('请选择语言 / Please select language:', [
+                '中文',
+                'English',
+              ]);
+              resolve(result);
+            }
+          },
+        );
+      });
+
       this.language = languageChoice === '中文' ? 'zh' : 'en';
 
       // Display skills list

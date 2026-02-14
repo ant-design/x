@@ -22,7 +22,8 @@ const messages = {
   zh: {
     welcome: `${emojis.rocket} 欢迎使用 X-Skill 安装器！`,
     welcomeSub: '我们将帮你快速安装所需的开发技能！',
-    selectLanguage: `${emojis.globe} 请选择语言:`,
+    selectLanguage: `${emojis.globe} 请选择语言 / Please select language:`,
+    selectLanguagePrompt: '请选择语言 / Please select language:',
     selectSkills: `${emojis.magic} 请选择要安装的技能 (可多选):`,
     selectSoftware: `${emojis.computer} 请选择目标软件 (可多选):`,
     selectInstallType: `${emojis.gear} 请选择安装方式:`,
@@ -50,7 +51,8 @@ const messages = {
   en: {
     welcome: `${emojis.rocket} Welcome to X-Skill Installer!`,
     welcomeSub: 'We will help you quickly install the required development skills!',
-    selectLanguage: `${emojis.globe} Select language:`,
+    selectLanguage: `${emojis.globe} Select language / 请选择语言:`,
+    selectLanguagePrompt: 'Please select language / 请选择语言:',
     selectSkills: `${emojis.magic} Select skills to install (multiple selection):`,
     selectSoftware: `${emojis.computer} Select target software (multiple selection):`,
     selectInstallType: `${emojis.gear} Select installation type:`,
