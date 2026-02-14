@@ -5,7 +5,6 @@
 ```typescript
 const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completions', {
   headers: {
-    'Content-Type': 'application/json',
     Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, // Node.js 环境变量
   },
   params: {
@@ -28,10 +27,6 @@ const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completio
 
 // ✅ 安全：通过同域代理
 const openAIRequest = XRequest('/api/proxy/openai', {
-  headers: {
-    'Content-Type': 'application/json',
-    // 不需要 Authorization，由代理服务添加
-  },
   params: {
     model: 'gpt-3.5-turbo',
     messages: [{ role: 'user', content: '你好' }],
