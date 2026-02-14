@@ -59,8 +59,17 @@ class SkillInstaller {
             const content = fs.readFileSync(skillMdPath, 'utf-8');
             const firstLine = content.split('\n')[0];
             description = firstLine.replace(/^#\s*/, '').trim();
+            // 如果描述为空、只有破折号或与技能名相同，则不显示描述
+            if (
+              !description ||
+              description === '-' ||
+              description === '---' ||
+              description === skillName
+            ) {
+              description = '';
+            }
           } catch (_e) {
-            description = skillName;
+            description = '';
           }
         }
 
@@ -92,7 +101,7 @@ class SkillInstaller {
           const index = parseInt(answer.trim(), 10) - 1;
           if (index >= 0 && index < options.length) {
             console.log(
-              `${emojis.check} ${this.getMessage('yourChoice')} ${this.colorize(options[index], 'green')}`,
+              `\n${emojis.check} ${this.getMessage('yourChoice')} ${this.colorize(options[index], 'green')}\n`,
             );
             resolve(options[index]);
           } else {
@@ -117,8 +126,6 @@ class SkillInstaller {
         console.log(`   ${checkbox} ${number} ${option}`);
       });
       this.printSeparator();
-      const tipsMsg = this.getMessage('selectFormat');
-      console.log(this.colorize(tipsMsg, 'dim'));
 
       this.rl.question(this.colorize(this.getMessage('pleaseSelect'), 'green'), async (answer) => {
         const indices = answer
@@ -171,12 +178,10 @@ class SkillInstaller {
 
   // 添加标题艺术字
   printHeader() {
-    console.log(`
-${this.colorize('╔══════════════════════════════════╗', 'cyan')}
+    console.log(`${this.colorize('╔══════════════════════════════════╗', 'cyan')}
 ${this.colorize('║', 'cyan')}    ${emojis.rocket} ${this.colorize('X-Skill 安装器', 'bright')} ${emojis.sparkles}    ${this.colorize('      ║', 'cyan')}
 ${this.colorize('║', 'cyan')}    ${this.colorize('让开发变得更简单、更有趣！', 'dim')}    ${this.colorize('║', 'cyan')}
-${this.colorize('╚══════════════════════════════════╝', 'cyan')}
-`);
+${this.colorize('╚══════════════════════════════════╝', 'cyan')}`);
   }
 
   // 添加加载动画
@@ -198,19 +203,35 @@ ${this.colorize('╚════════════════════
     }
   }
 
-  // 添加进度条
+  // 添加进度条 - 只显示一个持续更新的进度条
   printProgressBar(current, total, text = '') {
     const percentage = Math.round((current / total) * 100);
     const barLength = 30;
     const filledLength = Math.round((barLength * current) / total);
     const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
 
+    // 使用 \r 回到行首，覆盖之前的进度条
     process.stdout.write(
       `\r${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} ${percentage}% ${text}`,
     );
-    if (current === total) {
+
+    // 只在完成时换行
+    if (current === total && current > 0) {
       console.log(); // 换行
     }
+  }
+
+  // 严格控制的单行进度条
+  updateSingleProgressBar(current, total, text = '') {
+    const percentage = Math.round((current / total) * 100);
+    const barLength = 30;
+    const filledLength = Math.round((barLength * current) / total);
+    const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
+
+    // 严格控制：清除整行后显示
+    const line = `${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} ${percentage}% ${text}`;
+    // 使用 stdout 并严格控制输出
+    process.stdout.write(`\r${line.padEnd(80)}`);
   }
 
   // 添加装饰性分隔符
@@ -226,7 +247,7 @@ ${this.colorize('╚════════════════════
       console.log(`\n${this.colorize(this.getMessage('welcome', {}, 'en'), 'bright')}`);
       console.log(this.colorize(this.getMessage('welcomeSub', {}, 'en'), 'dim'));
 
-      // 语言选择
+      // 语言选择 - 双语显示
       const languageChoice = await this.askQuestion(this.getMessage('selectLanguage'), [
         '中文',
         'English',
@@ -236,7 +257,8 @@ ${this.colorize('╚════════════════════
       // 显示技能列表
       console.log(`\n${this.colorize(this.getMessage('foundSkills'), 'cyan')}`);
       const skillOptions = this.skills.map(
-        (skill) => `${skill.name}${skill.description ? ` - ${skill.description}` : ''}`,
+        (skill) =>
+          `${skill.name}${skill.description && skill.description !== skill.name ? ` - ${skill.description}` : ''}`,
       );
 
       const selectedSkills = await this.askMultipleChoice(
@@ -268,36 +290,43 @@ ${this.colorize('╚════════════════════
       const isGlobal = selectedInstallType === this.getMessage('globalInstall');
 
       // 安装过程
-      console.log(`\n${this.colorize(this.getMessage('copyingFiles'), 'yellow')}`);
+      process.stdout.write(`${this.colorize(this.getMessage('copyingFiles'), 'yellow')} `);
 
       const totalSteps = selectedSoftwareList.length * selectedSkillNames.length;
       let currentStep = 0;
 
+      // 只显示一次进度条，持续更新
+      const allTasks = [];
       for (const software of selectedSoftwareList) {
-        const installingMsg = this.messages[this.language].installingSkill.replace(
-          '{software}',
-          software,
-        );
-        console.log(`\n\n${this.colorize(installingMsg, 'blue')}\n`);
-
-        for (let i = 0; i < selectedSkillNames.length; i++) {
-          const skillName = selectedSkillNames[i];
-          this.startSpinner(`正在安装 ${skillName}...`);
-
-          await this.installSkills([skillName], software, isGlobal);
-
-          this.stopSpinner();
-          currentStep++;
-          const progressMsg = `${skillName} -> ${software}`;
-          this.printProgressBar(currentStep, totalSteps, progressMsg);
+        for (const skillName of selectedSkillNames) {
+          allTasks.push({ skillName, software });
         }
       }
 
+      // 开始安装，进度条将在循环中更新
+
+      for (const task of allTasks) {
+        const { skillName, software } = task;
+        const progressMsg = `${skillName} -> ${software}`;
+
+        // 更新单行进度条
+        this.updateSingleProgressBar(currentStep, totalSteps, progressMsg);
+
+        await this.installSkills([skillName], software, isGlobal);
+
+        currentStep++;
+      }
+
+      // 完成时显示100%
+      // 清理行尾并显示完成
+      process.stdout.write(`\r${' '.repeat(80)}\r`);
+      process.stdout.write(`\r${' '.repeat(80)}\r`);
+      this.updateSingleProgressBar(totalSteps, totalSteps, this.getMessage('allComplete'));
+
       // 完成动画
-      console.log(`\n${this.colorize(this.messages[this.language].allComplete, 'green')}\n\n`);
-      console.log(this.colorize(this.messages[this.language].startUsing, 'bright'));
+      console.log(`\n\n${this.colorize(this.messages[this.language].startUsing, 'bright')}`);
       console.log(
-        `\n${this.colorize(this.messages[this.language].thankYou, 'magenta')} ${emojis.heart}\n\n`,
+        `\n${this.colorize(this.messages[this.language].thankYou, 'magenta')} ${emojis.heart}`,
       );
     } catch (error) {
       this.stopSpinner();
@@ -329,7 +358,7 @@ ${this.colorize('╚════════════════════
     for (const skillName of skillNames) {
       const skill = this.skills.find((s) => s.name === skillName);
       if (!skill) {
-        console.log(`${emojis.warning} ${this.colorize(`技能 ${skillName} 未找到`, 'yellow')}`);
+        // 静默跳过未找到的技能，不输出警告
         continue;
       }
 
@@ -338,24 +367,14 @@ ${this.colorize('╚════════════════════
 
       try {
         if (fs.existsSync(destPath)) {
-          const updateMsg = this.messages[this.language].updatingSkill.replace(
-            '{skill}',
-            skillName,
-          );
-          console.log(`${emojis.info} ${this.colorize(updateMsg, 'dim')}\n`);
+          // 静默删除已存在的技能，不输出更新提示
           fs.rmSync(destPath, { recursive: true, force: true });
         }
 
         this.copyDirectory(sourcePath, destPath);
-        const detailMsg = this.messages[this.language].installingDetail
-          .replace('{skill}', skillName)
-          .replace('{path}', destPath);
-        console.log(`   ${this.colorize(detailMsg, 'green')}\n\n`);
+        // 静默完成安装，不输出详细信息
       } catch (error) {
-        const errorMsg = this.messages[this.language].installError
-          .replace('{skill}', skillName)
-          .replace('{error}', error.message);
-        console.log(`   ${this.colorize(errorMsg, 'red')}`);
+        // 静默处理错误，让上层处理
         throw error;
       }
     }
