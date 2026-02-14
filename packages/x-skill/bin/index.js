@@ -6,6 +6,20 @@ const readline = require('readline');
 const os = require('os');
 const { emojis, messages } = require('./locale/index.js');
 
+// 处理 -v 参数
+const args = process.argv.slice(2);
+if (args.includes('-v') || args.includes('--version')) {
+  try {
+    const packagePath = path.join(__dirname, '..', 'package.json');
+    const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf-8'));
+    console.log(packageJson.version);
+    process.exit(0);
+  } catch (error) {
+    console.error('Failed to read version:', error.message);
+    process.exit(1);
+  }
+}
+
 class SkillInstaller {
   constructor() {
     this.skills = [];
