@@ -10,6 +10,18 @@
 
 ## 使用 Ant Design X 提供的统一指令安装
 
+1. 安装依赖
+
+```bash
+npm i -g @ant-design/x-skill
+```
+
+2. 注册插件
+
+```bash
+npx  x-skill
+```
+
 ## 在 Claude Code 中使用
 
 ### 通过插件市场安装（推荐）
