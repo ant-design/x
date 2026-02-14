@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-skill",
-  "version": "2.2.2-beta.0",
+  "version": "2.2.2-beta.1",
   "description": "placeholder for @ant-design/x-sdk",
   "homepage": "https://x.ant.design/x-skills/introduce",
   "bugs": {
@@ -34,7 +34,8 @@
   "sideEffects": true,
   "files": [
     "skills",
-    "bin"
+    "bin",
+    ".skill.json"
   ],
   "license": "MIT",
   "repository": {
