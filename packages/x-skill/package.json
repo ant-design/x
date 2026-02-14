@@ -20,7 +20,7 @@
     "react"
   ],
   "scripts": {
-    "compile": "'✅ compile success' && exit 0",
+    "compile": "echo '✅ compile success' && exit 0",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "test:dekko": "tsx scripts/dekko.ts",
