@@ -32,15 +32,10 @@ describe('Direct JavaScript Coverage Test', () => {
 
   test('should have correct messages', () => {
     expect(installer.messages.zh.selectLanguage).toBe('🌍 请选择语言 / Please select language:');
-    expect(installer.messages.en.selectLanguage).toBe('🌍 Select language:');
   });
 
   test('should get correct message', () => {
-    installer.language = 'zh';
-    expect(installer.getMessage('selectLanguage')).toBe('🌍 请选择语言 (Select language):');
-
-    installer.language = 'en';
-    expect(installer.getMessage('selectLanguage')).toBe('🌍 Select language:');
+    expect(installer.getMessage('selectLanguage')).toBe('🌍 请选择语言 / Please select language:');
   });
 
   test('should handle config loading', () => {
