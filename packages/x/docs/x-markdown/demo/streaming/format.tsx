@@ -1,8 +1,7 @@
 import { Welcome } from '@ant-design/x';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import { Button, Card, Skeleton } from 'antd';
+import { Button, Card, Segmented, Skeleton, theme } from 'antd';
 import React, { useState } from 'react';
-import { useMarkdownTheme } from '../_utils';
 
 const demos = [
   {
@@ -12,24 +11,30 @@ const demos = [
     
 Ant Design X is a comprehensive toolkit for AI applications, integrating a UI component library, streaming Markdown rendering engine, and AI SDK.
 
-### @ant-design/x
+- \`npm install @ant-design/x\`
+- \`npm install @ant-design/x-markdown\`
+- \`npm install @ant-design/x-sdk\`
+
+### \`@ant-design/x\`
 
 A React UI library based on the Ant Design system, designed for **AI-driven interfaces**. [Click here for details.](/components/introduce/).
 
-### @ant-design/x-markdown
+### \`@ant-design/x-markdown\`
 
 An optimized Markdown rendering solution for **streaming content**. [Click here for details.](/x-markdowns/introduce).
 
-### @ant-design/x-sdk
+### \`@ant-design/x-sdk\`
 
 Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/introduce).
-<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
+
 
 | Repo | Description |
 | ------ | ----------- |
 | @ant-design/x   | A React UI library based on the Ant Design system. |
 | @ant-design/x-markdown | An optimized Markdown rendering solution for **streaming content**. |
 | @ant-design/x-sdk    | Provides a complete set of **tool APIs**. |
+
+<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
 `,
   },
   {
@@ -47,8 +52,7 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
   },
   {
     title: 'Table',
-    content: `
-| Repo | Description |
+    content: `| Repo | Description |
 | ------ | ----------- |
 | @ant-design/x   | A React UI library based on the Ant Design system. |
 | @ant-design/x-markdown | An optimized Markdown rendering solution for streaming content. |
@@ -58,6 +62,10 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
     title: 'Emphasis',
     content:
       'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
+  },
+  {
+    title: 'InlineCode',
+    content: 'This is inline code: `npm install @ant-design/x-markdown`.',
   },
 ];
 
@@ -106,6 +114,14 @@ const IncompleteEmphasis = (props: ComponentProps) => {
   }
 };
 
+const IncompleteInlineCode = (props: ComponentProps) => {
+  const rawData = String(props['data-raw'] || '');
+  if (!rawData) return null;
+
+  const decodedText = decodeURIComponent(rawData)?.slice(1);
+  return <code className="inline-code">{decodedText}</code>;
+};
+
 const WelcomeCard = (props: Record<string, any>) => (
   <Welcome
     styles={{ icon: { flexShrink: 0 } }}
@@ -116,76 +132,125 @@ const WelcomeCard = (props: Record<string, any>) => (
 );
 
 const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
-  const [displayText, setDisplayText] = useState(content);
-  const [isStreaming, setIsStreaming] = useState(false);
-  const [className] = useMarkdownTheme();
+  const [hasNextChunk, setHasNextChunk] = React.useState(true);
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
+  const [index, setIndex] = React.useState(0);
+  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const sourceRef = React.useRef<HTMLDivElement>(null);
 
-  const startStream = React.useCallback(() => {
-    setDisplayText('');
-    setIsStreaming(true);
-    let index = 0;
-
-    const stream = () => {
-      if (index <= content.length) {
-        setDisplayText(content.slice(0, index));
-        index++;
-        setTimeout(stream, 30);
-      } else {
-        setIsStreaming(false);
+  const scrollToBottom = React.useCallback(
+    (el: HTMLDivElement | null) => {
+      if (el && index > 0) {
+        const { scrollHeight, clientHeight } = el;
+        if (scrollHeight > clientHeight) {
+          el.scrollTo({ top: scrollHeight, behavior: 'smooth' });
+        }
       }
-    };
-
-    stream();
-  }, [content]);
+    },
+    [index],
+  );
 
   React.useEffect(() => {
-    startStream();
-  }, [startStream]);
+    if (index >= content.length) {
+      setHasNextChunk(false);
+      return;
+    }
+
+    timer.current = setTimeout(() => {
+      setIndex(Math.min(index + 1, content.length));
+    }, 30);
+
+    return () => {
+      if (timer.current) {
+        clearTimeout(timer.current);
+        timer.current = null;
+      }
+    };
+  }, [index]);
+
+  React.useEffect(() => {
+    if (index > 0) {
+      scrollToBottom(sourceRef.current);
+      scrollToBottom(contentRef.current);
+    }
+  }, [index, scrollToBottom]);
+
+  const isLongContent = content.length > 500;
+  const previewMinHeight = isLongContent ? 320 : 160;
+  const previewMaxHeight = isLongContent ? 420 : 280;
 
   return (
-    <div style={{ display: 'flex', gap: 16, width: '100%' }}>
-      <Card title="Markdown Source" size="small" style={{ flex: 1 }}>
+    <div
+      style={{
+        display: 'flex',
+        gap: 16,
+        width: '100%',
+        minHeight: previewMinHeight,
+        maxHeight: previewMaxHeight,
+        transition: 'max-height 0.25s ease',
+      }}
+    >
+      <Card
+        title="Markdown Source"
+        size="small"
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}
+        styles={{ body: { flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } }}
+      >
         <div
+          ref={sourceRef}
           style={{
-            background: '#f5f5f5',
+            flex: 1,
+            minHeight: 0,
+            background: 'var(--ant-color-fill-quaternary)',
             padding: 12,
-            borderRadius: 4,
-            fontSize: 13,
-            fontFamily: 'monospace',
+            borderRadius: 6,
             whiteSpace: 'pre-wrap',
             wordBreak: 'break-word',
-            margin: 0,
-            maxHeight: 800,
             overflow: 'auto',
+            fontSize: 12,
+            lineHeight: 1.5,
           }}
         >
-          {displayText || 'Click Stream to start'}
+          {content.slice(0, index)}
         </div>
       </Card>
 
       <Card
         title="Rendered Output"
         size="small"
-        style={{ flex: 1, overflow: 'scroll' }}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}
+        styles={{ body: { flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' } }}
         extra={
-          <Button type="primary" onClick={startStream} loading={isStreaming}>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              setIndex(0);
+              setHasNextChunk(true);
+            }}
+            size="small"
+          >
             Re-Render
           </Button>
         }
       >
         <div
+          ref={contentRef}
           style={{
-            border: '1px solid #f0f0f0',
-            borderRadius: 4,
+            flex: 1,
+            minHeight: 0,
+            overflow: 'auto',
             padding: 12,
-            maxHeight: 800,
-            overflow: 'scroll',
+            borderRadius: 6,
+            border: '1px solid var(--ant-color-border-secondary)',
+            background: 'var(--ant-color-bg-container)',
           }}
         >
           <XMarkdown
-            content={displayText}
+            content={content.slice(0, index)}
             className={className}
-            // paragraphTag="div"
+            paragraphTag="div"
             openLinksInNewTab
             dompurifyConfig={{ ADD_ATTR: ['icon', 'description'] }}
             components={{
@@ -194,9 +259,10 @@ const StreamDemo: React.FC<{ content: string }> = ({ content }) => {
               'incomplete-table': TableSkeleton,
               'incomplete-html': HtmlSkeleton,
               'incomplete-emphasis': IncompleteEmphasis,
+              'incomplete-inline-code': IncompleteInlineCode,
               welcome: WelcomeCard,
             }}
-            streaming={{ hasNextChunk: isStreaming }}
+            streaming={{ hasNextChunk }}
           />
         </div>
       </Card>
@@ -208,18 +274,15 @@ const App = () => {
   const [currentDemo, setCurrentDemo] = useState(0);
 
   return (
-    <div style={{ padding: 24 }}>
-      {demos.map((demo, index) => (
-        <Button
-          key={index}
-          type={currentDemo === index ? 'primary' : 'default'}
-          onClick={() => setCurrentDemo(index)}
-          style={{ marginRight: 8, marginBottom: 8 }}
-        >
-          {demo.title}
-        </Button>
-      ))}
-
+    <div style={{ maxWidth: 960, margin: '0 auto' }}>
+      <div style={{ marginBottom: 16 }}>
+        <Segmented
+          value={currentDemo}
+          onChange={(v) => setCurrentDemo(Number(v))}
+          options={demos.map((demo, index) => ({ label: demo.title, value: index }))}
+          block
+        />
+      </div>
       <StreamDemo key={currentDemo} content={demos[currentDemo].content} />
     </div>
   );

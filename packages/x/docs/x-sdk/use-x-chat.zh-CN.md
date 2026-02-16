@@ -23,6 +23,7 @@ tag: 2.0.0
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">请求远程历史消息</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
+<code src="./demos/x-chat/openai-callback.tsx">模型的请求回调</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">自定义 XRequest.fetch </code>
 <code src="./demos/x-chat/request-openai-node.tsx"> 自定义 request </code>
 
@@ -54,20 +55,10 @@ type useXChat<
 | --- | --- | --- | --- | --- |
 | provider | 数据提供方，用于将不同结构的数据及请求转换为useXChat能消费的格式，平台内置了`DefaultChatProvider`和`OpenAIChatProvider`，你也可以通过继承`AbstractChatProvider`实现自己的Provider。详见：[Chat Provider文档](/x-sdks/chat-provider-cn) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
 | conversationKey | 会话唯一标识（全局唯一），用于区分不同的会话 | string | Symbol('ConversationKey') | - |
-| defaultMessages | 默认展示信息 | DefaultMessagesType[] \| (info: { conversationKey?: string }) => DefaultMessagesType[] \| (info: { conversationKey?: string }) => Promise\<DefaultMessagesType[]\> | - | - |
+| defaultMessages | 默认展示信息 | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) =>  MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
 | parser | 将 ChatMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 ChatMessage。支持将一条 ChatMessage 转换成多条 ParsedMessage | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
 | requestFallback | 请求失败的兜底信息，不提供则不会展示 | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
 | requestPlaceholder | 请求中的占位信息，不提供则不会展示 | ChatMessage \| (requestParams: Partial\<Input\>, info: { messages: Message[] }) => ChatMessage \|Promise\<Message\>| - | - |
-
-#### DefaultMessagesType
-
-```ts
-type DefaultMessagesType = {
-  id: string | number;
-  message: ChatMessage;
-  status: MessageStatus;
-};
-```
 
 ### XChatConfigReturnType
 

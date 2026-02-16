@@ -16,6 +16,74 @@ tag: vVERSION
 
 ---
 
+## 2.2.2
+
+`2026-02-06`
+
+### @ant-design/x
+
+- 🛠 Fixed some documentation and types to support AI Coding. [#1733](https://github.com/ant-design/x/pull/1733) by [kimteayon](https://github.com/kimteayon)
+- 💄 Fixed Bubble.List style and semantic issues. [#1731](https://github.com/ant-design/x/pull/1731) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed Sender insert node replacement issue when replaceCharacters is configured. [#1727](https://github.com/ant-design/x/pull/1727) by [kimteayon](https://github.com/kimteayon)
+
+## 2.2.1
+
+`2026-01-30`
+
+### @ant-design/x
+
+- 💄 Fixed Bubble.List style issues. [#1713](https://github.com/ant-design/x/pull/1713) by [anxLiang](https://github.com/anxLiang), [#1704](https://github.com/ant-design/x/pull/1704) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed Node environment build errors caused by other third-party dependencies `esm` paths. [#1708](https://github.com/ant-design/x/pull/1708) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed streaming rendering cache invalidation issue where cache would prematurely commit and cause rendering anomalies when list items contained inline code (like - \code\`\` ). [#1709](https://github.com/ant-design/x/pull/1709) by [Div627](https://github.com/Div627)
+- 🆕 Custom code rendering now accepts language information. [#1705](https://github.com/ant-design/x/pull/1705) by [Aarebecca](https://github.com/Aarebecca)
+
+### @ant-design/x-sdk
+
+- 🆕 When XRequest is used together with Chat Provider, it will additionally obtain the assembled message. [#1714](https://github.com/ant-design/x/pull/1714) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1717](https://github.com/ant-design/x/pull/1717) by [kimteayon](https://github.com/kimteayon), [#1707](https://github.com/ant-design/x/pull/1707) by [Div627](https://github.com/Div627)
+
+## 2.2.0
+
+`2026-01-26`
+
+### @ant-design/x
+
+- Sender
+  - 🐛 Fixed cursor insertion position error when cursor is at skill position. [#1633](https://github.com/ant-design/x/pull/1633) by [IsDyh01](https://github.com/IsDyh01)
+  - 🛠 Refactored node insertion position capability and rewrote test cases. [#1612](https://github.com/ant-design/x/pull/1612) by [kimteayon](https://github.com/kimteayon)
+- XProvider
+  - 🐛 Fixed `iconPrefixCls` setting not taking effect. [#1656](https://github.com/ant-design/x/pull/1656) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed `prefix` setting not taking effect. [#1642](https://github.com/ant-design/x/pull/1642) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed `layer` setting issue. [#1616](https://github.com/ant-design/x/pull/1616) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed forced `antd` dependency on `es` path causing Node environment build errors. [#1645](https://github.com/ant-design/x/pull/1645) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed ThoughtChain layout causing animation stuttering. [#1641](https://github.com/ant-design/x/pull/1641) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed Think layout causing animation stuttering. [#1636](https://github.com/ant-design/x/pull/1636) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed Sources setting position but unable to locate content issue. [#1683](https://github.com/ant-design/x/pull/1683) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Bubble.List internal height change scrollbar change error issue. [#1690](https://github.com/ant-design/x/pull/1690) by [anxLiang](https://github.com/anxLiang)
+- 🆕 Added Mermaid settings initialization configuration and operation bar functionality. [#1631](https://github.com/ant-design/x/pull/1631) by [Div627](https://github.com/Div627)
+- 🆕 Added Attachments card type setting capability. [#1610](https://github.com/ant-design/x/pull/1610) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-sdk
+
+- 🆕 XRequest added reconnection capability. [#1629](https://github.com/ant-design/x/pull/1629) by [hylin](https://github.com/hylin)
+- 🆕 XRequest and XStream support stream data parsing with configurable delimiters `streamSeparator`, `partSeparator`, `kvSeparator`, while adding polyfill for TextDecoderStream to improve compatibility, and fixing the issue where undefined values were added to stream results. [#1611](https://github.com/ant-design/x/pull/1611) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 Enhanced XMarkdown parser to support custom components with placeholder protection. [#1668](https://github.com/ant-design/x/pull/1668) by [yanghuanrong](https://github.com/yanghuanrong)
+- 🆕 Added XMarkdown performance benchmarking capability for streaming Markdown rendering based on Playwright Component Testing. [#1314](https://github.com/ant-design/x/pull/1314) by [Div627](https://github.com/Div627)
+- 🆕 Added XMarkdown streaming syntax support for inline code caching. [#1630](https://github.com/ant-design/x/pull/1630) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1675](https://github.com/ant-design/x/pull/1675) by [hongxuWei](https://github.com/hongxuWei), [#1644](https://github.com/ant-design/x/pull/1644) by [kimteayon](https://github.com/kimteayon), [#1658](https://github.com/ant-design/x/pull/1658) by [kimteayon](https://github.com/kimteayon), [#1646](https://github.com/ant-design/x/pull/1646) by [kimteayon](https://github.com/kimteayon), [#1651](https://github.com/ant-design/x/pull/1651) by [kimteayon](https://github.com/kimteayon), [#1650](https://github.com/ant-design/x/pull/1650) by [Div627](https://github.com/Div627), [#1635](https://github.com/ant-design/x/pull/1635) by [IsDyh01](https://github.com/IsDyh01), [#1627](https://github.com/ant-design/x/pull/1627) by [Alexzjt](https://github.com/Alexzjt), [#1615](https://github.com/ant-design/x/pull/1615) by [Yx0201](https://github.com/Yx0201)
+
 ## 2.1.3
 
 `2026-01-04`

@@ -49,3 +49,6 @@ async function request() {
 | --- | --- | --- | --- | --- |
 | readableStream | Readable stream of binary data | ReadableStream<'Uint8Array'> | - | - |
 | transformStream | Support customizable transformStream to transform streams | TransformStream<string, T> | sseTransformStream | - |
+| streamSeparator | Stream separator, used to separate different data streams | string | \n\n | 2.2.0 |
+| partSeparator | Part separator, used to separate different parts of data | string | \n | 2.2.0 |
+| kvSeparator | Key-value separator, used to separate keys and values | string | : | 2.2.0 |

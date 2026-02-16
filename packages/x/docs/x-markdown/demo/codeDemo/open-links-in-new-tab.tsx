@@ -1,6 +1,6 @@
 import { XMarkdown } from '@ant-design/x-markdown';
+import { theme } from 'antd';
 import React from 'react';
-import { useMarkdownTheme } from '../_utils';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
@@ -24,7 +24,8 @@ const markdownContent = `
 `;
 
 export default () => {
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
 
   return (
     <div>
