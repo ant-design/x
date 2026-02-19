@@ -15,7 +15,7 @@ export default async function synchronizeVersion() {
   try {
     execSync('npm run version', { stdio: 'inherit' });
     spinner.succeed('npm run version 执行成功!');
-  } catch (error) {
+  } catch (_error) {
     spinner.fail(chalk.red('执行 npm run version 失败!'));
     exitProcess();
   }
