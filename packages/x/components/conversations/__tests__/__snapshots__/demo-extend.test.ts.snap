@@ -1012,7 +1012,7 @@ exports[`renders components/conversations/demo/infinite-load.tsx extend context 
         <div
           aria-busy="true"
           aria-live="polite"
-          class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_1o_"
+          class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-section css-var-_r_1o_"
         >
           <span
             aria-label="redo"
