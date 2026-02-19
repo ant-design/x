@@ -1,6 +1,6 @@
 ---
 name: use-x-chat
-version: 2.2.2-beta.2
+version: 2.2.2-beta.4
 description: 专注讲解如何使用 useXChat Hook，包括自定义 Provider 的集成、消息管理、错误处理等
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-skill",
-  "version": "2.2.2-beta.2",
+  "version": "2.2.2-beta.4",
   "description": "placeholder for @ant-design/x-sdk",
   "homepage": "https://x.ant.design/x-skills/introduce",
   "bugs": {
@@ -25,7 +25,7 @@
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "test:dekko": "tsx scripts/dekko.ts",
     "prepublishOnly": "tsx ../../scripts/pre-publish.ts x",
-    "version": "tsx scripts/version.ts",
+    "version": "tsx scripts/generate-version.ts",
     "clean": "rm -rf coverage lib es",
     "start": "node bin/index.js",
     "prestart": "npm run version",
