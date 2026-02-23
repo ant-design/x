@@ -91,7 +91,7 @@ interface UseXChatReturn {
 
 1. **IDE智能提示**：现代IDE会自动显示完整的API签名
 2. **源码查看**：直接查看 `@ant-design/x-sdk` 的类型定义文件
-3. **官方文档**：访问 [Ant Design X 官网](https://x.ant.design) 获取最新API
+3. **官方文档**：[useXChat 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
 
 #### 使用示例
 

@@ -20,39 +20,43 @@ const skills = fs
 
 console.log(`🔍 Found ${skills.length} skills to update:`);
 
-// Update each skill's SKILL.md file
+// Update each skill's SKILL.md files for both languages
 let updatedCount = 0;
+const languages = ['zh', 'en'];
+
 for (const skillName of skills) {
-  const skillMdPath = path.join(skillsDir, skillName, 'SKILL.md');
+  for (const lang of languages) {
+    const skillMdPath = path.join(skillsDir, skillName, lang, 'SKILL.md');
 
-  if (fs.existsSync(skillMdPath)) {
-    try {
-      let content = fs.readFileSync(skillMdPath, 'utf-8');
+    if (fs.existsSync(skillMdPath)) {
+      try {
+        let content = fs.readFileSync(skillMdPath, 'utf-8');
 
-      // Use regex to replace version field
-      const versionRegex = /^version:\s*.*$/m;
-      const newVersionLine = `version: ${currentVersion}`;
+        // Use regex to replace version field
+        const versionRegex = /^version:\s*.*$/m;
+        const newVersionLine = `version: ${currentVersion}`;
 
-      if (versionRegex.test(content)) {
-        content = content.replace(versionRegex, newVersionLine);
-      } else {
-        // If no version field exists, add it to front matter
-        const frontMatterRegex = /^---\n([\s\S]*?)\n---/;
-        if (frontMatterRegex.test(content)) {
-          content = content.replace(frontMatterRegex, (match, frontMatter) => {
-            return `---\n${frontMatter}\n${newVersionLine}\n---`;
-          });
+        if (versionRegex.test(content)) {
+          content = content.replace(versionRegex, newVersionLine);
+        } else {
+          // If no version field exists, add it to front matter
+          const frontMatterRegex = /^---\n([\s\S]*?)\n---/;
+          if (frontMatterRegex.test(content)) {
+            content = content.replace(frontMatterRegex, (_match, frontMatter) => {
+              return `---\n${frontMatter}\n${newVersionLine}\n---`;
+            });
+          }
         }
-      }
 
-      fs.writeFileSync(skillMdPath, content, 'utf-8');
-      console.log(`✅ Updated ${skillName}/SKILL.md`);
-      updatedCount++;
-    } catch (error) {
-      console.error(`❌ Failed to update ${skillName}/SKILL.md:`, error);
+        fs.writeFileSync(skillMdPath, content, 'utf-8');
+        console.log(`✅ Updated ${skillName}/${lang}/SKILL.md`);
+        updatedCount++;
+      } catch (error) {
+        console.error(`❌ Failed to update ${skillName}/${lang}/SKILL.md:`, error);
+      }
+    } else {
+      console.log(`⚠️  ${skillName}/${lang}/SKILL.md not found`);
     }
-  } else {
-    console.log(`⚠️  ${skillName}/SKILL.md not found`);
   }
 }
 

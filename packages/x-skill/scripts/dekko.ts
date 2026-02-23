@@ -44,15 +44,20 @@ const skillDirs = fs
   .map((dirent) => dirent.name)
   .filter((name) => !name.startsWith('.'));
 
-// Check each skill directory
+// Check each skill directory for bilingual structure
 skillDirs.forEach((skillName) => {
   const skillPath = path.join(rootPath, 'skills', skillName);
 
-  // Check SKILL.md file
-  $(skillPath).isDirectory().hasFile('SKILL.md');
+  // Check bilingual structure: zh/ and en/ directories
+  $(skillPath).isDirectory().hasDirectory('zh').hasDirectory('en');
 
-  // Check reference directory
-  $(path.join(skillPath, 'reference')).isDirectory();
+  // Check SKILL.md files in both languages
+  $(path.join(skillPath, 'zh')).isDirectory().hasFile('SKILL.md');
+  $(path.join(skillPath, 'en')).isDirectory().hasFile('SKILL.md');
+
+  // Check reference directories in both languages
+  $(path.join(skillPath, 'zh', 'reference')).isDirectory();
+  $(path.join(skillPath, 'en', 'reference')).isDirectory();
 });
 
 // Output success message

@@ -6,7 +6,7 @@ const readline = require('readline');
 const os = require('os');
 const { emojis, messages } = require('./locale/index.js');
 
-// 处理 -v 参数
+// Handle -v parameter
 const args = process.argv.slice(2);
 if (args.includes('-v') || args.includes('--version')) {
   try {
@@ -25,7 +25,6 @@ class SkillInstaller {
     this.skills = [];
     this.language = 'zh';
     this.messages = this.loadLocaleMessages();
-
     this.rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -187,7 +186,10 @@ class SkillInstaller {
       dim: '\x1b[2m',
       reset: '\x1b[0m',
     };
-    return `${colorMap[color] || ''}${text}${colorMap.reset}`;
+    if (!colorMap[color]) {
+      return text;
+    }
+    return `${colorMap[color]}${text}${colorMap.reset}`;
   }
 
   // Add title ASCII art
@@ -219,19 +221,27 @@ ${this.colorize('╚════════════════════
 
   // Add progress bar - display only one continuously updated progress bar
   printProgressBar(current, total, text = '') {
+    if (total === 0) {
+      const bar = '░'.repeat(30);
+      process.stdout.write(
+        `\r${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} 0% ${text}`,
+      );
+      return;
+    }
+
     const percentage = Math.round((current / total) * 100);
     const barLength = 30;
     const filledLength = Math.round((barLength * current) / total);
     const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
 
-    // 使用 \r 回到行首，覆盖之前的进度条
+    // Use \r to return to line start and overwrite previous progress bar
     process.stdout.write(
       `\r${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} ${percentage}% ${text}`,
     );
 
-    // 只在完成时换行
+    // Only add newline when complete
     if (current === total && current > 0) {
-      console.log(); // 换行
+      console.log(); // Add newline
     }
   }
 
@@ -242,9 +252,9 @@ ${this.colorize('╚════════════════════
     const filledLength = Math.round((barLength * current) / total);
     const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
 
-    // 严格控制：清除整行后显示
+    // Strict control: clear entire line before display
     const line = `${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} ${percentage}% ${text}`;
-    // 使用 stdout 并严格控制输出
+    // Use stdout with strict output control
     process.stdout.write(`\r${line.padEnd(80)}`);
   }
 
@@ -352,7 +362,7 @@ ${this.colorize('╚════════════════════
         const { skillName, software } = task;
         const progressMsg = `${skillName} -> ${software}`;
 
-        // 更新单行进度条
+        // Update single-line progress bar
         this.updateSingleProgressBar(currentStep, totalSteps, progressMsg);
 
         await this.installSkills([skillName], software, isGlobal);
@@ -361,7 +371,7 @@ ${this.colorize('╚════════════════════
       }
 
       // Show 100% when complete
-      // 清理行尾并显示完成
+      // Clean line end and show completion
       process.stdout.write(`\r${' '.repeat(80)}\r`);
       process.stdout.write(`\r${' '.repeat(80)}\r`);
       this.updateSingleProgressBar(totalSteps, totalSteps, this.getMessage('allComplete'));
@@ -422,9 +432,25 @@ ${this.colorize('╚════════════════════
       fs.mkdirSync(dest, { recursive: true });
     }
 
-    const entries = fs.readdirSync(src, { withFileTypes: true });
+    // Based on selected language, prioritize copying corresponding language files
+    const langDir = path.join(src, this.language);
+
+    // If corresponding language subdirectory exists, use it as source
+    const sourceDir = fs.existsSync(langDir) ? langDir : src;
+
+    // If source directory doesn't exist, return early
+    if (!fs.existsSync(sourceDir)) {
+      return;
+    }
+
+    const entries = fs.readdirSync(sourceDir, { withFileTypes: true });
     for (const entry of entries) {
-      const srcPath = path.join(src, entry.name);
+      // Skip language subdirectories (zh/ and en/) since we've already selected the corresponding language
+      if (entry.isDirectory() && (entry.name === 'zh' || entry.name === 'en')) {
+        continue;
+      }
+
+      const srcPath = path.join(sourceDir, entry.name);
       const destPath = path.join(dest, entry.name);
 
       if (entry.isDirectory()) {
