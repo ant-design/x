@@ -23,7 +23,7 @@ export interface ActionButtonProps extends ButtonProps {
   action: 'onSend' | 'onClear' | 'onCancel' | 'onSpeech';
 }
 
-export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButtonElement>) {
+export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>((props, ref) => {
   const { className, action, onClick, ...restProps } = props;
   const context = useContext(ActionButtonContext);
   const { prefixCls, disabled: rootDisabled, setSubmitDisabled } = context;
@@ -54,6 +54,6 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
       })}
     />
   );
-}
+});
 
-export default React.forwardRef(ActionButton);
+export default ActionButton;
