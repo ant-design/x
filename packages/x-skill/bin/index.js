@@ -311,6 +311,9 @@ ${this.colorize('╚════════════════════
 
       this.language = languageChoice === '中文' ? 'zh' : 'en';
 
+      // Reload skills based on selected language
+      this.loadSkills();
+
       // Display skills list
       console.log(`\n${this.colorize(this.getMessage('foundSkills'), 'cyan')}`);
       const skillOptions = this.skills.map(
