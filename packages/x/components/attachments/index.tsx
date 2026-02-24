@@ -60,7 +60,7 @@ export interface AttachmentsRef {
   select: (options?: { accept?: string; multiple?: boolean }) => void;
 }
 
-function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
+const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -256,14 +256,10 @@ function Attachments(props: AttachmentsProps, ref: React.Ref<AttachmentsRef>) {
       {renderChildren}
     </AttachmentContext.Provider>
   );
-}
-
-const ForwardAttachments = React.forwardRef(Attachments) as React.ForwardRefExoticComponent<
-  AttachmentsProps & React.RefAttributes<AttachmentsRef>
->;
+});
 
 if (process.env.NODE_ENV !== 'production') {
-  ForwardAttachments.displayName = 'Attachments';
+  Attachments.displayName = 'Attachments';
 }
 
-export default ForwardAttachments;
+export default Attachments;

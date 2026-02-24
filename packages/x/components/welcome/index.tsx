@@ -27,7 +27,7 @@ export interface WelcomeProps {
   extra?: React.ReactNode;
 }
 
-function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
+const Welcome = React.forwardRef<HTMLDivElement, WelcomeProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -157,12 +157,10 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
       </Flex>
     </Flex>
   );
-}
-
-const ForwardWelcome = React.forwardRef(Welcome);
+});
 
 if (process.env.NODE_ENV !== 'production') {
-  ForwardWelcome.displayName = 'Welcome';
+  Welcome.displayName = 'Welcome';
 }
 
-export default ForwardWelcome;
+export default Welcome;
