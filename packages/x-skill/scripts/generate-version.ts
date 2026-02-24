@@ -6,6 +6,7 @@ import path from 'path';
 const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const skillsZhDir = path.join(__dirname, '..', 'skills-zh');
 const skillsEnDir = path.join(__dirname, '..', 'skills');
+const marketplaceJsonPath = path.join(__dirname, '..', '.claude-plugin', 'marketplace.json');
 
 // Read package.json
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
@@ -100,4 +101,21 @@ for (const skillName of skillsEn) {
   }
 }
 
-console.log(`\n🎉 Successfully updated ${updatedCount} skills with version ${currentVersion}`);
+// Update marketplace.json version
+console.log(`\n🔄 Updating marketplace.json version...`);
+try {
+  if (fs.existsSync(marketplaceJsonPath)) {
+    const marketplaceJson = JSON.parse(fs.readFileSync(marketplaceJsonPath, 'utf-8'));
+    marketplaceJson.metadata.version = currentVersion;
+    fs.writeFileSync(marketplaceJsonPath, JSON.stringify(marketplaceJson, null, 2) + '\n', 'utf-8');
+    console.log(`✅ Updated marketplace.json version to ${currentVersion}`);
+  } else {
+    console.log(`⚠️  marketplace.json not found at ${marketplaceJsonPath}`);
+  }
+} catch (error) {
+  console.error(`❌ Failed to update marketplace.json:`, error);
+}
+
+console.log(
+  `\n🎉 Successfully updated ${updatedCount} skills and marketplace.json with version ${currentVersion}`,
+);

@@ -39,7 +39,8 @@
     "skills-zh",
     "bin",
     ".skill.json",
-    ".claude-plugin"
+    ".claude-plugin",
+    "LICENSE"
   ],
   "license": "MIT",
   "repository": {
