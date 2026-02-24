@@ -5,6 +5,13 @@ title: Introduction
 
 `@ant-design/x-skill` is an intelligent skill library specially designed for Ant Design X, providing a series of carefully crafted Agent skills. These skills can significantly improve development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development.
 
+## 🎯 Applicable Scenarios
+
+- **New Project Startup**: Quickly set up Ant Design X project framework
+- **Feature Development**: Get best practices and code examples for component usage
+- **Problem Troubleshooting**: Intelligent diagnosis and resolution of common development issues
+- **Performance Optimization**: Get professional advice for performance tuning
+
 ## ✨ Core Advantages
 
 - **Intelligent Development**: Code generation and optimization suggestions based on best practices
@@ -66,10 +73,3 @@ Suitable for scenarios requiring customized configuration, using `Claude Code` a
 
 - **Global Installation**: Copy skill files to the `~/.claude/skills` directory, available for all projects
 - **Project Installation**: Copy skill files to the `.claude/skills` directory in the project root, available only for the current project
-
-## 🎯 Applicable Scenarios
-
-- **New Project Startup**: Quickly set up Ant Design X project framework
-- **Feature Development**: Get best practices and code examples for component usage
-- **Problem Troubleshooting**: Intelligent diagnosis and resolution of common development issues
-- **Performance Optimization**: Get professional advice for performance tuning
