@@ -38,6 +38,7 @@
     "antd": "^6.1.1",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
+    "encoding": "^0.1.13",
     "father": "^4.6.10",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.6",
