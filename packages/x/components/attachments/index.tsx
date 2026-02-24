@@ -235,7 +235,11 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
           style={!hasFileList ? { display: 'none' } : {}}
           styles={otherStyles}
         />
-        {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef)}
+        {getPlaceholderNode(
+          'inline',
+          hasFileList ? { style: { display: 'none' } } : undefined,
+          uploadRef,
+        )}
         <DropArea
           getDropContainer={getDropContainer || (() => containerRef.current)}
           prefixCls={prefixCls}
