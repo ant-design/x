@@ -36,6 +36,7 @@
   "sideEffects": true,
   "files": [
     "skills",
+    "skills-zh",
     "bin",
     ".skill.json",
     ".claude-plugin"
