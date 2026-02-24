@@ -11,15 +11,6 @@ const spinner = ora('Loading unicorns').start('开始同步版本');
 export default async function synchronizeVersion() {
   spinner.start('正在执行版本更新...');
 
-  // 先执行 npm run version
-  try {
-    execSync('npm run version', { stdio: 'inherit' });
-    spinner.succeed('npm run version 执行成功!');
-  } catch (_error) {
-    spinner.fail(chalk.red('执行 npm run version 失败!'));
-    exitProcess();
-  }
-
   spinner.start('正在同步发布版本');
   const baseDir = path.join(process.cwd(), './packages');
   const { version: publishVersion } = await fs.readJSON(path.join(process.cwd(), './package.json'));
@@ -38,6 +29,15 @@ export default async function synchronizeVersion() {
 
         spinner.succeed(`${dir} 同步版本成功!`);
       }
+    }
+
+    // 同步版本后再执行 npm run version
+    try {
+      execSync('npm run version', { stdio: 'inherit' });
+      spinner.succeed('npm run version 执行成功!');
+    } catch (_error) {
+      spinner.fail(chalk.red('执行 npm run version 失败!'));
+      exitProcess();
     }
   } else {
     spinner.fail(chalk.red('🤔 同步发布版本失败!'));
