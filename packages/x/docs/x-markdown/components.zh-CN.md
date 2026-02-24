@@ -152,9 +152,9 @@ const UserCard = ({ domNode, streamStatus }) => {
 </think>
 ```
 
-**根本原因：** 根据 [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) 规范，HTML 块的识别依赖于严格的格式规则。一旦在 HTML 块内部出现两个连续换行（即空行），且未满足特定 HTML 块类型（如 <div>、<pre> 等）的延续条件，解析器会终止当前 HTML 块，并将后续内容作为 Markdown 段落处理。
+**根本原因：** 根据 [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) 规范，HTML 块的识别依赖于严格的格式规则。一旦在 HTML 块内部出现两个连续换行（即空行），且未满足特定 HTML 块类型（如 `<div>`、`<pre>` 等）的延续条件，解析器会终止当前 HTML 块，并将后续内容作为 Markdown 段落处理。
 
-自定义标签（如 <think>）通常不被识别为“可跨段落”的 HTML 块类型，因此极易受空行干扰。
+自定义标签（如 `<think>` ）通常不被识别为“可跨段落”的 HTML 块类型，因此极易受空行干扰。
 
 **解决方案：**
 
