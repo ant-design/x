@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
 import chalk from 'chalk';
+import fs from 'fs';
 import fetch from 'isomorphic-fetch';
 import ora from 'ora';
+import path from 'path';
 import type { StatusResult } from 'simple-git';
 import simpleGit from 'simple-git';
-
-import { version } from '../package.json';
 
 const cwd = process.cwd();
 const git = simpleGit(cwd);
@@ -16,8 +16,15 @@ function exitProcess(code = 1) {
   process.exit(code);
 }
 
+function getCurrentVersion() {
+  const packageJsonPath = path.join(cwd, 'package.json');
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
+  return packageJson.version;
+}
+
 async function checkVersion() {
   spinner.start('正在检查当前版本是否已经存在');
+  const version = getCurrentVersion();
 
   type RaceUrlKey = 'x' | 'x-sdk' | 'x-markdown' | 'x-skill';
   const raceUrlObj: Record<RaceUrlKey, string[]> = {
@@ -70,6 +77,7 @@ async function checkVersion() {
 
 async function checkBranch({ current }: StatusResult) {
   spinner.start('正在检查当前分支是否合法');
+  const version = getCurrentVersion();
   if (
     version.includes('-alpha.') ||
     version.includes('-beta.') ||
