@@ -54,8 +54,8 @@ export interface AttachmentsProps<T = any> extends Omit<UploadProps, 'fileList'>
 }
 
 export interface AttachmentsRef {
-  nativeElement: HTMLDivElement | null;
-  fileNativeElement: HTMLInputElement | null;
+  nativeElement?: HTMLDivElement | null;
+  fileNativeElement?: HTMLInputElement | null;
   upload: (file: File) => void;
   select: (options?: { accept?: string; multiple?: boolean }) => void;
 }
@@ -162,7 +162,7 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
   const getPlaceholderNode = (
     type: 'inline' | 'drop',
     props?: Pick<PlaceholderProps, 'style'>,
-    ref?: React.RefObject<GetRef<typeof Upload>>,
+    ref?: React.Ref<GetRef<typeof Upload>>,
   ) => {
     const placeholderContent = typeof placeholder === 'function' ? placeholder(type) : placeholder;
 
