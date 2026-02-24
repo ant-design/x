@@ -25,7 +25,7 @@
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
     "test:dekko": "tsx scripts/dekko.ts",
-    "prepublishOnly": "tsx ../../scripts/pre-publish.ts x",
+    "prepublishOnly": "tsx ../../scripts/pre-publish.ts x-skill",
     "version": "tsx scripts/generate-version.ts",
     "clean": "rm -rf coverage lib es",
     "start": "node bin/index.js",

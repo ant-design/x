@@ -19,7 +19,7 @@ function exitProcess(code = 1) {
 async function checkVersion() {
   spinner.start('正在检查当前版本是否已经存在');
 
-  type RaceUrlKey = 'x' | 'x-sdk' | 'x-markdown';
+  type RaceUrlKey = 'x' | 'x-sdk' | 'x-markdown' | 'x-skill';
   const raceUrlObj: Record<RaceUrlKey, string[]> = {
     x: ['http://registry.npmjs.org/@ant-design/x', 'https://registry.npmmirror.com/@ant-design/x'],
     'x-sdk': [
@@ -29,6 +29,10 @@ async function checkVersion() {
     'x-markdown': [
       'http://registry.npmjs.org/@ant-design/x-markdown',
       'https://registry.npmmirror.com/@ant-design/x-markdown',
+    ],
+    'x-skill': [
+      'http://registry.npmjs.org/@ant-design/x-skill',
+      'https://registry.npmmirror.com/@ant-design/x-skill',
     ],
   };
 
