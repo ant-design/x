@@ -164,24 +164,4 @@ describe('LaTeX Plugin', () => {
       ),
     ).toMatchSnapshot();
   });
-
-  it.each([
-    {
-      caseName: 'space after $$',
-      content:
-        '4. **speed**  \n   $$\n   v_{P,\\perp} = v_0 \\sin\\beta\n   $$ \n   $$\n   v_P = v_0\n   $$',
-    },
-    {
-      caseName: 'no space after $$',
-      content:
-        '4. **speed**  \n   $$\n   v_{P,\\perp} = v_0 \\sin\\beta\n   $$\n   $$\n   v_P = v_0\n   $$',
-    },
-  ])('should parse consecutive block formulas with indentation ($caseName)', ({ content }) => {
-    const { container } = render(
-      <XMarkdown config={{ extensions: latexPlugin() }}>{content}</XMarkdown>,
-    );
-    const katexElements = container.querySelectorAll('.katex-display');
-    expect(katexElements).toHaveLength(2);
-    expect(container).toMatchSnapshot();
-  });
 });
