@@ -67,7 +67,7 @@ describe('Installation Tests', () => {
     });
 
     mockReaddirSync.mockImplementation((dir) => {
-      if (dir.endsWith('skills')) {
+      if (dir.endsWith('skills') || dir.endsWith('skills-zh')) {
         return [
           { name: 'test-skill-1', isDirectory: () => true },
           { name: 'test-skill-2', isDirectory: () => true },
@@ -102,7 +102,7 @@ describe('Installation Tests', () => {
   describe('installSkills method', () => {
     test('should install skills globally', async () => {
       mockExistsSync.mockImplementation((path) => {
-        return path.includes('test-skill-1') || path.includes('zh') || path.includes('en');
+        return path.includes('test-skill-1');
       });
 
       await installer.installSkills(['test-skill-1'], 'cursor', true);
@@ -117,7 +117,7 @@ describe('Installation Tests', () => {
       mockExistsSync.mockImplementation((path) => {
         // Return false for the target directory to trigger mkdirSync
         if (path === '/current/project/.cursor/skills') return false;
-        return path.includes('test-skill-1') || path.includes('zh') || path.includes('en');
+        return path.includes('test-skill-1');
       });
 
       await installer.installSkills(['test-skill-1'], 'cursor', false);
@@ -130,7 +130,7 @@ describe('Installation Tests', () => {
 
     test('should handle existing destination directory', async () => {
       mockExistsSync.mockImplementation((path) => {
-        return path.includes('test-skill-1') || path.includes('zh') || path.includes('en');
+        return path.includes('test-skill-1');
       });
 
       await installer.installSkills(['test-skill-1'], 'cursor', true);
@@ -163,12 +163,7 @@ describe('Installation Tests', () => {
 
     test('should install multiple skills', async () => {
       mockExistsSync.mockImplementation((path) => {
-        return (
-          path.includes('test-skill-1') ||
-          path.includes('test-skill-2') ||
-          path.includes('zh') ||
-          path.includes('en')
-        );
+        return path.includes('test-skill-1') || path.includes('test-skill-2');
       });
 
       await installer.installSkills(['test-skill-1', 'test-skill-2'], 'cursor', true);
@@ -182,7 +177,7 @@ describe('Installation Tests', () => {
   describe('copyDirectory method', () => {
     test('should copy directory recursively', () => {
       mockExistsSync.mockImplementation((path) => {
-        return path.includes('/source/path') || path.includes('zh') || path.includes('en');
+        return path.includes('/source/path');
       });
 
       installer.copyDirectory('/source/path', '/dest/path');
@@ -192,12 +187,7 @@ describe('Installation Tests', () => {
 
     test('should handle existing destination directory', () => {
       mockExistsSync.mockImplementation((path) => {
-        return (
-          path.includes('/source/path') ||
-          path.includes('/dest/path') ||
-          path.includes('zh') ||
-          path.includes('en')
-        );
+        return path.includes('/source/path') || path.includes('/dest/path');
       });
 
       installer.copyDirectory('/source/path', '/dest/path');
@@ -214,11 +204,7 @@ describe('Installation Tests', () => {
       });
 
       mockExistsSync.mockImplementation((path) => {
-        return (
-          (path.includes('empty-skill') && !path.startsWith('/dest/')) ||
-          path.includes('zh') ||
-          path.includes('en')
-        );
+        return path.includes('empty-skill') && !path.startsWith('/dest/');
       });
 
       installer.copyDirectory('/source/empty-skill', '/dest/empty-skill');
@@ -230,7 +216,7 @@ describe('Installation Tests', () => {
   describe('Integration tests', () => {
     test('should handle complex directory structure', async () => {
       mockExistsSync.mockImplementation((path) => {
-        return path.includes('complex-skill') || path.includes('zh') || path.includes('en');
+        return path.includes('complex-skill');
       });
 
       // Setup complex directory structure

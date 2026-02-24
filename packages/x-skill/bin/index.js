@@ -55,7 +55,11 @@ class SkillInstaller {
   }
 
   loadSkills() {
-    const skillsDir = path.join(__dirname, '..', 'skills');
+    const skillsDir =
+      this.language === 'zh'
+        ? path.join(__dirname, '..', 'skills-zh')
+        : path.join(__dirname, '..', 'skills');
+
     try {
       const skillDirs = fs
         .readdirSync(skillsDir, { withFileTypes: true })
@@ -432,25 +436,14 @@ ${this.colorize('╚════════════════════
       fs.mkdirSync(dest, { recursive: true });
     }
 
-    // Based on selected language, prioritize copying corresponding language files
-    const langDir = path.join(src, this.language);
-
-    // If corresponding language subdirectory exists, use it as source
-    const sourceDir = fs.existsSync(langDir) ? langDir : src;
-
     // If source directory doesn't exist, return early
-    if (!fs.existsSync(sourceDir)) {
+    if (!fs.existsSync(src)) {
       return;
     }
 
-    const entries = fs.readdirSync(sourceDir, { withFileTypes: true });
+    const entries = fs.readdirSync(src, { withFileTypes: true });
     for (const entry of entries) {
-      // Skip language subdirectories (zh/ and en/) since we've already selected the corresponding language
-      if (entry.isDirectory() && (entry.name === 'zh' || entry.name === 'en')) {
-        continue;
-      }
-
-      const srcPath = path.join(sourceDir, entry.name);
+      const srcPath = path.join(src, entry.name);
       const destPath = path.join(dest, entry.name);
 
       if (entry.isDirectory()) {

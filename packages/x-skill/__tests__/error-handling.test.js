@@ -92,7 +92,7 @@ describe('Error Handling Tests', () => {
     });
 
     fs.readdirSync.mockImplementation((dir) => {
-      if (dir.includes('skills')) {
+      if (dir.includes('skills') || dir.includes('skills-zh')) {
         throw new Error('Skills directory not found');
       }
       return [];
@@ -121,7 +121,7 @@ describe('Error Handling Tests', () => {
     });
 
     fs.readdirSync.mockImplementation((dir) => {
-      if (dir.includes('skills')) {
+      if (dir.includes('skills') || dir.includes('skills-zh')) {
         return [{ name: 'test-skill', isDirectory: () => true }];
       }
       return [];
@@ -179,7 +179,7 @@ describe('Error Handling Tests', () => {
     });
 
     fs.readdirSync.mockImplementation((dir) => {
-      if (dir.includes('skills')) {
+      if (dir.includes('skills') || dir.includes('skills-zh')) {
         return [{ name: 'test-skill', isDirectory: () => true }];
       }
       return [];
@@ -212,7 +212,7 @@ describe('Error Handling Tests', () => {
     });
 
     fs.readdirSync.mockImplementation((dir) => {
-      if (dir.includes('skills')) {
+      if (dir.includes('skills') || dir.includes('skills-zh')) {
         return [{ name: 'test-skill', isDirectory: () => true }];
       }
       return [];

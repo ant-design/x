@@ -33,36 +33,51 @@ try {
   process.exit(1);
 }
 
-// Check skills directory
+// Check skills directories
 $(path.join(rootPath, 'skills')).isDirectory();
+$(path.join(rootPath, 'skills-zh')).isDirectory();
 
-// Get all skill directories
-const skillsPath = path.join(rootPath, 'skills');
-const skillDirs = fs
-  .readdirSync(skillsPath, { withFileTypes: true })
+// Get all skill directories for English skills
+const skillsEnPath = path.join(rootPath, 'skills');
+const skillsZhPath = path.join(rootPath, 'skills-zh');
+
+const skillsEn = fs
+  .readdirSync(skillsEnPath, { withFileTypes: true })
   .filter((dirent) => dirent.isDirectory())
   .map((dirent) => dirent.name)
   .filter((name) => !name.startsWith('.'));
 
-// Check each skill directory for bilingual structure
-skillDirs.forEach((skillName) => {
+const skillsZh = fs
+  .readdirSync(skillsZhPath, { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name)
+  .filter((name) => !name.startsWith('.'));
+
+// Check English skills structure
+skillsEn.forEach((skillName) => {
   const skillPath = path.join(rootPath, 'skills', skillName);
 
-  // Check bilingual structure: zh/ and en/ directories
-  $(skillPath).isDirectory().hasDirectory('zh').hasDirectory('en');
+  // Check skill directory structure
+  $(skillPath).isDirectory().hasFile('SKILL.md');
+  $(path.join(skillPath, 'reference')).isDirectory();
+});
 
-  // Check SKILL.md files in both languages
-  $(path.join(skillPath, 'zh')).isDirectory().hasFile('SKILL.md');
-  $(path.join(skillPath, 'en')).isDirectory().hasFile('SKILL.md');
+// Check Chinese skills structure
+skillsZh.forEach((skillName) => {
+  const skillPath = path.join(rootPath, 'skills-zh', skillName);
 
-  // Check reference directories in both languages
-  $(path.join(skillPath, 'zh', 'reference')).isDirectory();
-  $(path.join(skillPath, 'en', 'reference')).isDirectory();
+  // Check skill directory structure
+  $(skillPath).isDirectory().hasFile('SKILL.md');
+  $(path.join(skillPath, 'reference')).isDirectory();
 });
 
 // Output success message
+const totalSkills = skillsEn.length + skillsZh.length;
 console.log(chalk.green('✨ X-Skill project structure check passed!'));
-console.log(chalk.blue(`📁 Found ${skillDirs.length} skills:`));
-skillDirs.forEach((name) => {
+console.log(chalk.blue(`📁 Found ${totalSkills} skills:`));
+console.log(chalk.blue(`   📁 ${skillsEn.length} English skills in /skills/`));
+console.log(chalk.blue(`   📁 ${skillsZh.length} Chinese skills in /skills-zh/`));
+
+[...skillsEn, ...skillsZh].forEach((name) => {
   console.log(chalk.blue(`   ✓ ${name}`));
 });

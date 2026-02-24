@@ -30,6 +30,20 @@ describe('Direct JavaScript Coverage Test', () => {
     expect(installer.skills.length).toBeGreaterThan(0);
   });
 
+  test('should load skills from correct directory based on language', () => {
+    // Test Chinese skills loading
+    const zhInstaller = new SkillInstaller();
+    zhInstaller.language = 'zh';
+    zhInstaller.loadSkills();
+    expect(Array.isArray(zhInstaller.skills)).toBe(true);
+
+    // Test English skills loading
+    const enInstaller = new SkillInstaller();
+    enInstaller.language = 'en';
+    enInstaller.loadSkills();
+    expect(Array.isArray(enInstaller.skills)).toBe(true);
+  });
+
   test('should have correct messages', () => {
     expect(installer.messages.zh.selectLanguage).toBe('🌍 请选择语言 / Please select language:');
   });
