@@ -295,7 +295,7 @@ ${this.colorize('╚════════════════════
       // Language selection - bilingual display with dual language prompt
       console.log(`\n${this.colorize('🌍 请选择语言 / Please select language:', 'cyan')}`);
       this.printSeparator();
-      console.log(`   ${this.colorize('1.', 'yellow')} 中文 (Chinese)`);
+      console.log(`   ${this.colorize('1.', 'yellow')} 中文`);
       console.log(`   ${this.colorize('2.', 'yellow')} English`);
       this.printSeparator();
 

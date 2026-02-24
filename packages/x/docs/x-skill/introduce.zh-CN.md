@@ -39,6 +39,12 @@ npm i -g @ant-design/x-skill
 
 # 智能注册到当前 IDE
 npx x-skill
+
+# 查看技能包版本
+
+npx x-skill -v
+// or
+npx x-skill --version
 ```
 
 ### 方式二：Claude Code 集成

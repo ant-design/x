@@ -3,14 +3,14 @@ order: 1
 title: Introduction
 ---
 
-`@ant-design/x-skill` is an intelligent skill library specially designed for Ant Design X, providing a series of carefully crafted Agent skills. These skills can significantly improve development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development.
+`@ant-design/x-skill` is an intelligent skill library specifically designed for Ant Design X, providing a series of carefully crafted Agent skills. These skills significantly enhance development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development.
 
-## 🎯 Applicable Scenarios
+## 🎯 Use Cases
 
-- **New Project Startup**: Quickly set up Ant Design X project framework
+- **New Project Setup**: Quickly scaffold Ant Design X project framework
 - **Feature Development**: Get best practices and code examples for component usage
 - **Problem Troubleshooting**: Intelligent diagnosis and resolution of common development issues
-- **Performance Optimization**: Get professional advice for performance tuning
+- **Performance Optimization**: Get professional advice on performance tuning
 
 ## ✨ Core Advantages
 
@@ -27,11 +27,11 @@ title: Introduction
 
 ## 🚀 Quick Start
 
-We provide multiple flexible installation methods, and you can choose the most suitable solution according to your actual needs:
+We provide multiple flexible installation methods, you can choose the most suitable option based on your actual needs:
 
 ### Method 1: One-click Installation (Recommended)
 
-Supports mainstream AI IDEs like Claude Code, CodeFuse, and Cursor. Complete installation with a single command:
+Supports mainstream AI IDEs like Claude Code, CodeFuse, Cursor, complete installation with a single command:
 
 ```bash
 # Install skill library globally
@@ -39,11 +39,16 @@ npm i -g @ant-design/x-skill
 
 # Smart registration to current IDE
 npx x-skill
+
+# Check skill package version
+npx x-skill -v
+// or
+npx x-skill --version
 ```
 
 ### Method 2: Claude Code Integration
 
-#### Plugin Marketplace Installation (Officially Recommended)
+#### Plugin Marketplace Installation (Official Recommendation)
 
 **Step 1: Register Plugin Marketplace**
 
@@ -55,13 +60,13 @@ Execute the following command in Claude Code to add this repository as a plugin 
 
 **Step 2: Select and Install Skills**
 
-Install the skills included in the x-skill package.
+Install the skills included in x-skill.
 
 Click `Install now` to complete the installation.
 
 #### Quick Installation
 
-You can also directly install the complete skill package through commands:
+You can also directly install the complete skill package via command:
 
 ```bash
 /plugin install x-sdk-skills@x-agent-skills
@@ -71,5 +76,5 @@ You can also directly install the complete skill package through commands:
 
 Suitable for scenarios requiring customized configuration, using `Claude Code` as an example:
 
-- **Global Installation**: Copy skill files to the `~/.claude/skills` directory, available for all projects
-- **Project Installation**: Copy skill files to the `.claude/skills` directory in the project root, available only for the current project
+- **Global Installation**: Copy skill files to `~/.claude/skills` directory, available for all projects
+- **Project Installation**: Copy skill files to `.claude/skills` directory in the project root, available only for the current project
