@@ -74,8 +74,9 @@ class SkillInstaller {
         if (fs.existsSync(skillMdPath)) {
           try {
             const content = fs.readFileSync(skillMdPath, 'utf-8');
-            const firstLine = content.split('\n')[0];
-            description = firstLine.replace(/^#\s*/, '').trim();
+            const descMatch =
+              content.match(/^description:\s*(.*)$/m) || content.match(/^#\s*(.*)$/m);
+            description = descMatch ? descMatch[1].trim() : '';
             // If description is empty, only dashes, or same as skill name, don't display it
             if (
               !description ||
@@ -103,6 +104,12 @@ class SkillInstaller {
   }
 
   askQuestion(question, options) {
+    // 防止空选项数组导致的无限递归
+    if (!options || options.length === 0) {
+      console.log(`${emojis.warning} ${this.colorize('没有可用选项', 'red')}`);
+      return Promise.resolve(null);
+    }
+
     return new Promise((resolve) => {
       console.log(`\n${this.colorize(`❓ ${question}`, 'cyan')}`);
       this.printSeparator();
@@ -134,6 +141,12 @@ class SkillInstaller {
   }
 
   askMultipleChoice(question, options) {
+    // 防止空选项数组导致的无限递归
+    if (!options || options.length === 0) {
+      console.log(`${emojis.warning} ${this.colorize('没有可用选项', 'red')}`);
+      return Promise.resolve([]);
+    }
+
     return new Promise((resolve) => {
       console.log(`\n${this.colorize(`✨ ${question}`, 'cyan')}`);
       this.printSeparator();
@@ -258,8 +271,10 @@ ${this.colorize('╚════════════════════
 
     // Strict control: clear entire line before display
     const line = `${this.colorize('[', 'green')}${this.colorize(bar, 'green')}${this.colorize(']', 'green')} ${percentage}% ${text}`;
-    // Use stdout with strict output control
-    process.stdout.write(`\r${line.padEnd(80)}`);
+
+    readline.clearLine(process.stdout, 0);
+    readline.cursorTo(process.stdout, 0);
+    process.stdout.write(line);
   }
 
   // Add decorative separator
@@ -379,8 +394,8 @@ ${this.colorize('╚════════════════════
 
       // Show 100% when complete
       // Clean line end and show completion
-      process.stdout.write(`\r${' '.repeat(80)}\r`);
-      process.stdout.write(`\r${' '.repeat(80)}\r`);
+      readline.clearLine(process.stdout, 0);
+      readline.cursorTo(process.stdout, 0);
       this.updateSingleProgressBar(totalSteps, totalSteps, this.getMessage('allComplete'));
 
       // Completion animation
