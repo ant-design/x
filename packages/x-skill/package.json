@@ -20,6 +20,7 @@
     "react"
   ],
   "scripts": {
+    "precompile": "npm run prestart",
     "compile": "echo '✅ compile success' && exit 0",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
