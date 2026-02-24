@@ -5,8 +5,7 @@ import 'katex/dist/katex.min.css';
 
 const inlineRuleNonStandard =
   /^(?:\${1,2}([^$]{1,10000}?)\${1,2}|\\\(([\s\S]{1,10000}?)\\\)|\\\[((?:\\.|[^\\]){1,10000}?)\\\])/;
-const blockRule =
-  /^(\${1,2})\n([\s\S]{1,10000}?)\n\1(?:\s*(?:\n|$))|^\\\[((?:\\.|[^\\]){1,10000}?)\\\]/;
+const blockRule = /^(\${1,2})\n([\s\S]{1,10000}?)\n\1(?:\n|$)|^\\\[((?:\\.|[^\\]){1,10000}?)\\\]/;
 
 type LatexOption = {
   katexOptions?: KatexOptions;
