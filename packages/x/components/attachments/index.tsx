@@ -106,7 +106,6 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
       const fileInput = uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>(
         'input[type="file"]',
       ) as HTMLInputElement;
-      // Trigger native change event
       if (fileInput) {
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
