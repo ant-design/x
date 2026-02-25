@@ -103,20 +103,21 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
     fileNativeElement:
       uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]'),
     upload: (file) => {
-      const fileInput =
-        uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
+      const fileInput = uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       // Trigger native change event
       if (fileInput) {
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         fileInput.files = dataTransfer.files;
-
         fileInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
     },
     select: (options) => {
-      const fileInput =
-        uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
+      const fileInput = uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       if (fileInput) {
         fileInput.multiple = options?.multiple ?? false;
         const acceptValue = options?.accept || props.accept;
