@@ -116,6 +116,19 @@ try {
   console.error(`❌ Failed to update marketplace.json:`, error);
 }
 
+// Format marketplace.json with biome
+console.log(`\n🎨 Formatting marketplace.json...`);
+try {
+  const { execSync } = require('child_process');
+  execSync('npx biome format --write .claude-plugin/marketplace.json', {
+    stdio: 'inherit',
+    cwd: path.join(__dirname, '..'),
+  });
+  console.log(`✅ marketplace.json formatted successfully`);
+} catch (error: any) {
+  console.error(`⚠️  Failed to format marketplace.json:`, error.message);
+}
+
 console.log(
   `\n🎉 Successfully updated ${updatedCount} skills and marketplace.json with version ${currentVersion}`,
 );
