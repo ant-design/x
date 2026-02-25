@@ -38,7 +38,7 @@ description: Focuses on the practical configuration and usage of XRequest, provi
 
 | Dependency Package    | Version Requirement | Auto Install | Purpose                          |
 | --------------------- | ------------------- | ------------ | -------------------------------- |
-| **@ant-design/x-sdk** | ≥2.2.1              | ✅           | Core SDK, includes XRequest tool |
+| **@ant-design/x-sdk** | ≥2.2.2              | ✅           | Core SDK, includes XRequest tool |
 
 ### 🛠️ One-click Installation
 

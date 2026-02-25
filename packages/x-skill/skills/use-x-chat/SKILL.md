@@ -1,22 +1,22 @@
 ---
 name: use-x-chat
 version: 2.2.2-beta.7
-description: Focus on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, etc.
+description: Focuses on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, and more
 ---
 
 # 🎯 Skill Positioning
 
-> **Core Positioning**: Build professional AI chat applications using `useXChat` Hook **Prerequisites**: Already have custom Chat Provider (refer to [x-chat-provider skill](../x-chat-provider))
+> **Core Positioning**: Using the `useXChat` Hook to build professional AI conversation applications **Prerequisites**: Already have a custom Chat Provider (refer to [x-chat-provider skill](../x-chat-provider))
 
 ## Table of Contents
 
-- [🚀 Quick Start](#-quick-start) - Get started in 5 minutes
+- [🚀 Quick Start](#-quick-start)
   - [Dependency Management](#1-dependency-management)
   - [Three-Step Integration](#2-three-step-integration)
 - [🧩 Core Concepts](#-core-concepts)
-  - [Tech Stack Architecture](#tech-stack-architecture)
+  - [Technology Stack Architecture](#technology-stack-architecture)
   - [Data Model](#data-model)
-- [🔧 Core Features Deep Dive](#-core-features-deep-dive)
+- [🔧 Core Features Explained](#-core-features-explained)
   - [Message Management](#1-message-management)
   - [Request Control](#2-request-control)
   - [Error Handling](#3-error-handling)
@@ -35,35 +35,35 @@ description: Focus on explaining how to use the useXChat Hook, including custom 
 
 ### 📋 System Requirements
 
-- **@ant-design/x-sdk**: 2.2.1+ (auto-installed)
+- **@ant-design/x-sdk**: 2.2.2+ (auto-installed)
 - **@ant-design/x**: latest (UI components, auto-installed)
 
 ### ⚠️ Automatic Version Issue Resolution
 
-If version mismatch is detected, the skill will automatically:
+If version mismatches are detected, the skill will automatically:
 
-- ✅ Display current version status
+- ✅ Prompt current version status
 - ✅ Provide fix suggestions
 - ✅ Use relative paths to ensure compatibility
 
 #### 🎯 Built-in Version Check
 
-The use-x-chat skill includes built-in version checking, automatically checking version compatibility on startup:
+The use-x-chat skill includes built-in version checking functionality, automatically checking version compatibility on startup:
 
-**🔍 Automatic Check Features** When the skill starts, it automatically checks if `@ant-design/x-sdk` version meets requirements (≥2.2.1):
+**🔍 Automatic Check Features** When the skill starts, it automatically checks if the `@ant-design/x-sdk` version meets requirements (≥2.2.2):
 
 **📋 Check Contents:**
 
 - ✅ Currently installed version
-- ✅ Meets minimum requirements (≥2.2.1)
-- ✅ Auto-provides fix suggestions
-- ✅ Friendly error messages
+- ✅ Whether it meets minimum requirements (≥2.2.2)
+- ✅ Automatically provides fix suggestions
+- ✅ Friendly error prompts
 
-**🛠️ Version Issue Fixes** If version mismatch is detected, the skill provides specific fix commands:
+**🛠️ Version Issue Fixes** If version mismatches are detected, the skill provides specific fix commands:
 
 ```bash
 # Auto-suggested fix commands
-npm install @ant-design/x-sdk@^2.2.1
+npm install @ant-design/x-sdk@^2.2.2
 
 # Or install latest version
 npm install @ant-design/x-sdk@latest
@@ -79,10 +79,31 @@ This part is handled by the x-chat-provider skill
 import { MyChatProvider } from './MyChatProvider';
 import { XRequest } from '@ant-design/x-sdk';
 
-// Recommend using XRequest as default request method
+// Recommended to use XRequest as the default request method
 const provider = new MyChatProvider({
-  // Default uses XRequest, no custom fetch needed
+  // Default use of XRequest, no custom fetch needed
   request: XRequest('https://your-api.com/chat'),
+  // When requestPlaceholder is set, placeholder messages will display before requests start
+  requestPlaceholder: {
+    content: 'Thinking...',
+    role: 'assistant',
+    timestamp: Date.now(),
+  },
+  // When requestFallback is set, fallback messages will display when requests fail
+  requestFallback: (_, { error, errorInfo, messageInfo }) => {
+    if (error.name === 'AbortError') {
+      return {
+        content: messageInfo?.message?.content || 'Reply cancelled',
+        role: 'assistant' as const,
+        timestamp: Date.now(),
+      };
+    }
+    return {
+      content: errorInfo?.error?.message || 'Network error, please try again later',
+      role: 'assistant' as const,
+      timestamp: Date.now(),
+    };
+  },
 });
 ```
 
@@ -130,7 +151,7 @@ const ChatUI = () => {
 
 # 🧩 Core Concepts
 
-## Tech Stack Architecture
+## Technology Stack Architecture
 
 ```mermaid
 graph TD
@@ -143,7 +164,7 @@ graph TD
 
 ### Data Model
 
-> ⚠️ **Important Reminder**: `messages` type is `MessageInfo<MessageType>[]`, not direct `MessageType`
+> ⚠️ **Important Reminder**: The `messages` type is `MessageInfo<MessageType>[]`, not directly `MessageType`
 
 ```ts
 interface MessageInfo<Message> {
@@ -157,11 +178,11 @@ interface MessageInfo<Message> {
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
 ```
 
-# 🔧 Core Features Deep Dive
+# 🔧 Core Features Explained
 
-> 💡 **Tip**: APIs may update with versions, check [official documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.md) for latest info
+> 💡 **Tip**: APIs may update with versions, it's recommended to check [official documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.md) for the latest information
 
-Core features reference [CORE.md](reference/CORE.md)
+Core features reference content [CORE.md](reference/CORE.md)
 
 # 📋 Prerequisites and Dependencies
 
@@ -171,24 +192,24 @@ Core features reference [CORE.md](reference/CORE.md)
 
 | Dependency Type | Skill | Description | Required |
 | --- | --- | --- | --- |
-| **Core Dependency** | **x-chat-provider** | Provides custom Provider instance, uses XRequest by default, **must** be used with use-x-chat | **Required** |
+| **Core Dependency** | **x-chat-provider** | Provides custom Provider instances, uses XRequest by default, **must** be used with use-x-chat | **Required** |
 | **Or** | **Built-in Provider** | Built-in Providers like OpenAI/DeepSeek, uses XRequest by default | **Required** |
-| **Recommended Dependency** | **x-request** | Configure request parameters and authentication, as default request method | **Recommended** |
+| **Recommended** | **x-request** | Configure request parameters and authentication, as the default request method | **Recommended** |
 
 ## 🎯 Usage Scenario Comparison Table
 
 | Usage Scenario | Required Skill Combination | Usage Order |
 | --- | --- | --- |
 | **Private API Adaptation** | x-chat-provider → use-x-chat | Create Provider first, then use |
-| **Standard API Usage** | use-x-chat (built-in Provider) | Direct use |
+| **Standard API Usage** | use-x-chat (built-in Provider) | Use directly |
 | **Authentication Required** | x-request → use-x-chat | Configure request first, then use |
 | **Full Customization** | x-chat-provider → x-request → use-x-chat | Complete workflow |
 
 # 🚨 Development Rules
 
-## Before using use-x-chat, must confirm:
+## Before using use-x-chat, you must confirm:
 
-- [ ] **Have Provider source** (choose one):
+- [ ] **Provider source** (choose one of the following):
   - [ ] Used **x-chat-provider** to create custom Provider
   - [ ] Decided to use built-in Provider (OpenAI/DeepSeek)
 - [ ] Installed @ant-design/x-sdk
@@ -197,12 +218,12 @@ Core features reference [CORE.md](reference/CORE.md)
 
 ### Test Case Rules
 
-- **If user doesn't explicitly need test cases, don't add test files**
-- **Only create test cases when user explicitly requests**
+- **If the user doesn't explicitly need test cases, don't add test files**
+- **Only create test cases when the user explicitly requests**
 
 ### Code Quality Rules
 
-- **After completion must check types**: Run `tsc --noEmit` to ensure no type errors
+- **After completion, must check types**: Run `tsc --noEmit` to ensure no type errors
 - **Keep code clean**: Remove all unused variables and imports
 
 # 🔗 Reference Resources
@@ -210,7 +231,7 @@ Core features reference [CORE.md](reference/CORE.md)
 ## 📚 Core Reference Documentation
 
 - [API.md](reference/API.md) - Complete API reference documentation
-- [EXAMPLES.md](reference/EXAMPLES.md) - All practical example codes
+- [EXAMPLES.md](reference/EXAMPLES.md) - All practical example code
 
 ## 🌐 SDK Official Documentation
 

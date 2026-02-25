@@ -10,7 +10,7 @@ description: 专注讲解如何使用 useXChat Hook，包括自定义 Provider �
 
 ## 目录导航
 
-- [🚀 快速开始](#-快速开始) - 5分钟上手
+- [🚀 快速开始](#-快速开始)
   - [依赖管理](#1-依赖管理)
   - [三步集成](#2-三步集成)
 - [🧩 核心概念](#-核心概念)
@@ -35,7 +35,7 @@ description: 专注讲解如何使用 useXChat Hook，包括自定义 Provider �
 
 ### 📋 系统要求
 
-- **@ant-design/x-sdk**: 2.2.1+（自动安装）
+- **@ant-design/x-sdk**: 2.2.2+（自动安装）
 - **@ant-design/x**: 最新版（UI组件，自动安装）
 
 ### ⚠️ 版本问题自动修复
@@ -50,12 +50,12 @@ description: 专注讲解如何使用 useXChat Hook，包括自定义 Provider �
 
 use-x-chat 技能已内置版本检查功能，启动时自动检查版本兼容性：
 
-**🔍 自动检查功能** 技能启动时会自动检查 `@ant-design/x-sdk` 版本是否符合要求（≥2.2.1）：
+**🔍 自动检查功能** 技能启动时会自动检查 `@ant-design/x-sdk` 版本是否符合要求（≥2.2.2）：
 
 **📋 检查内容包括：**
 
 - ✅ 当前安装的版本
-- ✅ 是否符合最低要求（≥2.2.1）
+- ✅ 是否符合最低要求（≥2.2.2）
 - ✅ 自动提供修复建议
 - ✅ 友好的错误提示
 
@@ -63,7 +63,7 @@ use-x-chat 技能已内置版本检查功能，启动时自动检查版本兼容
 
 ```bash
 # 自动提示的修复命令
-npm install @ant-design/x-sdk@^2.2.1
+npm install @ant-design/x-sdk@^2.2.2
 
 # 或安装最新版本
 npm install @ant-design/x-sdk@latest
@@ -83,6 +83,27 @@ import { XRequest } from '@ant-design/x-sdk';
 const provider = new MyChatProvider({
   // 默认使用 XRequest，无需自定义 fetch
   request: XRequest('https://your-api.com/chat'),
+  // 当设置 requestPlaceholder 时，会在请求开始前显示占位消息
+  requestPlaceholder: {
+    content: '正在思考中...',
+    role: 'assistant',
+    timestamp: Date.now(),
+  },
+  // 当设置 requestFallback 时，会在请求失败时显示兜底消息
+  requestFallback: (_, { error, errorInfo, messageInfo }) => {
+    if (error.name === 'AbortError') {
+      return {
+        content: messageInfo?.message?.content || '已取消回复',
+        role: 'assistant' as const,
+        timestamp: Date.now(),
+      };
+    }
+    return {
+      content: errorInfo?.error?.message || '网络异常，请稍后重试',
+      role: 'assistant' as const,
+      timestamp: Date.now(),
+    };
+  },
 });
 ```
 

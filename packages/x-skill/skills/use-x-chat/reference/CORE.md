@@ -5,7 +5,7 @@
 ```ts
 const { messages } = useXChat({ provider });
 // messages structure: MessageInfo<MessageType>[]
-// actual message data is in msg.message
+// Actual message data is in msg.message
 ```
 
 #### Manually Set Messages
@@ -16,7 +16,7 @@ const { setMessages } = useXChat({ provider });
 // Clear messages
 setMessages([]);
 
-// Add welcome message - note MessageInfo structure
+// Add welcome message - note this is MessageInfo structure
 setMessages([
   {
     id: 'welcome',
@@ -63,18 +63,18 @@ onRequest({
 
 #### Abort Request
 
-```ts
+```tsx
 const { abort, isRequesting } = useXChat({ provider });
 
 // Abort current request
 <button onClick={abort} disabled={!isRequesting}>
   Stop generation
-</button>
+</button>;
 ```
 
 #### Resend
 
-The resend feature allows users to regenerate replies for specific messages, very useful when AI responses are unsatisfactory or errors occur.
+The resend feature allows users to regenerate replies for specific messages, which is very useful when AI responses are unsatisfactory or errors occur.
 
 #### Basic Usage
 
@@ -97,123 +97,53 @@ const ChatComponent = () => {
 };
 ```
 
-#### Complete Example: Resend with State Management
-
-```tsx
-import { useState } from 'react';
-import { useXChat } from '@ant-design/x-sdk';
-import { Bubble, Button } from '@ant-design/x';
-
-const ChatWithRegenerate = () => {
-  const { messages, onReload, isRequesting } = useXChat({
-    provider,
-    requestFallback: (_, { error }) => ({
-      message: {
-        content:
-          error.name === 'AbortError' ? 'Generation cancelled' : 'Generation failed, please retry',
-        role: 'assistant',
-      },
-      status: 'error',
-    }),
-  });
-
-  // Track message ID being regenerated
-  const [regeneratingId, setRegeneratingId] = useState<string | number | null>(null);
-
-  const handleRegenerate = (messageId: string | number) => {
-    setRegeneratingId(messageId);
-    onReload(
-      messageId,
-      {},
-      {
-        extra: { regenerate: true },
-      },
-    );
-  };
-
-  return (
-    <div>
-      <Bubble.List
-        items={messages.map((msg) => ({
-          key: msg.id,
-          content: msg.message.content,
-          role: msg.message.role,
-          loading: msg.status === 'loading',
-          footer: msg.message.role === 'assistant' && (
-            <Button
-              type="text"
-              size="small"
-              loading={regeneratingId === msg.id && isRequesting}
-              onClick={() => handleRegenerate(msg.id)}
-              disabled={isRequesting && regeneratingId !== msg.id}
-            >
-              {regeneratingId === msg.id ? 'Generating...' : 'Regenerate'}
-            </Button>
-          ),
-        }))}
-      />
-    </div>
-  );
-};
-```
-
 #### Resend Notes
 
-1. **Can only regenerate AI replies**: Usually only works for messages with `role === 'assistant'`
-2. **State management**: Resend will set corresponding message status to `loading`
-3. **Parameter passing**: Can pass additional info to Provider via `extra` parameter
-4. **Error handling**: Recommend using `requestFallback` to handle resend failures
+1. **Only regenerate AI replies**: Usually only use resend on messages with `role === 'assistant'`
+2. **Status management**: Resend will set the corresponding message status to `loading`
+3. **Parameter passing**: Can pass additional information to Provider via the `extra` parameter
+4. **Error handling**: Recommended to use with `requestFallback` to handle resend failures
 
 ### 3. Error Handling
 
 #### Unified Error Handling
 
-```ts
+```tsx
 const { messages } = useXChat({
   provider,
-  requestFallback: (_, { error, messageInfo }) => {
+  requestFallback: (_, { error, errorInfo, messageInfo }) => {
     // Network error
     if (!navigator.onLine) {
       return {
-        message: {
-          content: 'Network connection failed, please check network',
-          role: 'assistant',
-        },
-        status: 'error',
+        content: 'Network connection failed, please check your network',
+        role: 'assistant' as const,
       };
     }
 
-    // User abort
+    // User interruption
     if (error.name === 'AbortError') {
       return {
-        message: {
-          content: 'Generation cancelled',
-          role: 'assistant',
-        },
-        status: 'error',
+        content: messageInfo?.message?.content || 'Reply cancelled',
+        role: 'assistant' as const,
       };
     }
 
     // Server error
     return {
-      message: {
-        content: 'Service temporarily unavailable, please try again later',
-        role: 'assistant',
-      },
-      status: 'error',
+      content: errorInfo?.error?.message || 'Network error, please try again later',
+      role: 'assistant' as const,
     };
   },
 });
 ```
 
-### 4. Request Message Display
+### 4. Displaying Messages During Requests
 
-Generally no configuration needed, works with Bubble component's loading state by default. For custom loading content:
+Generally no configuration is needed, works with Bubble component's loading state by default. For custom loading content, refer to:
 
-````tsx
+```tsx
 const ChatComponent = () => {
   const { messages, onRequest } = useXChat({ provider });
-
   return (
     <div>
       {messages.map((msg) => (
@@ -225,69 +155,20 @@ const ChatComponent = () => {
     </div>
   );
 };
+```
 
 #### Custom Request Placeholder
 
-```ts
+When requestPlaceholder is set, placeholder messages will display before requests start, used with Bubble component's loading state.
+
+```tsx
 const { messages } = useXChat({
   provider,
   requestPlaceholder: (_, { error, messageInfo }) => {
     return {
-      message: {
-        content: 'Generating...',
-        role: 'assistant',
-      },
-      status: 'loading',
+      content: 'Generating...',
+      role: 'assistant',
     };
   },
 });
-````
-
-### 📊 Complete Example Project
-
-```tsx
-import React, { useState } from 'react';
-import { useXChat } from '@ant-design/x-sdk';
-import { Bubble, Sender, Conversations } from '@ant-design/x';
-
-const App: React.FC = () => {
-  const [conversations, setConversations] = useState([{ key: '1', label: 'New Chat' }]);
-  const [activeKey, setActiveKey] = useState('1');
-
-  const { messages, onRequest, isRequesting, abort } = useXChat({
-    provider,
-    requestFallback: (_, { error }) => {
-      if (error.name === 'AbortError') {
-        return { content: 'Cancelled', role: 'assistant', status: 'error' };
-      }
-      return { content: 'Request failed', role: 'assistant', status: 'error' };
-    },
-  });
-
-  return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Conversation List */}
-      <Conversations items={conversations} activeKey={activeKey} onActiveChange={setActiveKey} />
-
-      {/* Chat Area */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <Bubble.List
-          items={messages.map((msg) => ({
-            key: msg.id,
-            content: msg.content,
-            role: msg.role,
-            loading: msg.status === 'loading',
-          }))}
-        />
-
-        <Sender
-          loading={isRequesting}
-          onSubmit={(content) => onRequest({ query: content })}
-          onCancel={abort}
-          placeholder="Enter message..."
-        />
-      </div>
-    </div>
-  );
-};
 ```

@@ -78,7 +78,7 @@ graph LR
 
 | Dependency Package | Version Requirement | Auto Install | Purpose |
 | --- | --- | --- | --- |
-| **@ant-design/x-sdk** | ≥2.2.1 | ✅ | Core SDK, includes Provider and Hook |
+| **@ant-design/x-sdk** | ≥2.2.2 | ✅ | Core SDK, includes Provider and Hook |
 | **@ant-design/x** | Latest | ✅ | UI component library, build chat interface |
 
 #### 🛠️ One-click Environment Check
@@ -94,7 +94,7 @@ npm install @ant-design/x-sdk@latest
 
 | SDK Version | Supported Features         | Compatibility           |
 | ----------- | -------------------------- | ----------------------- |
-| ≥2.2.1      | Complete Provider features | ✅ Recommended          |
+| ≥2.2.2      | Complete Provider features | ✅ Recommended          |
 | 2.2.0       | Basic features             | ⚠️ Partially compatible |
 | <2.2.0      | Not supported              | ❌ Needs upgrade        |
 
