@@ -28,6 +28,7 @@
     "prepublishOnly": "tsx ../../scripts/pre-publish.ts x-skill",
     "version": "tsx scripts/generate-version.ts",
     "clean": "rm -rf coverage lib es",
+    "pretest": "npm run prestart",
     "start": "node bin/index.js",
     "prestart": "npm run version",
     "lint": "npm run version && biome lint bin/",
