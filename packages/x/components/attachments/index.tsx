@@ -100,13 +100,11 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
 
   React.useImperativeHandle(ref, () => ({
     nativeElement: containerRef.current,
-    fileNativeElement: uploadRef.current?.nativeElement?.querySelector(
-      'input[type="file"]',
-    ) as HTMLInputElement,
+    fileNativeElement:
+      uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]'),
     upload: (file) => {
-      const fileInput = uploadRef.current?.nativeElement?.querySelector(
-        'input[type="file"]',
-      ) as HTMLInputElement;
+      const fileInput =
+        uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
       // Trigger native change event
       if (fileInput) {
         const dataTransfer = new DataTransfer();
@@ -117,12 +115,13 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
       }
     },
     select: (options) => {
-      const fileInput = uploadRef.current?.nativeElement?.querySelector(
-        'input[type="file"]',
-      ) as any;
+      const fileInput =
+        uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
       if (fileInput) {
         fileInput.multiple = options?.multiple ?? false;
-        fileInput.accept = options?.accept || props.accept;
+        const acceptValue = options?.accept || props.accept;
+        fileInput.accept =
+          typeof acceptValue === 'string' ? acceptValue : acceptValue?.format || '';
         fileInput.click();
       }
     },
