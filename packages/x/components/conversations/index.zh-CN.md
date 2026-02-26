@@ -43,7 +43,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAA
 | items | 会话列表数据源 | `ItemType`[] | - | - |
 | activeKey | 当前选中的值 | string | - | - |
 | defaultActiveKey | 初始化选中的值 | string | - | - |
-| onActiveChange | 选中变更回调 | (value: string) => void | - | - |
+| onActiveChange | 选中变更回调 | (value: string, item: ItemType) => void | - | - |
 | menu | 会话操作菜单 | ItemMenuProps\| ((conversation: ConversationItemType) => ItemMenuProps) | - | - |
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |
 | shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys\<number\>; items?:ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[];} | - | 2.0.0 |
