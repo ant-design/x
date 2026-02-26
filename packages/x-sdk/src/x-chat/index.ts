@@ -421,7 +421,11 @@ export default function useXChat<
     if (requestParamsList && requestParamsList.length > 0) {
       setTimeout(() => {
         requestParamsList.forEach((requestParams) => {
-          onRequest(requestParams);
+          try {
+            onRequest(requestParams);
+          } catch (e) {
+            console.error('Failed to process a queued request:', e, requestParams);
+          }
         });
         messageQueueRef.current.delete(conversationKey);
       });

@@ -56,7 +56,7 @@ const App = () => {
     },
   ];
 
-  const isHistorySessionId = (sessionId: string) => items.find(({ key }) => key === sessionId);
+  const isHistorySessionId = (sessionId: string) => items.some(({ key }) => key === sessionId);
 
   // 提供者缓存：为每个会话缓存独立的聊天提供者实例
   // Provider cache: cache independent chat provider instances for each conversation
@@ -179,9 +179,7 @@ const App = () => {
         creation={{
           onClick: onAdd,
         }}
-        items={
-          conversations.filter(({ key }) => key !== DEFAULT_KEY).reverse() as ConversationItemType[]
-        }
+        items={conversations.filter(({ key }) => key !== DEFAULT_KEY).reverse()}
         activeKey={activeConversationKey === DEFAULT_KEY ? undefined : activeConversationKey}
         style={style}
         onActiveChange={setActiveConversationKey}
@@ -235,12 +233,13 @@ const App = () => {
             if (activeConversationKey !== DEFAULT_KEY) {
               onRequest({ messages: [{ role: 'user', content: val }] });
             } else {
+              const newConversationKey = `session_${Date.now()}`;
               addConversation({
-                key: 'sessionId_6',
+                key: newConversationKey,
                 label: val,
               });
-              setActiveConversationKey('sessionId_6');
-              queueRequest({ messages: [{ role: 'user', content: val }] }, 'sessionId_6');
+              setActiveConversationKey(newConversationKey);
+              queueRequest({ messages: [{ role: 'user', content: val }] }, newConversationKey);
             }
             senderRef.current?.clear();
           }}
