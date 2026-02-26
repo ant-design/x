@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-
 ### XRequestFunction
-
-=======
-
-#### XRequestFunction
-
-The core function of XRequest, used to create request instances.
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, string>> = (
@@ -16,8 +6,6 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
   options: XRequestOptions<Input, Output>,
 ) => XRequestClass<Input, Output>;
 ```
-
-<<<<<<< HEAD
 
 ### XRequestFunction
 
@@ -55,59 +43,13 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 ### XRequestClass
 
-=======
-
-#### XRequestFunction
-
-| Property | Description               | Type                           | Default | Version |
-| -------- | ------------------------- | ------------------------------ | ------- | ------- |
-| baseURL  | Request interface address | string                         | -       | -       |
-| options  |                           | XRequestOptions<Input, Output> | -       | -       |
-
-#### XRequestOptions
-
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- | --- |
-| callbacks | Request callback handling set | XRequestCallbacks<Output> | - | - |
-| params | Request parameters | Input | - | - |
-| headers | Additional request header configuration | Record<string, string> | - | - |
-| timeout | Request timeout configuration (time from sending request to connecting to service), unit: ms | number | - | - |
-| streamTimeout | Stream mode data timeout configuration (time interval for each chunk return), unit: ms | number | - | - |
-| fetch | Custom fetch object | `typeof fetch` | - | - |
-| middlewares | Middleware, supports pre-request and post-request processing | XFetchMiddlewares | - | - |
-| transformStream | Stream processor | XStreamOptions<Output>['transformStream'] | ((baseURL: string, responseHeaders: Headers) => XStreamOptions<Output>['transformStream']) | - | - |
-| streamSeparator | Stream separator, used to separate different data streams, not effective when transformStream has value | string | \n\n | 2.2.0 |
-| partSeparator | Part separator, used to separate different parts of data, not effective when transformStream has value | string | \n | 2.2.0 |
-| kvSeparator | Key-value separator, used to separate keys and values, not effective when transformStream has value | string | : | 2.2.0 |
-| manual | Whether to manually control sending requests, when `true`, need to manually call `run` method | boolean | false | - |
-| retryInterval | When request is interrupted or fails, retry interval time, unit ms, no setting will not auto retry | number | - | - |
-| retryTimes | Retry count limit, will not retry after exceeding count | number | - | - |
-
-#### XRequestCallbacks
-
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| onSuccess | Callback on success, when used with Chat Provider will additionally get assembled message | (chunks: Output[], responseHeaders: Headers, message: ChatMessage) => void | - | - |
-| onError | Error handling callback, `onError` can return a number indicating retry interval when request is abnormal (unit ms), when `options.retryInterval` exists simultaneously, `onError` return value has higher priority, when used with Chat Provider will additionally get assembled fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
-| onUpdate | Message update callback, when used with Chat Provider will additionally get assembled message | (chunk: Output,responseHeaders: Headers, message: ChatMessage) => void | - | - |
-
-#### XRequestClass
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
-
-| Property | Description    | Type       | Default | Version |
-| -------- | -------------- | ---------- | ------- | ------- |
-| abort    | Cancel request | () => void | -       | -       |
-
-<<<<<<< HEAD | run | Manually execute request (effective when `manual=true`) | (params?: Input) => void | - | - | | isRequesting | Whether currently requesting | boolean | - | - |
+| abort | Cancel request | () => void | - | - |
+| run | Manually execute request (effective when `manual=true`) | (params?: Input) => void | - | - |
+| isRequesting | Whether currently requesting | boolean | - | - |
 
 ### setXRequestGlobalOptions
-
-======= | run | Manually execute request, effective when `manual=true` | (params?: Input) => void | - | - | | isRequesting | Whether currently requesting | boolean | - | - |
-
-#### setXRequestGlobalOptions
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 type setXRequestGlobalOptions<Input, Output> = (
@@ -115,15 +57,7 @@ type setXRequestGlobalOptions<Input, Output> = (
 ) => void;
 ```
 
-<<<<<<< HEAD
-
 ### XRequestGlobalOptions
-
-=======
-
-#### XRequestGlobalOptions
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 type XRequestGlobalOptions<Input, Output> = Pick<
@@ -132,15 +66,7 @@ type XRequestGlobalOptions<Input, Output> = Pick<
 >;
 ```
 
-<<<<<<< HEAD
-
 ### XFetchMiddlewares
-
-=======
-
-#### XFetchMiddlewares
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 interface XFetchMiddlewares {
@@ -148,8 +74,6 @@ interface XFetchMiddlewares {
   onResponse?: (response: Response) => Promise<Response>;
 }
 ```
-
-<<<<<<< HEAD
 
 ## FAQ
 
@@ -191,7 +115,3 @@ const request = XRequest(url, {
   transformStream: new TransformStream({ ... }), // Do not persist in Provider/useState
 });
 ```
-
-=======
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8

@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-
 ### XRequestFunction
-
-=======
-
-#### XRequestFunction
-
-XRequest 的核心函数，用于创建请求实例。
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, string>> = (
@@ -17,30 +7,14 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 ) => XRequestClass<Input, Output>;
 ```
 
-<<<<<<< HEAD
-
 ### XRequestFunction
-
-=======
-
-#### XRequestFunction
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 | 属性    | 描述         | 类型                             | 默认值 | 版本 |
 | ------- | ------------ | -------------------------------- | ------ | ---- |
 | baseURL | 请求接口地址 | string                           | -      | -    |
 | options |              | XRequestOptions\<Input, Output\> | -      | -    |
 
-<<<<<<< HEAD
-
 ### XRequestOptions
-
-=======
-
-#### XRequestOptions
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -59,15 +33,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | retryInterval | 请求中断或者失败时，重试的间隔时间，单位ms，不设置将不会自动重试 | number | - | - |
 | retryTimes | 重试的次数限制，超过次数后不在进行重试 | number | - | - |
 
-<<<<<<< HEAD
-
 ### XRequestCallbacks
-
-=======
-
-#### XRequestCallbacks
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -75,15 +41,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | onError | 错误处理的回调，`onError` 可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval` 同时存在时，`onError`返回值优先级更高, 当与 Chat Provider 一起使用时会额外获取到组装好的 fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
 | onUpdate | 消息更新的回调，当与 Chat Provider 一起使用时会额外获取到组装好的 message | (chunk: Output,responseHeaders: Headers, message: ChatMessage) => void | - | - |
 
-<<<<<<< HEAD
-
 ### XRequestClass
-
-=======
-
-#### XRequestClass
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 | 属性         | 描述                                | 类型                     | 默认值 | 版本 |
 | ------------ | ----------------------------------- | ------------------------ | ------ | ---- |
@@ -91,15 +49,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | run          | 手动执行请求，当`manual=true`时有效 | (params?: Input) => void | -      | -    |
 | isRequesting | 当前是否在请求中                    | boolean                  | -      | -    |
 
-<<<<<<< HEAD
-
 ### setXRequestGlobalOptions
-
-=======
-
-#### setXRequestGlobalOptions
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 type setXRequestGlobalOptions<Input, Output> = (
@@ -107,15 +57,7 @@ type setXRequestGlobalOptions<Input, Output> = (
 ) => void;
 ```
 
-<<<<<<< HEAD
-
 ### XRequestGlobalOptions
-
-=======
-
-#### XRequestGlobalOptions
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 type XRequestGlobalOptions<Input, Output> = Pick<
@@ -124,15 +66,7 @@ type XRequestGlobalOptions<Input, Output> = Pick<
 >;
 ```
 
-<<<<<<< HEAD
-
 ### XFetchMiddlewares
-
-=======
-
-#### XFetchMiddlewares
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```ts | pure
 interface XFetchMiddlewares {
@@ -140,8 +74,6 @@ interface XFetchMiddlewares {
   onResponse?: (response: Response) => Promise<Response>;
 }
 ```
-
-<<<<<<< HEAD
 
 ## FAQ
 
@@ -183,7 +115,3 @@ const request = XRequest(url, {
   transformStream: new TransformStream({ ... }), // 不要持久化在 Provider/useState
 });
 ```
-
-=======
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8

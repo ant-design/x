@@ -28,11 +28,10 @@ description: 专注讲解 XRequest 的实际配置和使用，基于官方文档
   - [独立使用](#独立使用)
   - [配合其他技能](#配合其他技能)
 - [🚨 开发规则](#-开发规则)
-- [🔗 参考资源](#-参考资源) <<<<<<< HEAD
+- [🔗 参考资源](#-参考资源)
   - [📚 核心参考文档](#-核心参考文档)
   - [🌐 SDK官方文档](#-SDK官方文档)
-  - # [💻 示例代码](#-示例代码)
-    > > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
+  - [💻 示例代码](#-示例代码)
 
 # 🚀 快速开始
 
@@ -302,20 +301,6 @@ const checkConfig = () => {
 };
 ```
 
-# <<<<<<< HEAD
-
-# 🔗 参考资源
-
-## 📚 核心文档
-
-| 资源名称 | 链接 | 说明 | 依赖关系 |
-| --- | --- | --- | --- |
-| **官方文档** | [XRequest 文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md) | 最新功能说明 | 独立资源 |
-| **API参考** | [API.md](reference/API.md) | 完整API文档 | 必读 |
-| **服务商配置** | [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) | 各服务商配置示例 | 可选 |
-
-> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
-
 ## 🎯 技能协作
 
 ```mermaid
@@ -334,8 +319,6 @@ graph LR
 | **标准AI应用** | x-request → use-x-chat | 先配置请求，再构建界面 | 15分钟 |
 | **完整自定义** | x-request → x-chat-provider → use-x-chat | 完整工作流 | 30分钟 |
 
-<<<<<<< HEAD
-
 # 🔗 参考资源
 
 ## 📚 核心参考文档
@@ -351,5 +334,4 @@ graph LR
 
 ## 💻 示例代码
 
-- # [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例
-  > > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例
