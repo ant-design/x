@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.2.2",
+  "version": "2.2.2-beta.7",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
@@ -44,6 +44,7 @@
     "husky": "^9.1.6",
     "lint-staged": "^16.1.5",
     "marked-emoji": "^2.0.1",
+    "glob": "^13.0.0",
     "prettier": "^3.3.3",
     "react-markdown": "^10.1.0",
     "size-limit": "^12.0.0"
