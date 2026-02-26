@@ -104,7 +104,7 @@ export default function useXChat<
   const requestHandlerRef =
     React.useRef<AbstractXRequestClass<Input, Output, ChatMessage>>(undefined);
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
-  // fix #1431, should give a default key to create store
+
   const [conversationKey, setConversationKey] = useState(
     originalConversationKey || generateConversationKey(),
   );
@@ -232,6 +232,7 @@ export default function useXChat<
       });
     } else {
       // Add placeholder message
+
       setMessages((ori: MessageInfo<ChatMessage>[]) => {
         let nextMessages = [...ori, ...messages];
         if (requestPlaceholder) {
