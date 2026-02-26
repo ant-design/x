@@ -1,6 +1,6 @@
 ---
 name: x-chat-provider
-version: 2.2.2-beta.7
+version: 2.2.2-beta.8
 description: Focus on implementing custom Chat Provider, helping to adapt any streaming interface to Ant Design X standard format
 ---
 

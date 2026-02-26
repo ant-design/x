@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.2.2-beta.7",
+  "version": "2.2.2-beta.8",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
