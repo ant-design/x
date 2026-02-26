@@ -237,6 +237,7 @@ const App = () => {
             } else {
               addConversation({
                 key: 'sessionId_6',
+                label: val,
               });
               setActiveConversationKey('sessionId_6');
               queueRequest({ messages: [{ role: 'user', content: val }] }, 'sessionId_6');

@@ -26,6 +26,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <code src="./demos/x-chat/openai-callback.tsx">Model Request Callback</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">Custom XRequest.fetch</code>
 <code src="./demos/x-chat/request-openai-node.tsx">Custom request</code>
+<code src="./demos/x-conversations/session-key.tsx">SessionId - ConversationKey</code>
 
 ## API
 
@@ -57,7 +58,7 @@ type useXChat<
 | conversationKey | Session unique identifier (globally unique), used to distinguish different sessions | string | Symbol('ConversationKey') | - |
 | defaultMessages | Default display messages | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
-| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error;errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
+| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
 | requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { messages: Message[] }) => ChatMessage \| Promise\<Message\> | - | - |
 
 ### XChatConfigReturnType
@@ -74,6 +75,7 @@ type useXChat<
 | setMessages | Directly modify messages without triggering requests | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 | removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => void | - | - |
+| queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
 
 #### MessageInfo
 
