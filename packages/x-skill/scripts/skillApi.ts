@@ -66,13 +66,12 @@ function processLanguage(lang: string, skills: SkillConfig): void {
   console.log(`处理 ${lang} 语言...`);
 
   // 根据语言确定目标目录
-  const baseTargetDir =
-    lang === 'zh' ? path.join(__dirname, '../../skills-zh') : path.join(__dirname, '../../skills');
+  const baseTargetDir = lang === 'zh' ? config.paths.skillsZhDir : config.paths.skillsEnDir;
 
   for (const [skillName, sourcePath] of Object.entries(skills)) {
     console.log(`  处理技能: ${skillName}`);
 
-    const fullSourcePath = path.join(__dirname, '../../../..', sourcePath);
+    const fullSourcePath = path.join(__dirname, '..', '..', '..', sourcePath);
     const apiContent = extractApiContent(fullSourcePath);
     if (!apiContent) {
       console.warn(`    跳过 ${skillName}: 未找到API内容`);

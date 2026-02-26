@@ -13,15 +13,16 @@ import chalk from 'chalk';
 import $ from 'dekko';
 import * as fs from 'fs';
 import * as path from 'path';
+import config from './config';
 
 // Get project root directory
-const rootPath = path.join(__dirname, '..');
+const rootPath = config.paths.rootDir;
 
 // Check bin directory
-$(path.join(rootPath, 'bin')).isDirectory().hasFile('index.js');
+$(config.paths.binDir).isDirectory().hasFile('index.js');
 
 // Check if bin/index.js is executable
-const binIndexPath = path.join(rootPath, 'bin', 'index.js');
+const binIndexPath = path.join(config.paths.binDir, 'index.js');
 try {
   const stats = fs.statSync(binIndexPath);
   const isExecutable = (stats.mode & 0o111) !== 0;
@@ -34,12 +35,12 @@ try {
 }
 
 // Check skills directories
-$(path.join(rootPath, 'skills')).isDirectory();
-$(path.join(rootPath, 'skills-zh')).isDirectory();
+$(config.paths.skillsEnDir).isDirectory();
+$(config.paths.skillsZhDir).isDirectory();
 
 // Get all skill directories for English skills
-const skillsEnPath = path.join(rootPath, 'skills');
-const skillsZhPath = path.join(rootPath, 'skills-zh');
+const skillsEnPath = config.paths.skillsEnDir;
+const skillsZhPath = config.paths.skillsZhDir;
 
 const skillsEn = fs
   .readdirSync(skillsEnPath, { withFileTypes: true })

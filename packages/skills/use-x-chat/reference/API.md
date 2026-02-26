@@ -1,0 +1,63 @@
+### useXChat
+
+```tsx | pure
+type useXChat<
+  ChatMessage extends SimpleType = object,
+  ParsedMessage extends SimpleType = ChatMessage,
+  Input = RequestParams<ChatMessage>,
+  Output = SSEOutput,
+> = (config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) => XChatConfigReturnType;
+```
+
+<!-- prettier-ignore -->
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| ChatMessage | Message data type, defines the structure of chat messages | object | object | - |
+| ParsedMessage | Parsed message type, message format for component consumption | ChatMessage | ChatMessage | - |
+| Input | Request parameter type, defines the structure of request parameters | RequestParams\<ChatMessage\> | RequestParams\<ChatMessage\> | - |
+| Output | Response data type, defines the format of received response data | SSEOutput | SSEOutput | - |
+
+### XChatConfig
+
+<!-- prettier-ignore -->
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| provider | Data provider used to convert data and requests of different structures into formats that useXChat can consume. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, and you can also implement your own Provider by inheriting `AbstractChatProvider`. See: [Chat Provider Documentation](/x-sdks/chat-provider) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
+| conversationKey | Session unique identifier (globally unique), used to distinguish different sessions | string | Symbol('ConversationKey') | - |
+| defaultMessages | Default display messages | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
+| parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
+| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
+| requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { messages: Message[] }) => ChatMessage \| Promise\<Message\> | - | - |
+
+### XChatConfigReturnType
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| abort | Cancel request | () => void | - | - |
+| isRequesting | Whether a request is in progress | boolean | - | - |
+| isDefaultMessagesRequesting | Whether the default message list is requesting | boolean | false | 2.2.0 |
+| messages | Current managed message list content | MessageInfo\<ChatMessage\>[] | - | - |
+| parsedMessages | Content translated through `parser` | MessageInfo\<ParsedMessages\>[] | - | - |
+| onReload | Regenerate, will send request to backend and update the message with new returned data | (id: string \| number, requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
+| onRequest | Add a Message and trigger request | (requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
+| setMessages | Directly modify messages without triggering requests | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
+| setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
+| removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => void | - | - |
+| queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
+
+#### MessageInfo
+
+```ts
+interface MessageInfo<ChatMessage> {
+  id: number | string;
+  message: ChatMessage;
+  status: MessageStatus;
+  extra?: AnyObject;
+}
+```
+
+#### MessageStatus
+
+```ts
+type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+```

@@ -2,11 +2,12 @@
 
 import fs from 'fs';
 import path from 'path';
+import config from './config';
 
-const packageJsonPath = path.join(__dirname, '..', 'package.json');
-const skillsZhDir = path.join(__dirname, '..', 'skills-zh');
-const skillsEnDir = path.join(__dirname, '..', 'skills');
-const marketplaceJsonPath = path.join(__dirname, '..', '.claude-plugin', 'marketplace.json');
+const packageJsonPath = config.paths.packageJsonPath;
+const skillsZhDir = config.paths.skillsZhDir;
+const skillsEnDir = config.paths.skillsEnDir;
+const marketplaceJsonPath = config.paths.marketplaceJsonPath;
 
 // Read package.json
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
