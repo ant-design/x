@@ -1,22 +1,22 @@
 ---
 name: use-x-chat
 version: 2.2.2-beta.7
-description: Focuses on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, and more
+description: Focuses on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, etc.
 ---
 
 # 🎯 Skill Positioning
 
-> **Core Positioning**: Using the `useXChat` Hook to build professional AI conversation applications **Prerequisites**: Already have a custom Chat Provider (refer to [x-chat-provider skill](../x-chat-provider))
+> **Core Positioning**: Using `useXChat` Hook to build professional AI conversation applications **Prerequisites**: Already have custom Chat Provider (refer to [x-chat-provider skill](../x-chat-provider))
 
 ## Table of Contents
 
 - [🚀 Quick Start](#-quick-start)
   - [Dependency Management](#1-dependency-management)
-  - [Three-Step Integration](#2-three-step-integration)
+  - [Three-step Integration](#2-three-step-integration)
 - [🧩 Core Concepts](#-core-concepts)
-  - [Technology Stack Architecture](#technology-stack-architecture)
+  - [Tech Stack Architecture](#tech-stack-architecture)
   - [Data Model](#data-model)
-- [🔧 Core Features Explained](#-core-features-explained)
+- [🔧 Core Function Details](#-core-function-details)
   - [Message Management](#1-message-management)
   - [Request Control](#2-request-control)
   - [Error Handling](#3-error-handling)
@@ -24,8 +24,9 @@ description: Focuses on explaining how to use the useXChat Hook, including custo
 - [📋 Prerequisites and Dependencies](#-prerequisites-and-dependencies)
 - [🚨 Development Rules](#-development-rules)
 - [🔗 Reference Resources](#-reference-resources)
-  - [API.md](reference/API.md)
-  - [EXAMPLES.md](reference/EXAMPLES.md)
+  - [📚 Core Reference Documents](#-core-reference-documents)
+  - [🌐 SDK Official Documentation](#-sdk-official-documentation)
+  - [💻 Example Code](#-example-code)
 
 # 🚀 Quick Start
 
@@ -35,61 +36,61 @@ description: Focuses on explaining how to use the useXChat Hook, including custo
 
 ### 📋 System Requirements
 
-- **@ant-design/x-sdk**: 2.2.2+ (auto-installed)
-- **@ant-design/x**: latest (UI components, auto-installed)
+- **@ant-design/x-sdk**: 2.2.2+ (auto install)
+- **@ant-design/x**: Latest version (UI components, auto install)
 
-### ⚠️ Automatic Version Issue Resolution
+### ⚠️ Version Issue Auto Fix
 
-If version mismatches are detected, the skill will automatically:
+If version mismatch is detected, the skill will automatically:
 
 - ✅ Prompt current version status
 - ✅ Provide fix suggestions
 - ✅ Use relative paths to ensure compatibility
 
-#### 🎯 Built-in Version Check
+#### 🎯 Skill Built-in Version Check
 
-The use-x-chat skill includes built-in version checking functionality, automatically checking version compatibility on startup:
+use-x-chat skill has built-in version check functionality, automatically checks version compatibility on startup:
 
-**🔍 Automatic Check Features** When the skill starts, it automatically checks if the `@ant-design/x-sdk` version meets requirements (≥2.2.2):
+**🔍 Auto Check Function** When skill starts, it automatically checks if `@ant-design/x-sdk` version meets requirements (≥2.2.2):
 
-**📋 Check Contents:**
+**📋 Check Contents Include:**
 
 - ✅ Currently installed version
-- ✅ Whether it meets minimum requirements (≥2.2.2)
-- ✅ Automatically provides fix suggestions
+- ✅ Whether minimum requirements are met (≥2.2.2)
+- ✅ Auto provide fix suggestions
 - ✅ Friendly error prompts
 
-**🛠️ Version Issue Fixes** If version mismatches are detected, the skill provides specific fix commands:
+**🛠️ Version Issue Fix** If version mismatch is detected, skill will provide specific fix commands:
 
 ```bash
-# Auto-suggested fix commands
+# Auto prompted fix commands
 npm install @ant-design/x-sdk@^2.2.2
 
 # Or install latest version
 npm install @ant-design/x-sdk@latest
 ```
 
-## 2. Three-Step Integration
+## 2. Three-step Integration
 
 ### Step 1: Prepare Provider
 
-This part is handled by the x-chat-provider skill
+This part is handled by x-chat-provider skill
 
 ```ts
 import { MyChatProvider } from './MyChatProvider';
 import { XRequest } from '@ant-design/x-sdk';
 
-// Recommended to use XRequest as the default request method
+// Recommended to use XRequest as default request method
 const provider = new MyChatProvider({
-  // Default use of XRequest, no custom fetch needed
+  // Default use XRequest, no need for custom fetch
   request: XRequest('https://your-api.com/chat'),
-  // When requestPlaceholder is set, placeholder messages will display before requests start
+  // When setting requestPlaceholder, will display placeholder message before request starts
   requestPlaceholder: {
     content: 'Thinking...',
     role: 'assistant',
     timestamp: Date.now(),
   },
-  // When requestFallback is set, fallback messages will display when requests fail
+  // When setting requestFallback, will display fallback message when request fails
   requestFallback: (_, { error, errorInfo, messageInfo }) => {
     if (error.name === 'AbortError') {
       return {
@@ -151,7 +152,7 @@ const ChatUI = () => {
 
 # 🧩 Core Concepts
 
-## Technology Stack Architecture
+## Tech Stack Architecture
 
 ```mermaid
 graph TD
@@ -164,13 +165,13 @@ graph TD
 
 ### Data Model
 
-> ⚠️ **Important Reminder**: The `messages` type is `MessageInfo<MessageType>[]`, not directly `MessageType`
+> ⚠️ **Important Reminder**: `messages` type is `MessageInfo<MessageType>[]`, not direct `MessageType`
 
 ```ts
 interface MessageInfo<Message> {
-  id: number | string; // Unique message identifier
+  id: number | string; // Message unique identifier
   message: Message; // Actual message content
-  status: MessageStatus; // Sending status
+  status: MessageStatus; // Send status
   extraInfo?: AnyObject; // Extended information
 }
 
@@ -178,11 +179,11 @@ interface MessageInfo<Message> {
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
 ```
 
-# 🔧 Core Features Explained
+# 🔧 Core Function Details
 
-> 💡 **Tip**: APIs may update with versions, it's recommended to check [official documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.md) for the latest information
+> 💡 **Tip**: API may update with versions, recommend checking [official documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md) for latest information
 
-Core features reference content [CORE.md](reference/CORE.md)
+Core functionality reference content [CORE.md](reference/CORE.md)
 
 # 📋 Prerequisites and Dependencies
 
@@ -192,52 +193,53 @@ Core features reference content [CORE.md](reference/CORE.md)
 
 | Dependency Type | Skill | Description | Required |
 | --- | --- | --- | --- |
-| **Core Dependency** | **x-chat-provider** | Provides custom Provider instances, uses XRequest by default, **must** be used with use-x-chat | **Required** |
-| **Or** | **Built-in Provider** | Built-in Providers like OpenAI/DeepSeek, uses XRequest by default | **Required** |
-| **Recommended** | **x-request** | Configure request parameters and authentication, as the default request method | **Recommended** |
+| **Core Dependency** | **x-chat-provider** | Provides custom Provider instance, default uses XRequest, **must** cooperate with use-x-chat | **Required** |
+| **Or** | **Built-in Provider** | OpenAI/DeepSeek and other built-in Providers, default uses XRequest | **Required** |
+| **Recommended Dependency** | **x-request** | Configure request parameters and authentication, as default request method | **Recommended** |
 
 ## 🎯 Usage Scenario Comparison Table
 
 | Usage Scenario | Required Skill Combination | Usage Order |
 | --- | --- | --- |
 | **Private API Adaptation** | x-chat-provider → use-x-chat | Create Provider first, then use |
-| **Standard API Usage** | use-x-chat (built-in Provider) | Use directly |
-| **Authentication Required** | x-request → use-x-chat | Configure request first, then use |
-| **Full Customization** | x-chat-provider → x-request → use-x-chat | Complete workflow |
+| **Standard API Usage** | use-x-chat (built-in Provider) | Direct use |
+| **Need Authentication Configuration** | x-request → use-x-chat | Configure request first, then use |
+| **Complete Customization** | x-chat-provider → x-request → use-x-chat | Complete workflow |
 
 # 🚨 Development Rules
 
-## Before using use-x-chat, you must confirm:
+## Before using use-x-chat must confirm:
 
-- [ ] **Provider source** (choose one of the following):
-  - [ ] Used **x-chat-provider** to create custom Provider
+- [ ] **Has Provider source** (choose one of the following):
+  - [ ] Has used **x-chat-provider** to create custom Provider
   - [ ] Decided to use built-in Provider (OpenAI/DeepSeek)
-- [ ] Installed @ant-design/x-sdk
-- [ ] Understand MessageInfo data structure
-- [ ] Prepared UI components
+- [ ] Has installed @ant-design/x-sdk
+- [ ] Has understood MessageInfo data structure
+- [ ] Has prepared UI components
 
 ### Test Case Rules
 
-- **If the user doesn't explicitly need test cases, don't add test files**
-- **Only create test cases when the user explicitly requests**
+- **If user doesn't explicitly need test cases, don't add test files**
+- **Only create test cases when user explicitly requests**
 
 ### Code Quality Rules
 
-- **After completion, must check types**: Run `tsc --noEmit` to ensure no type errors
+- **Must check types after completion**: Run `tsc --noEmit` to ensure no type errors
 - **Keep code clean**: Remove all unused variables and imports
 
 # 🔗 Reference Resources
 
-## 📚 Core Reference Documentation
+## 📚 Core Reference Documents
 
+- [API.md](reference/API.md) - Complete API reference documentation
 - [EXAMPLES.md](reference/EXAMPLES.md) - All practical example code
 
 ## 🌐 SDK Official Documentation
 
-- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
-- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
-- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
 
-### 💻 Example Code
+## 💻 Example Code
 
-- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - Complete custom Provider example
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - Custom Provider complete example

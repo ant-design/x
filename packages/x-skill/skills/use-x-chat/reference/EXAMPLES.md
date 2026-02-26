@@ -14,7 +14,6 @@ const App: React.FC = () => {
   const [conversations, setConversations] = useState([{ key: '1', label: 'New Conversation' }]);
   const [activeKey, setActiveKey] = useState('1');
   const senderRef = useRef<GetRef<typeof Sender>>(null);
-
   // Create new conversation
   const handleNewConversation = () => {
     const newKey = Date.now().toString();
@@ -38,7 +37,7 @@ const App: React.FC = () => {
       return filtered;
     });
 
-    // If deleted conversation is active, switch to the first one
+    // If deleted current active conversation, switch to first one
     if (activeKey === key) {
       setActiveKey(conversations[0]?.key || '1');
     }
@@ -143,7 +142,7 @@ const App: React.FC = () => {
 export default App;
 ```
 
-## Regenerate with State Management
+## State-managed Regenerate
 
 ```tsx
 import React, { useRef, useState } from 'react';
@@ -183,7 +182,7 @@ const ChatWithRegenerate: React.FC = () => {
     },
   });
 
-  // Track message ID being regenerated
+  // Track regenerating message ID
   const [regeneratingId, setRegeneratingId] = useState<string | number | null>(null);
 
   const handleRegenerate = (messageId: string | number): void => {

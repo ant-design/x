@@ -1,7 +1,7 @@
 ---
 name: x-request
 version: 2.2.2-beta.7
-description: Focuses on the practical configuration and usage of XRequest, providing accurate configuration instructions based on official documentation
+description: Focuses on explaining the actual configuration and usage of XRequest, providing accurate configuration instructions based on official documentation
 ---
 
 # 🎯 Skill Positioning
@@ -20,17 +20,20 @@ description: Focuses on the practical configuration and usage of XRequest, provi
   - [Streaming Configuration](#3-streaming-configuration)
 - [🛡️ Security Guide](#️-security-guide)
   - [Environment Security Configuration](#environment-security-configuration)
-  - [Authentication Methods Comparison](#authentication-methods-comparison)
+  - [Authentication Method Comparison](#authentication-method-comparison)
 - [🔍 Debugging and Testing](#-debugging-and-testing)
   - [Debug Configuration](#debug-configuration)
   - [Configuration Validation](#configuration-validation)
 - [📋 Usage Scenarios](#-usage-scenarios)
   - [Standalone Usage](#standalone-usage)
-  - [Integration with Other Skills](#integration-with-other-skills)
+  - [Cooperate with Other Skills](#cooperate-with-other-skills)
 - [🚨 Development Rules](#-development-rules)
 - [🔗 Reference Resources](#-reference-resources)
+  - [📚 Core Reference Documents](#-core-reference-documents)
+  - [🌐 SDK Official Documentation](#-sdk-official-documentation)
+  - [� Example Code](#-example-code)
 
-# 🚀 Quick Start
+# �🚀 Quick Start
 
 ## Dependency Management
 
@@ -60,16 +63,16 @@ npm ls @ant-design/x-sdk
 ```typescript
 import { XRequest } from '@ant-design/x-sdk';
 
-// Minimal configuration: only need to provide API URL
+// Minimal configuration: only need to provide API address
 const request = XRequest('https://api.example.com/chat');
 
 // For manual control (used in Provider scenarios)
 const providerRequest = XRequest('https://api.example.com/chat', {
-  manual: true, // Only this item usually needs explicit configuration
+  manual: true, // Usually only this needs explicit configuration
 });
 ```
 
-> 💡 **Tip**: XRequest has built-in reasonable default configurations, in most cases you only need to provide the API URL to use it.
+> 💡 **Tip**: XRequest has built-in reasonable default configurations. In most cases, you only need to provide the API address to use.
 
 # 📦 Tech Stack Overview
 
@@ -77,7 +80,7 @@ const providerRequest = XRequest('https://api.example.com/chat', {
 
 ```mermaid
 graph TD
-    A[XRequest] --> B[Network Requests]
+    A[XRequest] --> B[Network Request]
     A --> C[Authentication Management]
     A --> D[Error Handling]
     A --> E[Streaming Processing]
@@ -89,15 +92,15 @@ graph TD
 
 ## 🔑 Core Concepts
 
-| Concept | Role Positioning | Core Responsibilities | Use Cases |
+| Concept | Role Positioning | Core Responsibility | Usage Scenario |
 | --- | --- | --- | --- |
 | **XRequest** | 🌐 Request Tool | Handle all network communication, authentication, error handling | Unified request management |
-| **Global Config** | ⚙️ Config Center | One-time configuration, multiple uses | Reduce duplicate code |
-| **Stream Config** | 🔄 Stream Processing | Support SSE and JSON response formats | AI chat scenarios |
+| **Global Configuration** | ⚙️ Configuration Center | Configure once, use multiple times | Reduce duplicate code |
+| **Streaming Configuration** | 🔄 Streaming Processing | Support SSE and JSON response formats | AI conversation scenarios |
 
 # 🔧 Core Configuration Details
 
-Core features reference content [CORE.md](reference/CORE.md)
+Core functionality reference content [CORE.md](reference/CORE.md)
 
 # 🛡️ Security Guide
 
@@ -107,11 +110,11 @@ Core features reference content [CORE.md](reference/CORE.md)
 
 | Runtime Environment | Security Level | Configuration Method | Risk Description |
 | --- | --- | --- | --- |
-| **Browser Frontend** | 🔴 High Risk | ❌ Prohibit key config | Keys will be directly exposed to users |
-| **Node.js Backend** | 🟢 Safe | ✅ Environment variables | Keys stored on server side |
+| **Browser Frontend** | 🔴 High Risk | ❌ Prohibit key configuration | Keys will be directly exposed to users |
+| **Node.js Backend** | 🟢 Safe | ✅ Environment variable configuration | Keys stored on server side |
 | **Proxy Service** | 🟢 Safe | ✅ Same-origin proxy forwarding | Keys managed by proxy service |
 
-### 🔐 Authentication Methods Comparison
+### 🔐 Authentication Method Comparison
 
 | Authentication Method    | Applicable Environment | Configuration Example           | Security  |
 | ------------------------ | ---------------------- | ------------------------------- | --------- |
@@ -124,7 +127,7 @@ Core features reference content [CORE.md](reference/CORE.md)
 
 ## Debug Configuration
 
-### 🛠️ Debug Templates
+### 🛠️ Debug Template
 
 **Node.js Debug Configuration**:
 
@@ -159,7 +162,7 @@ const validateSecurity = (config: any) => {
 
   if (isBrowser && hasAuth) {
     throw new Error(
-      '❌ Frontend environment prohibits Authorization configuration, risk of key leakage!',
+      '❌ Frontend environment prohibits Authorization configuration, key leakage risk!',
     );
   }
 
@@ -170,7 +173,7 @@ const validateSecurity = (config: any) => {
 // Usage example
 validateSecurity({
   headers: {
-    // Don't include Authorization
+    // Do not include Authorization
   },
 });
 ```
@@ -194,9 +197,9 @@ const response = await testRequest();
 console.log(response);
 ```
 
-## Integration with Other Skills
+## Cooperate with Other Skills
 
-### 🔄 Skill Collaboration Flow
+### 🔄 Skill Collaboration Process
 
 ```mermaid
 graph TD
@@ -208,16 +211,16 @@ graph TD
 
 | Usage Method | Cooperating Skill | Purpose | Example |
 | --- | --- | --- | --- |
-| **Standalone** | None | Directly initiate network requests | Test interface availability |
-| **With x-chat-provider** | x-chat-provider | Configure requests for custom Provider | Configure private API |
-| **With use-x-chat** | use-x-chat | Configure requests for built-in Provider | Configure OpenAI API |
-| **Complete AI Application** | x-request → x-chat-provider → use-x-chat | Configure requests for entire system | Complete AI chat application |
+| **Standalone Usage** | None | Directly initiate network requests | Test interface availability |
+| **Cooperate with x-chat-provider** | x-chat-provider | Configure requests for custom Provider | Configure private API |
+| **Cooperate with use-x-chat** | use-x-chat | Configure requests for built-in Provider | Configure OpenAI API |
+| **Complete AI Application** | x-request → x-chat-provider → use-x-chat | Configure requests for entire system | Complete AI conversation application |
 
 ### ⚠️ useXChat Integration Security Warning
 
-**Important Warning: useXChat is only for frontend environments, Authorization is prohibited in XRequest configuration!**
+**Important Warning: useXChat is only for frontend environments, XRequest configuration must not include Authorization!**
 
-**❌ Incorrect Configuration (Dangerous)**:
+**❌ Wrong Configuration (Dangerous)**:
 
 ```typescript
 // Extremely dangerous: keys will be directly exposed to browser
@@ -232,7 +235,7 @@ const unsafeRequest = XRequest('https://api.openai.com/v1/chat/completions', {
 **✅ Correct Configuration (Safe)**:
 
 ```typescript
-// Frontend security configuration: use proxy service
+// Frontend safe configuration: use proxy service
 const safeRequest = XRequest('/api/proxy/openai', {
   params: {
     model: 'gpt-3.5-turbo',
@@ -256,16 +259,16 @@ const safeRequest = XRequest('/api/proxy/openai', {
 
 ## ✅ Configuration Checklist
 
-Before using XRequest, please confirm the following configurations are correctly set:
+Please confirm the following configurations are correctly set before using XRequest:
 
 ### 🔍 Configuration Checklist
 
 | Check Item | Status | Description |
 | --- | --- | --- |
-| **API URL** | ✅ Must configure | `XRequest('https://api.xxx.com')` |
-| **Auth Info** | ⚠️ Environment dependent | Frontend❌prohibited, Node.js✅available |
-| **manual config** | ✅ Provider scenario | Must be set to `true` in Provider, other scenarios need to be set according to actual situation |
-| **Other configs** | ❌ No need to configure | Built-in reasonable defaults already exist |
+| **API Address** | ✅ Must configure | `XRequest('https://api.xxx.com')` |
+| **Authentication** | ⚠️ Environment related | Frontend ❌ prohibited, Node.js ✅ available |
+| **manual config** | ✅ Provider scenario | Needs to be set to `true` in Provider, other scenarios need to be set according to actual situation |
+| **Other configs** | ❌ No need to configure | Built-in reasonable defaults |
 | **Interface availability** | ✅ Recommended test | Use debug configuration to verify |
 
 ### 🛠️ Quick Validation Script
@@ -320,14 +323,17 @@ graph LR
 
 # 🔗 Reference Resources
 
-## 📚 Core Reference Documentation
+## 📚 Core Reference Documents
 
-- [API.md](reference/API.md) - Complete API documentation
-- [CORE.md](reference/CORE.md) - Core features reference content
-- [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) - Configuration examples for various service providers
+- [API.md](reference/API.md) - Complete API reference documentation
+- [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) - Service provider configuration examples
 
 ## 🌐 SDK Official Documentation
 
-- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
-- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
-- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
+
+## 💻 Example Code
+
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - Custom Provider complete example

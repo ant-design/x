@@ -2,7 +2,7 @@
 
 XRequest has built-in reasonable default configurations, **no additional configuration needed to use**.
 
-**Built-in Defaults**:
+**Built-in Default Values**:
 
 - `method: 'POST'`
 - `headers: { 'Content-Type': 'application/json' }`
@@ -13,7 +13,7 @@ XRequest has built-in reasonable default configurations, **no additional configu
 
 | Environment Type | Configuration Method | Security | Example |
 | --- | --- | --- | --- |
-| **Browser Frontend** | ❌ Prohibit direct configuration | Dangerous | Keys will be exposed to users |
+| **Frontend Browser** | ❌ Prohibit direct configuration | Dangerous | Keys will be exposed to users |
 | **Node.js** | ✅ Environment variables | Safe | `process.env.API_KEY` |
 | **Proxy Service** | ✅ Same-origin proxy | Safe | `/api/proxy/chat` |
 
@@ -44,7 +44,7 @@ const browserConfig = {
 import { XRequest } from '@ant-design/x-sdk';
 
 // ⚠️ Note: The following examples apply to Node.js environment
-// Frontend environment please use proxy service to avoid token leakage
+// For frontend environments, use proxy services to avoid token leakage
 const request = XRequest('https://your-api.com/chat', {
   headers: {
     Authorization: 'Bearer your-token', // ⚠️ Only for Node.js environment
@@ -70,7 +70,9 @@ const request = XRequest('https://your-api.com/chat', {
 });
 ```
 
-> ⚠️ **Important Reminder**: When XRequest is used in x-chat-provider or use-x-chat's provider, `manual: true` is a required configuration item, otherwise the request will be sent immediately instead of waiting for invocation.
+> ⚠️ **Important Reminder**: When XRequest is used in x-chat-provider or use-x-chat's provider, `manual: true` is a mandatory configuration item, otherwise the request will be sent immediately instead of waiting for invocation.
+
+````
 
 ### With URL Parameters
 
@@ -82,14 +84,14 @@ const request = XRequest('https://your-api.com/chat', {
     max_tokens: 1000,
   },
 });
-```
+````
 
 # 4. Streaming Configuration
 
 ## 🔄 Streaming Response Configuration
 
 ```typescript
-// Streaming response configuration (AI chat scenarios)
+// Streaming response configuration (AI conversation scenarios)
 const streamConfig = {
   params: {
     stream: true, // Enable streaming response
@@ -196,13 +198,13 @@ const request = XRequest(url, {
 
 #### 🔍 TextDecoder/TextEncoder Explanation
 
-**When are they needed?**
+**When do you need them?**
 
-| Scenario                     | Data Type                 | Need Conversion       |
-| ---------------------------- | ------------------------- | --------------------- |
-| **Standard fetch API**       | `Uint8Array` binary       | ✅ Need TextDecoder   |
-| **XRequest wrapper**         | May be string             | ❌ May not need       |
-| **Custom stream processing** | Depends on implementation | 🤔 Need to judge type |
+| Scenario                     | Data Type                 | Need Conversion?          |
+| ---------------------------- | ------------------------- | ------------------------- |
+| **Standard fetch API**       | `Uint8Array` binary       | ✅ Need TextDecoder       |
+| **XRequest wrapper**         | May be string             | ❌ May not need           |
+| **Custom stream processing** | Depends on implementation | 🤔 Need to determine type |
 
 **Practical usage suggestions:**
 
@@ -213,7 +215,7 @@ transformStream: () =>
       // Safe approach: check type first
       const text = typeof chunk === 'string' ? chunk : new TextDecoder().decode(chunk);
 
-      // Now text is definitely string
+      // Now text is definitely a string
       controller.enqueue(text);
     },
   });

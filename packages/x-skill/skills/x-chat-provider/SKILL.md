@@ -1,14 +1,14 @@
 ---
 name: x-chat-provider
 version: 2.2.2-beta.7
-description: Focuses on implementing custom Chat Providers to adapt any streaming API to Ant Design X standard format
+description: Focuses on implementing custom Chat Providers to help adapt any streaming interface to Ant Design X standard format
 ---
 
 # 🎯 Skill Positioning
 
-**This skill focuses on solving one problem**: How to quickly adapt your streaming API to Ant Design X's Chat Provider.
+**This skill focuses on solving one problem**: How to quickly adapt your streaming interface to Ant Design X's Chat Provider.
 
-**What it doesn't cover**: useXChat usage tutorials (that's another skill).
+**Not covered**: useXChat usage tutorials (that's another skill).
 
 ## Table of Contents
 
@@ -20,32 +20,35 @@ description: Focuses on implementing custom Chat Providers to adapt any streamin
   - [Built-in Providers](#built-in-providers)
   - [When to Use Custom Provider](#when-to-use-custom-provider)
 - [📋 Four Steps to Implement Custom Provider](#-four-steps-to-implement-custom-provider)
-  - [Step 1: Analyze Interface Format](#step-1-analyze-interface-format)
-  - [Step 2: Create Provider Class](#step-2-create-provider-class)
-  - [Step 3: Check and Validate](#step-3-check-and-validate)
-  - [Step 4: Use Provider](#step-4-use-provider)
+  - [Step 1: Analyze Interface Format](#step1-analyze-interface-format)
+  - [Step 2: Create Provider Class](#step2-create-provider-class)
+  - [Step 3: Check Files](#step3-check-files)
+  - [Step 4: Use Provider](#step4-use-provider)
 - [🔧 Common Scenario Adaptation](#-common-scenario-adaptation)
 - [📋 Combined Skill Usage](#-combined-skill-usage)
-  - [Scenario 1: Complete AI Chat Application](#scenario-1-complete-ai-chat-application)
-  - [Scenario 2: Provider Creation Only](#scenario-2-provider-creation-only)
-  - [Scenario 3: Using Built-in Provider](#scenario-3-using-built-in-provider)
+  - [Scenario 1: Complete AI Conversation App](#scenario1-complete-ai-conversation-app)
+  - [Scenario 2: Create Provider Only](#scenario2-create-provider-only)
+  - [Scenario 3: Use Built-in Provider](#scenario3-use-built-in-provider)
 - [⚠️ Important Reminders](#️-important-reminders)
-  - [Mandatory Rule: Never Implement request Method](#mandatory-rule-never-implement-request-method)
+  - [Mandatory Rule: Prohibit Writing request Method](#mandatory-rule-prohibit-writing-request-method)
 - [⚡ Quick Checklist](#-quick-checklist)
 - [🚨 Development Rules](#-development-rules)
-- [Reference Files](#reference-files)
+- [🔗 Reference Resources](#-reference-resources)
+  - [📚 Core Reference Documents](#-core-reference-documents)
+  - [🌐 SDK Official Documentation](#-sdk-official-documentation)
+  - [💻 Example Code](#-example-code)
 
-## 📦 Tech Stack Overview
+# 📦 Tech Stack Overview
 
 ### 🏗️ Ant Design X Ecosystem Architecture
 
-| Layer | Package Name | Core Purpose | Typical Use Cases |
+| Layer | Package Name | Core Purpose | Typical Usage Scenarios |
 | --- | --- | --- | --- |
 | **UI Layer** | **@ant-design/x** | React UI component library | Building chat interfaces, bubbles, input boxes |
 | **Logic Layer** | **@ant-design/x-sdk** | Development toolkit | Data flow management, Provider, Hook |
 | **Render Layer** | **@ant-design/x-markdown** | Markdown renderer | Content display, code highlighting |
 
-> ⚠️ **Important Reminder**: These three packages have different functional positioning. Please import required features from the correct package.
+> ⚠️ **Important Reminder**: These three packages have different functional positioning. Please import required features from the correct package
 >
 > ```ts
 > // ✅ Correct import examples
@@ -64,13 +67,13 @@ graph LR
     E[XRequest] -->|Network Request| B
 ```
 
-| Concept | Role Positioning | Core Responsibilities | Use Cases |
+| Concept | Role Positioning | Core Responsibility | Usage Scenario |
 | --- | --- | --- | --- |
 | **Chat Provider** | 🔄 Data Adapter | Convert any interface format to Ant Design X standard format | Private API adaptation, format conversion |
-| **useXChat** | ⚛️ React Hook | Manage conversation state, message flow, request control | Building AI chat interfaces |
+| **useXChat** | ⚛️ React Hook | Manage conversation state, message flow, request control | Build AI conversation interface |
 | **XRequest** | 🌐 Request Tool | Handle all network communication, authentication, error handling | Unified request management |
 
-## 🚀 Quick Start
+# 🚀 Quick Start
 
 ### 📋 Environment Preparation
 
@@ -79,7 +82,7 @@ graph LR
 | Dependency Package | Version Requirement | Auto Install | Purpose |
 | --- | --- | --- | --- |
 | **@ant-design/x-sdk** | ≥2.2.2 | ✅ | Core SDK, includes Provider and Hook |
-| **@ant-design/x** | Latest | ✅ | UI component library, build chat interface |
+| **@ant-design/x** | Latest version | ✅ | UI component library, build chat interface |
 
 #### 🛠️ One-click Environment Check
 
@@ -114,11 +117,11 @@ graph TD
     E --> H[Four Steps to Create Custom Provider]
 ```
 
-### 🏭 Built-in Provider Overview
+### 🏭 Built-in Provider Quick View
 
 #### Out-of-the-box Providers
 
-| Provider Type         | Use Cases             | Usage Method          |
+| Provider Type         | Applicable Scenario   | Usage Method          |
 | --------------------- | --------------------- | --------------------- |
 | **OpenAI Provider**   | Standard OpenAI API   | Direct import and use |
 | **DeepSeek Provider** | Standard DeepSeek API | Direct import and use |
@@ -170,7 +173,7 @@ interface MyAPIRequest {
   query: string; // User question
   context?: string; // Conversation history (optional)
   model?: string; // Model selection (optional)
-  stream?: boolean; // Whether to stream (optional)
+  stream?: boolean; // Whether streaming (optional)
 }
 ```
 
@@ -265,11 +268,11 @@ export class MyChatProvider extends AbstractChatProvider<MyMessage, MyInput, MyO
 
 ### 🚨 Development Notes
 
-- ✅ **Only modify 3 places**: Interface types, class name, response conversion logic
-- ✅ **Never implement request method**: Network requests handled by XRequest
+- ✅ **Only change 3 places**: Interface types, class name, response conversion logic
+- ✅ **Prohibit implementing request method**: Network requests handled by XRequest
 - ✅ **Maintain type safety**: Use TypeScript strict mode
 
-## Step 3: Check and Validate ⏱️ 1 minute
+## Step 3: Check Validation ⏱️ 1 minute
 
 ### ✅ Quick Checklist
 
@@ -290,7 +293,7 @@ npx tsc --noEmit MyChatProvider.ts
 # Expected result: no error output
 ```
 
-## Step 4: Configure and Use ⏱️ 1 minute
+## Step 4: Configure Usage ⏱️ 1 minute
 
 ### 🔧 Complete Integration Example
 
@@ -324,7 +327,7 @@ const provider = new MyChatProvider({
 });
 
 // 4. Now can be used with useXChat
-// This part handled by use-x-chat skill
+// This part is handled by use-x-chat skill
 export { provider };
 ```
 
@@ -333,7 +336,7 @@ export { provider };
 - **Zero network code**: XRequest handles all network details
 - **Type safety**: Complete TypeScript support
 - **Easy testing**: Can mock XRequest for unit testing
-- **Unified configuration**: Authentication, parameters, error handling centralized
+- **Unified configuration**: Authentication, parameters, error handling centralized management
 
 # 🔧 Common Scenario Adaptation
 
@@ -341,9 +344,9 @@ export { provider };
 
 | Scenario Type | Difficulty | Example Link | Description |
 | --- | --- | --- | --- |
-| **Standard OpenAI** | 🟢 Simple | [Built-in Provider Example](reference/EXAMPLES.md#scenario-1-openai-format) | Directly use built-in Provider |
-| **Standard DeepSeek** | 🟢 Simple | [Built-in Provider Example](reference/EXAMPLES.md#scenario-2-deepseek-format) | Directly use built-in Provider |
-| **Private API** | 🟡 Medium | [Custom Provider Detailed Scenarios](reference/EXAMPLES.md#scenario-3-custom-provider) | Requires four-step implementation |
+| **Standard OpenAI** | 🟢 Simple | [Built-in Provider Example](reference/EXAMPLES.md#scenario1-openai-format) | Directly use built-in Provider |
+| **Standard DeepSeek** | 🟢 Simple | [Built-in Provider Example](reference/EXAMPLES.md#scenario2-deepseek-format) | Directly use built-in Provider |
+| **Private API** | 🟡 Medium | [Custom Provider Detailed Scenarios](reference/EXAMPLES.md#scenario3-custom-provider) | Need four-step implementation |
 
 > 📖 **Complete Examples**: [EXAMPLES.md](reference/EXAMPLES.md) contains complete code for all actual scenarios
 
@@ -368,17 +371,17 @@ graph TD
 
 ## 📊 Skill Comparison Table
 
-| Skill Role | Skill Name | Prerequisites | Core Responsibilities | Use Cases |
+| Skill Role | Skill Name | Prerequisites | Core Responsibility | Usage Scenario |
 | --- | --- | --- | --- | --- |
-| **🏗️ Creator** | **x-chat-provider** | None | Create custom Provider | Adapt private/non-standard APIs |
-| **⚛️ User** | **use-x-chat** | Requires Provider | Build AI chat interface | React component development |
-| **🔧 Configurator** | **x-request** | None | Configure request parameters authentication | Unified network request management |
+| **🏗️ Creator** | **x-chat-provider** | None | Create custom Provider | Adapt private/non-standard API |
+| **⚛️ User** | **use-x-chat** | Needs Provider | Build AI conversation interface | React component development |
+| **🔧 Configurator** | **x-request** | None | Configure request parameter authentication | Unified network request management |
 
-## 🎯 Combined Usage Scenarios Explained
+## 🎯 Combined Usage Scenarios Detailed
 
-### 🚀 Scenario 1: Complete AI Chat Application
+### 🚀 Scenario 1: Complete AI Conversation Application
 
-**Applicable**: Building complete AI chat products from scratch
+**Applicable**: Building complete AI conversation product from scratch
 
 ```mermaid
 sequenceDiagram
@@ -392,18 +395,18 @@ sequenceDiagram
     Dev->>XR: 2. Configure XRequest parameters
     XR->>Dev: Return configured request
     Dev->>UX: 3. Use Provider to build interface
-    UX->>Dev: Complete AI chat application
+    UX->>Dev: Complete AI conversation application
 ```
 
 **Implementation Steps**:
 
-1. **x-chat-provider** → Create custom Provider (4-step implementation)
+1. **x-chat-provider** → Create custom Provider (four-step implementation)
 2. **x-request** → Configure authentication, parameters, error handling
 3. **use-x-chat** → Build React chat interface
 
-### 🎯 Scenario 2: Provider Creation Only
+### 🎯 Scenario 2: Create Provider Only
 
-**Applicable**: Providing Provider for other frameworks or teams
+**Applicable**: Provide Provider for other frameworks or teams
 
 ```mermaid
 graph LR
@@ -416,43 +419,43 @@ graph LR
 
 - 🔧 **Decoupling**: Provider separated from UI framework
 - 📦 **Reusability**: Can be used by multiple projects
-- 🚀 **Efficiency**: Develop once, use everywhere
+- 🚀 **Efficiency**: Develop once, use multiple times
 
-### ⚡ Scenario 3: Using Built-in Provider
+### ⚡ Scenario 3: Use Built-in Provider
 
-**Applicable**: Rapid prototyping or standard API calls
+**Applicable**: Quick prototype development or standard API calls
 
 ```mermaid
 graph LR
     A[Standard API] -->|Built-in| B[OpenAI/DeepSeek Provider]
     B -->|Direct use| C[use-x-chat]
     C -->|Configure| D[x-request]
-    D --> E[Quick deployment]
+    D --> E[Quick launch]
 ```
 
 **Advantages**:
 
 - ⚡ **Zero development**: No need for custom Provider
 - 🎯 **Zero configuration**: Built-in best practices
-- 🚀 **Ultra-fast deployment**: Complete in 5 minutes
+- 🚀 **Ultra-fast launch**: Can be completed in 5 minutes
 
 ## ⚠️ Important Reminders
 
-### 🚨 Mandatory Rule: Never Implement request Method!
+### 🚨 Mandatory Rule: Prohibit Writing request Method!
 
 **Mandatory Requirements**:
 
-- 🚫 **Absolutely forbidden** to implement `request` method in Provider
+- 🚫 **Absolutely prohibit** implementing `request` method in Provider
 - ✅ **Must use** XRequest to handle all network requests
 - ✅ **Only focus** on data conversion logic (transformParams, transformLocalMessage, transformMessage)
 
-**❌ Serious Error (absolutely forbidden)**:
+**❌ Serious Error (absolutely prohibited)**:
 
 ```ts
 // ❌ Serious error: implementing request method yourself
 class MyProvider extends AbstractChatProvider {
   async request(params: any) {
-    // Forbidden to write network request logic yourself!
+    // Prohibited from writing network request logic yourself!
     const response = await fetch(this.url, { ... });
     return response;
   }
@@ -462,9 +465,9 @@ class MyProvider extends AbstractChatProvider {
 **✅ Mandatory Requirement (only correct way)**:
 
 ```ts
-// ✅ Mandatory requirement: use XRequest, never implement request method
+// ✅ Mandatory requirement: use XRequest, prohibit implementing request method
 class MyProvider extends AbstractChatProvider {
-  // Never implement request method!
+  // Prohibited from implementing request method!
   transformParams(params) {
     /* ... */
   }
@@ -495,11 +498,11 @@ Before creating Provider, confirm:
 After completion:
 
 - [ ] Provider class can be instantiated normally
-- [ ] **Only implemented 3 required methods** (transformParams, transformLocalMessage, transformMessage)
-- [ ] **Absolutely no request method implemented** (mandatory use of XRequest for network requests)
+- [ ] **Only implemented three required methods** (transformParams, transformLocalMessage, transformMessage)
+- [ ] **Absolutely prohibited from implementing request method** (mandatory use of XRequest for network requests)
 - [ ] Edge cases handled (empty data, error responses)
 - [ ] **Type check passed** (ensure all TypeScript types are correct)
-- [ ] **Removed unused exports** (clean up unused export items)
+- [ ] **Removed useless exports** (clean up unused export items)
 
 # 🚨 Development Rules
 
@@ -513,18 +516,22 @@ After completion:
 - **Must check types after completion**: Run `tsc --noEmit` to ensure no type errors
 - **Keep code clean**: Remove all unused variables and imports
 
+### Example Code
+
+- custom provider width ui: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx
+
 # 🔗 Reference Resources
 
-## 📚 Core Reference Documentation
+## 📚 Core Reference Documents
 
-- [EXAMPLES.md](reference/EXAMPLES.md) - All practical example code
+- [EXAMPLES.md](reference/EXAMPLES.md) - Practical example code
 
 ## 🌐 SDK Official Documentation
 
-- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
-- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
-- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
 
-## Example Code
+## 💻 Example Code
 
-- custom provider width ui: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - Custom Provider complete example

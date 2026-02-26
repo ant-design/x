@@ -1,6 +1,6 @@
 ## Scenario 1: OpenAI Format
 
-OpenAI format uses the built-in Provider, using OpenAIProvider:
+OpenAI format uses built-in Provider, using OpenAIProvider:
 
 ```ts
 import { OpenAIProvider } from '@ant-design/x-sdk';
@@ -12,7 +12,7 @@ const provider = new OpenAIProvider({
 
 ## Scenario 2: DeepSeek Format
 
-DeepSeek format uses the built-in Provider, using DeepSeekProvider:
+DeepSeek format uses built-in Provider, using DeepSeekProvider:
 
 ```ts
 import { DeepSeekProvider } from '@ant-design/x-sdk';

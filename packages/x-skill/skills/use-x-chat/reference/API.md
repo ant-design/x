@@ -13,35 +13,35 @@ type useXChat<
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | ChatMessage | Message data type, defines the structure of chat messages | object | object | - |
-| ParsedMessage | Parsed message type, message format for component consumption | ChatMessage | ChatMessage | - |
-| Input | Request parameter type, defines the structure of request parameters | RequestParams<ChatMessage> | RequestParams<ChatMessage> | - |
+| ParsedMessage | Parsed message type, message format used for component consumption | ChatMessage | ChatMessage | - |
+| Input | Request parameter type, defines the structure of request parameters | RequestParams\<ChatMessage\> | RequestParams\<ChatMessage\> | - |
 | Output | Response data type, defines the format of received response data | SSEOutput | SSEOutput | - |
 
 ### XChatConfig
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| provider | Data provider, used to convert different data structures and requests into formats consumable by useXChat. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, you can also implement your own Provider by inheriting `AbstractChatProvider`. Recommended to use XRequest as the default request method, no custom fetch needed. See: [Chat Provider documentation](/x-sdks/chat-provider) | AbstractChatProvider<ChatMessage, Input, Output> | - | - |
-| conversationKey | Unique session identifier (globally unique), used to distinguish different sessions | string | Symbol('ConversationKey') | - |
-| defaultMessages | Default display information | MessageInfo<ChatMessage>[] \| (info: { conversationKey?: string }) => MessageInfo<ChatMessage>[] \| (info: { conversationKey?: string }) => Promise<MessageInfo<ChatMessage>[]> | - | - |
-| parser | Converts ChatMessage into ParsedMessage for consumption, when not set, directly consumes ChatMessage. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
-| requestFallback | Fallback information for failed requests, if not provided, nothing will be displayed | ChatMessage \| (requestParams: Partial<Input>,info: { error: Error; errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise<ChatMessage> | - | - |
-| requestPlaceholder | Placeholder information during requests, if not provided, nothing will be displayed | ChatMessage \| (requestParams: Partial<Input>, info: { messages: Message[] }) => ChatMessage \|Promise<Message> | - | - |
+| provider | Data provider, used to convert data and requests of different structures into formats that useXChat can consume. Platform has built-in `DefaultChatProvider` and `OpenAIChatProvider`, you can also implement your own Provider by inheriting `AbstractChatProvider`. Recommended to use XRequest as the default request method, no need for custom fetch. See: [Chat Provider documentation](/x-sdks/chat-provider-cn) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
+| conversationKey | Conversation unique identifier (globally unique), used to distinguish different conversations | string | Symbol('ConversationKey') | - |
+| defaultMessages | Default display information | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
+| parser | Convert ChatMessage to ParsedMessage for consumption, when not set, directly consume ChatMessage. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
+| requestFallback | Fallback information for request failure, won't display if not provided | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
+| requestPlaceholder | Placeholder information during request, won't display if not provided | ChatMessage \| (requestParams: Partial\<Input\>, info: { messages: Message[] }) => ChatMessage \|Promise\<Message\> | - | - |
 
 ### XChatConfigReturnType
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | abort | Cancel request | () => void | - | - |
-| isRequesting | Whether a request is in progress | boolean | - | - |
-| isDefaultMessagesRequesting | Whether the default message list is being requested | boolean | false | 2.2.0 |
-| messages | Current managed message list content | MessageInfo<ChatMessage>[] | - | - |
-| parsedMessages | Content after translation by `parser` | MessageInfo<ParsedMessages>[] | - | - |
-| onReload | Regenerate, will send request to backend, update the message with new returned data | (id: string \| number, requestParams: Partial<Input>,opts: { extra: AnyObject }) => void | - | - |
-| onRequest | Add a Message and trigger a request | (requestParams: Partial<Input>,opts: { extra: AnyObject }) => void | - | - |
-| setMessages | Directly modify messages, will not trigger requests | (messages: Partial<MessageInfo<ChatMessage>>[]) => void | - | - |
-| setMessage | Directly modify a single message, will not trigger requests | (id: string \| number, info: Partial<MessageInfo<ChatMessage>>) => void | - | - |
-| removeMessage | Delete a single message, will not trigger requests | (id: string \| number) => void | - | - |
+| isRequesting | Whether in request | boolean | - | - |
+| isDefaultMessagesRequesting | Whether default message list is in request | boolean | false | 2.2.0 |
+| messages | Current managed message list content | MessageInfo\<ChatMessage\>[] | - | - |
+| parsedMessages | Content after `parser` translation | MessageInfo\<ParsedMessages\>[] | - | - |
+| onReload | Regenerate, will send request to backend, update this message with new returned data | (id: string \| number, requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
+| onRequest | Add a Message and trigger request | (requestParams: Partial\<Input\>,opts: { extra: AnyObject }) => void | - | - |
+| setMessages | Directly modify messages, won't trigger request | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
+| setMessage | Directly modify single message, won't trigger request | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
+| removeMessage | Delete single message, won't trigger request | (id: string \| number) => void | - | - |
 
 #### MessageInfo
 
@@ -79,7 +79,7 @@ interface MyMessage {
 
 // Actual return type
 interface UseXChatReturn {
-  messages: MessageInfo<MyMessage>[]; // Note this is a MessageInfo array
+  messages: MessageInfo<MyMessage>[]; // Note it's MessageInfo array
   setMessages: (messages: MessageInfo<MyMessage>[]) => void;
   setMessage: (id: string, update: Partial<MessageInfo<MyMessage>>) => void;
 }
@@ -87,11 +87,11 @@ interface UseXChatReturn {
 
 #### Dynamic API Documentation
 
-To view complete API documentation and type definitions, it is recommended to:
+To view complete API documentation and type definitions, recommend:
 
 1. **IDE IntelliSense**: Modern IDEs will automatically display complete API signatures
-2. **Source Code Review**: Directly check the type definition files of `@ant-design/x-sdk`
-3. **Official Documentation**: [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.md)
+2. **Source Code View**: Directly check type definition files in `@ant-design/x-sdk`
+3. **Official Documentation**: [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
 
 #### Usage Example
 

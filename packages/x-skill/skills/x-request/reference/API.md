@@ -11,36 +11,36 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 
 #### XRequestFunction
 
-| Property | Description               | Type                           | Default | Version |
-| -------- | ------------------------- | ------------------------------ | ------- | ------- |
-| baseURL  | Request interface address | string                         | -       | -       |
-| options  |                           | XRequestOptions<Input, Output> | -       | -       |
+| Property | Description               | Type                             | Default | Version |
+| -------- | ------------------------- | -------------------------------- | ------- | ------- |
+| baseURL  | Request interface address | string                           | -       | -       |
+| options  |                           | XRequestOptions\<Input, Output\> | -       | -       |
 
 #### XRequestOptions
 
 | Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- | --- |
-| callbacks | Request callback handling set | XRequestCallbacks<Output> | - | - |
+| --- | --- | --- | --- | --- |
+| callbacks | Request callback processing set | XRequestCallbacks\<Output\> | - | - |
 | params | Request parameters | Input | - | - |
-| headers | Additional request header configuration | Record<string, string> | - | - |
+| headers | Additional request header configuration | Record\<string, string\> | - | - |
 | timeout | Request timeout configuration (time from sending request to connecting to service), unit: ms | number | - | - |
 | streamTimeout | Stream mode data timeout configuration (time interval for each chunk return), unit: ms | number | - | - |
 | fetch | Custom fetch object | `typeof fetch` | - | - |
 | middlewares | Middleware, supports pre-request and post-request processing | XFetchMiddlewares | - | - |
-| transformStream | Stream processor | XStreamOptions<Output>['transformStream'] | ((baseURL: string, responseHeaders: Headers) => XStreamOptions<Output>['transformStream']) | - | - |
-| streamSeparator | Stream separator, used to separate different data streams, not effective when transformStream has value | string | \n\n | 2.2.0 |
-| partSeparator | Part separator, used to separate different parts of data, not effective when transformStream has value | string | \n | 2.2.0 |
-| kvSeparator | Key-value separator, used to separate keys and values, not effective when transformStream has value | string | : | 2.2.0 |
+| transformStream | Stream processor | XStreamOptions\<Output\>['transformStream'] \| ((baseURL: string, responseHeaders: Headers) => XStreamOptions\<Output\>['transformStream']) | - | - |
+| streamSeparator | Stream separator, used to separate different data streams, does not take effect when transformStream has value | string | \n\n | 2.2.0 |
+| partSeparator | Part separator, used to separate different parts of data, does not take effect when transformStream has value | string | \n | 2.2.0 |
+| kvSeparator | Key-value separator, used to separate keys and values, does not take effect when transformStream has value | string | : | 2.2.0 |
 | manual | Whether to manually control sending requests, when `true`, need to manually call `run` method | boolean | false | - |
-| retryInterval | When request is interrupted or fails, retry interval time, unit ms, no setting will not auto retry | number | - | - |
+| retryInterval | Retry interval when request is interrupted or fails, unit ms, will not auto-retry if not set | number | - | - |
 | retryTimes | Retry count limit, will not retry after exceeding count | number | - | - |
 
 #### XRequestCallbacks
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| onSuccess | Callback on success, when used with Chat Provider will additionally get assembled message | (chunks: Output[], responseHeaders: Headers, message: ChatMessage) => void | - | - |
-| onError | Error handling callback, `onError` can return a number indicating retry interval when request is abnormal (unit ms), when `options.retryInterval` exists simultaneously, `onError` return value has higher priority, when used with Chat Provider will additionally get assembled fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
+| onSuccess | Success callback, when used with Chat Provider will additionally get assembled message | (chunks: Output[], responseHeaders: Headers, message: ChatMessage) => void | - | - |
+| onError | Error handling callback, `onError` can return a number indicating automatic retry interval when request is abnormal (unit ms), when `options.retryInterval` exists simultaneously, `onError` return value has higher priority, when used with Chat Provider will additionally get assembled fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
 | onUpdate | Message update callback, when used with Chat Provider will additionally get assembled message | (chunk: Output,responseHeaders: Headers, message: ChatMessage) => void | - | - |
 
 #### XRequestClass
@@ -48,7 +48,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | abort | Cancel request | () => void | - | - |
-| run | Manually execute request, effective when `manual=true` | (params?: Input) => void | - | - |
+| run | Manually execute request, valid when `manual=true` | (params?: Input) => void | - | - |
 | isRequesting | Whether currently requesting | boolean | - | - |
 
 #### setXRequestGlobalOptions

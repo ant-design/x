@@ -21,7 +21,7 @@ const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completio
 // ❌ Dangerous: Don't configure token directly in frontend
 // const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completions', {
 //   headers: {
-//     'Authorization': 'Bearer sk-xxxxxxxx', // ❌ Will expose keys
+//     'Authorization': 'Bearer sk-xxxxxxxx', // ❌ Will expose key
 //   },
 // });
 
@@ -35,7 +35,7 @@ const openAIRequest = XRequest('/api/proxy/openai', {
 });
 ```
 
-### 2️⃣ Alibaba Cloud Bailian (Tongyi Qianwen)
+### 2️⃣ Alibaba Bailian (Tongyi Qianwen)
 
 ```typescript
 const bailianRequest = XRequest(

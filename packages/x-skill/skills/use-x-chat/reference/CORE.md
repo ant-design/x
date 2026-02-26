@@ -16,7 +16,7 @@ const { setMessages } = useXChat({ provider });
 // Clear messages
 setMessages([]);
 
-// Add welcome message - note this is MessageInfo structure
+// Add welcome message - note it's MessageInfo structure
 setMessages([
   {
     id: 'welcome',
@@ -68,13 +68,13 @@ const { abort, isRequesting } = useXChat({ provider });
 
 // Abort current request
 <button onClick={abort} disabled={!isRequesting}>
-  Stop generation
+  Stop generating
 </button>;
 ```
 
-#### Resend
+#### Resend Message
 
-The resend feature allows users to regenerate replies for specific messages, which is very useful when AI responses are unsatisfactory or errors occur.
+The resend feature allows users to regenerate replies for specific messages, which is very useful when AI answers are unsatisfactory or errors occur.
 
 #### Basic Usage
 
@@ -99,10 +99,10 @@ const ChatComponent = () => {
 
 #### Resend Notes
 
-1. **Only regenerate AI replies**: Usually only use resend on messages with `role === 'assistant'`
-2. **Status management**: Resend will set the corresponding message status to `loading`
-3. **Parameter passing**: Can pass additional information to Provider via the `extra` parameter
-4. **Error handling**: Recommended to use with `requestFallback` to handle resend failures
+1. **Can only regenerate AI replies**: Usually can only use resend on messages with `role === 'assistant'`
+2. **Status Management**: Resend will set corresponding message status to `loading`
+3. **Parameter Passing**: Can pass additional information to Provider through `extra` parameter
+4. **Error Handling**: Recommend cooperating with `requestFallback` to handle resend failures
 
 ### 3. Error Handling
 
@@ -115,12 +115,12 @@ const { messages } = useXChat({
     // Network error
     if (!navigator.onLine) {
       return {
-        content: 'Network connection failed, please check your network',
+        content: 'Network connection failed, please check network',
         role: 'assistant' as const,
       };
     }
 
-    // User interruption
+    // User abort
     if (error.name === 'AbortError') {
       return {
         content: messageInfo?.message?.content || 'Reply cancelled',
@@ -137,9 +137,9 @@ const { messages } = useXChat({
 });
 ```
 
-### 4. Displaying Messages During Requests
+### 4. Message Display During Request
 
-Generally no configuration is needed, works with Bubble component's loading state by default. For custom loading content, refer to:
+Generally no configuration needed, default uses Bubble component's loading state. For custom loading content reference:
 
 ```tsx
 const ChatComponent = () => {
@@ -159,7 +159,7 @@ const ChatComponent = () => {
 
 #### Custom Request Placeholder
 
-When requestPlaceholder is set, placeholder messages will display before requests start, used with Bubble component's loading state.
+When setting requestPlaceholder, will display placeholder message before request starts, used with Bubble component's loading state.
 
 ```tsx
 const { messages } = useXChat({
