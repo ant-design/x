@@ -91,7 +91,7 @@ To view complete API documentation and type definitions, recommend:
 
 1. **IDE IntelliSense**: Modern IDEs will automatically display complete API signatures
 2. **Source Code View**: Directly check type definition files in `@ant-design/x-sdk`
-3. **Official Documentation**: [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
+3. **Official Documentation**: [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
 
 #### Usage Example
 
