@@ -1,0 +1,26 @@
+{
+  "name": "use-x-chat",
+  "targets": {
+    "codefuse": {
+      "enabled": true,
+      "paths": {
+        "global": ".codefuse/fuse/skills",
+        "project": ".codefuse/skills"
+      }
+    },
+    "claude": {
+      "enabled": true,
+      "paths": {
+        "global": ".claude/skills",
+        "project": ".claude/skills"
+      }
+    },
+    "cursor": {
+      "enabled": true,
+      "paths": {
+        "global": ".cursor/skills",
+        "project": ".cursor/skills"
+      }
+    }
+  }
+}

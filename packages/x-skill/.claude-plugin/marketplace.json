@@ -1,0 +1,31 @@
+{
+  "name": "x-agent-skills",
+  "metadata": {
+    "description": "Ant Design X intelligent agent skills collection",
+    "version": "2.2.2-beta.7",
+    "author": "Ant Design X Team",
+    "homepage": "https://github.com/ant-design/x",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ant-design/x.git"
+    },
+    "keywords": [
+      "ant-design-x",
+      "x-chat",
+      "x-request",
+      "chat-provider",
+      "ai",
+      "react",
+      "typescript"
+    ]
+  },
+  "plugins": [
+    {
+      "name": "x-sdk-skills",
+      "description": "Ant Design X SDK core skill package, including complete features such as useXChat, XRequest, and custom Provider",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/use-x-chat", "./skills/x-chat-provider", "./skills/x-request"]
+    }
+  ]
+}
