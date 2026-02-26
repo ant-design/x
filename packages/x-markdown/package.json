@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.2.2",
+  "version": "2.2.2-beta.7",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
@@ -69,8 +69,6 @@
     "@types/react-dom": "^19.0.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@umijs/mako": "^0.11.10",
-    "antd": "^6.1.1",
-    "glob": "^13.0.0",
     "markdown-it": "^14.0.0",
     "markdown-it-katex": "^2.0.3",
     "react": "^19.0.0",
