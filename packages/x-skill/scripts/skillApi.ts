@@ -14,9 +14,9 @@ interface Config {
 }
 
 /**
- * 从markdown文件中提取## API后的内容
- * @param filePath markdown文件路径
- * @returns API部分内容
+ * Extract content after ## API from markdown file
+ * @param filePath markdown file path
+ * @returns API section content
  */
 function extractApiContent(filePath: string): string {
   try {
@@ -27,7 +27,7 @@ function extractApiContent(filePath: string): string {
     const apiStartIndex = lines.findIndex((line) => line.trim() === '## API') + 1;
 
     if (apiStartIndex === -1) {
-      console.warn(`在文件 ${filePath} 中未找到 ## API 部分`);
+      console.warn(`## API section not found in file ${filePath}`);
       return '';
     }
 
@@ -35,14 +35,14 @@ function extractApiContent(filePath: string): string {
     const apiContent = lines.slice(apiStartIndex).join('\n');
     return apiContent.trim();
   } catch (error) {
-    console.error(`读取文件 ${filePath} 时出错:`, error);
+    console.error(`Error reading file ${filePath}:`, error);
     return '';
   }
 }
 
 /**
- * 确保目录存在
- * @param dirPath 目录路径
+ * Ensure directory exists
+ * @param dirPath directory path
  */
 function ensureDirectoryExists(dirPath: string): void {
   if (!fs.existsSync(dirPath)) {
@@ -51,23 +51,23 @@ function ensureDirectoryExists(dirPath: string): void {
 }
 
 /**
- * 处理单个语言的API文档
- * @param lang 语言代码
- * @param skills 技能配置
+ * Process API documentation for a single language
+ * @param lang language code
+ * @param skills skill configuration
  */
 function processLanguage(lang: string, skills: SkillConfig): void {
-  console.log(`处理 ${lang} 语言...`);
+  console.log(`Processing ${lang} language...`);
 
   // 根据语言确定目标目录
   const baseTargetDir = lang === 'zh' ? config.paths.skillsZhDir : config.paths.skillsEnDir;
 
   for (const [skillName, sourcePath] of Object.entries(skills)) {
-    console.log(`  处理技能: ${skillName}`);
+    console.log(`  Processing skill: ${skillName}`);
 
     const fullSourcePath = path.join(__dirname, '..', '..', '..', sourcePath);
     const apiContent = extractApiContent(fullSourcePath);
     if (!apiContent) {
-      console.warn(`    跳过 ${skillName}: 未找到API内容`);
+      console.warn(`    Skipping ${skillName}: API content not found`);
       continue;
     }
 
@@ -81,29 +81,29 @@ function processLanguage(lang: string, skills: SkillConfig): void {
     // 写入API文档
     try {
       fs.writeFileSync(targetFile, apiContent);
-      console.log(`    已更新: ${targetFile}`);
+      console.log(`    Updated: ${targetFile}`);
     } catch (error) {
-      console.error(`    写入文件 ${targetFile} 时出错:`, error);
+      console.error(`    Error writing file ${targetFile}:`, error);
     }
   }
 }
 
 /**
- * 主函数
+ * Main function
  */
 function main(): void {
-  console.log('开始更新技能API文档...\n');
+  console.log('Starting skill API documentation update...\n');
 
   const typedConfig = config as Config;
 
-  // 处理中文
+  // Process Chinese
   processLanguage('zh', typedConfig.zh);
   console.log();
 
-  // 处理英文
+  // Process English
   processLanguage('en', typedConfig.en);
 
-  console.log('\nAPI文档更新完成！');
+  console.log('\nAPI documentation update completed!');
 }
 
 // 如果直接运行此脚本
