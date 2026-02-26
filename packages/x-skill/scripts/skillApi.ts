@@ -23,15 +23,8 @@ function extractApiContent(filePath: string): string {
     const content = fs.readFileSync(filePath, 'utf-8');
     const lines = content.split('\n');
 
-    let apiStartIndex = -1;
-
     // 查找## API的位置
-    for (let i = 0; i < lines.length; i++) {
-      if (lines[i].trim() === '## API') {
-        apiStartIndex = i + 1;
-        break;
-      }
-    }
+    const apiStartIndex = lines.findIndex((line) => line.trim() === '## API') + 1;
 
     if (apiStartIndex === -1) {
       console.warn(`在文件 ${filePath} 中未找到 ## API 部分`);
