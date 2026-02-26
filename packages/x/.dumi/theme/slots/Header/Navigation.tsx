@@ -20,6 +20,7 @@ const locales = {
     zhUrl: '国内镜像',
     blog: '博客',
     sdk: 'X SDK',
+    skill: 'X Skill',
     markdown: 'X Markdown',
     resources: '资源',
   },
@@ -31,6 +32,7 @@ const locales = {
     zhUrl: '',
     blog: 'Blog',
     sdk: 'X SDK',
+    skill: 'X Skill',
     markdown: 'X Markdown',
     resources: 'Resources',
   },
@@ -61,6 +63,11 @@ const defaultItems = [
     path: '/x-sdks/introduce',
     basePath: '/x-sdk',
     key: 'sdk',
+  },
+  {
+    path: '/x-skills/introduce',
+    basePath: '/x-skill',
+    key: 'skill',
   },
   {
     path: '/docs/playground/ultramodern',
