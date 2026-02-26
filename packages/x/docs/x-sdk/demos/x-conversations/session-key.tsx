@@ -239,7 +239,7 @@ const App = () => {
                 label: val,
               });
               setActiveConversationKey(newConversationKey);
-              queueRequest({ messages: [{ role: 'user', content: val }] }, newConversationKey);
+              queueRequest(newConversationKey, { messages: [{ role: 'user', content: val }] });
             }
             senderRef.current?.clear();
           }}

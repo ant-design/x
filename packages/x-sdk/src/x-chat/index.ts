@@ -440,8 +440,8 @@ export default function useXChat<
 
   // 添加消息到队列，等待会话切换完成后发送
   const queueRequest = (
-    requestParams: Partial<Input>,
     currentConversationKey: string | symbol,
+    requestParams: Partial<Input>,
     opts?: { extraInfo: AnyObject },
   ) => {
     if (opts?.extraInfo) {
