@@ -37,6 +37,7 @@ export default defineConfig({
       { type: 'doc', dir: 'docs' },
       { type: 'x-sdk', dir: 'docs/x-sdk' },
       { type: 'x-markdown', dir: 'docs/x-markdown' },
+      { type: 'x-skill', dir: 'docs/x-skill' },
     ],
     atomDirs: [{ type: 'component', dir: 'components' }],
     codeBlockMode: 'passive',
