@@ -24,8 +24,9 @@ description: 专注讲解如何使用 useXChat Hook，包括自定义 Provider �
 - [📋 使用前提和依赖](#-使用前提和依赖)
 - [🚨 开发规则](#-开发规则)
 - [🔗 参考资源](#-参考资源)
-  - [API.md](reference/API.md)
-  - [EXAMPLES.md](reference/EXAMPLES.md)
+  - [📚 核心参考文档](#-核心参考文档)
+  - [🌐 SDK官方文档](#-SDK官方文档)
+  - [💻 示例代码](#-示例代码)
 
 # 🚀 快速开始
 
