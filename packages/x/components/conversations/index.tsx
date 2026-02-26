@@ -1,4 +1,4 @@
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Divider } from 'antd';
 import { clsx } from 'clsx';
@@ -45,7 +45,7 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @desc 选中变更回调
    * @descEN Callback for selection change
    */
-  onActiveChange?: (value: ConversationItemType['key']) => void;
+  onActiveChange?: (value: ConversationItemType['key'], item?: ItemType) => void;
 
   /**
    * @desc 会话操作菜单
@@ -143,17 +143,9 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
 
     // ============================ ActiveKey ============================
 
-    const [mergedActiveKey, setMergedActiveKey] = useMergedState<ConversationsProps['activeKey']>(
-      defaultActiveKey,
-      {
-        value: activeKey,
-        onChange: (key) => {
-          if (key) {
-            onActiveChange?.(key);
-          }
-        },
-      },
-    );
+    const [mergedActiveKey, setMergedActiveKey] = useControlledState<
+      ConversationsProps['activeKey']
+    >(defaultActiveKey, activeKey);
 
     // ============================ Groupable ============================
     const [groupList, collapsibleOptions, keyList] = useGroupable(groupable, items);
@@ -186,6 +178,10 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
     // ============================ Events ============================
     const onConversationItemClick: ConversationsItemProps['onClick'] = (key) => {
       setMergedActiveKey(key);
+      onActiveChange?.(
+        key,
+        items?.find((item) => item.key === mergedActiveKey),
+      );
     };
 
     // ============================ Short Key =========================

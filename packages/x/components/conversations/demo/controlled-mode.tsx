@@ -33,7 +33,7 @@ const items: GetProp<ConversationsProps, 'items'> = [
 ];
 
 const App: React.FC = () => {
-  const [activeKey, setActiveKey] = useState<string>('item1');
+  const [activeKey, setActiveKey] = useState<string>('write');
 
   const { token } = theme.useToken();
 
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     <Flex vertical gap="small" align="flex-start">
       <Conversations
         activeKey={activeKey}
-        onActiveChange={(v) => {
+        onActiveChange={(v, info) => {
           setActiveKey(v);
         }}
         items={items}
