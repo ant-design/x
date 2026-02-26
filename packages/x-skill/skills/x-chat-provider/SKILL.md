@@ -513,14 +513,18 @@ After completion:
 - **Must check types after completion**: Run `tsc --noEmit` to ensure no type errors
 - **Keep code clean**: Remove all unused variables and imports
 
-# Reference Files
+# 🔗 Reference Resources
 
-### SDK Documentation
+## 📚 Core Reference Documentation
 
-- useXChat: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md
-- XRequest: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md
-- chat provider: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md
+- [EXAMPLES.md](reference/EXAMPLES.md) - All practical example code
 
-### Example Code
+## 🌐 SDK Official Documentation
+
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)
+
+## Example Code
 
 - custom provider width ui: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx

@@ -300,16 +300,6 @@ const checkConfig = () => {
 };
 ```
 
-# 🔗 Reference Resources
-
-## 📚 Core Documentation
-
-| Resource Name | Link | Description | Dependencies |
-| --- | --- | --- | --- |
-| **Official Documentation** | [XRequest Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md) | Latest feature description | Standalone resource |
-| **API Reference** | [API.md](reference/API.md) | Complete API documentation | Must read |
-| **Service Provider Configuration** | [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) | Configuration examples for various service providers | Optional |
-
 ## 🎯 Skill Collaboration
 
 ```mermaid
@@ -327,3 +317,17 @@ graph LR
 | **Private API Adaptation** | x-request → x-chat-provider | Configure request first, then create Provider | 10 minutes |
 | **Standard AI Application** | x-request → use-x-chat | Configure request first, then build interface | 15 minutes |
 | **Complete Customization** | x-request → x-chat-provider → use-x-chat | Complete workflow | 30 minutes |
+
+# 🔗 Reference Resources
+
+## 📚 Core Reference Documentation
+
+- [API.md](reference/API.md) - Complete API documentation
+- [CORE.md](reference/CORE.md) - Core features reference content
+- [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) - Configuration examples for various service providers
+
+## 🌐 SDK Official Documentation
+
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)

@@ -239,6 +239,6 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 - [XRequest 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
 - [Chat Provider 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
 
-### 💻 示例代码
+## 💻 示例代码
 
 - [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例

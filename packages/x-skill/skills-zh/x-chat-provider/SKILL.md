@@ -513,14 +513,22 @@ const provider = new MyProvider({
 - **完成编写后必须检查类型**：运行 `tsc --noEmit` 确保无类型错误
 - **保持代码整洁**：移除所有未使用的变量和导入
 
-# 参考文件
-
-### SDK文档
-
-- useXChat: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md
-- XRequest: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md
-- chat provider: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md
-
 ### 示例代码
 
 - custom provider width ui: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx
+
+# 🔗 参考资源
+
+## 📚 核心参考文档
+
+- [EXAMPLES.md](reference/EXAMPLES.md) - 实战示例代码
+
+## 🌐 SDK官方文档
+
+- [useXChat 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
+- [XRequest 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
+- [Chat Provider 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
+
+## 💻 示例代码
+
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例

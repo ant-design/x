@@ -230,14 +230,13 @@ Core features reference content [CORE.md](reference/CORE.md)
 
 ## 📚 Core Reference Documentation
 
-- [API.md](reference/API.md) - Complete API reference documentation
 - [EXAMPLES.md](reference/EXAMPLES.md) - All practical example code
 
 ## 🌐 SDK Official Documentation
 
-- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.md)
-- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.md)
-- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.md)
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)
 
 ### 💻 Example Code
 
