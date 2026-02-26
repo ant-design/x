@@ -14,9 +14,9 @@ group:
 使用技能帮我创建一个完整的聊天应用，要求：
 - 使用 Ant Design X 的 UI 组件
 - 创建自定义 ChatProvider 适配流式接口，使用 XRequest 处理 SSE 请求
-- 接口地址：https://api.example.com/chat
-- 请求格式：{ query: string, sessionId?: string }
-- 响应格式：{ content: string, time: string, status: 'success' | 'error', role: 'assistant' | 'user' }
+- 接口地址：`https://api.example.com/chat`
+- 请求格式：`{ query: string, sessionId?: string }`
+- 响应格式：`{ content: string, time: string, status: 'success' | 'error', role: 'assistant' | 'user' }`
 - 添加错误处理和用户友好的错误提示
 - 按功能模块化组织代码：hooks/、types/、utils/、components/
 </PromptTemplate>
@@ -26,9 +26,9 @@ group:
 <PromptTemplate title="自定义 Chat Provider - 工具调用">
 使用技能帮我扩展当前 ChatProvider 支持工具调用：
 - 基于现有 ChatProvider 添加工具调用功能
-- 接口地址：https://api.example.com/chat
-- 请求格式：{ query: string, sessionId?: string }
-- 响应格式：{
+- 接口地址：`https://api.example.com/chat`
+- 请求格式：`{ query: string, sessionId?: string }`
+- 响应格式：`{
     content: string,
     time: string,
     status: 'success' | 'error',
@@ -40,8 +40,8 @@ group:
       output?: any,
       error?: string
     }\>
-   }
-- 消息格式：{
+   }`
+- 消息格式：`{
     role: 'assistant' | 'user',
     content: string,
     time: string,
@@ -52,5 +52,5 @@ group:
       code: string,
       status: 'running' | 'success' | 'error',
     }>
-  }
+  }`
 </PromptTemplate>
