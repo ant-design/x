@@ -125,10 +125,10 @@ try {
     cwd: path.join(__dirname, '..'),
   });
   console.log(`✅ marketplace.json formatted successfully`);
-} catch (error: unknown) {
-  const message = error instanceof Error ? error.message : String(error);
-  console.error(`⚠️  Failed to format marketplace.json:`, message);
+} catch (error: any) {
+  console.error(`⚠️  Failed to format marketplace.json:`, error.message);
 }
+
 console.log(
   `\n🎉 Successfully updated ${updatedCount} skills and marketplace.json with version ${currentVersion}`,
 );

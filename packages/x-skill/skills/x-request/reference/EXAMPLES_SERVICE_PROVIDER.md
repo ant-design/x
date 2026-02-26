@@ -21,7 +21,11 @@ const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completio
 // ❌ Dangerous: Don't configure token directly in frontend
 // const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completions', {
 //   headers: {
+<<<<<<< HEAD
 //     'Authorization': 'Bearer sk-xxxxxxxx', // ❌ Will expose key
+=======
+//     'Authorization': 'Bearer sk-xxxxxxxx', // ❌ Will expose keys
+>>>>>>> 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 //   },
 // });
 
@@ -35,7 +39,15 @@ const openAIRequest = XRequest('/api/proxy/openai', {
 });
 ```
 
+<<<<<<< HEAD
+
 ### 2️⃣ Alibaba Bailian (Tongyi Qianwen)
+
+=======
+
+### 2️⃣ Alibaba Cloud Bailian (Tongyi Qianwen)
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ```typescript
 const bailianRequest = XRequest(

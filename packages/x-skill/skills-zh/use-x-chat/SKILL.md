@@ -23,10 +23,13 @@ description: 专注讲解如何使用 useXChat Hook，包括自定义 Provider �
   - [完整示例项目](#-完整示例项目)
 - [📋 使用前提和依赖](#-使用前提和依赖)
 - [🚨 开发规则](#-开发规则)
-- [🔗 参考资源](#-参考资源)
+- [🔗 参考资源](#-参考资源) <<<<<<< HEAD
   - [📚 核心参考文档](#-核心参考文档)
   - [🌐 SDK官方文档](#-SDK官方文档)
-  - [💻 示例代码](#-示例代码)
+  - # [💻 示例代码](#-示例代码)
+  - [API.md](reference/API.md)
+  - [EXAMPLES.md](reference/EXAMPLES.md)
+    > > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 # 🚀 快速开始
 
@@ -240,6 +243,14 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 - [XRequest 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
 - [Chat Provider 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
 
+<<<<<<< HEAD
+
 ## 💻 示例代码
+
+=======
+
+### 💻 示例代码
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 - [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例

@@ -2,7 +2,9 @@
 
 XRequest has built-in reasonable default configurations, **no additional configuration needed to use**.
 
-**Built-in Default Values**:
+<<<<<<< HEAD **Built-in Default Values**: ======= **Built-in Defaults**:
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 - `method: 'POST'`
 - `headers: { 'Content-Type': 'application/json' }`
@@ -12,10 +14,11 @@ XRequest has built-in reasonable default configurations, **no additional configu
 ## 🔐 Authentication Configuration Comparison
 
 | Environment Type | Configuration Method | Security | Example |
-| --- | --- | --- | --- |
-| **Frontend Browser** | ❌ Prohibit direct configuration | Dangerous | Keys will be exposed to users |
-| **Node.js** | ✅ Environment variables | Safe | `process.env.API_KEY` |
-| **Proxy Service** | ✅ Same-origin proxy | Safe | `/api/proxy/chat` |
+| ---------------- | -------------------- | -------- | ------- |
+
+<<<<<<< HEAD | **Frontend Browser** | ❌ Prohibit direct configuration | Dangerous | Keys will be exposed to users | ======= | **Browser Frontend** | ❌ Prohibit direct configuration | Dangerous | Keys will be exposed to users |
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8 | **Node.js** | ✅ Environment variables | Safe | `process.env.API_KEY` | | **Proxy Service** | ✅ Same-origin proxy | Safe | `/api/proxy/chat` |
 
 ## 🛡️ Security Configuration Templates
 
@@ -44,7 +47,11 @@ const browserConfig = {
 import { XRequest } from '@ant-design/x-sdk';
 
 // ⚠️ Note: The following examples apply to Node.js environment
+<<<<<<< HEAD
 // For frontend environments, use proxy services to avoid token leakage
+=======
+// Frontend environment please use proxy service to avoid token leakage
+>>>>>>> 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 const request = XRequest('https://your-api.com/chat', {
   headers: {
     Authorization: 'Bearer your-token', // ⚠️ Only for Node.js environment
@@ -70,9 +77,14 @@ const request = XRequest('https://your-api.com/chat', {
 });
 ```
 
+<<<<<<< HEAD
+
 > ⚠️ **Important Reminder**: When XRequest is used in x-chat-provider or use-x-chat's provider, `manual: true` is a mandatory configuration item, otherwise the request will be sent immediately instead of waiting for invocation.
 
 ````
+=======
+> ⚠️ **Important Reminder**: When XRequest is used in x-chat-provider or use-x-chat's provider, `manual: true` is a required configuration item, otherwise the request will be sent immediately instead of waiting for invocation.
+>>>>>>> 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ### With URL Parameters
 
@@ -84,14 +96,24 @@ const request = XRequest('https://your-api.com/chat', {
     max_tokens: 1000,
   },
 });
+<<<<<<< HEAD
 ````
+
+=======
+
+````
+>>>>>>> 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 # 4. Streaming Configuration
 
 ## 🔄 Streaming Response Configuration
 
 ```typescript
+<<<<<<< HEAD
 // Streaming response configuration (AI conversation scenarios)
+=======
+// Streaming response configuration (AI chat scenarios)
+>>>>>>> 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 const streamConfig = {
   params: {
     stream: true, // Enable streaming response
@@ -107,7 +129,7 @@ const jsonConfig = {
     stream: false, // Disable streaming response
   },
 };
-```
+````
 
 # 5. Dynamic Request Headers
 
@@ -198,13 +220,23 @@ const request = XRequest(url, {
 
 #### 🔍 TextDecoder/TextEncoder Explanation
 
-**When do you need them?**
+<<<<<<< HEAD **When do you need them?**
 
 | Scenario                     | Data Type                 | Need Conversion?          |
 | ---------------------------- | ------------------------- | ------------------------- |
 | **Standard fetch API**       | `Uint8Array` binary       | ✅ Need TextDecoder       |
 | **XRequest wrapper**         | May be string             | ❌ May not need           |
 | **Custom stream processing** | Depends on implementation | 🤔 Need to determine type |
+
+======= **When are they needed?**
+
+| Scenario                     | Data Type                 | Need Conversion       |
+| ---------------------------- | ------------------------- | --------------------- |
+| **Standard fetch API**       | `Uint8Array` binary       | ✅ Need TextDecoder   |
+| **XRequest wrapper**         | May be string             | ❌ May not need       |
+| **Custom stream processing** | Depends on implementation | 🤔 Need to judge type |
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 **Practical usage suggestions:**
 
@@ -215,7 +247,11 @@ transformStream: () =>
       // Safe approach: check type first
       const text = typeof chunk === 'string' ? chunk : new TextDecoder().decode(chunk);
 
+<<<<<<< HEAD
       // Now text is definitely a string
+=======
+      // Now text is definitely string
+>>>>>>> 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
       controller.enqueue(text);
     },
   });

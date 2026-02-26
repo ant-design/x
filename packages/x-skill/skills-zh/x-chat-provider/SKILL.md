@@ -32,13 +32,21 @@ description: 专注于自定义 Chat Provider 的实现，帮助将任意流式�
 - [⚠️ 重要提醒](#️-重要提醒)
   - [强制规则：禁止自己写 request 方法](#强制规则禁止自己写-request-方法)
 - [⚡ 快速检查清单](#-快速检查清单)
-- [🚨 开发规则](#-开发规则)
+- [🚨 开发规则](#-开发规则) <<<<<<< HEAD
 - [🔗 参考资源](#-参考资源)
   - [📚 核心参考文档](#-核心参考文档)
   - [🌐 SDK官方文档](#-SDK官方文档)
   - [💻 示例代码](#-示例代码)
 
 # 📦 技术栈概览
+
+=======
+
+- [参考文件](#参考文件)
+
+## 📦 技术栈概览
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ### 🏗️ Ant Design X 生态架构
 
@@ -73,7 +81,15 @@ graph LR
 | **useXChat** | ⚛️ React Hook | 管理对话状态、消息流、请求控制 | 构建AI对话界面 |
 | **XRequest** | 🌐 请求工具 | 处理所有网络通信、认证、错误处理 | 统一请求管理 |
 
+<<<<<<< HEAD
+
 # 🚀 快速开始
+
+=======
+
+## 🚀 快速开始
+
+> > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
 
 ### 📋 环境准备
 
@@ -516,6 +532,8 @@ const provider = new MyProvider({
 - **完成编写后必须检查类型**：运行 `tsc --noEmit` 确保无类型错误
 - **保持代码整洁**：移除所有未使用的变量和导入
 
+<<<<<<< HEAD
+
 ### 示例代码
 
 - custom provider width ui: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx
@@ -534,4 +552,17 @@ const provider = new MyProvider({
 
 ## 💻 示例代码
 
-- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例
+- # [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例
+
+# 参考文件
+
+### SDK文档
+
+- useXChat: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md
+- XRequest: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md
+- chat provider: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md
+
+### 示例代码
+
+- custom provider width ui: https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx
+  > > > > > > > 1cf23b141ee7cc4322aa0946f59313c3205bcbb8
