@@ -159,6 +159,12 @@ interface XMarkdownProps {
    * @default false
    */
   protectCustomTagNewlines?: boolean;
+  /**
+   * @description 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容
+   * @description Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content
+   * @default false
+   */
+  escapeRawHtml?: boolean;
   /*
    * @description 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标
    * @description Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics

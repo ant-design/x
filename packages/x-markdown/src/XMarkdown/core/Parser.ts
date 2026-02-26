@@ -7,14 +7,15 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
+  escapeRawHtml?: boolean;
 };
 
 export const other = {
   escapeTestNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/,
-  escapeTest: /[&<>"']/,
+  escapeTest: /[&<>"'/]/,
   notSpaceStart: /^\S*/,
   endingNewline: /\n$/,
-  escapeReplace: /[&<>"']/g,
+  escapeReplace: /[&<>"'/]/g,
   escapeReplaceNoEncode: /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/g,
   completeFencedCode: /^ {0,3}(`{3,}|~{3,})([\s\S]*?)\n {0,3}\1[ \n\t]*$/,
 };
@@ -25,6 +26,7 @@ const escapeReplacements: { [index: string]: string } = {
   '>': '&gt;',
   '"': '&quot;',
   "'": '&#39;',
+  '/': '&#x2F;',
 };
 const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
 
@@ -54,8 +56,21 @@ class Parser {
     this.configureLinkRenderer();
     this.configureParagraphRenderer();
     this.configureCodeRenderer();
+    this.configureHtmlEscapeRenderer();
     // user config at last
     this.markdownInstance.use(markedConfig);
+  }
+
+  private configureHtmlEscapeRenderer() {
+    if (!this.options.escapeRawHtml) return;
+
+    const renderer = {
+      html(this: Renderer, token: Tokens.HTML | Tokens.Tag) {
+        const { raw = '', text = '' } = token;
+        return escapeHtml(raw || text, true) + '\n';
+      },
+    };
+    this.markdownInstance.use({ renderer });
   }
 
   private configureLinkRenderer() {
