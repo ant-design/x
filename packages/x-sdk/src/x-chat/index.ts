@@ -109,6 +109,9 @@ export default function useXChat<
     originalConversationKey || generateConversationKey(),
   );
 
+  // 消息队列：存储会话切换后的待发送消息
+  const messageQueueRef = React.useRef<Map<string | symbol, Partial<Input>[]>>(new Map());
+
   useEffect(() => {
     if (originalConversationKey) {
       setConversationKey(originalConversationKey);
@@ -412,6 +415,40 @@ export default function useXChat<
     });
   };
 
+  // 会话切换完成后处理消息队列
+  const processMessageQueue = React.useCallback(() => {
+    const requestParamsList = messageQueueRef.current.get(conversationKey);
+    if (requestParamsList && requestParamsList.length > 0) {
+      setTimeout(() => {
+        requestParamsList.forEach((requestParams) => {
+          onRequest(requestParams);
+        });
+        messageQueueRef.current.delete(conversationKey);
+      });
+    }
+  }, [conversationKey, onRequest]);
+
+  useEffect(() => {
+    if (!isDefaultMessagesRequesting) {
+      processMessageQueue();
+    }
+  }, [isDefaultMessagesRequesting]);
+
+  // 添加消息到队列，等待会话切换完成后发送
+  const queueRequest = (
+    requestParams: Partial<Input>,
+    currentConversationKey: string | symbol,
+    opts?: { extraInfo: AnyObject },
+  ) => {
+    if (opts?.extraInfo) {
+      requestParams = { ...requestParams, extraInfo: opts.extraInfo };
+    }
+    if (!messageQueueRef.current.has(currentConversationKey)) {
+      messageQueueRef.current.set(currentConversationKey, []);
+    }
+    messageQueueRef.current.get(currentConversationKey)!.push(requestParams);
+  };
+
   return {
     onRequest,
     isDefaultMessagesRequesting,
@@ -428,5 +465,6 @@ export default function useXChat<
     },
     isRequesting: conversationKey ? IsRequestingMap?.get(conversationKey) || false : isRequesting,
     onReload,
+    queueRequest,
   } as const;
 }

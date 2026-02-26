@@ -97,7 +97,6 @@ const App = () => {
     });
 
   const senderRef = useRef<GetRef<typeof Sender>>(null);
-  const pendingMessageRef = useRef<string | null>(null);
 
   const style = {
     width: 256,
@@ -137,31 +136,32 @@ const App = () => {
 
   // 聊天管理：使用聊天钩子管理消息和请求
   // Chat management: use chat hook to manage messages and requests
-  const { onRequest, messages, isDefaultMessagesRequesting, isRequesting, abort } = useXChat({
-    provider: providerFactory(activeConversationKey), // 每个会话都有独立的提供者
-    conversationKey: activeConversationKey,
-    defaultMessages: getHistoryMessageList,
-    requestPlaceholder: () => {
-      return {
-        content: locale.thinking,
-        role: 'assistant',
-      };
-    },
-    requestFallback: (_, { error, errorInfo, messageInfo }) => {
-      // 请求失败处理：区分中止错误和其他错误
-      // Request failure handling: distinguish between abort error and other errors
-      if (error.name === 'AbortError') {
+  const { onRequest, messages, isDefaultMessagesRequesting, isRequesting, abort, queueRequest } =
+    useXChat({
+      provider: providerFactory(activeConversationKey), // 每个会话都有独立的提供者
+      conversationKey: activeConversationKey,
+      defaultMessages: getHistoryMessageList,
+      requestPlaceholder: () => {
         return {
-          content: messageInfo?.message?.content || locale.requestAborted,
+          content: locale.thinking,
           role: 'assistant',
         };
-      }
-      return {
-        content: errorInfo?.error?.message || locale.somethingWrong,
-        role: 'assistant',
-      };
-    },
-  });
+      },
+      requestFallback: (_, { error, errorInfo, messageInfo }) => {
+        // 请求失败处理：区分中止错误和其他错误
+        // Request failure handling: distinguish between abort error and other errors
+        if (error.name === 'AbortError') {
+          return {
+            content: messageInfo?.message?.content || locale.requestAborted,
+            role: 'assistant',
+          };
+        }
+        return {
+          content: errorInfo?.error?.message || locale.somethingWrong,
+          role: 'assistant',
+        };
+      },
+    });
 
   useEffect(() => {
     senderRef.current?.clear();
@@ -233,20 +233,13 @@ const App = () => {
             if (!val) return;
 
             if (activeConversationKey !== DEFAULT_KEY) {
-              onRequest({
-                messages: [{ role: 'user', content: val }],
-              });
+              onRequest({ messages: [{ role: 'user', content: val }] });
             } else {
               addConversation({
                 key: 'sessionId_6',
-                label: val,
               });
               setActiveConversationKey('sessionId_6');
-              setTimeout(() => {
-                onRequest({
-                  messages: [{ role: 'user', content: '12345' }],
-                });
-              }, 0);
+              queueRequest({ messages: [{ role: 'user', content: val }] }, 'sessionId_6');
             }
             senderRef.current?.clear();
           }}
