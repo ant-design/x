@@ -48,7 +48,10 @@ const App: React.FC = () => {
     <Flex vertical gap="small" align="flex-start">
       <Conversations
         activeKey={activeKey}
-        onActiveChange={(v, info) => {
+        shortcutKeys={{
+          items: ['Alt', 'number'],
+        }}
+        onActiveChange={(v) => {
           setActiveKey(v);
         }}
         items={items}

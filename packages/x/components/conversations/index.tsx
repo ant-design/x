@@ -180,7 +180,7 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
       setMergedActiveKey(key);
       onActiveChange?.(
         key,
-        items?.find((item) => item.key === mergedActiveKey),
+        items?.find((item) => item.key === key),
       );
     };
 
@@ -196,6 +196,10 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
             const index = shortcutKeyAction?.actionKeyCodeNumber ?? shortcutKeyAction?.index;
             if (typeof index === 'number' && !keyList?.[index]?.disabled && keyList?.[index]?.key) {
               setMergedActiveKey(keyList?.[index]?.key);
+              onActiveChange?.(
+                keyList?.[index]?.key,
+                items?.find((item) => item.key === keyList?.[index]?.key),
+              );
             }
           }
           break;
