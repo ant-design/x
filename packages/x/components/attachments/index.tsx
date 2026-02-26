@@ -54,8 +54,8 @@ export interface AttachmentsProps<T = any> extends Omit<UploadProps, 'fileList'>
 }
 
 export interface AttachmentsRef {
-  nativeElement: HTMLDivElement | null;
-  fileNativeElement: HTMLInputElement | null;
+  nativeElement?: HTMLDivElement | null;
+  fileNativeElement?: HTMLInputElement | null;
   upload: (file: File) => void;
   select: (options?: { accept?: string; multiple?: boolean }) => void;
 }
@@ -100,23 +100,28 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
 
   React.useImperativeHandle(ref, () => ({
     nativeElement: containerRef.current,
-    fileNativeElement: uploadRef.current?.nativeElement?.querySelector('input[type="file"]'),
+    fileNativeElement:
+      uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]'),
     upload: (file) => {
-      const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
-      // Trigger native change event
+      const fileInput = uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       if (fileInput) {
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         fileInput.files = dataTransfer.files;
-
         fileInput.dispatchEvent(new Event('change', { bubbles: true }));
       }
     },
     select: (options) => {
-      const fileInput = uploadRef.current?.nativeElement?.querySelector('input[type="file"]');
+      const fileInput = uploadRef.current?.nativeElement?.querySelector<HTMLInputElement>(
+        'input[type="file"]',
+      ) as HTMLInputElement;
       if (fileInput) {
         fileInput.multiple = options?.multiple ?? false;
-        fileInput.accept = options?.accept || props.accept;
+        const acceptValue = options?.accept || props.accept;
+        fileInput.accept =
+          typeof acceptValue === 'string' ? acceptValue : acceptValue?.format || '';
         fileInput.click();
       }
     },
@@ -162,7 +167,7 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
   const getPlaceholderNode = (
     type: 'inline' | 'drop',
     props?: Pick<PlaceholderProps, 'style'>,
-    ref?: React.RefObject<GetRef<typeof Upload>>,
+    ref?: React.Ref<GetRef<typeof Upload>>,
   ) => {
     const placeholderContent = typeof placeholder === 'function' ? placeholder(type) : placeholder;
 
@@ -235,7 +240,11 @@ const Attachments = React.forwardRef<AttachmentsRef, AttachmentsProps>((props, r
           style={!hasFileList ? { display: 'none' } : {}}
           styles={otherStyles}
         />
-        {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef)}
+        {getPlaceholderNode(
+          'inline',
+          hasFileList ? { style: { display: 'none' } } : undefined,
+          uploadRef,
+        )}
         <DropArea
           getDropContainer={getDropContainer || (() => containerRef.current)}
           prefixCls={prefixCls}
