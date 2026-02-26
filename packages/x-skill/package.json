@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "precompile": "npm run prestart",
-    "skillApi": "tsx scripts/skillApi.ts",
+    "skillApi": "tsx scripts/skillApi/index.ts",
     "compile": "echo '✅ compile success' && exit 0",
     "test": "jest --config .jest.js --no-cache --collect-coverage",
     "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
@@ -31,8 +31,8 @@
     "clean": "rm -rf coverage lib es",
     "pretest": "npm run prestart",
     "start": "node bin/index.js",
-    "prestart": "npm run version",
-    "lint": "npm run version && biome lint bin/",
+    "prestart": "npm run skillApi && npm run version",
+    "lint": "biome lint bin/",
     "tsc": "tsc --noEmit"
   },
   "sideEffects": true,

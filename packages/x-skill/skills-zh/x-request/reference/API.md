@@ -1,6 +1,4 @@
-#### XRequestFunction
-
-XRequest 的核心函数，用于创建请求实例。
+### XRequestFunction
 
 ```ts | pure
 type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, string>> = (
@@ -9,14 +7,14 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 ) => XRequestClass<Input, Output>;
 ```
 
-#### XRequestFunction
+### XRequestFunction
 
 | 属性    | 描述         | 类型                             | 默认值 | 版本 |
 | ------- | ------------ | -------------------------------- | ------ | ---- |
 | baseURL | 请求接口地址 | string                           | -      | -    |
 | options |              | XRequestOptions\<Input, Output\> | -      | -    |
 
-#### XRequestOptions
+### XRequestOptions
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -35,7 +33,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | retryInterval | 请求中断或者失败时，重试的间隔时间，单位ms，不设置将不会自动重试 | number | - | - |
 | retryTimes | 重试的次数限制，超过次数后不在进行重试 | number | - | - |
 
-#### XRequestCallbacks
+### XRequestCallbacks
 
 | 属性 | 描述 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -43,7 +41,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | onError | 错误处理的回调，`onError` 可以返回一个数字，表示请求异常时进行自动重试的间隔(单位ms)，`options.retryInterval` 同时存在时，`onError`返回值优先级更高, 当与 Chat Provider 一起使用时会额外获取到组装好的 fail back message | (error: Error, errorInfo: any,responseHeaders?: Headers, message: ChatMessage) => number \| void | - | - |
 | onUpdate | 消息更新的回调，当与 Chat Provider 一起使用时会额外获取到组装好的 message | (chunk: Output,responseHeaders: Headers, message: ChatMessage) => void | - | - |
 
-#### XRequestClass
+### XRequestClass
 
 | 属性         | 描述                                | 类型                     | 默认值 | 版本 |
 | ------------ | ----------------------------------- | ------------------------ | ------ | ---- |
@@ -51,7 +49,7 @@ type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, 
 | run          | 手动执行请求，当`manual=true`时有效 | (params?: Input) => void | -      | -    |
 | isRequesting | 当前是否在请求中                    | boolean                  | -      | -    |
 
-#### setXRequestGlobalOptions
+### setXRequestGlobalOptions
 
 ```ts | pure
 type setXRequestGlobalOptions<Input, Output> = (
@@ -59,7 +57,7 @@ type setXRequestGlobalOptions<Input, Output> = (
 ) => void;
 ```
 
-#### XRequestGlobalOptions
+### XRequestGlobalOptions
 
 ```ts | pure
 type XRequestGlobalOptions<Input, Output> = Pick<
@@ -68,11 +66,52 @@ type XRequestGlobalOptions<Input, Output> = Pick<
 >;
 ```
 
-#### XFetchMiddlewares
+### XFetchMiddlewares
 
 ```ts | pure
 interface XFetchMiddlewares {
   onRequest?: (...ags: Parameters<typeof fetch>) => Promise<Parameters<typeof fetch>>;
   onResponse?: (response: Response) => Promise<Response>;
 }
+```
+
+## FAQ
+
+### XRequest 中使用 transformStream 的时候会造成第二次输入请求的时候流被锁定的问题，怎么解决？
+
+```ts | pure
+onError TypeError: Failed to execute 'getReader' on 'ReadableStream': ReadableStreamDefaultReader constructor can only accept readable streams that are not yet locked to a reader
+```
+
+Web Streams API 规定，一个流在同一时间只能被一个 reader 锁定。复用会报错, 所以在使用 TransformStream 的时候，需要注意以下几点：
+
+1. 确保 transformStream 函数返回的是一个新的 ReadableStream 对象，而不是同一个对象。
+2. 确保 transformStream 函数中没有对 response.body 进行多次读取操作。
+
+**推荐写法**
+
+```tsx | pure
+const [provider] = React.useState(
+  new CustomProvider({
+    request: XRequest(url, {
+      manual: true,
+      // 推荐写法：transformStream 用函数返回新实例
+      transformStream: () =>
+        new TransformStream({
+          transform(chunk, controller) {
+            // 你的自定义处理逻辑
+            controller.enqueue({ data: chunk });
+          },
+        }),
+      // 其他配置...
+    }),
+  }),
+);
+```
+
+```tsx | pure
+const request = XRequest(url, {
+  manual: true,
+  transformStream: new TransformStream({ ... }), // 不要持久化在 Provider/useState
+});
 ```
