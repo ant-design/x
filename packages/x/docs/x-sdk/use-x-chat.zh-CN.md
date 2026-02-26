@@ -75,7 +75,7 @@ type useXChat<
 | setMessages | 直接修改 messages，不会触发请求 | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | 直接修改单条 message，不会触发请求 | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 | removeMessage | 删除单条 message，不会触发请求 | (id: string \| number) => void | - | - |
-| queueRequest | 会将请求加入队列，等待 conversationKey 初始化完成后再发送 | (requestParams: Partial<Input>, currentConversationKey: string \| symbol, opts?: { extraInfo: AnyObject }) => void | - | - |
+| queueRequest | 会将请求加入队列，等待 conversationKey 初始化完成后再发送 | (requestParams: Partial\<Input\>, currentConversationKey: string \| symbol, opts?: { extraInfo: AnyObject }) => void | - | - |
 
 #### MessageInfo
 

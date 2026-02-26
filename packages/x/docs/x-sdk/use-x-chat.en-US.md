@@ -75,7 +75,7 @@ type useXChat<
 | setMessages | Directly modify messages without triggering requests | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 | removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => void | - | - |
-| queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (requestParams: Partial<Input>, currentConversationKey: string \| symbol, opts?: { extraInfo: AnyObject }) => void | - | - |
+| queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (requestParams: Partial\<Input\>, currentConversationKey: string \| symbol, opts?: { extraInfo: AnyObject }) => void | - | - |
 
 #### MessageInfo
 
