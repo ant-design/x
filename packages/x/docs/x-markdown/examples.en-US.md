@@ -58,7 +58,7 @@ XMarkdown registers the following **built-in renderers** first (depending on the
 | `link` | `openLinksInNewTab === true` | Adds `target="_blank"` and `rel="noopener noreferrer"` to links |
 | `paragraph` | `paragraphTag` is provided | Wraps paragraphs with the given tag (e.g. `div`) |
 | `code` | Always registered | Outputs code blocks with `data-block`, `data-state`, `data-lang`, etc. for streaming and highlighting |
-| `html` | `escapeRawHtml === true` | Escapes block-level raw HTML as plain text |
+| `html` | `escapeRawHtml === true` | Escapes raw HTML as plain text |
 
 ### StreamingOption
 

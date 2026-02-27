@@ -67,7 +67,7 @@ class Parser {
     const renderer = {
       html(this: Renderer, token: Tokens.HTML | Tokens.Tag) {
         const { raw = '', text = '' } = token;
-        return escapeHtml(raw || text, true) + '\n';
+        return escapeHtml(raw || text, true);
       },
     };
     this.markdownInstance.use({ renderer });
