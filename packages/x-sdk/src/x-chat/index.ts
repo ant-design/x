@@ -110,7 +110,15 @@ export default function useXChat<
   );
 
   // 消息队列：存储会话切换后的待发送消息
-  const messageQueueRef = React.useRef<Map<string | symbol, Partial<Input>[]>>(new Map());
+  const messageQueueRef = React.useRef<
+    Map<
+      string | symbol,
+      Array<{
+        requestParams: Partial<Input>;
+        opts?: { extraInfo: AnyObject };
+      }>
+    >
+  >(new Map());
 
   useEffect(() => {
     if (originalConversationKey) {
@@ -420,9 +428,9 @@ export default function useXChat<
     const requestParamsList = messageQueueRef.current.get(conversationKey);
     if (requestParamsList && requestParamsList.length > 0) {
       setTimeout(() => {
-        requestParamsList.forEach((requestParams) => {
+        requestParamsList.forEach(({ requestParams, opts }) => {
           try {
-            onRequest(requestParams);
+            onRequest(requestParams, opts);
           } catch (e) {
             console.error('Failed to process a queued request:', e, requestParams);
           }
@@ -436,7 +444,7 @@ export default function useXChat<
     if (!isDefaultMessagesRequesting) {
       processMessageQueue();
     }
-  }, [isDefaultMessagesRequesting]);
+  }, [isDefaultMessagesRequesting, processMessageQueue]);
 
   // 添加消息到队列，等待会话切换完成后发送
   const queueRequest = (
@@ -444,13 +452,13 @@ export default function useXChat<
     requestParams: Partial<Input>,
     opts?: { extraInfo: AnyObject },
   ) => {
-    if (opts?.extraInfo) {
-      requestParams = { ...requestParams, extraInfo: opts.extraInfo };
-    }
     if (!messageQueueRef.current.has(currentConversationKey)) {
       messageQueueRef.current.set(currentConversationKey, []);
     }
-    messageQueueRef.current.get(currentConversationKey)!.push(requestParams);
+    messageQueueRef.current.get(currentConversationKey)!.push({
+      requestParams,
+      opts,
+    });
   };
 
   return {

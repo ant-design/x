@@ -2,16 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import config from './config';
-
-interface SkillConfig {
-  [skillName: string]: string;
-}
-
-interface Config {
-  zh: SkillConfig;
-  en: SkillConfig;
-}
+import config, { Config, SkillConfig } from './config';
 
 /**
  * Extract content after ## API from markdown file
@@ -24,12 +15,14 @@ function extractApiContent(filePath: string): string {
     const lines = content.split('\n');
 
     // 查找## API的位置
-    const apiStartIndex = lines.findIndex((line) => line.trim() === '## API') + 1;
+    const apiIndex = lines.findIndex((line) => line.trim() === '## API');
 
-    if (apiStartIndex === -1) {
+    if (apiIndex === -1) {
       console.warn(`## API section not found in file ${filePath}`);
       return '';
     }
+
+    const apiStartIndex = apiIndex + 1;
 
     // 提取API后的所有内容
     const apiContent = lines.slice(apiStartIndex).join('\n');
