@@ -60,11 +60,12 @@ const App = () => {
 
   // 提供者缓存：为每个会话缓存独立的聊天提供者实例
   // Provider cache: cache independent chat provider instances for each conversation
-  const providerCaches = new Map<string, DeepSeekChatProvider>();
+  const providerCachesRef = useRef(new Map<string, DeepSeekChatProvider>());
 
   // 提供者工厂：根据会话key创建或获取对应的聊天提供者
   // Provider factory: create or get corresponding chat provider based on conversation key
   const providerFactory = (conversationKey: string) => {
+    const providerCaches = providerCachesRef.current;
     if (!providerCaches.get(conversationKey)) {
       providerCaches.set(
         conversationKey,
