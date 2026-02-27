@@ -1,6 +1,6 @@
-## Scenario 1: OpenAI Format
+## Scenario1: OpenAI Format
 
-OpenAI format uses the built-in Provider, using OpenAIProvider:
+OpenAI format uses built-in Provider, use OpenAIProvider:
 
 ```ts
 import { OpenAIProvider } from '@ant-design/x-sdk';
@@ -10,9 +10,9 @@ const provider = new OpenAIProvider({
 });
 ```
 
-## Scenario 2: DeepSeek Format
+## Scenario2 DeepSeek Format
 
-DeepSeek format uses the built-in Provider, using DeepSeekProvider:
+DeepSeek format uses built-in Provider, use DeepSeekProvider:
 
 ```ts
 import { DeepSeekProvider } from '@ant-design/x-sdk';
@@ -22,7 +22,7 @@ const provider = new DeepSeekProvider({
 });
 ```
 
-## Scenario 3: Custom Provider
+## Scenario3: Custom Provider
 
 ### 1. Custom Error Format
 

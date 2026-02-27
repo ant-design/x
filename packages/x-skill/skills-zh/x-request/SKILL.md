@@ -1,6 +1,6 @@
 ---
 name: x-request
-version: 2.2.2-beta.7
+version: 2.2.2-beta.8
 description: 专注讲解 XRequest 的实际配置和使用，基于官方文档提供准确的配置说明
 ---
 
@@ -29,6 +29,9 @@ description: 专注讲解 XRequest 的实际配置和使用，基于官方文档
   - [配合其他技能](#配合其他技能)
 - [🚨 开发规则](#-开发规则)
 - [🔗 参考资源](#-参考资源)
+  - [📚 核心参考文档](#-核心参考文档)
+  - [🌐 SDK官方文档](#-SDK官方文档)
+  - [💻 示例代码](#-示例代码)
 
 # 🚀 快速开始
 
@@ -298,16 +301,6 @@ const checkConfig = () => {
 };
 ```
 
-# 🔗 参考资源
-
-## 📚 核心文档
-
-| 资源名称 | 链接 | 说明 | 依赖关系 |
-| --- | --- | --- | --- |
-| **官方文档** | [XRequest 文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md) | 最新功能说明 | 独立资源 |
-| **API参考** | [API.md](reference/API.md) | 完整API文档 | 必读 |
-| **服务商配置** | [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) | 各服务商配置示例 | 可选 |
-
 ## 🎯 技能协作
 
 ```mermaid
@@ -325,3 +318,20 @@ graph LR
 | **私有API适配** | x-request → x-chat-provider | 先配置请求，再创建Provider | 10分钟 |
 | **标准AI应用** | x-request → use-x-chat | 先配置请求，再构建界面 | 15分钟 |
 | **完整自定义** | x-request → x-chat-provider → use-x-chat | 完整工作流 | 30分钟 |
+
+# 🔗 参考资源
+
+## 📚 核心参考文档
+
+- [API.md](reference/API.md) - 完整的 API 参考文档
+- [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) - 各服务商配置示例
+
+## 🌐 SDK官方文档
+
+- [useXChat 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.zh-CN.md)
+- [XRequest 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.zh-CN.md)
+- [Chat Provider 官方文档](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.zh-CN.md)
+
+## 💻 示例代码
+
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - 自定义 Provider 完整示例

@@ -1,7 +1,7 @@
 ---
 name: x-request
-version: 2.2.2-beta.7
-description: Focuses on the practical configuration and usage of XRequest, providing accurate configuration instructions based on official documentation
+version: 2.2.2-beta.8
+description: Focus on explaining the practical configuration and usage of XRequest, providing accurate configuration instructions based on official documentation
 ---
 
 # 🎯 Skill Positioning
@@ -10,10 +10,10 @@ description: Focuses on the practical configuration and usage of XRequest, provi
 
 # Table of Contents
 
-- [🚀 Quick Start](#-quick-start) - 3 minutes to get started
+- [🚀 Quick Start](#-quick-start) - Get started in 3 minutes
   - [Dependency Management](#dependency-management)
   - [Basic Configuration](#basic-configuration)
-- [📦 Tech Stack Overview](#-tech-stack-overview)
+- [📦 Technology Stack Overview](#-technology-stack-overview)
 - [🔧 Core Configuration Details](#-core-configuration-details)
   - [Global Configuration](#1-global-configuration)
   - [Security Configuration](#2-security-configuration)
@@ -29,6 +29,9 @@ description: Focuses on the practical configuration and usage of XRequest, provi
   - [Integration with Other Skills](#integration-with-other-skills)
 - [🚨 Development Rules](#-development-rules)
 - [🔗 Reference Resources](#-reference-resources)
+  - [📚 Core Reference Documentation](#-core-reference-documentation)
+  - [🌐 SDK Official Documentation](#-sdk-official-documentation)
+  - [💻 Example Code](#-example-code)
 
 # 🚀 Quick Start
 
@@ -36,7 +39,7 @@ description: Focuses on the practical configuration and usage of XRequest, provi
 
 ### 📋 System Requirements
 
-| Dependency Package    | Version Requirement | Auto Install | Purpose                          |
+| Package               | Version Requirement | Auto Install | Purpose                          |
 | --------------------- | ------------------- | ------------ | -------------------------------- |
 | **@ant-design/x-sdk** | ≥2.2.2              | ✅           | Core SDK, includes XRequest tool |
 
@@ -65,15 +68,15 @@ const request = XRequest('https://api.example.com/chat');
 
 // For manual control (used in Provider scenarios)
 const providerRequest = XRequest('https://api.example.com/chat', {
-  manual: true, // Only this item usually needs explicit configuration
+  manual: true, // Usually only this needs explicit configuration
 });
 ```
 
-> 💡 **Tip**: XRequest has built-in reasonable default configurations, in most cases you only need to provide the API URL to use it.
+> 💡 **Tip**: XRequest has built-in reasonable default configurations. In most cases, you only need to provide the API URL to use it.
 
-# 📦 Tech Stack Overview
+# 📦 Technology Stack Overview
 
-## 🏗️ Tech Stack Architecture
+## 🏗️ Technology Stack Architecture
 
 ```mermaid
 graph TD
@@ -81,7 +84,7 @@ graph TD
     A --> C[Authentication Management]
     A --> D[Error Handling]
     A --> E[Streaming Processing]
-    B --> F[fetch wrapper]
+    B --> F[fetch Wrapper]
     C --> G[Token Management]
     D --> H[Retry Mechanism]
     E --> I[Server-Sent Events]
@@ -89,15 +92,15 @@ graph TD
 
 ## 🔑 Core Concepts
 
-| Concept | Role Positioning | Core Responsibilities | Use Cases |
+| Concept | Role Positioning | Core Responsibilities | Usage Scenarios |
 | --- | --- | --- | --- |
 | **XRequest** | 🌐 Request Tool | Handle all network communication, authentication, error handling | Unified request management |
-| **Global Config** | ⚙️ Config Center | One-time configuration, multiple uses | Reduce duplicate code |
-| **Stream Config** | 🔄 Stream Processing | Support SSE and JSON response formats | AI chat scenarios |
+| **Global Config** | ⚙️ Config Center | Configure once, use everywhere | Reduce duplicate code |
+| **Streaming Config** | 🔄 Streaming Processing | Support SSE and JSON response formats | AI conversation scenarios |
 
 # 🔧 Core Configuration Details
 
-Core features reference content [CORE.md](reference/CORE.md)
+Core functionality reference content [CORE.md](reference/CORE.md)
 
 # 🛡️ Security Guide
 
@@ -107,18 +110,18 @@ Core features reference content [CORE.md](reference/CORE.md)
 
 | Runtime Environment | Security Level | Configuration Method | Risk Description |
 | --- | --- | --- | --- |
-| **Browser Frontend** | 🔴 High Risk | ❌ Prohibit key config | Keys will be directly exposed to users |
-| **Node.js Backend** | 🟢 Safe | ✅ Environment variables | Keys stored on server side |
+| **Browser Frontend** | 🔴 High Risk | ❌ Prohibit key configuration | Keys will be directly exposed to users |
+| **Node.js Backend** | 🟢 Safe | ✅ Environment variable configuration | Keys stored on server side |
 | **Proxy Service** | 🟢 Safe | ✅ Same-origin proxy forwarding | Keys managed by proxy service |
 
 ### 🔐 Authentication Methods Comparison
 
-| Authentication Method    | Applicable Environment | Configuration Example           | Security  |
-| ------------------------ | ---------------------- | ------------------------------- | --------- |
-| **Bearer Token**         | Node.js                | `Bearer ${process.env.API_KEY}` | ✅ Safe   |
-| **API Key Header**       | Node.js                | `X-API-Key: ${process.env.KEY}` | ✅ Safe   |
-| **Proxy Forwarding**     | Browser                | `/api/proxy/service`            | ✅ Safe   |
-| **Direct Configuration** | Browser                | `Bearer sk-xxx`                 | ❌ Danger |
+| Authentication Method | Applicable Environment | Configuration Example | Security |
+| --- | --- | --- | --- |
+| **Bearer Token** | Node.js | `Bearer ${process.env.API_KEY}` | ✅ Safe |
+| **API Key Header** | Node.js | `X-API-Key: ${process.env.KEY}` | ✅ Safe |
+| **Proxy Forwarding** | Browser | `/api/proxy/service` | ✅ Safe |
+| **Direct Configuration** | Browser | `Bearer sk-xxx` | ❌ Dangerous |
 
 # 🔍 Debugging and Testing
 
@@ -149,7 +152,7 @@ const debugRequest = XRequest('/api/debug/chat', {
 
 ## Configuration Validation
 
-### ✅ Security Check Tool
+### ✅ Security Check Tools
 
 ```typescript
 // Security configuration validation function
@@ -170,7 +173,7 @@ const validateSecurity = (config: any) => {
 // Usage example
 validateSecurity({
   headers: {
-    // Don't include Authorization
+    // Do not include Authorization
   },
 });
 ```
@@ -196,7 +199,7 @@ console.log(response);
 
 ## Integration with Other Skills
 
-### 🔄 Skill Collaboration Flow
+### 🔄 Skill Collaboration Workflow
 
 ```mermaid
 graph TD
@@ -208,14 +211,14 @@ graph TD
 
 | Usage Method | Cooperating Skill | Purpose | Example |
 | --- | --- | --- | --- |
-| **Standalone** | None | Directly initiate network requests | Test interface availability |
+| **Standalone** | None | Direct network request initiation | Test interface availability |
 | **With x-chat-provider** | x-chat-provider | Configure requests for custom Provider | Configure private API |
 | **With use-x-chat** | use-x-chat | Configure requests for built-in Provider | Configure OpenAI API |
-| **Complete AI Application** | x-request → x-chat-provider → use-x-chat | Configure requests for entire system | Complete AI chat application |
+| **Complete AI Application** | x-request → x-chat-provider → use-x-chat | Configure requests for entire system | Complete AI conversation application |
 
 ### ⚠️ useXChat Integration Security Warning
 
-**Important Warning: useXChat is only for frontend environments, Authorization is prohibited in XRequest configuration!**
+**Important Warning: useXChat is only for frontend environments, XRequest configuration must not contain Authorization!**
 
 **❌ Incorrect Configuration (Dangerous)**:
 
@@ -246,12 +249,12 @@ const safeRequest = XRequest('/api/proxy/openai', {
 
 ## Test Case Rules
 
-- **If user doesn't explicitly need test cases, don't add test files**
-- **Only create test cases when user explicitly requests**
+- **If the user does not explicitly need test cases, do not add test files**
+- **Only create test cases when the user explicitly requests them**
 
 ## Code Quality Rules
 
-- **Must check types after completion**: Run `tsc --noEmit` to ensure no type errors
+- **After completion, must check types**: Run `tsc --noEmit` to ensure no type errors
 - **Keep code clean**: Remove all unused variables and imports
 
 ## ✅ Configuration Checklist
@@ -262,13 +265,13 @@ Before using XRequest, please confirm the following configurations are correctly
 
 | Check Item | Status | Description |
 | --- | --- | --- |
-| **API URL** | ✅ Must configure | `XRequest('https://api.xxx.com')` |
-| **Auth Info** | ⚠️ Environment dependent | Frontend❌prohibited, Node.js✅available |
-| **manual config** | ✅ Provider scenario | Must be set to `true` in Provider, other scenarios need to be set according to actual situation |
-| **Other configs** | ❌ No need to configure | Built-in reasonable defaults already exist |
-| **Interface availability** | ✅ Recommended test | Use debug configuration to verify |
+| **API URL** | ✅ Must Configure | `XRequest('https://api.xxx.com')` |
+| **Auth Info** | ⚠️ Environment Related | Frontend❌Prohibited, Node.js✅Available |
+| **manual Config** | ✅ Provider Scenario | In Provider needs to be set to `true`, other scenarios need to be set according to actual situation |
+| **Other Config** | ❌ No Need to Configure | Built-in reasonable default values |
+| **Interface Availability** | ✅ Recommended Test | Verify with debug configuration |
 
-### 🛠️ Quick Validation Script
+### 🛠️ Quick Verification Script
 
 ```typescript
 // Check configuration before running
@@ -277,7 +280,7 @@ const checkConfig = () => {
     {
       name: 'Global Configuration',
       test: () => {
-        // Check if global configuration is set
+        // Check if global configuration has been set
         return true; // Check according to actual situation
       },
     },
@@ -300,16 +303,6 @@ const checkConfig = () => {
 };
 ```
 
-# 🔗 Reference Resources
-
-## 📚 Core Documentation
-
-| Resource Name | Link | Description | Dependencies |
-| --- | --- | --- | --- |
-| **Official Documentation** | [XRequest Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md) | Latest feature description | Standalone resource |
-| **API Reference** | [API.md](reference/API.md) | Complete API documentation | Must read |
-| **Service Provider Configuration** | [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) | Configuration examples for various service providers | Optional |
-
 ## 🎯 Skill Collaboration
 
 ```mermaid
@@ -323,7 +316,24 @@ graph LR
 
 | Usage Scenario | Required Skills | Usage Order | Completion Time |
 | --- | --- | --- | --- |
-| **Test Interface** | x-request | Direct use | 2 minutes |
+| **Test Interface** | x-request | Direct Use | 2 minutes |
 | **Private API Adaptation** | x-request → x-chat-provider | Configure request first, then create Provider | 10 minutes |
 | **Standard AI Application** | x-request → use-x-chat | Configure request first, then build interface | 15 minutes |
 | **Complete Customization** | x-request → x-chat-provider → use-x-chat | Complete workflow | 30 minutes |
+
+# 🔗 Reference Resources
+
+## 📚 Core Reference Documentation
+
+- [API.md](reference/API.md) - Complete API reference documentation
+- [EXAMPLES_SERVICE_PROVIDER.md](reference/EXAMPLES_SERVICE_PROVIDER.md) - Configuration examples for various service providers
+
+## 🌐 SDK Official Documentation
+
+- [useXChat Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/use-x-chat.en-US.md)
+- [XRequest Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/x-request.en-US.md)
+- [Chat Provider Official Documentation](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/chat-provider.en-US.md)
+
+## 💻 Example Code
+
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - Complete example of custom Provider
