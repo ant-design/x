@@ -432,7 +432,7 @@ export default function useXChat<
           try {
             onRequest(requestParams, opts);
           } catch (e) {
-            console.error('Failed to process a queued request:', e, requestParams);
+            console.error('Failed to process a queued request:', e, { requestParams, opts });
           }
         });
         messageQueueRef.current.delete(conversationKey);
