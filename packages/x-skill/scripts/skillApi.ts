@@ -2,7 +2,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import config, { Config, SkillConfig } from './config';
+import config, { type Config, type SkillConfig } from './config';
 
 /**
  * Extract content after ## API from markdown file
@@ -22,11 +22,16 @@ function extractApiContent(filePath: string): string {
       return '';
     }
 
-    const apiStartIndex = apiIndex + 1;
+    let apiStartIndex = apiIndex + 1;
 
-    // 提取API后的所有内容
+    // 跳过开头的空行
+    while (apiStartIndex < lines.length && lines[apiStartIndex].trim() === '') {
+      apiStartIndex++;
+    }
+
+    // 提取API后的所有内容，保持原始格式
     const apiContent = lines.slice(apiStartIndex).join('\n');
-    return apiContent.trim();
+    return apiContent;
   } catch (error) {
     console.error(`Error reading file ${filePath}:`, error);
     return '';
