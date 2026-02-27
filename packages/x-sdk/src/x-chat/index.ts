@@ -444,7 +444,7 @@ export default function useXChat<
     if (!isDefaultMessagesRequesting) {
       processMessageQueue();
     }
-  }, [isDefaultMessagesRequesting, processMessageQueue]);
+  }, [isDefaultMessagesRequesting]);
 
   // 添加消息到队列，等待会话切换完成后发送
   const queueRequest = (
