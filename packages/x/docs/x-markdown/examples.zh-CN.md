@@ -24,7 +24,7 @@ packageName: x-markdown
 <code src="./demo/codeDemo/renderer.tsx" title="渲染前处理"></code>
 <code src="./demo/codeDemo/link.tsx" title="中文链接处理"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
-<code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="链接在新标签页打开。" title="新标签页打开链接"></code>
+<code src="./demo/codeDemo/escape-raw-html.tsx" description="通过开关控制原始 HTML 转义与新标签页打开链接。" title="原始 HTML 转义 & 新标签页打开链接"></code>
 
 ## API
 
@@ -36,7 +36,7 @@ packageName: x-markdown
 | components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
 | paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | 流式渲染行为的配置 | `StreamingOption`，查看[语法处理](/x-markdowns/streaming-syntax)和[动画效果](/x-markdowns/streaming-animation) | - |
-| config | Markdown 解析和扩展的 Marked.js 配置 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| config | Markdown 解析和扩展的 Marked.js 配置，在**最后**应用，其中 `renderer` 会覆盖同名的内置 renderer，见下方「内置 Renderer 与 config 的优先级」 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | 是否为所有 a 标签添加 `target="_blank"` | `boolean` | `false` |
 | dompurifyConfig | HTML 净化和 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | debug | 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标 | `boolean` | `false` |
@@ -44,6 +44,21 @@ packageName: x-markdown
 | rootClassName | `className` 的别名，根元素的额外 CSS 类 | `string` | - |
 | style | 根容器的内联样式 | `CSSProperties` | - |
 | protectCustomTagNewlines | 是否保护自定义标记中的换行符 | `boolean` | `false` |
+| escapeRawHtml | 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容。若在 `config` 中传入自定义 `renderer.html`，会覆盖内置行为，导致本配置失效 | `boolean` | `false` |
+
+### 内置 Renderer 与 config 的优先级
+
+XMarkdown 在解析 Markdown 时会先注册以下**内置 renderer**（根据对应 prop 是否启用），再在**最后**应用你在 `config` 里传入的 [MarkedExtension](https://marked.js.org/using_advanced#options)（包括 `renderer`、`extensions` 等）。因此：
+
+- **若你在 `config` 中传入了同名的 `renderer`**（例如 `config={{ renderer: { html() { return '...'; } } }}`），会**覆盖**内置的该 renderer，对应能力可能失效。
+- 需要同时使用内置能力与自定义逻辑时，请在自定义 renderer 中自行调用或组合内置行为。
+
+| 内置 renderer | 生效条件 | 说明 |
+| --- | --- | --- |
+| `link` | `openLinksInNewTab === true` | 为链接添加 `target="_blank"`、`rel="noopener noreferrer"` |
+| `paragraph` | 传入 `paragraphTag` | 段落使用指定标签（如 `div`）包裹 |
+| `code` | 始终注册 | 代码块输出带 `data-block`、`data-state`、`data-lang` 等，供流式与高亮使用 |
+| `html` | `escapeRawHtml === true` | 将块级原始 HTML 转义为纯文本输出 |
 
 ### StreamingOption
 
