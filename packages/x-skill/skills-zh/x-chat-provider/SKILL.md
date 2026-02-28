@@ -1,6 +1,6 @@
 ---
 name: x-chat-provider
-version: 2.2.2-beta.8
+version: 2.3.0
 description: 专注于自定义 Chat Provider 的实现，帮助将任意流式接口适配为 Ant Design X 标准格式
 ---
 
