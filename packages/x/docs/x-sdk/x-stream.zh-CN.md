@@ -8,8 +8,7 @@ subtitle: 流
 order: 2
 description: 转换可读数据流。
 tag: 2.0.0
-demo:
-  cols: 1
+packageName: x-sdk
 ---
 
 ## 何时使用
@@ -50,3 +49,6 @@ async function request() {
 | --- | --- | --- | --- | --- |
 | readableStream | ReadableStream 实例 | ReadableStream<'Uint8Array'> | - | - |
 | transformStream | 自定义的 transformStream 用于转换流的处理 | TransformStream<string, T> | sseTransformStream | - |
+| streamSeparator | 流分隔符，用于分隔不同的数据流，transformStream 有值时不生效 | string | \\n\\n | 2.2.0 |
+| partSeparator | 部分分隔符，用于分隔数据的不同部分，transformStream 有值时不生效 | string | \\n | 2.2.0 |
+| kvSeparator | 键值分隔符，用于分隔键和值，transformStream 有值时不生效 | string | : | 2.2.0 |

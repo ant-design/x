@@ -5,6 +5,7 @@ group:
   order: 2
 title: OpenAIChatProvider
 tag: 2.0.0
+packageName: x-sdk
 order: 2
 ---
 

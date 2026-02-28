@@ -1093,7 +1093,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
               <div
                 aria-busy="true"
                 aria-live="polite"
-                class="ant-spin ant-spin-sm ant-spin-spinning css-var-_r_23_"
+                class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-section css-var-_r_23_"
               >
                 <span
                   class="ant-spin-dot-holder"
@@ -1203,7 +1203,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
               <div
                 aria-busy="true"
                 aria-live="polite"
-                class="ant-spin ant-spin-spinning css-var-_r_23_"
+                class="ant-spin ant-spin-spinning ant-spin-section css-var-_r_23_"
               >
                 <span
                   class="ant-spin-dot-holder"

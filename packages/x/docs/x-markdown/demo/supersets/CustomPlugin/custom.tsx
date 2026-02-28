@@ -1,9 +1,8 @@
 import { type ComponentProps, type Token, XMarkdown } from '@ant-design/x-markdown';
 import React from 'react';
 import './plugin.css';
-import { Popover } from 'antd';
+import { Popover, theme } from 'antd';
 import { useIntl } from 'react-intl';
-import { useMarkdownTheme } from '../../_utils';
 import { Adx_Markdown_En, Adx_Markdown_Zh } from '../../_utils/adx-markdown';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
@@ -29,7 +28,8 @@ const Footnote: React.FC<ComponentProps<{ href?: string; title?: string }>> = (p
 );
 
 const App = () => {
-  const [className] = useMarkdownTheme();
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
   const { locale } = useIntl();
   const content = locale === 'zh-CN' ? Adx_Markdown_Zh : Adx_Markdown_En;
   const footNoteExtension = {

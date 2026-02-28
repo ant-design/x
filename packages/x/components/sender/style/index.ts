@@ -1,8 +1,8 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
 import genSenderHeaderStyle from './header';
 import genSlotTextAreaStyle from './slot-textarea';
 import genSenderSwitchStyle from './switch';
@@ -100,6 +100,7 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       },
       [`&${componentCls}-disabled`]: {
         background: token.colorBgContainerDisabled,
+        borderColor: 'transparent',
       },
       // ============================== RTL ==============================
       [`&${componentCls}-rtl`]: {
@@ -141,10 +142,12 @@ const genSenderStyle: GenerateStyle<SenderToken> = (token) => {
       [`${componentCls}-actions-btn`]: {
         [`&-disabled:where(${antCls}-btn-variant-text)`]: {
           color: token.colorTextActionsDisabled,
+          borderColor: 'transparent',
         },
         [`&-disabled:not(${antCls}-btn-variant-text)`]: {
           background: token.colorBgActionsDisabled,
           color: token.colorTextLightSolid,
+          borderColor: 'transparent',
         },
         '&-loading-button': {
           padding: 0,

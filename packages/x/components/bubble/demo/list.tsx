@@ -151,7 +151,7 @@ const App = () => {
           <span>定位到新气泡 / locate to new bubble</span>
         </Space>
       </Flex>
-      <Flex gap="small">
+      <Flex gap="small" wrap>
         <Button
           type="primary"
           onClick={() => {
@@ -238,13 +238,15 @@ const App = () => {
           Add With Ref
         </Button>
       </Flex>
-      <Bubble.List
-        style={{ height: 620 }}
-        ref={listRef}
-        role={memoRole}
-        items={items}
-        autoScroll={autoScroll}
-      />
+      <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+        <Bubble.List
+          style={{ height: 620 }}
+          ref={listRef}
+          role={memoRole}
+          items={items}
+          autoScroll={autoScroll}
+        />
+      </div>
     </Flex>
   );
 };

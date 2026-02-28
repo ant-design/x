@@ -437,7 +437,10 @@ class TboxProvider<
   Input extends TboxInput = TboxInput,
   Output extends TboxOutput = TboxOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
@@ -755,7 +758,9 @@ const AgentTbox: React.FC = () => {
           />
         ) : null;
       },
-      footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
+      footer: (content, { status, key }) => (
+        <Footer content={content.ext_text} status={status} id={key} />
+      ),
       contentRender: (content, { status }) => {
         const markdownText = `${content.ext_text ? `<think>\n\n${content.ext_text}${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
         return (
@@ -787,8 +792,8 @@ const AgentTbox: React.FC = () => {
             key: i.id,
           }))}
           styles={{
-            bubble: {
-              maxWidth: 840,
+            root: {
+              maxWidth: 940,
             },
           }}
           role={role}

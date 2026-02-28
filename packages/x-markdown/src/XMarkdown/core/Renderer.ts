@@ -234,6 +234,14 @@ class Renderer {
             attribs || {};
           props.block = block === 'true';
           props.streamStatus = codeStreamStatus === 'loading' ? 'loading' : 'done';
+          const langFromData = attribs?.['data-lang'];
+          const langFromClass =
+            attribs?.class?.match(/(?:^|\s)language-([^\s]+)/)?.[1] ??
+            attribs?.class?.match(/(?:^|\s)lang-([^\s]+)/)?.[1];
+          const lang = langFromData || langFromClass;
+          if (lang) {
+            props.lang = lang;
+          }
         }
 
         if (children) {

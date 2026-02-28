@@ -11,14 +11,14 @@ Array [
     class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
   >
     <div
-      class="ant-card ant-card-bordered css-var-_R_d_"
+      class="ant-card ant-card-bordered css-var-_R_f_"
       style="border-radius:0"
     >
       <div
         class="ant-card-body"
       >
         <div
-          class="ant-welcome css-var-_R_d_ ant-welcome-filled ant-flex css-var-_R_d_"
+          class="ant-welcome css-var-_R_f_ ant-welcome-filled ant-flex css-var-_R_f_"
           style="background-image:linear-gradient(97deg, #f2f9fe 0%, #f7f3ff 100%);border-start-start-radius:4px"
         >
           <div
@@ -30,15 +30,15 @@ Array [
             />
           </div>
           <div
-            class="ant-welcome-content-wrapper ant-flex css-var-_R_d_ ant-flex-align-stretch ant-flex-vertical"
+            class="ant-welcome-content-wrapper ant-flex css-var-_R_f_ ant-flex-align-stretch ant-flex-vertical"
           >
             <h4
-              class="ant-typography ant-welcome-title css-var-_R_d_"
+              class="ant-typography ant-welcome-title css-var-_R_f_"
             >
               Hello, I'm Ant Design X
             </h4>
             <span
-              class="ant-typography ant-welcome-description css-var-_R_d_"
+              class="ant-typography ant-welcome-description css-var-_R_f_"
             >
               Base on Ant Design, AGI product interface solution, create a better intelligent vision~
             </span>
@@ -47,14 +47,14 @@ Array [
       </div>
     </div>
     <div
-      class="ant-card ant-card-bordered css-var-_R_l_"
+      class="ant-card ant-card-bordered css-var-_R_n_"
       style="border-radius:0"
     >
       <div
         class="ant-card-body"
       >
         <div
-          class="ant-welcome css-var-_R_l_ ant-welcome-filled ant-flex css-var-_R_l_"
+          class="ant-welcome css-var-_R_n_ ant-welcome-filled ant-flex css-var-_R_n_"
           style="background-image:linear-gradient(97deg, rgba(90,196,255,0.12) 0%, rgba(174,136,255,0.12) 100%);border-start-start-radius:4px"
         >
           <div
@@ -66,15 +66,15 @@ Array [
             />
           </div>
           <div
-            class="ant-welcome-content-wrapper ant-flex css-var-_R_l_ ant-flex-align-stretch ant-flex-vertical"
+            class="ant-welcome-content-wrapper ant-flex css-var-_R_n_ ant-flex-align-stretch ant-flex-vertical"
           >
             <h4
-              class="ant-typography ant-welcome-title css-var-_R_l_"
+              class="ant-typography ant-welcome-title css-var-_R_n_"
             >
               Hello, I'm Ant Design X
             </h4>
             <span
-              class="ant-typography ant-welcome-description css-var-_R_l_"
+              class="ant-typography ant-welcome-description css-var-_R_n_"
             >
               Base on Ant Design, AGI product interface solution, create a better intelligent vision~
             </span>

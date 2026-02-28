@@ -1,6 +1,6 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { unit } from '@ant-design/cssinjs/lib/util';
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { ThoughtChainToken } from '.';
 
 const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
@@ -10,18 +10,6 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
   const itemCls = `${componentCls}-item`;
   return {
     [itemCls]: {
-      [`${componentCls}-status`]: {
-        color: 'inherit',
-      },
-      [`${componentCls}-status-error`]: {
-        color: token.colorError,
-      },
-      [`${componentCls}-status-success`]: {
-        color: token.colorSuccess,
-      },
-      [`${componentCls}-status-loading`]: {
-        color: token.colorPrimary,
-      },
       display: 'inline-flex',
       gap: unit(calc(token.marginXXS).add(1).equal()),
       whiteSpace: 'normal',
@@ -37,56 +25,23 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
       [`&${itemCls}-rtl`]: {
         direction: 'rtl',
       },
-      [`&${itemCls}-solid`]: {
-        background: token.itemSolidBg,
-        [`&${itemCls}-click:hover`]: {
-          background: token.itemSolidHoverBg,
-          [`&${itemCls}-error:hover`]: {
-            color: token.colorError,
-            background: token.colorErrorBgFilledHover,
-          },
-        },
-        [`&${itemCls}-error`]: {
-          color: token.colorError,
-          background: token.colorErrorBg,
-        },
-      },
-      [`&${itemCls}-outlined`]: {
-        paddingBlock: token.paddingXXS,
-        backgroundColor: token.itemOutlinedBg,
-        border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorBorder}`,
-
-        [`&${itemCls}-click:hover`]: {
-          background: token.itemOutlinedHoverBg,
-          [`&${itemCls}-error:hover`]: {
-            color: token.colorError,
-            background: token.colorErrorBgFilledHover,
-          },
-        },
-        [`&${itemCls}-error`]: {
-          color: token.colorError,
-          border: `${unit(token.lineWidth)} ${token.lineType}, ${token.colorErrorBorder}`,
-          background: token.colorErrorBg,
-        },
-      },
-      [`&${itemCls}-text`]: {
-        [`&${itemCls}-click:hover`]: {
-          background: token.itemSolidHoverBg,
-          [`&${itemCls}-error:hover`]: {
-            color: token.colorError,
-            background: token.colorErrorBgFilledHover,
-          },
-        },
-        [`&${itemCls}-error`]: {
-          color: token.colorError,
-        },
-      },
-      [`&${itemCls}-click`]: {
+      [`&${itemCls}-click:not(${itemCls}-disabled)`]: {
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
-        [`&${itemCls}-solid:hover`]: {
-          background: token.itemSolidHoverBg,
+      },
+      [`&${itemCls}-disabled`]: {
+        cursor: 'not-allowed',
+      },
+      [`${componentCls}-motion-blink`]: {
+        [`${itemCls}-description`]: {
+          color: token.itemMotionDescription,
         },
+      },
+      [`${componentCls}-status-success`]: {
+        color: token.colorSuccess,
+      },
+      [`${componentCls}-status-loading`]: {
+        color: token.colorPrimary,
       },
       [`${itemCls}-title`]: {
         display: 'inline-block',
@@ -100,9 +55,71 @@ const genThoughtChainItemStyle: GenerateStyle<ThoughtChainToken> = (
         display: 'inline-block',
         whiteSpace: 'break-spaces',
       },
-      [`${componentCls}-motion-blink`]: {
+      [`&${itemCls}-disabled:not(${itemCls}-error)`]: {
+        color: token.colorTitleDisabled,
         [`${itemCls}-description`]: {
-          color: token.itemMotionDescription,
+          color: token.colorDescriptionDisabled,
+        },
+        [`${componentCls}-status-success`]: {
+          color: token.colorSuccessDisabled,
+        },
+        [`${componentCls}-status-loading`]: {
+          color: token.colorPrimaryDisabled,
+        },
+      },
+      [`&${itemCls}-solid`]: {
+        background: token.itemSolidBg,
+        [`&${itemCls}-disabled`]: {
+          background: token.colorBgContainerDisabled,
+        },
+        [`&${itemCls}-click:not(${itemCls}-error):hover`]: {
+          background: token.itemSolidHoverBg,
+        },
+        [`&${itemCls}-error:not(${itemCls}-disabled)`]: {
+          background: token.colorErrorBg,
+        },
+        [`&${itemCls}-error:where(${itemCls}-disabled)`]: {
+          background: token.colorErrorBgDisabled,
+        },
+      },
+      [`&${itemCls}-outlined`]: {
+        paddingBlock: token.paddingXXS,
+        backgroundColor: token.itemOutlinedBg,
+        borderWidth: token.lineWidth,
+        borderStyle: token.lineType,
+        borderColor: token.colorBorder,
+        [`&${itemCls}-error:not(${itemCls}-disabled)`]: {
+          borderColor: token.colorErrorBorder,
+          background: token.colorErrorBg,
+        },
+        [`&${itemCls}-error:where(${itemCls}-disabled)`]: {
+          borderColor: token.colorErrorBorder,
+          background: token.colorErrorBgDisabled,
+        },
+        [`&${itemCls}-click:not(${itemCls}-error):hover`]: {
+          background: token.itemOutlinedHoverBg,
+        },
+      },
+      [`&${itemCls}-text`]: {
+        [`&${itemCls}-click:not(${itemCls}-error):hover`]: {
+          background: token.itemSolidHoverBg,
+        },
+      },
+      [`&${itemCls}-error`]: {
+        [`&:not(${itemCls}-disabled)`]: {
+          color: token.colorErrorText,
+          [`${itemCls}-description`]: {
+            color: token.colorErrorTextDescription,
+          },
+        },
+        [`&:where(${itemCls}-disabled)`]: {
+          color: token.colorErrorTextDisabled,
+          [`${itemCls}-description`]: {
+            color: token.colorErrorTextDescriptionDisabled,
+          },
+        },
+        [`&${itemCls}-click:hover`]: {
+          background: token.colorErrorBgFilledHover,
         },
       },
     },

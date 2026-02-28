@@ -1,4 +1,5 @@
 import chalk from 'chalk';
+import { execSync } from 'child_process';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
@@ -8,6 +9,8 @@ function exitProcess(code = 1) {
 }
 const spinner = ora('Loading unicorns').start('开始同步版本');
 export default async function synchronizeVersion() {
+  spinner.start('正在执行版本更新...');
+
   spinner.start('正在同步发布版本');
   const baseDir = path.join(process.cwd(), './packages');
   const { version: publishVersion } = await fs.readJSON(path.join(process.cwd(), './package.json'));
@@ -19,13 +22,26 @@ export default async function synchronizeVersion() {
 
       if (stat.isDirectory()) {
         const subPath = `${baseDir}/${dir}/package.json`;
-        const package_json = await fs.readJson(subPath);
-        package_json.version = publishVersion;
+        if (fs.existsSync(subPath)) {
+          const package_json = await fs.readJson(subPath);
+          package_json.version = publishVersion;
 
-        fs.writeJsonSync(subPath, package_json, { spaces: 2, encoding: 'utf-8' });
+          fs.writeJsonSync(subPath, package_json, { spaces: 2, encoding: 'utf-8' });
 
-        spinner.succeed(`${dir} 同步版本成功!`);
+          spinner.succeed(`${dir} 同步版本成功!`);
+        } else {
+          spinner.info(`${dir} 目录没有 package.json，跳过`);
+        }
       }
+    }
+
+    // 同步版本后再执行 npm run version
+    try {
+      execSync('npm run version', { stdio: 'inherit' });
+      spinner.succeed('npm run version 执行成功!');
+    } catch (_error) {
+      spinner.fail(chalk.red('执行 npm run version 失败!'));
+      exitProcess();
     }
   } else {
     spinner.fail(chalk.red('🤔 同步发布版本失败!'));

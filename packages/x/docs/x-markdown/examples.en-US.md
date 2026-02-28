@@ -1,6 +1,10 @@
 ---
 title: Code Examples
 order: 2
+tag: 2.0.0
+category: Components
+componentName: XMarkdown
+packageName: x-markdown
 ---
 
 ## When to Use
@@ -20,7 +24,7 @@ Used for rendering streaming Markdown format returned by LLM.
 <code src="./demo/codeDemo/renderer.tsx" title="Pre-rendering Processing"></code>
 <code src="./demo/codeDemo/link.tsx" title="Chinese Link Handling"></code>
 <code src="./demo/codeDemo/xss.tsx"  title="XSS Defense"></code>
-<code src="./demo/codeDemo/open-links-in-new-tab.tsx" description="Open links in new tab." title="Open Links in New Tab"></code>
+<code src="./demo/codeDemo/escape-raw-html.tsx" description="Toggle escape raw HTML and open links in new tab." title="Escape Raw HTML & Open in New Tab"></code>
 
 ## API
 
@@ -32,12 +36,29 @@ Used for rendering streaming Markdown format returned by LLM.
 | components | Custom React components to replace HTML elements | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`, see [details](/x-markdowns/components) | - |
 | paragraphTag | Custom HTML tag for paragraph elements to prevent validation errors when custom components contain block-level elements | `keyof JSX.IntrinsicElements` | `'p'` |
 | streaming | Configuration for streaming rendering behavior | `StreamingOption`, see [syntax processing](/x-markdowns/streaming-syntax) and [animation effects](/x-markdowns/streaming-animation) | - |
-| config | Marked.js configuration for Markdown parsing and extensions | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| config | Marked.js configuration for Markdown parsing and extensions; applied **last**. A custom `renderer` overrides built-in renderers with the same name. See «Built-in Renderers and config Priority» below | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | openLinksInNewTab | Whether to add `target="_blank"` to all a tags | `boolean` | `false` |
 | dompurifyConfig | DOMPurify configuration for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
+| debug | Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics | `boolean` | `false` |
 | className | Additional CSS class for root container | `string` | - |
 | rootClassName | Alias for `className`, additional CSS class for root element | `string` | - |
 | style | Inline styles for root container | `CSSProperties` | - |
+| protectCustomTagNewlines | Whether to protect newlines in custom tags | `boolean` | `false` |
+| escapeRawHtml | Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content. If you pass a custom `renderer.html` in `config`, it overrides the built-in behavior and this option will not apply | `boolean` | `false` |
+
+### Built-in Renderers and config Priority
+
+XMarkdown registers the following **built-in renderers** first (depending on the corresponding props), then applies your [MarkedExtension](https://marked.js.org/using_advanced#options) from `config` (including `renderer`, `extensions`, etc.) **last**. Therefore:
+
+- **If you pass a renderer with the same name in `config`** (e.g. `config={{ renderer: { html() { return '...'; } } }}`), it **overrides** that built-in renderer and the related feature may not apply.
+- To keep built-in behavior and add custom logic, implement or compose the built-in behavior inside your custom renderer.
+
+| Built-in renderer | When applied | Description |
+| --- | --- | --- |
+| `link` | `openLinksInNewTab === true` | Adds `target="_blank"` and `rel="noopener noreferrer"` to links |
+| `paragraph` | `paragraphTag` is provided | Wraps paragraphs with the given tag (e.g. `div`) |
+| `code` | Always registered | Outputs code blocks with `data-block`, `data-state`, `data-lang`, etc. for streaming and highlighting |
+| `html` | `escapeRawHtml === true` | Escapes raw HTML as plain text |
 
 ### StreamingOption
 
@@ -61,6 +82,8 @@ Used for rendering streaming Markdown format returned by LLM.
 | --- | --- | --- | --- |
 | domNode | Component DOM node from html-react-parser, containing parsed DOM node information | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
 | streamStatus | Streaming rendering supports two states: `loading` indicates content is being loaded, `done` indicates loading is complete. Currently only supports HTML format and fenced code blocks. Since indented code blocks have no explicit terminator, they always return `done` status | `'loading' \| 'done'` | - |
+| lang | Code fence info strings | `string` | - |
+| block | Whether it is a block code | `boolean` | - |
 | rest | Component props, supports all standard HTML attributes (e.g., `href`, `title`, `className`) and custom data attributes | `Record<string, any>` | - |
 
 ## FAQ

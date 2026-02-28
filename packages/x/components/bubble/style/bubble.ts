@@ -1,5 +1,5 @@
 import { Keyframes, unit } from '@ant-design/cssinjs';
-import type { FullToken, GenerateStyle } from '../../theme/cssinjs-utils';
+import type { FullToken, GenerateStyle } from '../../theme/interface';
 
 const loadingMove = new Keyframes('loadingMove', {
   '0%': {
@@ -141,6 +141,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
         // ======================== placement ============================
         [`&${componentCls}-start`]: {
           flexDirection: 'row',
+          alignSelf: 'flex-start',
 
           [`& ${componentCls}-header`]: {
             flexDirection: 'row',
@@ -149,7 +150,7 @@ const genBubbleStyle: GenerateStyle<BubbleToken> = (token) => {
 
         [`&${componentCls}-end`]: {
           flexDirection: 'row-reverse',
-          justifySelf: 'flex-end',
+          alignSelf: 'flex-end',
 
           [`& ${componentCls}-header`]: {
             flexDirection: 'row-reverse',

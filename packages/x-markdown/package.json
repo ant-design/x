@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.1.3",
+  "version": "2.3.0",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
@@ -18,7 +18,11 @@
     "version": "tsx scripts/generate-version.ts",
     "test:dekko": "tsx ./tests/dekko/index.test.ts",
     "clean": "rm -rf es lib coverage plugins dist themes",
-    "test:package-diff": "antd-tools run package-diff"
+    "test:package-diff": "antd-tools run package-diff",
+    "token:meta": "tsx scripts/generate-token-meta.ts",
+    "token:statistic": "tsx scripts/collect-token-statistic.ts",
+    "benchmark": "cd src/XMarkdown/__benchmark__ && node scripts/run-benchmark.js",
+    "benchmark:check": "cd src/XMarkdown/__benchmark__ && node scripts/check-performance.js ./test-results/benchmark-results.json ./benchmark-check-report.txt"
   },
   "sideEffects": [
     "**/*.css"
@@ -51,21 +55,31 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "dompurify": "^3.2.6",
-    "html-react-parser": "^5.2.5",
+    "html-react-parser": "^5.2.13",
     "katex": "^0.16.22",
     "marked": "^15.0.12"
   },
   "devDependencies": {
+    "@playwright/experimental-ct-react": "^1.56.1",
+    "@playwright/test": "^1.56.1",
     "@types/dompurify": "^3.0.5",
     "@types/lodash.throttle": "^4.1.9",
+    "@types/markdown-it": "^14.1.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@types/react-syntax-highlighter": "^15.5.13",
     "@umijs/mako": "^0.11.10",
-    "antd": "^6.1.1",
-    "glob": "^11.0.0",
+    "markdown-it": "^14.0.0",
+    "markdown-it-katex": "^2.0.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "streamdown": "^1.4.0",
+    "vite": "^5.0.6"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

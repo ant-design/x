@@ -1,35 +1,53 @@
 import type { AnyObject } from '../_util/type';
+import { MessageInfo, SimpleType } from '../x-chat';
 import type { JSONOutPut, SSEOutput, XReadableStream, XStreamOptions } from '../x-stream';
 import XStream from '../x-stream';
 import type { XFetchMiddlewares } from './x-fetch';
 import xFetch from './x-fetch';
 
-export interface XRequestCallbacks<Output> {
+export interface XRequestCallbacks<Output, ChatMessage extends SimpleType = any> {
   /**
    * @description Callback when the request is successful
    */
-  onSuccess: (chunks: Output[], responseHeaders: Headers) => void;
+  onSuccess: (
+    chunks: Output[],
+    responseHeaders: Headers,
+    chatMessage?: MessageInfo<ChatMessage>,
+  ) => void;
 
   /**
    * @description Callback when the request fails
    */
-  onError: (error: Error, errorInfo?: any) => void;
+  onError: (
+    error: Error,
+    errorInfo?: any,
+    responseHeaders?: Headers,
+    fallbackMsg?: MessageInfo<ChatMessage>,
+  ) => void;
 
   /**
    * @description Callback when the request is updated
    */
-  onUpdate?: (chunk: Output, responseHeaders: Headers) => void;
+  onUpdate?: (
+    chunk: Output,
+    responseHeaders: Headers,
+    chatMessage?: MessageInfo<ChatMessage>,
+  ) => void;
 }
 
-export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends RequestInit {
+export interface XRequestOptions<
+  Input = AnyObject,
+  Output = SSEOutput,
+  ChatMessage extends SimpleType = any,
+> extends RequestInit {
   /**
    * @description Callbacks for the request
    */
-  callbacks?: XRequestCallbacks<Output>;
+  callbacks?: XRequestCallbacks<Output, ChatMessage>;
   /**
    * @description The parameters to be sent
    */
-  params?: Input;
+  params?: Partial<Input>;
   /**
    * @description The custom headers to be sent
    */
@@ -59,11 +77,32 @@ export interface XRequestOptions<Input = AnyObject, Output = SSEOutput> extends 
   transformStream?:
     | XStreamOptions<Output>['transformStream']
     | ((baseURL: string, responseHeaders: Headers) => XStreamOptions<Output>['transformStream']);
-
+  /**
+   * @description Separator for stream data parsing
+   */
+  streamSeparator?: string;
+  /**
+   * @description Separator for different parts within the stream
+   */
+  partSeparator?: string;
+  /**
+   * @description Separator for key-value pairs in the stream data
+   */
+  kvSeparator?: string;
   /**
    * @description Whether to manually run the request
    */
   manual?: boolean;
+
+  /**
+   * @description The interval after the request is failed
+   */
+  retryInterval?: number;
+
+  /**
+   * @description Retry times limit, valid when retryInterval is set or onError returns a number
+   */
+  retryTimes?: number;
 }
 
 export type XRequestGlobalOptions<Input, Output> = Pick<
@@ -96,11 +135,13 @@ export function setXRequestGlobalOptions<Input, Output>(
   Object.assign(globalOptions, options);
 }
 
-export abstract class AbstractXRequestClass<Input, Output> {
-  baseURL!: string;
-  options!: XRequestOptions<Input, Output>;
+const LastEventId = 'Last-Event-ID';
 
-  constructor(baseURL: string, options?: XRequestOptions<Input, Output>) {
+export abstract class AbstractXRequestClass<Input, Output, ChatMessage extends SimpleType = any> {
+  baseURL!: string;
+  options!: XRequestOptions<Input, Output, ChatMessage>;
+
+  constructor(baseURL: string, options?: XRequestOptions<Input, Output, ChatMessage>) {
     if (!baseURL || typeof baseURL !== 'string') throw new Error('The baseURL is not valid!');
     this.baseURL = baseURL;
     this.options = options || {};
@@ -116,10 +157,11 @@ export abstract class AbstractXRequestClass<Input, Output> {
   abstract abort(): void;
 }
 
-export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends AbstractXRequestClass<
-  Input,
-  Output
-> {
+export class XRequestClass<
+  Input = AnyObject,
+  Output = SSEOutput,
+  ChatMessage extends SimpleType = any,
+> extends AbstractXRequestClass<Input, Output, ChatMessage> {
   private _asyncHandler!: Promise<any>;
 
   private timeoutHandler!: number;
@@ -129,6 +171,10 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
   private abortController!: AbortController;
   private _isRequesting = false;
   private _manual = false;
+  private lastManualParams?: Partial<Input>;
+  private retryTimes = 0;
+  private retryTimer!: ReturnType<typeof setTimeout>;
+  private lastEventId = undefined;
 
   public get asyncHandler() {
     return this._asyncHandler;
@@ -158,7 +204,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     return this._manual;
   }
 
-  constructor(baseURL: string, options?: XRequestOptions<Input, Output>) {
+  constructor(baseURL: string, options?: XRequestOptions<Input, Output, ChatMessage>) {
     super(baseURL, options);
     this._manual = options?.manual || false;
     if (!this.manual) {
@@ -168,10 +214,13 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
 
   public run(params?: Input) {
     if (this.manual) {
+      this.resetRetry();
+      this.lastManualParams = params;
       this.init(params);
-    } else {
-      console.warn('The request is not manual, so it cannot be run!');
+      return true;
     }
+    console.warn('The request is not manual, so it cannot be run!');
+    return false;
   }
 
   public abort() {
@@ -180,7 +229,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     this.abortController.abort();
   }
 
-  private init(extraParams?: Partial<Input>) {
+  private init(extraParams?: Partial<Input>, extraHeaders?: Record<string, string>) {
     this.abortController = new AbortController();
     const {
       callbacks,
@@ -191,8 +240,17 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
       timeout,
       streamTimeout,
       middlewares,
+      streamSeparator,
+      partSeparator,
+      kvSeparator,
       ...otherOptions
     } = this.options;
+    const margeHeaders = Object.assign(
+      {},
+      globalOptions.headers || {},
+      headers,
+      extraHeaders || {},
+    );
     const requestInit: XRequestOptions<Input, Output> = {
       ...otherOptions,
       method: 'POST',
@@ -204,7 +262,7 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
         ...params,
         ...extraParams,
       } as Input,
-      headers: Object.assign({}, globalOptions.headers || {}, headers),
+      headers: margeHeaders,
       signal: this.abortController.signal,
       middlewares,
     };
@@ -232,7 +290,15 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
           if (typeof transformStream === 'function') {
             transformer = transformStream(this.baseURL, response.headers);
           }
-          await this.customResponseHandler<Output>(response, callbacks, transformer, streamTimeout);
+          await this.customResponseHandler<Output, ChatMessage>(
+            response,
+            callbacks,
+            transformer,
+            streamTimeout,
+            streamSeparator,
+            partSeparator,
+            kvSeparator,
+          );
           return;
         }
         const contentType = response.headers.get('content-type') || '';
@@ -240,11 +306,18 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
         switch (mimeType) {
           /** SSE */
           case 'text/event-stream':
-            await this.sseResponseHandler<Output>(response, callbacks, streamTimeout);
+            await this.sseResponseHandler<Output, ChatMessage>(
+              response,
+              callbacks,
+              streamTimeout,
+              streamSeparator,
+              partSeparator,
+              kvSeparator,
+            );
             break;
           /** JSON */
           case 'application/json':
-            await this.jsonResponseHandler<Output>(response, callbacks);
+            await this.jsonResponseHandler<Output, ChatMessage>(response, callbacks);
             break;
           default:
             throw new Error(`The response content-type: ${contentType} is not support!`);
@@ -258,7 +331,32 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
           error instanceof Error || error instanceof DOMException
             ? error
             : new Error('Unknown error!');
-        callbacks?.onError?.(err);
+        // get retry interval from return of onError or options
+        const returnOfOnError = callbacks?.onError?.(err);
+        // ignore abort error
+        if (err.name !== 'AbortError') {
+          const retryInterval =
+            typeof returnOfOnError === 'number' ? returnOfOnError : this.options.retryInterval;
+          if (retryInterval && retryInterval > 0) {
+            // if retry times limit is set, check if the retry times is reached
+            if (
+              typeof this.options.retryTimes === 'number' &&
+              this.retryTimes >= this.options.retryTimes
+            ) {
+              return;
+            }
+            clearTimeout(this.retryTimer);
+            this.retryTimer = setTimeout(() => {
+              const extraHeaders: Record<string, string> = {};
+              if (typeof this.lastEventId !== 'undefined') {
+                // add Last-Event-ID header for retry
+                extraHeaders[LastEventId] = this.lastEventId;
+              }
+              this.init(this.lastManualParams, extraHeaders);
+            }, retryInterval);
+            this.retryTimes = this.retryTimes + 1;
+          }
+        }
       });
   }
 
@@ -270,34 +368,46 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     this._isRequesting = false;
   }
 
-  private customResponseHandler = async <Output = SSEOutput>(
+  private customResponseHandler = async <Output = SSEOutput, ChatMessage extends SimpleType = any>(
     response: Response,
-    callbacks?: XRequestCallbacks<Output>,
+    callbacks?: XRequestCallbacks<Output, ChatMessage>,
     transformStream?: XStreamOptions<Output>['transformStream'],
     streamTimeout?: number | undefined,
+    streamSeparator?: string,
+    partSeparator?: string,
+    kvSeparator?: string,
   ) => {
     const stream = XStream<Output>({
       readableStream: response.body!,
       transformStream,
+      streamSeparator,
+      partSeparator,
+      kvSeparator,
     });
-    await this.processStream<Output>(stream, response, callbacks, streamTimeout);
+    await this.processStream<Output, ChatMessage>(stream, response, callbacks, streamTimeout);
   };
 
-  private sseResponseHandler = async <Output = SSEOutput>(
+  private sseResponseHandler = async <Output = SSEOutput, ChatMessage extends SimpleType = string>(
     response: Response,
-    callbacks?: XRequestCallbacks<Output>,
+    callbacks?: XRequestCallbacks<Output, ChatMessage>,
     streamTimeout?: number,
+    streamSeparator?: string,
+    partSeparator?: string,
+    kvSeparator?: string,
   ) => {
     const stream = XStream<Output>({
       readableStream: response.body!,
+      streamSeparator,
+      partSeparator,
+      kvSeparator,
     });
-    await this.processStream<Output>(stream, response, callbacks, streamTimeout);
+    await this.processStream<Output, ChatMessage>(stream, response, callbacks, streamTimeout);
   };
 
-  private async processStream<Output>(
+  private async processStream<Output, ChatMessage extends SimpleType = string>(
     stream: XReadableStream<Output>,
     response: Response,
-    callbacks?: XRequestCallbacks<Output>,
+    callbacks?: XRequestCallbacks<Output, ChatMessage>,
     streamTimeout?: number,
   ) {
     const chunks: Output[] = [];
@@ -310,15 +420,23 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
         this.streamTimeoutHandler = window.setTimeout(() => {
           this.isStreamTimeout = true;
           this.finishRequest();
-          callbacks?.onError?.(new Error('StreamTimeoutError'));
+          callbacks?.onError?.(new Error('StreamTimeoutError'), undefined, response.headers);
         }, streamTimeout);
       }
+
       result = await iterator.next();
-      chunks.push(result.value);
-      callbacks?.onUpdate?.(result.value, response.headers);
       clearTimeout(this.streamTimeoutHandler);
       if (this.isStreamTimeout) {
         break;
+      }
+
+      if (result.value) {
+        chunks.push(result.value);
+        callbacks?.onUpdate?.(result.value, response.headers);
+        if (typeof result?.value?.id !== 'undefined') {
+          // cache Last-Event-ID for retry request
+          this.lastEventId = result.value.id;
+        }
       }
     } while (!result.done);
     if (streamTimeout) {
@@ -332,16 +450,19 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
     callbacks?.onSuccess?.(chunks, response.headers);
   }
 
-  private jsonResponseHandler = async <Output = JSONOutPut>(
+  private jsonResponseHandler = async <
+    Output = JSONOutPut,
+    ChatMessage extends SimpleType = string,
+  >(
     response: Response,
-    callbacks?: XRequestCallbacks<Output>,
+    callbacks?: XRequestCallbacks<Output, ChatMessage>,
   ) => {
     const chunk: Output = await response.json();
 
     if ((chunk as JSONOutPut)?.success === false) {
       const error = new Error((chunk as JSONOutPut).message || 'System error');
       error.name = (chunk as JSONOutPut).name || 'SystemError';
-      callbacks?.onError?.(error, chunk);
+      callbacks?.onError?.(error, chunk, response.headers);
     } else {
       callbacks?.onUpdate?.(chunk, response.headers);
       this.finishRequest();
@@ -349,13 +470,19 @@ export class XRequestClass<Input = AnyObject, Output = SSEOutput> extends Abstra
       callbacks?.onSuccess?.([chunk], response.headers);
     }
   };
+
+  private resetRetry() {
+    clearTimeout(this.retryTimer);
+    this.retryTimes = 0;
+    this.lastEventId = undefined;
+  }
 }
 
-function XRequest<Input = AnyObject, Output = SSEOutput>(
+function XRequest<Input = AnyObject, Output = SSEOutput, ChatMessage extends SimpleType = any>(
   baseURL: string,
-  options?: XRequestOptions<Input, Output>,
-): AbstractXRequestClass<Input, Output> {
-  return new XRequestClass<Input, Output>(baseURL, options);
+  options?: XRequestOptions<Input, Output, ChatMessage>,
+): AbstractXRequestClass<Input, Output, ChatMessage> {
+  return new XRequestClass<Input, Output, ChatMessage>(baseURL, options);
 }
 
 export default XRequest;

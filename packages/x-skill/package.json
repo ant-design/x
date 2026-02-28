@@ -1,0 +1,60 @@
+{
+  "name": "@ant-design/x-skill",
+  "version": "2.3.0",
+  "description": "placeholder for @ant-design/x-sdk",
+  "homepage": "https://x.ant.design/x-skills/introduce",
+  "bugs": {
+    "url": "https://github.com/ant-design/x/issues"
+  },
+  "bin": {
+    "x-skill": "bin/index.js"
+  },
+  "keywords": [
+    "AI",
+    "SKILL",
+    "Agent",
+    "Copilot",
+    "ant",
+    "sdk",
+    "framework",
+    "react"
+  ],
+  "scripts": {
+    "precompile": "npm run prestart",
+    "skillApi": "tsx scripts/skillApi.ts",
+    "compile": "echo '✅ compile success' && exit 0",
+    "test": "jest --config .jest.js --no-cache --collect-coverage",
+    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
+    "test:dekko": "tsx scripts/dekko.ts",
+    "prepublishOnly": "tsx ../../scripts/pre-publish.ts x-skill",
+    "version": "tsx scripts/generate-version.ts",
+    "clean": "rm -rf coverage lib es",
+    "pretest": "npm run prestart",
+    "start": "node bin/index.js",
+    "prestart": "npm run skillApi && npm run version",
+    "lint": "biome lint bin/",
+    "tsc": "tsc --noEmit"
+  },
+  "sideEffects": true,
+  "files": [
+    "skills",
+    "skills-zh",
+    "bin",
+    ".skill.json",
+    ".claude-plugin",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ant-design/x"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mock-fs": "^5.5.0",
+    "tsx": "^4.19.1",
+    "typescript": "~5.9.3",
+    "@types/node": "^24.0.3",
+    "@biomejs/biome": "^2.0.5"
+  }
+}

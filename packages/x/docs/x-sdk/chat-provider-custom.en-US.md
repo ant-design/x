@@ -6,6 +6,7 @@ group:
 title: Custom Chat Provider
 order: 4
 tag: 2.0.0
+packageName: x-sdk
 ---
 
 When the built-in Chat Provider doesn't meet your needs, you can implement the abstract class `AbstractChatProvider` (which only contains three abstract methods) to convert data from different model providers or Agentic services into a unified format that `useXChat` can consume, enabling seamless integration and switching between different models and agents.
@@ -81,7 +82,10 @@ class CustomProvider<
   Input extends CustomInput = CustomInput,
   Output extends CustomOutput = CustomOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }

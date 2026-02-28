@@ -49,7 +49,7 @@ exports[`renders components/welcome/demo/background.tsx extend context correctly
     >
       <div
         class="ant-welcome css-var-_r_4_ ant-welcome-filled ant-flex css-var-_r_4_"
-        style="border-start-start-radius: 4px;"
+        style="background-image: linear-gradient(97deg, rgba(90,196,255,0.12) 0%, rgba(174,136,255,0.12) 100%); border-start-start-radius: 4px;"
       >
         <div
           class="ant-welcome-icon"
