@@ -16,6 +16,35 @@ tag: vVERSION
 
 ---
 
+## 2.3.0
+
+`2026-02-26`
+
+### @ant-design/x
+
+- 🆕 Conversation's onActiveChange callback now returns both the activated item and its key value, while updating useMergedState to useControlledState. [#1762](https://github.com/ant-design/x/pull/1762) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Optimized the visual presentation of Sender's disabled state buttons, unified the addition of transparent border handling to ensure consistent appearance across different button variants when disabled. [#1751](https://github.com/ant-design/x/pull/1751) by [Rain120](https://github.com/Rain120)
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown adds escapeRawHtml property, allowing users to choose whether to escape raw HTML during rendering. [#1769](https://github.com/ant-design/x/pull/1769) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown rendering when encountering unclosed inline code in lists, ensuring list markers are preserved in special unclosed cases. [#1739](https://github.com/ant-design/x/pull/1739) by [Div627](https://github.com/Div627)
+- 🐛 Improved parsing of block-level LaTeX formulas, with more tolerant handling of trailing whitespace and indentation, enhancing compatibility with different line ending formats and reducing misjudgment and rendering issues. [#1744](https://github.com/ant-design/x/pull/1744) by [Waiter](https://github.com/Waiter)
+- 🐛 Optimized dark mode CodeHighlighter and Mermaid plugin styling issues. [#1766](https://github.com/ant-design/x/pull/1766) by [menghany](https://github.com/menghany)
+
+### @ant-design/x-sdk
+
+- 🆕 useXChat adds queueRequest method, implementing initialization message sending for ConversationKey and SessionId. [#1761](https://github.com/ant-design/x/pull/1761) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-skill
+
+- 🆕 Added skill installation commands, simultaneously releasing three skills: use-x-chat, x-chat-provider, and x-request. [#1753](https://github.com/ant-design/x/pull/1753), [#1767](https://github.com/ant-design/x/pull/1767) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 🛠 Fixed build errors caused by dependency upgrades. [#1754](https://github.com/ant-design/x/pull/1754) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Resolved domhandler's ModuleNotFoundError in CodeSandbox preview. [#1754](https://github.com/ant-design/x/pull/1754) by [kimteayon](https://github.com/kimteayon)
+
 ## 2.2.2
 
 `2026-02-06`
