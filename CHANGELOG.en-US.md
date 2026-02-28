@@ -38,7 +38,7 @@ tag: vVERSION
 
 ### @ant-design/x-skill
 
-- 🆕 Added skill installation commands, simultaneously releasing three skills: use-x-chat, x-chat-provider, and x-request. [#1753](https://github.com/ant-design/x/pull/1768), [#1767](https://github.com/ant-design/x/pull/1768) by [Div627](https://github.com/Div627)
+- 🆕 Added skill installation commands, simultaneously releasing three skills: use-x-chat, x-chat-provider, and x-request. [#1753](https://github.com/ant-design/x/pull/1753), [#1767](https://github.com/ant-design/x/pull/1767) by [kimteayon](https://github.com/kimteayon)
 
 ### Others
 
