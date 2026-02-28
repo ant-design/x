@@ -406,17 +406,14 @@ describe('useXChat', () => {
 
     // 使用 queueRequest 将消息加入队列
     const [hookResult, setActiveConversationKey] = result.current as any;
-
+    setActiveConversationKey('new-conversation');
     // 添加多条消息到队列
-    hookResult.queueRequest('test-conversation', { query: 'queued message 1' });
+    hookResult.queueRequest('new-conversation', { query: 'queued message 1' });
     hookResult.queueRequest('test-conversation', { query: 'queued message 2' });
     hookResult.queueRequest('test-conversation', { query: 'queued message 2' });
 
     // 验证队列中的消息不会立即出现在 messages 中
     expect(hookResult.messages.length).toBe(1); // 只有默认消息
-
-    // 切换会话触发 processMessageQueue
-    setActiveConversationKey('new-conversation');
 
     // 等待 processMessageQueue 执行
     await waitFakeTimer();

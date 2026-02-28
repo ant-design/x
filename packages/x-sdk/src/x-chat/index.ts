@@ -427,13 +427,10 @@ export default function useXChat<
   const processMessageQueue = React.useCallback(() => {
     const requestParamsList = messageQueueRef.current.get(conversationKey);
     if (requestParamsList && requestParamsList.length > 0) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
+        clearTimeout(timer);
         requestParamsList.forEach(({ requestParams, opts }) => {
-          try {
-            onRequest(requestParams, opts);
-          } catch (e) {
-            console.error('Failed to process a queued request:', e, { requestParams, opts });
-          }
+          onRequest(requestParams, opts);
         });
         messageQueueRef.current.delete(conversationKey);
       });
