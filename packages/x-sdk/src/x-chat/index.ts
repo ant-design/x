@@ -104,10 +104,21 @@ export default function useXChat<
   const requestHandlerRef =
     React.useRef<AbstractXRequestClass<Input, Output, ChatMessage>>(undefined);
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
-  // fix #1431, should give a default key to create store
+
   const [conversationKey, setConversationKey] = useState(
     originalConversationKey || generateConversationKey(),
   );
+
+  // 消息队列：存储会话切换后的待发送消息
+  const messageQueueRef = React.useRef<
+    Map<
+      string | symbol,
+      Array<{
+        requestParams: Partial<Input>;
+        opts?: { extraInfo: AnyObject };
+      }>
+    >
+  >(new Map());
 
   useEffect(() => {
     if (originalConversationKey) {
@@ -232,6 +243,7 @@ export default function useXChat<
       });
     } else {
       // Add placeholder message
+
       setMessages((ori: MessageInfo<ChatMessage>[]) => {
         let nextMessages = [...ori, ...messages];
         if (requestPlaceholder) {
@@ -411,6 +423,41 @@ export default function useXChat<
     });
   };
 
+  // 会话切换完成后处理消息队列
+  const processMessageQueue = React.useCallback(() => {
+    const requestParamsList = messageQueueRef.current.get(conversationKey);
+    if (requestParamsList && requestParamsList.length > 0) {
+      const timer = setTimeout(() => {
+        clearTimeout(timer);
+        requestParamsList.forEach(({ requestParams, opts }) => {
+          onRequest(requestParams, opts);
+        });
+        messageQueueRef.current.delete(conversationKey);
+      });
+    }
+  }, [conversationKey, onRequest]);
+
+  useEffect(() => {
+    if (!isDefaultMessagesRequesting) {
+      processMessageQueue();
+    }
+  }, [isDefaultMessagesRequesting]);
+
+  // 添加消息到队列，等待会话切换完成后发送
+  const queueRequest = (
+    currentConversationKey: string | symbol,
+    requestParams: Partial<Input>,
+    opts?: { extraInfo: AnyObject },
+  ) => {
+    if (!messageQueueRef.current.has(currentConversationKey)) {
+      messageQueueRef.current.set(currentConversationKey, []);
+    }
+    messageQueueRef.current.get(currentConversationKey)!.push({
+      requestParams,
+      opts,
+    });
+  };
+
   return {
     onRequest,
     isDefaultMessagesRequesting,
@@ -427,5 +474,6 @@ export default function useXChat<
     },
     isRequesting: conversationKey ? IsRequestingMap?.get(conversationKey) || false : isRequesting,
     onReload,
+    queueRequest,
   } as const;
 }

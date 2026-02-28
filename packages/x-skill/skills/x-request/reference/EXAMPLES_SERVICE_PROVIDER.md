@@ -18,10 +18,10 @@ const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completio
 **Frontend Environment (Using Proxy)**
 
 ```typescript
-// ❌ Dangerous: Don't configure token directly in frontend
+// ❌ Dangerous: Do not configure token directly in frontend
 // const openAIRequest = XRequest('https://api.example-openai.com/v1/chat/completions', {
 //   headers: {
-//     'Authorization': 'Bearer sk-xxxxxxxx', // ❌ Will expose keys
+//     'Authorization': 'Bearer sk-xxxxxxxx', // ❌ Will expose key
 //   },
 // });
 

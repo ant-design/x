@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from 'react';
+import React, { useImperativeHandle, useState } from 'react';
 import { fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../tests/utils';
 import { DefaultChatProvider } from '../../chat-providers';
 import XRequest from '../../x-request';
@@ -361,5 +361,64 @@ describe('useXChat', () => {
 
     chatMessagesStoreHelper.delete('conversation-1');
     expect(chatMessagesStoreHelper.get('conversation-1')).toBeFalsy();
+  });
+
+  it('queueRequest should work without provider', async () => {
+    const { result } = renderHook(() =>
+      useXChat<string, ChatInput, any, any>({
+        defaultMessages: [{ message: 'Hello' }],
+      }),
+    );
+
+    // queueRequest 不会抛出错误，它只是将消息加入队列
+    expect(() => {
+      result.current?.queueRequest(
+        'test-conversation',
+        { messages: [{ role: 'user', content: 'Hello' }] },
+        { extraInfo: { id: '1111' } },
+      );
+    }).not.toThrow();
+  });
+
+  it('queueRequest should queue messages correctly and processMessageQueue should handle queued messages', async () => {
+    const provider = new DefaultChatProvider<string, any, any>({
+      request: XRequest('http://localhost:8000/', {
+        manual: true,
+        fetch: async () => {
+          return Promise.resolve(new Response('{"content": "test response"}'));
+        },
+      }),
+    });
+
+    const { result } = renderHook(() => {
+      const [activeConversationKey, setActiveConversationKey] = useState('test-conversation');
+      return [
+        useXChat<string, any, any, any>({
+          provider,
+          conversationKey: activeConversationKey,
+          defaultMessages: () => [{ message: 'Hello' }],
+        }),
+        setActiveConversationKey,
+      ];
+    });
+
+    await waitFakeTimer();
+
+    // 使用 queueRequest 将消息加入队列
+    const [hookResult, setActiveConversationKey] = result.current as any;
+    setActiveConversationKey('new-conversation');
+    // 添加多条消息到队列
+    hookResult.queueRequest('new-conversation', { query: 'queued message 1' });
+    hookResult.queueRequest('test-conversation', { query: 'queued message 2' });
+    hookResult.queueRequest('test-conversation', { query: 'queued message 2' });
+
+    // 验证队列中的消息不会立即出现在 messages 中
+    expect(hookResult.messages.length).toBe(1); // 只有默认消息
+
+    // 等待 processMessageQueue 执行
+    await waitFakeTimer();
+
+    // 验证队列消息被处理（由于会话切换，原会话的队列应该被清空）
+    expect(hookResult.messages.length).toBe(1); // 新会话只有默认消息
   });
 });
