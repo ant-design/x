@@ -230,7 +230,7 @@
     "simple-git": "^3.26.0",
     "spinnies": "^0.5.1",
     "tar": "^7.4.3",
-    "tbox-nodejs-sdk": "^0.0.13",
+    "tbox-nodejs-sdk": "^0.0.19",
     "tsx": "^4.19.1",
     "typedoc": "^0.28.0",
     "typescript": "~5.9.3",
