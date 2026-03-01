@@ -100,10 +100,11 @@ export const getComputedToken = (
 };
 export function useInternalToken(): [
   theme: Theme<SeedToken, AliasToken>,
-  token: GlobalToken,
-  hashId: string,
   realToken: GlobalToken,
+  hashId: string,
+  token: GlobalToken,
   cssVar?: DesignTokenProviderProps['cssVar'],
+  zeroRuntime?: boolean,
 ] {
   const {
     token: rootDesignToken,
@@ -111,6 +112,7 @@ export function useInternalToken(): [
     theme,
     override,
     cssVar: ctxCssVar,
+    zeroRuntime,
   } = React.useContext(antdTheme._internalContext);
   const cssVar = {
     prefix: ctxCssVar?.prefix ?? 'ant',
@@ -134,7 +136,14 @@ export function useInternalToken(): [
       },
     },
   );
-  return [mergedTheme as Theme<any, any>, realToken, hashed ? hashId : '', token, cssVar];
+  return [
+    mergedTheme as Theme<any, any>,
+    realToken,
+    hashed ? hashId : '',
+    token,
+    cssVar,
+    !!zeroRuntime,
+  ];
 }
 
 export default function useToken() {
