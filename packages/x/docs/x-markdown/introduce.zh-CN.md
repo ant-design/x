@@ -57,15 +57,7 @@ title: 介绍
 ```tsx
 import React from 'react';
 import { XMarkdown } from '@ant-design/x-markdown';
-const content = `
-# Hello World
-
-### 欢迎使用 XMarkdown！
-
-- 项目1
-- 项目2
-- 项目3
-`;
+const content = '# Hello XMarkdown\n\n这是一个流式友好的 Markdown 渲染器。';
 
 const App = () => <XMarkdown content={content} />;
 
