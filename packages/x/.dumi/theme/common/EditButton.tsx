@@ -3,7 +3,7 @@ import { Tooltip } from 'antd';
 import { createStyles } from 'antd-style';
 import React from 'react';
 
-const branchUrl = 'https://github.com/ant-design/x/edit/next/packages/x/';
+const branchUrl = 'https://github.com/ant-design/x/edit/main/packages/x/';
 
 export interface EditButtonProps {
   title: React.ReactNode;

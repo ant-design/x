@@ -77,17 +77,17 @@ const App: React.FC = () => {
     >
       <Bubble.List
         style={{
-          height: 400,
+          height: 630,
         }}
         role={memoRole}
         items={[
           { role: 'system', content: 'Welcome to Ant Design X', key: 'system' },
+          { role: 'divider', content: 'divider', key: 'divider' },
           {
             role: 'user',
             content: 'hello, Ant Design X',
             key: 'user',
           },
-          { role: 'divider', content: 'divider', key: 'divider' },
           {
             role: 'ai',
             content: 'hello, how can I help you?',

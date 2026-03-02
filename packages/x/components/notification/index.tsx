@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import warning from '../_util/warning';
 import type { useNotificationType, XNotificationOpenArgs } from './interface';
 
 let uuid = 0;
@@ -8,9 +9,11 @@ class XNotification {
   static permissible: boolean;
   constructor() {
     XNotification.permissible = !!globalThis?.Notification;
-    if (!XNotification.permissible) {
-      console.warn('Notification API is not supported in this environment.');
-    }
+    warning(
+      XNotification.permissible,
+      'XNotification',
+      'Notification API is not supported in this environment.',
+    );
   }
 
   public get permission(): NotificationPermission {

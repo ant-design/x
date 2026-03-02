@@ -1,7 +1,7 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { blinkMotion, genCollapseMotion } from '../../style';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
 export interface ComponentToken {
   /**
    * @desc 默认打字动画颜色

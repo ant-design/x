@@ -4,6 +4,8 @@ group:
 title: Latex
 subtitle: 公式
 order: 2
+category: Components
+packageName: x-markdown/plugins
 ---
 
 ## 何时使用

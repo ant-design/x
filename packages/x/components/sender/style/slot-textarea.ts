@@ -1,5 +1,5 @@
 import { unit } from '@ant-design/cssinjs';
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { SenderToken } from '.';
 
 const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {

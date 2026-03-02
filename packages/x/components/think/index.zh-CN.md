@@ -1,5 +1,5 @@
 ---
-category: Think
+category: Components
 group:
   title: 确认
   order: 1

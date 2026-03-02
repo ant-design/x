@@ -1,5 +1,5 @@
+import { CodeHighlighter } from '@ant-design/x';
 import React from 'react';
-import CodeHighlighter from '../index';
 
 const App: React.FC = () => {
   const code = `import React from 'react';

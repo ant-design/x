@@ -1,5 +1,6 @@
 import { useEvent, useMergedState } from '@rc-component/util';
 import React from 'react';
+import warning from '../../_util/warning';
 
 export type ControlledSpeechConfig = {
   recording?: boolean;
@@ -44,6 +45,14 @@ export default function useSpeech(
           };
 
           lastPermission = permissionStatus;
+        })
+        .catch((error: unknown) => {
+          const message = error instanceof Error ? error.message : String(error);
+          warning(
+            false,
+            'Sender',
+            `Browser does not support querying microphone permission. ${message}`,
+          );
         });
 
       return () => {

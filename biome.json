@@ -55,7 +55,8 @@
       "correctness": {
         "useExhaustiveDependencies": "off",
         "useUniqueElementIds": "off",
-        "noVoidTypeReturn": "off"
+        "noVoidTypeReturn": "off",
+        "noUndeclaredDependencies": "error"
       },
       "suspicious": {
         "noGlobalIsNan": "off",
@@ -151,6 +152,30 @@
         "rules": {
           "correctness": {
             "noUnusedPrivateClassMembers": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/es/**",
+        "**/lib/**",
+        "**/_site/**",
+        "**/coverage/**",
+        "**/scripts/**",
+        "**/.fatherrc.ts",
+        "**/tests/**",
+        "**/__tests__/**",
+        "**/demo/**",
+        "**/.dumi/**",
+        "packages/x/docs/**"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredDependencies": "off"
           }
         }
       }

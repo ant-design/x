@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from 'react';
+import React, { useImperativeHandle, useState } from 'react';
 import { fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../tests/utils';
 import { DefaultChatProvider } from '../../chat-providers';
 import XRequest from '../../x-request';
@@ -76,8 +76,8 @@ describe('useXChat', () => {
     return expect.objectContaining(obj);
   }
 
-  it('defaultMessages', () => {
-    const provider = new DefaultChatProvider<string, any, any>({
+  it('defaultMessages', async () => {
+    const provider = new DefaultChatProvider<SimpleType, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
       }),
@@ -85,14 +85,14 @@ describe('useXChat', () => {
     const { container } = render(
       <Demo
         provider={provider}
-        defaultMessages={[
+        defaultMessages={() => [
           {
             message: 'default',
           },
         ]}
       />,
     );
-
+    await waitFakeTimer();
     expect(getMessages(container)).toEqual([
       {
         id: 'default_0',
@@ -104,7 +104,7 @@ describe('useXChat', () => {
 
   describe('requestPlaceholder', () => {
     it('static', () => {
-      const provider = new DefaultChatProvider<ChatInput, any, any>({
+      const provider = new DefaultChatProvider<SimpleType, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           fetch: async () => {
@@ -122,10 +122,10 @@ describe('useXChat', () => {
       ]);
     });
 
-    it('callback', () => {
+    it('callback', async () => {
       const requestPlaceholder = jest.fn(() => 'light');
       const transformStream = new TransformStream();
-      const provider = new DefaultChatProvider<ChatInput, any, any>({
+      const provider = new DefaultChatProvider<SimpleType, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           transformStream: transformStream,
@@ -138,7 +138,7 @@ describe('useXChat', () => {
       const { container } = render(
         <Demo provider={provider} requestPlaceholder={requestPlaceholder} />,
       );
-
+      await waitFakeTimer();
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
 
       expect(requestPlaceholder).toHaveBeenCalledWith(
@@ -157,7 +157,7 @@ describe('useXChat', () => {
 
   describe('requestFallback', () => {
     it('static', async () => {
-      const provider = new DefaultChatProvider<ChatInput, any, any>({
+      const provider = new DefaultChatProvider<SimpleType, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           fetch: async () => {
@@ -167,8 +167,9 @@ describe('useXChat', () => {
       });
       const { container } = render(<Demo provider={provider} requestFallback="bamboo" />);
 
+      await waitFakeTimer();
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-      await sleep(1000);
+      await waitFakeTimer();
       expect(getMessages(container)).toEqual([
         expectMessage({ query: 'little' }, 'local'),
         expectMessage('bamboo', 'error'),
@@ -176,7 +177,7 @@ describe('useXChat', () => {
     });
 
     it('callback', async () => {
-      const provider = new DefaultChatProvider<ChatInput, any, any>({
+      const provider = new DefaultChatProvider<SimpleType, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
           fetch: async () => {
@@ -185,16 +186,22 @@ describe('useXChat', () => {
         }),
       });
       const requestFallback = jest.fn(async () => 'light');
-      const { container } = render(<Demo provider={provider} requestFallback={requestFallback} />);
+      const ref = React.createRef<any>();
+      const { container } = render(
+        <Demo ref={ref} provider={provider} requestFallback={requestFallback} />,
+      );
+      expect(ref.current).not.toBeNull();
+      await waitFakeTimer();
 
       fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
-
-      await sleep(1000);
+      ref.current.abort();
+      await waitFakeTimer();
 
       expect(requestFallback).toHaveBeenCalledWith(
         { query: 'little' },
         {
-          message: undefined,
+          messageInfo: undefined,
+          errorInfo: undefined,
           error: new Error('failed'),
           messages: [{ query: 'little' }],
         },
@@ -208,7 +215,7 @@ describe('useXChat', () => {
   });
 
   it('parser return multiple messages', async () => {
-    const provider = new DefaultChatProvider<ChatInput, any, any>({
+    const provider = new DefaultChatProvider<SimpleType, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
       }),
@@ -220,6 +227,7 @@ describe('useXChat', () => {
       />,
     );
 
+    await waitFakeTimer();
     fireEvent.change(container.querySelector('input')!, { target: { value: 'light' } });
     await waitFakeTimer();
 
@@ -229,13 +237,12 @@ describe('useXChat', () => {
     ]);
   });
 
-  it('should throw an error if onRequest,onReload,abort is called without an agent', () => {
+  it('should throw an error if onRequest,onReload,abort is called without an agent', async () => {
     const { result } = renderHook(() =>
       useXChat({
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
-
     expect(() => result.current?.onRequest({ query: 'Hello' })).toThrow('provider is required');
     expect(() =>
       result.current?.onReload(
@@ -257,16 +264,16 @@ describe('useXChat', () => {
         defaultMessages: [{ message: 'Hello' }],
       }),
     );
+    await sleep(100);
     result.current?.setMessage('default_0', { message: 'Hello2', extraInfo: { feedback: 'like' } });
     result.current?.setMessage('default_1', { message: 'Hello3' });
-    await sleep(100);
     expect(result.current?.messages.length).toBe(1);
     expect(result.current?.messages[0].message).toEqual('Hello2');
   });
 
   it('should reload, isRequesting work successfully', async () => {
     let count = 0;
-    const provider = new DefaultChatProvider<ChatInput, any, any>({
+    const provider = new DefaultChatProvider<SimpleType, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
         fetch: async () => {
@@ -289,7 +296,7 @@ describe('useXChat', () => {
     const { container } = render(
       <Demo ref={ref} provider={provider} requestPlaceholder="bamboo placeholder" />,
     );
-
+    await sleep(200);
     fireEvent.change(container.querySelector('input')!, { target: { value: 'little' } });
     expect(ref.current?.isRequesting).toBe(true);
     await sleep(200);
@@ -354,5 +361,64 @@ describe('useXChat', () => {
 
     chatMessagesStoreHelper.delete('conversation-1');
     expect(chatMessagesStoreHelper.get('conversation-1')).toBeFalsy();
+  });
+
+  it('queueRequest should work without provider', async () => {
+    const { result } = renderHook(() =>
+      useXChat<string, ChatInput, any, any>({
+        defaultMessages: [{ message: 'Hello' }],
+      }),
+    );
+
+    // queueRequest 不会抛出错误，它只是将消息加入队列
+    expect(() => {
+      result.current?.queueRequest(
+        'test-conversation',
+        { messages: [{ role: 'user', content: 'Hello' }] },
+        { extraInfo: { id: '1111' } },
+      );
+    }).not.toThrow();
+  });
+
+  it('queueRequest should queue messages correctly and processMessageQueue should handle queued messages', async () => {
+    const provider = new DefaultChatProvider<string, any, any>({
+      request: XRequest('http://localhost:8000/', {
+        manual: true,
+        fetch: async () => {
+          return Promise.resolve(new Response('{"content": "test response"}'));
+        },
+      }),
+    });
+
+    const { result } = renderHook(() => {
+      const [activeConversationKey, setActiveConversationKey] = useState('test-conversation');
+      return [
+        useXChat<string, any, any, any>({
+          provider,
+          conversationKey: activeConversationKey,
+          defaultMessages: () => [{ message: 'Hello' }],
+        }),
+        setActiveConversationKey,
+      ];
+    });
+
+    await waitFakeTimer();
+
+    // 使用 queueRequest 将消息加入队列
+    const [hookResult, setActiveConversationKey] = result.current as any;
+    setActiveConversationKey('new-conversation');
+    // 添加多条消息到队列
+    hookResult.queueRequest('new-conversation', { query: 'queued message 1' });
+    hookResult.queueRequest('test-conversation', { query: 'queued message 2' });
+    hookResult.queueRequest('test-conversation', { query: 'queued message 2' });
+
+    // 验证队列中的消息不会立即出现在 messages 中
+    expect(hookResult.messages.length).toBe(1); // 只有默认消息
+
+    // 等待 processMessageQueue 执行
+    await waitFakeTimer();
+
+    // 验证队列消息被处理（由于会话切换，原会话的队列应该被清空）
+    expect(hookResult.messages.length).toBe(1); // 新会话只有默认消息
   });
 });

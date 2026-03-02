@@ -185,6 +185,7 @@ const useStyle = createStyles(({ token, css }) => {
     designBtn: css`
       background: #ffffff1a;
       backdrop-filter: blur(40px);
+      border: ${token.lineWidth}px solid transparent;
 
       &::after {
         content: '';

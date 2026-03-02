@@ -13,10 +13,9 @@ import {
   ReloadOutlined,
   ScheduleOutlined,
 } from '@ant-design/icons';
-import type { BubbleListProps, ConversationItemType } from '@ant-design/x';
+import type { AttachmentsProps, BubbleListProps, ConversationItemType } from '@ant-design/x';
 import {
   Attachments,
-  type AttachmentsProps,
   Bubble,
   Conversations,
   Prompts,
@@ -25,8 +24,9 @@ import {
   Think,
   Welcome,
 } from '@ant-design/x';
+import { BubbleListRef } from '@ant-design/x/es/bubble';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import type { SSEFields } from '@ant-design/x-sdk';
+import type { DefaultMessageInfo, SSEFields, XModelMessage } from '@ant-design/x-sdk';
 import {
   DeepSeekChatProvider,
   useXChat,
@@ -68,6 +68,90 @@ const DEFAULT_CONVERSATIONS_ITEMS: ConversationItemType[] = [
     group: locale.yesterday,
   },
 ];
+
+// 使用国际化配置生成历史消息
+const generateHistoryMessages = (
+  locale: any,
+): Record<string, DefaultMessageInfo<XModelMessage>[]> => {
+  const { historyMessages } = locale;
+
+  return {
+    '5': [
+      {
+        message: { role: 'user', content: historyMessages.newSession.user },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.newSession.assistant,
+        },
+        status: 'success',
+      },
+    ],
+    '4': [
+      {
+        message: { role: 'user', content: historyMessages.whatHasAntDesignXUpgraded.user },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.whatHasAntDesignXUpgraded.assistant,
+        },
+        status: 'success',
+      },
+    ],
+    '3': [
+      {
+        message: { role: 'user', content: historyMessages.newAgiHybridInterface.user },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.newAgiHybridInterface.assistant,
+        },
+        status: 'success',
+      },
+    ],
+    '2': [
+      {
+        message: {
+          role: 'user',
+          content: historyMessages.howToQuicklyInstallAndImportComponents.user,
+        },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.howToQuicklyInstallAndImportComponents.assistant,
+        },
+        status: 'success',
+      },
+    ],
+    '1': [
+      {
+        message: { role: 'user', content: historyMessages.whatIsAntDesignX.user },
+        status: 'success',
+      },
+      {
+        message: {
+          role: 'assistant',
+          content: historyMessages.whatIsAntDesignX.assistant,
+        },
+        status: 'success',
+      },
+    ],
+  };
+};
+
+const historyMessageFactory = (conversationKey: string): DefaultMessageInfo<XModelMessage>[] => {
+  const historyMessages = generateHistoryMessages(locale);
+  return historyMessages[conversationKey] || [];
+};
+
 const MOCK_SUGGESTIONS = [
   { label: locale.writeAReport, value: 'report' },
   { label: locale.drawAPicture, value: 'draw' },
@@ -141,7 +225,6 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     // chatSend 样式
     chatSend: css`
       padding: ${token.padding}px;
-      
     `,
     speechButton: css`
       font-size: 18px;
@@ -249,11 +332,14 @@ const Copilot = (props: CopilotProps) => {
 
   const [inputValue, setInputValue] = useState('');
 
+  const listRef = useRef<BubbleListRef>(null);
+
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort } = useXChat({
     provider: providerFactory(activeConversationKey), // every conversation has its own provider
     conversationKey: activeConversationKey,
+    defaultMessages: historyMessageFactory(activeConversationKey),
     requestPlaceholder: () => {
       return {
         content: locale.noData,
@@ -279,6 +365,7 @@ const Copilot = (props: CopilotProps) => {
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
+    listRef.current?.scrollTo({ top: 'bottom' });
 
     // session title mock
     const conversation = getConversation(activeConversationKey);
@@ -345,6 +432,7 @@ const Copilot = (props: CopilotProps) => {
       {messages?.length ? (
         /** 消息列表 */
         <Bubble.List
+          ref={listRef}
           style={{ paddingInline: 16 }}
           items={messages?.map((i) => ({
             ...i.message,

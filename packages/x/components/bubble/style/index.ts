@@ -1,6 +1,6 @@
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import type { GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { GetDefaultToken } from '../../theme/interface';
 import genBubbleStyle, { BubbleToken } from './bubble';
 import { genShapeStyle, genVariantStyle } from './content';
 import { genDividerBubbleStyle } from './divider';

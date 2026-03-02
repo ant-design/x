@@ -26,6 +26,7 @@ export enum StreamCacheTokenType {
   Emphasis = 'emphasis',
   List = 'list',
   Table = 'table',
+  InlineCode = 'inline-code',
 }
 
 type Token = Tokens.Generic;
@@ -75,6 +76,16 @@ type ComponentProps<T extends Record<string, unknown> = Record<string, unknown>>
      * @description Streaming status, `loading` indicates streaming in progress, `done` indicates streaming complete
      */
     streamStatus: StreamStatus;
+    /**
+     * @description 代码块 info string（包含语言与参数，来自 marked 的 lang）
+     * @description Fenced code info string (language + params, from marked lang)
+     */
+    lang?: string;
+    /**
+     * @description 是否为块级 code（仅 code 组件）
+     * @description Whether it is a block code (code component only)
+     */
+    block?: boolean;
   } & T;
 
 interface XMarkdownProps {
@@ -142,6 +153,24 @@ interface XMarkdownProps {
    * @description DOMPurify configuration for HTML sanitization and XSS protection
    */
   dompurifyConfig?: DOMPurifyConfig;
+  /**
+   * @description 是否保护自定义标签中的换行符
+   * @description Whether to protect newlines in custom tags
+   * @default false
+   */
+  protectCustomTagNewlines?: boolean;
+  /**
+   * @description 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容
+   * @description Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content
+   * @default false
+   */
+  escapeRawHtml?: boolean;
+  /*
+   * @description 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标
+   * @description Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics
+   * @default false
+   */
+  debug?: boolean;
 }
 
 export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };

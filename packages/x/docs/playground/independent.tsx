@@ -45,9 +45,10 @@ import {
 import { Avatar, Button, Flex, type GetProp, message, Pagination, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+import { BubbleListRef } from '@ant-design/x/es/bubble';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 import locale from './_utils/local';
 
@@ -522,6 +523,8 @@ const Independent: React.FC = () => {
 
   const [inputValue, setInputValue] = useState('');
 
+  const listRef = useRef<BubbleListRef>(null);
+
   // ==================== Runtime ====================
 
   const { onRequest, messages, isRequesting, abort, onReload, setMessage } = useXChat<ChatMessage>({
@@ -554,6 +557,7 @@ const Independent: React.FC = () => {
     onRequest({
       messages: [{ role: 'user', content: val }],
     });
+    listRef.current?.scrollTo({ top: 'bottom' });
     setActiveConversationKey(activeConversationKey);
   };
 
@@ -635,6 +639,7 @@ const Independent: React.FC = () => {
       {messages?.length ? (
         /* 🌟 消息列表 */
         <Bubble.List
+          ref={listRef}
           items={messages?.map((i) => ({
             ...i.message,
             key: i.id,
@@ -643,8 +648,8 @@ const Independent: React.FC = () => {
             extraInfo: i.extraInfo,
           }))}
           styles={{
-            bubble: {
-              maxWidth: 840,
+            root: {
+              maxWidth: 940,
             },
           }}
           role={getRole(className)}

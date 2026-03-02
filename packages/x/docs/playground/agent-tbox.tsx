@@ -25,6 +25,7 @@ import {
   Welcome,
   XProvider,
 } from '@ant-design/x';
+import { BubbleListRef } from '@ant-design/x/es/bubble';
 import enUS_X from '@ant-design/x/locale/en_US';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
@@ -41,7 +42,7 @@ import enUS_antd from 'antd/locale/en_US';
 import zhCN_antd from 'antd/locale/zh_CN';
 import { createStyles } from 'antd-style';
 import dayjs from 'dayjs';
-import React, { createContext, memo, useContext, useEffect, useState } from 'react';
+import React, { createContext, memo, useContext, useEffect, useRef, useState } from 'react';
 import { TboxClient } from 'tbox-nodejs-sdk';
 import { useMarkdownTheme } from '../x-markdown/demo/_utils';
 
@@ -436,7 +437,10 @@ class TboxProvider<
   Input extends TboxInput = TboxInput,
   Output extends TboxOutput = TboxOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
@@ -615,6 +619,7 @@ const AgentTbox: React.FC = () => {
 
   const [inputValue, setInputValue] = useState('');
 
+  const listRef = useRef<BubbleListRef>(null);
   /**
    * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
    */
@@ -639,6 +644,7 @@ const AgentTbox: React.FC = () => {
     onRequest({
       message: { role: 'user', content: val },
     });
+    listRef.current?.scrollTo({ top: 'bottom' });
   };
 
   // ==================== Nodes ====================
@@ -752,7 +758,9 @@ const AgentTbox: React.FC = () => {
           />
         ) : null;
       },
-      footer: (content, { status, key }) => <Footer content={content} status={status} id={key} />,
+      footer: (content, { status, key }) => (
+        <Footer content={content.ext_text} status={status} id={key} />
+      ),
       contentRender: (content, { status }) => {
         const markdownText = `${content.ext_text ? `<think>\n\n${content.ext_text}${content.text ? '\n\n</think>\n\n' : ''}` : ''}${content.text || ''}`;
         return (
@@ -776,6 +784,7 @@ const AgentTbox: React.FC = () => {
       {messages?.length ? (
         /* 🌟 消息列表 */
         <Bubble.List
+          ref={listRef}
           items={messages?.map((i) => ({
             ...i.message,
             status: i.status,
@@ -783,8 +792,8 @@ const AgentTbox: React.FC = () => {
             key: i.id,
           }))}
           styles={{
-            bubble: {
-              maxWidth: 840,
+            root: {
+              maxWidth: 940,
             },
           }}
           role={role}

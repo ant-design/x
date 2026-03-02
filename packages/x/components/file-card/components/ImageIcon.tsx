@@ -1,7 +1,7 @@
 import Icon from '@ant-design/icons';
 import type { SpinProps } from 'antd';
-import type { DirectionType } from 'antd/es/config-provider';
 import React from 'react';
+import type { DirectionType } from '../../_util/type';
 
 interface ImageIconProps {
   className?: string;

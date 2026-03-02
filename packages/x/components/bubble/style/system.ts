@@ -1,5 +1,5 @@
 import { unit } from '@ant-design/cssinjs';
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { BubbleToken } from './bubble';
 
 export const genSystemBubbleStyle: GenerateStyle<BubbleToken> = (token) => {

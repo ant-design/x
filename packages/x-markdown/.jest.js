@@ -63,6 +63,7 @@ module.exports = {
   testRegex: getTestRegex(process.env.LIB_DIR),
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
+    '!src/**/__benchmark__/**',
     '!src/*/style/index.tsx',
     '!src/style/index.tsx',
     '!src/*/locale/index.tsx',

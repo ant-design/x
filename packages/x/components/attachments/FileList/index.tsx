@@ -105,7 +105,8 @@ export default function FileList(props: FileListProps) {
           description: clsx(`${cardCls}-desc`, classNames.description),
         },
         byte: items[i].size,
-        ...(omit(items[i], ['type']) as FileCardProps),
+        ...(omit(items[i], ['type', 'cardType']) as FileCardProps),
+        type: items[i].cardType,
         size: undefined,
         imageProps: {
           preview: preview,
@@ -154,11 +155,7 @@ export default function FileList(props: FileListProps) {
       extension={
         <SilentUploader visible={showExtension} upload={upload}>
           <Button
-            className={clsx(
-              classNames.upload,
-              contextClassNames.upload,
-              `${listCls}-upload-btn`,
-            )}
+            className={clsx(classNames.upload, contextClassNames.upload, `${listCls}-upload-btn`)}
             style={{ ...styles.upload, ...contextStyles.upload }}
             type="dashed"
           >

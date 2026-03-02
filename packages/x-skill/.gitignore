@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+.idea/
+.vscode/
+/dist
+/node_modules
+.codefuse
+package-lock.json
+.node
+.claude
+.cursor

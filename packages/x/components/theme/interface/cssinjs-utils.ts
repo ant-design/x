@@ -34,3 +34,11 @@ export type GenStyleFn<C extends TokenMapKey<ComponentTokenMap>> = GenStyleFnTyp
   AliasToken,
   C
 >;
+
+import type { CSSInterpolation } from '@ant-design/cssinjs';
+import type { AnyObject } from '../../_util/type';
+
+export type GenerateStyle<
+  ComponentToken extends AnyObject = AliasToken,
+  ReturnType = CSSInterpolation,
+> = (token: ComponentToken) => ReturnType;

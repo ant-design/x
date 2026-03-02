@@ -41,7 +41,7 @@ const Demo: React.FC = () => {
         autoSize={{ minRows: 4, maxRows: 6 }}
       />
       <Sender value="Force as loading" loading readOnly autoSize={true} />
-      <Sender disabled value="Set to disabled" />
+      <Sender disabled value="Set to disabled" allowSpeech />
     </Flex>
   );
 };

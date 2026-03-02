@@ -86,7 +86,8 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
             String(meta.frontmatter.showImport) !== 'false' && (
               <ComponentMeta
                 source
-                component={meta.frontmatter.title}
+                packageName={meta.frontmatter.packageName}
+                component={meta.frontmatter.componentName ?? meta.frontmatter.title}
                 filename={meta.frontmatter.filename}
                 version={meta.frontmatter.tag}
                 designUrl={meta.frontmatter.designUrl}

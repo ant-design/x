@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import Actions from '../actions';
 import { useXProviderContext } from '../x-provider';
@@ -66,11 +66,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
 
     return (
       <div
-        className={clsx(
-          `${prefixCls}-header`,
-          contextConfig.classNames?.header,
-          classNames.header,
-        )}
+        className={clsx(`${prefixCls}-header`, contextConfig.classNames?.header, classNames.header)}
         style={{ ...contextConfig.styles?.header, ...styles.header }}
       >
         <span

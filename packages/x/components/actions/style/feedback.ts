@@ -1,4 +1,4 @@
-import type { GenerateStyle } from '../../theme/cssinjs-utils';
+import type { GenerateStyle } from '../../theme/interface';
 import type { ActionsToken } from '.';
 
 const genActionsFeedbackStyle: GenerateStyle<ActionsToken> = (token) => {

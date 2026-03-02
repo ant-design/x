@@ -64,8 +64,9 @@ Common Props Reference: [Common Props](/docs/react/common-props)
 | avatar | Avatar slot | [BubbleSlot](#bubbleslot) | - | - |
 | extra | Extra slot | [BubbleSlot](#bubbleslot) | - | - |
 | onTyping | Typing animation callback | (rendererContent: string, currentContent: string) => void | - | 2.0.0 |
-| onEditing | Callback when content changes in editing mode | (content: string) => void | - | 2.0.0 |
 | onTypingComplete | Typing animation complete callback | (content: string) => void | - | - |
+| onEditConfirm | Edit confirm callback | (content: string) => void | - | 2.0.0 |
+| onEditCancel | Edit cancel callback | () => void | - | 2.0.0 |
 
 #### ContentType
 
@@ -234,6 +235,10 @@ If you do not want to use flex layout, you can set `max-height` for **Bubble.Lis
 #### Bubble.List role and Custom Bubble
 
 Both the `role` and `items` attributes of **Bubble.List** can be configured for bubbles, where the `role` configuration is used as the default and can be omitted. `item.role` is used to specify the bubble role for the data item, which will be matched with `Bubble.List.role`. The `items` itself can also be configured with bubble attributes, with higher priority than the `role` configuration. The final bubble configuration is: `{ ...role[item.role], ...item }`.
+
+Note that [semantic configuration](#semantic-dom) in **Bubble.List** can also style the bubbles, but it has the lowest priority and will be overridden by role or items.
+
+The final configuration priority is: `items` > `role` > `Bubble.List.styles` = `Bubble.List.classNames`.
 
 Special note: We provide four default fields for `role`, `ai`, `user`, `system`, `divider`. Among these, `system` and `divider` are reserved fields. If `item.role` is assigned either of them, **Bubble.List** will render this bubble data as **Bubble.System (role = 'system')** or **Bubble.Divider (role = 'divider')**.
 

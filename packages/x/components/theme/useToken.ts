@@ -1,12 +1,36 @@
 import type { Theme } from '@ant-design/cssinjs';
 import { createTheme, useCacheToken } from '@ant-design/cssinjs';
 import { theme as antdTheme } from 'antd';
-import type { DesignTokenProviderProps } from 'antd/es/theme/context';
-import { ignore, unitless } from 'antd/es/theme/useToken';
-import formatToken from 'antd/es/theme/util/alias';
 import React from 'react';
 import version from '../version';
-import type { AliasToken, GlobalToken, SeedToken } from './cssinjs-utils';
+import { DesignTokenProviderProps } from './context';
+import type { AliasToken, GlobalToken, SeedToken } from './interface';
+import formatToken from './util/alias';
+
+export const unitless: {
+  [key in keyof AliasToken]?: boolean;
+} = {
+  lineHeight: true,
+  lineHeightSM: true,
+  lineHeightLG: true,
+  lineHeightHeading1: true,
+  lineHeightHeading2: true,
+  lineHeightHeading3: true,
+  lineHeightHeading4: true,
+  lineHeightHeading5: true,
+  opacityLoading: true,
+  fontWeightStrong: true,
+  zIndexPopupBase: true,
+  zIndexBase: true,
+  opacityImage: true,
+};
+
+export const ignore: {
+  [key in keyof AliasToken]?: boolean;
+} = {
+  motionBase: true,
+  motionUnit: true,
+};
 
 const defaultTheme: Theme<SeedToken, AliasToken> = createTheme(antdTheme.defaultAlgorithm);
 
@@ -89,8 +113,8 @@ export function useInternalToken(): [
     cssVar: ctxCssVar,
   } = React.useContext(antdTheme._internalContext);
   const cssVar = {
-    prefix: ctxCssVar?.prefix || 'ant',
-    key: ctxCssVar?.key || 'css-var-root',
+    prefix: ctxCssVar?.prefix ?? 'ant',
+    key: ctxCssVar?.key ?? 'css-var-root',
   };
 
   const mergedTheme = theme || defaultTheme;

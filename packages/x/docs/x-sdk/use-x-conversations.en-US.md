@@ -1,10 +1,13 @@
 ---
+category: Components
 group:
   title: Data Flow
   order: 1
 title: useXConversations
 order: 2
-description:
+description: Manage conversation persistence and CRUD operations for multiple sessions.
+tag: 2.0.0
+packageName: x-sdk
 ---
 
 ## When To Use
@@ -18,6 +21,8 @@ description:
 <code src="./demos/x-conversations/operations.tsx">Conversation Operations</code> 
 <code src="./demos/x-conversations/multi-instances.tsx">Multiple Instances</code>
 <code src="./demos/x-conversations/with-x-chat.tsx">Integration with `useXChat` for message management</code>
+<code src="./demos/x-conversations/async-defaultMessages.tsx">Request Remote Historical Messages</code>
+<code src="./demos/x-conversations/session-key.tsx">SessionId - ConversationKey</code>
 
 ## API
 

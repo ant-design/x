@@ -3,8 +3,8 @@ import React from 'react';
 import DividerBubble from '../Divider';
 
 describe('Bubble.Divider', () => {
-  describe('基础功能', () => {
-    it('应该正确渲染基本的 DividerBubble 组件', () => {
+  describe('Basic functionality', () => {
+    it('should correctly render basic DividerBubble component', () => {
       const { container } = render(<DividerBubble content="分割线内容" />);
 
       const bubbleElement = container.querySelector('.ant-bubble');
@@ -16,7 +16,7 @@ describe('Bubble.Divider', () => {
       expect(dividerElement).toHaveTextContent('分割线内容');
     });
 
-    it('应该支持空内容', () => {
+    it('should support empty content', () => {
       const { container } = render(<DividerBubble />);
 
       const dividerElement = container.querySelector('.ant-divider');
@@ -24,14 +24,14 @@ describe('Bubble.Divider', () => {
       expect(dividerElement).toHaveTextContent('');
     });
 
-    it('应该支持自定义 class 前缀', () => {
+    it('should support custom class prefix', () => {
       const { container } = render(<DividerBubble prefixCls="custom-bubble" content="测试内容" />);
 
       const bubbleElement = container.querySelector('.custom-bubble');
       expect(bubbleElement).toBeInTheDocument();
     });
 
-    it('应该支持 React 节点内容', () => {
+    it('should support React node content', () => {
       const content = <span className="custom-content">自定义内容</span>;
       const { container } = render(<DividerBubble content={content as any} />);
 
@@ -40,8 +40,8 @@ describe('Bubble.Divider', () => {
     });
   });
 
-  describe('Divider 属性传递', () => {
-    it('应该正确传递 Divider 属性', () => {
+  describe('Divider property passing', () => {
+    it('should correctly pass Divider properties', () => {
       const { container } = render(
         <DividerBubble content="分割线" dividerProps={{ dashed: true, plain: true }} />,
       );
@@ -54,8 +54,8 @@ describe('Bubble.Divider', () => {
     });
   });
 
-  describe('样式和类名', () => {
-    it('应该支持自定义 className', () => {
+  describe('Styles and class names', () => {
+    it('should support custom className', () => {
       const { container } = render(<DividerBubble content="测试" className="custom-class" />);
 
       const bubbleElement = container.querySelector('.ant-bubble-divider');
@@ -63,7 +63,7 @@ describe('Bubble.Divider', () => {
       expect(bubbleElement).toHaveClass('custom-class');
     });
 
-    it('应该支持自定义 style', () => {
+    it('should support custom style', () => {
       const { container } = render(
         <DividerBubble content="测试" style={{ backgroundColor: 'red' }} />,
       );

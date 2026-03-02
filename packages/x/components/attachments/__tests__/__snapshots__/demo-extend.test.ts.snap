@@ -2,13 +2,13 @@
 
 exports[`renders components/attachments/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_d_"
+  class="ant-app css-var-_r_1b_"
 >
   <div
-    class="ant-flex css-var-_r_d_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-_r_1b_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_r_d_ ant-sender-main"
+      class="ant-sender css-var-_r_1b_ ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -17,7 +17,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
           class="ant-sender-prefix"
         >
           <span
-            class="ant-upload-wrapper css-var-_r_d_"
+            class="ant-upload-wrapper css-var-_r_1b_"
           >
             <div
               class="ant-upload ant-upload-select"
@@ -32,7 +32,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                   type="file"
                 />
                 <button
-                  class="ant-btn css-var-_r_d_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+                  class="ant-btn css-var-_r_1b_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
                   type="button"
                 >
                   <span
@@ -64,17 +64,17 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
           </span>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_d_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_1b_ ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_d_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_1b_"
           >
             <button
-              class="ant-btn css-var-_r_d_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-_r_1b_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -108,7 +108,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
     </div>
     <button
       aria-checked="false"
-      class="ant-switch css-var-_r_d_"
+      class="ant-switch css-var-_r_1b_"
       role="switch"
       type="button"
     >
@@ -131,14 +131,14 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
       </span>
     </button>
     <div
-      class="ant-attachment-drop-area css-var-_r_d_"
+      class="ant-attachment-drop-area css-var-_r_1b_"
       style="display: none;"
     >
       <div
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper css-var-_r_d_"
+          class="ant-upload-wrapper css-var-_r_1b_"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -159,10 +159,10 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-attachment-placeholder-inner ant-flex css-var-_r_d_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                  class="ant-attachment-placeholder-inner ant-flex css-var-_r_1b_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                 >
                   <span
-                    class="ant-typography ant-attachment-placeholder-icon css-var-_r_d_"
+                    class="ant-typography ant-attachment-placeholder-icon css-var-_r_1b_"
                   >
                     <span
                       aria-label="cloud-upload"
@@ -188,12 +188,12 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                     </span>
                   </span>
                   <h5
-                    class="ant-typography ant-attachment-placeholder-title css-var-_r_d_"
+                    class="ant-typography ant-attachment-placeholder-title css-var-_r_1b_"
                   >
                     Drag & Drop files here
                   </h5>
                   <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_d_"
+                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_1b_"
                   >
                     Support file type: image, video, audio, document, etc.
                   </span>
@@ -219,6 +219,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
   >
     <div
       aria-label="segmented control"
+      aria-orientation="horizontal"
       class="ant-segmented css-var-_r_b_"
       role="radiogroup"
       style="margin-inline-end: auto;"
@@ -237,9 +238,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-checked="true"
             class="ant-segmented-item-label"
-            role="radio"
             title="Wrap"
           >
             Wrap
@@ -254,9 +253,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-checked="false"
             class="ant-segmented-item-label"
-            role="radio"
             title="Scroll X"
           >
             Scroll X
@@ -271,9 +268,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
             type="radio"
           />
           <div
-            aria-checked="false"
             class="ant-segmented-item-label"
-            role="radio"
             title="Scroll Y"
           >
             Scroll Y

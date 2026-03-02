@@ -1,5 +1,5 @@
 ---
-category: FileCard
+category: Components
 group:
   title: Feedback
   order: 4

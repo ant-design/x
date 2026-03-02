@@ -4,9 +4,7 @@ import ActionsCopy from '../ActionsCopy';
 
 describe('ActionsCopy', () => {
   it('renders with text', () => {
-    const { container } = render(
-      <ActionsCopy text="hello" />,
-    );
+    const { container } = render(<ActionsCopy text="hello" />);
     expect(container.querySelector('.ant-actions-copy')).toBeTruthy();
   });
   it('renders with no text', () => {
