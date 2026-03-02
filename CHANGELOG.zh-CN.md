@@ -42,7 +42,7 @@ tag: vVERSION
 ### 其他
 
 - 🛠 修复了因依赖升级导致的构建错误问题。 [#1754](https://github.com/ant-design/x/pull/1754) 由 [kimteayon](https://github.com/kimteayon) 提交
-- 🛠 解决 CodeSandbox 预览中 domhandler 的 ModuleNotFoundError 错误。[#1754](https://github.com/ant-design/x/pull/1754) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🛠 解决 CodeSandbox 预览中 domhandler 的 ModuleNotFoundError 错误。[#1754](https://github.com/ant-design/x/pull/1754) 由 [Div627](https://github.com/Div627) 提交
 
 ## 2.2.2
 
