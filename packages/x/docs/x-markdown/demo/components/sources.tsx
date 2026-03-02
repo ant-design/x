@@ -68,7 +68,7 @@ const App = () => {
   }, [index]);
 
   return (
-    <Flex vertical gap="small" style={{ height: 300, overflow: 'auto' }} ref={contentRef}>
+    <Flex vertical gap="small" style={{ height: 240, overflow: 'auto' }} ref={contentRef}>
       <Flex justify="flex-end">
         <Button onClick={() => setIndex(0)}>Re-Render</Button>
       </Flex>

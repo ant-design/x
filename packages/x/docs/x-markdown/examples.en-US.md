@@ -9,173 +9,47 @@ packageName: x-markdown
 
 ## When to Use
 
-Used for rendering streaming Markdown format returned by LLM.
+Use this page to get a minimal setup for rendering LLM Markdown output.
 
 ## Code Examples
 
 <!-- prettier-ignore -->
-<code src="./demo/codeDemo/basic.tsx" description="Basic markdown syntax rendering." title="Basic Usage"></code>
-<code src="./demo/streaming/combined.tsx" description="Incomplete syntax handling and animation effects" title="Streaming Processing"></code>
-<code src="./demo/codeDemo/supersets.tsx" description="Rendering with plugins." title="Plugin Usage"></code>
-<code src="./demo/components/dataChart.tsx" description="Custom component rendering tags." title="Custom Components"></code>
-<code src="./demo/codeDemo/plugin.tsx" title="Custom Extension Plugin"></code>
-<code src="./demo/codeDemo/tokenizer.tsx" title="Custom Tokens"></code>
-<code src="./demo/codeDemo/walkTokens.tsx" title="Token Processing"></code>
-<code src="./demo/codeDemo/renderer.tsx" title="Pre-rendering Processing"></code>
-<code src="./demo/codeDemo/link.tsx" title="Chinese Link Handling"></code>
-<code src="./demo/codeDemo/xss.tsx"  title="XSS Defense"></code>
-<code src="./demo/codeDemo/escape-raw-html.tsx" description="Toggle escape raw HTML and open links in new tab." title="Escape Raw HTML & Open in New Tab"></code>
+<code src="./demo/codeDemo/basic.tsx" title="Basic Rendering" description="Smallest working setup"></code>
+<code src="./demo/streaming/combined.tsx" title="Streaming Rendering" description="Syntax recovery + animation"></code>
+<code src="./demo/components/codeHighlighter.tsx" title="Component Extension" description="Map code block to CodeHighlighter"></code>
+<code src="./demo/codeDemo/supersets.tsx" title="Plugin Extension" description="Extend Markdown syntax"></code>
+<code src="./demo/codeDemo/escape-raw-html.tsx" title="Security & Links" description="Escape raw HTML and open links in new tab; see Streaming format demo for dompurifyConfig"></code>
 
 ## API
 
-<!-- prettier-ignore -->
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | content | Markdown content to render | `string` | - |
-| children | Markdown content, alias for `content` prop | `string` | - |
-| components | Custom React components to replace HTML elements | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`, see [details](/x-markdowns/components) | - |
-| paragraphTag | Custom HTML tag for paragraph elements to prevent validation errors when custom components contain block-level elements | `keyof JSX.IntrinsicElements` | `'p'` |
-| streaming | Configuration for streaming rendering behavior | `StreamingOption`, see [syntax processing](/x-markdowns/streaming-syntax) and [animation effects](/x-markdowns/streaming-animation) | - |
-| config | Marked.js configuration for Markdown parsing and extensions; applied **last**. A custom `renderer` overrides built-in renderers with the same name. See «Built-in Renderers and config Priority» below | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
-| openLinksInNewTab | Whether to add `target="_blank"` to all a tags | `boolean` | `false` |
-| dompurifyConfig | DOMPurify configuration for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
-| debug | Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics | `boolean` | `false` |
-| className | Additional CSS class for root container | `string` | - |
-| rootClassName | Alias for `className`, additional CSS class for root element | `string` | - |
-| style | Inline styles for root container | `CSSProperties` | - |
-| protectCustomTagNewlines | Whether to protect newlines in custom tags | `boolean` | `false` |
-| escapeRawHtml | Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content. If you pass a custom `renderer.html` in `config`, it overrides the built-in behavior and this option will not apply | `boolean` | `false` |
-
-### Built-in Renderers and config Priority
-
-XMarkdown registers the following **built-in renderers** first (depending on the corresponding props), then applies your [MarkedExtension](https://marked.js.org/using_advanced#options) from `config` (including `renderer`, `extensions`, etc.) **last**. Therefore:
-
-- **If you pass a renderer with the same name in `config`** (e.g. `config={{ renderer: { html() { return '...'; } } }}`), it **overrides** that built-in renderer and the related feature may not apply.
-- To keep built-in behavior and add custom logic, implement or compose the built-in behavior inside your custom renderer.
-
-| Built-in renderer | When applied | Description |
-| --- | --- | --- |
-| `link` | `openLinksInNewTab === true` | Adds `target="_blank"` and `rel="noopener noreferrer"` to links |
-| `paragraph` | `paragraphTag` is provided | Wraps paragraphs with the given tag (e.g. `div`) |
-| `code` | Always registered | Outputs code blocks with `data-block`, `data-state`, `data-lang`, etc. for streaming and highlighting |
-| `html` | `escapeRawHtml === true` | Escapes raw HTML as plain text |
+| children | Markdown content (use either `content` or `children`) | `string` | - |
+| components | Map HTML nodes to custom React components | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>` | - |
+| streaming | Streaming behavior config | `StreamingOption` | - |
+| config | Marked parse config, applied last and may override built-in renderers | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| rootClassName | Extra CSS class for the root element | `string` | - |
+| className | Extra CSS class for the root container | `string` | - |
+| paragraphTag | HTML tag for paragraphs (avoids validation issues when custom components contain block elements) | `keyof JSX.IntrinsicElements` | `'p'` |
+| style | Inline styles for the root container | `CSSProperties` | - |
+| prefixCls | CSS class name prefix for component nodes | `string` | - |
+| openLinksInNewTab | Add `target="_blank"` to all links so they open in a new tab | `boolean` | `false` |
+| dompurifyConfig | DOMPurify config for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
+| protectCustomTagNewlines | Whether to preserve newlines inside custom tags | `boolean` | `false` |
+| escapeRawHtml | Escape raw HTML in Markdown as plain text (do not parse as real HTML), to prevent XSS while keeping content visible | `boolean` | `false` |
+| debug | Enable debug mode (performance overlay) | `boolean` | `false` |
 
 ### StreamingOption
 
-| Property | Description | Type | Default |
+| Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| hasNextChunk | Indicates whether there are subsequent content chunks. When false, flushes all caches and completes rendering | `boolean` | `false` |
-| enableAnimation | Enables text fade-in animation for block-level elements (`p`, `li`, `h1`, `h2`, `h3`, `h4`) | `boolean` | `false` |
-| animationConfig | Configuration for text appearance animation effects | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
-| incompleteMarkdownComponentMap | Custom component names for incomplete syntax. When streaming output contains unclosed Markdown syntax (e.g., incomplete tables, unterminated code blocks), you can manually specify the component name to wrap the fragment for placeholder or loading states. | `{ link?: string; image?: string; table?: string; html?: string }` | `{}` |
+| hasNextChunk | Whether more chunks are expected. Set `false` to flush cache and finish rendering | `boolean` | `false` |
+| enableAnimation | Whether to enable fade-in animation for block elements | `boolean` | `false` |
+| animationConfig | Animation options (for example fade duration and easing) | `AnimationConfig` | - |
+| incompleteMarkdownComponentMap | Map incomplete Markdown fragments to custom loading components | `Partial<Record<'link' \| 'image' \| 'html' \| 'emphasis' \| 'list' \| 'table' \| 'inline-code', string>>` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
 
-#### AnimationConfig
+## Related Docs
 
-| Property     | Description                                                 | Type     | Default |
-| ------------ | ----------------------------------------------------------- | -------- | ------- |
-| fadeDuration | Duration of fade-in animation in milliseconds               | `number` | `200`   |
-| opacity      | Initial opacity value for characters during animation (0-1) | `number` | `0.2`   |
-
-### ComponentProps
-
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| domNode | Component DOM node from html-react-parser, containing parsed DOM node information | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| streamStatus | Streaming rendering supports two states: `loading` indicates content is being loaded, `done` indicates loading is complete. Currently only supports HTML format and fenced code blocks. Since indented code blocks have no explicit terminator, they always return `done` status | `'loading' \| 'done'` | - |
-| lang | Code fence info strings | `string` | - |
-| block | Whether it is a block code | `boolean` | - |
-| rest | Component props, supports all standard HTML attributes (e.g., `href`, `title`, `className`) and custom data attributes | `Record<string, any>` | - |
-
-## FAQ
-
-### Difference Between Components and Config Marked Extensions
-
-#### Config Marked Extensions (Plugin Extensions)
-
-The [`extensions`](https://marked.js.org/using_pro#extensions) in the `config` property are used to extend the functionality of the Markdown parser, they take effect **during the Markdown to HTML conversion process**:
-
-- **Stage**: Markdown parsing stage
-- **Function**: Recognize and convert special Markdown syntax
-- **Example**: Convert `[^1]` footnote syntax to `<footnote>1</footnote>` HTML tag
-- **Use Case**: Extend Markdown syntax to support more markup formats
-
-```typescript
-// Plugin example: footnote extension
-const footnoteExtension = {
-  name: 'footnote',
-  level: 'inline',
-  start(src) { return src.match(/\[\^/)?.index; },
-  tokenizer(src) {
-    const rule = /^\[\^([^\]]+)\]/;
-    const match = rule.exec(src);
-    if (match) {
-      return {
-        type: 'footnote',
-        raw: match[0],
-        text: match[1]
-      };
-    }
-  },
-  renderer(token) {
-    return `<footnote>${token.text}</footnote>`;
-  }
-};
-
-// Using the plugin
-<XMarkdown
-  content="This is a footnote example[^1]"
-  config={{ extensions: [footnoteExtension] }}
-/>
-```
-
-### Components (Component Replacement)
-
-The `components` property is used to replace generated HTML tags with custom React components:
-
-- **Stage**: HTML rendering stage
-- **Function**: Replace HTML tags with React components
-- **Example**: Replace `<footnote>1</footnote>` with `<CustomFootnote>1</CustomFootnote>`
-- **Use Case**: Customize rendering styles and interactive behavior of tags
-
-```typescript
-// Custom footnote component
-const CustomFootnote = ({ children, ...props }) => (
-  <sup
-    className="footnote-ref"
-    onClick={() => console.log('Clicked footnote:', children)}
-    style={{ color: 'blue', cursor: 'pointer' }}
-  >
-    {children}
-  </sup>
-);
-
-// Using component replacement
-<XMarkdown
-  content="<footnote>1</footnote>"
-  components={{ footnote: CustomFootnote }}
-/>
-```
-
-### Incomplete Syntax Token Conversion
-
-When `hasNextChunk` is `true`, all incomplete syntax tokens are automatically converted to `incomplete-token` form, and the incomplete syntax is returned via the `data-raw` property. The supported token type is `StreamCacheTokenType`. For example:
-
-- Incomplete link `[example](https://example.com` will be converted to `<incomplete-link data-raw="[example](https://example.com">`
-- Incomplete image `![product](https://cdn.example.com/images/produc` will be converted to `<incomplete-image data-raw="![product](https://cdn.example.com/images/produc">`
-- Incomplete heading `###` will be converted to `<incomplete-heading data-raw="###">`
-
-#### StreamCacheTokenType Type
-
-`StreamCacheTokenType` is an enumeration type that defines all Markdown syntax token types supported during streaming processing:
-
-```typescript
-type StreamCacheTokenType =
-  | 'text' // Plain text
-  | 'link' // Link syntax [text](url)
-  | 'image' // Image syntax ![alt](src)
-  | 'heading' // Heading syntax # ## ###
-  | 'emphasis' // Emphasis syntax *italic* **bold**
-  | 'list' // List syntax - + *
-  | 'table' // Table syntax | header | content |
-  | 'xml'; // XML/HTML tags <tag>
-```
+- [Component Extension](/x-markdowns/components)
+- [Streaming](/x-markdowns/streaming)

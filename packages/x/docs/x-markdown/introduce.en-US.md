@@ -57,15 +57,7 @@ We provide `x-markdown.js`, `x-markdown.min.js` and `x-markdown.min.js.map` in t
 ```tsx
 import React from 'react';
 import { XMarkdown } from '@ant-design/x-markdown';
-const content = `
-# Hello World
-
-### Welcome to XMarkdown!
-
-- Item 1
-- Item 2
-- Item 3
-`;
+const content = `# Hello XMarkdown\n\nThis is a streaming, user-friendly Markdown renderer.`;
 
 const App = () => <XMarkdown content={content} />;
 
