@@ -57,9 +57,19 @@ const App: React.FC = () => {
   }, [index]);
 
   return (
-    <div style={{ padding: 24, maxWidth: 800, margin: '0 auto' }}>
-      <Flex vertical gap="middle">
-        <Flex gap="small" justify="end">
+    <div
+      style={{
+        padding: 24,
+        maxWidth: 800,
+        margin: '0 auto',
+        height: 360,
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
+      <Flex vertical gap="middle" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
+        <Flex gap="small" justify="end" style={{ flexShrink: 0 }}>
           <Space>
             <Text>动画</Text>
             <Switch
@@ -83,25 +93,27 @@ const App: React.FC = () => {
           </Button>
         </Flex>
 
-        <Bubble
-          content={text.slice(0, index)}
-          contentRender={(content) => (
-            <XMarkdown
-              className={className}
-              content={content as string}
-              paragraphTag="div"
-              streaming={{
-                hasNextChunk: isStreaming && enableCache,
-                enableAnimation,
-                incompleteMarkdownComponentMap: {
-                  link: 'loading-link',
-                  image: 'loading-image',
-                },
-              }}
-              components={LoadingComponents}
-            />
-          )}
-        />
+        <Flex style={{ flex: 1, minHeight: 0, overflow: 'auto' }}>
+          <Bubble
+            content={text.slice(0, index)}
+            contentRender={(content) => (
+              <XMarkdown
+                className={className}
+                content={content as string}
+                paragraphTag="div"
+                streaming={{
+                  hasNextChunk: isStreaming && enableCache,
+                  enableAnimation,
+                  incompleteMarkdownComponentMap: {
+                    link: 'loading-link',
+                    image: 'loading-image',
+                  },
+                }}
+                components={LoadingComponents}
+              />
+            )}
+          />
+        </Flex>
       </Flex>
     </div>
   );

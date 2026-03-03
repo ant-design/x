@@ -9,173 +9,42 @@ packageName: x-markdown
 
 ## 何时使用
 
-用于渲染 LLM 返回的流式 Markdown 格式。
+用于快速接入 LLM 的 Markdown 输出渲染。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
-<code src="./demo/codeDemo/basic.tsx" description="markdown 基础语法渲染。" title="基础用法"></code>
-<code src="./demo/streaming/combined.tsx" description="未完成语法处理、动画效果" title="流式处理"></code>
-<code src="./demo/codeDemo/supersets.tsx" description="使用插件渲染。" title="插件使用"></code>
-<code src="./demo/components/dataChart.tsx" description="自定义组件渲染标签。" title="自定义组件"></code>
-<code src="./demo/codeDemo/plugin.tsx" title="自定义拓展插件"></code>
-<code src="./demo/codeDemo/tokenizer.tsx" title="自定义标记"></code>
-<code src="./demo/codeDemo/walkTokens.tsx" title="标记处理"></code>
-<code src="./demo/codeDemo/renderer.tsx" title="渲染前处理"></code>
-<code src="./demo/codeDemo/link.tsx" title="中文链接处理"></code>
-<code src="./demo/codeDemo/xss.tsx"  title="XSS 防御"></code>
-<code src="./demo/codeDemo/escape-raw-html.tsx" description="通过开关控制原始 HTML 转义与新标签页打开链接。" title="原始 HTML 转义 & 新标签页打开链接"></code>
+<code src="./demo/codeDemo/basic.tsx" title="基础渲染" description="最小可用示例"></code>
+<code src="./demo/streaming/combined.tsx" title="流式渲染" description="语法修复 + 动画"></code>
+<code src="./demo/components/codeHighlighter.tsx" title="组件扩展" description="将 code 块映射为 CodeHighlighter"></code>
+<code src="./demo/codeDemo/supersets.tsx" title="插件扩展" description="扩展 Markdown 语法"></code>
+<code src="./demo/codeDemo/escape-raw-html.tsx" title="安全与链接" description="原始 HTML 转义与新标签链接；HTML 净化配置见 Streaming 的 format 示例"></code>
 
 ## API
 
-<!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | content | 需要渲染的 Markdown 内容 | `string` | - |
-| children | Markdown 内容，作为 `content` 属性的别名 | `string` | - |
-| components | 用于替换 HTML 元素的自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>`，查看[详情](/x-markdowns/components-cn) | - |
-| paragraphTag | 段落元素的自定义 HTML 标签，防止自定义组件包含块级元素时的验证错误 | `keyof JSX.IntrinsicElements` | `'p'` |
-| streaming | 流式渲染行为的配置 | `StreamingOption`，查看[语法处理](/x-markdowns/streaming-syntax)和[动画效果](/x-markdowns/streaming-animation) | - |
-| config | Markdown 解析和扩展的 Marked.js 配置，在**最后**应用，其中 `renderer` 会覆盖同名的内置 renderer，见下方「内置 Renderer 与 config 的优先级」 | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
-| openLinksInNewTab | 是否为所有 a 标签添加 `target="_blank"` | `boolean` | `false` |
-| dompurifyConfig | HTML 净化和 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
-| debug | 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标 | `boolean` | `false` |
+| children | Markdown 内容（与 `content` 二选一） | `string` | - |
+| components | 将 HTML 节点映射为自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>` | - |
+| streaming | 流式渲染行为配置 | `StreamingOption` | - |
+| config | Marked 解析配置，后应用且可能覆盖内置 renderer | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
+| rootClassName | 根元素的额外 CSS 类名 | `string` | - |
 | className | 根容器的额外 CSS 类名 | `string` | - |
-| rootClassName | `className` 的别名，根元素的额外 CSS 类 | `string` | - |
+| paragraphTag | 段落使用的 HTML 标签（避免自定义组件含块级元素时的校验问题） | `keyof JSX.IntrinsicElements` | `'p'` |
 | style | 根容器的内联样式 | `CSSProperties` | - |
-| protectCustomTagNewlines | 是否保护自定义标记中的换行符 | `boolean` | `false` |
-| escapeRawHtml | 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容。若在 `config` 中传入自定义 `renderer.html`，会覆盖内置行为，导致本配置失效 | `boolean` | `false` |
-
-### 内置 Renderer 与 config 的优先级
-
-XMarkdown 在解析 Markdown 时会先注册以下**内置 renderer**（根据对应 prop 是否启用），再在**最后**应用你在 `config` 里传入的 [MarkedExtension](https://marked.js.org/using_advanced#options)（包括 `renderer`、`extensions` 等）。因此：
-
-- **若你在 `config` 中传入了同名的 `renderer`**（例如 `config={{ renderer: { html() { return '...'; } } }}`），会**覆盖**内置的该 renderer，对应能力可能失效。
-- 需要同时使用内置能力与自定义逻辑时，请在自定义 renderer 中自行调用或组合内置行为。
-
-| 内置 renderer | 生效条件 | 说明 |
-| --- | --- | --- |
-| `link` | `openLinksInNewTab === true` | 为链接添加 `target="_blank"`、`rel="noopener noreferrer"` |
-| `paragraph` | 传入 `paragraphTag` | 段落使用指定标签（如 `div`）包裹 |
-| `code` | 始终注册 | 代码块输出带 `data-block`、`data-state`、`data-lang` 等，供流式与高亮使用 |
-| `html` | `escapeRawHtml === true` | 将块级原始 HTML 转义为纯文本输出 |
+| prefixCls | 组件节点 CSS 类名前缀 | `string` | - |
+| openLinksInNewTab | 是否为所有链接添加 `target="_blank"` 并在新标签页打开 | `boolean` | `false` |
+| dompurifyConfig | HTML 净化与 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
+| protectCustomTagNewlines | 是否保留自定义标签内部的换行 | `boolean` | `false` |
+| escapeRawHtml | 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），用于防 XSS 同时保留内容 | `boolean` | `false` |
+| debug | 是否开启调试模式（显示性能监控浮层） | `boolean` | `false` |
 
 ### StreamingOption
 
-| 属性 | 说明 | 类型 | 默认值 |
+| 字段 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| hasNextChunk | 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染 | `boolean` | `false` |
-| enableAnimation | 为块级元素（`p`、`li`、`h1`、`h2`、`h3`、`h4`）启用文字淡入动画 | `boolean` | `false` |
-| animationConfig | 文字出现动画效果的配置 | `AnimationConfig` | `{ fadeDuration: 200, opacity: 0.2 }` |
-| incompleteMarkdownComponentMap | 未完成语法对应的自定义组件名。当流式输出出现未闭合的 Markdown 语法（如半截表格、未收尾代码块）时，可手动指定用于包裹该片段的组件名称，实现占位或加载态。 | `{ link?: string; image?: string; table?: string; html?: string }` | `{}` |
-
-#### AnimationConfig
-
-| 属性         | 说明                              | 类型     | 默认值 |
-| ------------ | --------------------------------- | -------- | ------ |
-| fadeDuration | 淡入动画的持续时间（毫秒）        | `number` | `200`  |
-| opacity      | 动画期间字符的初始透明度值（0-1） | `number` | `0.2`  |
-
-### ComponentProps
-
-| 属性 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| domNode | 来自 html-react-parser 的组件 DOM 节点，包含解析后的 DOM 节点信息 | [`DOMNode`](https://github.com/remarkablemark/html-react-parser?tab=readme-ov-file#replace) | - |
-| streamStatus | 流式渲染支持两种状态：`loading` 表示内容正在加载中，`done` 表示加载已完成。当前仅支持 HTML 格式以及带围栏的代码块（fenced code）。由于缩进代码块（indented code）没有明确的结束符，因此始终返回 `done` 状态 | `'loading' \| 'done'` | - |
-| lang | 代码块语言标识信息 | `string` | - |
-| block | 是否为块级 code | `boolean` | - |
-| rest | 组件属性，支持所有标准 HTML 属性（如 `href`、`title`、`className` 等）和自定义数据属性 | `Record<string, any>` | - |
-
-## FAQ
-
-### Components 与 Config Marked Extensions 的区别
-
-#### Config Marked Extensions（插件扩展）
-
-`config` 属性中的 [`extensions`](https://marked.js.org/using_pro#extensions) 用于扩展 Markdown 解析器的功能，它们在 **Markdown 转换为 HTML 的过程中** 起作用：
-
-- **作用阶段**：Markdown 解析阶段
-- **功能**：识别和转换特殊的 Markdown 语法
-- **示例**：将 `[^1]` 脚注语法转换为 `<footnote>1</footnote>` HTML 标签
-- **使用场景**：扩展 Markdown 语法，支持更多标记格式
-
-```typescript
-// 插件示例：脚注扩展
-const footnoteExtension = {
-  name: 'footnote',
-  level: 'inline',
-  start(src) { return src.match(/\[\^/)?.index; },
-  tokenizer(src) {
-    const rule = /^\[\^([^\]]+)\]/;
-    const match = rule.exec(src);
-    if (match) {
-      return {
-        type: 'footnote',
-        raw: match[0],
-        text: match[1]
-      };
-    }
-  },
-  renderer(token) {
-    return `<footnote>${token.text}</footnote>`;
-  }
-};
-
-// 使用插件
-<XMarkdown
-  content="这是一个脚注示例[^1]"
-  config={{ extensions: [footnoteExtension] }}
-/>
-```
-
-### Components（组件替换）
-
-`components` 属性用于将已生成的 HTML 标签替换为自定义的 React 组件：
-
-- **作用阶段**：HTML 渲染阶段
-- **功能**：将 HTML 标签替换为 React 组件
-- **示例**：将 `<footnote>1</footnote>` 替换为 `<CustomFootnote>1</CustomFootnote>`
-- **使用场景**：自定义标签的渲染样式和交互行为
-
-```typescript
-// 自定义脚注组件
-const CustomFootnote = ({ children, ...props }) => (
-  <sup
-    className="footnote-ref"
-    onClick={() => console.log('点击脚注:', children)}
-    style={{ color: 'blue', cursor: 'pointer' }}
-  >
-    {children}
-  </sup>
-);
-
-// 使用组件替换
-<XMarkdown
-  content="<footnote>1</footnote>"
-  components={{ footnote: CustomFootnote }}
-/>
-```
-
-### 未完成语法标记转换
-
-当 `hasNextChunk` 为 `true` 时，所有未完成的语法标记会被自动转换为 `incomplete-token` 形式，并将未完成的语法通过 `data-raw` 属性返回，支持的 token 类型为 `StreamCacheTokenType`。例如：
-
-- 未完成的链接 `[示例](https://example.com` 会被转换为 `<incomplete-link data-raw="[示例](https://example.com">`
-- 未完成的图片 `![产品图](https://cdn.example.com/images/produc` 会被转换为 `<incomplete-image data-raw="![产品图](https://cdn.example.com/images/produc">`
-- 未完成的标题 `###` 会被转换为 `<incomplete-heading data-raw="###">`
-
-#### StreamCacheTokenType 类型
-
-`StreamCacheTokenType` 是一个枚举类型，定义了流式处理过程中支持的所有 Markdown 语法标记类型：
-
-```typescript
-type StreamCacheTokenType =
-  | 'text' // 普通文本
-  | 'link' // 链接语法 [text](url)
-  | 'image' // 图片语法 ![alt](src)
-  | 'heading' // 标题语法 # ## ###
-  | 'emphasis' // 强调语法 *斜体* **粗体**
-  | 'list' // 列表语法 - + *
-  | 'table' // 表格语法 | 标题 | 内容 |
-  | 'xml'; // XML/HTML 标签 <tag>
-```
+| hasNextChunk | 是否还有后续内容块。为 `false` 时会刷新缓存并完成渲染 | `boolean` | `false` |
+| enableAnimation | 是否为块级元素启用文字淡入动画 | `boolean` | `false` |
+| animationConfig | 动画配置（如淡入时长、缓动函数） | `AnimationConfig` | - |
+| incompleteMarkdownComponentMap | 将未闭合 Markdown 片段映射到自定义 loading 组件 | `Partial<Record<'link' \| 'image' \| 'html' \| 'emphasis' \| 'list' \| 'table' \| 'inline-code', string>>` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |

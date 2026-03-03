@@ -43,7 +43,7 @@ tag: vVERSION
 ### Others
 
 - 🛠 Fixed build errors caused by dependency upgrades. [#1754](https://github.com/ant-design/x/pull/1754) by [kimteayon](https://github.com/kimteayon)
-- 🛠 Resolved domhandler's ModuleNotFoundError in CodeSandbox preview. [#1754](https://github.com/ant-design/x/pull/1754) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Resolved domhandler's ModuleNotFoundError in CodeSandbox preview. [#1754](https://github.com/ant-design/x/pull/1754) by [Div627](https://github.com/Div627)
 
 ## 2.2.2
 
