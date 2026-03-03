@@ -20,7 +20,7 @@ const App: React.FC = () => {
     borderRadius: token.borderRadius,
   };
 
-  const menuConfig: ConversationsProps['menu'] = {
+  const menuConfig: ConversationsProps['menu'] = (conversation) => ({
     items: [
       {
         label: 'Rename',
@@ -49,10 +49,10 @@ const App: React.FC = () => {
       },
     ],
     onClick: (itemInfo) => {
-      console.log(`Click ${itemInfo.key}`);
+      console.log(`Click ${itemInfo.key}`, conversation.key);
       itemInfo.domEvent.stopPropagation();
     },
-  };
+  });
 
   return <Conversations defaultActiveKey="item1" menu={menuConfig} items={items} style={style} />;
 };

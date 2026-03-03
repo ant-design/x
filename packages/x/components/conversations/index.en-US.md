@@ -42,8 +42,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | activeKey | Currently selected value | string | - | - |
 | defaultActiveKey | Default selected value | string | - | - |
 | items | Data source for conversation list | `ItemType`[] | - | - |
-| onActiveChange | Callback for selection change | (value: string) => void | - | - |
-| menu | Operation menu for conversations | ItemMenuProps\| ((value: ConversationItemType) => ItemMenuProps) | - | - |
+| onActiveChange | Callback for selection change | (value: string, item: ItemType) => void | - | - |
+| menu | Operation menu for conversations | ItemMenuProps\| ((conversation: ConversationItemType) => ItemMenuProps) | - | - |
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
 | shortcutKeys | Shortcut key operations | { creation?: ShortcutKeys<number>; items?:ShortcutKeys<'number'> \| ShortcutKeys<number>[];} | - | 2.0.0 |
 | creation | New conversation configuration | CreationProps | - | 2.0.0 |

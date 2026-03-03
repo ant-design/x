@@ -238,6 +238,30 @@ describe('XMarkdown', () => {
     expect(receivedProps?.streamStatus).toBe('done');
   });
 
+  describe('escapeRawHtml', () => {
+    it('should render block raw HTML as escaped text when escapeRawHtml is true', () => {
+      const markdown = '<div>hello</div>';
+      const { container } = render(<XMarkdown content={markdown} escapeRawHtml />);
+      const html = (container.firstChild as HTMLElement)?.innerHTML ?? '';
+      expect(html).toContain('&lt;div&gt;hello&lt;/div&gt;');
+      expect(html).not.toContain('<div>hello</div>');
+    });
+
+    it('should render block raw HTML as real HTML when escapeRawHtml is false (default)', () => {
+      const markdown = '<div>hello</div>';
+      const { container } = render(<XMarkdown content={markdown} />);
+      expect((container.firstChild as HTMLElement)?.innerHTML).toBe('<div>hello</div>');
+    });
+
+    it('should escape script tag when escapeRawHtml is true', () => {
+      const markdown = '<script>alert(1)</script>';
+      const { container } = render(<XMarkdown content={markdown} escapeRawHtml />);
+      const html = (container.firstChild as HTMLElement)?.innerHTML ?? '';
+      expect(html).toContain('&lt;script&gt;');
+      expect(container.querySelector('script')).toBeNull();
+    });
+  });
+
   describe('openLinksInNewTab', () => {
     it('should add target="_blank" and rel="noopener noreferrer" to links with title when openLinksInNewTab is true', () => {
       const { container } = render(

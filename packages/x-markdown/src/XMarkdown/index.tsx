@@ -20,6 +20,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     openLinksInNewTab,
     dompurifyConfig,
     protectCustomTagNewlines,
+    escapeRawHtml,
     debug,
   } = props;
 
@@ -37,8 +38,9 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
         openLinksInNewTab,
         components,
         protectCustomTagNewlines,
+        escapeRawHtml,
       }),
-    [config, paragraphTag, openLinksInNewTab, components, protectCustomTagNewlines],
+    [config, paragraphTag, openLinksInNewTab, components, protectCustomTagNewlines, escapeRawHtml],
   );
 
   const renderer = useMemo(

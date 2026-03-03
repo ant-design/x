@@ -26,6 +26,7 @@ tag: 2.0.0
 <code src="./demos/x-chat/openai-callback.tsx">模型的请求回调</code>
 <code src="./demos/x-chat/custom-request-fetch.tsx">自定义 XRequest.fetch </code>
 <code src="./demos/x-chat/request-openai-node.tsx"> 自定义 request </code>
+<code src="./demos/x-conversations/session-key.tsx">SessionId - ConversationKey</code>
 
 ## API
 
@@ -74,6 +75,7 @@ type useXChat<
 | setMessages | 直接修改 messages，不会触发请求 | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | 直接修改单条 message，不会触发请求 | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 | removeMessage | 删除单条 message，不会触发请求 | (id: string \| number) => void | - | - |
+| queueRequest | 会将请求加入队列，等待 conversationKey 初始化完成后再发送 | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
 
 #### MessageInfo
 

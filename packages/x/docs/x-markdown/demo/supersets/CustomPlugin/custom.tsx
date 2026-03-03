@@ -3,9 +3,40 @@ import React from 'react';
 import './plugin.css';
 import { Popover, theme } from 'antd';
 import { useIntl } from 'react-intl';
-import { Adx_Markdown_En, Adx_Markdown_Zh } from '../../_utils/adx-markdown';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
+
+const customPluginMarkdownZh = `
+# 自定义脚注插件
+
+Ant Design X 提供可扩展的 Markdown 渲染能力[^1]，你可以按需添加插件并映射为业务组件[^2]。
+
+- 解析自定义语法
+- 渲染业务化 UI
+- 兼容流式输出
+
+更多说明见文档[^3]。
+
+[^1]: x-markdown 支持扩展 tokenizer 与 renderer。
+[^2]: 通过 components 将标签映射为 React 组件。
+[^3]: 示例链接仅用于演示脚注交互。
+`;
+
+const customPluginMarkdownEn = `
+# Custom Footnote Plugin
+
+Ant Design X provides extensible Markdown rendering[^1], so you can add plugins and map them to business components[^2].
+
+- Parse custom syntax
+- Render business UI
+- Keep streaming-friendly behavior
+
+See docs for more details[^3].
+
+[^1]: x-markdown supports custom tokenizer and renderer.
+[^2]: Use components to map tags to React components.
+[^3]: Links in this demo are for footnote interaction only.
+`;
 
 const referenceList = [
   { url: 'https://x.ant.design', title: 'link1' },
@@ -31,7 +62,7 @@ const App = () => {
   const { theme: antdTheme } = theme.useToken();
   const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
   const { locale } = useIntl();
-  const content = locale === 'zh-CN' ? Adx_Markdown_Zh : Adx_Markdown_En;
+  const content = locale === 'zh-CN' ? customPluginMarkdownZh : customPluginMarkdownEn;
   const footNoteExtension = {
     name: 'footnote',
     level: 'inline' as const,
