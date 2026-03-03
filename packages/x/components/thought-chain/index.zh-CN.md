@@ -1,0 +1,87 @@
+---
+category: Components
+group:
+  title: 确认
+  order: 3
+title: ThoughtChain
+subtitle: 思维链
+description: 思维链组件用于可视化和追踪 Agent 对 Actions 和 Tools 的调用链。
+cover: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*GaspS5T6proAAAAAAAAAAAAADgCCAQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*siL-Qpl794sAAAAAAAAAAAAADgCCAQ/original
+tag: 2.0.0
+---
+
+## 何时使用
+
+- 调试和跟踪复杂 Agent System 中的调用链
+- 类似的链式场景中使用
+
+## 代码演示
+
+<!-- prettier-ignore -->
+<code src="./demo/basic.tsx" background="grey">基本</code>
+<code src="./demo/status.tsx" background="grey">节点状态</code>
+<code src="./demo/simple.tsx">简洁思维链</code>
+<code src="./demo/collapsible.tsx" background="grey">可折叠的</code>
+<code src="./demo/controlled-collapsible" background="grey">受控的折叠</code>
+<code src="./demo/customization.tsx" background="grey">客制化</code>
+<code src="./demo/nested.tsx" background="grey">嵌套使用</code>
+<code src="./demo/single-row.tsx" background="grey">单行折叠</code>
+
+## API
+
+通用属性参考：[通用属性](/docs/react/common-props)
+
+### ThoughtChainProps
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| items | 思维节点集合 | ThoughtChainItemType[] | - | - |
+| defaultExpandedKeys | 初始化展开的节点 | string[] | - | - |
+| expandedKeys | 当前展开的节点 | string[] | - | - |
+| onExpand | 展开节点变化回调 | (expandedKeys: string[]) => void; | - | - |
+| line | 线条样式，为`false` 时不展示线条 | boolean \| 'solid' \| 'dashed' \| 'dotted‌' | 'solid' | - |
+| classNames | 语义化结构的类名 | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
+| prefixCls | 自定义前缀 | string | - | - |
+| styles | 语义化结构的样式 | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
+| rootClassName | 根元素样式类名 | string | - | - |
+
+### ThoughtChainItemType
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| content | 思维节点内容 | React.ReactNode | - | - |
+| description | 思维节点描述 | React.ReactNode | - | - |
+| footer | 思维节点脚注 | React.ReactNode | - | - |
+| icon | 思维节点图标,为false时不展示 | false\|React.ReactNode | DefaultIcon | - |
+| key | 思维节点唯一标识符 | string | - | - |
+| status | 思维节点状态 | 'loading' \| 'success' \| 'error'\| 'abort' | - | - |
+| title | 思维节点标题 | React.ReactNode | - | - |
+| collapsible | 思维节点是否可折叠 | boolean | false | - |
+| blink | 闪动效果 | boolean | - | - |
+
+### ThoughtChain.Item
+
+| 属性        | 说明       | 类型                                        | 默认值 | 版本 |
+| ----------- | ---------- | ------------------------------------------- | ------ | ---- |
+| prefixCls   | 自定义前缀 | string                                      | -      | -    |
+| icon        | 思维链图标 | React.ReactNode                             | -      | -    |
+| title       | 思维链标题 | React.ReactNode                             | -      | -    |
+| description | 思维链描述 | React.ReactNode                             | -      | -    |
+| status      | 思维链状态 | 'loading' \| 'success' \| 'error'\| 'abort' | -      | -    |
+| variant     | 变体配置   | 'solid' \| 'outlined' \| 'text'             | -      | -    |
+| blink       | 闪动效果   | boolean                                     | -      | -    |
+
+## Semantic DOM
+
+## ThoughtChain
+
+<code src="./demo/_semantic.tsx" simplify="true"></code>
+
+## ThoughtChain.Item
+
+<code src="./demo/_semantic-item.tsx" simplify="true"></code>
+
+## 主题变量（Design Token）
+
+<ComponentTokenTable component="ThoughtChain"></ComponentTokenTable>

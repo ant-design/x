@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Sources Component Sources component work 1`] = `
+<div
+  class="ant-sources css-var-root"
+>
+  <div
+    class="ant-sources-title-wrapper ant-sources-icon-position-start"
+  >
+    <span
+      aria-label="right"
+      class="anticon anticon-right ant-sources-title-down-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="right"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        style="transform: rotate(90deg);"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <path
+          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+        />
+      </svg>
+    </span>
+    <span
+      class="ant-sources-title"
+    >
+      Test
+    </span>
+  </div>
+  <div
+    class="ant-sources-content"
+  >
+    <ul
+      class="ant-sources-list"
+    >
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            1. Data source
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            2. Data source
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            3. Data source
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Sources Component rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-sources css-var-root ant-sources-rtl"
+>
+  <div
+    class="ant-sources-title-wrapper ant-sources-icon-position-start"
+  >
+    <span
+      aria-label="right"
+      class="anticon anticon-right ant-sources-title-down-icon"
+      role="img"
+    >
+      <svg
+        aria-hidden="true"
+        data-icon="right"
+        fill="currentColor"
+        focusable="false"
+        height="1em"
+        style="transform: rotate(90deg);"
+        viewBox="64 64 896 896"
+        width="1em"
+      >
+        <path
+          d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
+        />
+      </svg>
+    </span>
+    <span
+      class="ant-sources-title"
+    >
+      Test
+    </span>
+  </div>
+  <div
+    class="ant-sources-content"
+  >
+    <ul
+      class="ant-sources-list"
+    >
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            1. Data source
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            2. Data source
+          </span>
+        </a>
+      </li>
+      <li
+        class="ant-sources-list-item"
+      >
+        <a
+          class="ant-sources-link"
+          href="https://x.ant.design/components/overview"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span
+            class="ant-sources-link-title"
+          >
+            3. Data source
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+`;

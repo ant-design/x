@@ -1,0 +1,118 @@
+import { clsx } from 'clsx';
+import dayjs from 'dayjs';
+
+import 'dayjs/locale/zh-cn';
+
+import { XProvider } from '@ant-design/x';
+import zhCN_X from '@ant-design/x/locale/zh_CN';
+import zhCN from 'antd/es/locale/zh_CN';
+import { Helmet, useOutlet, useSiteData } from 'dumi';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
+
+import useLocale from '../../../hooks/useLocale';
+import useLocation from '../../../hooks/useLocation';
+import GlobalStyles from '../../common/GlobalStyles';
+import Header from '../../slots/Header';
+import SiteContext from '../../slots/SiteContext';
+
+import '../../static/style';
+
+import IndexLayout from '../IndexLayout';
+import SidebarLayout from '../SidebarLayout';
+
+const locales = {
+  cn: {
+    title: 'Ant Design X - AI界面解决方案',
+    description: '轻松打造 AI 驱动的界面。',
+  },
+  en: {
+    title: 'Ant Design X - AI interface solution',
+    description: 'Craft AI-driven interfaces effortlessly.',
+  },
+};
+
+const DocLayout: React.FC = () => {
+  const outlet = useOutlet();
+  const location = useLocation();
+  const { pathname, search, hash } = location;
+  const [locale, lang] = useLocale(locales);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(null!);
+  const { direction } = React.use(SiteContext);
+  const { loading } = useSiteData();
+
+  useLayoutEffect(() => {
+    if (lang === 'cn') {
+      dayjs.locale('zh-cn');
+    } else {
+      dayjs.locale('en');
+    }
+  }, []);
+
+  useEffect(() => {
+    const nprogressHiddenStyle = document.getElementById('nprogress-style');
+    timerRef.current = setTimeout(() => {
+      nprogressHiddenStyle?.remove();
+    }, 0);
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  // handle hash change or visit page hash from Link component, and jump after async chunk loaded
+  useEffect(() => {
+    const id = hash.replace('#', '');
+    if (id) {
+      document.getElementById(decodeURIComponent(id))?.scrollIntoView();
+    }
+  }, [loading, hash]);
+
+  useEffect(() => {
+    if (typeof (window as any).ga !== 'undefined') {
+      (window as any).ga('send', 'pageview', pathname + search);
+    }
+  }, [location]);
+
+  const content = React.useMemo<React.ReactNode>(() => {
+    if (
+      ['', '/'].some((path) => path === pathname) ||
+      ['/index'].some((path) => pathname.startsWith(path))
+    ) {
+      return (
+        <IndexLayout title={locale.title} desc={locale.description}>
+          {outlet}
+        </IndexLayout>
+      );
+    }
+    if (pathname.startsWith('/theme-editor')) {
+      return outlet;
+    }
+    return <SidebarLayout>{outlet}</SidebarLayout>;
+  }, [pathname, outlet]);
+
+  return (
+    <>
+      <Helmet encodeSpecialCharacters={false}>
+        <html
+          lang={lang === 'cn' ? 'zh-CN' : lang}
+          data-direction={direction}
+          className={clsx({ rtl: direction === 'rtl' })}
+        />
+        <link
+          sizes="144x144"
+          href="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/MGdkQ6iLuXEAAAAAQDAAAAgADtFMAQFr/original"
+        />
+        <meta property="og:description" content={locale.description} />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://mdn.alipayobjects.com/huamei_lkxviz/afts/img/MGdkQ6iLuXEAAAAAQDAAAAgADtFMAQFr/original"
+        />
+      </Helmet>
+      <XProvider direction={direction} locale={lang === 'cn' ? { ...zhCN, ...zhCN_X } : undefined}>
+        <GlobalStyles />
+        <Header />
+        {content}
+      </XProvider>
+    </>
+  );
+};
+
+export default DocLayout;

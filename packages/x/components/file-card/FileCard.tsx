@@ -1,0 +1,341 @@
+import {
+  FileExcelFilled,
+  FileImageFilled,
+  FileMarkdownFilled,
+  FilePdfFilled,
+  FilePptFilled,
+  FileTextFilled,
+  FileWordFilled,
+  FileZipFilled,
+  JavaOutlined,
+  JavaScriptOutlined,
+  PythonOutlined,
+} from '@ant-design/icons';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import type { ImageProps, SpinProps } from 'antd';
+import { Image } from 'antd';
+import { clsx } from 'clsx';
+import React, { useMemo } from 'react';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import File from './components/File';
+import ImageLoading from './components/ImageLoading';
+import AudioIcon from './icons/audio';
+import VideoIcon from './icons/video';
+import useStyle from './style';
+import { matchExt } from './utils';
+
+enum CARD_TYPE {
+  FILE = 'file',
+  IMAGE = 'image',
+  AUDIO = 'audio',
+  VIDEO = 'video',
+}
+
+export type SemanticType = 'root' | 'file' | 'icon' | 'name' | 'description';
+export type PresetIcons =
+  | 'default'
+  | 'excel'
+  | 'image'
+  | 'markdown'
+  | 'pdf'
+  | 'ppt'
+  | 'word'
+  | 'zip'
+  | 'video'
+  | 'audio'
+  | 'java'
+  | 'javascript'
+  | 'python';
+export interface FileCardProps
+  extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    'content' | 'onAnimationStart' | 'onAnimationEnd'
+  > {
+  prefixCls?: string;
+  style?: React.CSSProperties;
+  styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  className?: string;
+  classNames?: Partial<Record<SemanticType, string>>;
+  rootClassName?: string;
+  key?: React.Key;
+  name: string;
+  byte?: number;
+  size?: 'small' | 'default';
+  description?: React.ReactNode;
+  loading?: boolean;
+  src?: string;
+  mask?: React.ReactNode;
+  icon?: React.ReactNode | PresetIcons;
+  type?: `${CARD_TYPE}`;
+  imageProps?: ImageProps;
+  spinProps?: SpinProps & {
+    showText?: boolean;
+    icon?: React.ReactNode;
+  };
+  videoProps?: Partial<React.JSX.IntrinsicElements['video']>;
+  audioProps?: Partial<React.JSX.IntrinsicElements['audio']>;
+  onClick?: () => void;
+}
+
+const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'jfif'];
+const AUDIO_EXT = ['mp3', 'wav', 'flac', 'ape', 'aac', 'ogg'];
+const VIDEO_EXT = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'];
+
+const PRESET_FILE_ICONS: {
+  ext: string[];
+  color: string;
+  icon: React.ReactElement;
+  key: string;
+}[] = [
+  {
+    icon: <FileExcelFilled />,
+    color: '#22b35e',
+    ext: ['xlsx', 'xls'],
+    key: 'excel',
+  },
+  {
+    icon: <FileImageFilled />,
+    color: '#8c8c8c',
+    ext: IMAGE_EXT,
+    key: 'image',
+  },
+  {
+    icon: <FileMarkdownFilled />,
+    color: '#8c8c8c',
+    ext: ['md', 'mdx'],
+    key: 'markdown',
+  },
+  {
+    icon: <FilePdfFilled />,
+    color: '#ff4d4f',
+    ext: ['pdf'],
+    key: 'pdf',
+  },
+  {
+    icon: <FilePptFilled />,
+    color: '#ff6e31',
+    ext: ['ppt', 'pptx'],
+    key: 'ppt',
+  },
+  {
+    icon: <FileWordFilled />,
+    color: '#1677ff',
+    ext: ['doc', 'docx'],
+    key: 'word',
+  },
+  {
+    icon: <FileZipFilled />,
+    color: '#fab714',
+    ext: ['zip', 'rar', '7z', 'tar', 'gz'],
+    key: 'zip',
+  },
+  {
+    icon: <VideoIcon />,
+    color: '#ff4d4f',
+    ext: VIDEO_EXT,
+    key: 'video',
+  },
+  {
+    icon: <AudioIcon />,
+    color: '#ff6e31',
+    ext: AUDIO_EXT,
+    key: 'audio',
+  },
+  {
+    icon: <JavaOutlined />,
+    color: '#1677ff',
+    ext: ['java'],
+    key: 'java',
+  },
+  {
+    icon: <JavaScriptOutlined />,
+    color: '#fab714',
+    ext: ['js'],
+    key: 'javascript',
+  },
+  {
+    icon: <PythonOutlined />,
+    color: '#fab714',
+    ext: ['py'],
+    key: 'python',
+  },
+];
+
+const DEFAULT_ICON = {
+  icon: <FileTextFilled />,
+  color: '#8c8c8c',
+  ext: ['default'],
+  key: 'default',
+};
+
+const FileCard: React.FC<FileCardProps> = (props) => {
+  const {
+    prefixCls: customizePrefixCls,
+    style,
+    styles = {},
+    className,
+    rootClassName,
+    classNames = {},
+    name,
+    byte,
+    size,
+    description,
+    icon: customIcon,
+    src,
+    mask,
+    loading,
+    type: customType,
+    onClick,
+    imageProps,
+    videoProps,
+    audioProps,
+    spinProps,
+    ...restProps
+  } = props;
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const { direction, getPrefixCls } = useXProviderContext();
+  const prefixCls = getPrefixCls('file-card', customizePrefixCls);
+  const contextConfig = useXComponentConfig('fileCard');
+
+  const [hashId, cssVarCls] = useStyle(prefixCls);
+
+  const mergedCls = clsx(
+    prefixCls,
+    contextConfig.className,
+    className,
+    rootClassName,
+    classNames.root,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+    },
+  );
+
+  const [namePrefix, nameSuffix] = useMemo(() => {
+    const nameStr = name || '';
+    const match = nameStr.match(/^(.*)\.[^.]+$/);
+    return match ? [match[1], nameStr.slice(match[1].length)] : [nameStr, ''];
+  }, [name]);
+
+  const [icon, iconColor] = useMemo(() => {
+    if (typeof customIcon === 'string') {
+      const match = PRESET_FILE_ICONS.find((item) => item.key === customIcon);
+      if (match) {
+        return [match.icon, match.color];
+      }
+    }
+    for (const item of PRESET_FILE_ICONS) {
+      if (matchExt(nameSuffix, item.ext)) {
+        return [item.icon, item.color];
+      }
+    }
+    return [DEFAULT_ICON.icon, DEFAULT_ICON.color];
+  }, [nameSuffix]);
+
+  const fileType = useMemo(() => {
+    if (customType) {
+      return customType;
+    }
+    if (matchExt(nameSuffix, IMAGE_EXT)) {
+      return CARD_TYPE.IMAGE;
+    }
+    if (matchExt(nameSuffix, AUDIO_EXT)) {
+      return CARD_TYPE.AUDIO;
+    }
+    if (matchExt(nameSuffix, VIDEO_EXT)) {
+      return CARD_TYPE.VIDEO;
+    }
+
+    return CARD_TYPE.FILE;
+  }, [nameSuffix, customType]);
+
+  let ContentNode: React.ReactNode = null;
+
+  if (fileType === CARD_TYPE.IMAGE) {
+    ContentNode = (
+      <div
+        className={clsx(`${prefixCls}-image`, classNames.file, {
+          [`${prefixCls}-loading`]: loading,
+        })}
+        style={styles.file}
+      >
+        <Image
+          rootClassName={clsx(`${prefixCls}-image-img`)}
+          width={styles?.file?.width}
+          height={styles?.file?.height}
+          alt={name}
+          src={src}
+          {...(imageProps as ImageProps)}
+        />
+        {loading && (
+          <ImageLoading spinProps={spinProps} prefixCls={prefixCls} style={styles.file} />
+        )}
+      </div>
+    );
+  } else if (fileType === CARD_TYPE.VIDEO) {
+    ContentNode = (
+      <video
+        src={src}
+        controls
+        style={styles.file}
+        className={clsx(`${prefixCls}-video`, classNames.file)}
+        {...(videoProps as React.JSX.IntrinsicElements['video'])}
+      />
+    );
+  } else if (fileType === CARD_TYPE.AUDIO) {
+    ContentNode = (
+      <audio
+        src={src}
+        controls
+        style={styles.file}
+        className={clsx(`${prefixCls}-audio`, classNames.file)}
+        {...(audioProps as React.JSX.IntrinsicElements['audio'])}
+      />
+    );
+  } else {
+    ContentNode = (
+      <File
+        prefixCls={prefixCls}
+        name={namePrefix}
+        ext={nameSuffix}
+        size={size}
+        byte={byte}
+        description={description}
+        icon={customIcon && typeof customIcon !== 'string' ? customIcon : icon}
+        iconColor={iconColor}
+        onClick={onClick}
+        mask={mask}
+        classNames={classNames}
+        styles={styles}
+      />
+    );
+  }
+
+  return (
+    <div
+      {...domProps}
+      className={mergedCls}
+      style={{
+        ...contextConfig.style,
+        ...style,
+        ...styles.root,
+      }}
+    >
+      {ContentNode}
+    </div>
+  );
+};
+
+if (process.env.NODE_ENV !== 'production') {
+  FileCard.displayName = 'FileCard';
+}
+
+export default FileCard;

@@ -2,7 +2,6 @@
 import runScript from '@npmcli/run-script';
 import chalk from 'chalk';
 import Spinnies from 'spinnies';
-
 import checkRepo from './check-repo';
 
 const { Notification: Notifier } = require('node-notifier');
@@ -88,6 +87,9 @@ const runPrePublish = async () => {
   showMessage(`成功清理构建产物目录`, 'succeed');
 
   // CI
+
+  // const workspacePath = `${path.join(__dirname, process.argv.slice(2)?.[0])}` || '.';
+
   showMessage(`[CI] 正在执行 lint`, true);
   await runScript({ event: 'lint', path: '.', stdio: 'inherit' });
   showMessage(`[CI] lint 执行成功`, 'succeed');

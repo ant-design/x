@@ -1,0 +1,214 @@
+import { XProvider } from '@ant-design/x';
+import set from '@rc-component/util/lib/utils/set';
+import { Col, Flex, Popover, Row, Tag, Typography, theme } from 'antd';
+import { createStyles, css } from 'antd-style';
+import { clsx } from 'clsx';
+/* eslint-disable react-hooks-extra/no-direct-set-state-in-use-effect */
+import React from 'react';
+
+const MARK_BORDER_SIZE = 2;
+
+const useStyle = createStyles(({ token }, markPos: [number, number, number, number]) => ({
+  container: css`
+    position: relative;
+  `,
+  colWrap: css`
+    border-right: 1px solid ${token.colorBorderSecondary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: ${token.paddingMD}px;
+    overflow: hidden;
+  `,
+  listWrap: css`
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  `,
+  listItem: css`
+    cursor: pointer;
+    padding: ${token.paddingSM}px;
+    transition: background-color ${token.motionDurationFast} ease;
+    &:hover {
+      background-color: ${token.controlItemBgHover};
+    }
+    &:not(:first-of-type) {
+      border-top: 1px solid ${token.colorBorderSecondary};
+    }
+  `,
+  marker: css`
+    position: absolute;
+    border: ${MARK_BORDER_SIZE}px solid ${token.colorWarning};
+    box-sizing: border-box;
+    z-index: 999999;
+    box-shadow: 0 0 0 1px #fff;
+    pointer-events: none;
+    inset-inline-start: ${markPos[0] - MARK_BORDER_SIZE}px;
+    top: ${markPos[1] - MARK_BORDER_SIZE}px;
+    width: ${markPos[2] + MARK_BORDER_SIZE * 2}px;
+    height: ${markPos[3] + MARK_BORDER_SIZE * 2}px;
+  `,
+  markerActive: css`
+    opacity: 1;
+  `,
+  markerNotActive: css`
+    opacity: 0;
+  `,
+  markerMotion: css`
+    transition:
+      opacity ${token.motionDurationSlow} ease,
+      all ${token.motionDurationSlow} ease;
+  `,
+  markerNotMotion: css`
+    transition: opacity ${token.motionDurationSlow} ease;
+  `,
+}));
+
+function getSemanticCells(semanticPath: string) {
+  return semanticPath.split('.');
+}
+
+const getMarkClassName = (semanticKey: string) =>
+  `semantic-mark-${semanticKey}`.replace(/\./g, '-');
+
+export interface SemanticPreviewProps {
+  componentName: string;
+  semantics: { name: string; desc: string; version?: string }[];
+  children: React.ReactElement | ((injectProps: any) => React.ReactElement);
+  height?: number;
+}
+
+const SemanticPreview: React.FC<SemanticPreviewProps> = (props) => {
+  const { semantics = [], children, height, componentName = 'Component' } = props;
+  const { token } = theme.useToken();
+
+  // ======================= Semantic =======================
+
+  const semanticClassNames = React.useMemo<Record<string, string>>(() => {
+    let classNames: Record<string, string> = {};
+
+    semantics.forEach((semantic) => {
+      const pathCell = getSemanticCells(semantic.name);
+      classNames = set(classNames, pathCell, getMarkClassName(semantic.name));
+    });
+
+    return classNames;
+  }, [semantics]);
+
+  const injectProps = {
+    classNames: semanticClassNames,
+  };
+
+  const cloneNode =
+    typeof children === 'function'
+      ? children(injectProps)
+      : React.cloneElement(children, injectProps);
+
+  // ======================== Hover =========================
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const timerRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+
+  const [positionMotion, setPositionMotion] = React.useState<boolean>(false);
+  const [hoverSemantic, setHoverSemantic] = React.useState<string | null>(null);
+  const [markPos, setMarkPos] = React.useState<[number, number, number, number]>([0, 0, 0, 0]);
+
+  const { styles } = useStyle(markPos);
+
+  React.useEffect(() => {
+    if (hoverSemantic) {
+      const targetClassName = getMarkClassName(hoverSemantic);
+      const targetElement = containerRef.current?.querySelector<HTMLElement>(`.${targetClassName}`);
+      const containerRect = containerRef.current?.getBoundingClientRect();
+      const targetRect = targetElement?.getBoundingClientRect();
+
+      setMarkPos([
+        (targetRect?.left || 0) - (containerRect?.left || 0),
+        (targetRect?.top || 0) - (containerRect?.top || 0),
+        targetRect?.width || 0,
+        targetRect?.height || 0,
+      ]);
+
+      timerRef.current = setTimeout(() => {
+        setPositionMotion(true);
+      }, 10);
+    } else {
+      timerRef.current = setTimeout(() => {
+        setPositionMotion(false);
+      }, 500);
+    }
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [hoverSemantic]);
+
+  // ======================== Render ========================
+  return (
+    <div className={styles.container} ref={containerRef}>
+      <Row style={{ minHeight: height }}>
+        <Col span={16} className={styles.colWrap}>
+          <XProvider theme={{ token: { motion: false } }}>{cloneNode}</XProvider>
+        </Col>
+        <Col span={8}>
+          <ul className={styles.listWrap}>
+            {semantics.map<React.ReactNode>((semantic) => (
+              <Popover
+                key={semantic.name}
+                content={
+                  <Typography style={{ fontSize: 12, minWidth: 300 }}>
+                    <pre dir="ltr">
+                      <code dir="ltr">
+                        {`<${componentName}
+  classNames={{
+    ${semantic.name}: 'my-${componentName.toLowerCase()}',
+  }}
+  styles={{
+    ${semantic.name}: { color: 'red' },
+  }}
+>
+  ...
+</${componentName}>`}
+                      </code>
+                    </pre>
+                  </Typography>
+                }
+              >
+                <li
+                  className={styles.listItem}
+                  onMouseEnter={() => setHoverSemantic(semantic.name)}
+                  onMouseLeave={() => setHoverSemantic(null)}
+                >
+                  <Flex vertical gap="small">
+                    <Flex gap="small" align="center">
+                      <Typography.Title level={5} style={{ margin: 0 }}>
+                        {semantic.name}
+                      </Typography.Title>
+                      {semantic.version && <Tag color="blue">{semantic.version}</Tag>}
+                    </Flex>
+                    <Typography.Paragraph style={{ margin: 0, fontSize: token.fontSizeSM }}>
+                      {semantic.desc}
+                    </Typography.Paragraph>
+                  </Flex>
+                </li>
+              </Popover>
+            ))}
+          </ul>
+        </Col>
+      </Row>
+      <div
+        className={clsx(
+          styles.marker,
+          hoverSemantic ? styles.markerActive : styles.markerNotActive,
+          positionMotion ? styles.markerMotion : styles.markerNotMotion,
+        )}
+      />
+    </div>
+  );
+};
+
+export default SemanticPreview;

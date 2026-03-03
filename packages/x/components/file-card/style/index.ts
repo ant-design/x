@@ -1,0 +1,427 @@
+import { mergeToken } from '@ant-design/cssinjs-utils';
+import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
+
+// biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
+export interface ComponentToken {}
+
+export interface FileCardToken extends FullToken<'FileCard'> {}
+
+const genFileCardStyle: GenerateStyle<FileCardToken> = (token) => {
+  const {
+    antCls,
+    componentCls,
+    paddingSM,
+    padding,
+    paddingXXS,
+    colorFillTertiary,
+    marginSM,
+    colorTextDescription,
+    fontSize,
+    fontSizeSM,
+    colorTextBase,
+    motionDurationSlow,
+    colorTextLightSolid,
+    lineHeightLG,
+    marginXXS,
+    fontSizeHeading1,
+    fontSizeHeading4,
+    controlHeightLG,
+    marginXS,
+    calc,
+  } = token;
+
+  return {
+    [componentCls]: {
+      display: 'flex',
+      [`${componentCls}-file`]: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: `${paddingSM} ${padding}`,
+        backgroundColor: colorFillTertiary,
+        borderRadius: token.borderRadius,
+        position: 'relative',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        width: 268,
+        height: 'auto',
+        '&-pointer': {
+          cursor: 'pointer',
+        },
+
+        [`${componentCls}-file-icon`]: {
+          fontSize: calc(fontSizeHeading1).sub(2).equal(),
+          marginInlineEnd: marginSM,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+
+        [`${componentCls}-file-content`]: {
+          flex: 1,
+          maxWidth: calc('100%').sub(calc(fontSizeHeading1).sub(2).equal()).sub(marginSM).equal(),
+        },
+
+        [`${componentCls}-file-name`]: {
+          fontSize: fontSize,
+          color: colorTextBase,
+          display: 'flex',
+          maxWidth: '100%',
+        },
+
+        [`${componentCls}-file-name-prefix`]: {
+          flex: '0 1 auto',
+          minWidth: 0,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        },
+
+        [`${componentCls}-file-name-suffix`]: {
+          flex: 'none',
+        },
+
+        [`${componentCls}-file-description`]: {
+          fontSize: fontSizeSM,
+          color: colorTextDescription,
+          lineHeight: lineHeightLG,
+          marginBottom: marginXXS,
+        },
+
+        [`${componentCls}-file-mask`]: {
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          color: colorTextLightSolid,
+          background: 'rgba(0, 0, 0, 0.5)',
+          cursor: 'pointer',
+          opacity: 0,
+          transition: `opacity ${motionDurationSlow}`,
+
+          '&:hover': {
+            opacity: 1,
+          },
+
+          [`${componentCls}-file-mask-info`]: {
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            padding: `0 ${paddingXXS}`,
+          },
+        },
+      },
+
+      [`${componentCls}-file-small`]: {
+        borderRadius: token.borderRadius,
+        padding: `0 ${paddingSM}`,
+        height: controlHeightLG,
+
+        [`${componentCls}-file-icon`]: {
+          fontSize: fontSizeHeading4,
+          marginInlineEnd: marginXS,
+        },
+
+        [`${componentCls}-file-description`]: {
+          display: 'none',
+        },
+      },
+
+      [`${componentCls}-image`]: {
+        width: 268,
+        borderRadius: token.borderRadius,
+        overflow: 'hidden',
+      },
+
+      [`${componentCls}-image-img`]: {
+        width: '100%',
+        img: {
+          width: '100%',
+          height: 'auto',
+          objectFit: 'cover',
+          borderRadius: 'inherit',
+        },
+      },
+
+      [`${componentCls}-loading`]: {
+        width: 268,
+        aspectRatio: '1',
+        position: 'relative',
+        borderRadius: token.borderRadius,
+        overflow: 'hidden',
+      },
+
+      [`${componentCls}-image-loading`]: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        insetBlockStart: 0,
+        insetInlineStart: 0,
+        background: token.colorBgBase,
+      },
+
+      [`${componentCls}-image-skeleton`]: {
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        [`${antCls}-skeleton-node`]: {
+          width: '100%',
+          height: '100%',
+        },
+      },
+
+      [`${componentCls}-image-spin`]: {
+        position: 'absolute',
+        insetBlockStart: token.margin,
+        insetInlineStart: token.margin,
+        color: token.colorText,
+        lineHeight: token.lineHeight,
+        '&-default': {
+          fontSize: token.fontSize,
+        },
+        '&-small': {
+          fontSize: token.fontSizeSM,
+        },
+        '&-large': {
+          fontSize: token.fontSizeLG,
+        },
+      },
+
+      [`${componentCls}-audio`]: {
+        width: 268,
+      },
+
+      [`${componentCls}-video`]: {
+        width: 268,
+        aspectRatio: '16 / 9',
+        borderRadius: token.borderRadius,
+      },
+
+      [`&${componentCls}-rtl`]: {
+        direction: 'rtl',
+      },
+    },
+  };
+};
+
+const genFileCardListStyle: GenerateStyle<FileCardToken> = (token) => {
+  const {
+    componentCls,
+    padding,
+    paddingSM,
+    colorFillTertiary,
+    marginXS,
+    colorTextLabel,
+    fontSize,
+    fontSizeLG,
+    borderRadius,
+    motionDurationSlow,
+    calc,
+  } = token;
+
+  return {
+    [`${componentCls}-list`]: {
+      position: 'relative',
+      [`${componentCls}-list-content`]: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: marginXS,
+        paddingBlock: paddingSM,
+        paddingInline: padding,
+
+        // Scrollbar none
+        scrollbarWidth: 'none',
+        '-ms-overflow-style': 'none',
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+        '&:dir(ltr)': {
+          [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-prev-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+          [`&${componentCls}-list-overflow-ping-end ${componentCls}-list-next-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+        },
+        '&:dir(rtl)': {
+          [`&${componentCls}-list-overflow-ping-end ${componentCls}-list-prev-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+          [`&${componentCls}-list-overflow-ping-start ${componentCls}-list-next-btn`]: {
+            opacity: 1,
+            pointerEvents: 'auto',
+          },
+        },
+      },
+      // list item
+      [`${componentCls}-list-item`]: {
+        display: 'flex',
+        position: 'relative',
+        [`${componentCls}-list-remove`]: {
+          transition: `opacity ${token.motionDurationMid} ${token.motionEaseOut}`,
+        },
+        '&:hover': {
+          [`${componentCls}-list-remove`]: {
+            opacity: 1,
+          },
+        },
+      },
+
+      [`${componentCls}-list-motion`]: {
+        transition: `opacity ${motionDurationSlow}`,
+
+        [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]:
+          {
+            transition: ['width', 'padding']
+              .map((prop) => `${prop} ${motionDurationSlow}`)
+              .join(','),
+          },
+
+        '&-leave-active': {
+          opacity: 0,
+          marginInlineEnd: calc(marginXS).mul(-1).equal(),
+
+          [`${componentCls}-file, ${componentCls}-image, ${componentCls}-video, ${componentCls}-audio`]:
+            {
+              width: 0,
+              paddingInline: 0,
+            },
+        },
+      },
+
+      [`${componentCls}-file`]: {
+        [`${componentCls}-file-content`]: {
+          maxWidth: 156,
+        },
+      },
+
+      [`${componentCls}-image`]: {
+        width: 68,
+        height: 68,
+        borderRadius: borderRadius,
+        display: 'flex',
+      },
+
+      [`${componentCls}-list-remove`]: {
+        position: 'absolute',
+        insetBlockStart: 0,
+        insetInlineEnd: 0,
+        transform: 'translate(50%, -50%)',
+        fontSize: fontSizeLG,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: colorTextLabel,
+        opacity: 0,
+        cursor: 'pointer',
+        backgroundColor: colorFillTertiary,
+      },
+      // small size
+      [`${componentCls}-list-small`]: {
+        [`${componentCls}-list-remove`]: {
+          fontSize: fontSize,
+        },
+      },
+      [`${componentCls}-list-overflow-scrollX, ${componentCls}-list-overflow-scrollY`]: {
+        '&:before, &:after': {
+          content: '""',
+          position: 'absolute',
+          opacity: 0,
+          transition: `opacity ${motionDurationSlow}`,
+          zIndex: 1,
+        },
+      },
+      [`${componentCls}-list-overflow-ping-start:before`]: {
+        opacity: 1,
+      },
+      [`${componentCls}-list-overflow-ping-end:after`]: {
+        opacity: 1,
+      },
+      [`${componentCls}-list-overflow-scrollX`]: {
+        overflowX: 'auto',
+        overflowY: 'hidden',
+        flexWrap: 'nowrap',
+        '&:before, &:after': {
+          insetBlock: 0,
+          width: 8,
+        },
+        '&:before': {
+          insetInlineStart: 0,
+          background: `linear-gradient(to right, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
+        },
+        '&:after': {
+          insetInlineEnd: 0,
+          background: `linear-gradient(to left, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
+        },
+
+        '&:dir(rtl)': {
+          '&:before': {
+            background: `linear-gradient(to left, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
+          },
+          '&:after': {
+            background: `linear-gradient(to right, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
+          },
+        },
+      },
+      [`${componentCls}-list-overflow-scrollY`]: {
+        overflowX: 'hidden',
+        overflowY: 'auto',
+        maxHeight: 68,
+        boxSizing: 'content-box',
+
+        '&:before, &:after': {
+          insetInline: 0,
+          height: 8,
+        },
+
+        '&:before': {
+          insetBlockStart: 0,
+          background: `linear-gradient(to bottom, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
+        },
+        '&:after': {
+          insetBlockEnd: 0,
+          background: `linear-gradient(to top, rgba(0,0,0,0.06), rgba(0,0,0,0));`,
+        },
+      },
+      // prev/next btn
+      [`${componentCls}-list-prev-btn,${componentCls}-list-next-btn`]: {
+        position: 'absolute',
+        insetBlockStart: '50%',
+        transform: 'translateY(-50%)',
+        boxShadow: token.boxShadowTertiary,
+        opacity: 0,
+        pointerEvents: 'none',
+      },
+      [`${componentCls}-list-prev-btn`]: {
+        left: {
+          _skip_check_: true,
+          value: token.padding,
+        },
+      },
+      [`${componentCls}-list-next-btn`]: {
+        right: {
+          _skip_check_: true,
+          value: token.padding,
+        },
+      },
+    },
+  };
+};
+
+export const prepareComponentToken: GetDefaultToken<'FileCard'> = () => ({});
+
+export default genStyleHooks<'FileCard'>(
+  'FileCard',
+  (token) => {
+    const FileCardToken = mergeToken<FileCardToken>(token, {});
+    return [genFileCardStyle(FileCardToken), genFileCardListStyle(FileCardToken)];
+  },
+  prepareComponentToken,
+);

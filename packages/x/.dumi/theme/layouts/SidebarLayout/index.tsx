@@ -1,0 +1,28 @@
+import { createStyles } from 'antd-style';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
+import SiteContext from '../../../pages/index/components/SiteContext';
+import CommonHelmet from '../../common/CommonHelmet';
+import Content from '../../slots/Content';
+import Sidebar from '../../slots/Sidebar';
+
+const useStyle = createStyles(({ css, token }, { alertVisible }: { alertVisible: boolean }) => ({
+  main: css`
+    display: flex;
+    margin-top: ${token.headerHeight + (alertVisible ? 40 : 0)}px;
+`,
+}));
+
+const SidebarLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  const { alertVisible } = React.use(SiteContext);
+  const { styles } = useStyle({ alertVisible });
+  return (
+    <main className={styles.main}>
+      <CommonHelmet />
+      <Sidebar />
+      <Content>{children}</Content>
+    </main>
+  );
+};
+
+export default SidebarLayout;

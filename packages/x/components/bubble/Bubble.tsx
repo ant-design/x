@@ -1,0 +1,273 @@
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
+import React from 'react';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import { BubbleContext } from './context';
+import { EditableContent } from './EditableContent';
+import type {
+  BubbleContentType,
+  BubbleProps,
+  BubbleRef,
+  BubbleSlot,
+  EditableBubbleOption,
+  SemanticType,
+} from './interface';
+import Loading from './loading';
+import useBubbleStyle from './style';
+import { TypingContent } from './TypingContent';
+
+const Bubble: React.ForwardRefRenderFunction<BubbleRef, BubbleProps> = (
+  {
+    prefixCls: customizePrefixCls,
+    rootClassName,
+    style,
+    className,
+    styles = {},
+    classNames = {},
+    placement = 'start',
+    content,
+    contentRender,
+    editable = false,
+    typing,
+    streaming = false,
+    variant = 'filled',
+    shape = 'default',
+    header,
+    footer,
+    avatar,
+    extra,
+    footerPlacement,
+    loading,
+    loadingRender,
+    onTyping,
+    onTypingComplete,
+    onEditConfirm,
+    onEditCancel,
+    ...restProps
+  },
+  ref,
+) => {
+  // ======================== Ref ==========================
+  const rootDiv = React.useRef<HTMLDivElement>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    nativeElement: rootDiv.current!,
+  }));
+
+  // ===================== Component Config =========================
+  const contextConfig = useXComponentConfig('bubble');
+
+  // ============================ Prefix ============================
+  const { direction, getPrefixCls } = useXProviderContext();
+
+  const prefixCls = getPrefixCls('bubble', customizePrefixCls);
+
+  // ============================= Bubble context ==============================
+  const context = React.useContext(BubbleContext);
+
+  // ============================ Styles ============================
+  const [hashId, cssVarCls] = useBubbleStyle(prefixCls);
+
+  const rootMergedStyle = {
+    ...contextConfig.style,
+    ...contextConfig.styles.root,
+    ...styles.root,
+    ...style,
+  };
+  const rootMergedCls = clsx(
+    prefixCls,
+    contextConfig.className,
+    contextConfig.classNames.root,
+    classNames.root,
+    rootClassName,
+    className,
+    hashId,
+    cssVarCls,
+    `${prefixCls}-${placement}`,
+    {
+      [`${prefixCls}-${context.status}`]: context.status,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
+      [`${prefixCls}-loading`]: loading,
+    },
+  );
+
+  const domProps = pickAttrs(restProps, {
+    attr: true,
+    aria: true,
+    data: true,
+  });
+
+  const info = { key: context?.key, status: context?.status, extraInfo: context?.extraInfo };
+  // ============================= process content ==============================
+  const memoedContent = React.useMemo(
+    () => (contentRender ? contentRender(content, info) : content),
+    [content, contentRender, info.key, info.status, info.extraInfo],
+  );
+
+  const mergeTyping = typeof typing === 'function' ? typing(content, info) : typing;
+
+  const usingInnerAnimation = !!mergeTyping && typeof memoedContent === 'string';
+
+  /**
+   * 1、启用内置动画的情况下，由 TypingContent 来负责通知。
+   * 2、不启用内置动画的情况下，也应当有一个回调来反映 content 的变化。
+   *    没有动画，则 content 的变化、渲染是全量的，等同于动画是瞬时完成的，合该用 onTypingComplete 来通知变化。
+   * 3、流式输入 content 的场景下，应当在流式结束时（streaming === false）才执行 onTypingComplete，
+   *    保证一次流式传输归属于一个动画周期。
+   **/
+  React.useEffect(() => {
+    if (usingInnerAnimation) return;
+    if (streaming) return;
+    content && onTypingComplete?.(content);
+  }, [memoedContent, usingInnerAnimation, streaming]);
+  // ============================= render ==============================
+  const _footerPlacement: BubbleProps['footerPlacement'] =
+    footerPlacement || (placement === 'start' ? 'outer-start' : 'outer-end');
+
+  const isEditing = typeof editable === 'boolean' ? editable : editable.editing;
+
+  const renderContent = () => {
+    if (loading) return loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
+    const _content = (
+      <>
+        {usingInnerAnimation ? (
+          <TypingContent
+            prefixCls={prefixCls}
+            streaming={streaming}
+            typing={mergeTyping}
+            content={memoedContent as string}
+            onTyping={onTyping}
+            onTypingComplete={onTypingComplete}
+          />
+        ) : (
+          memoedContent
+        )}
+      </>
+    );
+    const isFooterIn = _footerPlacement.includes('inner');
+    return (
+      <div className={getSlotClassName('body')} style={getSlotStyle('body')}>
+        {renderHeader()}
+        <div
+          style={{
+            ...contextConfig.styles.content,
+            ...styles.content,
+          }}
+          className={clsx(
+            `${prefixCls}-content`,
+            `${prefixCls}-content-${variant}`,
+            contextConfig.classNames.content,
+            classNames.content,
+            {
+              [`${prefixCls}-content-${context?.status}`]: context?.status,
+              [`${prefixCls}-content-${shape}`]: variant !== 'borderless',
+              [`${prefixCls}-content-editing`]: isEditing,
+              [`${prefixCls}-content-string`]: typeof memoedContent === 'string',
+            },
+          )}
+        >
+          {isEditing ? (
+            <EditableContent
+              prefixCls={prefixCls}
+              content={content}
+              okText={(editable as EditableBubbleOption)?.okText}
+              cancelText={(editable as EditableBubbleOption)?.cancelText}
+              onEditConfirm={onEditConfirm}
+              onEditCancel={onEditCancel}
+            />
+          ) : (
+            <>
+              {isFooterIn ? (
+                <div className={clsx(`${prefixCls}-content-with-footer`)}>{_content}</div>
+              ) : (
+                _content
+              )}
+              {isFooterIn && renderFooter()}
+            </>
+          )}
+        </div>
+        {!isEditing && !isFooterIn && renderFooter()}
+      </div>
+    );
+  };
+
+  const getSlotClassName = (slotType: SemanticType) =>
+    clsx(`${prefixCls}-${slotType}`, contextConfig.classNames[slotType], classNames[slotType]);
+
+  const getSlotStyle = (slotType: SemanticType) => ({
+    ...contextConfig.styles[slotType],
+    ...styles[slotType],
+  });
+
+  const renderSlot = (slot: BubbleSlot<typeof content>) =>
+    typeof slot === 'function' ? slot(content, info) : slot;
+
+  const renderAvatar = () => {
+    if (!avatar) return null;
+    return (
+      <div className={getSlotClassName('avatar')} style={getSlotStyle('avatar')}>
+        {renderSlot(avatar)}
+      </div>
+    );
+  };
+
+  const renderExtra = () => {
+    if (!extra) return null;
+    return (
+      <div className={getSlotClassName('extra')} style={getSlotStyle('extra')}>
+        {renderSlot(extra)}
+      </div>
+    );
+  };
+
+  const renderHeader = () => {
+    if (!header) return null;
+    return (
+      <div className={getSlotClassName('header')} style={getSlotStyle('header')}>
+        {renderSlot(header)}
+      </div>
+    );
+  };
+
+  const renderFooter = () => {
+    if (!footer) return null;
+    const cls = clsx(getSlotClassName('footer'), {
+      [`${prefixCls}-footer-start`]: _footerPlacement.includes('start'),
+      [`${prefixCls}-footer-end`]: _footerPlacement.includes('end'),
+    });
+    return (
+      <div className={cls} style={getSlotStyle('footer')}>
+        {renderSlot(footer)}
+      </div>
+    );
+  };
+
+  return (
+    <div
+      className={rootMergedCls}
+      style={rootMergedStyle}
+      {...restProps}
+      {...domProps}
+      ref={rootDiv}
+    >
+      {renderAvatar()}
+      {renderContent()}
+      {!isEditing && !loading && renderExtra()}
+    </div>
+  );
+};
+
+type ForwardBubbleType = <T extends BubbleContentType = string>(
+  props: BubbleProps<T> & { ref?: React.Ref<BubbleRef> },
+) => React.ReactElement;
+
+const ForwardBubble = React.forwardRef(Bubble);
+
+if (process.env.NODE_ENV !== 'production') {
+  ForwardBubble.displayName = 'Bubble';
+}
+
+export default ForwardBubble as ForwardBubbleType;
+
+export type { BubbleProps };

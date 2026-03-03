@@ -1,0 +1,149 @@
+import {
+  AlipayCircleOutlined,
+  BulbOutlined,
+  CheckCircleOutlined,
+  GithubOutlined,
+  LoadingOutlined,
+  SmileOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import {
+  Bubble,
+  Conversations,
+  Prompts,
+  Sender,
+  Suggestion,
+  ThoughtChain,
+  XProvider,
+} from '@ant-design/x';
+import type { ConfigProviderProps, GetProp } from 'antd';
+import { Card, Divider, Flex, Radio, Typography } from 'antd';
+import React from 'react';
+
+export default () => {
+  const [value, setValue] = React.useState('');
+  const [direction, setDirection] =
+    React.useState<GetProp<ConfigProviderProps, 'direction'>>('ltr');
+
+  return (
+    <>
+      <Flex gap={12} style={{ marginBottom: 16 }} align="center">
+        <Typography.Text>Direction:</Typography.Text>
+        <Radio.Group value={direction} onChange={(e) => setDirection(e.target.value)}>
+          <Radio.Button value="ltr">LTR</Radio.Button>
+          <Radio.Button value="rtl">RTL</Radio.Button>
+        </Radio.Group>
+      </Flex>
+
+      <Flex gap={12} vertical>
+        <Card>
+          <XProvider direction={direction}>
+            <Flex style={{ height: 500 }} gap={12}>
+              <Conversations
+                style={{ width: 200 }}
+                defaultActiveKey="1"
+                items={[
+                  {
+                    key: '1',
+                    label: 'Conversation - 1',
+                    icon: <GithubOutlined />,
+                  },
+                  {
+                    key: '2',
+                    label: 'Conversation - 2',
+                    icon: <AlipayCircleOutlined />,
+                  },
+                ]}
+              />
+              <Divider orientation="vertical" style={{ height: '100%' }} />
+              <Flex vertical justify="space-between" style={{ flex: 1 }}>
+                <Bubble.List
+                  items={[
+                    {
+                      key: '1',
+                      role: 'user',
+                      placement: 'end',
+                      content: 'Hello Ant Design X!',
+                      avatar: <UserOutlined />,
+                    },
+                    {
+                      key: '2',
+                      role: 'ai',
+                      content: 'Hello World!',
+                    },
+                    {
+                      key: '3',
+                      role: 'ai',
+                      content: '',
+                      loading: true,
+                    },
+                  ]}
+                />
+                <Flex vertical gap={12}>
+                  <Prompts
+                    items={[
+                      {
+                        key: '1',
+                        icon: <BulbOutlined style={{ color: '#FFD700' }} />,
+                        label: 'Ignite Your Creativity',
+                      },
+                      {
+                        key: '2',
+                        icon: <SmileOutlined style={{ color: '#52C41A' }} />,
+                        label: 'Tell me a Joke',
+                      },
+                    ]}
+                  />
+                  <Suggestion items={[{ label: 'Write a report', value: 'report' }]}>
+                    {({ onTrigger, onKeyDown }) => {
+                      return (
+                        <Sender
+                          value={value}
+                          onChange={(nextVal) => {
+                            if (nextVal === '/') {
+                              onTrigger();
+                            } else if (!nextVal) {
+                              onTrigger(false);
+                            }
+                            setValue(nextVal);
+                          }}
+                          onKeyDown={onKeyDown}
+                          placeholder='Type "/" to trigger suggestion'
+                        />
+                      );
+                    }}
+                  </Suggestion>
+                </Flex>
+              </Flex>
+              <Divider orientation="vertical" style={{ height: '100%' }} />
+              <ThoughtChain
+                style={{ width: 200 }}
+                items={[
+                  {
+                    title: 'Hello Ant Design X!',
+                    status: 'success',
+                    description: 'status: success',
+                    icon: <CheckCircleOutlined />,
+                    content: 'Ant Design X help you build AI chat/platform app as ready-to-use 📦.',
+                  },
+                  {
+                    title: 'Hello World!',
+                    status: 'success',
+                    description: 'status: success',
+                    icon: <CheckCircleOutlined />,
+                  },
+                  {
+                    title: 'Pending...',
+                    status: 'loading',
+                    description: 'status: pending',
+                    icon: <LoadingOutlined />,
+                  },
+                ]}
+              />
+            </Flex>
+          </XProvider>
+        </Card>
+      </Flex>
+    </>
+  );
+};
