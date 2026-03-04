@@ -1,5 +1,5 @@
 import { Flex, Typography } from 'antd';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
@@ -27,7 +27,7 @@ export interface WelcomeProps {
   extra?: React.ReactNode;
 }
 
-function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
+const Welcome = React.forwardRef<HTMLDivElement, WelcomeProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     rootClassName,
@@ -68,7 +68,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
     }
     return (
       <div
-        className={classnames(`${prefixCls}-icon`, contextConfig.classNames.icon, classNames.icon)}
+        className={clsx(`${prefixCls}-icon`, contextConfig.classNames.icon, classNames.icon)}
         style={styles.icon}
       >
         {iconEle}
@@ -84,11 +84,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
     return (
       <Typography.Title
         level={4}
-        className={classnames(
-          `${prefixCls}-title`,
-          contextConfig.classNames.title,
-          classNames.title,
-        )}
+        className={clsx(`${prefixCls}-title`, contextConfig.classNames.title, classNames.title)}
         style={styles.title}
       >
         {title}
@@ -103,11 +99,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
 
     return (
       <div
-        className={classnames(
-          `${prefixCls}-extra`,
-          contextConfig.classNames.extra,
-          classNames.extra,
-        )}
+        className={clsx(`${prefixCls}-extra`, contextConfig.classNames.extra, classNames.extra)}
         style={styles.extra}
       >
         {extra}
@@ -119,7 +111,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
   return (
     <Flex
       ref={ref}
-      className={classnames(
+      className={clsx(
         prefixCls,
         contextConfig.className,
         className,
@@ -152,7 +144,7 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
         {/* Description */}
         {description && (
           <Typography.Text
-            className={classnames(
+            className={clsx(
               `${prefixCls}-description`,
               contextConfig.classNames.description,
               classNames.description,
@@ -165,12 +157,10 @@ function Welcome(props: WelcomeProps, ref: React.Ref<HTMLDivElement>) {
       </Flex>
     </Flex>
   );
-}
-
-const ForwardWelcome = React.forwardRef(Welcome);
+});
 
 if (process.env.NODE_ENV !== 'production') {
-  ForwardWelcome.displayName = 'Welcome';
+  Welcome.displayName = 'Welcome';
 }
 
-export default ForwardWelcome;
+export default Welcome;

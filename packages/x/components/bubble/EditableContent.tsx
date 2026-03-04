@@ -1,5 +1,5 @@
+import { useEvent } from '@rc-component/util';
 import { Button, Flex } from 'antd';
-import { useEvent } from 'rc-util';
 import React from 'react';
 import { useLocale } from '../locale';
 import en_US from '../locale/en_US';

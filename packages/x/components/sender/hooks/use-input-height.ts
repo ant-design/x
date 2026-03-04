@@ -1,12 +1,12 @@
 import useToken from '../../theme/useToken';
-import { SenderProps } from '../interface';
+import type { SenderProps } from '../interface';
 
 const SENDER_INPUT_PADDING_HEIGHT = 4.35;
 const useInputHeight = (
   styles: React.CSSProperties,
   autoSize: SenderProps['autoSize'],
   editableRef: React.RefObject<HTMLDivElement | null>,
-) => {
+): React.CSSProperties => {
   const { token } = useToken();
   const computedStyle: any = editableRef.current
     ? window.getComputedStyle(editableRef.current)

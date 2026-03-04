@@ -1,5 +1,5 @@
 import { Flex, GetRef, Typography, Upload, type UploadProps } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import { AttachmentContext } from './context';
 
@@ -19,7 +19,7 @@ export interface PlaceholderProps {
   style?: React.CSSProperties;
 }
 
-function Placeholder(props: PlaceholderProps, ref: React.Ref<GetRef<typeof Upload>>) {
+const Placeholder = React.forwardRef<GetRef<typeof Upload>, PlaceholderProps>((props, ref) => {
   const { prefixCls, placeholder = {}, upload, className, style } = props;
 
   const placeholderCls = `${prefixCls}-placeholder`;
@@ -65,7 +65,7 @@ function Placeholder(props: PlaceholderProps, ref: React.Ref<GetRef<typeof Uploa
 
   return (
     <div
-      className={classNames(
+      className={clsx(
         placeholderCls,
         {
           [`${placeholderCls}-drag-in`]: dragIn,
@@ -89,6 +89,6 @@ function Placeholder(props: PlaceholderProps, ref: React.Ref<GetRef<typeof Uploa
       </Upload.Dragger>
     </div>
   );
-}
+});
 
-export default React.forwardRef(Placeholder);
+export default Placeholder;

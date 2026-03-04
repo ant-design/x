@@ -1,0 +1,63 @@
+{
+  "name": "@ant-design/x-skill",
+  "version": "2.3.0-beta.1",
+  "description": "placeholder for @ant-design/x-sdk",
+  "homepage": "https://x.ant.design/x-skills/introduce",
+  "bugs": {
+    "url": "https://github.com/ant-design/x/issues"
+  },
+  "bin": {
+    "x-skill": "bin/index.js"
+  },
+  "keywords": [
+    "AI",
+    "SKILL",
+    "Agent",
+    "Copilot",
+    "ant",
+    "sdk",
+    "framework",
+    "react"
+  ],
+  "scripts": {
+    "precompile": "npm run skillApi && npm run prestart",
+    "compile": "father build",
+    "skillApi": "tsx scripts/skillApi.ts",
+    "test": "echo 'test skipped for x-skill' && exit 0",
+    "pretest": "echo 'test skipped for x-skill' && exit 0",
+    "coverage": "echo 'coverage skipped for x-skill' && exit 0",
+    "test:dekko": "tsx scripts/dekko.ts",
+    "prepublishOnly": "tsx ../../scripts/pre-publish.ts x-skill",
+    "version": "tsx scripts/generate-version.ts",
+    "clean": "rm -rf coverage lib es",
+    "start": "father build && node bin/index.js",
+    "prestart": "npm run version",
+    "lint": "biome lint src/",
+    "tsc": "tsc --noEmit"
+  },
+  "sideEffects": true,
+  "files": [
+    "skills",
+    "skills-zh",
+    "bin",
+    ".skill.json",
+    ".claude-plugin",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ant-design/x"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.5",
+    "@types/node": "^24.0.3",
+    "tsx": "^4.19.1",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "figlet": "^1.10.0",
+    "ora": "^8.2.0",
+    "progress": "^2.0.3"
+  }
+}

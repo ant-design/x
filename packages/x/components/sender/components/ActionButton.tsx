@@ -1,6 +1,6 @@
 import { Button, type ButtonProps } from 'antd';
-import classNames from 'classnames';
-import * as React from 'react';
+import { clsx } from 'clsx';
+import React, { useContext, useEffect } from 'react';
 
 export interface ActionButtonContextProps {
   prefixCls: string;
@@ -14,6 +14,7 @@ export interface ActionButtonContextProps {
   onSpeechDisabled?: boolean;
   speechRecording?: boolean;
   disabled?: boolean;
+  setSubmitDisabled?: (disabled: boolean) => void;
 }
 
 export const ActionButtonContext = React.createContext<ActionButtonContextProps>(null!);
@@ -22,11 +23,19 @@ export interface ActionButtonProps extends ButtonProps {
   action: 'onSend' | 'onClear' | 'onCancel' | 'onSpeech';
 }
 
-export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButtonElement>) {
+export const ActionButton = React.forwardRef<HTMLButtonElement, ActionButtonProps>((props, ref) => {
   const { className, action, onClick, ...restProps } = props;
-  const context = React.useContext(ActionButtonContext);
-  const { prefixCls, disabled: rootDisabled } = context;
-  const mergedDisabled = restProps.disabled ?? rootDisabled ?? context[`${action}Disabled`];
+  const context = useContext(ActionButtonContext);
+  const { prefixCls, disabled: rootDisabled, setSubmitDisabled } = context;
+  const mergedDisabled =
+    restProps.disabled ?? rootDisabled ?? (context[`${action}Disabled`] as boolean);
+
+  useEffect(() => {
+    if (action === 'onSend') {
+      setSubmitDisabled?.(mergedDisabled);
+    }
+  }, [mergedDisabled, action, setSubmitDisabled]);
+
   return (
     <Button
       type="text"
@@ -40,11 +49,11 @@ export function ActionButton(props: ActionButtonProps, ref: React.Ref<HTMLButton
         onClick?.(e);
       }}
       disabled={mergedDisabled}
-      className={classNames(prefixCls, className, {
+      className={clsx(prefixCls, className, {
         [`${prefixCls}-disabled`]: mergedDisabled,
       })}
     />
   );
-}
+});
 
-export default React.forwardRef(ActionButton);
+export default ActionButton;

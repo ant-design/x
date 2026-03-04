@@ -1,5 +1,5 @@
 import { Col, Flex, Skeleton, Space, Typography } from 'antd';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import { FormattedMessage, useRouteMeta } from 'dumi';
 import React, { useLayoutEffect, useMemo, useState } from 'react';
 
@@ -57,7 +57,7 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
         <InViewSuspense fallback={null}>
           <DocAnchor showDebug={showDebug} debugDemos={debugDemos} />
         </InViewSuspense>
-        <article className={classNames(styles.articleWrapper, { rtl: isRTL })}>
+        <article className={clsx(styles.articleWrapper, { rtl: isRTL })}>
           {meta.frontmatter?.title ? (
             <Flex justify="space-between">
               <Typography.Title style={{ fontSize: 32, position: 'relative' }}>
@@ -86,7 +86,8 @@ const Content: React.FC<React.PropsWithChildren> = ({ children }) => {
             String(meta.frontmatter.showImport) !== 'false' && (
               <ComponentMeta
                 source
-                component={meta.frontmatter.title}
+                packageName={meta.frontmatter.packageName}
+                component={meta.frontmatter.componentName ?? meta.frontmatter.title}
                 filename={meta.frontmatter.filename}
                 version={meta.frontmatter.tag}
                 designUrl={meta.frontmatter.designUrl}

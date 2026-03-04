@@ -63,9 +63,13 @@ exports[`renders components/think/demo/basic.tsx extend context correctly 1`] = 
     </span>
   </div>
   <div
-    class="ant-think-content"
+    class=""
   >
-    This is deep thinking content.
+    <div
+      class="ant-think-content"
+    >
+      This is deep thinking content.
+    </div>
   </div>
 </div>
 `;
@@ -147,9 +151,13 @@ Array [
       </span>
     </div>
     <div
-      class="ant-think-content"
+      class=""
     >
-      This is deep thinking content.
+      <div
+        class="ant-think-content"
+      >
+        This is deep thinking content.
+      </div>
     </div>
   </div>,
 ]
@@ -232,9 +240,13 @@ Array [
       </span>
     </div>
     <div
-      class="ant-think-content"
+      class=""
     >
-      This is deep thinking content.
+      <div
+        class="ant-think-content"
+      >
+        This is deep thinking content.
+      </div>
     </div>
   </div>,
   <br />,
@@ -295,9 +307,13 @@ Array [
       </span>
     </div>
     <div
-      class="ant-think-content"
+      class=""
     >
-      Customize status icon.
+      <div
+        class="ant-think-content"
+      >
+        Customize status icon.
+      </div>
     </div>
   </div>,
 ]

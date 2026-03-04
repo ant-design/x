@@ -1,6 +1,6 @@
 import type { BubbleListProps } from '@ant-design/x';
-import { Bubble, Sender } from '@ant-design/x';
-import { AbstractChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import { Bubble, FileCard, Sender } from '@ant-design/x';
+import { AbstractChatProvider, useXChat, XRequest, XRequestOptions } from '@ant-design/x-sdk';
 import { Button, Flex } from 'antd';
 import React from 'react';
 
@@ -9,16 +9,31 @@ import React from 'react';
 interface CustomInput {
   query: string;
   role: 'user';
-  stream?: boolean;
+  stream: boolean;
+  model: string;
 }
 
 interface CustomOutput {
-  data: string;
+  data: {
+    content: string;
+    attachments?: {
+      name: string;
+      url: string;
+      type: string;
+      size?: number;
+    }[];
+  };
 }
 
 interface CustomMessage {
   content: string;
   role: 'user' | 'assistant' | 'system';
+  attachments?: {
+    name: string;
+    url: string;
+    type: string;
+    size?: number;
+  }[];
 }
 
 // 自定义Provider实现：继承AbstractChatProvider实现自定义聊天逻辑
@@ -30,14 +45,17 @@ class CustomProvider<
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
   // 转换请求参数：将用户输入转换为标准格式
   // Transform request parameters: convert user input to standard format
-  transformParams(requestParams: Partial<Input>): Input {
+
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }
     return {
-      query: requestParams.query || '',
-      role: 'user',
-      stream: requestParams.stream ?? false,
+      ...(options?.params || {}),
+      ...(requestParams || {}),
     } as Input;
   }
 
@@ -57,28 +75,46 @@ class CustomProvider<
 
     // 处理完成标记或空数据
     // Handle completion marker or empty data
-    if (!chunk || !chunk?.data || (chunk?.data && chunk?.data?.includes('[DONE]'))) {
+    if (!chunk || !chunk?.data || chunk?.data?.includes('[DONE]')) {
       return {
-        content: `${originMessage?.content}`,
+        content: originMessage?.content || '',
         role: 'assistant',
+        attachments: originMessage?.attachments || [],
       } as ChatMessage;
     }
 
     try {
       // 处理流式数据：解析JSON格式
       // Process streaming data: parse JSON format
-      const chunkJson = JSON.parse(chunk.data);
+      const data = JSON.parse(chunk.data);
       const content = originMessage?.content || '';
+
+      // 合并附件信息，避免数据丢失
+      // Merge attachment information to avoid data loss
+      const existingAttachments = originMessage?.attachments || [];
+      const newAttachments: CustomMessage['attachments'] = data.attachments || [];
+      const mergedAttachments = [...existingAttachments];
+
+      // 只添加新的附件，避免重复
+      // Only add new attachments to avoid duplicates
+      newAttachments?.forEach((newAttach: NonNullable<CustomMessage['attachments']>[0]) => {
+        if (!mergedAttachments.some((existing) => existing.url === newAttach.url)) {
+          mergedAttachments.push(newAttach);
+        }
+      });
+
       return {
-        content: `${content}${chunkJson.data || ''}`,
+        content: `${content}${data.content || ''}`,
         role: 'assistant',
+        attachments: mergedAttachments,
       } as ChatMessage;
-    } catch (error) {
+    } catch (_error) {
       // 如果解析失败，直接使用原始数据
       // If parsing fails, use raw data directly
       return {
         content: `${originMessage?.content || ''}${chunk.data || ''}`,
         role: 'assistant',
+        attachments: originMessage?.attachments || [],
       } as ChatMessage;
     }
   }
@@ -90,19 +126,32 @@ const role: BubbleListProps['role'] = {
   assistant: {
     placement: 'start',
     contentRender(content: CustomMessage) {
-      return (content as any)?.content;
+      return (
+        <div>
+          {content.content && <div>{content.content}</div>}
+          {content.attachments && content.attachments.length > 0 && (
+            <div style={{ marginTop: content.content ? 8 : 0 }}>
+              {content.attachments.map((attachment, index) => (
+                <div key={index} style={{ marginBottom: 8 }}>
+                  <FileCard type="file" name={attachment.name} />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
     },
   },
   user: {
     placement: 'end',
     contentRender(content: CustomMessage) {
-      return (content as any)?.content;
+      return content.content;
     },
   },
   system: {
     variant: 'borderless', // 无边框样式
     contentRender(content: CustomMessage) {
-      return content?.content;
+      return content.content;
     },
   },
 };
@@ -129,10 +178,6 @@ const useLocale = () => {
     editSystemMessage: isCN ? '编辑系统消息' : 'Edit a system message',
     editUserMessage: isCN ? '编辑用户消息' : 'Edit a user message',
     editAIResponse: isCN ? '编辑AI回复' : 'Edit an AI response',
-    customProviderTitle: isCN ? '自定义Provider示例' : 'Custom Provider Example',
-    customProviderDesc: isCN
-      ? '这是一个使用自定义Provider的示例，展示了如何继承AbstractChatProvider来实现自定义的数据处理逻辑。'
-      : 'This is an example using a custom provider, demonstrating how to extend AbstractChatProvider to implement custom data processing logic.',
   };
 };
 
@@ -144,8 +189,12 @@ const App = () => {
   // Use custom provider: create custom chat provider instance
   const [provider] = React.useState(
     new CustomProvider<CustomMessage, CustomInput, CustomOutput>({
-      request: XRequest('https://api.x.ant.design/api/custom_chat_provider_stream', {
+      request: XRequest('https://api.x.ant.design/api/attachment_stream', {
         manual: true,
+        params: {
+          stream: true,
+          model: 'qwen2.5-7b-instruct',
+        },
       }),
     }),
   );
@@ -211,13 +260,8 @@ const App = () => {
       message: { role: lastMessage.message.role, content: locale.editSystemMessage },
     });
   };
-
   return (
     <Flex vertical gap="middle">
-      <div>
-        <h3>{locale.customProviderTitle}</h3>
-        <p>{locale.customProviderDesc}</p>
-      </div>
       <Flex gap="small">
         <Button disabled={!isRequesting} onClick={abort}>
           {locale.abort}

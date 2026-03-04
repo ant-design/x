@@ -1,5 +1,5 @@
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import { useXProviderContext } from '../x-provider';
@@ -67,10 +67,31 @@ export interface ThoughtChainItemProps
    * @descEN blink
    */
   blink?: boolean;
+  /**
+   * @desc 自定义样式类名
+   * @descEN Custom CSS class name
+   */
   className?: string;
+  /**
+   * @desc 语义化样式类名配置
+   * @descEN Semantic class names configuration
+   */
   classNames?: Partial<Record<SemanticType, string>>;
+  /**
+   * @desc 自定义内联样式
+   * @descEN Custom inline styles
+   */
   style?: React.CSSProperties;
+  /**
+   * @desc 语义化样式配置
+   * @descEN Semantic styles configuration
+   */
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
+  /**
+   * @desc 是否禁用
+   * @descEN Whether disabled
+   */
+  disabled?: boolean;
 }
 
 type ItemRef = {
@@ -93,6 +114,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
     status,
     onClick,
     description,
+    disabled,
     ...restProps
   } = props;
 
@@ -124,9 +146,9 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
     <div
       ref={itemRef}
       key={key || id}
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       style={style}
-      className={classnames(
+      className={clsx(
         prefixCls,
         hashId,
         className,
@@ -136,9 +158,10 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         itemCls,
         {
           [`${itemCls}-${variant}`]: variant,
-          [`${itemCls}-click`]: onClick,
+          [`${itemCls}-click`]: !disabled && onClick,
           [`${itemCls}-error`]: status === THOUGHT_CHAIN_ITEM_STATUS.ERROR,
           [`${itemCls}-rtl`]: direction === 'rtl',
+          [`${itemCls}-disabled`]: disabled,
         },
       )}
       {...domProps}
@@ -153,14 +176,14 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         />
       )}
       <div
-        className={classnames(`${itemCls}-content`, {
+        className={clsx(`${itemCls}-content`, {
           [`${prefixCls}-motion-blink`]: blink,
         })}
       >
         {title && (
           <div
             style={styles?.title}
-            className={classnames(`${itemCls}-title`, classNames?.title, {
+            className={clsx(`${itemCls}-title`, classNames?.title, {
               [`${itemCls}-title-with-description`]: description,
             })}
           >
@@ -170,7 +193,7 @@ const Item = React.forwardRef<ItemRef, ThoughtChainItemProps>((props, ref) => {
         {description && (
           <div
             style={styles?.description}
-            className={classnames(`${itemCls}-description`, classNames?.description)}
+            className={clsx(`${itemCls}-description`, classNames?.description)}
           >
             {description}
           </div>

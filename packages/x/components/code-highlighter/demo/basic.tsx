@@ -1,5 +1,5 @@
+import { CodeHighlighter } from '@ant-design/x';
 import React from 'react';
-import CodeHighlighter from '../index';
 
 const App: React.FC = () => {
   const code = `import React from 'react';
@@ -39,6 +39,14 @@ export default App;`;
   <h1>Hello World</h1>
 </body>
 </html>`}
+      </CodeHighlighter>
+
+      <h3 style={{ margin: '8px 0' }}>Prism Light Mode</h3>
+      <p style={{ marginBottom: 8, color: '#666' }}>
+        使用 <code>prismLightMode</code> 属性启用轻量模式，按需加载语言支持，可显著减少打包体积。
+      </p>
+      <CodeHighlighter lang="javascript" prismLightMode>
+        {code}
       </CodeHighlighter>
     </div>
   );

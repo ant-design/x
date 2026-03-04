@@ -1,6 +1,6 @@
 import { ActionsProps } from '@ant-design/x';
-import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import { fireEvent, render } from '../../../tests/utils';
 
 import { findItem } from '../ActionsMenu';
 import Actions from '../index';

@@ -5,7 +5,7 @@ exports[`renders components/suggestion/demo/basic.tsx correctly 1`] = `
   class="ant-suggestion ant-suggestion-content css-var-_R_0_"
 >
   <div
-    class="ant-sender css-var-_R_0_"
+    class="ant-sender css-var-_R_0_ ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -61,7 +61,7 @@ exports[`renders components/suggestion/demo/block.tsx correctly 1`] = `
   class="ant-suggestion ant-suggestion-content css-var-_R_0_"
 >
   <div
-    class="ant-sender css-var-_R_0_"
+    class="ant-sender css-var-_R_0_ ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -140,10 +140,8 @@ exports[`renders components/suggestion/demo/trigger.tsx correctly 1`] = `
       >
         <input
           aria-autocomplete="list"
-          aria-controls="test-id_list"
           aria-expanded="false"
           aria-haspopup="listbox"
-          aria-owns="test-id_list"
           autocomplete="off"
           class="ant-select-input"
           id="test-id"

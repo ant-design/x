@@ -3,6 +3,8 @@ group:
   title: Plugins
 title: Latex
 order: 2
+category: Components
+packageName: x-markdown/plugins
 ---
 
 ## When to Use

@@ -1,5 +1,5 @@
-import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
+import { fireEvent, render } from '../../../tests/utils';
 import ActionsFeedback from '../ActionsFeedback';
 
 describe('Actions.Feedback Component', () => {

@@ -1,8 +1,8 @@
 import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { initFadeLeftMotion, initFadeMotion } from '../../style';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
 import genActionsAudioStyle from './audio';
 import genActionsCopyStyle from './copy';
 import genActionsFeedbackStyle from './feedback';
@@ -45,7 +45,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
       [`${componentCls}-list-danger`]: {
         color: token.colorError,
       },
-      [`${componentCls}-item`]: {
+      [`&${componentCls}-item,${componentCls}-item`]: {
         cursor: 'pointer',
         fontSize: token.fontSize,
         paddingInline: unit(calc(token.paddingXXS).add(1).equal()),
@@ -68,7 +68,7 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
           background: token.colorBgTextHover,
         },
       },
-      [`${componentCls}-list`]: {
+      [`&${componentCls}-list,${componentCls}-list`]: {
         display: 'inline-flex',
         flexDirection: 'row',
         alignItems: 'center',

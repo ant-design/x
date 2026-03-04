@@ -14,7 +14,10 @@ export default class OpenAIChatProvider<
   Input extends XModelParams = XModelParams,
   Output extends Partial<Record<SSEFields, any>> = Partial<Record<SSEFields, any>>,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     return {
       ...(options?.params || {}),
       ...requestParams,
@@ -27,7 +30,7 @@ export default class OpenAIChatProvider<
   }
 
   transformMessage(info: TransformMessage<ChatMessage, Output>): ChatMessage {
-    const { originMessage, chunk, chunks, responseHeaders } = info;
+    const { originMessage, chunk, responseHeaders } = info;
     let currentContent = '';
     let role = 'assistant';
     try {
@@ -37,7 +40,7 @@ export default class OpenAIChatProvider<
           message = JSON.parse(chunk.data);
         }
       } else {
-        message = chunk || chunks[0];
+        message = chunk;
       }
       if (message) {
         message?.choices?.forEach((choice: any) => {

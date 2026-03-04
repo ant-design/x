@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useLocation } from 'dumi';
 import type { AnimationDirection, AnimationItem } from 'lottie-web';
 import React, { lazy, Suspense, useRef } from 'react';
@@ -185,6 +185,7 @@ const useStyle = createStyles(({ token, css }) => {
     designBtn: css`
       background: #ffffff1a;
       backdrop-filter: blur(40px);
+      border: ${token.lineWidth}px solid transparent;
 
       &::after {
         content: '';
@@ -260,12 +261,12 @@ const MainBanner: React.FC = () => {
 
           <div className={styles.content}>
             <Link to={getLocalizedPathname('components/introduce', isZhCN(pathname), search)}>
-              <button type="button" className={classnames(styles.btn, styles.startBtn)}>
+              <button type="button" className={clsx(styles.btn, styles.startBtn)}>
                 {locale.start}
               </button>
             </Link>
             <Link to={getLocalizedPathname('/docs/spec/introduce', isZhCN(pathname), search)}>
-              <Button type="text" className={classnames(styles.btn, styles.designBtn)}>
+              <Button type="text" className={clsx(styles.btn, styles.designBtn)}>
                 {locale.design}
               </Button>
             </Link>
@@ -275,7 +276,7 @@ const MainBanner: React.FC = () => {
           <Suspense>
             <LottieComponent
               onLoad={onLoad}
-              className={classnames(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
+              className={clsx(styles.lottie, direction === 'rtl' && styles.lottie_rtl)}
               path="https://mdn.alipayobjects.com/huamei_lkxviz/afts/file/n25_R7prS_0AAAAAQPAAAAgADtFMAQFr"
             />
           </Suspense>

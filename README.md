@@ -6,13 +6,14 @@
 
 Build excellent AI interfaces and pioneer intelligent new experiences.
 
-[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors] [![Follow zhihu][zhihu-image]][zhihu-url]
+[![CI status][github-action-image]][github-action-url] [![codecov][codecov-image]][codecov-url] ![GitHub contributors][github-contributors] [![Follow zhihu][zhihu-image]][zhihu-url] [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ant-design/x)
 
 | Package | Latest Version | Download stats | Bundle Size | JSDelivr |
 | :-- | :-- | :-- | :-- | :-- |
 | `@ant-design/x` | [![npm version][x-version-image]][x-version-url] | [![npm downloads][x-downloads-image]][x-downloads-url] | [![bundle size][x-bundle-size-image]][x-bundle-size-url] | [![jsdelivr][x-jsdelivr-image]][x-jsdelivr-url] |
 | `@ant-design/x-markdown` | [![npm version][x-markdown-version-image]][x-markdown-version-url] | [![npm downloads][x-markdown-downloads-image]][x-markdown-downloads-url] | [![bundle size][x-markdown-bundle-size-image]][x-markdown-bundle-size-url] | [![jsdelivr][x-markdown-jsdelivr-image]][x-markdown-jsdelivr-url] |
 | `@ant-design/x-sdk` | [![npm version][x-sdk-version-image]][x-sdk-version-url] | [![npm downloads][x-sdk-downloads-image]][x-sdk-downloads-url] | [![bundle size][x-sdk-bundle-size-image]][x-sdk-bundle-size-url] | [![jsdelivr][x-sdk-jsdelivr-image]][x-sdk-jsdelivr-url] |
+| `@ant-design/x-skill` | [![npm version][x-skill-version-image]][x-skill-version-url] | [![npm downloads][x-skill-downloads-image]][x-skill-downloads-url] | [![bundle size][x-skill-bundle-size-image]][x-skill-bundle-size-url] | [![jsdelivr][x-skill-jsdelivr-image]][x-skill-jsdelivr-url] |
 
 [Changelog](./CHANGELOG.en-US.md) · [Report a Bug][github-issues-bug-report] · [Request a Feature][github-issues-feature-request] · English · [中文](./README-zh_CN.md)
 
@@ -46,6 +47,16 @@ Build excellent AI interfaces and pioneer intelligent new experiences.
 [x-sdk-package-size-url]: https://packagephobia.com/result?p=@ant-design/x-sdk
 [x-sdk-jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@ant-design/x-sdk/badge
 [x-sdk-jsdelivr-url]: https://www.jsdelivr.com/package/npm/@ant-design/x-sdk
+[x-skill-version-image]: https://img.shields.io/npm/v/@ant-design/x-skill.svg?style=flat-square
+[x-skill-version-url]: https://www.npmjs.com/package/@ant-design/x-skill
+[x-skill-downloads-image]: https://img.shields.io/npm/dm/@ant-design/x-skill.svg?style=flat
+[x-skill-downloads-url]: https://www.npmjs.com/package/@ant-design/x-skill
+[x-skill-bundle-size-image]: https://img.shields.io/bundlephobia/minzip/@ant-design/x-skill
+[x-skill-bundle-size-url]: https://bundlephobia.com/result?p=@ant-design/x-skill
+[x-skill-package-size-image]: https://packagephobia.com/badge?p=@ant-design/x-skill
+[x-skill-package-size-url]: https://packagephobia.com/result?p=@ant-design/x-skill
+[x-skill-jsdelivr-image]: https://data.jsdelivr.com/v1/package/npm/@ant-design/x-skill/badge
+[x-skill-jsdelivr-url]: https://www.jsdelivr.com/package/npm/@ant-design/x-skill
 [npm-image]: https://img.shields.io/npm/v/@ant-design/x.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@ant-design/x
 [github-action-image]: https://github.com/ant-design/x/actions/workflows/main.yml/badge.svg
@@ -70,15 +81,19 @@ Build excellent AI interfaces and pioneer intelligent new experiences.
 
 ## 🌈 Enterprise-level LLM Components Out of the Box
 
-`@ant-design/x` provides a rich set of atomic components for different interaction stages based on the RICH interaction paradigm, helping you flexibly build your AI applications. See details [here](../x/README.md).
+`@ant-design/x` provides a rich set of atomic components for different interaction stages based on the RICH interaction paradigm, helping you flexibly build your AI applications. See details [here](packages/x/README.md).
 
 ## ⚡️ Connect to Model Agents & Efficiently Manage Data Streams
 
-`@ant-design/x-sdk` provides a set of utility APIs to help developers manage AI application data streams out of the box. See details [here](../x-sdk/README.md).
+`@ant-design/x-sdk` provides a set of utility APIs to help developers manage AI application data streams out of the box. See details [here](packages/x-sdk/README.md).
 
 ## ✨ Markdown Renderer
 
-`@ant-design/x-markdown` aims to provide a streaming-friendly, highly extensible, and high-performance Markdown renderer. It supports streaming rendering of formulas, code highlighting, mermaid, and more. See details [here](../x-markdown/README.md).
+`@ant-design/x-markdown` aims to provide a streaming-friendly, highly extensible, and high-performance Markdown renderer. It supports streaming rendering of formulas, code highlighting, mermaid, and more. See details [here](packages/x-markdown/README.md).
+
+## 🚀 Skill
+
+`@ant-design/x-skill` is an intelligent skill library specially designed for Ant Design X, providing a series of carefully designed Agent skills. These skills can significantly improve development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development. See details [here](packages/x-skill/README.md).
 
 ## Who's using
 

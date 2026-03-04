@@ -109,7 +109,10 @@ class TboxProvider<
   Input extends TboxInput = TboxInput,
   Output extends TboxOutput = TboxOutput,
 > extends AbstractChatProvider<ChatMessage, Input, Output> {
-  transformParams(requestParams: Partial<Input>, options: XRequestOptions<Input, Output>): Input {
+  transformParams(
+    requestParams: Partial<Input>,
+    options: XRequestOptions<Input, Output, ChatMessage>,
+  ): Input {
     if (typeof requestParams !== 'object') {
       throw new Error('requestParams must be an object');
     }

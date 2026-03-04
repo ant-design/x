@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -31,7 +31,7 @@ const SystemBubble: React.ForwardRefRenderFunction<BubbleRef, SystemBubbleProps>
 
   // ============================ Styles ============================
   const cls = `${prefixCls}-system`;
-  const rootMergedCls = classnames(
+  const rootMergedCls = clsx(
     hashId,
     cssVarCls,
     cls,

@@ -16,30 +16,220 @@ tag: vVERSION
 
 ---
 
+## 2.3.0
+
+`2026-02-26`
+
+### @ant-design/x
+
+- 🆕 Conversation's onActiveChange callback now returns both the activated item and its key value, while updating useMergedState to useControlledState. [#1762](https://github.com/ant-design/x/pull/1762) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Optimized the visual presentation of Sender's disabled state buttons, unified the addition of transparent border handling to ensure consistent appearance across different button variants when disabled. [#1751](https://github.com/ant-design/x/pull/1751) by [Rain120](https://github.com/Rain120)
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown adds escapeRawHtml property, allowing users to choose whether to escape raw HTML during rendering. [#1769](https://github.com/ant-design/x/pull/1769) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown rendering when encountering unclosed inline code in lists, ensuring list markers are preserved in special unclosed cases. [#1739](https://github.com/ant-design/x/pull/1739) by [Div627](https://github.com/Div627)
+- 🐛 Improved parsing of block-level LaTeX formulas, with more tolerant handling of trailing whitespace and indentation, enhancing compatibility with different line ending formats and reducing misjudgment and rendering issues. [#1744](https://github.com/ant-design/x/pull/1744) by [Waiter](https://github.com/Waiter)
+- 🐛 Optimized dark mode CodeHighlighter and Mermaid plugin styling issues. [#1766](https://github.com/ant-design/x/pull/1766) by [menghany](https://github.com/menghany)
+
+### @ant-design/x-sdk
+
+- 🆕 useXChat adds queueRequest method, implementing initialization message sending for ConversationKey and SessionId. [#1761](https://github.com/ant-design/x/pull/1761) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-skill
+
+- 🆕 Added skill installation commands, simultaneously releasing three skills: use-x-chat, x-chat-provider, and x-request. [#1753](https://github.com/ant-design/x/pull/1753), [#1767](https://github.com/ant-design/x/pull/1767) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 🛠 Fixed build errors caused by dependency upgrades. [#1754](https://github.com/ant-design/x/pull/1754) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Resolved domhandler's ModuleNotFoundError in CodeSandbox preview. [#1754](https://github.com/ant-design/x/pull/1754) by [Div627](https://github.com/Div627)
+
+## 2.2.2
+
+`2026-02-06`
+
+### @ant-design/x
+
+- 🛠 Fixed some documentation and types to support AI Coding. [#1733](https://github.com/ant-design/x/pull/1733) by [kimteayon](https://github.com/kimteayon)
+- 💄 Fixed Bubble.List style and semantic issues. [#1731](https://github.com/ant-design/x/pull/1731) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed Sender insert node replacement issue when replaceCharacters is configured. [#1727](https://github.com/ant-design/x/pull/1727) by [kimteayon](https://github.com/kimteayon)
+
+## 2.2.1
+
+`2026-01-30`
+
+### @ant-design/x
+
+- 💄 Fixed Bubble.List style issues. [#1713](https://github.com/ant-design/x/pull/1713) by [anxLiang](https://github.com/anxLiang), [#1704](https://github.com/ant-design/x/pull/1704) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed Node environment build errors caused by other third-party dependencies `esm` paths. [#1708](https://github.com/ant-design/x/pull/1708) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🐛 Fixed streaming rendering cache invalidation issue where cache would prematurely commit and cause rendering anomalies when list items contained inline code (like - \code\`\` ). [#1709](https://github.com/ant-design/x/pull/1709) by [Div627](https://github.com/Div627)
+- 🆕 Custom code rendering now accepts language information. [#1705](https://github.com/ant-design/x/pull/1705) by [Aarebecca](https://github.com/Aarebecca)
+
+### @ant-design/x-sdk
+
+- 🆕 When XRequest is used together with Chat Provider, it will additionally obtain the assembled message. [#1714](https://github.com/ant-design/x/pull/1714) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1717](https://github.com/ant-design/x/pull/1717) by [kimteayon](https://github.com/kimteayon), [#1707](https://github.com/ant-design/x/pull/1707) by [Div627](https://github.com/Div627)
+
+## 2.2.0
+
+`2026-01-26`
+
+### @ant-design/x
+
+- Sender
+  - 🐛 Fixed cursor insertion position error when cursor is at skill position. [#1633](https://github.com/ant-design/x/pull/1633) by [IsDyh01](https://github.com/IsDyh01)
+  - 🛠 Refactored node insertion position capability and rewrote test cases. [#1612](https://github.com/ant-design/x/pull/1612) by [kimteayon](https://github.com/kimteayon)
+- XProvider
+  - 🐛 Fixed `iconPrefixCls` setting not taking effect. [#1656](https://github.com/ant-design/x/pull/1656) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed `prefix` setting not taking effect. [#1642](https://github.com/ant-design/x/pull/1642) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed `layer` setting issue. [#1616](https://github.com/ant-design/x/pull/1616) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed forced `antd` dependency on `es` path causing Node environment build errors. [#1645](https://github.com/ant-design/x/pull/1645) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed ThoughtChain layout causing animation stuttering. [#1641](https://github.com/ant-design/x/pull/1641) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed Think layout causing animation stuttering. [#1636](https://github.com/ant-design/x/pull/1636) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed Sources setting position but unable to locate content issue. [#1683](https://github.com/ant-design/x/pull/1683) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Bubble.List internal height change scrollbar change error issue. [#1690](https://github.com/ant-design/x/pull/1690) by [anxLiang](https://github.com/anxLiang)
+- 🆕 Added Mermaid settings initialization configuration and operation bar functionality. [#1631](https://github.com/ant-design/x/pull/1631) by [Div627](https://github.com/Div627)
+- 🆕 Added Attachments card type setting capability. [#1610](https://github.com/ant-design/x/pull/1610) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-sdk
+
+- 🆕 XRequest added reconnection capability. [#1629](https://github.com/ant-design/x/pull/1629) by [hylin](https://github.com/hylin)
+- 🆕 XRequest and XStream support stream data parsing with configurable delimiters `streamSeparator`, `partSeparator`, `kvSeparator`, while adding polyfill for TextDecoderStream to improve compatibility, and fixing the issue where undefined values were added to stream results. [#1611](https://github.com/ant-design/x/pull/1611) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 Enhanced XMarkdown parser to support custom components with placeholder protection. [#1668](https://github.com/ant-design/x/pull/1668) by [yanghuanrong](https://github.com/yanghuanrong)
+- 🆕 Added XMarkdown performance benchmarking capability for streaming Markdown rendering based on Playwright Component Testing. [#1314](https://github.com/ant-design/x/pull/1314) by [Div627](https://github.com/Div627)
+- 🆕 Added XMarkdown streaming syntax support for inline code caching. [#1630](https://github.com/ant-design/x/pull/1630) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1675](https://github.com/ant-design/x/pull/1675) by [hongxuWei](https://github.com/hongxuWei), [#1644](https://github.com/ant-design/x/pull/1644) by [kimteayon](https://github.com/kimteayon), [#1658](https://github.com/ant-design/x/pull/1658) by [kimteayon](https://github.com/kimteayon), [#1646](https://github.com/ant-design/x/pull/1646) by [kimteayon](https://github.com/kimteayon), [#1651](https://github.com/ant-design/x/pull/1651) by [kimteayon](https://github.com/kimteayon), [#1650](https://github.com/ant-design/x/pull/1650) by [Div627](https://github.com/Div627), [#1635](https://github.com/ant-design/x/pull/1635) by [IsDyh01](https://github.com/IsDyh01), [#1627](https://github.com/ant-design/x/pull/1627) by [Alexzjt](https://github.com/Alexzjt), [#1615](https://github.com/ant-design/x/pull/1615) by [Yx0201](https://github.com/Yx0201)
+
+## 2.1.3
+
+`2026-01-04`
+
+### @ant-design/x
+
+- 🐛 Fixed an undeclared dependency issue in Sender by replacing `classnames` with `clsx` and enabling dependency checks in `biome.json`. [#1608](https://github.com/ant-design/x/pull/1608) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1605](https://github.com/ant-design/x/pull/1605) by [kimteayon](https://github.com/kimteayon)
+
+## 2.1.2
+
+`2025-12-30`
+
+### @ant-design/x
+
+- 💄 Fixed Actions `disliked` className error issue. [#1521](https://github.com/ant-design/x/pull/1521) by [kimteayon](https://github.com/kimteayon)
+- Sender
+  - 🛠 Overall refactoring of Sender component implementation, while fixing some detailed cursor issues. [#1515](https://github.com/ant-design/x/pull/1515) [#1548](https://github.com/ant-design/x/pull/1548) by [kimteayon](https://github.com/kimteayon)
+  - 💄 Fixed Sender component actions style conflict with antd Button causing rendering errors. [#1535](https://github.com/ant-design/x/pull/1535) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where cursor was too small when placeholder was empty in slot mode `skill`. [#1537](https://github.com/ant-design/x/pull/1537) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where undo stack was not updated when pasting text. [#1527](https://github.com/ant-design/x/pull/1527) by [Chiaki-xps](https://github.com/Chiaki-xps)
+- 🐛 Removed Bubble.List automatic scrolling to bottom logic for new messages, changed to manual control. [#1548](https://github.com/ant-design/x/pull/1548) by [anxLiang](https://github.com/anxLiang)
+- 💄 Fixed Prompts component animation demo not working issue. [#1580](https://github.com/ant-design/x/pull/1580) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Actions.Feedback tooltip display anomaly issue. [#1591](https://github.com/ant-design/x/pull/1591) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Attachments calling `ref.select()` error when no parameters passed. [#1587](https://github.com/ant-design/x/pull/1587) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed FileCard `overflow` display button not updating issue, and Image display failure when no `src` in image display. [#1587](https://github.com/ant-design/x/pull/1587) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-sdk
+
+- 🐛 Fixed XChat unable to remotely load historical messages issue. [#1593](https://github.com/ant-design/x/pull/1593) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed OpenAIChatProvider and DeepSeekChatProvider non-streaming requests rendering content twice issue. [#1593](https://github.com/ant-design/x/pull/1593) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 💄 Fixed XMarkdown animation font color error issue. [#1531](https://github.com/ant-design/x/pull/1531) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 🛠 Overall dependency refactoring and upgrade. [#1448](https://github.com/ant-design/x/pull/1448) by [yoyo837](https://github.com/yoyo837)
+- 📖 Optimized official website to improve user experience. [#1508](https://github.com/ant-design/x/pull/1508) by [kimteayon](https://github.com/kimteayon), [#1516](https://github.com/ant-design/x/pull/1516) by [kimteayon](https://github.com/kimteayon), [#1529](https://github.com/ant-design/x/pull/1529) by [fireairforce](https://github.com/fireairforce), [#1549](https://github.com/ant-design/x/pull/1549) by [kimteayon](https://github.com/kimteayon), [#1551](https://github.com/ant-design/x/pull/1551) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1553](https://github.com/ant-design/x/pull/1553) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1555](https://github.com/ant-design/x/pull/1555) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1543](https://github.com/ant-design/x/pull/1543) by [IsDyh01](https://github.com/IsDyh01), [#1558](https://github.com/ant-design/x/pull/1558) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1557](https://github.com/ant-design/x/pull/1557) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1562](https://github.com/ant-design/x/pull/1562) by [hustcc](https://github.com/hustcc), [#1569](https://github.com/ant-design/x/pull/1569) by [kimteayon](https://github.com/kimteayon), [#1561](https://github.com/ant-design/x/pull/1561) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1584](https://github.com/ant-design/x/pull/1584) by [kimteayon](https://github.com/kimteayon), [#1581](https://github.com/ant-design/x/pull/1581) by [teimurjan](https://github.com/teimurjan)
+
+## 2.1.1
+
+`2025-12-10`
+
+### @ant-design/x
+
+- Sender
+  - 🐛 Fixed the issue where send shortcuts enter and shift + enter were not controlled by the disabled state of the submit button, and fixed the inconsistency between `onSubmit` shortcut keys and button parameters. [#1472](https://github.com/ant-design/x/pull/1472) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the missing `skill` parameter in `onChange`, fixed the issue where placeholder was not displayed when slot mode only showed skill capabilities, and refactored `onChange` logic. [#1477](https://github.com/ant-design/x/pull/1477) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where send shortcuts enter and shift + enter were not triggered when `input` type slot was activated and focused in slot mode. [#1498](https://github.com/ant-design/x/pull/1498) by [kimteayon](https://github.com/kimteayon)
+- Attachment
+  - 🐛 Fixed the issue where the last file was not uploaded after setting `maxCount`. [#1486](https://github.com/ant-design/x/pull/1486) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the antd warning issue after uploading images. [#1492](https://github.com/ant-design/x/pull/1492) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Mermaid rendering jitter issue. [#1497](https://github.com/ant-design/x/pull/1497) by [Div627](https://github.com/Div627)
+- 📖 Optimized official website to improve user experience. [#1464](https://github.com/ant-design/x/pull/1464) by [IsDyh01](https://github.com/IsDyh01), [#1483](https://github.com/ant-design/x/pull/1483) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1463](https://github.com/ant-design/x/pull/1463) by [J-Da-Shi](https://github.com/J-Da-Shi), [#1489](https://github.com/ant-design/x/pull/1489) by [Chiaki-xps](https://github.com/Chiaki-xps), [#1499](https://github.com/ant-design/x/pull/1499) by [kimteayon](https://github.com/kimteayon), [#1500](https://github.com/ant-design/x/pull/1500) by [kimteayon](https://github.com/kimteayon), [#1501](https://github.com/ant-design/x/pull/1501) by [Samoy](https://github.com/Samoy)
+- 🛠 Modified dependency configuration for `mermaid`. [#1475](https://github.com/ant-design/x/pull/1475) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-sdk
+
+- 🐛 Optimized message flow throttling and emission logic to avoid deep update errors caused by high-frequency streaming updates, improving real-time message stability and performance. [#1418](https://github.com/ant-design/x/pull/1418) by [Afee2019](https://github.com/Afee2019)
+
+### @ant-design/x-markdown
+
+- 🛠 Optimized `sideEffects` configuration. [#1408](https://github.com/ant-design/x/pull/1408) by [hongxuWei](https://github.com/hongxuWei)
+
+## 2.1.0
+
+`2025-12-05`
+
+### @ant-design/x
+
+- 🐛 Fixed Bubble css token `typingContent` configuration not taking effect. [#1435](https://github.com/ant-design/x/pull/1435) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed multiple component style loss issues caused by antd upgrade to 6.0.1. [#1441](https://github.com/ant-design/x/pull/1441) by [kimteayon](https://github.com/kimteayon), [#1446](https://github.com/ant-design/x/pull/1446) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Bubble.List scrolling compatibility issue in Safari browser. [#1392](https://github.com/ant-design/x/pull/1392) by [anxLiang](https://github.com/anxLiang)
+- 🔥 New components HighlightCode and Mermaid. [#1402](https://github.com/ant-design/x/pull/1402) by [Div627](https://github.com/Div627)
+- 🆕 Added semantic implementation for Actions. [#1443](https://github.com/ant-design/x/pull/1443) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added semantic implementation for Suggestion, removed duplicate Enter trigger events, fixed the issue of `onSubmit` method being executed multiple times, added complete data return of `selectedOptions` to `onSelect` method, and refactored the option implementation using `useMergedState`. [#1406](https://github.com/ant-design/x/pull/1406) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1444](https://github.com/ant-design/x/pull/1444) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added new slot type `content` and skill function `skill` for Sender. [#1377](https://github.com/ant-design/x/pull/1377) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-sdk
+
+- 🐛 Fixed DeepSeekChatProvider's improper handling of newline characters in `<think>` tag format causing XMarkdown rendering anomalies. [#1445](https://github.com/ant-design/x/pull/1445) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed useXChat `setMessages` method call not triggering re-rendering. [#1450](https://github.com/ant-design/x/pull/1450) by [hylin](https://github.com/hylin)
+- 🐛 Fixed missing rc-util dependency declaration. [#1456](https://github.com/ant-design/x/pull/1456) by [hylin](https://github.com/hylin)
+
+### @ant-design/x-markdown
+
+- 🐛 Replaced useStreaming regex to resolve iOS compatibility issues. [#1457](https://github.com/ant-design/x/pull/1457) by [Div627](https://github.com/Div627)
+- 📖 Improved documentation to enhance user experience. [#1451](https://github.com/ant-design/x/pull/1451) by [Div627](https://github.com/Div627)
+- 🛠 Migrated UI plugins HighlightCode and Mermaid to @ant-design/x to achieve more reasonable dependency relationships. [#1402](https://github.com/ant-design/x/pull/1402) by [Div627](https://github.com/Div627)
+
 ## 2.0.1
 
 `2025-12-03`
 
 ### @ant-design/x
 
-- 🐛 Fixed multiple component style loss issues caused by antd upgrade to 6.0.1. [#1428](https://github.com/ant-design/x/pull/1428) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed antd error when using Attachments component. [#1395](https://github.com/ant-design/x/pull/1395) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed Sender component `allowSpeech` custom disable error. [#1398](https://github.com/ant-design/x/pull/1398) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed missing semantic configuration for Sender.Switch component. [#1396](https://github.com/ant-design/x/pull/1396) by [@kimteayon](https://github.com/kimteayon)
-- 🛠 Fixed test case failures caused by version upgrades. [#1393](https://github.com/ant-design/x/pull/1393) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Added 1.x official website links. [#1386](https://github.com/ant-design/x/pull/1386) by [@kimteayon](https://github.com/kimteayon), [#1394](https://github.com/ant-design/x/pull/1394) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized official website to improve user experience. [#1384](https://github.com/ant-design/x/pull/1384) by [@kimteayon](https://github.com/kimteayon), [#1416](https://github.com/ant-design/x/pull/1416) by [@IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed multiple component style loss issues caused by antd upgrade to 6.0.1. [#1428](https://github.com/ant-design/x/pull/1428) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed antd error when using Attachments component. [#1395](https://github.com/ant-design/x/pull/1395) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Sender component `allowSpeech` custom disable error. [#1398](https://github.com/ant-design/x/pull/1398) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed missing semantic configuration for Sender.Switch component. [#1396](https://github.com/ant-design/x/pull/1396) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Fixed test case failures caused by version upgrades. [#1393](https://github.com/ant-design/x/pull/1393) by [kimteayon](https://github.com/kimteayon)
+- 📖 Added 1.x official website links. [#1386](https://github.com/ant-design/x/pull/1386) by [kimteayon](https://github.com/kimteayon), [#1394](https://github.com/ant-design/x/pull/1394) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1384](https://github.com/ant-design/x/pull/1384) by [kimteayon](https://github.com/kimteayon), [#1416](https://github.com/ant-design/x/pull/1416) by [IsDyh01](https://github.com/IsDyh01)
 
 ### @ant-design/x-sdk
 
-- 📖 Comprehensive updates to official website directory, documentation, and examples. [#1419](https://github.com/ant-design/x/pull/1419) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed useXChat `requestFallback` adding errorInfo parameter to resolve inability to get API error data. [#1419](https://github.com/ant-design/x/pull/1419) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Comprehensive updates to official website directory, documentation, and examples. [#1419](https://github.com/ant-design/x/pull/1419) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed useXChat `requestFallback` adding errorInfo parameter to resolve inability to get API error data. [#1419](https://github.com/ant-design/x/pull/1419) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed HighlightCode plugin copy code error. [#1414](https://github.com/ant-design/x/pull/1414) by [@Jimi1126](https://github.com/Jimi1126)
-- 🐛 Fixed XMarkdown rendering special characters failure. [#1413](https://github.com/ant-design/x/pull/1413) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed XMarkdown cache reset logic not taking effect due to old references. [#1420](https://github.com/ant-design/x/pull/1420) by [@Div627](https://github.com/Div627)
+- 🐛 Fixed HighlightCode plugin copy code error. [#1414](https://github.com/ant-design/x/pull/1414) by [Jimi1126](https://github.com/Jimi1126)
+- 🐛 Fixed XMarkdown rendering special characters failure. [#1413](https://github.com/ant-design/x/pull/1413) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown cache reset logic not taking effect due to old references. [#1420](https://github.com/ant-design/x/pull/1420) by [Div627](https://github.com/Div627)
 
 ## 2.0.0
 
@@ -69,20 +259,20 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🛠 Removed the components property while promoting internal properties. [#1338](https://github.com/ant-design/x/pull/1338) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 FileCard adds image generation process and loading/rendering capabilities. [#1311](https://github.com/ant-design/x/pull/1311) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Think upgrades `blink` animation styles to css token. [#1318](https://github.com/ant-design/x/pull/1318) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 ThoughtChain upgrades `blink` animation styles to css token. [#1318](https://github.com/ant-design/x/pull/1318) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1335](https://github.com/ant-design/x/pull/1335) by [@kimteayon](https://github.com/kimteayon), [#1329](https://github.com/ant-design/x/pull/1329) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Removed the components property while promoting internal properties. [#1338](https://github.com/ant-design/x/pull/1338) by [kimteayon](https://github.com/kimteayon)
+- 🆕 FileCard adds image generation process and loading/rendering capabilities. [#1311](https://github.com/ant-design/x/pull/1311) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Think upgrades `blink` animation styles to css token. [#1318](https://github.com/ant-design/x/pull/1318) by [kimteayon](https://github.com/kimteayon)
+- 🆕 ThoughtChain upgrades `blink` animation styles to css token. [#1318](https://github.com/ant-design/x/pull/1318) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1335](https://github.com/ant-design/x/pull/1335) by [kimteayon](https://github.com/kimteayon), [#1329](https://github.com/ant-design/x/pull/1329) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🛠 Optimized markdown rendering with useMemo, and updated basic demo text and animation demo text. [#1337](https://github.com/ant-design/x/pull/1337) by [@Div627](https://github.com/Div627)
-- 🆕 XMarkdown renders HTML tags with `disabled` and `checked` attributes exposed. [#1328](https://github.com/ant-design/x/pull/1328) by [@Div627](https://github.com/Div627)
-- 🆕 XMarkdown `hasNextChunk` adds table rendering processing capability. [#1322](https://github.com/ant-design/x/pull/1322) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed XMarkdown default table rendering styles. [#1324](https://github.com/ant-design/x/pull/1324) by [@Div627](https://github.com/Div627)
-- 🆕 XMarkdown `incompleteMarkdownComponentMap` adds multiple type renderings. [#1325](https://github.com/ant-design/x/pull/1325) by [@Div627](https://github.com/Div627)
-- 📖 Optimized the official site to enhance user experience. [#1326](https://github.com/ant-design/x/pull/1326) by [@Div627](https://github.com/Div627)
+- 🛠 Optimized markdown rendering with useMemo, and updated basic demo text and animation demo text. [#1337](https://github.com/ant-design/x/pull/1337) by [Div627](https://github.com/Div627)
+- 🆕 XMarkdown renders HTML tags with `disabled` and `checked` attributes exposed. [#1328](https://github.com/ant-design/x/pull/1328) by [Div627](https://github.com/Div627)
+- 🆕 XMarkdown `hasNextChunk` adds table rendering processing capability. [#1322](https://github.com/ant-design/x/pull/1322) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown default table rendering styles. [#1324](https://github.com/ant-design/x/pull/1324) by [Div627](https://github.com/Div627)
+- 🆕 XMarkdown `incompleteMarkdownComponentMap` adds multiple type renderings. [#1325](https://github.com/ant-design/x/pull/1325) by [Div627](https://github.com/Div627)
+- 📖 Optimized the official site to enhance user experience. [#1326](https://github.com/ant-design/x/pull/1326) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.15
 
@@ -90,16 +280,16 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🛠 Upgraded antd dependency version to `6.00-alpha.4`. [#1300](https://github.com/ant-design/x/pull/1300) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1303](https://github.com/ant-design/x/pull/1303) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Upgraded antd dependency version to `6.00-alpha.4`. [#1300](https://github.com/ant-design/x/pull/1300) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1303](https://github.com/ant-design/x/pull/1303) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🛠 Refactored markdown theme styles. [#1305](https://github.com/ant-design/x/pull/1305) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed the issue where `code` tag `streamStatus` state was incorrect. [#1307](https://github.com/ant-design/x/pull/1307) by [@Div627](https://github.com/Div627)
-- 🛠 Transformed `index.less` to `index.css`. [#1306](https://github.com/ant-design/x/pull/1306) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed `SteamingOption` to `StreamingOption`. [#1301](https://github.com/ant-design/x/pull/1301) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed the issue where dompurifyConfig.ALLOWED_TAGS was incorrectly merged into ADD_TAGS. [#1297](https://github.com/ant-design/x/pull/1297) by [@Div627](https://github.com/Div627)
+- 🛠 Refactored markdown theme styles. [#1305](https://github.com/ant-design/x/pull/1305) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue where `code` tag `streamStatus` state was incorrect. [#1307](https://github.com/ant-design/x/pull/1307) by [Div627](https://github.com/Div627)
+- 🛠 Transformed `index.less` to `index.css`. [#1306](https://github.com/ant-design/x/pull/1306) by [Div627](https://github.com/Div627)
+- 🐛 Fixed `SteamingOption` to `StreamingOption`. [#1301](https://github.com/ant-design/x/pull/1301) by [Div627](https://github.com/Div627)
+- 🐛 Fixed the issue where dompurifyConfig.ALLOWED_TAGS was incorrectly merged into ADD_TAGS. [#1297](https://github.com/ant-design/x/pull/1297) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.13
 
@@ -107,17 +297,17 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🐛 Removed Bubble.List `suffix` property and modified typing through CSS Token. [#1285](https://github.com/ant-design/x/pull/1285) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added flashing animation effect to ThoughtChain.Item component. [#1278](https://github.com/ant-design/x/pull/1278) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added flashing animation effect to Think component. [#1278](https://github.com/ant-design/x/pull/1278) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added flashing animation effect to ThoughtChain component. [#1286](https://github.com/ant-design/x/pull/1286) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added fadeIn and fadeInLeft effects to Actions. [#1288](https://github.com/ant-design/x/pull/1288) by [@kimteayon](https://github.com/kimteayon), [#1289](https://github.com/ant-design/x/pull/1289) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added fadeIn and fadeInLeft effects to Prompts. [#1289](https://github.com/ant-design/x/pull/1289) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1290](https://github.com/ant-design/x/pull/1290) by [@Rain120](https://github.com/Rain120)
+- 🐛 Removed Bubble.List `suffix` property and modified typing through CSS Token. [#1285](https://github.com/ant-design/x/pull/1285) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added flashing animation effect to ThoughtChain.Item component. [#1278](https://github.com/ant-design/x/pull/1278) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added flashing animation effect to Think component. [#1278](https://github.com/ant-design/x/pull/1278) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added flashing animation effect to ThoughtChain component. [#1286](https://github.com/ant-design/x/pull/1286) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added fadeIn and fadeInLeft effects to Actions. [#1288](https://github.com/ant-design/x/pull/1288) by [kimteayon](https://github.com/kimteayon), [#1289](https://github.com/ant-design/x/pull/1289) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added fadeIn and fadeInLeft effects to Prompts. [#1289](https://github.com/ant-design/x/pull/1289) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1290](https://github.com/ant-design/x/pull/1290) by [Rain120](https://github.com/Rain120)
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed the issue where the renderer link passed in was overwritten. [#1276](https://github.com/ant-design/x/pull/1276) by [@Div627](https://github.com/Div627)
+- 🐛 Fixed the issue where the renderer link passed in was overwritten. [#1276](https://github.com/ant-design/x/pull/1276) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.12
 
@@ -125,15 +315,15 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🆕 Attachments Ref adds `select` method to support file selection capability, while fixing the issue where the upload button still appears after reaching the maximum quantity when a maximum limit is set. [#1266](https://github.com/ant-design/x/pull/1266) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1269](https://github.com/ant-design/x/pull/1269) by [@kimteayon](https://github.com/kimteayon), [#1274](https://github.com/ant-design/x/pull/1274) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Attachments Ref adds `select` method to support file selection capability, while fixing the issue where the upload button still appears after reaching the maximum quantity when a maximum limit is set. [#1266](https://github.com/ant-design/x/pull/1266) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1269](https://github.com/ant-design/x/pull/1269) by [kimteayon](https://github.com/kimteayon), [#1274](https://github.com/ant-design/x/pull/1274) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed KaTeX plugin rendering failure and exception throwing issues, modified formula rendering rules to reduce rendering exceptions. [#1265](https://github.com/ant-design/x/pull/1265) by [@Div627](https://github.com/Div627)
-- 📖 Added code examples for XMarkdown handling Chinese links. [#1270](https://github.com/ant-design/x/pull/1270) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 `code` and `pre` tags now return rendering status `streamStatus` and block-level identifier `block` during rendering. [#1272](https://github.com/ant-design/x/pull/1272) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed duplicate DOM keys when rendering markdown. [#1273](https://github.com/ant-design/x/pull/1273) by [@Div627](https://github.com/Div627)
+- 🐛 Fixed KaTeX plugin rendering failure and exception throwing issues, modified formula rendering rules to reduce rendering exceptions. [#1265](https://github.com/ant-design/x/pull/1265) by [Div627](https://github.com/Div627)
+- 📖 Added code examples for XMarkdown handling Chinese links. [#1270](https://github.com/ant-design/x/pull/1270) by [kimteayon](https://github.com/kimteayon)
+- 🆕 `code` and `pre` tags now return rendering status `streamStatus` and block-level identifier `block` during rendering. [#1272](https://github.com/ant-design/x/pull/1272) by [Div627](https://github.com/Div627)
+- 🐛 Fixed duplicate DOM keys when rendering markdown. [#1273](https://github.com/ant-design/x/pull/1273) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.11
 
@@ -141,14 +331,14 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🆕 Sender slot configuration changed to mutable properties, in slot mode the `insert` method adds `replaceCharacters` parameter to support replacement functionality, and the `focus` method adds slot `key` configuration to support focusing on specific slots. [#1259](https://github.com/ant-design/x/pull/1259) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Sources inline mode supports specifying the currently active panel, adds `activeKey` property, and optimizes panel switching interaction styles for better experience. [#1261](https://github.com/ant-design/x/pull/1261) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Bubble.List optimized scrollbar layout, implementation, and semantics. [#1263](https://github.com/ant-design/x/pull/1263) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Sender slot configuration changed to mutable properties, in slot mode the `insert` method adds `replaceCharacters` parameter to support replacement functionality, and the `focus` method adds slot `key` configuration to support focusing on specific slots. [#1259](https://github.com/ant-design/x/pull/1259) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Sources inline mode supports specifying the currently active panel, adds `activeKey` property, and optimizes panel switching interaction styles for better experience. [#1261](https://github.com/ant-design/x/pull/1261) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Bubble.List optimized scrollbar layout, implementation, and semantics. [#1263](https://github.com/ant-design/x/pull/1263) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed inconsistent parameter structure issue for XMarkdown custom components under different states. [#1260](https://github.com/ant-design/x/pull/1260) by [@Div627](https://github.com/Div627)
-- 📖 Added XMarkdown code examples. [#1262](https://github.com/ant-design/x/pull/1262) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed inconsistent parameter structure issue for XMarkdown custom components under different states. [#1260](https://github.com/ant-design/x/pull/1260) by [Div627](https://github.com/Div627)
+- 📖 Added XMarkdown code examples. [#1262](https://github.com/ant-design/x/pull/1262) by [kimteayon](https://github.com/kimteayon)
 
 ## 2.0.0-alpha.10
 
@@ -156,30 +346,30 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🔥 New component Sources. [#1250](https://github.com/ant-design/x/pull/1250) by [@hy993658052](https://github.com/hy993658052)
-- 🆕 Bubble adds two subcomponents: Bubble.System and Bubble.Divider. [#1239](https://github.com/ant-design/x/pull/1239) by [@anxLiang](https://github.com/anxLiang) and [@kimteayon](https://github.com/kimteayon)
+- 🔥 New component Sources. [#1250](https://github.com/ant-design/x/pull/1250) by [hy993658052](https://github.com/hy993658052)
+- 🆕 Bubble adds two subcomponents: Bubble.System and Bubble.Divider. [#1239](https://github.com/ant-design/x/pull/1239) by [anxLiang](https://github.com/anxLiang) and [kimteayon](https://github.com/kimteayon)
 - Sender
-  - 🆕 Added slot focus event functionality. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fixed the issue where `onPasteFile` callback data was incorrect when pasting multiple files in the input box. [#1221](https://github.com/ant-design/x/pull/1221) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fixed accessibility issues caused by SVG not being internationalized. [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Added slot focus event functionality. [#1221](https://github.com/ant-design/x/pull/1221) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where `onPasteFile` callback data was incorrect when pasting multiple files in the input box. [#1221](https://github.com/ant-design/x/pull/1221) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed accessibility issues caused by SVG not being internationalized. [#1243](https://github.com/ant-design/x/pull/1243) by [kimteayon](https://github.com/kimteayon)
 - FileCard
-  - 🆕 Added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Added support for `jfif` type. [#1248](https://github.com/ant-design/x/pull/1248) by [@IsDyh01](https://github.com/IsDyh01)
-- 🆕 Attachments added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1216](https://github.com/ant-design/x/pull/1216) by [@kimteayon](https://github.com/kimteayon), [#1217](https://github.com/ant-design/x/pull/1217) by [@Div627](https://github.com/Div627), [#1218](https://github.com/ant-design/x/pull/1218) by [@IsDyh01](https://github.com/IsDyh01), [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon), [#1232](https://github.com/ant-design/x/pull/1232) by [@IsDyh01](https://github.com/IsDyh01), [#1233](https://github.com/ant-design/x/pull/1233) by [@kimteayon](https://github.com/kimteayon), [#1243](https://github.com/ant-design/x/pull/1243) by [@kimteayon](https://github.com/kimteayon), [#1247](https://github.com/ant-design/x/pull/1247) by [@elrrrrrrr](https://github.com/elrrrrrrr)
+  - 🆕 Added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 Added support for `jfif` type. [#1248](https://github.com/ant-design/x/pull/1248) by [IsDyh01](https://github.com/IsDyh01)
+- 🆕 Attachments added semantic implementation. [#1220](https://github.com/ant-design/x/pull/1220) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1216](https://github.com/ant-design/x/pull/1216) by [kimteayon](https://github.com/kimteayon), [#1217](https://github.com/ant-design/x/pull/1217) by [Div627](https://github.com/Div627), [#1218](https://github.com/ant-design/x/pull/1218) by [IsDyh01](https://github.com/IsDyh01), [#1224](https://github.com/ant-design/x/pull/1224) by [kimteayon](https://github.com/kimteayon), [#1232](https://github.com/ant-design/x/pull/1232) by [IsDyh01](https://github.com/IsDyh01), [#1233](https://github.com/ant-design/x/pull/1233) by [kimteayon](https://github.com/kimteayon), [#1243](https://github.com/ant-design/x/pull/1243) by [kimteayon](https://github.com/kimteayon), [#1247](https://github.com/ant-design/x/pull/1247) by [elrrrrrrr](https://github.com/elrrrrrrr)
 
 ### @ant-design/x-markdown
 
-- 🆕 XMarkdown adds rendering component configuration `incomplete` for tags that need to be closed during the rendering process and corresponding functionality. [#1223](https://github.com/ant-design/x/pull/1223) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed the issue where XMarkdown `openLinksInNewTab` property configuration was ineffective. [#1253](https://github.com/ant-design/x/pull/1253) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed the issue of repeated rendering in XMarkdown animations. [#1255](https://github.com/ant-design/x/pull/1255) by [@Div627](https://github.com/Div627)
-- 🆕 Enhanced XMarkdown's ability to identify formula rendering tags. [#1255](https://github.com/ant-design/x/pull/1255) by [@Div627](https://github.com/Div627)
+- 🆕 XMarkdown adds rendering component configuration `incomplete` for tags that need to be closed during the rendering process and corresponding functionality. [#1223](https://github.com/ant-design/x/pull/1223) by [Div627](https://github.com/Div627)
+- 🐛 Fixed the issue where XMarkdown `openLinksInNewTab` property configuration was ineffective. [#1253](https://github.com/ant-design/x/pull/1253) by [Div627](https://github.com/Div627)
+- 🐛 Fixed the issue of repeated rendering in XMarkdown animations. [#1255](https://github.com/ant-design/x/pull/1255) by [Div627](https://github.com/Div627)
+- 🆕 Enhanced XMarkdown's ability to identify formula rendering tags. [#1255](https://github.com/ant-design/x/pull/1255) by [Div627](https://github.com/Div627)
 
 ### @ant-design/x-sdk
 
-- 🐛 Fixed the issue where useXChat handling stream data server errors caused parameter problems in the `requestFallback` callback. [#1224](https://github.com/ant-design/x/pull/1224) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added implementation for activeConversationKey in useXConversations. [#1252](https://github.com/ant-design/x/pull/1252) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed the non-multi-instance issue of useXChat `isRequesting`, and optimized the callback parameters for `requestPlaceholder` and `requestFallback`. [#1254](https://github.com/ant-design/x/pull/1254) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue where useXChat handling stream data server errors caused parameter problems in the `requestFallback` callback. [#1224](https://github.com/ant-design/x/pull/1224) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added implementation for activeConversationKey in useXConversations. [#1252](https://github.com/ant-design/x/pull/1252) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the non-multi-instance issue of useXChat `isRequesting`, and optimized the callback parameters for `requestPlaceholder` and `requestFallback`. [#1254](https://github.com/ant-design/x/pull/1254) by [kimteayon](https://github.com/kimteayon)
 
 ## 2.0.0-alpha.9
 
@@ -187,7 +377,7 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x-markdown
 
-- 🐛 Fixed code highlighting plugin style loss, resolved component matching issues with nested child elements, and removed table text-align attribute from default styles. [#1212](https://github.com/ant-design/x/pull/1212) by [@Div627](https://github.com/Div627)
+- 🐛 Fixed code highlighting plugin style loss, resolved component matching issues with nested child elements, and removed table text-align attribute from default styles. [#1212](https://github.com/ant-design/x/pull/1212) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.8
 
@@ -196,29 +386,29 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 ### @ant-design/x
 
 - Bubble
-  - 🆕 Bubble.List adds `extra` parameter, which supports custom functions with useXChat. [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fixed the issue where the content height was fixed in the `loading` state. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fixed component type export naming error. [#1182](https://github.com/ant-design/x/pull/1182) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed ThoughtChain.Item component type export naming error. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed the issue of missing listening components in XProvider. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Bubble.List adds `extra` parameter, which supports custom functions with useXChat. [#1195](https://github.com/ant-design/x/pull/1195) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue where the content height was fixed in the `loading` state. [#1178](https://github.com/ant-design/x/pull/1178) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed component type export naming error. [#1182](https://github.com/ant-design/x/pull/1182) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed ThoughtChain.Item component type export naming error. [#1178](https://github.com/ant-design/x/pull/1178) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue of missing listening components in XProvider. [#1178](https://github.com/ant-design/x/pull/1178) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🛠 Refactored animation-related implementation. [#1198](https://github.com/ant-design/x/pull/1198) by [@Div627](https://github.com/Div627), [#1204](https://github.com/ant-design/x/pull/1204) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed plugin export type error, and added examples and documentation. [#1187](https://github.com/ant-design/x/pull/1187) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed rendering exception when switching Mermaid plugin. [#1175](https://github.com/ant-design/x/pull/1175) by [@Div627](https://github.com/Div627)
-- 🆕 Added semantic implementation for HighlightCode and Mermaid plugins. [#1178](https://github.com/ant-design/x/pull/1178) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed incomplete theme style override in XMarkdown. [#1182](https://github.com/ant-design/x/pull/1182) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Refactored animation-related implementation. [#1198](https://github.com/ant-design/x/pull/1198) by [Div627](https://github.com/Div627), [#1204](https://github.com/ant-design/x/pull/1204) by [Div627](https://github.com/Div627)
+- 🐛 Fixed plugin export type error, and added examples and documentation. [#1187](https://github.com/ant-design/x/pull/1187) by [Div627](https://github.com/Div627)
+- 🐛 Fixed rendering exception when switching Mermaid plugin. [#1175](https://github.com/ant-design/x/pull/1175) by [Div627](https://github.com/Div627)
+- 🆕 Added semantic implementation for HighlightCode and Mermaid plugins. [#1178](https://github.com/ant-design/x/pull/1178) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed incomplete theme style override in XMarkdown. [#1182](https://github.com/ant-design/x/pull/1182) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-sdk
 
-- 🆕 useXChat `setMessage` now supports a callback function to get the original message, and `onRequest` and `onReload` add an `extra` parameter to support custom functions. [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 useXChat `setMessage` now supports a callback function to get the original message, and `onRequest` and `onReload` add an `extra` parameter to support custom functions. [#1195](https://github.com/ant-design/x/pull/1195) by [kimteayon](https://github.com/kimteayon)
 
 ### Others
 
-- 🆕 Updated the overall site documentation. [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Updated the showcase functionality, added 'Ultramodern' showcase. [#1184](https://github.com/ant-design/x/pull/1184) by [@kimteayon](https://github.com/kimteayon), [#1195](https://github.com/ant-design/x/pull/1195) by [@kimteayon](https://github.com/kimteayon), [#1194](https://github.com/ant-design/x/pull/1194) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1170](https://github.com/ant-design/x/pull/1170) by [@jinyang](https://github.com/jinyang), [#1186](https://github.com/ant-design/x/pull/1186) by [@jinyang](https://github.com/jinyang), [#1192](https://github.com/ant-design/x/pull/1192) by [@iamkun-2](https://github.com/iamkun-2), [#1193](https://github.com/ant-design/x/pull/1193) by [@iamkun-2](https://github.com/iamkun-2), [#1197](https://github.com/ant-design/x/pull/1197) by [@elrrrrrrr](https://github.com/elrrrrrrr), [#1199](https://github.com/ant-design/x/pull/1199) by [@Div627](https://github.com/Div627)
+- 🆕 Updated the overall site documentation. [#1194](https://github.com/ant-design/x/pull/1194) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Updated the showcase functionality, added 'Ultramodern' showcase. [#1184](https://github.com/ant-design/x/pull/1184) by [kimteayon](https://github.com/kimteayon), [#1195](https://github.com/ant-design/x/pull/1195) by [kimteayon](https://github.com/kimteayon), [#1194](https://github.com/ant-design/x/pull/1194) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1170](https://github.com/ant-design/x/pull/1170) by [jinyang](https://github.com/jinyang), [#1186](https://github.com/ant-design/x/pull/1186) by [jinyang](https://github.com/jinyang), [#1192](https://github.com/ant-design/x/pull/1192) by [iamkun-2](https://github.com/iamkun-2), [#1193](https://github.com/ant-design/x/pull/1193) by [iamkun-2](https://github.com/iamkun-2), [#1197](https://github.com/ant-design/x/pull/1197) by [elrrrrrrr](https://github.com/elrrrrrrr), [#1199](https://github.com/ant-design/x/pull/1199) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.7
 
@@ -227,30 +417,30 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 ### @ant-design/x
 
 - Bubble
-  - 💄 Fixed the default `white-space` style issue. [#1147](https://github.com/ant-design/x/pull/1147) by [@kimteayon](https://github.com/kimteayon)
-  - 💄 Fixed missing semantics and incorrect height in `loading` state under Bubble.List. [#1162](https://github.com/ant-design/x/pull/1162) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fixed type export and documentation import errors. [#1160](https://github.com/ant-design/x/pull/1160) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Removed deprecated tools `useXAgent` and `useXChat`, and updated or replaced related documentation with `X SDK`. [#1148](https://github.com/ant-design/x/pull/1148) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed the missing `status` display issue in the FileCard component. [#1156](https://github.com/ant-design/x/pull/1156) by [@hy993658052](https://github.com/hy993658052)
-- 🐛 Fixed the issue where the Sender component could not paste Excel cell text when file paste was enabled. [#1167](https://github.com/ant-design/x/pull/1167) by [@kimteayon](https://github.com/kimteayon)
+  - 💄 Fixed the default `white-space` style issue. [#1147](https://github.com/ant-design/x/pull/1147) by [kimteayon](https://github.com/kimteayon)
+  - 💄 Fixed missing semantics and incorrect height in `loading` state under Bubble.List. [#1162](https://github.com/ant-design/x/pull/1162) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed type export and documentation import errors. [#1160](https://github.com/ant-design/x/pull/1160) by [kimteayon](https://github.com/kimteayon)
+- 📖 Removed deprecated tools `useXAgent` and `useXChat`, and updated or replaced related documentation with `X SDK`. [#1148](https://github.com/ant-design/x/pull/1148) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the missing `status` display issue in the FileCard component. [#1156](https://github.com/ant-design/x/pull/1156) by [hy993658052](https://github.com/hy993658052)
+- 🐛 Fixed the issue where the Sender component could not paste Excel cell text when file paste was enabled. [#1167](https://github.com/ant-design/x/pull/1167) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🆕 Added Mermaid plugin operation functionality. [#1135](https://github.com/ant-design/x/pull/1135) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed the streaming effect in XMarkdown. [#1135](https://github.com/ant-design/x/pull/1135) by [@Div627](https://github.com/Div627)
-- 🆕 Added plugin internationalization and theme customization features, along with documentation upgrades. [#1135](https://github.com/ant-design/x/pull/1135) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added `openLinksInNewTab` configuration for XMarkdown links and adjusted theme colors. [#1164](https://github.com/ant-design/x/pull/1164) by [@Div627](https://github.com/Div627)
-- 🐛 Fixed style conflicts between XMarkdown and documentation markdown. [#1161](https://github.com/ant-design/x/pull/1161) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Added Mermaid plugin operation functionality. [#1135](https://github.com/ant-design/x/pull/1135) by [Div627](https://github.com/Div627)
+- 🐛 Fixed the streaming effect in XMarkdown. [#1135](https://github.com/ant-design/x/pull/1135) by [Div627](https://github.com/Div627)
+- 🆕 Added plugin internationalization and theme customization features, along with documentation upgrades. [#1135](https://github.com/ant-design/x/pull/1135) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added `openLinksInNewTab` configuration for XMarkdown links and adjusted theme colors. [#1164](https://github.com/ant-design/x/pull/1164) by [Div627](https://github.com/Div627)
+- 🐛 Fixed style conflicts between XMarkdown and documentation markdown. [#1161](https://github.com/ant-design/x/pull/1161) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-sdk
 
-- 🛠 Refactored the `isRequesting` property in the useXChat tool, upgrading it from a method to an observable variable. [#1168](https://github.com/ant-design/x/pull/1168) by [@hylin](https://github.com/hylin)
-- 🆕 Added message `abort` status to the useXChat tool, fixed the `message` parameter error in the `requestFallback` callback method, and removed error state message filtering. [#1171](https://github.com/ant-design/x/pull/1171) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Refactored the `isRequesting` property in the useXChat tool, upgrading it from a method to an observable variable. [#1168](https://github.com/ant-design/x/pull/1168) by [hylin](https://github.com/hylin)
+- 🆕 Added message `abort` status to the useXChat tool, fixed the `message` parameter error in the `requestFallback` callback method, and removed error state message filtering. [#1171](https://github.com/ant-design/x/pull/1171) by [kimteayon](https://github.com/kimteayon)
 
 ### Others
 
-- 📖 Optimized the official site to enhance user experience. [#1169](https://github.com/ant-design/x/pull/1169) by [@hylin](https://github.com/hylin)
-- 📖 Updated documentation for introduction, model integration, agent integration, X SDK, and template code. [#1171](https://github.com/ant-design/x/pull/1171) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1169](https://github.com/ant-design/x/pull/1169) by [hylin](https://github.com/hylin)
+- 📖 Updated documentation for introduction, model integration, agent integration, X SDK, and template code. [#1171](https://github.com/ant-design/x/pull/1171) by [kimteayon](https://github.com/kimteayon)
 
 ## 2.0.0-alpha.6
 
@@ -258,19 +448,19 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🐛 Fixed the issue where pressing `Enter` in normal mode of the Sender component would trigger `Submit` when selecting a candidate word. [#1144](https://github.com/ant-design/x/pull/1144) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed the issue where the Sender component could not insert a new line when `submitType` was set to `shiftEnter` in slot mode. [#1143](https://github.com/ant-design/x/pull/1143) by [@kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue where pressing `Enter` in normal mode of the Sender component would trigger `Submit` when selecting a candidate word. [#1144](https://github.com/ant-design/x/pull/1144) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue where the Sender component could not insert a new line when `submitType` was set to `shiftEnter` in slot mode. [#1143](https://github.com/ant-design/x/pull/1143) by [kimteayon](https://github.com/kimteayon)
 - 💄 Fixed the abnormal `margin` style when the `description` content of ThoughtChain.Item wrapped to a new line.
-- 🛠 Refactored the template room using `@ant-design/x-sdk`. [#1139](https://github.com/ant-design/x/pull/1139) by [@hylin](https://github.com/hylin)
-- 🐛 Fixed the persistent display of the `prefix` in the Bubble component. [#1137](https://github.com/ant-design/x/pull/1137) by [@anxLiang](https://github.com/anxLiang)
-- 📖 Added documentation to explain the scrolling container issue in Bubble.List. [#1133](https://github.com/ant-design/x/pull/1133) by [@anxLiang](https://github.com/anxLiang)
-- 🐛 Fixed the issue where uploaded images in the Attachment component were not displayed. [#1140](https://github.com/ant-design/x/pull/1140) by [@hy993658052](https://github.com/hy993658052)
-- 🐛 Fixed semantic issues and size display problems in the FileCard component. [#1130](https://github.com/ant-design/x/pull/1130) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Refactored the template room using `@ant-design/x-sdk`. [#1139](https://github.com/ant-design/x/pull/1139) by [hylin](https://github.com/hylin)
+- 🐛 Fixed the persistent display of the `prefix` in the Bubble component. [#1137](https://github.com/ant-design/x/pull/1137) by [anxLiang](https://github.com/anxLiang)
+- 📖 Added documentation to explain the scrolling container issue in Bubble.List. [#1133](https://github.com/ant-design/x/pull/1133) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed the issue where uploaded images in the Attachment component were not displayed. [#1140](https://github.com/ant-design/x/pull/1140) by [hy993658052](https://github.com/hy993658052)
+- 🐛 Fixed semantic issues and size display problems in the FileCard component. [#1130](https://github.com/ant-design/x/pull/1130) by [kimteayon](https://github.com/kimteayon)
 
 ### Others
 
-- 📦 Upgraded the father configuration. [#1125](https://github.com/ant-design/x/pull/1125) by [@fireairforce](https://github.com/fireairforce)
-- 📖 Optimized the official site to enhance user experience. [#1142](https://github.com/ant-design/x/pull/1142) by [@kimteayon](https://github.com/kimteayon)
+- 📦 Upgraded the father configuration. [#1125](https://github.com/ant-design/x/pull/1125) by [fireairforce](https://github.com/fireairforce)
+- 📖 Optimized the official site to enhance user experience. [#1142](https://github.com/ant-design/x/pull/1142) by [kimteayon](https://github.com/kimteayon)
 
 ## 2.0.0-alpha.5
 
@@ -278,22 +468,22 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🆕 Added subcomponent features for Actions, including Actions.Copy, Actions.Audio, and Actions.Item. [#1121](https://github.com/ant-design/x/pull/1121) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Added subcomponent features for Actions, including Actions.Copy, Actions.Audio, and Actions.Item. [#1121](https://github.com/ant-design/x/pull/1121) by [kimteayon](https://github.com/kimteayon)
 - Bubble
-  - 🆕 Added functionality to render content with line breaks and tabs when `string content` is provided. [#1127](https://github.com/ant-design/x/pull/1127) by [@anxLiang](https://github.com/anxLiang)
-  - 🆕 Added semantic implementation. [#1116](https://github.com/ant-design/x/pull/1116) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Optimized styles and type issues. [#1108](https://github.com/ant-design/x/pull/1108) by [@anxLiang](https://github.com/anxLiang)
-- 🆕 Added semantic configuration for the Sender component. [#1116](https://github.com/ant-design/x/pull/1116) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Added functionality to render content with line breaks and tabs when `string content` is provided. [#1127](https://github.com/ant-design/x/pull/1127) by [anxLiang](https://github.com/anxLiang)
+  - 🆕 Added semantic implementation. [#1116](https://github.com/ant-design/x/pull/1116) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Optimized styles and type issues. [#1108](https://github.com/ant-design/x/pull/1108) by [anxLiang](https://github.com/anxLiang)
+- 🆕 Added semantic configuration for the Sender component. [#1116](https://github.com/ant-design/x/pull/1116) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-sdk
 
-- 🛠 Overall optimization of X SDK. [#1114](https://github.com/ant-design/x/pull/1114) by [@hylin](https://github.com/hylin)
+- 🛠 Overall optimization of X SDK. [#1114](https://github.com/ant-design/x/pull/1114) by [hylin](https://github.com/hylin)
 
 ### Others
 
-- 📖 Refactored the template room using X SDK. [#1139](https://github.com/ant-design/x/pull/1139) by [@hylin](https://github.com/hylin)
-- 📖 Optimized the official site to enhance user experience. [#1124](https://github.com/ant-design/x/pull/1124) by [@kimteayon](https://github.com/kimteayon), [#1123](https://github.com/ant-design/x/pull/1123) by [@kimteayon](https://github.com/kimteayon)
-- 🛠 Optimized the release process. [#1115](https://github.com/ant-design/x/pull/1115) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Refactored the template room using X SDK. [#1139](https://github.com/ant-design/x/pull/1139) by [hylin](https://github.com/hylin)
+- 📖 Optimized the official site to enhance user experience. [#1124](https://github.com/ant-design/x/pull/1124) by [kimteayon](https://github.com/kimteayon), [#1123](https://github.com/ant-design/x/pull/1123) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Optimized the release process. [#1115](https://github.com/ant-design/x/pull/1115) by [kimteayon](https://github.com/kimteayon)
 
 ## 2.0.0-alpha.3
 
@@ -301,7 +491,7 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x-markdown
 
-- 🛠 Optimized version logic, configuration, and documentation. [#1112](https://github.com/ant-design/x/pull/1112) by [@Div627](https://github.com/Div627)
+- 🛠 Optimized version logic, configuration, and documentation. [#1112](https://github.com/ant-design/x/pull/1112) by [Div627](https://github.com/Div627)
 
 ## 2.0.0-alpha.1
 
@@ -309,14 +499,14 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🛠 Refactored and upgraded the Bubble component. [#1100](https://github.com/ant-design/x/pull/1100) by [@anxLiang](https://github.com/anxLiang), [#1077](https://github.com/ant-design/x/pull/1077) by [@anxLiang](https://github.com/anxLiang)
-- 🛠 Refactored and upgraded the Bubble.List component. [#1077](https://github.com/ant-design/x/pull/1077) by [@anxLiang](https://github.com/anxLiang)
-- 🐛 Fixed the issue where the `readOnly` and `loading` logic of the Bubble component did not take effect. [#1101](https://github.com/ant-design/x/pull/1101) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Refactored and upgraded the Bubble component. [#1100](https://github.com/ant-design/x/pull/1100) by [anxLiang](https://github.com/anxLiang), [#1077](https://github.com/ant-design/x/pull/1077) by [anxLiang](https://github.com/anxLiang)
+- 🛠 Refactored and upgraded the Bubble.List component. [#1077](https://github.com/ant-design/x/pull/1077) by [anxLiang](https://github.com/anxLiang)
+- 🐛 Fixed the issue where the `readOnly` and `loading` logic of the Bubble component did not take effect. [#1101](https://github.com/ant-design/x/pull/1101) by [kimteayon](https://github.com/kimteayon)
 
 ### Others
 
-- 🛠 Optimized the release process. [#1098](https://github.com/ant-design/x/pull/1098) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1087](https://github.com/ant-design/x/pull/1087) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Optimized the release process. [#1098](https://github.com/ant-design/x/pull/1098) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1087](https://github.com/ant-design/x/pull/1087) by [kimteayon](https://github.com/kimteayon)
 
 ## 2.0.0-alpha.0
 
@@ -324,70 +514,70 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### @ant-design/x
 
-- 🔥 Added new component FileCard. [#1094](https://github.com/ant-design/x/pull/1094) by [@hy993658052](https://github.com/hy993658052)
-- 🔥 Added new component Notification. [#973](https://github.com/ant-design/x/pull/973) by [@kimteayon](https://github.com/kimteayon)
-- 🔥 Added new component Think. [#970](https://github.com/ant-design/x/pull/970), [#966](https://github.com/ant-design/x/pull/966), [#946](https://github.com/ant-design/x/pull/946) by [@hy993658052](https://github.com/hy993658052)
+- 🔥 Added new component FileCard. [#1094](https://github.com/ant-design/x/pull/1094) by [hy993658052](https://github.com/hy993658052)
+- 🔥 Added new component Notification. [#973](https://github.com/ant-design/x/pull/973) by [kimteayon](https://github.com/kimteayon)
+- 🔥 Added new component Think. [#970](https://github.com/ant-design/x/pull/970) [#966](https://github.com/ant-design/x/pull/966) [#946](https://github.com/ant-design/x/pull/946) by [hy993658052](https://github.com/hy993658052)
 - 🛠 Refactored and upgraded the Attachments component.
-- 🛠 Refactored and upgraded the Actions component. [#994](https://github.com/ant-design/x/pull/994) by [@vanndxh](https://github.com/vanndxh)
-- 🛠 Refactored and upgraded the Conversations component. [#955](https://github.com/ant-design/x/pull/955), [#954](https://github.com/ant-design/x/pull/954), [#937](https://github.com/ant-design/x/pull/937) by [@kimteayon](https://github.com/kimteayon)
-- 🛠 Refactored and upgraded the Sender component. [#1073](https://github.com/ant-design/x/pull/1073), [#962](https://github.com/ant-design/x/pull/962) by [@kimteayon](https://github.com/kimteayon), [@Chuck-Ray](https://github.com/Chuck-Ray)
-- 🛠 Refactored and upgraded the ThoughtChain component. [#985](https://github.com/ant-design/x/pull/985) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Added `Ref` functionality to all components. [#1081](https://github.com/ant-design/x/pull/1081) by [@kimteayon](https://github.com/kimteayon)
-- 🆕 Integrated internationalization logic into the XProvider component. [#952](https://github.com/ant-design/x/pull/952) by [@kimteayon](https://github.com/kimteayon)
+- 🛠 Refactored and upgraded the Actions component. [#994](https://github.com/ant-design/x/pull/994) by [vanndxh](https://github.com/vanndxh)
+- 🛠 Refactored and upgraded the Conversations component. [#955](https://github.com/ant-design/x/pull/955) [#954](https://github.com/ant-design/x/pull/954) [#937](https://github.com/ant-design/x/pull/937) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Refactored and upgraded the Sender component. [#1073](https://github.com/ant-design/x/pull/1073), [#962](https://github.com/ant-design/x/pull/962) by [kimteayon](https://github.com/kimteayon), [Chuck-Ray](https://github.com/Chuck-Ray)
+- 🛠 Refactored and upgraded the ThoughtChain component. [#985](https://github.com/ant-design/x/pull/985) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added `Ref` functionality to all components. [#1081](https://github.com/ant-design/x/pull/1081) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Integrated internationalization logic into the XProvider component. [#952](https://github.com/ant-design/x/pull/952) by [kimteayon](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 
-- 🔥 Added new component XMarkdown. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627)
-- 🔥 Added new plugin Latex. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627)
-- 🔥 Added new plugin HighlightCode. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627)
-- 🔥 Added new plugin Mermaid. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [@Div627](https://github.com/Div627)
+- 🔥 Added new component XMarkdown. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [Div627](https://github.com/Div627)
+- 🔥 Added new plugin Latex. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [Div627](https://github.com/Div627)
+- 🔥 Added new plugin HighlightCode. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [Div627](https://github.com/Div627)
+- 🔥 Added new plugin Mermaid. [#1060](https://github.com/ant-design/x/pull/1060), [#989](https://github.com/ant-design/x/pull/989) by [Div627](https://github.com/Div627)
 
 ### @ant-design/x-sdk
 
-- 🔥 Added new tool useXChat. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin)
-- 🔥 Added new tool useXConversations. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin)
-- 🔥 Added new tool Chat Provider. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin)
-- 🔥 Added new tool XRequest. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin)
-- 🔥 Added new tool XStream. [#1098](https://github.com/ant-design/x/pull/1098) by [@hylin](https://github.com/hylin)
+- 🔥 Added new tool useXChat. [#1098](https://github.com/ant-design/x/pull/1098) by [hylin](https://github.com/hylin)
+- 🔥 Added new tool useXConversations. [#1098](https://github.com/ant-design/x/pull/1098) by [hylin](https://github.com/hylin)
+- 🔥 Added new tool Chat Provider. [#1098](https://github.com/ant-design/x/pull/1098) by [hylin](https://github.com/hylin)
+- 🔥 Added new tool XRequest. [#1098](https://github.com/ant-design/x/pull/1098) by [hylin](https://github.com/hylin)
+- 🔥 Added new tool XStream. [#1098](https://github.com/ant-design/x/pull/1098) by [hylin](https://github.com/hylin)
 
 ### Others
 
-- 🛠 The overall framework has been upgraded to Monorepo.[#823](https://github.com/ant-design/x/pull/823) by [@elrrrrrrr](https://github.com/elrrrrrrr)
-- 🛠 Upgraded all components to Ant Design V6. [#1012](https://github.com/ant-design/x/pull/1012) by [@kimteayon](https://github.com/kimteayon)
-- 🛠 Upgraded and adjusted the release logic of Ant Design X. [#1098](https://github.com/ant-design/x/pull/1098), [#1009](https://github.com/ant-design/x/pull/1009) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Optimized the official site to enhance user experience. [#1083](https://github.com/ant-design/x/pull/1083) by [@kimteayon](https://github.com/kimteayon), [#1001](https://github.com/ant-design/x/pull/1001) by [@elrrrrrrr](https://github.com/elrrrrrrr)
+- 🛠 The overall framework has been upgraded to Monorepo.[#823](https://github.com/ant-design/x/pull/823) by [elrrrrrrr](https://github.com/elrrrrrrr)
+- 🛠 Upgraded all components to Ant Design V6. [#1012](https://github.com/ant-design/x/pull/1012) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Upgraded and adjusted the release logic of Ant Design X. [#1098](https://github.com/ant-design/x/pull/1098), [#1009](https://github.com/ant-design/x/pull/1009) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized the official site to enhance user experience. [#1083](https://github.com/ant-design/x/pull/1083) by [kimteayon](https://github.com/kimteayon), [#1001](https://github.com/ant-design/x/pull/1001) by [elrrrrrrr](https://github.com/elrrrrrrr)
 
 ## 1.6.1
 
 `2025-09-12`
 
-- 🐛 Fixed ThoughtChain component `title` could not display the collapsed title when passing `ReactNode`. [#1172](https://github.com/ant-design/x/pull/1172) by [@IsDyh01](https://github.com/IsDyh01)
-- 🐛 Fixed Sender component `LoadingButton` would display two icons when the `icon ` property is passed. [#1145](https://github.com/ant-design/x/pull/1145) by [@IsDyh01](https://github.com/IsDyh01)
-- 🐛 Fixed semantic loss in Sender component `content`. [#703](https://github.com/ant-design/x/pull/703) by [@HomyeeKing](https://github.com/HomyeeKing)
-- 🐛 Removed redundant condition checks in Bubble component typing effect prefix logic. [#1091](https://github.com/ant-design/x/pull/1091) by [@AqingCyan](https://github.com/AqingCyan)
-- 🐛 Fixed missing `updating` status in useXChat. [#833](https://github.com/ant-design/x/pull/833) by [@wzc520pyfm](https://github.com/wzc520pyfm)
-- 🐛 Fixed the exception in Suggestion component when items is an empty array in `useActive`. [#824](https://github.com/ant-design/x/pull/824) by [@LengYXin](https://github.com/LengYXin)
-- 📖 Improved the official site for better user experience. [#960](https://github.com/ant-design/x/pull/960) by [@wzc520pyfm](https://github.com/wzc520pyfm), [#1048](https://github.com/ant-design/x/pull/1048) by [@wzc520pyfm](https://github.com/wzc520pyfm), [#1118](https://github.com/ant-design/x/pull/1118) by [@afc163](https://github.com/afc163), [#1122](https://github.com/ant-design/x/pull/1122) by [@fireairforce](https://github.com/fireairforce), [#1120](https://github.com/ant-design/x/pull/1120) by [@IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed ThoughtChain component `title` could not display the collapsed title when passing `ReactNode`. [#1172](https://github.com/ant-design/x/pull/1172) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed Sender component `LoadingButton` would display two icons when the `icon ` property is passed. [#1145](https://github.com/ant-design/x/pull/1145) by [IsDyh01](https://github.com/IsDyh01)
+- 🐛 Fixed semantic loss in Sender component `content`. [#703](https://github.com/ant-design/x/pull/703) by [HomyeeKing](https://github.com/HomyeeKing)
+- 🐛 Removed redundant condition checks in Bubble component typing effect prefix logic. [#1091](https://github.com/ant-design/x/pull/1091) by [AqingCyan](https://github.com/AqingCyan)
+- 🐛 Fixed missing `updating` status in useXChat. [#833](https://github.com/ant-design/x/pull/833) by [wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐛 Fixed the exception in Suggestion component when items is an empty array in `useActive`. [#824](https://github.com/ant-design/x/pull/824) by [LengYXin](https://github.com/LengYXin)
+- 📖 Improved the official site for better user experience. [#960](https://github.com/ant-design/x/pull/960) by [wzc520pyfm](https://github.com/wzc520pyfm), [#1048](https://github.com/ant-design/x/pull/1048) by [wzc520pyfm](https://github.com/wzc520pyfm), [#1118](https://github.com/ant-design/x/pull/1118) by [afc163](https://github.com/afc163), [#1122](https://github.com/ant-design/x/pull/1122) by [fireairforce](https://github.com/fireairforce), [#1120](https://github.com/ant-design/x/pull/1120) by [IsDyh01](https://github.com/IsDyh01)
 
 ## 1.6.0
 
 `2025-07-30`
 
-- 🆕 Attachments component `FileCard` adds icon and type configuration. [#1006](https://github.com/ant-design/x/pull/1006) by [@kieranwv](https://github.com/kieranwv)
+- 🆕 Attachments component `FileCard` adds icon and type configuration. [#1006](https://github.com/ant-design/x/pull/1006) by [kieranwv](https://github.com/kieranwv)
 - 📖 Added documentation and demo for Toolbox Agent integration. [#1063](https://github.com/ant-design/x/pull/1063) by [iamkun-2](https://github.com/iamkun-2)
-- 📖 Improved official site for better user experience. [#1054](https://github.com/ant-design/x/pull/1054) by [@hylin](https://github.com/hylin), [#1056](https://github.com/hylin)
+- 📖 Improved official site for better user experience. [#1054](https://github.com/ant-design/x/pull/1054) by [hylin](https://github.com/hylin), [#1056](https://github.com/hylin)
 
 ## 1.5.0
 
 `2025-07-16`
 
-- 🆕 Added Bubble component support for `onScroll` event listener. [#1021](https://github.com/ant-design/x/pull/1021) by [@QdabuliuQ](https://github.com/QdabuliuQ)
-- 🐛 Removed duplicate TypeScript type declaration in Bubble component. [#1032](https://github.com/ant-design/x/pull/1032) by [@wzc520pyfm](https://github.com/wzc520pyfm)
-- 🐛 Fixed Conversations `onActiveChange` being triggered when a disabled `menu` item is clicked. [#1024](https://github.com/ant-design/x/pull/1024) by [@QdabuliuQ](https://github.com/QdabuliuQ)
-- 🐛 Fixed semantic configuration for Attachments component `FileList`. [#1017](https://github.com/ant-design/x/pull/1017) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Added html configuration for Actions component. [#995](https://github.com/ant-design/x/pull/995) by [@vanndxh](https://github.com/vanndxh)
-- 🐛 Fixed Conversations label display issue and improved semantic configuration. [#898](https://github.com/ant-design/x/pull/898) by [@yuanliu147](https://github.com/yuanliu147)
-- 📖 Improved official site for better user experience. [#940](https://github.com/ant-design/x/pull/940) by [@coding-ice](https://github.com/coding-ice), [#969](https://github.com/ant-design/x/pull/969) by [@afc163](https://github.com/afc163), [#968](https://github.com/ant-design/x/pull/968) by [@afc163](https://github.com/afc163), [#1019](https://github.com/ant-design/x/pull/1019) by [hylin](https://github.com/hylin),[#1036](https://github.com/ant-design/x/pull/1036) by [@kimteayon](https://github.com/kimteayon)
+- 🆕 Added Bubble component support for `onScroll` event listener. [#1021](https://github.com/ant-design/x/pull/1021) by [QdabuliuQ](https://github.com/QdabuliuQ)
+- 🐛 Removed duplicate TypeScript type declaration in Bubble component. [#1032](https://github.com/ant-design/x/pull/1032) by [wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐛 Fixed Conversations `onActiveChange` being triggered when a disabled `menu` item is clicked. [#1024](https://github.com/ant-design/x/pull/1024) by [QdabuliuQ](https://github.com/QdabuliuQ)
+- 🐛 Fixed semantic configuration for Attachments component `FileList`. [#1017](https://github.com/ant-design/x/pull/1017) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Added html configuration for Actions component. [#995](https://github.com/ant-design/x/pull/995) by [vanndxh](https://github.com/vanndxh)
+- 🐛 Fixed Conversations label display issue and improved semantic configuration. [#898](https://github.com/ant-design/x/pull/898) by [yuanliu147](https://github.com/yuanliu147)
+- 📖 Improved official site for better user experience. [#940](https://github.com/ant-design/x/pull/940) by [coding-ice](https://github.com/coding-ice), [#969](https://github.com/ant-design/x/pull/969) by [afc163](https://github.com/afc163), [#968](https://github.com/ant-design/x/pull/968) by [afc163](https://github.com/afc163), [#1019](https://github.com/ant-design/x/pull/1019) by [hylin](https://github.com/hylin),[#1036](https://github.com/ant-design/x/pull/1036) by [kimteayon](https://github.com/kimteayon)
 
 ## 1.4.0
 
@@ -396,147 +586,147 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 - 🔥 New Component Actions.[#768](https://github.com/ant-design/x/pull/768) by [vanndxh](https://github.com/vanndxh)
 - 🐛 Fix the issue where Bubble.List `footer` and `header` cannot retrieve keys.[#876](https://github.com/ant-design/x/pull/876) by [kimteayon](https://github.com/kimteayon)
 - 🐛 Fix the issue of overflow and ellipsis of Conversations list titles.[#877](https://github.com/ant-design/x/pull/877) by [kimteayon](https://github.com/kimteayon)
-- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [@Rain120](https://github.com/Rain120)、[#880](https://github.com/ant-design/x/pull/880) by [@kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#816](https://github.com/ant-design/x/pull/816) by [Rain120](https://github.com/Rain120)、[#880](https://github.com/ant-design/x/pull/880) by [kimteayon](https://github.com/kimteayon)
 
 ## 1.3.0
 
 `2025-05-21`
 
-- 📖 Add Conversation type export. [#258](https://github.com/ant-design/x/pull/258) by [@ONLY-yours](https://github.com/ONLY-yours)
-- 💄 Fixed the issue that the Prompts scroll bar is always displayed. [#785](https://github.com/ant-design/x/pull/785) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fix Suggestion warning for using antd deprecated API `onDropdownVisibleChange`. [#827](https://github.com/ant-design/x/pull/827) by [@zombieJ](https://github.com/zombieJ)
-- 🆕 Extend Bubble`content` to `footer` and `header` method implementation parameters, and add Demo implementation.[#683](https://github.com/ant-design/x/pull/683) by [@L-Hknu](https://github.com/L-Hknu) and [@kimteayon](https://github.com/kimteayon)
-- 📖 Fixed the security issue of Api Key being exposed on the site.[#840](https://github.com/ant-design/x/pull/840) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Enhance the official website to improve user experience.[#783](https://github.com/ant-design/x/pull/783) by [@kimteayon](https://github.com/kimteayon) ,[#229](https://github.com/ant-design/x/pull/229) by [@afc163](https://github.com/afc163) ,[#835](https://github.com/ant-design/x/pull/835) by [@kimteayon](https://github.com/kimteayon) ,[#814](https://github.com/ant-design/x/pull/814) by [@wzc520pyfm](https://github.com/wzc520pyfm)
+- 📖 Add Conversation type export. [#258](https://github.com/ant-design/x/pull/258) by [ONLY-yours](https://github.com/ONLY-yours)
+- 💄 Fixed the issue that the Prompts scroll bar is always displayed. [#785](https://github.com/ant-design/x/pull/785) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fix Suggestion warning for using antd deprecated API `onDropdownVisibleChange`. [#827](https://github.com/ant-design/x/pull/827) by [zombieJ](https://github.com/zombieJ)
+- 🆕 Extend Bubble`content` to `footer` and `header` method implementation parameters, and add Demo implementation.[#683](https://github.com/ant-design/x/pull/683) by [L-Hknu](https://github.com/L-Hknu) and [kimteayon](https://github.com/kimteayon)
+- 📖 Fixed the security issue of Api Key being exposed on the site.[#840](https://github.com/ant-design/x/pull/840) by [kimteayon](https://github.com/kimteayon)
+- 📖 Enhance the official website to improve user experience.[#783](https://github.com/ant-design/x/pull/783) by [kimteayon](https://github.com/kimteayon) ,[#229](https://github.com/ant-design/x/pull/229) by [afc163](https://github.com/afc163) ,[#835](https://github.com/ant-design/x/pull/835) by [kimteayon](https://github.com/kimteayon) ,[#814](https://github.com/ant-design/x/pull/814) by [wzc520pyfm](https://github.com/wzc520pyfm)
 
 ## 1.2.0
 
 `2025-04-25`
 
-- 🐛 Delete Conversations ellipsis tooltip , fix 'tooltip' display error issue.[#776](https://github.com/ant-design/x/pull/776) by [@afc163](https://github.com/afc163)
-- 🐛 Fixed Attachments `image` card style.[#751](https://github.com/ant-design/x/pull/751) by [@wzc520pyfm](https://github.com/wzc520pyfm)
-- 🐛 Fixed ThoughtChain controlled issue.[#752](https://github.com/ant-design/x/pull/752) by [@Youzi2233](https://github.com/Youzi2233)
+- 🐛 Delete Conversations ellipsis tooltip , fix 'tooltip' display error issue.[#776](https://github.com/ant-design/x/pull/776) by [afc163](https://github.com/afc163)
+- 🐛 Fixed Attachments `image` card style.[#751](https://github.com/ant-design/x/pull/751) by [wzc520pyfm](https://github.com/wzc520pyfm)
+- 🐛 Fixed ThoughtChain controlled issue.[#752](https://github.com/ant-design/x/pull/752) by [Youzi2233](https://github.com/Youzi2233)
 - XRequest
-  - 🆕 XRequestCallbacks adds an 'onStream' callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fixed the issue of XRequestOptions changes not taking effect and added a demo.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Add an example of model integration. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
-  - 📖 Inaccurate parameter naming in optimizing API methods.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 XRequestCallbacks adds an 'onStream' callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed the issue of XRequestOptions changes not taking effect and added a demo.[#736](https://github.com/ant-design/x/pull/736) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 Add an example of model integration. [#725](https://github.com/ant-design/x/pull/725) by [kimteayon](https://github.com/kimteayon)
+  - 📖 Inaccurate parameter naming in optimizing API methods.[#736](https://github.com/ant-design/x/pull/736) by [kimteayon](https://github.com/kimteayon)
 - useXAgent
-  - 🆕 RequestFn adds an `onStream` callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 RequestFn has added a `transformStream` transformation function for processing stream data.[#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fix the issue of XAgentConfig Preset changes not taking effect and add an example.[#736](https://github.com/ant-design/x/pull/736) by [@kimteayon](https://github.com/kimteayon)
-  - 🐛 Fix the issue of incorrect callback types for RequestFn `onSuccess` and update the corresponding demo. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Add model access, Custom RequestParams,and customize `XRequestOptions`demos. [#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon) ,[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 RequestFn adds an `onStream` callback that allows for stream listening and abort operations.[#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 RequestFn has added a `transformStream` transformation function for processing stream data.[#725](https://github.com/ant-design/x/pull/725) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fix the issue of XAgentConfig Preset changes not taking effect and add an example.[#736](https://github.com/ant-design/x/pull/736) by [kimteayon](https://github.com/kimteayon)
+  - 🐛 Fix the issue of incorrect callback types for RequestFn `onSuccess` and update the corresponding demo. [#725](https://github.com/ant-design/x/pull/725) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 Add model access, Custom RequestParams,and customize `XRequestOptions`demos. [#725](https://github.com/ant-design/x/pull/725) by [kimteayon](https://github.com/kimteayon) ,[#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
 - useXChat
-  - 🆕 XChatConfig adds input and output generic types.[#725](https://github.com/ant-design/x/pull/725) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 XChatConfig adds `transformMessage` transformation function,which can transform `messages` when updating data and update to `messages` at the same time. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 XChatConfig adds `transformStream`conversion function for processing stream data.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 XChatConfig adds `resolveAbortController`callback function, which can obtain the`AbortController` controller for controlling the stream state.[#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Add model access examples and remove incorrect abort examples. [#711](https://github.com/ant-design/x/pull/711) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed the issue of Sender `header` `border-radius` style overflow.[#732](https://github.com/ant-design/x/pull/732) by [@Bao0630](https://github.com/Bao0630)
-- 📖 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [@vanndxh](https://github.com/vanndxh)
-- 📖 Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [@vanndxh](https://github.com/vanndxh)
-- 📖 Enhance the official website to improve user experience.[#730](https://github.com/ant-design/x/pull/730) by [@afc163](https://github.com/afc163) ,[#758](https://github.com/ant-design/x/pull/758) by [@coding-ice](https://github.com/coding-ice) , [#761](https://github.com/ant-design/x/pull/761) by [@ONLY-yours](https://github.com/ONLY-yours)
+  - 🆕 XChatConfig adds input and output generic types.[#725](https://github.com/ant-design/x/pull/725) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 XChatConfig adds `transformMessage` transformation function,which can transform `messages` when updating data and update to `messages` at the same time. [#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 XChatConfig adds `transformStream`conversion function for processing stream data.[#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 XChatConfig adds `resolveAbortController`callback function, which can obtain the`AbortController` controller for controlling the stream state.[#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 Add model access examples and remove incorrect abort examples. [#711](https://github.com/ant-design/x/pull/711) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed the issue of Sender `header` `border-radius` style overflow.[#732](https://github.com/ant-design/x/pull/732) by [Bao0630](https://github.com/Bao0630)
+- 📖 Add a copilot style model room.[#657](https://github.com/ant-design/x/pull/657) by [vanndxh](https://github.com/vanndxh)
+- 📖 Refactoring the independent model room.[#753](https://github.com/ant-design/x/pull/753) by [vanndxh](https://github.com/vanndxh)
+- 📖 Enhance the official website to improve user experience.[#730](https://github.com/ant-design/x/pull/730) by [afc163](https://github.com/afc163) ,[#758](https://github.com/ant-design/x/pull/758) by [coding-ice](https://github.com/coding-ice) , [#761](https://github.com/ant-design/x/pull/761) by [ONLY-yours](https://github.com/ONLY-yours)
 
 ## 1.1.1
 
 `2025-04-14`
 
 - Bubble.List
-  - 💄 Refactor Bubble.List, reduce unnecessary refreshes during updates.[#479](https://github.com/ant-design/x/pull/479) by [@YumoImer](https://github.com/YumoImer)
-  - 🐛 Fixed scrollbar styles issues of `Bubble.List` under dark theme.[#727](https://github.com/ant-design/x/pull/727) by [@kimteayon](https://github.com/kimteayon)
+  - 💄 Refactor Bubble.List, reduce unnecessary refreshes during updates.[#479](https://github.com/ant-design/x/pull/479) by [YumoImer](https://github.com/YumoImer)
+  - 🐛 Fixed scrollbar styles issues of `Bubble.List` under dark theme.[#727](https://github.com/ant-design/x/pull/727) by [kimteayon](https://github.com/kimteayon)
 - Conversation
-  - 🐛 Fixed style issues of `ul` and `li` in Conversation.[#726](https://github.com/ant-design/x/pull/726) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Extended `getPopupContainer` for `menu`.[#698](https://github.com/ant-design/x/pull/698) by [@yuxuan-ctrl](https://github.com/yuxuan-ctrl)
-- 🐛 Fixed ThoughtChain Collapse cannot unfold issue.[#720](https://github.com/ant-design/x/pull/720) by [@kimteayon](https://github.com/kimteayon)
-- 🐛 Fixed Attachments image display style issue.[#708](https://github.com/ant-design/x/pull/708) by [@hy993658052](https://github.com/hy993658052)
-- 💄 Refactor Sender,Control the 'disabled' attribute of custom `Actions`.[#666](https://github.com/ant-design/x/pull/666) by [@afc163](https://github.com/afc163)
-- 📖 Enhance the official website to improve user experience.[#680](https://github.com/ant-design/x/pull/680) by [@wzc520pyfm](https://github.com/wzc520pyfm),[#699](https://github.com/ant-design/x/pull/699) by [@afc163](https://github.com/afc163),[#716](https://github.com/ant-design/x/pull/716) by [@afc163](https://github.com/afc163),[#686](https://github.com/ant-design/x/pull/686) by [@afc163](https://github.com/afc163),[#728](https://github.com/ant-design/x/pull/728) by [@kimteayon](https://github.com/kimteayon)
+  - 🐛 Fixed style issues of `ul` and `li` in Conversation.[#726](https://github.com/ant-design/x/pull/726) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 Extended `getPopupContainer` for `menu`.[#698](https://github.com/ant-design/x/pull/698) by [yuxuan-ctrl](https://github.com/yuxuan-ctrl)
+- 🐛 Fixed ThoughtChain Collapse cannot unfold issue.[#720](https://github.com/ant-design/x/pull/720) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fixed Attachments image display style issue.[#708](https://github.com/ant-design/x/pull/708) by [hy993658052](https://github.com/hy993658052)
+- 💄 Refactor Sender,Control the 'disabled' attribute of custom `Actions`.[#666](https://github.com/ant-design/x/pull/666) by [afc163](https://github.com/afc163)
+- 📖 Enhance the official website to improve user experience.[#680](https://github.com/ant-design/x/pull/680) by [wzc520pyfm](https://github.com/wzc520pyfm),[#699](https://github.com/ant-design/x/pull/699) by [afc163](https://github.com/afc163),[#716](https://github.com/ant-design/x/pull/716) by [afc163](https://github.com/afc163),[#686](https://github.com/ant-design/x/pull/686) by [afc163](https://github.com/afc163),[#728](https://github.com/ant-design/x/pull/728) by [kimteayon](https://github.com/kimteayon)
 
 ## 1.1.0
 
 `2025-03-28`
 
 - Sender
-  - 🆕 Add `footer` to support custom footer content.[#654](https://github.com/ant-design/x/pull/654) by [@kimteayon](https://github.com/kimteayon)
-  - 🆕 Extended `autoSize` to support custom content height.[#637](https://github.com/ant-design/x/pull/637) by [@Zhang-Wei-666](https://github.com/Zhang-Wei-666)
-  - 📖 Add the declarations for `onFocus` and `onBlur` types.[#625](https://github.com/ant-design/x/pull/625) by [@aojunhao123](https://github.com/aojunhao123)
-- 🆕 Extended Conversations `menu.trigger` to support custom menu trigger.[#630](https://github.com/ant-design/x/pull/630) by [@kimteayon](https://github.com/kimteayon)
+  - 🆕 Add `footer` to support custom footer content.[#654](https://github.com/ant-design/x/pull/654) by [kimteayon](https://github.com/kimteayon)
+  - 🆕 Extended `autoSize` to support custom content height.[#637](https://github.com/ant-design/x/pull/637) by [Zhang-Wei-666](https://github.com/Zhang-Wei-666)
+  - 📖 Add the declarations for `onFocus` and `onBlur` types.[#625](https://github.com/ant-design/x/pull/625) by [aojunhao123](https://github.com/aojunhao123)
+- 🆕 Extended Conversations `menu.trigger` to support custom menu trigger.[#630](https://github.com/ant-design/x/pull/630) by [kimteayon](https://github.com/kimteayon)
 - Attachments
-  - 🆕 Extended `ImageProps` to support custom image configuration.[#613](https://github.com/ant-design/x/pull/613) by [@hy993658052](https://github.com/hy993658052)
-  - 📖 Add Attachments `onRemove` API documentation[#608](https://github.com/ant-design/x/pull/608) by [@kimteayon](https://github.com/kimteayon)
-- 📖 Extended `GPT-Vis` rendering chart example.[#603](https://github.com/ant-design/x/pull/603) by [@lvisei](https://github.com/lvisei)
-- 📦 Improved Chat Design X `peerDependencies`.[#611](https://github.com/ant-design/x/pull/611) by [@pokerface9830](https://github.com/pokerface9830)
-- 📖 Enhance the official website to improve user experience.[#626](https://github.com/ant-design/x/pull/626) by [@aojunhao123](https://github.com/aojunhao123),[#648](https://github.com/ant-design/x/pull/648) by [@kimteayon](https://github.com/kimteayon),[#659](https://github.com/ant-design/x/pull/659) by [@afc163](https://github.com/afc163),[#667](https://github.com/ant-design/x/pull/667) by [@jin19980928](https://github.com/jin19980928)
+  - 🆕 Extended `ImageProps` to support custom image configuration.[#613](https://github.com/ant-design/x/pull/613) by [hy993658052](https://github.com/hy993658052)
+  - 📖 Add Attachments `onRemove` API documentation[#608](https://github.com/ant-design/x/pull/608) by [kimteayon](https://github.com/kimteayon)
+- 📖 Extended `GPT-Vis` rendering chart example.[#603](https://github.com/ant-design/x/pull/603) by [lvisei](https://github.com/lvisei)
+- 📦 Improved Chat Design X `peerDependencies`.[#611](https://github.com/ant-design/x/pull/611) by [pokerface9830](https://github.com/pokerface9830)
+- 📖 Enhance the official website to improve user experience.[#626](https://github.com/ant-design/x/pull/626) by [aojunhao123](https://github.com/aojunhao123),[#648](https://github.com/ant-design/x/pull/648) by [kimteayon](https://github.com/kimteayon),[#659](https://github.com/ant-design/x/pull/659) by [afc163](https://github.com/afc163),[#667](https://github.com/ant-design/x/pull/667) by [jin19980928](https://github.com/jin19980928)
 
 ## 1.0.6
 
 `2025-03-14`
 
-- 🆕 Extended `Sender` file pasting can handle multiple files.[#505](https://github.com/ant-design/x/pull/500) by [@ztkuaikuai](https://github.com/ztkuaikuai)
-- 🆕 Extended `BubbleList` role definition function.[#485](https://github.com/ant-design/x/pull/500) by [@chenluda](https://github.com/chenluda)
-- 🐛 Fixed `Attachments` multi file horizontal scrollbar display.[#556](https://github.com/ant-design/x/pull/556) by [@onefeng123 ](https://github.com/onefeng123)
-- 🐛 Fixed `Attachments` onRemove non effective issue.[#555](https://github.com/ant-design/x/pull/555) by [@edison-tianhe ](https://github.com/edison-tianhe)
-- 🐛 Fixed `Sender` the issue of actions lacking `SpeechButton`.[#549](https://github.com/ant-design/x/pull/549) by [@zombieJ ](https://github.com/zombieJ)
-- 🐛 Fixed `Attachments`the issue of file initialization display.[#524](https://github.com/ant-design/x/pull/524) by [@ztkuaikuai ](https://github.com/ztkuaikuai)
-- 🐛 Fixed `Conversations`scroll bar issue.[#485](https://github.com/ant-design/x/pull/485) by [@LofiSu](https://github.com/LofiSu)
-- 📖 Improved`Bubble` `typing` reduces unnecessary rendering.[#477](https://github.com/ant-design/x/pull/477) by [@kxcy001123](https://github.com/kxcy001123)
-- 📦 Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578),[#584](https://github.com/ant-design/x/pull/584) by [@kimteayon](https://github.com/kimteayon), [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon),[#587](https://github.com/ant-design/x/pull/587) by [@afc163](https://github.com/afc163)
-- 📖 Enhance the official website to improve user experience.[#484](https://github.com/ant-design/x/pull/484) by [@ztkuaikuai](https://github.com/ztkuaikuai), [#495](https://github.com/ant-design/x/pull/495) by [@ztkuaikuai](https://github.com/ztkuaikuai), [#522](https://github.com/ant-design/x/pull/522) by [@liangchaofei](https://github.com/liangchaofei),[#537](https://github.com/ant-design/x/pull/537) by [@wzc520pyfm](https://github.com/wzc520pyfm),[#553](https://github.com/ant-design/x/pull/553) by [@PeachScript](https://github.com/PeachScript), [#578](https://github.com/ant-design/x/pull/578) by [@kimteayon](https://github.com/kimteayon), [#585](https://github.com/ant-design/x/pull/585) by [@MaricoHan](https://github.com/MaricoHan)
+- 🆕 Extended `Sender` file pasting can handle multiple files.[#505](https://github.com/ant-design/x/pull/500) by [ztkuaikuai](https://github.com/ztkuaikuai)
+- 🆕 Extended `BubbleList` role definition function.[#485](https://github.com/ant-design/x/pull/500) by [chenluda](https://github.com/chenluda)
+- 🐛 Fixed `Attachments` multi file horizontal scrollbar display.[#556](https://github.com/ant-design/x/pull/556) by [onefeng123 ](https://github.com/onefeng123)
+- 🐛 Fixed `Attachments` onRemove non effective issue.[#555](https://github.com/ant-design/x/pull/555) by [edison-tianhe ](https://github.com/edison-tianhe)
+- 🐛 Fixed `Sender` the issue of actions lacking `SpeechButton`.[#549](https://github.com/ant-design/x/pull/549) by [zombieJ ](https://github.com/zombieJ)
+- 🐛 Fixed `Attachments`the issue of file initialization display.[#524](https://github.com/ant-design/x/pull/524) by [ztkuaikuai ](https://github.com/ztkuaikuai)
+- 🐛 Fixed `Conversations`scroll bar issue.[#485](https://github.com/ant-design/x/pull/485) by [LofiSu](https://github.com/LofiSu)
+- 📖 Improved`Bubble` `typing` reduces unnecessary rendering.[#477](https://github.com/ant-design/x/pull/477) by [kxcy001123](https://github.com/kxcy001123)
+- 📦 Improved Chat Design X construct [#578](https://github.com/ant-design/x/pull/578),[#584](https://github.com/ant-design/x/pull/584) by [kimteayon](https://github.com/kimteayon), [#578](https://github.com/ant-design/x/pull/578) by [kimteayon](https://github.com/kimteayon),[#587](https://github.com/ant-design/x/pull/587) by [afc163](https://github.com/afc163)
+- 📖 Enhance the official website to improve user experience.[#484](https://github.com/ant-design/x/pull/484) by [ztkuaikuai](https://github.com/ztkuaikuai), [#495](https://github.com/ant-design/x/pull/495) by [ztkuaikuai](https://github.com/ztkuaikuai), [#522](https://github.com/ant-design/x/pull/522) by [liangchaofei](https://github.com/liangchaofei),[#537](https://github.com/ant-design/x/pull/537) by [wzc520pyfm](https://github.com/wzc520pyfm),[#553](https://github.com/ant-design/x/pull/553) by [PeachScript](https://github.com/PeachScript), [#578](https://github.com/ant-design/x/pull/578) by [kimteayon](https://github.com/kimteayon), [#585](https://github.com/ant-design/x/pull/585) by [MaricoHan](https://github.com/MaricoHan)
 
 ## 1.0.5
 
 `2025-01-13`
 
-- 🐛 Fix `Attachment` remove icon style. [#460](https://github.com/ant-design/x/pull/460) by [@Rain120](https://github.com/Rain120)
-- 🛠 Refactor `BubbleProps` to support `ContentType` type argument. [#403](https://github.com/ant-design/x/pull/403) by [@YumoImer](https://github.com/YumoImer)
-- 🛠 Dev and site support React 19. [#432](https://github.com/ant-design/x/pull/432) by [@YumoImer](https://github.com/YumoImer)
-- 📖 Enhance the official website to improve user experience. [#456](https://github.com/ant-design/x/pull/456), [#446](https://github.com/ant-design/x/pull/446), [#448](https://github.com/ant-design/x/pull/448), [#444](https://github.com/ant-design/x/pull/444), [#414](https://github.com/ant-design/x/pull/414), [#406](https://github.com/ant-design/x/pull/406), [#404](https://github.com/ant-design/x/pull/404) by [@wzc520pyfm](https://github.com/wzc520pyfm), [@YumoImer](https://github.com/YumoImer), [@Rain120](https://github.com/Rain120), [@afc163](https://github.com/afc163)
+- 🐛 Fix `Attachment` remove icon style. [#460](https://github.com/ant-design/x/pull/460) by [Rain120](https://github.com/Rain120)
+- 🛠 Refactor `BubbleProps` to support `ContentType` type argument. [#403](https://github.com/ant-design/x/pull/403) by [YumoImer](https://github.com/YumoImer)
+- 🛠 Dev and site support React 19. [#432](https://github.com/ant-design/x/pull/432) by [YumoImer](https://github.com/YumoImer)
+- 📖 Enhance the official website to improve user experience. [#456](https://github.com/ant-design/x/pull/456), [#446](https://github.com/ant-design/x/pull/446), [#448](https://github.com/ant-design/x/pull/448), [#444](https://github.com/ant-design/x/pull/444), [#414](https://github.com/ant-design/x/pull/414), [#406](https://github.com/ant-design/x/pull/406), [#404](https://github.com/ant-design/x/pull/404) by [wzc520pyfm](https://github.com/wzc520pyfm), [YumoImer](https://github.com/YumoImer), [Rain120](https://github.com/Rain120), [afc163](https://github.com/afc163)
 
 ## 1.0.4
 
 `2024-12-25`
 
-- 🆕 Extended `XStream` support for the cancel feature. [#319](https://github.com/ant-design/x/pull/319) by [@ppbl](https://github.com/ppbl)
-- 🆕 Extended `Bubble` support for the `typing.suffix` feature. [#316](https://github.com/ant-design/x/pull/316) by [@BQXBQX](https://github.com/BQXBQX)
-- 🆕 Extended `Sender` component's `onChange` parameter to include the `event` object. [#362](https://github.com/ant-design/x/pull/362) by [@defaultjacky](https://github.com/defaultjacky)
-- 🆕 Enhanced the `Sender` component's `ref` to support focus control methods like `focus` and `blur`. [#397](https://github.com/ant-design/x/pull/397) by [@YumoImer](https://github.com/YumoImer)
-- 🐛 Fixed styling issues in `ThoughtChain` when `cssVar` is not applied. [#373](https://github.com/ant-design/x/pull/373) by [@YumoImer](https://github.com/YumoImer)
-- 📖 Added `Petercat` assistant feature. [#375](https://github.com/ant-design/x/pull/375) by [@xingwanying](https://github.com/xingwanying)
-- 📖 Improved the official website for a better user experience. [#389](https://github.com/ant-design/x/pull/389), [#377](https://github.com/ant-design/x/pull/377), [#364](https://github.com/ant-design/x/pull/364), [#368](https://github.com/ant-design/x/pull/368) by [@afc163](https://github.com/afc163), [@YumoImer](https://github.com/YumoImer)
+- 🆕 Extended `XStream` support for the cancel feature. [#319](https://github.com/ant-design/x/pull/319) by [ppbl](https://github.com/ppbl)
+- 🆕 Extended `Bubble` support for the `typing.suffix` feature. [#316](https://github.com/ant-design/x/pull/316) by [BQXBQX](https://github.com/BQXBQX)
+- 🆕 Extended `Sender` component's `onChange` parameter to include the `event` object. [#362](https://github.com/ant-design/x/pull/362) by [defaultjacky](https://github.com/defaultjacky)
+- 🆕 Enhanced the `Sender` component's `ref` to support focus control methods like `focus` and `blur`. [#397](https://github.com/ant-design/x/pull/397) by [YumoImer](https://github.com/YumoImer)
+- 🐛 Fixed styling issues in `ThoughtChain` when `cssVar` is not applied. [#373](https://github.com/ant-design/x/pull/373) by [YumoImer](https://github.com/YumoImer)
+- 📖 Added `Petercat` assistant feature. [#375](https://github.com/ant-design/x/pull/375) by [xingwanying](https://github.com/xingwanying)
+- 📖 Improved the official website for a better user experience. [#389](https://github.com/ant-design/x/pull/389), [#377](https://github.com/ant-design/x/pull/377), [#364](https://github.com/ant-design/x/pull/364), [#368](https://github.com/ant-design/x/pull/368) by [afc163](https://github.com/afc163), [YumoImer](https://github.com/YumoImer)
 
 ## 1.0.3
 
 `2024-12-16`
 
-- 💄 Refactor the styles when `placement: 'end'` is set for `Bubble`. [#314](https://github.com/ant-design/x/pull/314) by [@YumoImer](https://github.com/YumoImer)
-- 🐛 Fix occasional failure to trigger auto-scrolling when `autoScroll` is set in `Bubble.List`. [#336](https://github.com/ant-design/x/pull/336) by [@anzhou99Ru](https://github.com/anzhou99Ru)
-- 📖 Enhance the official website to improve user experience. [#343](https://github.com/ant-design/x/pull/343), [#334](https://github.com/ant-design/x/pull/334), [#315](https://github.com/ant-design/x/pull/315), [#331](https://github.com/ant-design/x/pull/331) by [@afc163](https://github.com/afc163), [@YumoImer](https://github.com/YumoImer), [@Wxh16144](https://github.com/Wxh16144)
-- 🛠 Fix errors encountered when running `pnpm lint`. [#313](https://github.com/ant-design/x/pull/313) by [@BQXBQX](https://github.com/BQXBQX)
+- 💄 Refactor the styles when `placement: 'end'` is set for `Bubble`. [#314](https://github.com/ant-design/x/pull/314) by [YumoImer](https://github.com/YumoImer)
+- 🐛 Fix occasional failure to trigger auto-scrolling when `autoScroll` is set in `Bubble.List`. [#336](https://github.com/ant-design/x/pull/336) by [anzhou99Ru](https://github.com/anzhou99Ru)
+- 📖 Enhance the official website to improve user experience. [#343](https://github.com/ant-design/x/pull/343), [#334](https://github.com/ant-design/x/pull/334), [#315](https://github.com/ant-design/x/pull/315), [#331](https://github.com/ant-design/x/pull/331) by [afc163](https://github.com/afc163), [YumoImer](https://github.com/YumoImer), [Wxh16144](https://github.com/Wxh16144)
+- 🛠 Fix errors encountered when running `pnpm lint`. [#313](https://github.com/ant-design/x/pull/313) by [BQXBQX](https://github.com/BQXBQX)
 
 ## 1.0.2
 
 `2024-12-04`
 
-- 🛠 Enhanced `XRequest` to support parsing custom protocols. [#293](https://github.com/ant-design/x/pull/293) by [@YumoImer](https://github.com/YumoImer)
-- 🐛 Fixed an issue where the preview buttons for `Attachment` did not toggle visibility properly. [#295](https://github.com/ant-design/x/pull/295) by [@anzhou99](https://github.com/anzhou99)
-- 🐛 Fixed a bug in `useXChat` where the same message triggered `onUpdate` multiple times. [#298](https://github.com/ant-design/x/pull/298) by [@YumoImer](https://github.com/YumoImer)
-- 📖 Added documentation for using `Bubble` with `GPT-Vis`. [#288](https://github.com/ant-design/x/pull/288) by [@lvisei](https://github.com/lvisei)
-- 📦 Updated browser target configurations to reduce bundle size. [#282](https://github.com/ant-design/x/pull/282) by [@afc163](https://github.com/afc163)
-- 🛠 Fixed errors when running `pnpm run prestart`. [#287](https://github.com/ant-design/x/pull/287) by [@long36708](https://github.com/long36708)
+- 🛠 Enhanced `XRequest` to support parsing custom protocols. [#293](https://github.com/ant-design/x/pull/293) by [YumoImer](https://github.com/YumoImer)
+- 🐛 Fixed an issue where the preview buttons for `Attachment` did not toggle visibility properly. [#295](https://github.com/ant-design/x/pull/295) by [anzhou99](https://github.com/anzhou99)
+- 🐛 Fixed a bug in `useXChat` where the same message triggered `onUpdate` multiple times. [#298](https://github.com/ant-design/x/pull/298) by [YumoImer](https://github.com/YumoImer)
+- 📖 Added documentation for using `Bubble` with `GPT-Vis`. [#288](https://github.com/ant-design/x/pull/288) by [lvisei](https://github.com/lvisei)
+- 📦 Updated browser target configurations to reduce bundle size. [#282](https://github.com/ant-design/x/pull/282) by [afc163](https://github.com/afc163)
+- 🛠 Fixed errors when running `pnpm run prestart`. [#287](https://github.com/ant-design/x/pull/287) by [long36708](https://github.com/long36708)
 
 ## 1.0.1
 
 `2024-11-29`
 
-- 🛠 Optimized TS types for `useXAgent` and `XStream`. [#272](https://github.com/ant-design/x/pull/272) by [@YumoImer](https://github.com/YumoImer)
-- 🛠 Made the `agent` parameter optional to support data management functionality using only `useXChat`. [#271](https://github.com/ant-design/x/pull/271) by [@YumoImer](https://github.com/YumoImer)
-- 💄 Adjusted `Conversations` style based on RICH design specification. [#242](https://github.com/ant-design/x/pull/242) by [@YumoImer](https://github.com/YumoImer)
-- 🛠 Fixed ghost dependency issue that prevented the project from starting when using `pnpm`. [#223](https://github.com/ant-design/x/pull/223) by [@YumoImer](https://github.com/YumoImer)
-- 🌈 Demonstrated the attachment upload functionality in the standalone template. [#250](https://github.com/ant-design/x/pull/250), [#265](https://github.com/ant-design/x/pull/265) by [@kelvinelove](https://github.com/kelvinelove)
-- 📖 Fixed missing contributor information. [#212](https://github.com/ant-design/x/pull/212) by [@afc163](https://github.com/afc163)
-- 📖 Optimized official site to enhance user experience. [#277](https://github.com/ant-design/x/pull/277), [#264](https://github.com/ant-design/x/pull/264), [#263](https://github.com/ant-design/x/pull/263), [#262](https://github.com/ant-design/x/pull/262), [#261](https://github.com/ant-design/x/pull/261), [#241](https://github.com/ant-design/x/pull/241), [#246](https://github.com/ant-design/x/pull/246), [#210](https://github.com/ant-design/x/pull/210), [#211](https://github.com/ant-design/x/pull/211) by [@YumoImer](https://github.com/YumoImer), [@afc163](https://github.com/afc163), [@Rain-1214](https://github.com/Rain-1214), [@kelvinelove](https://github.com/kelvinelove) and [@tabzzz1](https://github.com/tabzzz1)
-- 📦 Updated browser targets to reduce bundle size. [#234](https://github.com/ant-design/x/pull/234) by [@afc163](https://github.com/afc163)
+- 🛠 Optimized TS types for `useXAgent` and `XStream`. [#272](https://github.com/ant-design/x/pull/272) by [YumoImer](https://github.com/YumoImer)
+- 🛠 Made the `agent` parameter optional to support data management functionality using only `useXChat`. [#271](https://github.com/ant-design/x/pull/271) by [YumoImer](https://github.com/YumoImer)
+- 💄 Adjusted `Conversations` style based on RICH design specification. [#242](https://github.com/ant-design/x/pull/242) by [YumoImer](https://github.com/YumoImer)
+- 🛠 Fixed ghost dependency issue that prevented the project from starting when using `pnpm`. [#223](https://github.com/ant-design/x/pull/223) by [YumoImer](https://github.com/YumoImer)
+- 🌈 Demonstrated the attachment upload functionality in the standalone template. [#250](https://github.com/ant-design/x/pull/250), [#265](https://github.com/ant-design/x/pull/265) by [kelvinelove](https://github.com/kelvinelove)
+- 📖 Fixed missing contributor information. [#212](https://github.com/ant-design/x/pull/212) by [afc163](https://github.com/afc163)
+- 📖 Optimized official site to enhance user experience. [#277](https://github.com/ant-design/x/pull/277), [#264](https://github.com/ant-design/x/pull/264), [#263](https://github.com/ant-design/x/pull/263), [#262](https://github.com/ant-design/x/pull/262), [#261](https://github.com/ant-design/x/pull/261), [#241](https://github.com/ant-design/x/pull/241), [#246](https://github.com/ant-design/x/pull/246), [#210](https://github.com/ant-design/x/pull/210), [#211](https://github.com/ant-design/x/pull/211) by [YumoImer](https://github.com/YumoImer), [afc163](https://github.com/afc163), [Rain-1214](https://github.com/Rain-1214), [kelvinelove](https://github.com/kelvinelove) and [tabzzz1](https://github.com/tabzzz1)
+- 📦 Updated browser targets to reduce bundle size. [#234](https://github.com/ant-design/x/pull/234) by [afc163](https://github.com/afc163)
 
 ## 1.0.0
 
@@ -556,43 +746,43 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 `2024-11-07`
 
-- 🔥 Sender support `onPasteFile` and Attachments support `ref.upload` for manual uploading, by [@zombieJ](https://github.com/zombieJ) [#184](https://github.com/ant-design/x/pull/184)
-- 🔥 Sender `allowSpeech` support using third-part SDK, by [@zombieJ](https://github.com/zombieJ) [#187](https://github.com/ant-design/x/pull/187)
+- 🔥 Sender support `onPasteFile` and Attachments support `ref.upload` for manual uploading, by [zombieJ](https://github.com/zombieJ) [#184](https://github.com/ant-design/x/pull/184)
+- 🔥 Sender `allowSpeech` support using third-part SDK, by [zombieJ](https://github.com/zombieJ) [#187](https://github.com/ant-design/x/pull/187)
 
 ## 1.0.0-alpha.11
 
 `2024-11-06`
 
-- 🔥 New Component Welcome, by [@zombieJ](https://github.com/zombieJ) [#179](https://github.com/ant-design/x/pull/179)
-- 🔥 Prompts support nest structure, by [@zombieJ](https://github.com/zombieJ) [#181](https://github.com/ant-design/x/pull/181)
-- 🔥 Attachments support Attachments.FileCard component, by [@zombieJ](https://github.com/zombieJ) [#182](https://github.com/ant-design/x/pull/182)
+- 🔥 New Component Welcome, by [zombieJ](https://github.com/zombieJ) [#179](https://github.com/ant-design/x/pull/179)
+- 🔥 Prompts support nest structure, by [zombieJ](https://github.com/zombieJ) [#181](https://github.com/ant-design/x/pull/181)
+- 🔥 Attachments support Attachments.FileCard component, by [zombieJ](https://github.com/zombieJ) [#182](https://github.com/ant-design/x/pull/182)
 
 ## 1.0.0-alpha.10
 
 `2024-11-04`
 
-- 🐛 Fix Attachments drop upload could not trigger the upload request, by [@YumoImer](https://github.com/YumoImer) [#178](https://github.com/ant-design/x/pull/178)
+- 🐛 Fix Attachments drop upload could not trigger the upload request, by [YumoImer](https://github.com/YumoImer) [#178](https://github.com/ant-design/x/pull/178)
 
 ## 1.0.0-alpha.9
 
 `2024-11-01`
 
-- 🐛 Fix the logic in the Attachments, by [@YumoImer](https://github.com/YumoImer) [#174](https://github.com/ant-design/x/pull/174)
-- 🐛 Fix Sender.Header can not focus, by [@zombieJ](https://github.com/zombieJ) [#175](https://github.com/ant-design/x/pull/175)
+- 🐛 Fix the logic in the Attachments, by [YumoImer](https://github.com/YumoImer) [#174](https://github.com/ant-design/x/pull/174)
+- 🐛 Fix Sender.Header can not focus, by [zombieJ](https://github.com/zombieJ) [#175](https://github.com/ant-design/x/pull/175)
 
 ## 1.0.0-alpha.7
 
 `2024-10-31`
 
-- 🐛 Fix Attachments first upload could not trigger the upload request, by [@YumoImer](https://github.com/YumoImer) [#172](https://github.com/ant-design/x/pull/172)
+- 🐛 Fix Attachments first upload could not trigger the upload request, by [YumoImer](https://github.com/YumoImer) [#172](https://github.com/ant-design/x/pull/172)
 
 ## 1.0.0-alpha.6
 
 `2024-10-25`
 
-- 🔥 New Component `Attachments`, by [@zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168)
-- 🔥 New Tools `XStream`, by [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
-- 🔥 New Tools `XRequest`, by [@YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+- 🔥 New Component `Attachments`, by [zombieJ](https://github.com/zombieJ) [#168](https://github.com/ant-design/x/pull/168)
+- 🔥 New Tools `XStream`, by [YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
+- 🔥 New Tools `XRequest`, by [YumoImer](https://github.com/YumoImer) [#138](https://github.com/ant-design/x/pull/138)
 
 ## 1.0.0-alpha.5
 
@@ -606,32 +796,32 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 `2024-10-17`
 
 - Sender
-  - 🆕 Sender support `speech`, by [@zombieJ](https://github.com/zombieJ) [#154](https://github.com/ant-design/x/pull/154)
-  - 🆕 Sender support Sender.Header, by [@zombieJ](https://github.com/zombieJ) [#156](https://github.com/ant-design/x/pull/156)
-  - 🆕 Sender style adjust, by [@zombieJ](https://github.com/zombieJ) [#151](https://github.com/ant-design/x/pull/151)
-- 📖 update group config for Components category, by [@YumoImer](https://github.com/YumoImer) [#155](https://github.com/ant-design/x/pull/155)
-- 📖 tweak demo toggle button style , by [@afc163](https://github.com/afc163) [#146](https://github.com/ant-design/x/pull/146)
-- 📖 Update README.md, by [@afc163](https://github.com/afc163) [#142](https://github.com/ant-design/x/pull/142)
+  - 🆕 Sender support `speech`, by [zombieJ](https://github.com/zombieJ) [#154](https://github.com/ant-design/x/pull/154)
+  - 🆕 Sender support Sender.Header, by [zombieJ](https://github.com/zombieJ) [#156](https://github.com/ant-design/x/pull/156)
+  - 🆕 Sender style adjust, by [zombieJ](https://github.com/zombieJ) [#151](https://github.com/ant-design/x/pull/151)
+- 📖 update group config for Components category, by [YumoImer](https://github.com/YumoImer) [#155](https://github.com/ant-design/x/pull/155)
+- 📖 tweak demo toggle button style , by [afc163](https://github.com/afc163) [#146](https://github.com/ant-design/x/pull/146)
+- 📖 Update README.md, by [afc163](https://github.com/afc163) [#142](https://github.com/ant-design/x/pull/142)
 
 ## 1.0.0-alpha.3
 
 `2024-10-10`
 
 - Bubble
-  - 🆕 Bubble support `variant` props, by [@zombieJ](https://github.com/zombieJ) [#140](https://github.com/ant-design/x/pull/140)
-  - 🆕 Bubble support `shape` props, by [@zombieJ](https://github.com/zombieJ) [#144](https://github.com/ant-design/x/pull/144)
-  - 🆕 Bubble support `header` and `footer` props, by [@zombieJ](https://github.com/zombieJ) [#147](https://github.com/ant-design/x/pull/147)
+  - 🆕 Bubble support `variant` props, by [zombieJ](https://github.com/zombieJ) [#140](https://github.com/ant-design/x/pull/140)
+  - 🆕 Bubble support `shape` props, by [zombieJ](https://github.com/zombieJ) [#144](https://github.com/ant-design/x/pull/144)
+  - 🆕 Bubble support `header` and `footer` props, by [zombieJ](https://github.com/zombieJ) [#147](https://github.com/ant-design/x/pull/147)
 
 ## 1.0.0-alpha.2
 
 `2024-09-27`
 
-- 🔥 New Component `XProvider` for global configuration, by [@YumoImer](https://github.com/YumoImer) [#127](https://github.com/ant-design/x/pull/127)
-- 🔥 New Runtime Hook `useXChat` for data management, by [@zombieJ](https://github.com/zombieJ) [#125](https://github.com/ant-design/x/pull/125)
-- 🔥 New Runtime Hook `useXAgent` for model scheduling, by [@zombieJ](https://github.com/zombieJ) [#125](https://github.com/ant-design/x/pull/125)
-- 🆕 `ThoughtChain` component now support the `size` property, by [@YumoImer](https://github.com/YumoImer) [#123](https://github.com/ant-design/x/pull/123)
-- 🛠 Updated `.lintstagedrc.json`, by [@afc163](https://github.com/afc163) [#128](https://github.com/ant-design/x/pull/128)
-- 🛠 Updated dependency `cheerio` to `v1.0.0`, by [@afc163](https://github.com/afc163) [#121](https://github.com/ant-design/x/pull/121)
+- 🔥 New Component `XProvider` for global configuration, by [YumoImer](https://github.com/YumoImer) [#127](https://github.com/ant-design/x/pull/127)
+- 🔥 New Runtime Hook `useXChat` for data management, by [zombieJ](https://github.com/zombieJ) [#125](https://github.com/ant-design/x/pull/125)
+- 🔥 New Runtime Hook `useXAgent` for model scheduling, by [zombieJ](https://github.com/zombieJ) [#125](https://github.com/ant-design/x/pull/125)
+- 🆕 `ThoughtChain` component now support the `size` property, by [YumoImer](https://github.com/YumoImer) [#123](https://github.com/ant-design/x/pull/123)
+- 🛠 Updated `.lintstagedrc.json`, by [afc163](https://github.com/afc163) [#128](https://github.com/ant-design/x/pull/128)
+- 🛠 Updated dependency `cheerio` to `v1.0.0`, by [afc163](https://github.com/afc163) [#121](https://github.com/ant-design/x/pull/121)
 
 ## 1.0.0-alpha.1
 
@@ -639,54 +829,54 @@ Provide a complete set of tool APIs, out-of-the-box AI chat application data flo
 
 ### 🚀 Features
 
-- 🔥 feat: Suggestion 建议组件 by [@ONLY-yours](https://github.com/ONLY-yours) in [#87](https://github.com/ant-design/x/pull/87)
+- 🔥 feat: Suggestion 建议组件 by [ONLY-yours](https://github.com/ONLY-yours) in [#87](https://github.com/ant-design/x/pull/87)
 
 ### 🐛 Fixes
 
-- 🐛 fix: change the Sender restProps type by [@ONLY-yours](https://github.com/ONLY-yours) in [#101](https://github.com/ant-design/x/pull/101)
-- 🛠 fix: bun install by [@afc163](https://github.com/afc163) in [#111](https://github.com/ant-design/x/pull/111)
+- 🐛 fix: change the Sender restProps type by [ONLY-yours](https://github.com/ONLY-yours) in [#101](https://github.com/ant-design/x/pull/101)
+- 🛠 fix: bun install by [afc163](https://github.com/afc163) in [#111](https://github.com/ant-design/x/pull/111)
 
 ### 🛠 Refactors
 
-- 🛠 chore: add layer support by [@zombieJ](https://github.com/zombieJ) in [#118](https://github.com/ant-design/x/pull/118)
-- 🛠 chore: speed up workflows by [@afc163](https://github.com/afc163) in [#119](https://github.com/ant-design/x/pull/119)
-- 🛠 chore(deps-dev): bump the dev-dependencies group with 5 updates by [@dependabot](https://github.com/dependabot) in [#120](https://github.com/ant-design/x/pull/120)
-- 🛠 chore: clean up README.md by [@afc163](https://github.com/afc163) in [#102](https://github.com/ant-design/x/pull/102)
-- 🛠 chore: add issue templates by [@afc163](https://github.com/afc163) in [#103](https://github.com/ant-design/x/pull/103)
-- 🛠 chore: add bun.lockb by [@afc163](https://github.com/afc163) in [#108](https://github.com/ant-design/x/pull/108)
-- 🛠 chore: Delete index-style-only.js by [@afc163](https://github.com/afc163) in [#106](https://github.com/ant-design/x/pull/106)
-- 🛠 chore: Update main.yml by [@afc163](https://github.com/afc163) in [#105](https://github.com/ant-design/x/pull/105)
-- 🛠 chore: Update package.json by [@afc163](https://github.com/afc163) in [#110](https://github.com/ant-design/x/pull/110)
+- 🛠 chore: add layer support by [zombieJ](https://github.com/zombieJ) in [#118](https://github.com/ant-design/x/pull/118)
+- 🛠 chore: speed up workflows by [afc163](https://github.com/afc163) in [#119](https://github.com/ant-design/x/pull/119)
+- 🛠 chore(deps-dev): bump the dev-dependencies group with 5 updates by [dependabot](https://github.com/dependabot) in [#120](https://github.com/ant-design/x/pull/120)
+- 🛠 chore: clean up README.md by [afc163](https://github.com/afc163) in [#102](https://github.com/ant-design/x/pull/102)
+- 🛠 chore: add issue templates by [afc163](https://github.com/afc163) in [#103](https://github.com/ant-design/x/pull/103)
+- 🛠 chore: add bun.lockb by [afc163](https://github.com/afc163) in [#108](https://github.com/ant-design/x/pull/108)
+- 🛠 chore: Delete index-style-only.js by [afc163](https://github.com/afc163) in [#106](https://github.com/ant-design/x/pull/106)
+- 🛠 chore: Update main.yml by [afc163](https://github.com/afc163) in [#105](https://github.com/ant-design/x/pull/105)
+- 🛠 chore: Update package.json by [afc163](https://github.com/afc163) in [#110](https://github.com/ant-design/x/pull/110)
 
 ### 📖 Documentation
 
-- 📖 docs: Update README.md by [@afc163](https://github.com/afc163) in [#104](https://github.com/ant-design/x/pull/104)
-- 📖 docs: Update codecov badge by [@afc163](https://github.com/afc163) in [#112](https://github.com/ant-design/x/pull/112)
+- 📖 docs: Update README.md by [afc163](https://github.com/afc163) in [#104](https://github.com/ant-design/x/pull/104)
+- 📖 docs: Update codecov badge by [afc163](https://github.com/afc163) in [#112](https://github.com/ant-design/x/pull/112)
 
 ## 1.0.0-alpha.0
 
 `2024-09-05`
 
-- 🔥 New Component Bubble. [#19](https://github.com/ant-design/x/pull/19) [@li-jia-nan](https://github.com/li-jia-nan)
-  - 🔥 Bubble support direction [#52](https://github.com/ant-design/x/pull/52) [@li-jia-nan](https://github.com/li-jia-nan)
-- 🔥 New Component Bubble.List. [#57](https://github.com/ant-design/x/pull/57) [@zombieJ](https://github.com/zombieJ)
-- 🔥 New Component Conversations. [#48](https://github.com/ant-design/x/pull/48) [@YumoImer](https://github.com/YumoImer)
-- 🔥 New Component Prompts. [#55](https://github.com/ant-design/x/pull/55) [@YumoImer](https://github.com/YumoImer)
-- 🔥 New Component Sender. [#46](https://github.com/ant-design/x/pull/46) [@ONLY-yours](https://github.com/ONLY-yours)
-- 🔥 New Component ThoughtChain. [#86](https://github.com/ant-design/x/pull/86) [@YumoImer](https://github.com/YumoImer)
-- 📦 Use `father` to build. [#84](https://github.com/ant-design/x/pull/84) [@zombieJ](https://github.com/zombieJ)
-- 🛠 Fix ThemeContext instances being inconsistent when using `antd` es or lib package. [#88](https://github.com/ant-design/x/pull/88) [@YumoImer](https://github.com/YumoImer)
-- 🛠 Refactor: API Naming Conventions [#73](https://github.com/ant-design/x/pull/73) [@zombieJ](https://github.com/zombieJ)
+- 🔥 New Component Bubble. [#19](https://github.com/ant-design/x/pull/19) [li-jia-nan](https://github.com/li-jia-nan)
+  - 🔥 Bubble support direction [#52](https://github.com/ant-design/x/pull/52) [li-jia-nan](https://github.com/li-jia-nan)
+- 🔥 New Component Bubble.List. [#57](https://github.com/ant-design/x/pull/57) [zombieJ](https://github.com/zombieJ)
+- 🔥 New Component Conversations. [#48](https://github.com/ant-design/x/pull/48) [YumoImer](https://github.com/YumoImer)
+- 🔥 New Component Prompts. [#55](https://github.com/ant-design/x/pull/55) [YumoImer](https://github.com/YumoImer)
+- 🔥 New Component Sender. [#46](https://github.com/ant-design/x/pull/46) [ONLY-yours](https://github.com/ONLY-yours)
+- 🔥 New Component ThoughtChain. [#86](https://github.com/ant-design/x/pull/86) [YumoImer](https://github.com/YumoImer)
+- 📦 Use `father` to build. [#84](https://github.com/ant-design/x/pull/84) [zombieJ](https://github.com/zombieJ)
+- 🛠 Fix ThemeContext instances being inconsistent when using `antd` es or lib package. [#88](https://github.com/ant-design/x/pull/88) [YumoImer](https://github.com/YumoImer)
+- 🛠 Refactor: API Naming Conventions [#73](https://github.com/ant-design/x/pull/73) [zombieJ](https://github.com/zombieJ)
 - 🛠 MISC: CI, Github Actions, Publish
-  - 🛠 [#59](https://github.com/ant-design/x/pull/59) [@zombieJ](https://github.com/zombieJ)
-  - 🛠 [#62](https://github.com/ant-design/x/pull/62) [@zombieJ](https://github.com/zombieJ)
-  - 🛠 [#71](https://github.com/ant-design/x/pull/71) [@ONLY-yours](https://github.com/ONLY-yours)
-  - 🛠 [#72](https://github.com/ant-design/x/pull/72) [@YumoImer](https://github.com/YumoImer)
-  - 🛠 [#98](https://github.com/ant-design/x/pull/98) [@YumoImer](https://github.com/YumoImer)
+  - 🛠 [#59](https://github.com/ant-design/x/pull/59) [zombieJ](https://github.com/zombieJ)
+  - 🛠 [#62](https://github.com/ant-design/x/pull/62) [zombieJ](https://github.com/zombieJ)
+  - 🛠 [#71](https://github.com/ant-design/x/pull/71) [ONLY-yours](https://github.com/ONLY-yours)
+  - 🛠 [#72](https://github.com/ant-design/x/pull/72) [YumoImer](https://github.com/YumoImer)
+  - 🛠 [#98](https://github.com/ant-design/x/pull/98) [YumoImer](https://github.com/YumoImer)
 - 📖 Update README.md
-  - 📖 [#81](https://github.com/ant-design/x/pull/81) [@zombieJ](https://github.com/zombieJ)
-  - 📖 [#82](https://github.com/ant-design/x/pull/82) [@zombieJ](https://github.com/zombieJ)
-  - 📖 [#61](https://github.com/ant-design/x/pull/61) [@afc163](https://github.com/afc163)
+  - 📖 [#81](https://github.com/ant-design/x/pull/81) [zombieJ](https://github.com/zombieJ)
+  - 📖 [#82](https://github.com/ant-design/x/pull/82) [zombieJ](https://github.com/zombieJ)
+  - 📖 [#61](https://github.com/ant-design/x/pull/61) [afc163](https://github.com/afc163)
 
 ## 0.0.0-alpha.0
 

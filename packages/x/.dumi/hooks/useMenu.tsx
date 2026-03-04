@@ -2,7 +2,7 @@ import { version } from '@ant-design/x';
 import type { MenuProps } from 'antd';
 import { Flex, Tag } from 'antd';
 import { createStyles } from 'antd-style';
-import classnames from 'classnames';
+import { clsx } from 'clsx';
 import { useFullSidebarData, useSidebarData } from 'dumi';
 import React, { useMemo } from 'react';
 import Link from '../theme/common/Link';
@@ -61,13 +61,13 @@ const MenuItemLabelWithTag: React.FC<MenuItemLabelProps> = (props) => {
 
   if (!before && !after) {
     return (
-      <Link to={`${link}${search}`} className={classnames(className, { [styles.link]: tag })}>
+      <Link to={`${link}${search}`} className={clsx(className, { [styles.link]: tag })}>
         <Flex justify="flex-start" align="center" gap="small">
           <span>{title}</span>
           {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
         </Flex>
         {tag && (
-          <Tag variant="filled" className={classnames(styles.tag)} color={getTagColor(tag)}>
+          <Tag variant="filled" className={styles.tag} color={getTagColor(tag)}>
             {tag.replace(/VERSION/i, version)}
           </Tag>
         )}

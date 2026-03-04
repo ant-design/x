@@ -2,8 +2,8 @@ import { unit } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
 import { FastColor } from '@ant-design/fast-color';
 import { genCollapseMotion } from '../../style';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
 
 export interface ComponentToken {
   /**

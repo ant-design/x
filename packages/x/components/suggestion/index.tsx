@@ -1,7 +1,7 @@
+import { useEvent, useMergedState } from '@rc-component/util';
 import type { CascaderProps } from 'antd';
 import { Cascader, Flex } from 'antd';
-import classnames from 'classnames';
-import { useEvent, useMergedState } from 'rc-util';
+import { clsx } from 'clsx';
 import React from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { AnyObject } from '../_util/type';
@@ -21,6 +21,7 @@ export interface SuggestionItem extends AnyObject {
 export interface RenderChildrenProps<T> {
   onTrigger: (info?: T | false) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
+  open: boolean;
 }
 
 export interface SuggestionProps<T = any>
@@ -142,7 +143,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const [activePath, onKeyDown] = useActive(itemList, mergedOpen, isRTL, onClose);
 
   // =========================== Children ===========================
-  const childNode = children?.({ onTrigger, onKeyDown });
+  const childNode = children?.({ onTrigger, onKeyDown, open: mergedOpen });
 
   // ============================ Render ============================
   const onInternalOpenChange = (nextOpen: boolean) => {
@@ -170,7 +171,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       placement={isRTL ? 'topRight' : 'topLeft'}
       {...compatibleProps}
       optionRender={optionRender}
-      rootClassName={classnames(rootClassName, classNames.root, prefixCls, hashId, cssVarCls, {
+      rootClassName={clsx(rootClassName, className, classNames.root, prefixCls, hashId, cssVarCls, {
         [`${prefixCls}-block`]: block,
       })}
       classNames={{
@@ -189,7 +190,7 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
       popupMatchSelectWidth={block}
     >
       <div
-        className={classnames(
+        className={clsx(
           prefixCls,
           rootClassName,
           contextConfig.classNames.content,

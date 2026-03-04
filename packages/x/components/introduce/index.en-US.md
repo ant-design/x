@@ -45,8 +45,8 @@ Based on the RICH interaction paradigm, we provide a variety of atomic component
 - General: `Bubble` - message bubble, `Conversations` - conversation management, `Notification` - system notification
 - Wake-up: `Welcome` - welcome, `Prompts` - prompt set
 - Expression: `Sender` - input box, `Attachment` - input attachment, `Suggestion` - quick command
-- Confirmation: `Think` - thinking process, `ThoughtChain` - chain of thought、`Sources` - Sources
-- Feedback: `Actions` - action list, `FileCard` - file card
+- Confirmation: `Think` - thinking process, `ThoughtChain` - chain of thought
+- Feedback: `Actions` - action list, `FileCard` - file card, `Sources` - source citation, `CodeHighlighter` - code highlighting, `Mermaid` - chart tool
 - Others: `XProvider` - global config: theme, locale, etc.
 
 Here is a simple example of building a chat box using atomic components:

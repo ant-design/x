@@ -1,4 +1,4 @@
-import type { Locale as antdLocale } from 'antd/es/locale';
+import type { Locale as antdLocale } from 'antd/lib/locale';
 import * as React from 'react';
 import { devUseWarning } from '../_util/warning';
 import type { LocaleContextProps } from './context';

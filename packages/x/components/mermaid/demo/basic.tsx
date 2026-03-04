@@ -1,5 +1,5 @@
+import { Mermaid } from '@ant-design/x';
 import React from 'react';
-import Mermaid from '../Mermaid';
 
 const App: React.FC = () => (
   <Mermaid>

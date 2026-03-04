@@ -1,6 +1,6 @@
 import ContributorsList from '@qixian.cs/github-contributors-list';
 import { createStyles } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import { useIntl } from 'dumi';
 import React from 'react';
 
@@ -47,7 +47,7 @@ const Contributors: React.FC<ContributorsProps> = ({ filename }) => {
   }
 
   return (
-    <div className={classNames({ [styles.listMobile]: isMobile })}>
+    <div className={clsx({ [styles.listMobile]: isMobile })}>
       <div className={styles.title}>{formatMessage({ id: 'app.content.contributors' })}</div>
       <ContributorsList
         cache

@@ -1,8 +1,8 @@
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import classnames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import CSSMotion from 'rc-motion';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import type { CSSMotionProps } from '@rc-component/motion';
+import CSSMotion from '@rc-component/motion';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import { useXProviderContext } from '../x-provider';
 import type { ThoughtChainItemType, ThoughtChainProps } from './interface';
@@ -53,22 +53,16 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   // ============================ Content Open ============================
   const contentOpen = expandedKeys?.includes(key);
-  let iconNode: React.ReactNode = (
-    <div className={classnames(`${nodeCls}-index-icon`)}>{index + 1}</div>
-  );
+  let iconNode: React.ReactNode = <div className={clsx(`${nodeCls}-index-icon`)}>{index + 1}</div>;
 
   iconNode = icon === false ? null : icon || iconNode;
 
   // ============================ Render ============================
   return (
-    <div
-      {...domProps}
-      className={classnames(nodeCls, className, classNames.item)}
-      style={props.style}
-    >
+    <div {...domProps} className={clsx(nodeCls, className, classNames.item)} style={props.style}>
       {iconNode && (
         <Status
-          className={classnames(`${nodeCls}-icon`, classNames.itemIcon, {
+          className={clsx(`${nodeCls}-icon`, classNames.itemIcon, {
             [`${nodeCls}-icon-${line}`]: typeof line !== 'boolean',
           })}
           style={styles.itemIcon}
@@ -77,15 +71,12 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           status={status}
         />
       )}
-      <div className={classnames(`${nodeCls}-box`)}>
+      <div className={clsx(`${nodeCls}-box`)}>
         {/* Header */}
-        <div
-          className={classnames(`${nodeCls}-header`, classNames.itemHeader)}
-          style={styles.itemHeader}
-        >
+        <div className={clsx(`${nodeCls}-header`, classNames.itemHeader)} style={styles.itemHeader}>
           {/* Header */}
           <div
-            className={classnames(`${nodeCls}-title`, {
+            className={clsx(`${nodeCls}-title`, {
               [`${nodeCls}-collapsible`]: collapsible,
               [`${prefixCls}-motion-blink`]: blink,
             })}
@@ -113,12 +104,12 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
           <CSSMotion {...collapseMotion} visible={collapsible ? contentOpen : true}>
             {({ className: motionClassName, style }, motionRef) => (
               <div
-                className={classnames(`${nodeCls}-content`, motionClassName)}
+                className={clsx(`${nodeCls}-content`, motionClassName)}
                 ref={motionRef}
                 style={style}
               >
                 <div
-                  className={classnames(`${nodeCls}-content-box`, classNames.itemContent)}
+                  className={clsx(`${nodeCls}-content-box`, classNames.itemContent)}
                   style={styles.itemContent}
                 >
                   {content}
@@ -130,7 +121,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
         {/* Footer */}
         {footer && (
           <div
-            className={classnames(`${nodeCls}-footer`, classNames.itemFooter)}
+            className={clsx(`${nodeCls}-footer`, classNames.itemFooter)}
             style={styles.itemFooter}
           >
             {footer}

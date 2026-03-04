@@ -1,4 +1,4 @@
-import KeyCode from 'rc-util/lib/KeyCode';
+import KeyCode from '@rc-component/util/lib/KeyCode';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
@@ -116,11 +116,29 @@ describe('Conversations Component', () => {
     const onActiveChange = jest.fn();
     const { getByText } = render(<Conversations items={items} onActiveChange={onActiveChange} />);
     fireEvent.click(getByText('What is Ant Design X ?'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo1');
+    expect(onActiveChange).toHaveBeenCalledWith(
+      'demo1',
+      expect.objectContaining({
+        key: 'demo1',
+        label: 'What is Ant Design X ?',
+      }),
+    );
     fireEvent.click(getByText('In Docker, use 🐑 Ollama and initialize'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo4');
+    expect(onActiveChange).toHaveBeenCalledWith(
+      'demo4',
+      expect.objectContaining({
+        key: 'demo4',
+        label: 'In Docker, use 🐑 Ollama and initialize',
+      }),
+    );
     fireEvent.click(getByText('Expired, please go to the recycle bin to check'));
-    expect(onActiveChange).toHaveBeenCalledWith('demo4');
+    expect(onActiveChange).toHaveBeenCalledWith(
+      'demo4',
+      expect.objectContaining({
+        key: 'demo4',
+        label: 'In Docker, use 🐑 Ollama and initialize',
+      }),
+    );
   });
 
   it('should handle menu function', () => {
@@ -205,7 +223,13 @@ describe('Conversations Component', () => {
       expect(
         (await getByText('In Docker, use 🐑 Ollama and initialize')).parentElement,
       ).toHaveClass('ant-conversations-item-active');
-      expect(onActiveChange).toHaveBeenCalledWith('demo4');
+      expect(onActiveChange).toHaveBeenCalledWith(
+        'demo4',
+        expect.objectContaining({
+          key: 'demo4',
+          label: 'In Docker, use 🐑 Ollama and initialize',
+        }),
+      );
     });
     it('shortcut keys of items width number', async () => {
       const onActiveChange = jest.fn();
@@ -231,7 +255,13 @@ describe('Conversations Component', () => {
       expect(
         (await getByText('In Docker, use 🐑 Ollama and initialize')).parentElement,
       ).toHaveClass('ant-conversations-item-active');
-      expect(onActiveChange).toHaveBeenCalledWith('demo4');
+      expect(onActiveChange).toHaveBeenCalledWith(
+        'demo4',
+        expect.objectContaining({
+          key: 'demo4',
+          label: 'In Docker, use 🐑 Ollama and initialize',
+        }),
+      );
     });
     it('shortcut keys of items width error number', async () => {
       render(

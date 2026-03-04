@@ -43,7 +43,7 @@ interface CodeBlockButtonProps {
 }
 
 const CodeBlockButton: React.FC<CodeBlockButtonProps> = ({ title, dependencies = {}, jsx }) => {
-  const showCodeBlockButton = useShowCodeBlockButton();
+  const showCodeBlockButton = false; //useShowCodeBlockButton();
 
   const codeBlockPrefillConfig = {
     title: `${title} - antd@${dependencies.antd}`,

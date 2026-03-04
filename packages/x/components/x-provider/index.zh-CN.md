@@ -53,7 +53,7 @@ import { XProvider  } from '@ant-design/x';
 import zhCN from 'antd/locale/zh_CN';
 import zhCN_X from '@ant-design/x/locale/zh_CN';
 
-<XProvider locale={{...zhCN_X,..zhCN}}>
+<XProvider locale={{...zhCN_X,...zhCN}}>
   <App />
 </XProvider>
 ```

@@ -1,4 +1,5 @@
 const compileModules = [
+  '@rc-component',
   'react-sticky-box',
   'rc-tween-one',
   '@babel',

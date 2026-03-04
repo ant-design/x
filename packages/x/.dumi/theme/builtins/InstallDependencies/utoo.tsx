@@ -1,5 +1,5 @@
 import { createStyles, css } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 
 interface IconProps {
@@ -21,7 +21,7 @@ const UtooIcon: React.FC<IconProps> = (props) => {
   const { className, style } = props;
   const { styles } = useStyle();
   return (
-    <span className={classNames(styles.iconWrap, className)} style={style}>
+    <span className={clsx(styles.iconWrap, className)} style={style}>
       <svg
         id="utoo"
         xmlns="http://www.w3.org/2000/svg"

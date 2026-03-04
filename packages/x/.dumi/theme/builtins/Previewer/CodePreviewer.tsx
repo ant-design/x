@@ -3,7 +3,7 @@ import type { Project } from '@stackblitz/sdk';
 import stackblitzSdk from '@stackblitz/sdk';
 import { Alert, Badge, Flex, Tooltip } from 'antd';
 import { createStyles, css } from 'antd-style';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import { FormattedMessage, useLiveDemo, useSiteData } from 'dumi';
 import { pickBy } from 'lodash';
 import LZString from 'lz-string';
@@ -160,14 +160,14 @@ const CodePreviewer: React.FC<AntdPreviewerProps> = (props) => {
     );
   }
 
-  const codeBoxClass = classNames('code-box', {
+  const codeBoxClass = clsx('code-box', {
     expand: codeExpand,
     'code-box-debug': originDebug,
     'code-box-simplify': simplify,
   });
 
   const localizedTitle = title;
-  const highlightClass = classNames('highlight-wrapper', {
+  const highlightClass = clsx('highlight-wrapper', {
     'highlight-wrapper-expand': codeExpand,
   });
 
@@ -289,12 +289,23 @@ import Demo from './demo';
 createRoot(document.getElementById('container')).render(<Demo />);
   `;
 
+  const useXMarkdown = Boolean(dependencies['@ant-design/x-markdown']);
+  const domhandlerBridgeContent =
+    "export { Comment, Text, Element, ProcessingInstruction } from 'domhandler';";
+  const fixDomhandlerPathScript = `const fs = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..');
+const dir = path.join(root, 'node_modules', 'html-dom-parser', 'esm', 'client', 'node_modules', 'domhandler', 'lib', 'esm');
+const content = "export { Comment, Text, Element, ProcessingInstruction } from 'domhandler';";
+fs.mkdirSync(dir, { recursive: true });
+fs.writeFileSync(path.join(dir, 'node.mjs'), content);
+`;
   const codesandboxPackage = {
     title: `${localizedTitle} - antd@${dependencies.antd}`,
     main: 'index.js',
     dependencies: {
       ...dependencies,
-      'rc-util': pkgDependencyList['rc-util'],
+      '@rc-component/util': pkgDependencyList['@rc-component/util'],
       react: '^18.0.0',
       'react-dom': '^18.0.0',
       'react-scripts': '^5.0.0',
@@ -307,6 +318,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
       build: 'react-scripts build',
       test: 'react-scripts test --env=jsdom',
       eject: 'react-scripts eject',
+      ...(useXMarkdown && { postinstall: 'node scripts/fix-domhandler-path.js' }),
     },
     browserslist: ['>0.2%', 'not dead'],
   };
@@ -320,6 +332,12 @@ createRoot(document.getElementById('container')).render(<Demo />);
       'index.html': {
         content: html,
       },
+      ...(useXMarkdown && {
+        'scripts/fix-domhandler-path.js': { content: fixDomhandlerPathScript },
+        'node_modules/html-dom-parser/esm/client/node_modules/domhandler/lib/esm/node.mjs': {
+          content: domhandlerBridgeContent,
+        },
+      }),
     },
   };
 

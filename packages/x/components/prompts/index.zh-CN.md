@@ -46,12 +46,6 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 | fadeIn | 渐入效果 | boolean | - | - |
 | fadeInLeft | 从左到右渐入效果 | boolean | - | - |
 
-#### SemanticType
-
-```typescript | pure
-type SemanticType = 'list' | 'item' | 'content' | 'title' | 'subList' | 'subItem';
-```
-
 ### PromptProps
 
 | 属性        | 说明                         | 类型            | 默认值  | 版本 |

@@ -1,11 +1,11 @@
-import { useEvent } from 'rc-util';
-import React, { useState } from 'react';
+import { useEvent } from '@rc-component/util';
+import React, { useEffect, useState } from 'react';
 import type { AnyObject } from '../_util/type';
 import { AbstractChatProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
-import { useChatStore } from './store';
+import { ConversationKey, useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
 
@@ -42,7 +42,12 @@ export interface XChatConfig<
 > {
   provider?: AbstractChatProvider<ChatMessage, Input, Output>;
   conversationKey?: ConversationData['key'];
-  defaultMessages?: DefaultMessageInfo<ChatMessage>[];
+  defaultMessages?:
+    | DefaultMessageInfo<ChatMessage>[]
+    | ((info: {
+        conversationKey?: ConversationData['key'];
+      }) => Promise<DefaultMessageInfo<ChatMessage>[]>)
+    | ((info?: { conversationKey?: ConversationData['key'] }) => DefaultMessageInfo<ChatMessage>[]);
   /** Convert agent message to bubble usage message type */
   parser?: (message: ChatMessage) => BubbleMessage | BubbleMessage[];
   requestPlaceholder?: ChatMessage | RequestPlaceholderFn<Input, ChatMessage>;
@@ -76,7 +81,8 @@ function toArray<T>(item: T | T[]): T[] {
   return Array.isArray(item) ? item : [item];
 }
 
-const IsRequestingMap = new Map<string, boolean>();
+const IsRequestingMap = new Map<ConversationKey, boolean>();
+const generateConversationKey = () => Symbol('ConversationKey');
 
 export default function useXChat<
   ChatMessage extends SimpleType = string,
@@ -90,23 +96,54 @@ export default function useXChat<
     requestPlaceholder,
     parser,
     provider,
-    conversationKey,
+    conversationKey: originalConversationKey,
   } = config;
 
   // ========================= Agent Messages =========================
   const idRef = React.useRef(0);
-  const requestHandlerRef = React.useRef<AbstractXRequestClass<Input, Output>>(undefined);
+  const requestHandlerRef =
+    React.useRef<AbstractXRequestClass<Input, Output, ChatMessage>>(undefined);
   const [isRequesting, setIsRequesting] = useState<boolean>(false);
 
-  const { messages, setMessages, getMessages, setMessage } = useChatStore<MessageInfo<ChatMessage>>(
-    () =>
-      (defaultMessages || []).map((info, index) => ({
-        id: `default_${index}`,
-        status: 'local',
-        ...info,
-      })),
-    conversationKey,
+  const [conversationKey, setConversationKey] = useState(
+    originalConversationKey || generateConversationKey(),
   );
+
+  // 消息队列：存储会话切换后的待发送消息
+  const messageQueueRef = React.useRef<
+    Map<
+      string | symbol,
+      Array<{
+        requestParams: Partial<Input>;
+        opts?: { extraInfo: AnyObject };
+      }>
+    >
+  >(new Map());
+
+  useEffect(() => {
+    if (originalConversationKey) {
+      setConversationKey(originalConversationKey);
+    }
+  }, [originalConversationKey]);
+
+  const {
+    messages,
+    isDefaultMessagesRequesting,
+    removeMessage,
+    setMessages,
+    getMessages,
+    setMessage,
+  } = useChatStore<MessageInfo<ChatMessage>>(async () => {
+    const messageList =
+      typeof defaultMessages === 'function'
+        ? await defaultMessages({ conversationKey: originalConversationKey })
+        : defaultMessages;
+    return (messageList || []).map((info, index) => ({
+      id: `default_${index}`,
+      status: 'local',
+      ...info,
+    }));
+  }, conversationKey);
 
   const createMessage = (message: ChatMessage, status: MessageStatus, extraInfo?: AnyObject) => {
     const msg: MessageInfo<ChatMessage> = {
@@ -206,6 +243,7 @@ export default function useXChat<
       });
     } else {
       // Add placeholder message
+
       setMessages((ori: MessageInfo<ChatMessage>[]) => {
         let nextMessages = [...ori, ...messages];
         if (requestPlaceholder) {
@@ -290,23 +328,25 @@ export default function useXChat<
           });
         });
       }
-
+      msg = getMessages().find((info) => info.id === updatingMsgId) || msg;
       return msg;
     };
     provider.injectRequest({
       onUpdate: (chunk: Output, headers: Headers) => {
-        updateMessage('updating', chunk, [], headers);
+        const msg = updateMessage('updating', chunk, [], headers);
+        return msg;
       },
       onSuccess: (chunks: Output[], headers: Headers) => {
         setIsRequesting(false);
         conversationKey && IsRequestingMap.delete(conversationKey);
-        updateMessage('success', undefined as Output, chunks, headers);
+        const msg = updateMessage('success', undefined as Output, chunks, headers);
+        return msg;
       },
       onError: async (error: Error, errorInfo: any) => {
         setIsRequesting(false);
         conversationKey && IsRequestingMap.delete(conversationKey);
+        let fallbackMsg: ChatMessage;
         if (requestFallback) {
-          let fallbackMsg: ChatMessage;
           // Update as error
           if (typeof requestFallback === 'function') {
             // typescript has bug that not get real return type when use `typeof function` check
@@ -335,6 +375,9 @@ export default function useXChat<
           ]);
         } else {
           // Remove directly
+          fallbackMsg = getMessages().find(
+            (info) => info.id !== loadingMsgId && info.id !== updatingMsgId,
+          ) as ChatMessage;
           setMessages((ori: MessageInfo<ChatMessage>[]) => {
             return ori.map((info: MessageInfo<ChatMessage>) => {
               if (info.id === loadingMsgId || info.id === updatingMsgId) {
@@ -347,6 +390,7 @@ export default function useXChat<
             });
           });
         }
+        return fallbackMsg;
       },
     });
     setIsRequesting(true);
@@ -379,11 +423,48 @@ export default function useXChat<
     });
   };
 
+  // 会话切换完成后处理消息队列
+  const processMessageQueue = React.useCallback(() => {
+    const requestParamsList = messageQueueRef.current.get(conversationKey);
+    if (requestParamsList && requestParamsList.length > 0) {
+      const timer = setTimeout(() => {
+        clearTimeout(timer);
+        requestParamsList.forEach(({ requestParams, opts }) => {
+          onRequest(requestParams, opts);
+        });
+        messageQueueRef.current.delete(conversationKey);
+      });
+    }
+  }, [conversationKey, onRequest]);
+
+  useEffect(() => {
+    if (!isDefaultMessagesRequesting) {
+      processMessageQueue();
+    }
+  }, [isDefaultMessagesRequesting]);
+
+  // 添加消息到队列，等待会话切换完成后发送
+  const queueRequest = (
+    currentConversationKey: string | symbol,
+    requestParams: Partial<Input>,
+    opts?: { extraInfo: AnyObject },
+  ) => {
+    if (!messageQueueRef.current.has(currentConversationKey)) {
+      messageQueueRef.current.set(currentConversationKey, []);
+    }
+    messageQueueRef.current.get(currentConversationKey)!.push({
+      requestParams,
+      opts,
+    });
+  };
+
   return {
     onRequest,
+    isDefaultMessagesRequesting,
     messages,
     parsedMessages,
     setMessages,
+    removeMessage,
     setMessage,
     abort: () => {
       if (!provider) {
@@ -393,5 +474,6 @@ export default function useXChat<
     },
     isRequesting: conversationKey ? IsRequestingMap?.get(conversationKey) || false : isRequesting,
     onReload,
+    queueRequest,
   } as const;
 }

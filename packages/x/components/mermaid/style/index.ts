@@ -1,7 +1,7 @@
 import type { CSSObject } from '@ant-design/cssinjs';
 import { mergeToken } from '@ant-design/cssinjs-utils';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/interface';
 
 export interface ComponentToken {
   /**
@@ -57,13 +57,16 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token: MermaidToken): CSSO
         overflow: 'auto',
         borderEndEndRadius: token.borderRadius,
         borderEndStartRadius: token.borderRadius,
+        height: '400px',
       },
       [`${componentCls}-graph-hidden`]: {
         display: 'none',
       },
       [`${componentCls}-graph svg`]: {
         maxWidth: '100%',
+        maxHeight: '100%',
         height: 'auto',
+        width: 'auto',
       },
       [`${componentCls}-code`]: {
         borderEndEndRadius: token.borderRadius,
@@ -74,7 +77,8 @@ const genMermaidStyle: GenerateStyle<MermaidToken> = (token: MermaidToken): CSSO
         background: token.colorBgContainer,
         paddingInline: token.paddingSM,
         paddingBlock: token.paddingSM,
-        overflow: 'hidden',
+        overflow: 'auto',
+        height: '400px',
         'pre,code': {
           whiteSpace: 'pre',
           fontSize: token.fontSize,

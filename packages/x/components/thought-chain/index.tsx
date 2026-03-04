@@ -1,5 +1,5 @@
-import classnames from 'classnames';
-import pickAttrs from 'rc-util/lib/pickAttrs';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import { clsx } from 'clsx';
 import React from 'react';
 import useCollapsible from '../_util/hooks/use-collapsible';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
@@ -51,7 +51,7 @@ const ForwardThoughtChain = React.forwardRef<any, ThoughtChainProps>((props, ref
 
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
-  const mergedCls = classnames(
+  const mergedCls = clsx(
     className,
     prefixCls,
     contextConfig.className,
@@ -106,10 +106,10 @@ const ForwardThoughtChain = React.forwardRef<any, ThoughtChainProps>((props, ref
           onItemExpand,
           collapseMotion,
           classNames: {
-            itemHeader: classnames(contextConfig.classNames.itemHeader, classNames.itemHeader),
-            itemContent: classnames(contextConfig.classNames.itemContent, classNames.itemContent),
-            itemFooter: classnames(contextConfig.classNames.itemFooter, classNames.itemFooter),
-            itemIcon: classnames(contextConfig.classNames.itemIcon, classNames.itemIcon),
+            itemHeader: clsx(contextConfig.classNames.itemHeader, classNames.itemHeader),
+            itemContent: clsx(contextConfig.classNames.itemContent, classNames.itemContent),
+            itemFooter: clsx(contextConfig.classNames.itemFooter, classNames.itemFooter),
+            itemIcon: clsx(contextConfig.classNames.itemIcon, classNames.itemIcon),
           },
           styles: {
             itemHeader: { ...contextConfig.styles.itemHeader, ...styles.itemHeader },
@@ -124,7 +124,7 @@ const ForwardThoughtChain = React.forwardRef<any, ThoughtChainProps>((props, ref
             key={item.key || `key_${index}`}
             index={index}
             line={line}
-            className={classnames(contextConfig.classNames.item, classNames.item)}
+            className={clsx(contextConfig.classNames.item, classNames.item)}
             style={{ ...contextConfig.styles.item, ...styles.item }}
             info={item}
           />

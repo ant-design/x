@@ -13,6 +13,8 @@ This document will help you upgrade from `@ant-design/x 1.x` to `@ant-design/x 2
 
 1. Please upgrade antd in your project to the latest version of 6.x first. For details, please check the [upgrade documentation](https://ant.design/docs/react/migration-v6).
 
+**Note**: The `@ant-design/x` 2.1.0 version is compatible with the vast majority of antd 5.x components. However, some components' styles rely on the semantic implementation of version 6, which may result in minor differences requiring manual adjustments on your part.
+
 ## Incompatible Changes in 2.0
 
 ### Runtime-related tools migrated to `@ant-design/x-sdk` with comprehensive refactoring
