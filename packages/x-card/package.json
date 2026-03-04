@@ -1,11 +1,10 @@
 {
   "name": "@ant-design/x-card",
-  "version": "2.0.1",
+  "version": "2.3.0-beta.1",
   "description": "React card loader for dynamic content loading and management",
   "keywords": [
-    "card",
+    "A2UI",
     "loader",
-    "dynamic",
     "react",
     "ant-design"
   ],
