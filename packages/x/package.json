@@ -91,7 +91,7 @@
     "mermaid": "^11.12.1"
   },
   "devDependencies": {
-    "@antv/gpt-vis": "^0.5.10",
+    "@antv/gpt-vis": "^0.6.0",
     "@antv/infographic": "0.2.12",
     "@blazediff/core": "^1.8.0",
     "@codesandbox/sandpack-react": "^2.19.8",
@@ -126,7 +126,7 @@
     "@types/jest-axe": "^3.5.9",
     "@types/jest-environment-puppeteer": "^5.0.6",
     "@types/jest-image-snapshot": "^6.4.0",
-    "@types/jquery": "^3.5.30",
+    "@types/jquery": "^4.0.0",
     "@types/jsdom": "^27.0.0",
     "@types/lodash": "^4.17.7",
     "@types/minimist": "^1.2.5",
@@ -159,7 +159,7 @@
     "cheerio": "^1.0.0",
     "cli-progress": "^3.12.0",
     "copy-to-clipboard": "^3.3.3",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.1.0",
     "cross-fetch": "^4.0.0",
     "crypto": "^1.0.1",
     "dayjs": "^1.11.13",
