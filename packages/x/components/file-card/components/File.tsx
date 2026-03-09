@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
-import { SemanticType } from '../FileCard';
+import { type FileCardProps, SemanticType } from '../FileCard';
 import { getSize } from '../utils';
 
 interface FileProps {
@@ -11,11 +11,13 @@ interface FileProps {
   ext?: string;
   size?: 'small' | 'default';
   byte?: number;
-  description?: React.ReactNode;
+  src?: string;
+  type?: FileCardProps['type'];
+  description?: FileCardProps['description'];
   icon?: React.ReactNode;
   iconColor?: string;
   onClick?: () => void;
-  mask?: React.ReactNode;
+  mask?: FileCardProps['mask'];
 }
 
 const File: React.FC<FileProps> = (props) => {
@@ -27,6 +29,8 @@ const File: React.FC<FileProps> = (props) => {
     ext,
     size,
     byte,
+    src,
+    type,
     description,
     icon,
     iconColor,
@@ -41,14 +45,24 @@ const File: React.FC<FileProps> = (props) => {
   });
 
   const desc = useMemo(() => {
-    if (description) {
-      return description;
-    }
-    if (typeof byte === 'number') {
-      return getSize(byte);
-    }
-    return '';
-  }, [description, byte]);
+    const size = typeof byte === 'number' ? getSize(byte) : '';
+    const descriptionNode =
+      typeof description === 'function'
+        ? description({ size, icon, src, type, name, namePrefix: name, nameSuffix: ext })
+        : description;
+
+    return descriptionNode;
+  }, [description, byte, icon, src, type, name, ext]);
+
+  const maskNode = useMemo(() => {
+    const size = typeof byte === 'number' ? getSize(byte) : '';
+    const maskContent =
+      typeof mask === 'function'
+        ? mask({ size, icon, src, type, name, namePrefix: name, nameSuffix: ext })
+        : mask;
+
+    return maskContent;
+  }, [mask, byte, icon, src, type, name, ext]);
 
   return (
     <div className={mergedCls} style={styles.file} onClick={onClick}>
@@ -72,9 +86,9 @@ const File: React.FC<FileProps> = (props) => {
           </div>
         )}
       </div>
-      {mask && (
+      {maskNode && (
         <div className={`${compCls}-mask`}>
-          <div className={`${compCls}-mask-info`}>{mask}</div>
+          <div className={`${compCls}-mask-info`}>{maskNode}</div>
         </div>
       )}
     </div>

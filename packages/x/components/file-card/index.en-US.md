@@ -40,11 +40,11 @@ Common props ref：[Common props](/docs/react/common-props)
 | name | File name | string | - | - |
 | byte | File size (bytes) | number | - | - |
 | size | Card size | 'small' \| 'default' | 'default' | - |
-| description | File description | React.ReactNode | - | - |
+| description | File description, supports function form to get context information | React.ReactNode \| ((info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }) => React.ReactNode) | - | - |
 | loading | Loading state | boolean | false | - |
 | type | File type | 'file' \| 'image' \| 'audio' \| 'video' \| string | - | - |
 | src | Image or file URL | string | - | - |
-| mask | Mask content. For `type="image"`, this is configured via `imageProps.preview.mask`,This prop only applies to non-image file types. | React.ReactNode | - | - |
+| mask | Mask content, supports function form to get context information. For `type="image"`, this is configured via `imageProps.preview.mask`,This prop only applies to non-image file types. | React.ReactNode \| ((info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }) => React.ReactNode) | - | - |
 | icon | Custom icon | React.ReactNode \| PresetIcons | - | - |
 | imageProps | Image props configuration | [Image](https://ant.design/components/image-cn#api) | - | - |
 | videoProps | Video props configuration | Partial<React.JSX.IntrinsicElements['video']> | - | - |

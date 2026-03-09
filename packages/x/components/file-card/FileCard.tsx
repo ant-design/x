@@ -47,6 +47,18 @@ export type PresetIcons =
   | 'java'
   | 'javascript'
   | 'python';
+
+type ExtendNode =
+  | React.ReactNode
+  | ((info: {
+      size: string;
+      icon: React.ReactNode;
+      namePrefix?: string;
+      nameSuffix?: string;
+      name?: string;
+      src?: string;
+      type?: `${CARD_TYPE}`;
+    }) => React.ReactNode);
 export interface FileCardProps
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
@@ -62,10 +74,10 @@ export interface FileCardProps
   name: string;
   byte?: number;
   size?: 'small' | 'default';
-  description?: React.ReactNode;
+  description?: ExtendNode;
   loading?: boolean;
   src?: string;
-  mask?: React.ReactNode;
+  mask?: ExtendNode;
   icon?: React.ReactNode | PresetIcons;
   type?: `${CARD_TYPE}`;
   imageProps?: ImageProps;
@@ -305,6 +317,8 @@ const FileCard: React.FC<FileCardProps> = (props) => {
       <File
         prefixCls={prefixCls}
         name={namePrefix}
+        type={customType}
+        src={src}
         ext={nameSuffix}
         size={size}
         byte={byte}

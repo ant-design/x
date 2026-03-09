@@ -27,6 +27,7 @@ tag: 2.0.0
 <code src="./demo/icon.tsx">自定义图标</code>
 <code src="./demo/list.tsx">文件列表</code>
 <code src="./demo/overflow.tsx">超出样式</code>
+<code src="./demo/custom-description.tsx">自定义描述</code>
 
 ## API
 
@@ -39,11 +40,11 @@ tag: 2.0.0
 | name | 文件名称 | string | - | - |
 | byte | 文件大小（字节） | number | - | - |
 | size | 卡片大小 | 'small' \| 'default' | 'default' | - |
-| description | 文件描述 | React.ReactNode | - | - |
+| description | 文件描述，支持函数形式获取上下文信息 | React.ReactNode \| ((info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }) => React.ReactNode) | - | - |
 | loading | 是否处于加载状态 | boolean | false | - |
 | type | 文件类型 | 'file' \| 'image' \| 'audio' \| 'video' \| string | - | - |
 | src | 图片或文件地址 | string | - | - |
-| mask | 遮罩内容。对于 `type="image"`，可通过 `imageProps.preview.mask` 配置，此属性仅适用于非图像文件类型。 | React.ReactNode | - | - |
+| mask | 遮罩内容，支持函数形式获取上下文信息。对于 `type="image"`，可通过 `imageProps.preview.mask` 配置，此属性仅适用于非图像文件类型。 | React.ReactNode \| ((info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }) => React.ReactNode) | - | - |
 | icon | 自定义图标 | React.ReactNode \| PresetIcons | - | - |
 | imageProps | 图片属性，同 antd [Image](https://ant.design/components/image-cn#api) 属性 | ImageProps | - | - |
 | videoProps | 视频属性配置 | Partial<React.JSX.IntrinsicElements['video']> | - | - |
