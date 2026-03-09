@@ -51,7 +51,7 @@ const File: React.FC<FileProps> = (props) => {
         ? description({ size, icon, src, type, name, namePrefix: name, nameSuffix: ext })
         : description;
 
-    return descriptionNode;
+    return descriptionNode === false ? null : descriptionNode || size;
   }, [description, byte, icon, src, type, name, ext]);
 
   const maskNode = useMemo(() => {
@@ -61,7 +61,7 @@ const File: React.FC<FileProps> = (props) => {
         ? mask({ size, icon, src, type, name, namePrefix: name, nameSuffix: ext })
         : mask;
 
-    return maskContent;
+    return maskContent === false ? null : maskContent;
   }, [mask, byte, icon, src, type, name, ext]);
 
   return (

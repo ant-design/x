@@ -49,6 +49,7 @@ export type PresetIcons =
   | 'python';
 
 type ExtendNode =
+  | false
   | React.ReactNode
   | ((info: {
       size: string;
