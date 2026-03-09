@@ -8,6 +8,7 @@ interface FileProps {
   classNames?: Partial<Record<SemanticType, string>>;
   prefixCls?: string;
   name?: string;
+  namePrefix?: string;
   ext?: string;
   size?: 'small' | 'default';
   byte?: number;
@@ -26,6 +27,7 @@ const File: React.FC<FileProps> = (props) => {
     classNames = {},
     prefixCls,
     name,
+    namePrefix,
     ext,
     size,
     byte,
@@ -48,21 +50,21 @@ const File: React.FC<FileProps> = (props) => {
     const size = typeof byte === 'number' ? getSize(byte) : '';
     const descriptionNode =
       typeof description === 'function'
-        ? description({ size, icon, src, type, name, namePrefix: name, nameSuffix: ext })
+        ? description({ size, icon, src, type, name, namePrefix, nameSuffix: ext })
         : description;
 
     return descriptionNode === false ? null : descriptionNode || size;
-  }, [description, byte, icon, src, type, name, ext]);
+  }, [description, byte, icon, src, type, name, namePrefix, ext]);
 
   const maskNode = useMemo(() => {
     const size = typeof byte === 'number' ? getSize(byte) : '';
     const maskContent =
       typeof mask === 'function'
-        ? mask({ size, icon, src, type, name, namePrefix: name, nameSuffix: ext })
+        ? mask({ size, icon, src, type, name, namePrefix, nameSuffix: ext })
         : mask;
 
     return maskContent === false ? null : maskContent;
-  }, [mask, byte, icon, src, type, name, ext]);
+  }, [mask, byte, icon, src, type, name, namePrefix, ext]);
 
   const handleClick = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
@@ -73,7 +75,7 @@ const File: React.FC<FileProps> = (props) => {
             size,
             icon,
             name,
-            namePrefix: name,
+            namePrefix,
             nameSuffix: ext,
             src,
             type,
@@ -82,7 +84,7 @@ const File: React.FC<FileProps> = (props) => {
         );
       }
     },
-    [onClick, byte, icon, name, ext, src, type],
+    [onClick, byte, icon, name, namePrefix, ext, src, type],
   );
 
   return (
@@ -95,7 +97,7 @@ const File: React.FC<FileProps> = (props) => {
       </div>
       <div className={`${compCls}-content`}>
         <div className={clsx(`${compCls}-name`, classNames.name)} style={styles.name}>
-          <span className={`${compCls}-name-prefix`}>{name}</span>
+          <span className={`${compCls}-name-prefix`}>{namePrefix}</span>
           <span className={`${compCls}-name-suffix`}>{ext}</span>
         </div>
         {desc && (

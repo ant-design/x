@@ -315,8 +315,9 @@ const FileCard: React.FC<FileCardProps> = (props) => {
     ContentNode = (
       <File
         prefixCls={prefixCls}
-        name={namePrefix}
-        type={customType}
+        namePrefix={namePrefix}
+        name={name}
+        type={fileType}
         src={src}
         ext={nameSuffix}
         size={size}
