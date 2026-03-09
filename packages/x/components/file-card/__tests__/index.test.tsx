@@ -54,6 +54,20 @@ it('should display file size correctly', () => {
   expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('1 KB');
 });
 
+it('should handle card click', () => {
+  const onClick = jest.fn();
+  const { container } = render(
+    <FileCard name="test.txt" icon="excel" byte={1024} onClick={onClick} />,
+  );
+
+  const cardElement = container.querySelector('.ant-file-card-file');
+  expect(cardElement).toBeTruthy();
+
+  if (cardElement) {
+    fireEvent.click(cardElement);
+    expect(onClick).toHaveBeenCalledTimes(1);
+  }
+});
 it('should handle custom description', () => {
   const { container } = render(<FileCard name="test.txt" description="Custom desc" />);
   expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe(
