@@ -47,20 +47,24 @@ const File: React.FC<FileProps> = (props) => {
   });
 
   const desc = useMemo(() => {
-    const size = typeof byte === 'number' ? getSize(byte) : '';
+    const sizeText = typeof byte === 'number' ? getSize(byte) : '';
     const descriptionNode =
       typeof description === 'function'
-        ? description({ size, icon, src, type, name, namePrefix, nameSuffix: ext })
+        ? description({ size: sizeText, icon, src, type, name, namePrefix, nameSuffix: ext })
         : description;
 
-    return descriptionNode === false ? null : descriptionNode || size;
+    if (descriptionNode === false) {
+      return null;
+    }
+
+    return descriptionNode ?? sizeText;
   }, [description, byte, icon, src, type, name, namePrefix, ext]);
 
   const maskNode = useMemo(() => {
-    const size = typeof byte === 'number' ? getSize(byte) : '';
+    const sizeText = typeof byte === 'number' ? getSize(byte) : '';
     const maskContent =
       typeof mask === 'function'
-        ? mask({ size, icon, src, type, name, namePrefix, nameSuffix: ext })
+        ? mask({ size: sizeText, icon, src, type, name, namePrefix, nameSuffix: ext })
         : mask;
 
     return maskContent === false ? null : maskContent;
@@ -100,7 +104,7 @@ const File: React.FC<FileProps> = (props) => {
           <span className={`${compCls}-name-prefix`}>{namePrefix}</span>
           <span className={`${compCls}-name-suffix`}>{ext}</span>
         </div>
-        {desc && (
+        {desc !== null && desc !== undefined && (
           <div
             className={clsx(`${compCls}-description`, classNames.description)}
             style={styles.description}
@@ -109,7 +113,7 @@ const File: React.FC<FileProps> = (props) => {
           </div>
         )}
       </div>
-      {maskNode && (
+      {maskNode !== null && maskNode !== undefined && (
         <div className={`${compCls}-mask`}>
           <div className={`${compCls}-mask-info`}>{maskNode}</div>
         </div>
