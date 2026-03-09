@@ -80,6 +80,9 @@ export interface LocaleMessages {
   availableVersions: string;
   installationProgress: string;
   installationFailed: string;
+  tagValueRequired: string;
+  unknownOption: string;
+  useHelp: string;
 }
 
 // 定义语言类型
@@ -153,6 +156,11 @@ export const messages: Messages = {
     examples: '示例',
     environmentVariables: '环境变量',
 
+    // 命令行参数错误
+    tagValueRequired: '错误: --tag 参数需要一个值 / Error: --tag parameter requires a value',
+    unknownOption: '错误: 未知的选项 / Error: unknown option',
+    useHelp: '使用 --help 查看可用选项 / Use --help to see available options',
+
     // 版本和标签
     usingVersion: '使用版本: {version}',
     latestMarker: ' (latest)',
@@ -225,6 +233,11 @@ export const messages: Messages = {
     options: 'Options',
     examples: 'Examples',
     environmentVariables: 'Environment Variables',
+
+    // 命令行参数错误
+    tagValueRequired: 'Error: --tag parameter requires a value',
+    unknownOption: 'Error: unknown option',
+    useHelp: 'Use --help to see available options',
 
     // 版本和标签
     usingVersion: 'Using version: {version}',

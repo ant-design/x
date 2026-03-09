@@ -137,17 +137,41 @@ class SkillLoader {
 
   async downloadFile(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      https
+      const request = https
         .get(url, (res) => {
+          // 检查状态码
+          if (res.statusCode! < 200 || res.statusCode! >= 300) {
+            reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
+            return;
+          }
+
           if (res.statusCode === 302 || res.statusCode === 301) {
             // Follow redirect
-            https
-              .get(res.headers.location!, (res2) => {
+            if (!res.headers.location) {
+              reject(new Error('Redirect location not provided'));
+              return;
+            }
+
+            const redirectRequest = https
+              .get(res.headers.location, (res2) => {
+                // 检查重定向后的状态码
+                if (res2.statusCode! < 200 || res2.statusCode! >= 300) {
+                  reject(new Error(`HTTP ${res2.statusCode}: ${res2.statusMessage}`));
+                  return;
+                }
+
                 let data = '';
                 res2.on('data', (chunk) => (data += chunk));
                 res2.on('end', () => resolve(data));
               })
               .on('error', reject);
+
+            // 设置重定向请求的超时
+            redirectRequest.setTimeout(30000, () => {
+              redirectRequest.destroy();
+              reject(new Error('Redirect request timeout after 30 seconds'));
+            });
+
             return;
           }
 
@@ -156,21 +180,30 @@ class SkillLoader {
           res.on('end', () => resolve(data));
         })
         .on('error', reject);
+
+      // 设置请求超时
+      request.setTimeout(30000, () => {
+        request.destroy();
+        reject(new Error('Request timeout after 30 seconds'));
+      });
     });
   }
 
   async downloadDirectory(url: string, destPath: string): Promise<void> {
     let apiUrl: string;
 
-    if (url.includes('raw.githubusercontent.com')) {
-      const match = url.match(/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)/);
-      if (!match) throw new Error('Invalid raw GitHub URL format');
-      const [, owner, repo, ref, path] = match;
-      apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    const urlObj = new URL(url);
+
+    if (urlObj.hostname === 'raw.githubusercontent.com') {
+      const pathParts = urlObj.pathname.split('/').filter(Boolean);
+      if (pathParts.length < 4) throw new Error('Invalid raw GitHub URL format');
+      const [owner, repo, ref, ...pathPartsRest] = pathParts;
+      const filePath = pathPartsRest.join('/');
+      apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
       if (ref !== 'main' && ref !== 'master') {
         apiUrl += `?ref=${ref}`;
       }
-    } else if (url.includes('api.github.com')) {
+    } else if (urlObj.hostname === 'api.github.com') {
       apiUrl = url;
     } else {
       throw new Error('Unsupported URL format');
@@ -179,12 +212,15 @@ class SkillLoader {
     const contents = (await this.makeRequest(apiUrl)) as GitHubContent[];
 
     for (const item of contents) {
+      // 使用path.basename()清理文件名，防止路径遍历攻击
+      const safeName = path.basename(item.name);
+
       if (item.type === 'file') {
         const fileContent = await this.downloadFile(item.download_url!);
-        const filePath = path.join(destPath, item.name);
+        const filePath = path.join(destPath, safeName);
         fs.writeFileSync(filePath, fileContent);
       } else if (item.type === 'dir') {
-        const subDirPath = path.join(destPath, item.name);
+        const subDirPath = path.join(destPath, safeName);
         fs.mkdirSync(subDirPath, { recursive: true });
         await this.downloadDirectory(item.url!, subDirPath);
       }
@@ -213,11 +249,16 @@ class SkillLoader {
 
       // 使用Promise.race实现超时控制
       const downloadPromise = this.downloadDirectory(apiUrl, skillTempDir);
-      const timeoutPromise = new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error('Download timeout: 60s')), 60000),
-      );
+      let timeoutId: NodeJS.Timeout;
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error('Download timeout: 60s')), 60000);
+      });
 
-      await Promise.race([downloadPromise, timeoutPromise]);
+      try {
+        await Promise.race([downloadPromise, timeoutPromise]);
+      } finally {
+        clearTimeout(timeoutId!);
+      }
       return skillTempDir;
     } catch (error) {
       console.warn(
@@ -264,7 +305,8 @@ class SkillLoader {
     if (!vA.prerelease && vB.prerelease) return -1;
     if (vA.prerelease && !vB.prerelease) return 1;
     if (vA.prerelease && vB.prerelease) {
-      return vA.prerelease.localeCompare(vB.prerelease);
+      // 使用降序排序，确保最新的预发布版本排在前面
+      return vB.prerelease.localeCompare(vA.prerelease);
     }
 
     return 0;
@@ -331,11 +373,17 @@ class SkillLoader {
       // 使用Promise.race实现列表获取超时控制
       const apiUrl = `https://api.github.com/repos/${this.githubOwner}/${this.githubRepo}/contents/${basePath}?ref=${tag}`;
       const listPromise = this.makeRequest(apiUrl) as Promise<GitHubContent[]>;
-      const timeoutPromise = new Promise<never>((_, reject) =>
-        setTimeout(() => reject(new Error('List skills timeout: 60s')), 60000),
-      );
+      let timeoutId: NodeJS.Timeout;
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error('List skills timeout: 60s')), 60000);
+      });
 
-      const contents = await Promise.race([listPromise, timeoutPromise]);
+      let contents: GitHubContent[];
+      try {
+        contents = await Promise.race([listPromise, timeoutPromise]);
+      } finally {
+        clearTimeout(timeoutId!);
+      }
       const skillDirs = contents.filter((item) => item.type === 'dir').map((item) => item.name);
 
       const skills: Skill[] = [];
@@ -403,8 +451,10 @@ class SkillLoader {
 
     const items = fs.readdirSync(src, { withFileTypes: true });
     for (const item of items) {
-      const srcPath = path.join(src, item.name);
-      const destPath = path.join(dest, item.name);
+      // 使用path.basename()清理文件名，防止路径遍历攻击
+      const safeName = path.basename(item.name);
+      const srcPath = path.join(src, safeName);
+      const destPath = path.join(dest, safeName);
 
       if (item.isDirectory()) {
         this.copyDirectorySync(srcPath, destPath);

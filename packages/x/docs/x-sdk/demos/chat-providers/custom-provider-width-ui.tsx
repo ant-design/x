@@ -131,8 +131,8 @@ const role: BubbleListProps['role'] = {
           {content.content && <div>{content.content}</div>}
           {content.attachments && content.attachments.length > 0 && (
             <div style={{ marginTop: content.content ? 8 : 0 }}>
-              {content.attachments.map((attachment, index) => (
-                <div key={index} style={{ marginBottom: 8 }}>
+              {content.attachments.map((attachment) => (
+                <div key={attachment.url} style={{ marginBottom: 8 }}>
                   <FileCard type="file" name={attachment.name} />
                 </div>
               ))}
