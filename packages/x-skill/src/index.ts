@@ -82,6 +82,10 @@ class SkillInstaller {
     const args = process.argv.slice(2);
     const parsed: ParsedArgs = { tag: null, help: false, listVersions: false };
 
+    // 检测系统语言环境，默认为英文
+    const systemLang = (process.env.LANG || process.env.LANGUAGE || '').toLowerCase();
+    const defaultLanguage = systemLang.includes('zh') ? 'zh' : 'en';
+
     for (let i = 0; i < args.length; i++) {
       const arg = args[i];
       switch (arg) {
@@ -90,7 +94,7 @@ class SkillInstaller {
           if (i + 1 < args.length && !args[i + 1].startsWith('-')) {
             parsed.tag = args[++i];
           } else {
-            console.error('错误: --tag 参数需要一个值');
+            console.error(getMessage('tagValueRequired', defaultLanguage));
             process.exit(1);
           }
           break;
@@ -110,8 +114,8 @@ class SkillInstaller {
           break;
         default:
           if (arg.startsWith('-')) {
-            console.error(`错误: 未知的选项 '${arg}'`);
-            console.error('使用 --help 查看可用选项');
+            console.error(`${getMessage('unknownOption', defaultLanguage)} '${arg}'`);
+            console.error(getMessage('useHelp', defaultLanguage));
             process.exit(1);
           }
           break;
@@ -453,6 +457,9 @@ class SkillInstaller {
 
       this.language = languageChoice === '中文' ? 'zh' : 'en';
 
+      // 更新HelpManager的语言设置
+      this.helpManager.setLanguage(this.language);
+
       // Load skills from GitHub
       await this.loadSkills();
 
@@ -510,17 +517,20 @@ class SkillInstaller {
       }
 
       // Installation method selection
-      const installTypeOptions = [getMessage('globalInstall'), getMessage('projectInstall')];
+      const installTypeOptions = [
+        getMessage('globalInstall', this.language),
+        getMessage('projectInstall', this.language),
+      ];
 
       let selectedInstallType: string | null = null;
       while (!selectedInstallType) {
         selectedInstallType = await this.askQuestion(
-          getMessage('selectInstallType'),
+          getMessage('selectInstallType', this.language),
           installTypeOptions,
         );
       }
 
-      const isGlobal = selectedInstallType === getMessage('globalInstall');
+      const isGlobal = selectedInstallType === getMessage('globalInstall', this.language);
 
       // Installation process
       const totalSteps = selectedSoftwareList.length * selectedSkillNames.length;

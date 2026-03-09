@@ -1,5 +1,4 @@
 {
-  "name": "use-x-chat",
   "targets": {
     "codefuse": {
       "enabled": true,
