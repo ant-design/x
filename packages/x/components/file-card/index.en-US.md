@@ -51,7 +51,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | videoProps | Video props configuration | Partial<React.JSX.IntrinsicElements['video']> | - | - |
 | audioProps | Audio props configuration | Partial<React.JSX.IntrinsicElements['audio']> | - | - |
 | spinProps | Loading animation props configuration | [SpinProps](https://ant.design/components/spin-cn#api) & { showText?: boolean; icon?: React.ReactNode } | - | - |
-| onClick | Click event callback, receives file information and click event | (info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }, event: React.MouseEvent<HTMLDivElement>) => void | - | - |
+| onClick | Click event callback, receives file information and click event | (info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }, event: React.MouseEvent\<HTMLDivElement\>) => void | - | - |
 
 ### PresetIcons
 
