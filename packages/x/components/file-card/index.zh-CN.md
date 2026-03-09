@@ -50,7 +50,7 @@ tag: 2.0.0
 | videoProps | 视频属性配置 | Partial<React.JSX.IntrinsicElements['video']> | - | - |
 | audioProps | 音频属性配置 | Partial<React.JSX.IntrinsicElements['audio']> | - | - |
 | spinProps | 加载中属性 | [SpinProps](https://ant.design/components/spin-cn#api) & { showText?: boolean; icon?: React.ReactNode } | - | - |
-| onClick | 点击事件回调 | () => void | - | - |
+| onClick | 点击事件回调，接收文件信息和点击事件 | (info: { size: string, icon: React.ReactNode, namePrefix?: string, nameSuffix?: string, name?: string, src?: string, type?: string }, event: React.MouseEvent<HTMLDivElement>) => void | - | - |
 
 ### PresetIcons
 

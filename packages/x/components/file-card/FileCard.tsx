@@ -48,22 +48,20 @@ export type PresetIcons =
   | 'javascript'
   | 'python';
 
-type ExtendNode =
-  | false
-  | React.ReactNode
-  | ((info: {
-      size: string;
-      icon: React.ReactNode;
-      namePrefix?: string;
-      nameSuffix?: string;
-      name?: string;
-      src?: string;
-      type?: `${CARD_TYPE}`;
-    }) => React.ReactNode);
+type CardInfo = {
+  size: string;
+  icon: React.ReactNode;
+  namePrefix?: string;
+  nameSuffix?: string;
+  name?: string;
+  src?: string;
+  type?: `${CARD_TYPE}`;
+};
+type ExtendNode = false | React.ReactNode | ((info: CardInfo) => React.ReactNode);
 export interface FileCardProps
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
-    'content' | 'onAnimationStart' | 'onAnimationEnd'
+    'content' | 'onAnimationStart' | 'onAnimationEnd' | 'onClick'
   > {
   prefixCls?: string;
   style?: React.CSSProperties;
@@ -88,7 +86,7 @@ export interface FileCardProps
   };
   videoProps?: Partial<React.JSX.IntrinsicElements['video']>;
   audioProps?: Partial<React.JSX.IntrinsicElements['audio']>;
-  onClick?: () => void;
+  onClick?: (info: CardInfo, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'jfif'];

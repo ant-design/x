@@ -16,7 +16,7 @@ interface FileProps {
   description?: FileCardProps['description'];
   icon?: React.ReactNode;
   iconColor?: string;
-  onClick?: () => void;
+  onClick?: FileCardProps['onClick'];
   mask?: FileCardProps['mask'];
 }
 
@@ -64,8 +64,29 @@ const File: React.FC<FileProps> = (props) => {
     return maskContent === false ? null : maskContent;
   }, [mask, byte, icon, src, type, name, ext]);
 
+  const handleClick = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (onClick) {
+        const size = typeof byte === 'number' ? getSize(byte) : '';
+        onClick(
+          {
+            size,
+            icon,
+            name,
+            namePrefix: name,
+            nameSuffix: ext,
+            src,
+            type,
+          },
+          event,
+        );
+      }
+    },
+    [onClick, byte, icon, name, ext, src, type],
+  );
+
   return (
-    <div className={mergedCls} style={styles.file} onClick={onClick}>
+    <div className={mergedCls} style={styles.file} onClick={handleClick}>
       <div
         className={clsx(`${compCls}-icon`, classNames.icon)}
         style={{ color: iconColor, ...styles.icon }}
