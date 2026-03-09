@@ -68,11 +68,17 @@ it('should handle card click', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
   }
 });
+
 it('should handle custom description', () => {
   const { container } = render(<FileCard name="test.txt" description="Custom desc" />);
   expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe(
     'Custom desc',
   );
+});
+
+it('should handle custom no description', () => {
+  const { container } = render(<FileCard name="test.txt" byte={1024} description={false} />);
+  expect(container.querySelector('.ant-file-card-file-description')).not.toBeTruthy();
 });
 
 it('should handle image type', () => {
