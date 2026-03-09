@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import path from 'path';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import config, { type Config, type SkillConfig } from './config';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * Extract content after ## API from markdown file
@@ -105,7 +109,7 @@ function main(): void {
 }
 
 // 如果直接运行此脚本
-if (require.main === module) {
+if (import.meta.url === `file://${__filename}`) {
   main();
 }
 

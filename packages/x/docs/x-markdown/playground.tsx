@@ -1,6 +1,6 @@
-import XMarkdown from '@ant-design/x-markdown';
 import type { ComponentProps } from '@ant-design/x-markdown';
-import { Button, Card, Flex, Input, Segmented, Space, Switch, theme, Typography } from 'antd';
+import XMarkdown from '@ant-design/x-markdown';
+import { Button, Card, Flex, Input, Segmented, Space, Switch, Typography, theme } from 'antd';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';

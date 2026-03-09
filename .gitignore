@@ -27,6 +27,7 @@ _data
 dist
 report.html
 lib
+bin
 es
 
 elasticsearch-*

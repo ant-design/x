@@ -4,6 +4,7 @@
  */
 
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 export interface SkillConfig {
   [skillName: string]: string;
@@ -30,8 +31,9 @@ export interface Config {
   };
 }
 
-// 基于当前文件位置计算相对路径
-const scriptDir = __dirname;
+// 基于当前文件位置计算相对路径（兼容ES模块）
+const __filename = fileURLToPath(import.meta.url);
+const scriptDir = path.dirname(__filename);
 const projectRoot = path.join(scriptDir, '..');
 
 // 原有的文档链接配置

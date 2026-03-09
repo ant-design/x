@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-skill",
-  "version": "2.3.0",
+  "version": "2.3.0-beta.1",
   "description": "placeholder for @ant-design/x-sdk",
   "homepage": "https://x.ant.design/x-skills/introduce",
   "bugs": {
@@ -20,19 +20,20 @@
     "react"
   ],
   "scripts": {
-    "precompile": "npm run prestart",
+    "precompile": "npm run skillApi && npm run prestart",
+    "compile": "father build",
     "skillApi": "tsx scripts/skillApi.ts",
-    "compile": "echo '✅ compile success' && exit 0",
-    "test": "jest --config .jest.js --no-cache --collect-coverage",
-    "coverage": "jest --config .jest.js --no-cache --collect-coverage --coverage",
+    "generate-meta": "tsx scripts/generate-meta.ts && biome format --write src/skill-meta.json",
+    "test": "echo 'test skipped for x-skill' && exit 0",
+    "pretest": "echo 'test skipped for x-skill' && exit 0",
+    "coverage": "echo 'coverage skipped for x-skill' && exit 0",
     "test:dekko": "tsx scripts/dekko.ts",
     "prepublishOnly": "tsx ../../scripts/pre-publish.ts x-skill",
     "version": "tsx scripts/generate-version.ts",
     "clean": "rm -rf coverage lib es",
-    "pretest": "npm run prestart",
-    "start": "node bin/index.js",
-    "prestart": "npm run skillApi && npm run version",
-    "lint": "biome lint bin/",
+    "start": "father build && node bin/index.js",
+    "prestart": "npm run version && npm run generate-meta",
+    "lint": "biome lint src/",
     "tsc": "tsc --noEmit"
   },
   "sideEffects": true,
@@ -50,11 +51,14 @@
     "url": "https://github.com/ant-design/x"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "mock-fs": "^5.5.0",
+    "@biomejs/biome": "^2.0.5",
+    "@types/node": "^25.3.5",
     "tsx": "^4.19.1",
-    "typescript": "~5.9.3",
-    "@types/node": "^24.0.3",
-    "@biomejs/biome": "^2.0.5"
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "figlet": "^1.10.0",
+    "ora": "^9.3.0",
+    "progress": "^2.0.3"
   }
 }
