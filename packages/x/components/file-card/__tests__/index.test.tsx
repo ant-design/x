@@ -119,6 +119,13 @@ it('should handle mask', () => {
   expect(container.querySelector('.custom-mask')).toBeTruthy();
 });
 
+it('should handle mask fn', () => {
+  const { container } = render(
+    <FileCard name="test.txt" mask={({ name }) => <div className="custom-mask">{name}</div>} />,
+  );
+  expect(container.querySelector('.custom-mask')).toBeTruthy();
+});
+
 it('should handle custom icon', () => {
   const { container } = render(
     <FileCard name="test.txt" icon={<span className="custom-icon">ICON</span>} />,
