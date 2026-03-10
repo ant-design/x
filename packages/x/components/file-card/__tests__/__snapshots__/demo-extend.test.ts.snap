@@ -1198,7 +1198,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             style="width: 100%; height: 100%;"
           >
             <div
-              class="ant-file-card-image-spin ant-file-card-image-spin-default ant-flex css-var-_r_23_ ant-flex-align-center ant-flex-gap-small"
+              class="ant-file-card-image-spin ant-file-card-image-spin-middle ant-flex css-var-_r_23_ ant-flex-align-center ant-flex-gap-small"
             >
               <div
                 aria-busy="true"

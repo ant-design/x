@@ -72,6 +72,7 @@ export interface FileCardProps
   spinProps?: SpinProps & {
     showText?: boolean;
     icon?: React.ReactNode;
+    size: 'small' | 'default' | 'large';
   };
   videoProps?: Partial<React.JSX.IntrinsicElements['video']>;
   audioProps?: Partial<React.JSX.IntrinsicElements['audio']>;

@@ -1,11 +1,45 @@
+import { SettingOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import { Button, Flex, Skeleton, Space, Switch, Typography, theme } from 'antd';
+import { Button, Flex, Input, Popover, Skeleton, Switch, Typography, theme } from 'antd';
 import React, { useState } from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
 
 const { Text } = Typography;
+
+interface ToggleItemProps {
+  label: string;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}
+
+const ToggleItem: React.FC<ToggleItemProps> = ({ label, checked, onChange }) => (
+  <Flex align="center" justify="space-between" gap={16} style={{ minWidth: 180 }}>
+    <Text style={{ fontSize: 12, margin: 0, whiteSpace: 'nowrap' }}>{label}</Text>
+    <Switch size="small" checked={checked} onChange={onChange} />
+  </Flex>
+);
+
+interface InputItemProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+}
+
+const InputItem: React.FC<InputItemProps> = ({ label, value, onChange, disabled }) => (
+  <Flex align="center" justify="space-between" gap={16} style={{ minWidth: 180 }}>
+    <Text style={{ fontSize: 12, margin: 0, whiteSpace: 'nowrap' }}>{label}</Text>
+    <Input
+      size="small"
+      style={{ width: 80 }}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      disabled={disabled}
+    />
+  </Flex>
+);
 
 // 简化的示例文本
 const text = `# Ant Design X
@@ -29,28 +63,27 @@ const LoadingComponents = {
 const App: React.FC = () => {
   const [enableAnimation, setEnableAnimation] = useState(true);
   const [enableCache, setEnableCache] = useState(true);
+  const [tailEnabled, setTailEnabled] = useState(false);
+  const [tailContent, setTailContent] = useState('▋');
   const [isStreaming, setIsStreaming] = useState(false);
   const [index, setIndex] = useState(0);
   const { theme: antdTheme } = theme.useToken();
   const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
   const timer = React.useRef<any>(-1);
 
-  const renderStream = () => {
+  React.useEffect(() => {
+    clearTimeout(timer.current);
+
     if (index >= text.length) {
-      clearTimeout(timer.current);
       setIsStreaming(false);
       return;
     }
-    timer.current = setTimeout(() => {
-      setIndex((prev) => prev + 1);
-      renderStream();
-    }, 50);
-  };
 
-  React.useEffect(() => {
-    if (index === text.length) return;
-    renderStream();
     setIsStreaming(true);
+    timer.current = setTimeout(() => {
+      setIndex((prev) => Math.min(prev + 1, text.length));
+    }, 50);
+
     return () => {
       clearTimeout(timer.current);
     };
@@ -70,26 +103,41 @@ const App: React.FC = () => {
     >
       <Flex vertical gap="middle" style={{ flex: 1, minHeight: 0, overflow: 'hidden' }}>
         <Flex gap="small" justify="end" style={{ flexShrink: 0 }}>
-          <Space>
-            <Text>动画</Text>
-            <Switch
-              checked={enableAnimation}
-              onChange={setEnableAnimation}
-              checkedChildren="开"
-              unCheckedChildren="关"
-            />
-          </Space>
-          <Space>
-            <Text>语法处理</Text>
-            <Switch
-              checked={enableCache}
-              onChange={setEnableCache}
-              checkedChildren="开"
-              unCheckedChildren="关"
-            />
-          </Space>
-          <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
-            重新渲染
+          <Popover
+            trigger="click"
+            placement="bottomRight"
+            content={
+              <Flex vertical gap={10}>
+                <ToggleItem
+                  label="Animation"
+                  checked={enableAnimation}
+                  onChange={setEnableAnimation}
+                />
+                <ToggleItem label="Syntax Cache" checked={enableCache} onChange={setEnableCache} />
+                <ToggleItem label="Tail" checked={tailEnabled} onChange={setTailEnabled} />
+                <InputItem
+                  label="Tail Content"
+                  value={tailContent}
+                  onChange={setTailContent}
+                  disabled={!tailEnabled}
+                />
+              </Flex>
+            }
+          >
+            <Button type="default" size="small" icon={<SettingOutlined />}>
+              Config
+            </Button>
+          </Popover>
+          <Button
+            type="primary"
+            size="small"
+            style={{ alignSelf: 'flex-end' }}
+            onClick={() => {
+              setIndex(0);
+              setIsStreaming(true);
+            }}
+          >
+            Run Stream
           </Button>
         </Flex>
 
@@ -104,6 +152,7 @@ const App: React.FC = () => {
                 streaming={{
                   hasNextChunk: isStreaming && enableCache,
                   enableAnimation,
+                  tail: tailEnabled ? { content: tailContent || '▋' } : false,
                   incompleteMarkdownComponentMap: {
                     link: 'loading-link',
                     image: 'loading-image',

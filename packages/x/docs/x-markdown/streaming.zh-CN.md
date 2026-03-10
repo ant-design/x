@@ -1,13 +1,13 @@
 ---
-title: 流式处理
+title: 流式渲染
 order: 4
 ---
 
-处理 **LLM 流式返回的 Markdown**：不完整语法修复、渐进动画，以及开发期可选的性能监控。
+处理 **LLM 流式返回的 Markdown**：语法补全和缓存、动画以及尾缀。
 
 ## 代码示例
 
-<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx" description="淡入动画与可选调试面板">动画与调试</code>
+<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
 
 ## API
 
@@ -19,6 +19,14 @@ order: 4
 | incompleteMarkdownComponentMap | 未完成语法的组件映射 | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
 | enableAnimation | 是否启用淡入动画 | `boolean` | `false` |
 | animationConfig | 动画参数 | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
+| tail | 是否启用尾部指示器 | `boolean \| TailConfig` | `false` |
+
+### TailConfig
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| content | 尾部显示的内容 | `string` | `'▋'` |
+| component | 自定义尾部组件，优先级高于 content | `React.ComponentType<{ content?: string }>` | - |
 
 ### AnimationConfig
 
@@ -26,6 +34,23 @@ order: 4
 | ------------ | ---------------- | -------- | --------------- |
 | fadeDuration | 动画时长（毫秒） | `number` | `200`           |
 | easing       | 缓动函数         | `string` | `'ease-in-out'` |
+
+> 尾部默认显示 `▋`。可通过 `content` 自定义字符，或通过 `component` 传入自定义 React 组件实现动画、延迟显示等效果。
+>
+> ```tsx
+> // 自定义尾部组件示例
+> const DelayedTail: React.FC<{ content?: string }> = ({ content }) => {
+>   const [visible, setVisible] = useState(false);
+>
+>   useEffect(() => {
+>     const timer = setTimeout(() => setVisible(true), 2000);
+>     return () => clearTimeout(timer);
+>   }, []);
+>
+>   if (!visible) return null;
+>   return <span className="my-tail">{content}</span>;
+> };
+> ```
 
 ### debug
 
@@ -53,6 +78,7 @@ order: 4
   streaming={{
     hasNextChunk,
     enableAnimation: true,
+    tail: true,
     incompleteMarkdownComponentMap: {
       link: 'link-loading',
       table: 'table-loading',
