@@ -60,74 +60,82 @@ const useStreamText = (text: string) => {
   };
   return { text: text.slice(0, textIndex), streamStatus, timestamp: textTimestamp.current, run };
 };
-const App = () => {
-  const CreateCard: XAgentCommand_v0_9 = {
-    version: 'v0.9',
-    createSurface: {
-      surfaceId: 'booking',
-      catalogId: 'https://a2ui.org/specification/v0_9/basic_catalog.json',
-    },
-  };
-  const UpdateCard: XAgentCommand_v0_9 = {
-    version: 'v0.9',
-    updateComponents: {
-      surfaceId: 'booking',
-      components: [
-        {
-          id: 'title',
-          component: 'Text',
-          text: 'Book Your Table',
-          variant: 'h1',
-        },
-        {
-          id: 'datetime',
-          component: 'DateTimeInput',
-          value: { path: '/booking/date' },
-          enableDate: true,
-        },
-        {
-          id: 'submit-text',
-          component: 'Text',
-          text: 'Confirm',
-        },
-        {
-          id: 'submit-btn',
-          component: 'Button',
-          child: 'submit-text',
-          variant: 'primary',
-          action: {
-            event: { name: 'confirm_booking' },
-          },
-        },
-      ],
-    },
-  };
-  const UpdateModel: XAgentCommand_v0_9 = {
-    version: 'v0.9',
-    updateDataModel: {
-      surfaceId: 'booking',
-      path: '/booking',
-      value: {
-        date: '2025-12-16T19:00:00Z',
+
+const CreateCard: XAgentCommand_v0_9 = {
+  version: 'v0.9',
+  createSurface: {
+    surfaceId: 'booking',
+    catalogId: 'https://a2ui.org/specification/v0_9/basic_catalog.json',
+  },
+};
+const UpdateCard: XAgentCommand_v0_9 = {
+  version: 'v0.9',
+  updateComponents: {
+    surfaceId: 'booking',
+    components: [
+      {
+        id: 'title',
+        component: 'Text',
+        text: 'Book Your Table',
+        variant: 'h1',
       },
+      {
+        id: 'datetime',
+        component: 'DateTimeInput',
+        value: { path: '/booking/date' },
+        enableDate: true,
+      },
+      {
+        id: 'submit-text',
+        component: 'Text',
+        text: 'Confirm',
+      },
+      {
+        id: 'submit-btn',
+        component: 'Button',
+        child: 'submit-text',
+        variant: 'primary',
+        action: {
+          event: { name: 'confirm_booking' },
+        },
+      },
+    ],
+  },
+};
+const UpdateModel: XAgentCommand_v0_9 = {
+  version: 'v0.9',
+  updateDataModel: {
+    surfaceId: 'booking',
+    path: '/booking',
+    value: {
+      date: '2025-12-16T19:00:00Z',
     },
+  },
+};
+
+const App = () => {
+  const [card, setCard] = useState<CardNode[]>([]);
+  const [commands, setCommands] = useState<XAgentCommand_v0_9>();
+  const onAgentCommand = (command: XAgentCommand_v0_9) => {
+    if ('createSurface' in command) {
+      setCard([
+        {
+          id: 'booking',
+          timestamp: Date.now(),
+        },
+      ]);
+    } else {
+      setCommands(command);
+    }
   };
 
-  const onAgentCommand = (command: XAgentCommand_v0_9) => {
-    console.log(command, 'command');
-  };
   const {
     text: textHeader,
     streamStatus: streamStatusHeader,
     timestamp: timestampHeader,
     run: runHeader,
   } = useStreamText(contentHeader);
-  const {
-    text: textFooter,
-    streamStatus: streamStatusFooter,
-    timestamp: timestampFooter,
-    run: runFooter,
-  } = useStreamText(text2);
+  const { text: textFooter, timestamp: timestampFooter, run: runFooter } = useStreamText(text2);
 
   useEffect(() => {
     runHeader();
@@ -136,6 +144,7 @@ const App = () => {
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
       onAgentCommand(CreateCard);
+      onAgentCommand(UpdateCard);
       runFooter();
     }
   }, [streamStatusHeader]);
@@ -146,14 +155,13 @@ const App = () => {
         texts: [
           { text: textHeader, timestamp: timestampHeader },
           { text: textFooter, timestamp: timestampFooter },
-        ],
-        card: [],
+        ].filter((item) => item.timestamp !== 0),
+        card,
       } as ContentType,
       role: 'assistant',
       key: '1',
     },
   ];
-
   return (
     <div>
       {version}
@@ -163,6 +171,7 @@ const App = () => {
       重新触发
     </Button> */}
       <XCard.Box
+        commands={commands}
         components={{
           Text,
           List,
