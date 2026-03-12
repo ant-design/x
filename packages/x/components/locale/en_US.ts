@@ -29,6 +29,12 @@ const localeValues: Required<xLocale> = {
     code: 'Code',
     image: 'Image',
   },
+  Folder: {
+    selectFile: 'Please select a file',
+    loadError: 'Failed to load file',
+    noService: 'File content service not configured',
+    loadFailed: 'Failed to load file',
+  },
 };
 
 export default localeValues;

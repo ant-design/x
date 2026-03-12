@@ -29,6 +29,12 @@ const localeValues: Required<xLocale> = {
     code: '代码',
     image: '图片',
   },
+  Folder: {
+    selectFile: '请选择一个文件',
+    loadError: '文件加载失败',
+    noService: '未配置文件内容服务',
+    loadFailed: '加载文件失败',
+  },
 };
 
 export default localeValues;
