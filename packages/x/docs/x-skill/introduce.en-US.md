@@ -21,7 +21,9 @@ title: Introduction
 
 ## 🔧 Included Skills
 
-Please check the [Skills List](/x-skills/skills)
+- **use-x-chat**: Conversation SDK usage guide
+- **x-chat-provider**: Chat data flow management
+- **x-request**: Network request best practices
 
 ## 🚀 Quick Start
 

@@ -21,7 +21,9 @@ title: 介绍
 
 ## 🔧 包含的技能
 
-请查看 [技能列表](/x-skills/skills-cn)
+- **use-x-chat**：对话 SDK 使用指南
+- **x-chat-provider**：聊天数据流管理
+- **x-request**：网络请求最佳实践
 
 ## 🚀 快速开始
 
