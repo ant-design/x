@@ -14,6 +14,7 @@ interface ImageIconProps {
 
 enum ImageIconSize {
   small = '32px',
+  middle = '46px',
   default = '46px',
   large = '52px',
 }
