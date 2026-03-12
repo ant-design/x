@@ -73,7 +73,7 @@ describe('Renderer', () => {
     it('should handle void elements correctly', () => {
       const renderer = new Renderer({
         components: {
-          'img': MockComponent,
+          img: MockComponent,
         },
       });
       // Access private method for testing
@@ -93,6 +93,99 @@ describe('Renderer', () => {
       const html3 = '<div><img src="image.png"></div><p>';
       const result3 = detectUnclosedTags(html3);
       expect(result3.size).toBe(0);
+    });
+
+    it('should handle HTML comments correctly', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Comment inside closed tag - should be properly closed
+      const html1 = '<custom-tag><!-- <unclosed> comment --></custom-tag>';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.size).toBe(0);
+
+      // Comment before and after tag
+      const html2 = '<!-- comment --><custom-tag>content</custom-tag><!-- end -->';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.size).toBe(0);
+
+      // Comment before unclosed tag
+      const html3 = '<!-- comment --><custom-tag>content';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.has('custom-tag-1')).toBe(true);
+    });
+
+    it('should handle CDATA sections correctly', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // CDATA inside closed tag
+      const html1 = '<custom-tag><![CDATA[<unclosed>]]></custom-tag>';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.size).toBe(0);
+
+      // CDATA before tag
+      const html2 = '<![CDATA[some data]]><custom-tag>content</custom-tag>';
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.size).toBe(0);
+
+      // CDATA before unclosed tag
+      const html3 = '<![CDATA[data]]><custom-tag>content';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.has('custom-tag-1')).toBe(true);
+    });
+
+    it('should handle escaped quotes in attributes', () => {
+      const renderer = new Renderer({
+        components: {
+          'custom-tag': MockComponent,
+        },
+      });
+
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Escaped double quotes in attribute
+      const html1 = '<custom-tag attr="he said \\"hello\\"">content</custom-tag>';
+      const result1 = detectUnclosedTags(html1);
+      expect(result1.size).toBe(0);
+
+      // Escaped single quotes in attribute
+      const html2 = "<custom-tag attr='it\\'s fine'>content</custom-tag>";
+      const result2 = detectUnclosedTags(html2);
+      expect(result2.size).toBe(0);
+
+      // Mixed quotes with escaped characters
+      const html3 = '<custom-tag a="\\"test\\"" b="\'value\'">content</custom-tag>';
+      const result3 = detectUnclosedTags(html3);
+      expect(result3.size).toBe(0);
+    });
+
+    it('should handle multiple comments and CDATA mixed with tags', () => {
+      const renderer = new Renderer({
+        components: {
+          'tag-a': MockComponent,
+          'tag-b': MockComponent,
+        },
+      });
+
+      const detectUnclosedTags = (renderer as any).detectUnclosedTags.bind(renderer);
+
+      // Complex HTML with comments, CDATA, and multiple tags
+      const html = '<!-- start --><tag-a><!-- inner --><![CDATA[data]]></tag-a><tag-b>unclosed';
+      const result = detectUnclosedTags(html);
+      expect(result.size).toBe(1);
+      expect(result.has('tag-b-1')).toBe(true);
+      expect(result.has('tag-a-1')).toBe(false);
     });
   });
 
