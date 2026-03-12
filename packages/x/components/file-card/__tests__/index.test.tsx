@@ -54,11 +54,31 @@ it('should display file size correctly', () => {
   expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe('1 KB');
 });
 
+it('should handle card click', () => {
+  const onClick = jest.fn();
+  const { container } = render(
+    <FileCard name="test.txt" icon="excel" byte={1024} onClick={onClick} />,
+  );
+
+  const cardElement = container.querySelector('.ant-file-card-file');
+  expect(cardElement).toBeTruthy();
+
+  if (cardElement) {
+    fireEvent.click(cardElement);
+    expect(onClick).toHaveBeenCalledTimes(1);
+  }
+});
+
 it('should handle custom description', () => {
   const { container } = render(<FileCard name="test.txt" description="Custom desc" />);
   expect(container.querySelector('.ant-file-card-file-description')?.textContent).toBe(
     'Custom desc',
   );
+});
+
+it('should handle custom no description', () => {
+  const { container } = render(<FileCard name="test.txt" byte={1024} description={false} />);
+  expect(container.querySelector('.ant-file-card-file-description')).not.toBeTruthy();
 });
 
 it('should handle image type', () => {
@@ -101,6 +121,13 @@ it('should handle custom styles', () => {
 it('should handle mask', () => {
   const { container } = render(
     <FileCard name="test.txt" mask={<div className="custom-mask">Mask</div>} />,
+  );
+  expect(container.querySelector('.custom-mask')).toBeTruthy();
+});
+
+it('should handle mask fn', () => {
+  const { container } = render(
+    <FileCard name="test.txt" mask={({ name }) => <div className="custom-mask">{name}</div>} />,
   );
   expect(container.querySelector('.custom-mask')).toBeTruthy();
 });

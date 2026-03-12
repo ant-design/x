@@ -139,6 +139,10 @@ ${this.colorize(getMessage('examples', this.language), 'yellow')}
       error.message,
     );
   }
+
+  setLanguage(language: Language): void {
+    this.language = language;
+  }
 }
 
 export default HelpManager;

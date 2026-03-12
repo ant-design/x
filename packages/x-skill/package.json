@@ -23,6 +23,7 @@
     "precompile": "npm run skillApi && npm run prestart",
     "compile": "father build",
     "skillApi": "tsx scripts/skillApi.ts",
+    "generate-meta": "tsx scripts/generate-meta.ts && biome format --write src/skill-meta.json",
     "test": "echo 'test skipped for x-skill' && exit 0",
     "pretest": "echo 'test skipped for x-skill' && exit 0",
     "coverage": "echo 'coverage skipped for x-skill' && exit 0",
@@ -31,7 +32,7 @@
     "version": "tsx scripts/generate-version.ts",
     "clean": "rm -rf coverage lib es",
     "start": "father build && node bin/index.js",
-    "prestart": "npm run version",
+    "prestart": "npm run version && npm run generate-meta",
     "lint": "biome lint src/",
     "tsc": "tsc --noEmit"
   },
@@ -51,13 +52,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.5",
-    "@types/node": "^24.0.3",
+    "@types/node": "^25.3.5",
     "tsx": "^4.19.1",
     "typescript": "~5.9.3"
   },
   "dependencies": {
     "figlet": "^1.10.0",
-    "ora": "^8.2.0",
+    "ora": "^9.3.0",
     "progress": "^2.0.3"
   }
 }

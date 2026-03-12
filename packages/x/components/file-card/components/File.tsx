@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
-import { SemanticType } from '../FileCard';
+import { type FileCardProps, SemanticType } from '../FileCard';
 import { getSize } from '../utils';
 
 interface FileProps {
@@ -8,14 +8,17 @@ interface FileProps {
   classNames?: Partial<Record<SemanticType, string>>;
   prefixCls?: string;
   name?: string;
+  namePrefix?: string;
   ext?: string;
   size?: 'small' | 'default';
   byte?: number;
-  description?: React.ReactNode;
+  src?: string;
+  type?: FileCardProps['type'];
+  description?: FileCardProps['description'];
   icon?: React.ReactNode;
   iconColor?: string;
-  onClick?: () => void;
-  mask?: React.ReactNode;
+  onClick?: FileCardProps['onClick'];
+  mask?: FileCardProps['mask'];
 }
 
 const File: React.FC<FileProps> = (props) => {
@@ -24,9 +27,12 @@ const File: React.FC<FileProps> = (props) => {
     classNames = {},
     prefixCls,
     name,
+    namePrefix,
     ext,
     size,
     byte,
+    src,
+    type,
     description,
     icon,
     iconColor,
@@ -41,17 +47,52 @@ const File: React.FC<FileProps> = (props) => {
   });
 
   const desc = useMemo(() => {
-    if (description) {
-      return description;
+    const sizeText = typeof byte === 'number' ? getSize(byte) : '';
+    const descriptionNode =
+      typeof description === 'function'
+        ? description({ size: sizeText, icon, src, type, name, namePrefix, nameSuffix: ext })
+        : description;
+
+    if (descriptionNode === false) {
+      return null;
     }
-    if (typeof byte === 'number') {
-      return getSize(byte);
-    }
-    return '';
-  }, [description, byte]);
+
+    return descriptionNode ?? sizeText;
+  }, [description, byte, icon, src, type, name, namePrefix, ext]);
+
+  const maskNode = useMemo(() => {
+    const sizeText = typeof byte === 'number' ? getSize(byte) : '';
+    const maskContent =
+      typeof mask === 'function'
+        ? mask({ size: sizeText, icon, src, type, name, namePrefix, nameSuffix: ext })
+        : mask;
+
+    return maskContent === false ? null : maskContent;
+  }, [mask, byte, icon, src, type, name, namePrefix, ext]);
+
+  const handleClick = React.useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (onClick) {
+        const size = typeof byte === 'number' ? getSize(byte) : '';
+        onClick(
+          {
+            size,
+            icon,
+            name,
+            namePrefix,
+            nameSuffix: ext,
+            src,
+            type,
+          },
+          event,
+        );
+      }
+    },
+    [onClick, byte, icon, name, namePrefix, ext, src, type],
+  );
 
   return (
-    <div className={mergedCls} style={styles.file} onClick={onClick}>
+    <div className={mergedCls} style={styles.file} onClick={handleClick}>
       <div
         className={clsx(`${compCls}-icon`, classNames.icon)}
         style={{ color: iconColor, ...styles.icon }}
@@ -60,10 +101,10 @@ const File: React.FC<FileProps> = (props) => {
       </div>
       <div className={`${compCls}-content`}>
         <div className={clsx(`${compCls}-name`, classNames.name)} style={styles.name}>
-          <span className={`${compCls}-name-prefix`}>{name}</span>
+          <span className={`${compCls}-name-prefix`}>{namePrefix}</span>
           <span className={`${compCls}-name-suffix`}>{ext}</span>
         </div>
-        {desc && (
+        {desc !== null && desc !== undefined && (
           <div
             className={clsx(`${compCls}-description`, classNames.description)}
             style={styles.description}
@@ -72,9 +113,9 @@ const File: React.FC<FileProps> = (props) => {
           </div>
         )}
       </div>
-      {mask && (
+      {maskNode !== null && maskNode !== undefined && (
         <div className={`${compCls}-mask`}>
-          <div className={`${compCls}-mask-info`}>{mask}</div>
+          <div className={`${compCls}-mask-info`}>{maskNode}</div>
         </div>
       )}
     </div>

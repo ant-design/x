@@ -1,16 +1,16 @@
 import { Tooltip } from 'antd';
 import { FormattedMessage } from 'dumi';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 
-import { ping } from '../../utils';
+// import { ping } from '../../utils';
 
-let pingDeferrer: PromiseLike<boolean>;
+// let pingDeferrer: PromiseLike<boolean>;
 
-const codeBlockJs =
-  'https://renderoffice.a' +
-  'lipay' +
-  'objects.com/p' +
-  '/yuyan/180020010001206410/parseFileData-v1.0.1.js';
+// const codeBlockJs =
+//   'https://renderoffice.a' +
+//   'lipay' +
+//   'objects.com/p' +
+//   '/yuyan/180020010001206410/parseFileData-v1.0.1.js';
 
 // function useShowCodeBlockButton() {
 //   const [showCodeBlockButton, setShowCodeBlockButton] = useState(false);
