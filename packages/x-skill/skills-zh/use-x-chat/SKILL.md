@@ -161,7 +161,6 @@ graph TD
     A --> D[Ant Design X UI]
     D --> E[Bubble组件]
     D --> F[Sender组件]
-    E --> G[XMarkdown渲染]
 ```
 
 ### 数据模型
@@ -197,17 +196,15 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 | **核心依赖** | **x-chat-provider** | 提供自定义 Provider 实例，默认使用 XRequest, **必须**配合 use-x-chat | **必须** |
 | **或** | **内置 Provider** | OpenAI/DeepSeek 等内置 Provider，默认使用 XRequest | **必须** |
 | **推荐依赖** | **x-request** | 配置请求参数和认证，作为默认请求方式 | **推荐** |
-| **推荐渲染层** | **x-markdown** | 渲染 Markdown 回复、流式富文本区块和自定义标签内容 | **推荐** |
 
 ## 🎯 使用场景对照表
 
-| 使用场景 | 需要的技能组合 | 使用顺序 |
-| --- | --- | --- |
-| **私有API适配** | x-chat-provider → use-x-chat | 先创建Provider，再使用 |
-| **标准API使用** | use-x-chat（内置Provider） | 直接使用 |
-| **需要认证配置** | x-request → use-x-chat | 先配置请求，再使用 |
-| **Markdown 聊天界面** | x-request → use-x-chat → x-markdown | 先配请求和状态，再渲染 Markdown 回复 |
-| **完整自定义** | x-chat-provider → x-request → use-x-chat | 完整工作流 |
+| 使用场景         | 需要的技能组合                           | 使用顺序               |
+| ---------------- | ---------------------------------------- | ---------------------- |
+| **私有API适配**  | x-chat-provider → use-x-chat             | 先创建Provider，再使用 |
+| **标准API使用**  | use-x-chat（内置Provider）               | 直接使用               |
+| **需要认证配置** | x-request → use-x-chat                   | 先配置请求，再使用     |
+| **完整自定义**   | x-chat-provider → x-request → use-x-chat | 完整工作流             |
 
 # 🚨 开发规则
 
@@ -219,7 +216,6 @@ type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'a
 - [ ] 已安装 @ant-design/x-sdk
 - [ ] 已了解 MessageInfo 数据结构
 - [ ] 已准备好 UI 组件
-- [ ] 如果回复内容是 Markdown，已规划使用 **x-markdown** 作为渲染层
 
 ### 测试用例规则
 

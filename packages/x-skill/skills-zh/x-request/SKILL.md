@@ -204,8 +204,7 @@ graph TD
     A[x-request] -->|配置请求| B[x-chat-provider]
     A -->|配置请求| C[use-x-chat]
     B -->|提供Provider| C
-    C --> D[x-markdown]
-    A --> E[直接请求]
+    A --> D[直接请求]
 ```
 
 | 使用方式 | 配合技能 | 作用 | 示例 |
@@ -214,7 +213,6 @@ graph TD
 | **配合 x-chat-provider** | x-chat-provider | 为自定义 Provider 配置请求 | 配置私有 API |
 | **配合 use-x-chat** | use-x-chat | 为内置 Provider 配置请求 | 配置 OpenAI API |
 | **完整 AI 应用** | x-request → x-chat-provider → use-x-chat | 为整个系统配置请求 | 完整 AI 对话应用 |
-| **Markdown AI 应用** | x-request → x-chat-provider → use-x-chat → x-markdown | 将请求配置与渲染逻辑分离 | 富 Markdown 对话界面 |
 
 ### ⚠️ useXChat 集成安全警告
 

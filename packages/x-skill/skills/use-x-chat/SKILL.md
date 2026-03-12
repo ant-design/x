@@ -161,7 +161,6 @@ graph TD
     A --> D[Ant Design X UI]
     D --> E[Bubble Component]
     D --> F[Sender Component]
-    E --> G[XMarkdown Rendering]
 ```
 
 ### Data Model
@@ -197,7 +196,6 @@ Core functionality reference content [CORE.md](reference/CORE.md)
 | **Core Dependency** | **x-chat-provider** | Provides custom Provider instance, default uses XRequest, **must** be used with use-x-chat | **Required** |
 | **Or** | **Built-in Provider** | OpenAI/DeepSeek and other built-in Providers, default uses XRequest | **Required** |
 | **Recommended Dependency** | **x-request** | Configure request parameters and authentication, as the default request method | **Recommended** |
-| **Recommended Render Layer** | **x-markdown** | Render assistant Markdown replies, streaming-rich blocks, and custom tag content | **Recommended** |
 
 ## 🎯 Usage Scenario Comparison Table
 
@@ -206,7 +204,6 @@ Core functionality reference content [CORE.md](reference/CORE.md)
 | **Private API Adaptation** | x-chat-provider → use-x-chat | Create Provider first, then use |
 | **Standard API Usage** | use-x-chat (built-in Provider) | Direct use |
 | **Authentication Configuration Needed** | x-request → use-x-chat | Configure request first, then use |
-| **Markdown Chat UI** | x-request → use-x-chat → x-markdown | Configure request, manage state, then render Markdown replies |
 | **Complete Customization** | x-chat-provider → x-request → use-x-chat | Complete workflow |
 
 # 🚨 Development Rules
@@ -219,7 +216,6 @@ Core functionality reference content [CORE.md](reference/CORE.md)
 - [ ] @ant-design/x-sdk is installed
 - [ ] Understand MessageInfo data structure
 - [ ] UI components are ready
-- [ ] If assistant replies are Markdown, the render layer is planned with **x-markdown**
 
 ### Test Case Rules
 
