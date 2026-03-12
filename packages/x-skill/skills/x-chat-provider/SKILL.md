@@ -55,6 +55,7 @@ description: Focus on implementing custom Chat Provider, helping to adapt any st
 > import { Bubble } from '@ant-design/x'; // UI component
 > import { AbstractChatProvider } from '@ant-design/x-sdk'; // Provider base class
 > import { XRequest } from '@ant-design/x-sdk'; // Request tool
+> import { XMarkdown } from '@ant-design/x-markdown'; // Markdown render layer
 > ```
 
 ### 🔑 Core Concept Analysis
@@ -366,7 +367,9 @@ graph TD
     E --> D
 
     D --> F[x-request]
-    F --> G[Final Application]
+    D --> G[x-markdown]
+    F --> H[Final Application]
+    G --> H
 ```
 
 ## 📊 Skill Comparison Table
@@ -376,6 +379,7 @@ graph TD
 | **🏗️ Creator** | **x-chat-provider** | None | Create custom Provider | Adapt private/non-standard APIs |
 | **⚛️ User** | **use-x-chat** | Needs Provider | Build AI conversation interface | React component development |
 | **🔧 Configurer** | **x-request** | None | Configure request parameters authentication | Unified network request management |
+| **🖼️ Renderer** | **x-markdown** | Markdown content | Render streaming Markdown and rich content blocks | Assistant reply presentation |
 
 ## 🎯 Combined Usage Scenarios
 
@@ -389,13 +393,15 @@ sequenceDiagram
     participant CP as x-chat-provider
     participant UX as use-x-chat
     participant XR as x-request
+    participant XM as x-markdown
 
     Dev->>CP: 1. Create custom Provider
     CP->>Dev: Return adapted Provider
     Dev->>XR: 2. Configure XRequest parameters
     XR->>Dev: Return configured request
     Dev->>UX: 3. Use Provider to build interface
-    UX->>Dev: Complete AI conversation application
+    Dev->>XM: 4. Render assistant Markdown replies
+    XM->>Dev: Complete AI conversation application
 ```
 
 **Implementation Steps**:
@@ -403,6 +409,7 @@ sequenceDiagram
 1. **x-chat-provider** → Create custom Provider (four-step implementation)
 2. **x-request** → Configure authentication, parameters, error handling
 3. **use-x-chat** → Build React chat interface
+4. **x-markdown** → Render Markdown responses, custom tags, and streaming-rich content
 
 ### 🎯 Scenario2: Only Create Provider
 

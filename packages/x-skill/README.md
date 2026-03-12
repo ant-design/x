@@ -17,7 +17,7 @@ Intelligent skill library specially designed for Ant Design X
 - 🤖 **Intelligent Development Experience**: Code generation and optimization suggestions based on best practices, with AI assisting your development
 - ⚡ **Significant Efficiency Boost**: Reduce repetitive work and accelerate Ant Design X project development
 - 🛡 **Quality Assurance**: Strictly follow Ant Design X design specifications to ensure code quality and consistency
-- 🎯 **Full Scenario Coverage**: Cover common AI application scenarios like conversation components, data requests, and state management
+- 🎯 **Full Scenario Coverage**: Cover common AI application scenarios like conversation components, data requests, state management, and Markdown rendering
 - 🔧 **Multi-IDE Support**: Support mainstream AI IDEs like Claude Code, CodeFuse, and Cursor
 
 ## 📦 Installation
@@ -81,10 +81,14 @@ Chat data flow management, providing efficient data stream processing solutions.
 
 Network request best practices, optimizing API calls and data processing.
 
+### x-markdown
+
+Markdown rendering guide for streaming output, component mapping, plugins, and themes.
+
 ## 🎯 Applicable Scenarios
 
 - **🚀 New Project Startup**: Quickly set up Ant Design X project framework with complete configuration and best practices
-- **⚙️ Feature Development**: Get best practices and code examples for component usage to accelerate feature implementation
+- **⚙️ Feature Development**: Get best practices and code examples for component usage, rendering, and integration to accelerate feature implementation
 - **🔍 Problem Troubleshooting**: Intelligent diagnosis and resolution of common development issues with professional solutions
 - **📈 Performance Optimization**: Get professional advice for performance tuning to improve application performance
 

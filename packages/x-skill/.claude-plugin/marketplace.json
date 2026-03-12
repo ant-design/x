@@ -13,6 +13,8 @@
       "ant-design-x",
       "x-chat",
       "x-request",
+      "x-markdown",
+      "markdown",
       "chat-provider",
       "ai",
       "react",
@@ -22,10 +24,15 @@
   "plugins": [
     {
       "name": "x-sdk-skills",
-      "description": "Ant Design X SDK core skill package, including complete features such as useXChat, XRequest, and custom Provider",
+      "description": "Ant Design X core skill package for requests, chat state, provider adaptation, and Markdown rendering",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/use-x-chat", "./skills/x-chat-provider", "./skills/x-request"]
+      "skills": [
+        "./skills/use-x-chat",
+        "./skills/x-chat-provider",
+        "./skills/x-request",
+        "./skills/x-markdown"
+      ]
     }
   ]
 }

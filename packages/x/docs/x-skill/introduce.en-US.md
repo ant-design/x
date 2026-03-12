@@ -3,7 +3,7 @@ order: 1
 title: Introduction
 ---
 
-`@ant-design/x-skill` is an intelligent skill library specifically designed for Ant Design X, providing a series of carefully crafted Agent skills. These skills significantly enhance development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development.
+`@ant-design/x-skill` is an intelligent skill library specifically designed for Ant Design X, providing a series of carefully crafted Agent skills. These skills significantly enhance development efficiency, help you quickly build high-quality AI conversation applications, rich Markdown rendering flows, and effectively solve various problems encountered during development.
 
 ## 🎯 Use Cases
 
@@ -17,13 +17,14 @@ title: Introduction
 - **Intelligent Development**: Code generation and optimization suggestions based on best practices
 - **Efficiency Boost**: Reduce repetitive work and accelerate project development
 - **Quality Assurance**: Follow Ant Design X design specifications to ensure code quality
-- **Rich Scenarios**: Cover common scenarios like conversation components, data requests, and state management
+- **Rich Scenarios**: Cover common scenarios like conversation components, data requests, state management, and Markdown rendering
 
 ## 🔧 Included Skills
 
 - **use-x-chat**: Conversation SDK usage guide
 - **x-chat-provider**: Chat data flow management
 - **x-request**: Network request best practices
+- **x-markdown**: Streaming-friendly Markdown rendering and extension guide
 
 ## 🚀 Quick Start
 

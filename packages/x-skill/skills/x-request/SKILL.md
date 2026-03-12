@@ -206,7 +206,8 @@ graph TD
     A[x-request] -->|Configure Request| B[x-chat-provider]
     A -->|Configure Request| C[use-x-chat]
     B -->|Provide Provider| C
-    A --> D[Direct Request]
+    C --> D[x-markdown]
+    A --> E[Direct Request]
 ```
 
 | Usage Method | Cooperating Skill | Purpose | Example |
@@ -215,6 +216,7 @@ graph TD
 | **With x-chat-provider** | x-chat-provider | Configure requests for custom Provider | Configure private API |
 | **With use-x-chat** | use-x-chat | Configure requests for built-in Provider | Configure OpenAI API |
 | **Complete AI Application** | x-request → x-chat-provider → use-x-chat | Configure requests for entire system | Complete AI conversation application |
+| **Markdown AI Application** | x-request → x-chat-provider → use-x-chat → x-markdown | Keep request config separate from render logic | Rich Markdown conversation UI |
 
 ### ⚠️ useXChat Integration Security Warning
 
