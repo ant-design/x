@@ -1,26 +1,46 @@
-import { VerticalAlignBottomOutlined } from '@ant-design/icons';
+import { DownloadOutlined, EyeOutlined } from '@ant-design/icons';
 import { FileCard } from '@ant-design/x';
 import React from 'react';
 
-const App = () => {
-  const onDownload = () => {
-    const blob = new Blob(['123'], { type: 'text/plain' });
-    const a = document.createElement('a');
-    const href = URL.createObjectURL(blob);
-    a.href = href;
-    a.download = 'txt-file.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(href);
-  };
-
+const App: React.FC = () => {
   return (
-    <FileCard
-      name="txt-file.txt"
-      byte={1024}
-      mask={<VerticalAlignBottomOutlined style={{ fontSize: 20 }} onClick={() => onDownload()} />}
-    />
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+      <FileCard
+        name="example-document.pdf"
+        byte={1024000}
+        description="这是一个PDF文档"
+        mask={
+          <div style={{ display: 'flex', gap: 8 }}>
+            <EyeOutlined />
+            <DownloadOutlined />
+          </div>
+        }
+      />
+
+      <FileCard
+        name="image.jpg"
+        src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+        type="image"
+        mask={
+          <div style={{ display: 'flex', gap: 8, color: '#fff' }}>
+            <span>预览</span>
+            <span>下载</span>
+          </div>
+        }
+      />
+
+      <FileCard
+        name="video.mp4"
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        type="video"
+        mask={(info) => (
+          <div>
+            <div>播放视频</div>
+            <div style={{ fontSize: 12, opacity: 0.8 }}>{info.name}</div>
+          </div>
+        )}
+      />
+    </div>
   );
 };
 

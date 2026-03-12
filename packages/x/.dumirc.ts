@@ -24,10 +24,12 @@ export default defineConfig({
         }
       : false,
   hash: true,
-  mfsu: false,
+  mfsu: {},
   mako: ['Darwin', 'Linux'].includes(os.type()) ? {} : false,
   crossorigin: {},
   runtimePublicPath: {},
+  fastRefresh: true,
+  devtool: 'eval-source-map',
   outputPath: '_site',
   favicons: [
     'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original',
