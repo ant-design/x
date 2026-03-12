@@ -69,7 +69,17 @@ describe('CodeHighlighter', () => {
       'javascript',
     );
   });
-
+  it('render normal code with header false', async () => {
+    const { container } = render(
+      <CodeHighlighter
+        header={() => false}
+        lang="javascript"
+      >{`console.log("javascript");`}</CodeHighlighter>,
+    );
+    await waitFor(() => {
+      expect(container.querySelector('.ant-codeHighlighter-header')).not.toBeInTheDocument();
+    });
+  });
   it('render normal code with custom header class', async () => {
     const { container } = render(
       <CodeHighlighter lang="javascript" classNames={{ header: 'customHeader' }}>
