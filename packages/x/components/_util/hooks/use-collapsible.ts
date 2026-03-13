@@ -1,5 +1,5 @@
 import type { CSSMotionProps } from '@rc-component/motion';
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import { useControlledState } from '@rc-component/util';
 import React from 'react';
 import initCollapseMotion from '../../_util/motion';
 
@@ -67,12 +67,9 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
     }, [collapsible]);
 
   // ============================ ExpandedKeys ============================
-  const [mergedExpandedKeys, setMergedExpandedKeys] = useMergedState<
+  const [mergedExpandedKeys, setMergedExpandedKeys] = useControlledState<
     RequiredCollapsibleOptions['expandedKeys']
-  >(defaultExpandedKeys || [], {
-    value: isThoughtChainUnControlled ? undefined : customizeExpandedKeys,
-    onChange: customizeOnExpand,
-  });
+  >(defaultExpandedKeys || [], isThoughtChainUnControlled ? undefined : customizeExpandedKeys);
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {

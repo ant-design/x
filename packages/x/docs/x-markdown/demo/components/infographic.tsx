@@ -1,6 +1,6 @@
 import { Bubble } from '@ant-design/x';
 import XMarkdown, { type ComponentProps } from '@ant-design/x-markdown';
-import { Button, Flex } from 'antd';
+import { Button, Flex, Spin } from 'antd';
 import React from 'react';
 
 const text = `
@@ -38,72 +38,142 @@ type ReactInfographicProps = {
   children: React.ReactNode;
 };
 
+/**
+ * React wrapper for @antv/infographic
+ * Dynamically imports the library to avoid SSR issues
+ */
 function ReactInfographic(props: ReactInfographicProps) {
   const { children } = props;
   const [isClient, setIsClient] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  const $container = React.useRef<HTMLDivElement>(null);
-  const infographicInstance = React.useRef<any>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const infographicInstance = React.useRef<{
+    render: (spec: string) => void;
+    destroy: () => void;
+  } | null>(null);
 
   React.useEffect(() => {
     setIsClient(true);
   }, []);
 
   React.useEffect(() => {
-    if (!isClient || !$container.current) return;
-    // 动态导入 Infographic 以避免 SSR 问题
-    import('@antv/infographic').then(({ Infographic }) => {
-      // 确保 container 不为 null
-      if ($container.current) {
+    if (!isClient || !containerRef.current) return;
+
+    let isMounted = true;
+
+    import('@antv/infographic')
+      .then(({ Infographic }) => {
+        if (!isMounted || !containerRef.current) return;
+
         infographicInstance.current = new Infographic({
-          container: $container.current,
+          container: containerRef.current,
         });
-        infographicInstance.current?.render(children as string);
-      }
-    });
+
+        infographicInstance.current.render(children as string);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Failed to load infographic:', error);
+        setIsLoading(false);
+      });
+
     return () => {
-      infographicInstance.current?.destroy?.();
+      isMounted = false;
+      infographicInstance.current?.destroy();
+      infographicInstance.current = null;
     };
   }, [isClient, children]);
 
   if (!isClient) {
-    return <div style={{ minHeight: 400 }}>Loading infographic...</div>;
+    return (
+      <div
+        style={{
+          minHeight: 400,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Spin tip="Loading infographic..." />
+      </div>
+    );
   }
 
-  return <div ref={$container} />;
+  return (
+    <div
+      style={{
+        position: 'relative',
+        maxHeight: 500,
+        overflow: 'auto',
+        border: '1px solid #f0f0f0',
+        borderRadius: 8,
+        padding: 16,
+      }}
+    >
+      {isLoading && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(255, 255, 255, 0.8)',
+            zIndex: 1,
+          }}
+        >
+          <Spin tip="Rendering..." />
+        </div>
+      )}
+      <div ref={containerRef} />
+    </div>
+  );
 }
 
+/**
+ * Custom code renderer for XMarkdown
+ * Handles 'infographic' language code blocks
+ */
 const Code: React.FC<ComponentProps> = (props) => {
   const { className, children } = props;
   const lang = className?.match(/language-(\w+)/)?.[1] || '';
 
   if (typeof children !== 'string') return null;
+
   if (lang === 'infographic') {
     return <ReactInfographic>{children}</ReactInfographic>;
   }
+
   return <code>{children}</code>;
 };
 
+/**
+ * Main application component
+ * Demonstrates streaming markdown rendering with infographic support
+ */
 const App = () => {
   const [index, setIndex] = React.useState(0);
-  const timer = React.useRef<NodeJS.Timeout | null>(null);
+  const timerRef = React.useRef<NodeJS.Timeout | null>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
 
+  // Streaming text animation
   React.useEffect(() => {
     if (index >= text.length) return;
 
-    timer.current = setTimeout(() => {
-      setIndex(Math.min(index + 5, text.length));
+    timerRef.current = setTimeout(() => {
+      setIndex((prev) => Math.min(prev + 5, text.length));
     }, 20);
 
     return () => {
-      if (timer.current) {
-        clearTimeout(timer.current);
-        timer.current = null;
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
       }
     };
   }, [index]);
 
+  // Auto-scroll to bottom during streaming
   React.useEffect(() => {
     if (contentRef.current && index > 0 && index < text.length) {
       const { scrollHeight, clientHeight } = contentRef.current;
@@ -116,10 +186,16 @@ const App = () => {
     }
   }, [index]);
 
+  const handleRerender = () => {
+    setIndex(0);
+  };
+
   return (
     <Flex vertical gap="small" style={{ height: 800, overflow: 'auto' }} ref={contentRef}>
       <Flex justify="flex-end">
-        <Button onClick={() => setIndex(0)}>Re-Render</Button>
+        <Button type="primary" onClick={handleRerender}>
+          Re-Render
+        </Button>
       </Flex>
 
       <Bubble

@@ -1,4 +1,4 @@
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Button } from 'antd';
 import { clsx } from 'clsx';
@@ -84,14 +84,9 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
   });
 
   // ============================ Checked ============================
-  const [mergedChecked, setMergedChecked] = useMergedState<SenderSwitchProps['value']>(
+  const [mergedChecked, setMergedChecked] = useControlledState<SenderSwitchProps['value']>(
     defaultValue,
-    {
-      value: customValue,
-      onChange: (key) => {
-        onChange?.(key as boolean);
-      },
-    },
+    customValue,
   );
 
   // ============================ style ============================
@@ -143,7 +138,9 @@ const SenderSwitch = React.forwardRef<SenderSwitchRef, SenderSwitchProps>((props
         color={mergedChecked ? 'primary' : 'default'}
         icon={icon}
         onClick={() => {
-          setMergedChecked(!mergedChecked);
+          const newValue = !mergedChecked;
+          setMergedChecked(newValue);
+          onChange?.(newValue);
         }}
       >
         {mergedChecked ? checkedChildren : unCheckedChildren}

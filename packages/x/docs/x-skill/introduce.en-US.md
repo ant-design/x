@@ -29,7 +29,7 @@ We provide multiple flexible installation methods, you can choose the most suita
 
 ### Method 1: One-click Installation (Recommended)
 
-Supports mainstream AI IDEs like Claude Code, CodeFuse, Cursor, complete installation with a single command:
+Supports mainstream AI IDEs like Claude Code, CodeFuse, Cursor, CodeX complete installation with a single command:
 
 ### Basic Installation
 

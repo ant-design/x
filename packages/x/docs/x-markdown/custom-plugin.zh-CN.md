@@ -1,8 +1,7 @@
 ---
 group:
   title: 插件集
-title: CustomPlugins
-subtitle: 自定义插件
+title: 自定义插件
 order: 5
 ---
 

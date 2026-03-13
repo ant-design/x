@@ -8,6 +8,7 @@ exports[`antd dist files exports modules correctly 1`] = `
   "CodeHighlighter",
   "Conversations",
   "FileCard",
+  "Folder",
   "Mermaid",
   "Prompts",
   "Sender",

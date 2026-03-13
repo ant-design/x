@@ -23,6 +23,7 @@
   --table-margin: 0 0 24px 0;
   --margin-pre: 0 0 16px 0;
   --padding-code: 16px;
+  --xmd-tail-color: var(--text-color);
 }
 
 .x-markdown-light h1,

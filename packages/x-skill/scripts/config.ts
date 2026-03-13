@@ -41,10 +41,12 @@ const skillConfig: Config = {
   zh: {
     'use-x-chat': 'packages/x/docs/x-sdk/use-x-chat.zh-CN.md',
     'x-request': 'packages/x/docs/x-sdk/x-request.zh-CN.md',
+    'x-markdown': 'packages/x/docs/x-markdown/examples.zh-CN.md',
   },
   en: {
     'use-x-chat': 'packages/x/docs/x-sdk/use-x-chat.en-US.md',
     'x-request': 'packages/x/docs/x-sdk/x-request.en-US.md',
+    'x-markdown': 'packages/x/docs/x-markdown/examples.en-US.md',
   },
   paths: {
     // 中文技能目录

@@ -4,6 +4,7 @@ import type { ComponentToken as BubbleComponentToken } from '../../bubble/style'
 import type { ComponentToken as CodeHighlighterComponentToken } from '../../code-highlighter/style';
 import type { ComponentToken as ConversationsComponentToken } from '../../conversations/style';
 import type { ComponentToken as FileCardComponentToken } from '../../file-card/style';
+import type { ComponentToken as FolderComponentToken } from '../../folder/style';
 import type { ComponentToken as MermaidComponentToken } from '../../mermaid/style';
 import type { ComponentToken as PromptsComponentToken } from '../../prompts/style';
 import type { ComponentToken as SenderComponentToken } from '../../sender/style';
@@ -25,6 +26,7 @@ export interface ComponentTokenMap {
   Welcome?: WelcomeComponentToken;
   Actions?: ActionsToken;
   FileCard?: FileCardComponentToken;
+  Folder?: FolderComponentToken;
   Sources?: SourcesComponentToken;
   CodeHighlighter?: CodeHighlighterComponentToken;
   Mermaid?: MermaidComponentToken;

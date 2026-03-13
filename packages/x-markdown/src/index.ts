@@ -4,8 +4,8 @@ export { default as AnimationText } from './XMarkdown/AnimationText';
 export { useStreaming } from './XMarkdown/hooks';
 export type {
   ComponentProps,
-  StreamStatus,
   StreamCacheTokenType,
+  StreamStatus,
   Token,
   Tokens,
   XMarkdownProps,

@@ -29,7 +29,7 @@ title: 介绍
 
 ### 方式一：一键安装（推荐）
 
-支持 Claude Code、CodeFuse、Cursor 等主流 AI IDE，一条命令即可完成安装：
+支持 Claude Code、CodeFuse、Cursor、CodeX 等主流 AI IDE，一条命令即可完成安装：
 
 #### 基础安装
 

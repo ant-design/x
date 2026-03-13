@@ -107,7 +107,9 @@ const App = () => {
         align="center"
         style={{ display: 'flex', justifyContent: 'flex-end', flexShrink: 0, marginBottom: 8 }}
       >
-        <Button onClick={handleReRender}>Re-Render</Button>
+        <Button size="small" onClick={handleReRender}>
+          Re-Render
+        </Button>
       </Space>
 
       <Flex vertical style={{ flex: 1, minHeight: 0, overflow: 'auto' }} ref={contentRef}>

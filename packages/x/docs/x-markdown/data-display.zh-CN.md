@@ -9,9 +9,11 @@ order: 3
 将 Markdown 内容映射为数据展示组件，当前示例聚焦：
 
 - Mermaid 图表渲染
+- AntV 信息图渲染
 
 <!-- prettier-ignore -->
 <code src="./demo/components/mermaid.tsx">Mermaid</code>
+<code src="./demo/components/infographic.tsx">AntV 信息图</code>
 
 ## 相关
 

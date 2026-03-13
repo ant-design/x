@@ -1,7 +1,7 @@
 import { RightOutlined } from '@ant-design/icons';
 import type { CSSMotionProps } from '@rc-component/motion';
 import CSSMotion from '@rc-component/motion';
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Popover } from 'antd';
 import { clsx } from 'clsx';
@@ -107,10 +107,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
 
   // ============================  Collapsible ============================
 
-  const [isExpand, setIsExpand] = useMergedState<boolean>(defaultExpanded ?? true, {
-    value: expanded,
-    onChange: onExpand,
-  });
+  const [isExpand, setIsExpand] = useControlledState<boolean>(defaultExpanded ?? true, expanded);
 
   const collapseMotion: CSSMotionProps = {
     ...initCollapseMotion(),
@@ -186,7 +183,11 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
               `${prefixCls}-icon-position-${expandIconPosition}`,
               classNames.title,
             )}
-            onClick={() => setIsExpand(!isExpand)}
+            onClick={() => {
+              const newExpand = !isExpand;
+              setIsExpand(newExpand);
+              onExpand?.(newExpand);
+            }}
             style={styles.title}
           >
             <RightOutlined className={`${prefixCls}-title-down-icon`} rotate={isExpand ? 90 : 0} />

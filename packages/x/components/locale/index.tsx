@@ -37,6 +37,12 @@ export interface xLocale {
     code: string;
     image: string;
   };
+  Folder?: {
+    selectFile: string;
+    loadError: string;
+    noService: string;
+    loadFailed: string;
+  };
 }
 
 export type Locale = xLocale & antdLocale;

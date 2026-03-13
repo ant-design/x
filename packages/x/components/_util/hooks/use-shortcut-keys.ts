@@ -223,7 +223,7 @@ const useShortcutKeys = (
 
     return () => {
       document.removeEventListener('keydown', onKeydown);
-      document.addEventListener('keyup', onKeyup);
+      document.removeEventListener('keyup', onKeyup);
     };
   }, [flattenShortcutKeys.length, observer]);
   return [shortcutAction, shortcutKeysInfo, subscribe];

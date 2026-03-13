@@ -1,8 +1,7 @@
 ---
 group:
   title: 插件集
-title: Latex
-subtitle: 公式
+title: 公式
 order: 2
 category: Components
 packageName: x-markdown/plugins
