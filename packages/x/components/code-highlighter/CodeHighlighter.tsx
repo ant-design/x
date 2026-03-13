@@ -116,30 +116,40 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
     ...style,
   };
 
-  // ============================ render content ============================
-  const renderTitle = () => {
-    if (header === null) return null;
-
-    if (header) return header;
-
-    return (
-      <div
-        className={clsx(`${prefixCls}-header`, contextConfig.classNames?.header, classNames.header)}
-        style={{ ...contextConfig.styles?.header, ...styles.header }}
-      >
-        <span
+  // ============================ render header ============================
+  const renderHeader = () => {
+    if (header === undefined) {
+      return (
+        <div
           className={clsx(
-            `${prefixCls}-header-title`,
-            classNames.headerTitle,
-            contextConfig.classNames?.headerTitle,
+            `${prefixCls}-header`,
+            contextConfig.classNames?.header,
+            classNames.header,
           )}
-          style={{ ...contextConfig.styles?.headerTitle, ...styles.headerTitle }}
+          style={{ ...contextConfig.styles?.header, ...styles.header }}
         >
-          {lang}
-        </span>
-        <Actions.Copy text={children} />
-      </div>
-    );
+          <span
+            className={clsx(
+              `${prefixCls}-header-title`,
+              classNames.headerTitle,
+              contextConfig.classNames?.headerTitle,
+            )}
+            style={{ ...contextConfig.styles?.headerTitle, ...styles.headerTitle }}
+          >
+            {lang}
+          </span>
+          <Actions.Copy text={children} />
+        </div>
+      );
+    }
+
+    const headerResult = typeof header === 'function' ? header() : header;
+
+    if (headerResult === false) {
+      return null;
+    }
+
+    return headerResult;
   };
 
   // ============================ render ============================
@@ -165,7 +175,7 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
 
   return (
     <div ref={ref} className={mergedCls} style={mergedStyle} {...restProps}>
-      {renderTitle()}
+      {renderHeader()}
       <div
         className={clsx(`${prefixCls}-code`, contextConfig.classNames?.code, classNames.code)}
         style={{ ...contextConfig.styles.code, ...styles.code }}

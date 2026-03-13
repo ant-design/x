@@ -35,8 +35,9 @@ const ImageSvg: React.FC<ImageIconProps> = ({ height, width, direction, color })
 
 const ImageIcon = React.forwardRef<HTMLSpanElement, ImageIconProps>((props, ref) => {
   const { size, ...otherProps } = props;
-  const mergeWidth = size ? ImageIconSize[size] : props.width;
-  const mergeHeight = size ? ImageIconSize[size] : props.height;
+  const sizeKey = size as ImageIconSizeKey;
+  const mergeWidth = ImageIconSize[sizeKey] || props.width || '100%';
+  const mergeHeight = ImageIconSize[sizeKey] || props.height || '100%';
 
   return (
     <Icon

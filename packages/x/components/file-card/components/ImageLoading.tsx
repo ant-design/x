@@ -18,12 +18,16 @@ const ImageLoading: React.FC<ImageLoadingProps> = (props) => {
     true,
     typeof spinProps?.percent === 'undefined' ? 'auto' : spinProps?.percent,
   );
-  const mergeSinkProps = {
-    size: 'default',
-    showText: true,
-    icon: <ImageIcon color="rgba(0,0,0,.45)" size={spinProps?.size || 'default'} />,
-    ...spinProps,
-  };
+  const mergeSinkProps = React.useMemo(
+    () => ({
+      size: 'middle',
+      showText: true,
+      icon: <ImageIcon color="rgba(0,0,0,.45)" size={spinProps?.size || 'middle'} />,
+      ...spinProps,
+    }),
+    [spinProps],
+  );
+
   return (
     <div className={clsx(`${prefixCls}-image-loading`, className)} style={style}>
       <Skeleton.Node

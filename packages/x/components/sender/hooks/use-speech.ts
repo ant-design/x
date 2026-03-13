@@ -1,4 +1,4 @@
-import { useEvent, useMergedState } from '@rc-component/util';
+import { useControlledState, useEvent } from '@rc-component/util';
 import React from 'react';
 import warning from '../../_util/warning';
 
@@ -80,9 +80,7 @@ export default function useSpeech(
 
   // ========================== Speech Events ==========================
   const recognitionRef = React.useRef<any | null>(null);
-  const [recording, setRecording] = useMergedState(false, {
-    value: controlledRecording,
-  });
+  const [recording, setRecording] = useControlledState(false, controlledRecording);
 
   const forceBreakRef = React.useRef(false);
 

@@ -15,6 +15,32 @@ tag: vVERSION
 
 ---
 
+## 2.4.0
+
+`2026-03-13`
+
+### @ant-design/x
+
+- 🔥 新组件 Folder。[#1797](https://github.com/ant-design/x/pull/1797) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🆕 强化 FileCard 的 `description`、`mask`、`onClick` 配置的能力。[#1807](https://github.com/ant-design/x/pull/1807) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown 流式渲染新增 `tail` 配置，支持自定义尾缀内容与尾缀组件，并避免尾缀出现在未完成组件之前。[`46873e14`](https://github.com/ant-design/x/commit/46873e14ac660e624730d26ff43b2dac4166f97a) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复 XMarkdown 自定义组件流式状态识别问题，正确处理 void elements，并隔离同名组件多实例的 `streamStatus`。[#1590](https://github.com/ant-design/x/pull/1590) 由 [Last-Order](https://github.com/Last-Order) 提交
+- 🛠 导出 XMarkdown 的 `StreamCacheTokenType` 类型，便于外部复用流式渲染相关类型。[#1592](https://github.com/ant-design/x/pull/1592) 由 [Last-Order](https://github.com/Last-Order) 提交
+- 📖 新增 XMarkdown Playground，并重构 streaming、examples、data-display 文档，补充 AntV Infographic 示例。[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-skill
+
+- 🆕 发布 x-markdown skill。[#1813](https://github.com/ant-design/x/pull/1813) 由 [Div627](https://github.com/Div627) 提交
+
+### 其他
+
+- 🐛 修复 useShortcutKeys 错误的事件处理。[#1822](https://github.com/ant-design/x/pull/1822) 由 [cxybd](https://github.com/cxybd) 提交
+- 🛠 将所有组件 useMergedState 升级为 useControlledState。[#1808](https://github.com/ant-design/x/pull/1808) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交、[#1793](https://github.com/ant-design/x/pull/1793) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1792](https://github.com/ant-design/x/pull/1792) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交
+
 ## 2.3.0
 
 `2026-02-26`

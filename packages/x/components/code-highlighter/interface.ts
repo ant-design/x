@@ -19,7 +19,7 @@ export interface CodeHighlighterProps
    * @desc 头部内容，为 null 时不显示头部
    * @descEN Header content, no header displayed when null
    */
-  header?: React.ReactNode | null;
+  header?: false | React.ReactNode | (() => React.ReactNode | false);
   /**
    * @desc 样式类名的前缀
    * @descEN Prefix for style classnames
