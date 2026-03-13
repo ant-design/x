@@ -22,6 +22,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
+- 🐛 Fix incorrect event handling in `useShortcutKeys`.[#1822](https://github.com/ant-design/x/pull/1822) 由 [cxybd](https://github.com/cxybd) 提交
 - 🔥 New component Folder. [#1797](https://github.com/ant-design/x/pull/1797) by [kimteayon](https://github.com/kimteayon)
 - 🆕 Enhanced FileCard's `description`, `mask`, and `onClick` configuration capabilities. [#1807](https://github.com/ant-design/x/pull/1807) by [kimteayon](https://github.com/kimteayon)
 

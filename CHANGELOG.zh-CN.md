@@ -30,6 +30,7 @@ tag: vVERSION
 
 ### 其他
 
+- 🐛 修复 useShortcutKeys 错误的事件处理。[#1822](https://github.com/ant-design/x/pull/1822) 由 [cxybd](https://github.com/cxybd) 提交
 - 🛠 将所有组件 useMergedState 升级为 useControlledState。[#1808](https://github.com/ant-design/x/pull/1808) 由 [kimteayon](https://github.com/kimteayon) 提交
 - 📖 优化官网站点提升用户体验。[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交、[#1793](https://github.com/ant-design/x/pull/1793) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1792](https://github.com/ant-design/x/pull/1792) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交
 
