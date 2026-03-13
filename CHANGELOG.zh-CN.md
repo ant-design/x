@@ -26,7 +26,7 @@ tag: vVERSION
 
 ### @ant-design/x-markdown
 
-- 🆕 XMarkdown 流式渲染新增 `tail` 配置，支持自定义尾缀内容与尾缀组件，并避免尾缀出现在未完成组件之前。[`46873e14`](https://github.com/ant-design/x/commit/46873e14ac660e624730d26ff43b2dac4166f97a) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 XMarkdown 流式渲染新增 `tail` 配置，支持自定义尾缀内容与尾缀组件，并避免尾缀出现在未完成组件之前。[#1296](https://github.com/ant-design/x/pull/1296) 由 [Div627](https://github.com/Div627) 提交
 - 🐛 修复 XMarkdown 自定义组件流式状态识别问题，正确处理 void elements，并隔离同名组件多实例的 `streamStatus`。[#1590](https://github.com/ant-design/x/pull/1590) 由 [Last-Order](https://github.com/Last-Order) 提交
 - 🛠 导出 XMarkdown 的 `StreamCacheTokenType` 类型，便于外部复用流式渲染相关类型。[#1592](https://github.com/ant-design/x/pull/1592) 由 [Last-Order](https://github.com/Last-Order) 提交
 - 📖 新增 XMarkdown Playground，并重构 streaming、examples、data-display 文档，补充 AntV Infographic 示例。[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交
