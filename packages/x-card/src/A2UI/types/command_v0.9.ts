@@ -7,10 +7,11 @@ interface PathValue {
 }
 
 // Base component structure for v0.9
-interface BaseComponent {
+export interface BaseComponent_v0_9 {
   id: string;
   component: string; // Component type identifier
-  child?: string; // Reference to child component ID
+  child?: string;
+  children?: string[]; // Reference to children component ID
   value?: PathValue; // Data binding value
   [key: string]: any; // Additional component-specific properties
 }
@@ -29,7 +30,7 @@ interface UpdateComponentsCommand {
   version: 'v0.9';
   updateComponents: {
     surfaceId: string;
-    components: BaseComponent[];
+    components: BaseComponent_v0_9[];
   };
 }
 

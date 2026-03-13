@@ -19,7 +19,7 @@ interface LiteralStringValue {
 }
 
 // Component wrapper structure with standard fields and custom properties
-interface ComponentWrapper {
+export interface ComponentWrapper_v0_8 {
   id: string;
   component: {
     [componentType: string]: {
@@ -38,7 +38,7 @@ interface ComponentWrapper {
 interface SurfaceUpdateCommand {
   surfaceUpdate: {
     surfaceId: string;
-    components: ComponentWrapper[];
+    components: ComponentWrapper_v0_8[];
   };
 }
 
