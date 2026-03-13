@@ -15,6 +15,24 @@ tag: vVERSION
 
 ---
 
+## 2.4.0
+
+`2026-03-13`
+
+### @ant-design/x
+
+- 🔥 新组件 Folder。[#1797](https://github.com/ant-design/x/pull/1797) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🆕 强化 FileCard 的 `description`、`mask`、`onClick` 配置的能力。[#1807](https://github.com/ant-design/x/pull/1807) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-skill
+
+- 🆕 发布 x-markdown skill。[#1813](https://github.com/ant-design/x/pull/1813) 由 [Div627](https://github.com/Div627) 提交
+
+### 其他
+
+- 🛠 将所有组件 useMergedState 升级为 useControlledState。[#1808](https://github.com/ant-design/x/pull/1808) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交、[#1793](https://github.com/ant-design/x/pull/1793) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1792](https://github.com/ant-design/x/pull/1792) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交
+
 ## 2.3.0
 
 `2026-02-26`

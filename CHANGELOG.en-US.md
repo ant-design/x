@@ -16,6 +16,24 @@ tag: vVERSION
 
 ---
 
+## 2.4.0
+
+`2026-03-13`
+
+### @ant-design/x
+
+- 🔥 New component Folder. [#1797](https://github.com/ant-design/x/pull/1797) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Enhanced FileCard's `description`, `mask`, and `onClick` configuration capabilities. [#1807](https://github.com/ant-design/x/pull/1807) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-skill
+
+- 🆕 Released x-markdown skill. [#1813](https://github.com/ant-design/x/pull/1813) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 🛠 Upgraded all components' useMergedState to useControlledState. [#1808](https://github.com/ant-design/x/pull/1808) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1814](https://github.com/ant-design/x/pull/1814) by [Div627](https://github.com/Div627), [#1793](https://github.com/ant-design/x/pull/1793) by [kimteayon](https://github.com/kimteayon), [#1792](https://github.com/ant-design/x/pull/1792) by [Div627](https://github.com/Div627), [#1780](https://github.com/ant-design/x/pull/1780) by [Div627](https://github.com/Div627), [#1779](https://github.com/ant-design/x/pull/1779) by [Div627](https://github.com/Div627)
+
 ## 2.3.0
 
 `2026-02-26`
