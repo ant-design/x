@@ -22,6 +22,7 @@
   --hr-margin: 24px 0;
   --table-margin: 0 0 24px 0;
   --padding-code: 16px;
+  --xmd-tail-color: var(--text-color);
 }
 
 .x-markdown-dark h1,

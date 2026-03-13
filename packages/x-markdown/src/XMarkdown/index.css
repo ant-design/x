@@ -37,6 +37,17 @@
   color: var(--text-color);
 }
 
+/* xmd-tail: default styling for streaming tail indicator */
+xmd-tail {
+  display: inline;
+}
+
+.xmd-tail {
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
 .x-markdown p,
 .x-markdown div,
 .x-markdown span,

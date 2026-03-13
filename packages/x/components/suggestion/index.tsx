@@ -1,4 +1,4 @@
-import { useEvent, useMergedState } from '@rc-component/util';
+import { useControlledState, useEvent } from '@rc-component/util';
 import type { CascaderProps } from 'antd';
 import { Cascader, Flex } from 'antd';
 import { clsx } from 'clsx';
@@ -90,14 +90,12 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   const [hashId, cssVarCls] = useStyle(prefixCls);
 
   // =========================== Trigger ============================
-  const [mergedOpen, setOpen] = useMergedState(false, {
-    value: open,
-  });
+  const [mergedOpen, setOpen] = useControlledState<boolean>(false, open);
 
-  const [itemList, setItemList] = useMergedState<SuggestionItem[]>([], {
-    value: typeof items === 'function' ? undefined : items,
-    defaultValue: typeof items === 'function' ? items() : items,
-  });
+  const [itemList, setItemList] = useControlledState<SuggestionItem[]>(
+    typeof items === 'function' ? items() : items,
+    typeof items === 'function' ? undefined : items,
+  );
 
   const triggerOpen = (nextOpen: boolean) => {
     setOpen(nextOpen);

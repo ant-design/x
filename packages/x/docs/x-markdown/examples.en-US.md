@@ -15,7 +15,7 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 
 <!-- prettier-ignore -->
 <code src="./demo/codeDemo/basic.tsx" title="Basic Rendering" description="Smallest working setup"></code>
-<code src="./demo/streaming/combined.tsx" title="Streaming Rendering" description="Syntax recovery + animation"></code>
+<code src="./demo/streaming/combined.tsx" title="Streaming Rendering" description="Syntax completion and caching, animation, and tail suffix"></code>
 <code src="./demo/components/codeHighlighter.tsx" title="Component Extension" description="Map code block to CodeHighlighter"></code>
 <code src="./demo/codeDemo/supersets.tsx" title="Plugin Extension" description="Extend Markdown syntax"></code>
 <code src="./demo/codeDemo/escape-raw-html.tsx" title="Security & Links" description="Escape raw HTML and open links in new tab; see Streaming format demo for dompurifyConfig"></code>
@@ -47,7 +47,22 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 | hasNextChunk | Whether more chunks are expected. Set `false` to flush cache and finish rendering | `boolean` | `false` |
 | enableAnimation | Whether to enable fade-in animation for block elements | `boolean` | `false` |
 | animationConfig | Animation options (for example fade duration and easing) | `AnimationConfig` | - |
+| tail | Enable tail indicator | `boolean \| TailConfig` | `false` |
 | incompleteMarkdownComponentMap | Map incomplete Markdown fragments to custom loading components | `Partial<Record<'link' \| 'image' \| 'html' \| 'emphasis' \| 'list' \| 'table' \| 'inline-code', string>>` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
+
+### TailConfig
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| content | Content to display as tail | `string` | `'▋'` |
+| component | Custom tail component, takes precedence over content | `React.ComponentType<{ content?: string }>` | - |
+
+### AnimationConfig
+
+| Property     | Description         | Type     | Default         |
+| ------------ | ------------------- | -------- | --------------- |
+| fadeDuration | Duration in ms      | `number` | `200`           |
+| easing       | CSS easing function | `string` | `'ease-in-out'` |
 
 ## Related Docs
 

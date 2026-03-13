@@ -12,11 +12,16 @@ interface ImageIconProps {
   direction?: DirectionType;
 }
 
-enum ImageIconSize {
-  small = '32px',
-  default = '46px',
-  large = '52px',
-}
+const ImageIconSize = {
+  small: '32px',
+  medium: '46px',
+  middle: '46px',
+  default: '46px',
+  large: '52px',
+} as const;
+
+type ImageIconSizeType = typeof ImageIconSize;
+type ImageIconSizeKey = keyof ImageIconSizeType;
 
 const ImageSvg: React.FC<ImageIconProps> = ({ height, width, direction, color }) => (
   <svg
@@ -34,8 +39,8 @@ const ImageSvg: React.FC<ImageIconProps> = ({ height, width, direction, color })
 
 const ImageIcon = React.forwardRef<HTMLSpanElement, ImageIconProps>((props, ref) => {
   const { size, ...otherProps } = props;
-  const mergeWidth = size ? ImageIconSize[size] : props.width;
-  const mergeHeight = size ? ImageIconSize[size] : props.height;
+  const mergeWidth = size ? ImageIconSize[size as ImageIconSizeKey] : props.width;
+  const mergeHeight = size ? ImageIconSize[size as ImageIconSizeKey] : props.height;
 
   return (
     <Icon

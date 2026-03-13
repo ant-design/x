@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <Flex vertical gap="small">
-      <Button style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
+      <Button size="small" style={{ alignSelf: 'flex-end' }} onClick={() => setIndex(0)}>
         Re-Render
       </Button>
 
