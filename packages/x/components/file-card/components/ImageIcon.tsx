@@ -16,6 +16,7 @@ const ImageIconSize = {
   small: '32px',
   medium: '46px',
   middle: '46px',
+  default: '46px',
   large: '52px',
 } as const;
 
