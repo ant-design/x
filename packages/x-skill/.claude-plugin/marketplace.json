@@ -14,6 +14,8 @@
       "ant-design-x",
       "x-chat",
       "x-request",
+      "x-markdown",
+      "markdown",
       "chat-provider",
       "ai",
       "react",
@@ -28,6 +30,14 @@
       "source": "./",
       "strict": false,
       "skills": ["./skills/use-x-chat", "./skills/x-chat-provider", "./skills/x-request"]
+    },
+    {
+      "name": "x-markdown",
+      "description": "Ant Design X Markdown rendering skill package, providing rich text rendering and chat enhancement features",
+      "descriptionZh": "Ant Design X Markdown 渲染技能包，提供富文本渲染和对话增强功能",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/x-markdown"]
     }
   ]
 }
