@@ -42,5 +42,5 @@
 
 ## Related Docs
 
-- [Component Extension](/x-markdowns/components)
-- [Streaming](/x-markdowns/streaming)
+- [Component Extension](EXTENSIONS.md)
+- [Streaming](STREAMING.md)
