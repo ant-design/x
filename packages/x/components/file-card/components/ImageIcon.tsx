@@ -12,12 +12,15 @@ interface ImageIconProps {
   direction?: DirectionType;
 }
 
-enum ImageIconSize {
-  small = '32px',
-  middle = '46px',
-  default = '46px',
-  large = '52px',
-}
+const ImageIconSize = {
+  small: '32px',
+  medium: '46px',
+  middle: '46px',
+  large: '52px',
+} as const;
+
+type ImageIconSizeType = typeof ImageIconSize;
+type ImageIconSizeKey = keyof ImageIconSizeType;
 
 const ImageSvg: React.FC<ImageIconProps> = ({ height, width, direction, color }) => (
   <svg
