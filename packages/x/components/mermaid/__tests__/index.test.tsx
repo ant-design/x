@@ -11,11 +11,20 @@ jest.mock('mermaid', () => ({
   render: jest.fn(),
 }));
 
-// Mock SyntaxHighlighter
-jest.mock('react-syntax-highlighter', () => ({
+// Mock CodeHighlighter
+jest.mock('../../code-highlighter', () => ({
   __esModule: true,
-  default: ({ children }: { children: React.ReactNode }) => (
-    <div data-testid="syntax-highlighter">{children}</div>
+  default: ({
+    children,
+    header,
+  }: {
+    children: React.ReactNode;
+    header: React.ReactNode | null;
+  }) => (
+    <div data-testid="syntax-highlighter">
+      {header}
+      {children}
+    </div>
   ),
 }));
 

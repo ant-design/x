@@ -5,6 +5,7 @@ import parseHtml, { domToReact } from 'html-react-parser';
 import React, { ReactNode } from 'react';
 import AnimationText from '../AnimationText';
 import type { ComponentProps, XMarkdownProps } from '../interface';
+import { detectUnclosedComponentTags, getTagInstanceId } from './detectUnclosedComponentTags';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
@@ -20,40 +21,8 @@ class Renderer {
     this.options = options;
   }
 
-  /**
-   * Detect unclosed tags using regular expressions
-   */
   private detectUnclosedTags(htmlString: string): Set<string> {
-    const unclosedTags = new Set<string>();
-    const stack: string[] = [];
-    const tagRegex = /<\/?([a-zA-Z][a-zA-Z0-9-]*)(?:\s[^>]*)?>/g;
-
-    let match = tagRegex.exec(htmlString);
-    while (match !== null) {
-      const [fullMatch, tagName] = match;
-      const isClosing = fullMatch.startsWith('</');
-      const isSelfClosing = fullMatch.endsWith('/>');
-
-      if (this.options.components?.[tagName.toLowerCase()]) {
-        if (isClosing) {
-          // Found closing tag, pop from stack
-          const lastIndex = stack.lastIndexOf(tagName.toLowerCase());
-          if (lastIndex !== -1) {
-            stack.splice(lastIndex, 1);
-          }
-        } else if (!isSelfClosing) {
-          // Found opening tag, push to stack
-          stack.push(tagName.toLowerCase());
-        }
-      }
-      match = tagRegex.exec(htmlString);
-    }
-
-    // Remaining tags in stack are unclosed
-    stack.forEach((tag) => {
-      unclosedTags.add(tag);
-    });
-    return unclosedTags;
+    return detectUnclosedComponentTags(htmlString, Object.keys(this.options.components ?? {}));
   }
 
   /**
@@ -73,7 +42,10 @@ class Renderer {
     };
   }
 
-  private createReplaceElement(unclosedTags: Set<string> | undefined, cidRef: { current: number }) {
+  private createReplaceElement(
+    unclosedTags: Set<string> | undefined,
+    cidRef: { current: number; tagIndexes: Record<string, number> },
+  ) {
     const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
       const key = `x-markdown-component-${cidRef.current++}`;
@@ -94,7 +66,10 @@ class Renderer {
       const { name, attribs, children } = domNode as Element;
       const renderElement = this.options.components?.[name];
       if (renderElement) {
-        const streamStatus = unclosedTags?.has(name) ? 'loading' : 'done';
+        cidRef.tagIndexes[name] = (cidRef.tagIndexes[name] ?? 0) + 1;
+        const streamStatus = unclosedTags?.has(getTagInstanceId(name, cidRef.tagIndexes[name]))
+          ? 'loading'
+          : 'done';
         const props: ComponentProps = {
           domNode,
           streamStatus,
@@ -138,7 +113,7 @@ class Renderer {
   private processChildren(
     children: DOMNode[],
     unclosedTags: Set<string> | undefined,
-    cidRef: { current: number },
+    cidRef: { current: number; tagIndexes: Record<string, number> },
   ): ReactNode {
     return domToReact(children as DOMNode[], {
       replace: this.createReplaceElement(unclosedTags, cidRef),
@@ -147,7 +122,7 @@ class Renderer {
 
   public processHtml(htmlString: string): React.ReactNode {
     const unclosedTags = this.detectUnclosedTags(htmlString);
-    const cidRef = { current: 0 };
+    const cidRef = { current: 0, tagIndexes: {} };
 
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
     const purifyConfig = this.configureDOMPurify();

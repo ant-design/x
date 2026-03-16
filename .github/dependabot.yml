@@ -8,15 +8,18 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: daily
+      interval: weekly
+      day: monday
+      time: '10:00'
+      timezone: Asia/Shanghai
     ignore:
-      - dependency-name: "@ant-design/cssinjs"
+      - dependency-name: '@ant-design/cssinjs'
       - dependency-name: dayjs
         versions: [1.x]
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: daily
+      interval: monthly
     labels:
       - github-actions
       - dependencies

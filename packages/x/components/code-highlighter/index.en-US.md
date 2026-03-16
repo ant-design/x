@@ -34,10 +34,11 @@ For common properties, refer to: [Common Properties](/docs/react/common-props).
 | --- | --- | --- | --- |
 | lang | Language | `string` | - |
 | children | Code content | `string` | - |
-| header | Header | `React.ReactNode \| null` | React.ReactNode |
+| header | Header content, set to `false` to hide the header | `React.ReactNode \| (() => React.ReactNode \| false) \| false` | - |
 | className | Style class name | `string` |  |
 | classNames | Style class names | `string` | - |
 | highlightProps | Code highlighting configuration | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
+| prismLightMode | Whether to use Prism light mode to automatically load language support based on lang prop for smaller bundle size | `boolean` | `true` |
 
 ### CodeHighlighterRef
 

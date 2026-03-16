@@ -21,9 +21,7 @@ title: 介绍
 
 ## 🔧 包含的技能
 
-- **use-x-chat**：对话 SDK 使用指南
-- **x-chat-provider**：聊天数据流管理
-- **x-request**：网络请求最佳实践
+请查看 [技能列表](/x-skills/skills-cn)
 
 ## 🚀 快速开始
 
@@ -31,20 +29,52 @@ title: 介绍
 
 ### 方式一：一键安装（推荐）
 
-支持 Claude Code、CodeFuse、Cursor 等主流 AI IDE，一条命令即可完成安装：
+支持 Claude Code、CodeFuse、Cursor、CodeX 等主流 AI IDE，一条命令即可完成安装：
+
+#### 基础安装
 
 ```bash
 # 全局安装技能库
 npm i -g @ant-design/x-skill
 
-# 智能注册到当前 IDE
+# 智能注册到当前 IDE（交互式安装）
 npx x-skill
+```
 
-# 查看技能包版本
+#### 版本管理
 
-npx x-skill -v
-// or
-npx x-skill --version
+支持指定版本标签安装，确保获取特定版本的功能：
+
+```bash
+# 查看所有可用版本
+x-skill --list-versions
+
+# 或
+x-skill -l
+
+# 安装指定版本（替换 <tag> 为具体版本号）
+x-skill --tag <tag>
+# 或
+x-skill -t <tag>
+
+# 查看当前安装器的版本（非 skill 版本）
+x-skill --version
+# 或
+x-skill -V
+x-skill -v
+```
+
+#### 使用示例
+
+```bash
+# 安装最新稳定版本
+x-skill
+
+# 安装指定版本确保兼容性
+x-skill --tag 2.3.0
+
+# 查看帮助信息
+x-skill --help
 ```
 
 ### 方式二：Claude Code 集成

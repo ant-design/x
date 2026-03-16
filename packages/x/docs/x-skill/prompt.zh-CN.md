@@ -1,9 +1,6 @@
 ---
-order: 1
+order: 2
 title: Prompt 模版
-group:
-  title: 技能
-  order: 3
 ---
 
 本文档提供了使用 X 技能时的 Prompt 模版参考，帮助您更高效地使用各种技能功能。

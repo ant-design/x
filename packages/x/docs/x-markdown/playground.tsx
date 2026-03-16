@@ -1,6 +1,19 @@
-import XMarkdown from '@ant-design/x-markdown';
+import { SettingOutlined } from '@ant-design/icons';
 import type { ComponentProps } from '@ant-design/x-markdown';
-import { Button, Card, Flex, Input, Segmented, Space, Switch, theme, Typography } from 'antd';
+import XMarkdown from '@ant-design/x-markdown';
+import {
+  Button,
+  Card,
+  Flex,
+  Input,
+  Popover,
+  Segmented,
+  Select,
+  Space,
+  Switch,
+  Typography,
+  theme,
+} from 'antd';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
@@ -82,19 +95,30 @@ interface ToggleItemProps {
 }
 
 const ToggleItem: React.FC<ToggleItemProps> = ({ label, checked, onChange }) => (
-  <Space
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      gap: 6,
-      padding: '2px 0',
-      minHeight: 32,
-      lineHeight: 1,
-    }}
-  >
+  <Flex align="center" justify="space-between" gap={16} style={{ minWidth: 140 }}>
     <Text style={{ fontSize: 12, margin: 0, whiteSpace: 'nowrap' }}>{label}</Text>
     <Switch size="small" checked={checked} onChange={onChange} />
-  </Space>
+  </Flex>
+);
+
+interface SelectItemProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: { label: string; value: string }[];
+}
+
+const SelectItem: React.FC<SelectItemProps> = ({ label, value, onChange, options }) => (
+  <Flex align="center" justify="space-between" gap={16} style={{ minWidth: 140 }}>
+    <Text style={{ fontSize: 12, margin: 0, whiteSpace: 'nowrap' }}>{label}</Text>
+    <Select
+      size="small"
+      style={{ width: 96 }}
+      value={value}
+      onChange={onChange}
+      options={options}
+    />
+  </Flex>
 );
 
 const Playground: React.FC = () => {
@@ -102,15 +126,31 @@ const Playground: React.FC = () => {
   const [cursor, setCursor] = React.useState<number>(source.length);
   const [isStreaming, setIsStreaming] = React.useState<boolean>(false);
   const [enableAnimation, setEnableAnimation] = React.useState<boolean>(true);
-  const [escapeRawHtml, setEscapeRawHtml] = React.useState<boolean>(false);
+  const [tailMode, setTailMode] = React.useState<'off' | 'caret' | 'dot' | 'custom'>('off');
+  const [enableDebugPanel, setEnableDebugPanel] = React.useState<boolean>(true);
+  const [escapeRawHtml, setEscapeRawHtml] = React.useState<boolean>(true);
   const [openLinksInNewTab, setOpenLinksInNewTab] = React.useState<boolean>(true);
-  const [protectCustomTagNewlines, setProtectCustomTagNewlines] = React.useState<boolean>(false);
+  const [protectCustomTagNewlines, setProtectCustomTagNewlines] = React.useState<boolean>(true);
   const [themeMode, setThemeMode] = React.useState<'light' | 'dark'>('light');
   const timerRef = React.useRef<number | null>(null);
   const { token } = theme.useToken();
   const markdownClassName = themeMode === 'light' ? 'x-markdown-light' : 'x-markdown-dark';
   const isDarkMode = themeMode === 'dark';
   const viewportHeight = 'clamp(440px, 68vh, 760px)';
+
+  // Custom tail component
+  const CustomTail: React.FC<{ content?: string }> = ({ content }) => {
+    return (
+      <span
+        style={{
+          animation: 'pulse 1s ease-in-out infinite',
+          color: '#1890ff',
+        }}
+      >
+        {content}
+      </span>
+    );
+  };
 
   const clearTimer = React.useCallback(() => {
     if (timerRef.current !== null) {
@@ -152,6 +192,46 @@ const Playground: React.FC = () => {
   const previewContent = isStreaming ? source.slice(0, cursor) : source;
   const hasNextChunk = isStreaming && cursor < source.length;
 
+  const configContent = (
+    <Flex gap={24} wrap>
+      <Flex vertical gap={10}>
+        <Text strong style={{ fontSize: 12, marginBottom: 4 }}>
+          Streaming
+        </Text>
+        <ToggleItem label="Animation" checked={enableAnimation} onChange={setEnableAnimation} />
+        <SelectItem
+          label="Tail"
+          value={tailMode}
+          onChange={(v) => setTailMode(v as 'off' | 'caret' | 'dot' | 'custom')}
+          options={[
+            { label: 'Off', value: 'off' },
+            { label: 'Caret', value: 'caret' },
+            { label: 'Dot', value: 'dot' },
+            { label: 'Custom', value: 'custom' },
+          ]}
+        />
+        <ToggleItem label="Debug Panel" checked={enableDebugPanel} onChange={setEnableDebugPanel} />
+      </Flex>
+
+      <Flex vertical gap={10}>
+        <Text strong style={{ fontSize: 12, marginBottom: 4 }}>
+          Parsing & Safety
+        </Text>
+        <ToggleItem label="Escape Raw HTML" checked={escapeRawHtml} onChange={setEscapeRawHtml} />
+        <ToggleItem
+          label="Open Links In New Tab"
+          checked={openLinksInNewTab}
+          onChange={setOpenLinksInNewTab}
+        />
+        <ToggleItem
+          label="Protect Custom Tag Newlines"
+          checked={protectCustomTagNewlines}
+          onChange={setProtectCustomTagNewlines}
+        />
+      </Flex>
+    </Flex>
+  );
+
   return (
     <div style={{ padding: token.padding, maxWidth: 1400, margin: '0 auto' }}>
       <Flex vertical gap={14}>
@@ -164,42 +244,36 @@ const Playground: React.FC = () => {
           }}
           bodyStyle={{ padding: 12 }}
         >
-          <Flex gap={10} align="center" justify="space-between" wrap>
-            <Space size={8} wrap>
-              <Segmented
-                size="small"
-                value={themeMode}
-                onChange={(value) => setThemeMode(value as 'light' | 'dark')}
-                options={[
-                  { label: 'Light', value: 'light' },
-                  { label: 'Dark', value: 'dark' },
-                ]}
-              />
-              <ToggleItem
-                label="Animation"
-                checked={enableAnimation}
-                onChange={setEnableAnimation}
-              />
-              <ToggleItem
-                label="Escape Raw HTML"
-                checked={escapeRawHtml}
-                onChange={setEscapeRawHtml}
-              />
-              <ToggleItem
-                label="Open Links In New Tab"
-                checked={openLinksInNewTab}
-                onChange={setOpenLinksInNewTab}
-              />
-              <ToggleItem
-                label="Protect Custom Tag Newlines"
-                checked={protectCustomTagNewlines}
-                onChange={setProtectCustomTagNewlines}
-              />
-            </Space>
+          <Flex align="center" justify="space-between" wrap gap={12}>
+            <Segmented
+              size="small"
+              value={themeMode}
+              onChange={(value) => setThemeMode(value as 'light' | 'dark')}
+              options={[
+                { label: 'Light', value: 'light' },
+                { label: 'Dark', value: 'dark' },
+              ]}
+            />
 
-            <Button type="primary" size="small" onClick={runStream} disabled={source.length === 0}>
-              Run Stream
-            </Button>
+            <Space size="small">
+              <Popover
+                trigger="click"
+                placement="bottomRight"
+                content={<div style={{ padding: 8 }}>{configContent}</div>}
+              >
+                <Button type="default" size="small" icon={<SettingOutlined />}>
+                  Config
+                </Button>
+              </Popover>
+              <Button
+                type="primary"
+                size="small"
+                onClick={runStream}
+                disabled={source.length === 0}
+              >
+                Run Stream
+              </Button>
+            </Space>
           </Flex>
         </Card>
 
@@ -241,6 +315,7 @@ const Playground: React.FC = () => {
               >
                 <XMarkdown
                   content={previewContent}
+                  debug={enableDebugPanel}
                   className={markdownClassName}
                   escapeRawHtml={escapeRawHtml}
                   openLinksInNewTab={openLinksInNewTab}
@@ -248,6 +323,14 @@ const Playground: React.FC = () => {
                   streaming={{
                     hasNextChunk,
                     enableAnimation,
+                    tail:
+                      tailMode === 'off'
+                        ? false
+                        : tailMode === 'caret'
+                          ? { content: '▋' }
+                          : tailMode === 'dot'
+                            ? { content: '●' }
+                            : { content: '...', component: CustomTail },
                     incompleteMarkdownComponentMap: {
                       link: 'loading-link',
                       image: 'loading-image',

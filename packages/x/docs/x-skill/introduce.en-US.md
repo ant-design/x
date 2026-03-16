@@ -21,9 +21,7 @@ title: Introduction
 
 ## 🔧 Included Skills
 
-- **use-x-chat**: Conversation SDK usage guide
-- **x-chat-provider**: Chat data flow management
-- **x-request**: Network request best practices
+Please check the [Skills List](/x-skills/skills)
 
 ## 🚀 Quick Start
 
@@ -31,19 +29,52 @@ We provide multiple flexible installation methods, you can choose the most suita
 
 ### Method 1: One-click Installation (Recommended)
 
-Supports mainstream AI IDEs like Claude Code, CodeFuse, Cursor, complete installation with a single command:
+Supports mainstream AI IDEs like Claude Code, CodeFuse, Cursor, CodeX complete installation with a single command:
+
+### Basic Installation
 
 ```bash
 # Install skill library globally
 npm i -g @ant-design/x-skill
 
-# Smart registration to current IDE
+# Smart registration to current IDE (interactive installation)
 npx x-skill
+```
 
-# Check skill package version
-npx x-skill -v
-// or
-npx x-skill --version
+### Version Management
+
+Supports installation with specific version tags to ensure getting specific version features:
+
+```bash
+# View all available versions
+x-skill --list-versions
+
+# or
+x-skill -l
+
+# Install specific version (replace <tag> with actual version number)
+x-skill --tag <tag>
+# or
+x-skill -t <tag>
+
+# View current installer version (not skill version)
+x-skill --version
+# or
+x-skill -V
+x-skill -v
+```
+
+### Usage Examples
+
+```bash
+# Install latest stable version
+x-skill
+
+# Install specific version to ensure compatibility
+x-skill --tag 2.3.0
+
+# View help information
+x-skill --help
 ```
 
 ### Method 2: Claude Code Integration

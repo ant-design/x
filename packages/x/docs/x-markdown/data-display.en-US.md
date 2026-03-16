@@ -9,9 +9,11 @@ order: 3
 Map Markdown content to data display components. The current demo focuses on:
 
 - Mermaid diagram rendering
+- AntV infographic rendering
 
 <!-- prettier-ignore -->
 <code src="./demo/components/mermaid.tsx">Mermaid</code>
+<code src="./demo/components/infographic.tsx">AntV Infographic</code>
 
 ## See also
 

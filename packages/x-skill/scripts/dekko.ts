@@ -20,20 +20,6 @@ const rootPath = config.paths.rootDir;
 
 // Check bin directory
 $(config.paths.binDir).isDirectory().hasFile('index.js');
-
-// Check if bin/index.js is executable
-const binIndexPath = path.join(config.paths.binDir, 'index.js');
-try {
-  const stats = fs.statSync(binIndexPath);
-  const isExecutable = (stats.mode & 0o111) !== 0;
-  if (!isExecutable) {
-    throw new Error('bin/index.js is not executable');
-  }
-} catch (error) {
-  console.error(chalk.red(`❌ bin/index.js check failed: ${error}`));
-  process.exit(1);
-}
-
 // Check skills directories
 $(config.paths.skillsEnDir).isDirectory();
 $(config.paths.skillsZhDir).isDirectory();

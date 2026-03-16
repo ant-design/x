@@ -1,7 +1,7 @@
 import { LoadingOutlined, RightOutlined } from '@ant-design/icons';
 import type { CSSMotionProps } from '@rc-component/motion';
 import CSSMotion from '@rc-component/motion';
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { clsx } from 'clsx';
 import React from 'react';
@@ -104,10 +104,12 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
 
   // ============================  Collapsible ============================
 
-  const [isExpand, setIsExpand] = useMergedState(defaultExpanded, {
-    value: expanded,
-    onChange: onExpand,
-  });
+  const [isExpand, setIsExpand] = useControlledState(defaultExpanded, expanded);
+
+  const handleExpand = (nextExpand: boolean) => {
+    setIsExpand(nextExpand);
+    onExpand?.(nextExpand);
+  };
 
   const collapseMotion: CSSMotionProps = {
     ...initCollapseMotion(),
@@ -130,7 +132,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
     >
       <div
         className={clsx(`${prefixCls}-status-wrapper`, classNames.status)}
-        onClick={() => setIsExpand(!isExpand)}
+        onClick={() => handleExpand(!isExpand)}
         style={styles.status}
       >
         <div className={`${prefixCls}-status-icon`}>

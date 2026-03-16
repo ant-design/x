@@ -18,6 +18,10 @@ An optimized Markdown rendering solution for streaming content, with powerful ex
 
 Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/x-sdks/introduce).
 
+**`@ant-design/x-skill` - Intelligent Skill Library**
+
+A specialized intelligent skill library designed for Ant Design X, providing a series of carefully crafted Agent skills. These skills can significantly improve development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development. For details, click [here](/x-skills/introduce).
+
 <div class="pic-plus">
   <img width="150" src="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original"/>
   <span>+</span>

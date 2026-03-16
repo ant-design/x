@@ -4,6 +4,7 @@
  */
 
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 
 export interface SkillConfig {
   [skillName: string]: string;
@@ -30,8 +31,9 @@ export interface Config {
   };
 }
 
-// 基于当前文件位置计算相对路径
-const scriptDir = __dirname;
+// 基于当前文件位置计算相对路径（兼容ES模块）
+const __filename = fileURLToPath(import.meta.url);
+const scriptDir = path.dirname(__filename);
 const projectRoot = path.join(scriptDir, '..');
 
 // 原有的文档链接配置
@@ -39,10 +41,12 @@ const skillConfig: Config = {
   zh: {
     'use-x-chat': 'packages/x/docs/x-sdk/use-x-chat.zh-CN.md',
     'x-request': 'packages/x/docs/x-sdk/x-request.zh-CN.md',
+    'x-markdown': 'packages/x/docs/x-markdown/examples.zh-CN.md',
   },
   en: {
     'use-x-chat': 'packages/x/docs/x-sdk/use-x-chat.en-US.md',
     'x-request': 'packages/x/docs/x-sdk/x-request.en-US.md',
+    'x-markdown': 'packages/x/docs/x-markdown/examples.en-US.md',
   },
   paths: {
     // 中文技能目录
