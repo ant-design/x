@@ -7,7 +7,7 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 ## Code Examples
 
-<code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
+<code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/parsingGuards.tsx" description="Legacy vs parsingGuards comparison">Parsing Guards</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
 
 ## API
 
@@ -15,11 +15,43 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 | Parameter | Description | Type | Default |
 | --- | --- | --- | --- |
+| `true` | Equivalent to `{ hasNextChunk: true, parsingGuards: true }` for quickly enabling streaming optimizations | `boolean` | - |
 | hasNextChunk | Whether more chunks are coming | `boolean` | `false` |
 | incompleteMarkdownComponentMap | Component mapping for incomplete syntax | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
+| parsingGuards | Guards streamed intermediate parsing results to avoid early misparsing | `boolean \| ParsingGuardsOption` | `false` |
 | enableAnimation | Enable fade-in animation | `boolean` | `false` |
 | animationConfig | Animation config | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
 | tail | Enable tail indicator | `boolean \| TailConfig` | `false` |
+
+### ParsingGuardsOption
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| setextHeading | Protects setext-style intermediate states like `text\n--` so they do not flash as headings during streaming | `boolean` | `false` |
+| customTags | Stabilizes block custom tags and keeps their inner Markdown renderable during streaming | `boolean \| { inlineTags?: string[] }` | `false` |
+
+Use `customTags.inlineTags` to keep specific registered tags inline.
+
+### Boolean Shorthand
+
+```tsx
+<XMarkdown streaming>{content}</XMarkdown>
+```
+
+This is equivalent to:
+
+```tsx
+<XMarkdown
+  streaming={{
+    hasNextChunk: true,
+    parsingGuards: true,
+  }}
+>
+  {content}
+</XMarkdown>
+```
+
+`streaming={true}` only enables streaming optimizations by default. It does not automatically enable `tail` or `enableAnimation`.
 
 ### TailConfig
 
@@ -77,6 +109,10 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
   content={content}
   streaming={{
     hasNextChunk,
+    parsingGuards: {
+      setextHeading: true,
+      customTags: true,
+    },
     enableAnimation: true,
     tail: true,
     incompleteMarkdownComponentMap: {
@@ -96,3 +132,7 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 ### Can `hasNextChunk` always be `true`?
 
 No. Set it to `false` for the last chunk so placeholders can be flushed into final rendered content.
+
+### Does `parsingGuards` change final rendering?
+
+`setextHeading` only guards intermediate streaming states. Once the final chunk arrives, the final result still follows CommonMark. `customTags` is opt-in and promotes custom tags into stable block structures only when explicitly enabled.

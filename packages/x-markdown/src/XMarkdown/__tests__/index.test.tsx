@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import XMarkdown, { Token } from '../../index';
-import type { ComponentProps } from '../interface';
+import XMarkdown from '../index';
+import type { ComponentProps, Token } from '../interface';
 
 const testCases = [
   {
@@ -316,6 +316,85 @@ describe('XMarkdown', () => {
         />,
       );
       expect(container).toMatchSnapshot();
+    });
+  });
+
+  describe('streaming parsingGuards integration', () => {
+    it('should keep block custom tag content grouped and parse inner markdown', () => {
+      const ThinkComponent = (props: ComponentProps) => (
+        <section data-testid="think" data-stream-status={props.streamStatus}>
+          {props.children}
+        </section>
+      );
+
+      const { container, getByTestId } = render(
+        <XMarkdown
+          content={'<think>\n\n- test\n\ntest</think> outer,'}
+          components={{ think: ThinkComponent }}
+          streaming={{
+            hasNextChunk: false,
+            parsingGuards: {
+              customTags: true,
+            },
+          }}
+        />,
+      );
+
+      const think = getByTestId('think');
+      expect(think).toHaveAttribute('data-stream-status', 'done');
+      expect(think.querySelector('ul li')?.textContent).toBe('test');
+      expect(think.querySelector('p')?.textContent).toBe('test');
+
+      const paragraphs = Array.from(container.querySelectorAll('p'));
+      expect(paragraphs[paragraphs.length - 1]).toHaveTextContent('outer,');
+      expect(paragraphs[paragraphs.length - 1]?.closest('[data-testid="think"]')).toBeNull();
+    });
+
+    it('should mark unclosed custom tags as loading while streaming', () => {
+      const ThinkComponent = (props: ComponentProps) => (
+        <section data-testid="think" data-stream-status={props.streamStatus}>
+          {props.children}
+        </section>
+      );
+
+      const { getByTestId } = render(
+        <XMarkdown
+          content={'<think>\n\n- test\n\ntest'}
+          components={{ think: ThinkComponent }}
+          streaming={{
+            hasNextChunk: true,
+            parsingGuards: {
+              customTags: true,
+            },
+          }}
+        />,
+      );
+
+      const think = getByTestId('think');
+      expect(think).toHaveAttribute('data-stream-status', 'loading');
+      expect(think.querySelector('ul li')?.textContent).toBe('test');
+      expect(think.querySelector('p')?.textContent).toBe('test');
+    });
+
+    it('should enable parsing guards by default when streaming is true', () => {
+      const ThinkComponent = (props: ComponentProps) => (
+        <section data-testid="think" data-stream-status={props.streamStatus}>
+          {props.children}
+        </section>
+      );
+
+      const { getByTestId } = render(
+        <XMarkdown
+          content={'<think>\n\n- test\n\ntest'}
+          components={{ think: ThinkComponent }}
+          streaming
+        />,
+      );
+
+      const think = getByTestId('think');
+      expect(think).toHaveAttribute('data-stream-status', 'loading');
+      expect(think.querySelector('ul li')?.textContent).toBe('test');
+      expect(think.querySelector('p')?.textContent).toBe('test');
     });
   });
 });

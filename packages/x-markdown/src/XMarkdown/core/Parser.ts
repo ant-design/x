@@ -1,5 +1,12 @@
 import { Marked, Renderer, Token, Tokens } from 'marked';
 import { XMarkdownProps } from '../interface';
+import {
+  getBlockCustomTagNames,
+  INTERNAL_STREAM_STATUS_ATTR,
+  INTERNAL_STREAM_STATUS_LOADING,
+  resolveParsingGuards,
+  resolveStreamingConfig,
+} from '../utils/parsingGuards';
 
 type ParserOptions = {
   markedConfig?: XMarkdownProps['config'];
@@ -8,6 +15,7 @@ type ParserOptions = {
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
   escapeRawHtml?: boolean;
+  streaming?: XMarkdownProps['streaming'];
 };
 
 type ParseOptions = {
@@ -53,6 +61,55 @@ const TAIL_MARKER = Symbol('tailMarker');
 
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
+
+const TRAILING_BLANK_LINE_REGEX = /\n[ \t]*\n[ \t]*$/;
+const LEADING_BLANK_LINE_REGEX = /^[ \t]*\n[ \t]*\n/;
+
+const trimBoundaryBlankLines = (text: string): string =>
+  text.replace(/^(?:[ \t]*\r?\n)+/, '').replace(/(?:\r?\n[ \t]*)+$/, '');
+
+const ensureTrailingBlankLine = (text: string): string => {
+  if (!text || TRAILING_BLANK_LINE_REGEX.test(text)) {
+    return text;
+  }
+
+  return `${text.replace(/[ \t]+$/, '')}\n\n`;
+};
+
+const ensureLeadingBlankLine = (text: string): string => {
+  if (!text || LEADING_BLANK_LINE_REGEX.test(text)) {
+    return text;
+  }
+
+  return `\n\n${text.replace(/^[ \t]+/, '')}`;
+};
+
+const addInternalStreamStatus = (rawTag: string): string =>
+  rawTag.replace(/>$/, ` ${INTERNAL_STREAM_STATUS_ATTR}="${INTERNAL_STREAM_STATUS_LOADING}">`);
+
+type CustomTagMatch = {
+  index: number;
+  end: number;
+  type: 'open' | 'close';
+  tagName: string;
+  match: string;
+  selfClosing: boolean;
+};
+
+type CustomTagSegment =
+  | {
+      start: number;
+      end: number;
+      openTag: CustomTagMatch;
+      closeTag: CustomTagMatch;
+      loading: false;
+    }
+  | {
+      start: number;
+      end: number;
+      openTag: CustomTagMatch;
+      loading: true;
+    };
 
 class Parser {
   options: ParserOptions;
@@ -168,12 +225,160 @@ class Parser {
     });
   }
 
-  private protectCustomTags(content: string): {
+  private getBlockCustomTagNames(): string[] {
+    const parsingGuards = resolveParsingGuards(this.options.streaming);
+
+    if (!parsingGuards.customTags) {
+      return [];
+    }
+
+    return getBlockCustomTagNames(this.options.components, parsingGuards.inlineTags);
+  }
+
+  private collectCustomTagSegments(content: string, tagNames: string[]): CustomTagSegment[] {
+    if (tagNames.length === 0) {
+      return [];
+    }
+
+    const tagNamePattern = tagNames
+      .map((name) => name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+      .join('|');
+
+    const openTagRegex = new RegExp(`<(${tagNamePattern})(?:\\s[^>]*)?>`, 'gi');
+    const closeTagRegex = new RegExp(`</(${tagNamePattern})>`, 'gi');
+
+    const positions: CustomTagMatch[] = [];
+    let match = openTagRegex.exec(content);
+    while (match !== null) {
+      positions.push({
+        index: match.index,
+        end: match.index + match[0].length,
+        type: 'open',
+        tagName: match[1].toLowerCase(),
+        match: match[0],
+        selfClosing: /\/>$/.test(match[0].trim()),
+      });
+      match = openTagRegex.exec(content);
+    }
+
+    closeTagRegex.lastIndex = 0;
+    match = closeTagRegex.exec(content);
+    while (match !== null) {
+      positions.push({
+        index: match.index,
+        end: match.index + match[0].length,
+        type: 'close',
+        tagName: match[1].toLowerCase(),
+        match: match[0],
+        selfClosing: false,
+      });
+      match = closeTagRegex.exec(content);
+    }
+
+    positions.sort((a, b) => a.index - b.index);
+
+    const segments: CustomTagSegment[] = [];
+    const stack: CustomTagMatch[] = [];
+
+    for (const position of positions) {
+      if (position.type === 'open') {
+        if (!position.selfClosing) {
+          stack.push(position);
+        }
+        continue;
+      }
+
+      const openTag = stack.length > 0 ? stack[stack.length - 1] : null;
+      if (!openTag || openTag.tagName !== position.tagName) {
+        continue;
+      }
+
+      stack.pop();
+      if (stack.length === 0) {
+        segments.push({
+          start: openTag.index,
+          end: position.end,
+          openTag,
+          closeTag: position,
+          loading: false,
+        });
+      }
+    }
+
+    const { hasNextChunk = false } = resolveStreamingConfig(this.options.streaming) || {};
+    if (hasNextChunk && stack.length > 0) {
+      segments.push({
+        start: stack[0].index,
+        end: content.length,
+        openTag: stack[0],
+        loading: true,
+      });
+    }
+
+    return segments.sort((a, b) => a.start - b.start);
+  }
+
+  private buildCustomTagSegment(content: string, segment: CustomTagSegment): string {
+    const openTag = segment.loading
+      ? addInternalStreamStatus(segment.openTag.match)
+      : segment.openTag.match;
+    const closeTag = segment.loading ? `</${segment.openTag.tagName}>` : segment.closeTag.match;
+    const innerStart = segment.openTag.end;
+    const innerEnd = segment.loading ? segment.end : segment.closeTag.index;
+    const innerContent = trimBoundaryBlankLines(content.slice(innerStart, innerEnd));
+
+    return innerContent
+      ? `${openTag}\n\n${innerContent}\n\n${closeTag}`
+      : `${openTag}\n\n${closeTag}`;
+  }
+
+  private normalizeBlockCustomTags(content: string): string {
+    const blockTagNames = this.getBlockCustomTagNames();
+    if (blockTagNames.length === 0) {
+      return content;
+    }
+
+    const segments = this.collectCustomTagSegments(content, blockTagNames);
+    if (segments.length === 0) {
+      return content;
+    }
+
+    let result = '';
+    let lastIndex = 0;
+
+    for (const segment of segments) {
+      if (segment.start < lastIndex) {
+        continue;
+      }
+
+      const before = content.slice(lastIndex, segment.start);
+      result += before;
+
+      if (result && /\S/.test(result)) {
+        result = ensureTrailingBlankLine(result);
+      }
+
+      result += this.buildCustomTagSegment(content, segment);
+      lastIndex = segment.end;
+    }
+
+    let trailing = content.slice(lastIndex);
+    if (trailing && /\S/.test(trailing) && result) {
+      trailing = ensureLeadingBlankLine(trailing);
+    }
+
+    return result + trailing;
+  }
+
+  private protectCustomTags(
+    content: string,
+    tagNames?: string[],
+  ): {
     protected: string;
     placeholders: Map<string, string>;
   } {
     const placeholders = new Map<string, string>();
-    const customTagNames = Object.keys(this.options.components || {});
+    const customTagNames = tagNames ?? Object.keys(this.options.components || {});
 
     if (customTagNames.length === 0) {
       return { protected: content, placeholders };
@@ -336,15 +541,27 @@ class Parser {
   public parse(content: string, parseOptions?: ParseOptions) {
     // Set tail injection flag
     this.injectTail = parseOptions?.injectTail ?? false;
+    let nextContent = content;
+
+    if (resolveParsingGuards(this.options.streaming).customTags) {
+      nextContent = this.normalizeBlockCustomTags(nextContent);
+    }
 
     // Protect custom tags if needed
     if (this.options.protectCustomTagNewlines) {
-      const { protected: protectedContent, placeholders } = this.protectCustomTags(content);
+      const blockTagNames = new Set(this.getBlockCustomTagNames());
+      const protectedTagNames = Object.keys(this.options.components || {}).filter(
+        (tagName) => !blockTagNames.has(tagName.toLowerCase()),
+      );
+      const { protected: protectedContent, placeholders } = this.protectCustomTags(
+        nextContent,
+        protectedTagNames,
+      );
       const parsed = this.markdownInstance.parse(protectedContent) as string;
       return this.restorePlaceholders(parsed, placeholders);
     }
 
-    return this.markdownInstance.parse(content) as string;
+    return this.markdownInstance.parse(nextContent) as string;
   }
 }
 

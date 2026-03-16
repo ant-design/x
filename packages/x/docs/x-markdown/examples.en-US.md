@@ -44,11 +44,13 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
+| `true` | Equivalent to `{ hasNextChunk: true, parsingGuards: true }` for quickly enabling streaming optimizations | `boolean` | - |
 | hasNextChunk | Whether more chunks are expected. Set `false` to flush cache and finish rendering | `boolean` | `false` |
 | enableAnimation | Whether to enable fade-in animation for block elements | `boolean` | `false` |
 | animationConfig | Animation options (for example fade duration and easing) | `AnimationConfig` | - |
 | tail | Enable tail indicator | `boolean \| TailConfig` | `false` |
 | incompleteMarkdownComponentMap | Map incomplete Markdown fragments to custom loading components | `Partial<Record<'link' \| 'image' \| 'html' \| 'emphasis' \| 'list' \| 'table' \| 'inline-code', string>>` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
+| parsingGuards | Guards intermediate streamed parsing results, including `setextHeading` and `customTags` | `boolean \| ParsingGuardsOption` | `false` |
 
 ### TailConfig
 

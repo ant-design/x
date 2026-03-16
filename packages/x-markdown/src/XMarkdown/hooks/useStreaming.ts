@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { StreamCacheTokenType, XMarkdownProps } from '../interface';
+import { resolveParsingGuards, resolveStreamingConfig } from '../utils/parsingGuards';
 
 /* ------------ Type ------------ */
 
@@ -236,13 +237,46 @@ const safeEncodeURIComponent = (str: string): string => {
   }
 };
 
+const applySetextHeadingGuard = (
+  output: string,
+  shouldGuard: boolean,
+  hasNextChunk: boolean,
+): string => {
+  if (!shouldGuard || !hasNextChunk || !output) {
+    return output;
+  }
+
+  const lines = output.split('\n');
+  let candidateIndex = lines.length - 1;
+
+  while (candidateIndex >= 0 && lines[candidateIndex].trim() === '') {
+    candidateIndex--;
+  }
+
+  if (candidateIndex <= 0) {
+    return output;
+  }
+
+  const underline = lines[candidateIndex].trim();
+  const previousLine = lines[candidateIndex - 1];
+
+  if (!/^[=-]+$/.test(underline) || previousLine.trim() === '') {
+    return output;
+  }
+
+  return `${lines.slice(0, candidateIndex).join('\n')}\n`;
+};
+
 /* ------------ Main Hook ------------ */
 const useStreaming = (
   input: string,
   config?: { streaming: XMarkdownProps['streaming']; components?: XMarkdownProps['components'] },
 ) => {
   const { streaming, components = {} } = config || {};
-  const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
+  const resolvedStreaming = resolveStreamingConfig(streaming);
+  const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } =
+    resolvedStreaming || {};
+  const parsingGuards = resolveParsingGuards(streaming);
   const [output, setOutput] = useState('');
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
@@ -322,9 +356,16 @@ const useStreaming = (
       }
 
       const incompletePlaceholder = handleIncompleteMarkdown(cache);
-      setOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
+      const rawOutput = cache.completeMarkdown + (incompletePlaceholder || '');
+      setOutput(
+        applySetextHeadingGuard(
+          rawOutput,
+          parsingGuards.setextHeading,
+          !!resolvedStreaming?.hasNextChunk,
+        ),
+      );
     },
-    [handleIncompleteMarkdown],
+    [handleIncompleteMarkdown, parsingGuards.setextHeading, resolvedStreaming?.hasNextChunk],
   );
 
   useEffect(() => {

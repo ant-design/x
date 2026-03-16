@@ -44,11 +44,13 @@ packageName: x-markdown
 
 | 字段 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| `true` | 等价于 `{ hasNextChunk: true, parsingGuards: true }`，快速开启流式优化 | `boolean` | - |
 | hasNextChunk | 是否还有后续内容块。为 `false` 时会刷新缓存并完成渲染 | `boolean` | `false` |
 | enableAnimation | 是否为块级元素启用文字淡入动画 | `boolean` | `false` |
 | animationConfig | 动画配置（如淡入时长、缓动函数） | `AnimationConfig` | - |
 | tail | 是否启用尾部指示器 | `boolean \| TailConfig` | `false` |
 | incompleteMarkdownComponentMap | 将未闭合 Markdown 片段映射到自定义 loading 组件 | `Partial<Record<'link' \| 'image' \| 'html' \| 'emphasis' \| 'list' \| 'table' \| 'inline-code', string>>` | `{ link: 'incomplete-link', image: 'incomplete-image' }` |
+| parsingGuards | 保护流式中间态的解析结果，支持 `setextHeading` 和 `customTags` | `boolean \| ParsingGuardsOption` | `false` |
 
 ### TailConfig
 

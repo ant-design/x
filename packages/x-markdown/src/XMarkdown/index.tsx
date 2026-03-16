@@ -2,8 +2,9 @@ import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { Parser, Renderer } from './core';
 import DebugPanel from './DebugPanel';
-import { useStreaming } from './hooks';
+import useStreaming from './hooks/useStreaming';
 import { XMarkdownProps } from './interface';
+import { resolveStreamingConfig } from './utils/parsingGuards';
 import { resolveTailContent } from './utils/tail';
 import './index.css';
 
@@ -24,9 +25,14 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     escapeRawHtml,
     debug,
   } = props;
-  const tailContent = useMemo(() => resolveTailContent(streaming?.tail), [streaming?.tail]);
-  const TailComponent = typeof streaming?.tail === 'object' ? streaming.tail.component : undefined;
-  const shouldShowTail = !!streaming?.hasNextChunk && tailContent;
+  const resolvedStreaming = useMemo(() => resolveStreamingConfig(streaming), [streaming]);
+  const tailContent = useMemo(
+    () => resolveTailContent(resolvedStreaming?.tail),
+    [resolvedStreaming?.tail],
+  );
+  const TailComponent =
+    typeof resolvedStreaming?.tail === 'object' ? resolvedStreaming.tail.component : undefined;
+  const shouldShowTail = !!resolvedStreaming?.hasNextChunk && tailContent;
 
   // ============================ style ============================
   const mergedCls = clsx('x-markdown', rootClassName, className);
@@ -62,6 +68,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
         components: mergedComponents,
         protectCustomTagNewlines,
         escapeRawHtml,
+        streaming: resolvedStreaming,
       }),
     [
       config,
@@ -70,6 +77,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
       mergedComponents,
       protectCustomTagNewlines,
       escapeRawHtml,
+      resolvedStreaming,
     ],
   );
 
@@ -78,9 +86,9 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
       new Renderer({
         components: mergedComponents,
         dompurifyConfig,
-        streaming,
+        streaming: resolvedStreaming,
       }),
-    [mergedComponents, dompurifyConfig, streaming],
+    [mergedComponents, dompurifyConfig, resolvedStreaming],
   );
 
   const htmlString = useMemo(() => {

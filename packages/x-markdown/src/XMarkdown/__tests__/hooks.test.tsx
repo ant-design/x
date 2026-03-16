@@ -1,6 +1,6 @@
 import { act, render, renderHook } from '@testing-library/react';
 import React from 'react';
-import { useStreaming } from '../hooks';
+import useStreaming from '../hooks/useStreaming';
 import type { XMarkdownProps } from '../interface';
 
 // 流处理功能测试 - 基础测试用例
@@ -499,6 +499,93 @@ describe('XMarkdown hooks', () => {
         });
       });
       expect(result.current).toBe('Start with [link](https://example.com)');
+    });
+  });
+
+  describe('useStreaming parsingGuards', () => {
+    it('should guard setext heading intermediate state while streaming', () => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: 'test\n--',
+          config: {
+            streaming: {
+              hasNextChunk: true,
+              parsingGuards: {
+                setextHeading: true,
+              },
+            },
+          },
+        },
+      });
+
+      expect(result.current).toBe('test\n');
+
+      act(() => {
+        rerender({
+          input: 'test\n- test',
+          config: {
+            streaming: {
+              hasNextChunk: true,
+              parsingGuards: {
+                setextHeading: true,
+              },
+            },
+          },
+        });
+      });
+
+      expect(result.current).toBe('test\n- test');
+    });
+
+    it('should follow CommonMark for final setext-like content', () => {
+      const { result } = renderHook(() =>
+        useStreaming('test\n--', {
+          streaming: {
+            hasNextChunk: false,
+            parsingGuards: {
+              setextHeading: true,
+            },
+          },
+        }),
+      );
+
+      expect(result.current).toBe('test\n--');
+    });
+
+    it('should keep existing behavior when setext heading guard is disabled', () => {
+      const { result } = renderHook(() =>
+        useStreaming('test\n--', {
+          streaming: {
+            hasNextChunk: true,
+            parsingGuards: {},
+          },
+        }),
+      );
+
+      expect(result.current).toBe('test\n--');
+    });
+
+    it('should enable streaming guards by default when streaming is true', () => {
+      const { result, rerender } = renderHook(
+        ({ input, streaming }) => useStreaming(input, { streaming }),
+        {
+          initialProps: {
+            input: 'test\n--',
+            streaming: true as XMarkdownProps['streaming'],
+          },
+        },
+      );
+
+      expect(result.current).toBe('test\n');
+
+      act(() => {
+        rerender({
+          input: 'test\n--',
+          streaming: false as XMarkdownProps['streaming'],
+        });
+      });
+
+      expect(result.current).toBe('test\n--');
     });
   });
 

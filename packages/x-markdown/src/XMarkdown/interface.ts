@@ -45,7 +45,31 @@ interface TailConfig {
   component?: React.ComponentType<{ content?: string }>;
 }
 
-interface StreamingOption {
+interface ParsingGuardsCustomTagsOption {
+  /**
+   * @description 仍按行内标签处理的自定义标签列表
+   * @description Custom tags that should continue to be treated as inline tags
+   * @default []
+   */
+  inlineTags?: string[];
+}
+
+interface ParsingGuardsOption {
+  /**
+   * @description 保护 setext 标题的中间态，避免 `text\n--` 在流式阶段被提前解析为标题
+   * @description Protects setext heading intermediate states and prevents `text\n--` from being parsed as a heading too early during streaming
+   * @default false
+   */
+  setextHeading?: boolean;
+  /**
+   * @description 保护自定义标签的块级结构，使其内部 Markdown 在流式阶段保持稳定
+   * @description Protects block-level custom tag structure so inner Markdown remains stable during streaming
+   * @default false
+   */
+  customTags?: boolean | ParsingGuardsCustomTagsOption;
+}
+
+interface StreamingConfig {
   /**
    * @description 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染
    * @description Indicates whether more content chunks are expected. When false, flushes all cached content and completes rendering
@@ -80,7 +104,15 @@ interface StreamingOption {
       string
     >
   >;
+  /**
+   * @description 保护流式中间态的解析结果，避免在内容未完成时被过早解析
+   * @description Guards streamed intermediate parsing results to avoid early parsing before content is complete
+   * @default false
+   */
+  parsingGuards?: boolean | ParsingGuardsOption;
 }
+
+type StreamingOption = boolean | StreamingConfig;
 
 type StreamStatus = 'loading' | 'done';
 
@@ -199,6 +231,9 @@ export type {
   Tokens,
   StreamStatus,
   ComponentProps,
+  StreamingConfig,
   StreamingOption,
   TailConfig,
+  ParsingGuardsOption,
+  ParsingGuardsCustomTagsOption,
 };

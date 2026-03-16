@@ -608,6 +608,31 @@ describe('Renderer', () => {
       jest.restoreAllMocks();
     });
 
+    it('should respect injected internal streaming status markers', () => {
+      const components = {
+        think: MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      renderer.processHtml(
+        '<think data-xmd-streaming="loading"><ul><li>test</li></ul><p>test</p></think>',
+      );
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          streamStatus: 'loading',
+        }),
+      );
+
+      const thinkCall = createElementSpy.mock.calls.find((call) => call[0] === MockComponent);
+      expect(thinkCall?.[1]).not.toHaveProperty('data-xmd-streaming');
+
+      createElementSpy.mockRestore();
+    });
+
     it('should handle complex nested structures with partial component mapping', () => {
       const ArticleComponent: React.FC<any> = (props) => React.createElement('article', props);
       const SectionComponent: React.FC<any> = (props) => React.createElement('section', props);

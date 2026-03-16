@@ -388,14 +388,10 @@ const ThinkComponent = React.memo((props: ComponentProps) => {
     }
   }, [props.streamStatus]);
 
-  if (typeof props.children !== 'string') {
-    return null;
-  }
-
   return (
     <div style={{ padding: '12px 0' }}>
       <Think title={title} loading={loading} expanded={expand} onClick={() => setExpand(!expand)}>
-        {props?.children?.trim()}
+        {props.children}
       </Think>
     </div>
   );
@@ -468,6 +464,12 @@ const App = () => {
               ordermanager: OrderManager,
             }}
             paragraphTag="div"
+            streaming={{
+              hasNextChunk: index < text.length,
+              parsingGuards: {
+                customTags: true,
+              },
+            }}
           >
             {content}
           </XMarkdown>

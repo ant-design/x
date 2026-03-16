@@ -1,10 +1,13 @@
 export { default as version } from './version';
 export { default, default as XMarkdown } from './XMarkdown';
 export { default as AnimationText } from './XMarkdown/AnimationText';
-export { useStreaming } from './XMarkdown/hooks';
+export { default as useStreaming } from './XMarkdown/hooks/useStreaming';
 export type {
   ComponentProps,
+  ParsingGuardsCustomTagsOption,
+  ParsingGuardsOption,
   StreamCacheTokenType,
+  StreamingConfig,
   StreamStatus,
   Token,
   Tokens,

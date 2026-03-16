@@ -180,6 +180,63 @@ describe('Parser', () => {
     });
   });
 
+  describe('parsingGuards.customTags', () => {
+    it('should normalize block custom tags so inner markdown remains inside the component', () => {
+      const parser = new Parser({
+        components: { think: 'div' },
+        streaming: {
+          hasNextChunk: false,
+          parsingGuards: {
+            customTags: true,
+          },
+        },
+      });
+
+      const result = parser.parse('<think>\n\n- test\n\ntest</think> outer,');
+      expect(result).toContain('<think>');
+      expect(result).toContain('<ul>\n<li>test</li>\n</ul>');
+      expect(result).toContain('<p>test</p>');
+      expect(result).toContain('</think>');
+      expect(result).toContain('<p>outer,</p>');
+      expect(result).not.toContain('<p>test</think> outer,</p>');
+    });
+
+    it('should inject a temporary close tag for unclosed custom tags while streaming', () => {
+      const parser = new Parser({
+        components: { think: 'div' },
+        streaming: {
+          hasNextChunk: true,
+          parsingGuards: {
+            customTags: true,
+          },
+        },
+      });
+
+      const result = parser.parse('<think>\n\n- test\n\ntest');
+      expect(result).toContain('<think data-xmd-streaming="loading">');
+      expect(result).toContain('<ul>\n<li>test</li>\n</ul>');
+      expect(result).toContain('<p>test</p>');
+      expect(result).toContain('</think>');
+    });
+
+    it('should keep inline tags untouched when listed in inlineTags', () => {
+      const parser = new Parser({
+        components: { sup: 'sup' },
+        streaming: {
+          hasNextChunk: false,
+          parsingGuards: {
+            customTags: {
+              inlineTags: ['sup'],
+            },
+          },
+        },
+      });
+
+      const result = parser.parse('Count<sup>1</sup> tail');
+      expect(result).toBe('<p>Count<sup>1</sup> tail</p>\n');
+    });
+  });
+
   describe('escapeHtml', () => {
     it('should escape HTML when encode is false or undefined and contains special characters', () => {
       expect(escapeHtml('test<script>alert("xss")</script>', false)).toBe(

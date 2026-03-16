@@ -75,7 +75,16 @@ const App = () => {
       <Bubble
         content={text.slice(0, index)}
         contentRender={(content) => (
-          <XMarkdown components={{ think: ThinkComponent }} paragraphTag="div">
+          <XMarkdown
+            components={{ think: ThinkComponent }}
+            paragraphTag="div"
+            streaming={{
+              hasNextChunk: index < text.length,
+              parsingGuards: {
+                customTags: true,
+              },
+            }}
+          >
             {content}
           </XMarkdown>
         )}

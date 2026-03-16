@@ -5,6 +5,7 @@ import parseHtml, { domToReact } from 'html-react-parser';
 import React, { ReactNode } from 'react';
 import AnimationText from '../AnimationText';
 import type { ComponentProps, XMarkdownProps } from '../interface';
+import { INTERNAL_STREAM_STATUS_ATTR } from '../utils/parsingGuards';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
@@ -69,7 +70,7 @@ class Renderer {
     return {
       ...userConfig,
       ADD_TAGS: Array.from(new Set([...customComponents, ...allowedTags])),
-      ADD_ATTR: Array.from(new Set(['target', 'rel', ...addAttr])),
+      ADD_ATTR: Array.from(new Set(['target', 'rel', INTERNAL_STREAM_STATUS_ATTR, ...addAttr])),
     };
   }
 
@@ -94,14 +95,23 @@ class Renderer {
       const { name, attribs, children } = domNode as Element;
       const renderElement = this.options.components?.[name];
       if (renderElement) {
-        const streamStatus = unclosedTags?.has(name) ? 'loading' : 'done';
+        cidRef.tagIndexes[name] = (cidRef.tagIndexes[name] ?? 0) + 1;
+        const internalStreamStatus = attribs?.[INTERNAL_STREAM_STATUS_ATTR];
+        const isLoadingFromInjectedStatus = internalStreamStatus === INTERNAL_STREAM_STATUS_LOADING;
+        const streamStatus =
+          isLoadingFromInjectedStatus ||
+          unclosedTags?.has(getTagInstanceId(name, cidRef.tagIndexes[name]))
+            ? 'loading'
+            : 'done';
+        const publicAttribs = { ...attribs };
+        delete publicAttribs[INTERNAL_STREAM_STATUS_ATTR];
         const props: ComponentProps = {
           domNode,
           streamStatus,
           key,
-          ...attribs,
-          ...(attribs.disabled !== undefined && { disabled: true }),
-          ...(attribs.checked !== undefined && { checked: true }),
+          ...publicAttribs,
+          ...(publicAttribs.disabled !== undefined && { disabled: true }),
+          ...(publicAttribs.checked !== undefined && { checked: true }),
         };
 
         // Handle class and className merging

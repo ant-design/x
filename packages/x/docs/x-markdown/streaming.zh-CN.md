@@ -7,7 +7,7 @@ order: 4
 
 ## 代码示例
 
-<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
+<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/parsingGuards.tsx" description="Legacy 与 parsingGuards 对比">解析保护</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
 
 ## API
 
@@ -15,11 +15,43 @@ order: 4
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| `true` | 等价于 `{ hasNextChunk: true, parsingGuards: true }`，用于快速开启流式优化 | `boolean` | - |
 | hasNextChunk | 是否还有后续 chunk | `boolean` | `false` |
 | incompleteMarkdownComponentMap | 未完成语法的组件映射 | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
+| parsingGuards | 保护流式中间态解析结果，避免提前误解析 | `boolean \| ParsingGuardsOption` | `false` |
 | enableAnimation | 是否启用淡入动画 | `boolean` | `false` |
 | animationConfig | 动画参数 | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
 | tail | 是否启用尾部指示器 | `boolean \| TailConfig` | `false` |
+
+### ParsingGuardsOption
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| setextHeading | 保护 `text\n--` 这类 setext 标题中间态，避免流式阶段闪成标题 | `boolean` | `false` |
+| customTags | 保护块级自定义标签的结构，并允许其内部 Markdown 在流式阶段稳定解析 | `boolean \| { inlineTags?: string[] }` | `false` |
+
+`customTags.inlineTags` 可用于排除仍需保持行内语义的标签。
+
+### Boolean Shorthand
+
+```tsx
+<XMarkdown streaming>{content}</XMarkdown>
+```
+
+等价于：
+
+```tsx
+<XMarkdown
+  streaming={{
+    hasNextChunk: true,
+    parsingGuards: true,
+  }}
+>
+  {content}
+</XMarkdown>
+```
+
+`streaming={true}` 只会默认开启流式优化，不会自动开启 `tail` 或 `enableAnimation`。
 
 ### TailConfig
 
@@ -77,6 +109,10 @@ order: 4
   content={content}
   streaming={{
     hasNextChunk,
+    parsingGuards: {
+      setextHeading: true,
+      customTags: true,
+    },
     enableAnimation: true,
     tail: true,
     incompleteMarkdownComponentMap: {
@@ -96,3 +132,7 @@ order: 4
 ### `hasNextChunk` 可以一直是 `true` 吗？
 
 不建议。最后一个 chunk 到达后应切换为 `false`，否则未完成语法会持续停留在占位状态。
+
+### `parsingGuards` 会影响最终渲染结果吗？
+
+`setextHeading` 只保护流式中间态；最后一个 chunk 到达后，结果仍遵循 CommonMark。`customTags` 只在显式开启时生效，用于把自定义标签提升为稳定的块级结构。
