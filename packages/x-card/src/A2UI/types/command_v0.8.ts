@@ -1,19 +1,12 @@
-interface PathValue {
-  path: string;
-}
-
-interface LiteralStringValue {
-  literalString: string;
-}
-
 // A2UI Component System v0.8 Type Definitions
 // Flexible component system supporting dynamic component types
 
-// Base value types for data binding
+/** 数据绑定路径对象 */
 interface PathValue {
   path: string;
 }
 
+/** 字面字符串值对象（v0.8 特有） */
 interface LiteralStringValue {
   literalString: string;
 }
@@ -23,12 +16,11 @@ export interface ComponentWrapper_v0_8 {
   id: string;
   component: {
     [componentType: string]: {
-      // Standard fields for component relationships and data binding
+      // Standard fields for component relationships
       child?: string;
       children?: string[];
-      value?: PathValue | LiteralStringValue;
-
-      // All other properties are custom and component-specific
+      // 任何字段均支持字面值或 PathValue / LiteralStringValue 数据绑定形式
+      // 例：{ "text": "Hello" } 或 { "text": { "path": "/user/name" } } 或 { "text": { "literalString": "Hello" } }
       [key: string]: any;
     };
   };

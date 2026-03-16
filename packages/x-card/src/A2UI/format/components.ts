@@ -1,70 +1,127 @@
 import type { ComponentWrapper_v0_8 } from '../types/command_v0.8';
 import type { BaseComponent_v0_9 } from '../types/command_v0.9';
 
-interface ReactComponentTree {
+export interface ReactComponentTree {
   type: string;
-  props: Record<string, any>;
-  children?: ReactComponentTree[];
+  props: Record<string, any>; // 不含 id、component、children、child 等结构性字段；{ path } 绑定已提取为路径字符串
+  children?: string[]; // 子节点 id 列表，由调用方去 componentMap 中查找对应节点
 }
 
+// ─── 内部解析辅助 ────────────────────────────────────────────────────────────
+
+/** 判断一个值是否为 { path: string } 形式的路径对象 */
+function isPathObject(val: any): val is { path: string } {
+  return val !== null && typeof val === 'object' && typeof val.path === 'string';
+}
+
+function parseV08Node(comp: ComponentWrapper_v0_8): ReactComponentTree {
+  const [type, config] = Object.entries(comp.component)[0];
+
+  const props: Record<string, any> = {};
+  for (const [key, val] of Object.entries(config)) {
+    if (['child', 'children'].includes(key)) continue;
+    // v0.8 中 value 支持 { path } 或 { literalString } 两种特有格式，单独处理
+    if (key === 'value') {
+      if (val !== undefined) {
+        props.value = 'path' in val ? val.path : val.literalString;
+      }
+      continue;
+    }
+    // 其余字段：字面值直接使用，{ path } 形式提取路径字符串
+    props[key] = isPathObject(val) ? val.path : val;
+  }
+
+  const childIds: string[] = config.children ?? (config.child ? [config.child] : []);
+
+  return {
+    type,
+    props,
+    ...(childIds.length > 0 && { children: childIds }),
+  };
+}
+
+function parseV09Node(comp: BaseComponent_v0_9): ReactComponentTree {
+  const type = comp.component;
+
+  const props: Record<string, any> = {};
+  for (const [key, val] of Object.entries(comp)) {
+    // 跳过结构性内部字段，其余字段（包括 value）统一处理
+    if (['id', 'component', 'child', 'children'].includes(key)) continue;
+    // 字面值直接使用，{ path } 形式提取路径字符串供 resolveProps 解析
+    props[key] = isPathObject(val) ? val.path : val;
+  }
+
+  const childIds: string[] = comp.children ?? (comp.child ? [comp.child] : []);
+
+  return {
+    type,
+    props,
+    ...(childIds.length > 0 && { children: childIds }),
+  };
+}
+
+// ─── 工厂函数 ────────────────────────────────────────────────────────────────
+
+export interface ComponentTransformer {
+  /**
+   * 将新增/更新的 components 合并进内部缓存，并返回以 root 节点为根的树。
+   * 若缓存中尚无 id === 'root' 的节点则返回 null。
+   */
+  transform(
+    components: ComponentWrapper_v0_8[] | BaseComponent_v0_9[],
+    version?: 'v0.8' | 'v0.9',
+  ): ReactComponentTree | null;
+
+  /** 按 id 查找已缓存的节点，不存在时返回 undefined */
+  getById(id: string): ReactComponentTree | undefined;
+
+  /** 清空内部缓存 */
+  reset(): void;
+}
+
+export function createComponentTransformer(): ComponentTransformer {
+  // id → 解析后的节点（children 为子节点 id 列表）
+  const componentMap = new Map<string, ReactComponentTree>();
+
+  function transform(
+    components: ComponentWrapper_v0_8[] | BaseComponent_v0_9[],
+    version: 'v0.8' | 'v0.9' = 'v0.8',
+  ): ReactComponentTree | null {
+    if (!Array.isArray(components) || components.length === 0) {
+      return componentMap.get('root') ?? null;
+    }
+
+    if (version === 'v0.8') {
+      for (const comp of components as ComponentWrapper_v0_8[]) {
+        componentMap.set(comp.id, parseV08Node(comp));
+      }
+    } else {
+      for (const comp of components as BaseComponent_v0_9[]) {
+        componentMap.set(comp.id, parseV09Node(comp));
+      }
+    }
+
+    return componentMap.get('root') ?? null;
+  }
+
+  function getById(id: string): ReactComponentTree | undefined {
+    return componentMap.get(id);
+  }
+
+  function reset(): void {
+    componentMap.clear();
+  }
+
+  return { transform, getById, reset };
+}
+
+// ─── 向后兼容的默认导出 ───────────────────────────────────────────────────────
+
+/** @deprecated 请使用 createComponentTransformer() 工厂函数 */
 export default function transformToReactTree(
   componentsCommand: ComponentWrapper_v0_8[] | BaseComponent_v0_9[],
   version: 'v0.8' | 'v0.9' = 'v0.8',
 ): ReactComponentTree | null {
-  if (!Array.isArray(componentsCommand) || componentsCommand.length === 0) {
-    return null;
-  }
-
-  if (version === 'v0.8') {
-    const components = componentsCommand as ComponentWrapper_v0_8[];
-    const rootComponents = components.filter((comp) => comp.id === 'root');
-
-    if (rootComponents.length === 0) return null;
-
-    const rootComponent = rootComponents[0]; // 只取第一个root
-    const [type, config] = Object.entries(rootComponent.component)[0];
-
-    return {
-      type: type,
-      props: {
-        id: rootComponent.id,
-        ...Object.fromEntries(
-          Object.entries(config).filter(([key]) => !['value', 'children', 'child'].includes(key)),
-        ),
-        ...(config.value && {
-          value: 'path' in config.value ? config.value.path : config.value.literalString,
-        }),
-      },
-      children: config.children?.map((childId) => ({
-        type: 'placeholder',
-        props: { id: childId },
-      })),
-    };
-  }
-
-  const components = componentsCommand as BaseComponent_v0_9[];
-  const rootComponents = components.filter((comp) => comp.id === 'root');
-
-  if (rootComponents.length === 0) return null;
-
-  const rootComponent = rootComponents[0]; // 只取第一个root
-
-  // 处理 children 和 child 的兼容
-  const childIds = rootComponent.children || (rootComponent.child ? [rootComponent.child] : []);
-
-  return {
-    type: rootComponent.component,
-    props: {
-      id: rootComponent.id,
-      ...Object.fromEntries(
-        Object.entries(rootComponent).filter(
-          ([key]) => !['id', 'component', 'value', 'child', 'children'].includes(key),
-        ),
-      ),
-      ...(rootComponent.value && { value: rootComponent.value.path }),
-    },
-    ...(childIds.length > 0 && {
-      children: childIds.map((childId) => ({ type: 'placeholder', props: { id: childId } })),
-    }),
-  };
+  const transformer = createComponentTransformer();
+  return transformer.transform(componentsCommand, version);
 }

@@ -1,8 +1,8 @@
 // A2UI Command System v0.9 Type Definitions
 // Structured command system with explicit versioning and strict typing
 
-// Base value type for path-based data binding
-interface PathValue {
+/** 数据绑定路径对象，任何组件字段均可使用此形式实现响应式绑定 */
+export interface PathValue {
   path: string;
 }
 
@@ -12,8 +12,9 @@ export interface BaseComponent_v0_9 {
   component: string; // Component type identifier
   child?: string;
   children?: string[]; // Reference to children component ID
-  value?: PathValue; // Data binding value
-  [key: string]: any; // Additional component-specific properties
+  // 任何字段均支持字面值或 PathValue（{ path: string }）数据绑定形式
+  // 例：{ "text": "Hello" } 或 { "text": { "path": "/user/name" } }
+  [key: string]: any;
 }
 
 // Command to create a new surface
@@ -44,11 +45,20 @@ interface UpdateDataModelCommand {
   };
 }
 
+// Command to delete a surface
+interface DeleteSurfaceCommand {
+  version: 'v0.9';
+  deleteSurface: {
+    surfaceId: string;
+  };
+}
+
 // Union type for all possible commands
 export type A2UICommand_v0_9 =
   | CreateSurfaceCommand
   | UpdateComponentsCommand
-  | UpdateDataModelCommand;
+  | UpdateDataModelCommand
+  | DeleteSurfaceCommand;
 
 // Backward compatible type alias
 export type XAgentCommand_v0_9 = A2UICommand_v0_9;
