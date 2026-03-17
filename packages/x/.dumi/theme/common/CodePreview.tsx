@@ -107,7 +107,6 @@ const CodePreview: React.FC<CodePreviewProps> = ({
   styleCode = '',
   entryName,
   onSourceChange,
-  error,
 }) => {
   // 避免 Tabs 数量不稳定的闪动问题
   const initialCodes: Partial<Record<'tsx' | 'jsx' | 'style', string>> = {};
@@ -156,7 +155,6 @@ const CodePreview: React.FC<CodePreviewProps> = ({
           <div className={styles.code}>
             {lang === 'tsx' ? (
               <LiveCode
-                error={error}
                 lang={lang}
                 initialValue={sourceCodes[lang]}
                 onChange={(code: string) => {
@@ -184,7 +182,6 @@ const CodePreview: React.FC<CodePreviewProps> = ({
       children: (
         <div className={styles.code}>
           <LiveCode
-            error={error}
             lang={lang}
             initialValue={codeString}
             onChange={(code: string) => {
