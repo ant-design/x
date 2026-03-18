@@ -203,7 +203,6 @@ const CodePreview: React.FC<CodePreviewProps> = ({
   if (langList.length === 1) {
     return (
       <LiveCode
-        error={error}
         lang={langList[0]}
         initialValue={sourceCodes[langList[0]]}
         onChange={(code: string) => {
