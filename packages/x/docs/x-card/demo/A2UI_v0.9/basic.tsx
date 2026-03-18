@@ -4,6 +4,7 @@ import { version, type XAgentCommand_v0_9, XCard } from '@ant-design/x-card';
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, DatePicker, Radio, Space, Tag, Typography } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
+import { rest } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 const contentHeader =
@@ -208,8 +209,6 @@ interface CoffeeListProps {
   description?: string;
   /** 当前选中项的 id（受控） */
   value?: string | number;
-  /** 选中变化时回调，返回选中项的 id */
-  onChange?: (value: string | number) => void;
   /** 禁用整个列表，不可再选择 */
   disabled?: boolean;
   /** Card 内部 action 触发器，选中时上报 select_coffee 事件 */
@@ -219,24 +218,17 @@ interface CoffeeListProps {
 const CoffeeList: React.FC<CoffeeListProps> = ({
   list,
   description,
-  value,
-  onChange,
   disabled,
   onAction,
+  ...rest
 }) => {
-  const [selected, setSelected] = useState<string | number | undefined>(value);
-
-  // 外部 value 变化时同步
-  useEffect(() => {
-    setSelected(value);
-  }, [value]);
+  console.log(rest, 'rest');
 
   if (!list || list.length === 0) return null;
 
   const handleSelect = (itemId: string | number) => {
     if (disabled) return;
-    setSelected(itemId);
-    onChange?.(itemId);
+
     // 找到选中的完整咖啡对象，通过 action 上报给 App
     const selectedItem = list.find((item, index) => (item.id ?? index) === itemId);
     onAction?.('select_coffee', { selectedItem });
@@ -258,127 +250,106 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
         </Typography.Text>
       )}
       <Radio.Group
-        value={selected}
         onChange={(e) => handleSelect(e.target.value)}
         disabled={disabled}
         style={{ width: '100%' }}
-      >
-        <Space vertical style={{ width: '100%' }} size={8}>
-          {list.map((item, index) => {
-            const itemId = item.id ?? index;
-            const isSelected = selected === itemId;
-            return (
-              <Radio
-                key={itemId}
-                value={itemId}
-                disabled={disabled}
-                style={{ width: '100%', margin: 0, display: 'flex', alignItems: 'center' }}
+        options={list.map((item, index) => ({
+          value: item.id ?? index,
+          disabled,
+          label: (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 12,
+                padding: '10px 12px',
+                borderRadius: 12,
+                background: '#fafafa',
+                border: '1px solid #f0f0f0',
+                transition: 'background 0.2s',
+                cursor: disabled ? 'not-allowed' : 'pointer',
+              }}
+            >
+              {/* 图片 / 占位图标 */}
+              <div
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: 10,
+                  background: 'linear-gradient(135deg, #6b3520 0%, #c8855a 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  overflow: 'hidden',
+                }}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 12,
-                    padding: '8px 10px',
-                    borderRadius: 10,
-                    border: `1.5px solid ${isSelected ? '#d4915a' : '#f0ebe3'}`,
-                    background: isSelected
-                      ? 'linear-gradient(90deg, #fff8f2 0%, #fff3e8 100%)'
-                      : '#fdfaf6',
-                    transition: 'border-color 0.2s, background 0.2s',
-                    cursor: disabled ? 'not-allowed' : 'pointer',
-                    flex: 1,
-                    minWidth: 0,
-                    boxSizing: 'border-box',
-                  }}
-                >
-                  {/* 咖啡图标 / 图片 */}
-                  <div
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: 8,
-                      background: item.image
-                        ? 'transparent'
-                        : 'linear-gradient(135deg, #c8956c 0%, #8b5a2b 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      overflow: 'hidden',
-                    }}
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <span style={{ fontSize: 24 }}>☕</span>
+                )}
+              </div>
+
+              {/* 文字信息 */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                  <Typography.Text
+                    strong
+                    style={{ fontSize: 14, color: '#1a1a1a', lineHeight: '20px' }}
                   >
-                    {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
-                    ) : (
-                      <span style={{ fontSize: 20 }}>☕</span>
-                    )}
-                  </div>
-
-                  {/* 文字信息 */}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
-                      <Typography.Text
-                        strong
-                        style={{
-                          fontSize: 14,
-                          color: isSelected ? '#8b5a2b' : '#3d2b1f',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        {item.name}
-                      </Typography.Text>
-                      {item.tag && (
-                        <Tag
-                          color="orange"
-                          style={{
-                            fontSize: 11,
-                            padding: '0 5px',
-                            lineHeight: '18px',
-                            flexShrink: 0,
-                          }}
-                        >
-                          {item.tag}
-                        </Tag>
-                      )}
-                    </div>
-                    {item.description && (
-                      <Typography.Text
-                        type="secondary"
-                        style={{
-                          fontSize: 12,
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          display: 'block',
-                        }}
-                      >
-                        {item.description}
-                      </Typography.Text>
-                    )}
-                  </div>
-
-                  {/* 价格 */}
-                  {item.price !== undefined && (
-                    <Typography.Text
-                      strong
-                      style={{ fontSize: 14, color: '#8b5a2b', flexShrink: 0 }}
+                    {item.name}
+                  </Typography.Text>
+                  {item.tag && (
+                    <Tag
+                      style={{
+                        fontSize: 11,
+                        padding: '0 6px',
+                        lineHeight: '18px',
+                        borderRadius: 8,
+                        color: '#d46b08',
+                        background: '#fff7e6',
+                        border: '1px solid #ffd591',
+                        margin: 0,
+                      }}
                     >
-                      ¥{item.price}
-                    </Typography.Text>
+                      {item.tag}
+                    </Tag>
                   )}
                 </div>
-              </Radio>
-            );
-          })}
-        </Space>
-      </Radio.Group>
+                {item.description && (
+                  <Typography.Text
+                    type="secondary"
+                    style={{ fontSize: 12, lineHeight: '18px', display: 'block' }}
+                    ellipsis
+                  >
+                    {item.description}
+                  </Typography.Text>
+                )}
+              </div>
+
+              {/* 价格 */}
+              {item.price !== undefined && (
+                <Typography.Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: '#d46b08',
+                    flexShrink: 0,
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  ¥{item.price}
+                </Typography.Text>
+              )}
+            </div>
+          ),
+        }))}
+      />
     </div>
   );
 };
@@ -643,6 +614,9 @@ const UpdateCard: XAgentCommand_v0_9 = {
         description: { path: '/booking/list/description' },
         disabled: { path: '/booking/status/confirmed' },
         id: 'coffee_list',
+        action: {
+          event: { name: 'select_coffee' },
+        },
       },
       {
         id: 'status-text',

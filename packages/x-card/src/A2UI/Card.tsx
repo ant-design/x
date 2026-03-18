@@ -53,6 +53,7 @@ function renderNode(
   onDataChange?: (path: string, value: any) => void,
 ): React.ReactNode {
   const node = transformer.getById(nodeId);
+
   if (!node) return null;
   return (
     <NodeRenderer
@@ -93,15 +94,6 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
   // 将 props 中的路径绑定替换为 dataModel 中的真实值
   const resolvedProps = resolveProps(props, dataModel);
 
-  // 若 props 中含有 bind 字段（双向绑定路径），注入 onChange 将值写回 dataModel
-  if (resolvedProps.bind) {
-    const bindPath: string = resolvedProps.bind;
-    resolvedProps.onChange = (val: any) => {
-      onDataChange?.(bindPath, val);
-    };
-    delete resolvedProps.bind;
-  }
-
   // 将 onAction 注入给所有自定义组件，由组件自行决定何时、如何触发
   // action 字段原样透传，组件自己解析 event.name 并调用 onAction
   if (typeof Component !== 'string') {
@@ -111,6 +103,7 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
   const childNodes = children?.map((childId) =>
     renderNode(childId, transformer, components, dataModel, onAction, onDataChange),
   );
+  console.log(resolvedProps, 'resolvedProps');
 
   return <Component {...resolvedProps}>{childNodes}</Component>;
 };
@@ -139,6 +132,7 @@ const Card: React.FC<CardProps> = ({ id }) => {
         commands.updateComponents.components,
         version as 'v0.8' | 'v0.9',
       );
+
       setRootNode(nodeTree);
     }
 
