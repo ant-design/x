@@ -103,7 +103,6 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
   const childNodes = children?.map((childId) =>
     renderNode(childId, transformer, components, dataModel, onAction, onDataChange),
   );
-  console.log(resolvedProps, 'resolvedProps');
 
   return <Component {...resolvedProps}>{childNodes}</Component>;
 };

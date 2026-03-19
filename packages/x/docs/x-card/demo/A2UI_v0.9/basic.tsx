@@ -4,7 +4,6 @@ import { version, type XAgentCommand_v0_9, XCard } from '@ant-design/x-card';
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, DatePicker, Radio, Space, Tag, Typography } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import { rest } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 const contentHeader =
@@ -69,66 +68,32 @@ const Text: React.FC<TextProps> = ({ text, variant, children }) => {
 
 // ─── DateTimeInput 组件 ───────────────────────────────────────────────────────
 interface DateTimeInputProps {
-  value?: string;
-  enableDate?: boolean;
-  enableTime?: boolean;
-  onChange?: (value: string) => void;
+  action?: { event?: { name?: string } };
+  status?: 'success';
+  onAction?: (name: string, context: Record<string, any>) => void;
 }
 
-const DateTimeInput: React.FC<DateTimeInputProps> = ({
-  value,
-  enableDate = true,
-  enableTime = true,
-  onChange,
-}) => {
-  // value 可能是路径字符串（如 "/booking/date"）或真实日期字符串，需防御处理
-  const parsedInitial = value && !value.startsWith('/') ? dayjs(value) : null;
-  const initialValue = parsedInitial?.isValid() ? parsedInitial : null;
-  const [dateValue, setDateValue] = useState<Dayjs | null>(initialValue);
-
-  // 当外部 value 变化时同步更新（如 updateDataModel 注入真实日期后）
-  useEffect(() => {
-    if (value && !value.startsWith('/')) {
-      const parsed = dayjs(value);
-      if (parsed.isValid()) {
-        setDateValue(parsed);
-      }
-    }
-  }, [value]);
-
+const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status }) => {
+  const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs());
+  const disabled = status === 'success';
   const handleChange = (val: Dayjs | null) => {
     setDateValue(val);
-    if (onChange && val) {
-      onChange(val.toISOString());
+    if (!action?.event?.name) return;
+    if (val) {
+      onAction?.(action.event.name, { selectedDate: val.toISOString() });
     }
   };
 
-  if (enableDate && enableTime) {
-    return (
-      <DatePicker
-        showTime
-        value={dateValue}
-        onChange={handleChange}
-        format="YYYY-MM-DD HH:mm"
-        placeholder="请选择日期和时间"
-        style={{ width: '100%' }}
-      />
-    );
-  }
-
-  if (enableDate) {
-    return (
-      <DatePicker
-        value={dateValue}
-        onChange={handleChange}
-        format="YYYY-MM-DD"
-        placeholder="请选择日期"
-        style={{ width: '100%' }}
-      />
-    );
-  }
-
-  return null;
+  return (
+    <DatePicker
+      value={dateValue}
+      disabled={disabled}
+      onChange={handleChange}
+      format="YYYY-MM-DD"
+      placeholder="请选择日期"
+      style={{ width: '100%' }}
+    />
+  );
 };
 
 // ─── BookForm 组件 ────────────────────────────────────────────────────────────
@@ -160,33 +125,36 @@ const BookForm: React.FC<BookFormProps> = ({ children }) => {
 interface ActionButtonProps {
   action?: { event?: { name?: string } };
   onAction?: (name: string, context: Record<string, any>) => void;
-  disabled?: boolean;
   variant?: string;
   children?: React.ReactNode;
+  status?: 'success';
+  selectedDateTime?: string;
+  selectedCoffee?: CoffeeItem;
   [key: string]: any;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({
   action,
   onAction,
-  disabled,
   variant,
+  status,
   children,
+  selectedDateTime,
+  selectedCoffee,
   ...rest
 }) => {
   const handleClick = () => {
-    if (disabled) return;
     const eventName = action?.event?.name;
     if (eventName && onAction) {
-      onAction(eventName, {});
+      onAction(eventName, { selectedDateTime, selectedCoffee });
     }
   };
 
   return (
     <Button
       {...rest}
+      disabled={status === 'success'}
       type={variant === 'primary' ? 'primary' : undefined}
-      disabled={disabled}
       onClick={handleClick}
     >
       {children}
@@ -209,29 +177,19 @@ interface CoffeeListProps {
   description?: string;
   /** 当前选中项的 id（受控） */
   value?: string | number;
-  /** 禁用整个列表，不可再选择 */
-  disabled?: boolean;
+  status?: 'success';
   /** Card 内部 action 触发器，选中时上报 select_coffee 事件 */
   onAction?: (name: string, context: Record<string, any>) => void;
+  action?: { event?: { name?: string } };
 }
 
-const CoffeeList: React.FC<CoffeeListProps> = ({
-  list,
-  description,
-  disabled,
-  onAction,
-  ...rest
-}) => {
-  console.log(rest, 'rest');
-
+const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, status, action }) => {
   if (!list || list.length === 0) return null;
 
   const handleSelect = (itemId: string | number) => {
-    if (disabled) return;
-
-    // 找到选中的完整咖啡对象，通过 action 上报给 App
-    const selectedItem = list.find((item, index) => (item.id ?? index) === itemId);
-    onAction?.('select_coffee', { selectedItem });
+    if (!action?.event?.name) return;
+    const selectedCoffee = list.find((item, index) => (item.id ?? index) === itemId);
+    onAction?.(action?.event?.name, { selectedCoffee });
   };
 
   return (
@@ -240,7 +198,6 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
         display: 'flex',
         flexDirection: 'column',
         gap: 8,
-        opacity: disabled ? 0.6 : 1,
         transition: 'opacity 0.2s',
       }}
     >
@@ -251,11 +208,10 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
       )}
       <Radio.Group
         onChange={(e) => handleSelect(e.target.value)}
-        disabled={disabled}
-        style={{ width: '100%' }}
+        style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}
+        disabled={status === 'success'}
         options={list.map((item, index) => ({
           value: item.id ?? index,
-          disabled,
           label: (
             <div
               style={{
@@ -267,7 +223,6 @@ const CoffeeList: React.FC<CoffeeListProps> = ({
                 background: '#fafafa',
                 border: '1px solid #f0f0f0',
                 transition: 'background 0.2s',
-                cursor: disabled ? 'not-allowed' : 'pointer',
               }}
             >
               {/* 图片 / 占位图标 */}
@@ -594,25 +549,27 @@ const UpdateCard: XAgentCommand_v0_9 = {
       {
         id: 'title',
         component: 'Text',
-        text: 'Book Your Table',
+        text: '咖啡店单机',
         variant: 'h1',
       },
       {
         id: 'datetime',
         component: 'DateTimeInput',
-        value: { path: '/booking/date' },
-        enableDate: true,
+        status: { path: '/booking/status' },
+        action: {
+          event: { name: 'select_date' },
+        },
       },
       {
         id: 'submit-text',
         component: 'Text',
-        text: 'Confirm',
+        text: '确定点单',
       },
       {
         component: 'CoffeeList',
+        status: { path: '/booking/status' },
         list: { path: '/booking/list/data' },
         description: { path: '/booking/list/description' },
-        disabled: { path: '/booking/status/confirmed' },
         id: 'coffee_list',
         action: {
           event: { name: 'select_coffee' },
@@ -621,7 +578,7 @@ const UpdateCard: XAgentCommand_v0_9 = {
       {
         id: 'status-text',
         component: 'Text',
-        text: { path: '/booking/status/message' },
+        status: { path: '/booking/status' },
         variant: 'success',
       },
       {
@@ -629,10 +586,10 @@ const UpdateCard: XAgentCommand_v0_9 = {
         component: 'ActionButton',
         child: 'submit-text',
         variant: 'primary',
-        disabled: { path: '/booking/status/confirmed' },
-        action: {
-          event: { name: 'confirm_booking' },
-        },
+        status: { path: '/booking/status' },
+        selectedDateTime: { path: '/booking/date' },
+        selectedCoffee: { path: '/booking/selectedCoffee' },
+        action: { event: { name: 'confirm_booking' } },
       },
       {
         id: 'root',
@@ -678,9 +635,6 @@ const UpdateModel: XAgentCommand_v0_9 = {
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
   const [commands, setCommands] = useState<XAgentCommand_v0_9>();
-  // 用 ref 记录用户选中的咖啡对象（select_coffee action 上报）
-  const selectedCoffeeRef = React.useRef<CoffeeItem | null>(null);
-
   const onAgentCommand = (command: XAgentCommand_v0_9) => {
     if ('createSurface' in command) {
       const surfaceId = command.createSurface.surfaceId;
@@ -698,48 +652,48 @@ const App = () => {
 
   /** 处理 Card 内部 action 事件 */
   const handleAction = (payload: ActionPayload) => {
+    // 用户选择日期时，更新数据模型
+    if (payload.name === 'select_date') {
+      onAgentCommand({
+        version: 'v0.9',
+        updateDataModel: {
+          surfaceId: payload.surfaceId,
+          path: '/booking/date',
+          value: payload.context?.selectedDate,
+        },
+      });
+      return;
+    }
+
     // 用户选中咖啡时，记录选中项
     if (payload.name === 'select_coffee') {
-      selectedCoffeeRef.current = payload.context?.selectedItem ?? null;
+      const selectedCoffee = payload.context?.selectedCoffee;
+      onAgentCommand({
+        version: 'v0.9',
+        updateDataModel: {
+          surfaceId: payload.surfaceId,
+          path: '/booking/selectedCoffee',
+          value: {
+            id: selectedCoffee.id,
+            name: selectedCoffee.name,
+            description: selectedCoffee.description,
+            price: selectedCoffee.price,
+            tag: selectedCoffee.tag,
+          },
+        },
+      });
       return;
     }
 
     if (payload.name === 'confirm_booking') {
-      const bookingData = payload.context?.booking ?? {};
-      const date = bookingData.date ?? '';
-      const coffee = selectedCoffeeRef.current;
-
-      const resultComponents: XAgentCommand_v0_9 = {
+      onAgentCommand({
         version: 'v0.9',
-        updateComponents: {
-          surfaceId: 'coffee-result',
-          components: [
-            {
-              id: 'result-card',
-              component: 'CoffeeResultCard',
-              name: coffee?.name ?? '未知咖啡',
-              description: coffee?.description ?? '',
-              price: coffee?.price,
-              tag: coffee?.tag ?? '',
-              image: coffee?.image ?? '',
-              date,
-            },
-          ],
+        updateDataModel: {
+          surfaceId: payload.surfaceId,
+          path: '/booking/status',
+          value: 'success',
         },
-      };
-
-      // 删除 booking surface
-      onAgentCommand({ version: 'v0.9', deleteSurface: { surfaceId: 'booking' } });
-
-      // 同一个 tick 内：setCard 追加 coffee-result，setCommands 设为 updateComponents
-      // Card 挂载时 commands 已是 updateComponents，useEffect 初次执行即处理
-      setTimeout(() => {
-        setCard((prev) => {
-          if (prev.some((c) => c.id === 'coffee-result')) return prev;
-          return [...prev, { id: 'coffee-result', timestamp: Date.now() }];
-        });
-        setCommands(resultComponents);
-      }, 0);
+      });
     }
   };
 
