@@ -1,14 +1,21 @@
+import { ReloadOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
-import type { ActionPayload } from '@ant-design/x-card';
-import { version, type XAgentCommand_v0_9, XCard } from '@ant-design/x-card';
+import type { ActionPayload, Catalog, XAgentCommand_v0_9 } from '@ant-design/x-card';
+import { registerCatalog, XCard } from '@ant-design/x-card';
 import XMarkdown from '@ant-design/x-markdown';
 import { Button, DatePicker, Radio, Space, Tag, Typography } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+// 导入本地 catalog schema
+import localCatalog from './catalog.json';
+
+// 注册本地 catalog
+registerCatalog(localCatalog as unknown as Catalog);
 
 const contentHeader =
   '您好！欢迎使用在线预订服务 🎉\n\n 请选择您希望预订的日期和时间，我们将为您安排最合适的座位，期待您的光临～';
-const text2 = '请填写下方预订信息并确认';
+const orderConfirmation = '✅ 预订成功！您的订单已确认，期待您的光临～';
 
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
@@ -27,6 +34,7 @@ const role = {
         if ('text' in node && node.text) {
           return <XMarkdown key={index}>{node.text}</XMarkdown>;
         }
+
         if ('id' in node && node.id) {
           return <XCard.Card key={index} id={node.id} />;
         }
@@ -47,10 +55,10 @@ const Text: React.FC<TextProps> = ({ text, variant, children }) => {
   const content = text ?? children;
   if (!content) return null;
   const styleMap: Record<string, React.CSSProperties> = {
-    h1: { fontSize: 20, fontWeight: 700, margin: '0 0 12px', color: '#1a1a1a' },
-    h2: { fontSize: 17, fontWeight: 600, margin: '0 0 8px', color: '#1a1a1a' },
-    h3: { fontSize: 15, fontWeight: 600, margin: '0 0 6px', color: '#333' },
-    body: { fontSize: 14, color: '#555', margin: 0 },
+    h1: { fontSize: 20, fontWeight: 700, margin: '0 0 12px' },
+    h2: { fontSize: 17, fontWeight: 600, margin: '0 0 8px' },
+    h3: { fontSize: 15, fontWeight: 600, margin: '0 0 6px' },
+    body: { fontSize: 14, margin: 0 },
     success: {
       fontSize: 14,
       fontWeight: 600,
@@ -68,7 +76,12 @@ const Text: React.FC<TextProps> = ({ text, variant, children }) => {
 
 // ─── DateTimeInput 组件 ───────────────────────────────────────────────────────
 interface DateTimeInputProps {
-  action?: { event?: { name?: string } };
+  action?: {
+    event?: {
+      name?: string;
+      context?: Record<string, any>;
+    };
+  };
   status?: 'success';
   onAction?: (name: string, context: Record<string, any>) => void;
 }
@@ -76,12 +89,22 @@ interface DateTimeInputProps {
 const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status }) => {
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs());
   const disabled = status === 'success';
+
   const handleChange = (val: Dayjs | null) => {
     setDateValue(val);
-    if (!action?.event?.name) return;
-    if (val) {
-      onAction?.(action.event.name, { selectedDate: val.toISOString() });
+    if (!action?.event?.name || !val) return;
+
+    // 根据 action.event.context 的 key 来构造 context
+    const context: Record<string, any> = {};
+    if (action.event.context) {
+      // context 中的 key 就是组件需要传递的数据字段
+      // 例如 { time: { path: '/booking/res/time' } } 中的 time
+      Object.keys(action.event.context).forEach((key) => {
+        context[key] = val.toISOString();
+      });
     }
+
+    onAction?.(action.event.name, context);
   };
 
   return (
@@ -121,15 +144,18 @@ const BookForm: React.FC<BookFormProps> = ({ children }) => {
   );
 };
 
-// ─── ActionButton 组件 ────────────────────────────────────────────────────────
 interface ActionButtonProps {
-  action?: { event?: { name?: string } };
+  action?: {
+    event?: {
+      name?: string;
+      context?: Record<string, any>;
+    };
+  };
   onAction?: (name: string, context: Record<string, any>) => void;
   variant?: string;
   children?: React.ReactNode;
-  status?: 'success';
-  selectedDateTime?: string;
-  selectedCoffee?: CoffeeItem;
+  status?: 'success' | 'error' | 'loading';
+  res?: any; // 从 dataModel 绑定的 res 数据
   [key: string]: any;
 }
 
@@ -137,23 +163,51 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   action,
   onAction,
   variant,
-  status,
+  status: currentStatus,
   children,
-  selectedDateTime,
-  selectedCoffee,
+  res,
   ...rest
 }) => {
   const handleClick = () => {
     const eventName = action?.event?.name;
-    if (eventName && onAction) {
-      onAction(eventName, { selectedDateTime, selectedCoffee });
+    if (!eventName || !onAction) return;
+
+    // 根据 action.event.context 的 key 来构造 context
+    const context: Record<string, any> = {};
+    if (action?.event?.context) {
+      Object.keys(action.event.context).forEach((key) => {
+        const contextValue = action.event!.context![key];
+
+        // 如果是 { path: string } 形式，使用从 dataModel 解析的值（如 res）
+        if (contextValue && typeof contextValue === 'object' && 'path' in contextValue) {
+          context[key] = res;
+        }
+        // 否则直接使用字面值（如 status: 'success'）
+        else {
+          context[key] = contextValue;
+        }
+      });
     }
+
+    // 组件内部可以根据业务逻辑修改或添加 context
+    // 例如：验证数据，决定 status 的值
+    if (context.status === undefined || typeof context.status === 'object') {
+      // 如果 status 未设置或是路径绑定，由组件决定
+      if (!res?.time || !res?.coffee) {
+        context.status = 'error';
+        context.errorMessage = '请先选择日期和咖啡';
+      } else {
+        context.status = 'success';
+      }
+    }
+
+    onAction(eventName, context);
   };
 
   return (
     <Button
       {...rest}
-      disabled={status === 'success'}
+      disabled={currentStatus === 'success'}
       type={variant === 'primary' ? 'primary' : undefined}
       onClick={handleClick}
     >
@@ -178,9 +232,14 @@ interface CoffeeListProps {
   /** 当前选中项的 id（受控） */
   value?: string | number;
   status?: 'success';
-  /** Card 内部 action 触发器，选中时上报 select_coffee 事件 */
+  /** Card 内部 action 触发器 */
   onAction?: (name: string, context: Record<string, any>) => void;
-  action?: { event?: { name?: string } };
+  action?: {
+    event?: {
+      name?: string;
+      context?: Record<string, any>;
+    };
+  };
 }
 
 const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, status, action }) => {
@@ -188,8 +247,21 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
 
   const handleSelect = (itemId: string | number) => {
     if (!action?.event?.name) return;
+
     const selectedCoffee = list.find((item, index) => (item.id ?? index) === itemId);
-    onAction?.(action?.event?.name, { selectedCoffee });
+    if (!selectedCoffee) return;
+
+    // 根据 action.event.context 的 key 来构造 context
+    const context: Record<string, any> = {};
+    if (action.event.context) {
+      Object.keys(action.event.context).forEach((key) => {
+        // context 中的 key 就是组件需要传递的数据字段
+        // 例如 { coffee: { path: '/booking/res/coffee' } } 中的 coffee
+        context[key] = selectedCoffee;
+      });
+    }
+
+    onAction?.(action.event.name, context);
   };
 
   return (
@@ -198,7 +270,6 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
         display: 'flex',
         flexDirection: 'column',
         gap: 8,
-        transition: 'opacity 0.2s',
       }}
     >
       {description && (
@@ -217,6 +288,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
               style={{
                 display: 'flex',
                 alignItems: 'center',
+                width: 300,
                 gap: 12,
                 padding: '10px 12px',
                 borderRadius: 12,
@@ -511,11 +583,17 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
 // ─── 流式文本 Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
-  const [textIndex, setTextIndex] = React.useState(textRef.current);
+  const [textIndex, setTextIndex] = React.useState(0);
   const textTimestamp = React.useRef(0);
   const [streamStatus, setStreamStatus] = useState('INIT');
-  const run = () => {
-    const timer = setInterval(() => {
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const run = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
+    timerRef.current = setInterval(() => {
       if (textRef.current < text.length) {
         if (textTimestamp.current === 0) {
           textTimestamp.current = Date.now();
@@ -525,11 +603,31 @@ const useStreamText = (text: string) => {
         setTextIndex(textRef.current);
       } else {
         setStreamStatus('FINISHED');
-        clearInterval(timer);
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
       }
     }, 100);
+  }, [text]);
+
+  const reset = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    textRef.current = 0;
+    textTimestamp.current = 0;
+    setTextIndex(0);
+    setStreamStatus('INIT');
+  }, []);
+
+  return {
+    text: text.slice(0, textIndex),
+    streamStatus,
+    timestamp: textTimestamp.current,
+    run,
+    reset,
   };
-  return { text: text.slice(0, textIndex), streamStatus, timestamp: textTimestamp.current, run };
 };
 
 // ─── Agent 指令 ───────────────────────────────────────────────────────────────
@@ -537,7 +635,7 @@ const CreateCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
     surfaceId: 'booking',
-    catalogId: 'https://a2ui.org/specification/v0_9/basic_catalog.json',
+    catalogId: 'local://coffee_booking_catalog.json',
   },
 };
 
@@ -557,7 +655,14 @@ const UpdateCard: XAgentCommand_v0_9 = {
         component: 'DateTimeInput',
         status: { path: '/booking/status' },
         action: {
-          event: { name: 'select_date' },
+          event: {
+            name: 'select_date',
+            context: {
+              time: {
+                path: '/booking/res/time',
+              },
+            },
+          },
         },
       },
       {
@@ -572,7 +677,14 @@ const UpdateCard: XAgentCommand_v0_9 = {
         description: { path: '/booking/list/description' },
         id: 'coffee_list',
         action: {
-          event: { name: 'select_coffee' },
+          event: {
+            name: 'select_coffee',
+            context: {
+              coffee: {
+                path: '/booking/res/coffee',
+              },
+            },
+          },
         },
       },
       {
@@ -587,9 +699,20 @@ const UpdateCard: XAgentCommand_v0_9 = {
         child: 'submit-text',
         variant: 'primary',
         status: { path: '/booking/status' },
-        selectedDateTime: { path: '/booking/date' },
-        selectedCoffee: { path: '/booking/selectedCoffee' },
-        action: { event: { name: 'confirm_booking' } },
+        res: { path: '/booking/res' },
+        action: {
+          event: {
+            name: 'confirm_booking',
+            context: {
+              status: {
+                path: '/booking/status',
+              },
+              res: {
+                path: '/booking/res',
+              },
+            },
+          },
+        },
       },
       {
         id: 'root',
@@ -606,7 +729,9 @@ const UpdateModel: XAgentCommand_v0_9 = {
     surfaceId: 'booking',
     path: '/booking',
     value: {
-      date: '2025-12-16T19:00:00Z',
+      res: {
+        time: new Date().toISOString(), // 初始化为当前日期
+      },
       list: {
         description: '咖啡列表',
         data: [
@@ -631,10 +756,47 @@ const UpdateModel: XAgentCommand_v0_9 = {
   },
 };
 
+// ─── 结果卡片配置 ─────────────────────────────────────────────────────────────
+const CreateResultCard: XAgentCommand_v0_9 = {
+  version: 'v0.9',
+  createSurface: {
+    surfaceId: 'result',
+    catalogId: 'local://coffee_booking_catalog.json',
+  },
+};
+
+const UpdateResultCard = (res: any): XAgentCommand_v0_9 => {
+  return {
+    version: 'v0.9',
+    updateComponents: {
+      surfaceId: 'result',
+      components: [
+        {
+          id: 'result-card',
+          component: 'CoffeeResultCard',
+          name: res?.coffee?.name,
+          description: res?.coffee?.description,
+          price: res?.coffee?.price,
+          tag: res?.coffee?.tag,
+          image: res?.coffee?.image,
+          date: res?.time,
+        },
+        {
+          id: 'root',
+          component: 'BookForm',
+          children: ['result-card'],
+        },
+      ],
+    },
+  };
+};
+
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
   const [commands, setCommands] = useState<XAgentCommand_v0_9>();
+  const [sessionKey, setSessionKey] = useState(0);
+
   const onAgentCommand = (command: XAgentCommand_v0_9) => {
     if ('createSurface' in command) {
       const surfaceId = command.createSurface.surfaceId;
@@ -642,6 +804,8 @@ const App = () => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
+
+      setCommands(command);
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
       setCommands(command);
@@ -650,50 +814,34 @@ const App = () => {
     }
   };
 
-  /** 处理 Card 内部 action 事件 */
+  /** 处理 Card 内部 action 事件（完全自动化） */
   const handleAction = (payload: ActionPayload) => {
-    // 用户选择日期时，更新数据模型
-    if (payload.name === 'select_date') {
-      onAgentCommand({
-        version: 'v0.9',
-        updateDataModel: {
-          surfaceId: payload.surfaceId,
-          path: '/booking/date',
-          value: payload.context?.selectedDate,
-        },
-      });
-      return;
-    }
-
-    // 用户选中咖啡时，记录选中项
-    if (payload.name === 'select_coffee') {
-      const selectedCoffee = payload.context?.selectedCoffee;
-      onAgentCommand({
-        version: 'v0.9',
-        updateDataModel: {
-          surfaceId: payload.surfaceId,
-          path: '/booking/selectedCoffee',
-          value: {
-            id: selectedCoffee.id,
-            name: selectedCoffee.name,
-            description: selectedCoffee.description,
-            price: selectedCoffee.price,
-            tag: selectedCoffee.tag,
-          },
-        },
-      });
-      return;
-    }
-
     if (payload.name === 'confirm_booking') {
-      onAgentCommand({
-        version: 'v0.9',
-        updateDataModel: {
-          surfaceId: payload.surfaceId,
-          path: '/booking/status',
-          value: 'success',
-        },
-      });
+      const { res, status } = payload.context || {};
+
+      // 只在成功时显示结果卡片
+      if (status === 'success' && res) {
+        // 1. 显示确认文本
+        runFooter();
+
+        // 2. 删除预订表单卡片
+        onAgentCommand({
+          version: 'v0.9',
+          deleteSurface: {
+            surfaceId: 'booking',
+          },
+        });
+
+        // 3. 创建并更新结果卡片（增加延迟确保 catalog 加载完成）
+        onAgentCommand(CreateResultCard);
+
+        // 增加 delay 确保命令被处理
+        setTimeout(() => {
+          onAgentCommand(UpdateResultCard(res));
+        }, 200);
+      } else if (status === 'error') {
+        console.log('❌ 预订失败:', payload.context?.errorMessage);
+      }
     }
   };
 
@@ -702,22 +850,47 @@ const App = () => {
     streamStatus: streamStatusHeader,
     timestamp: timestampHeader,
     run: runHeader,
+    reset: resetHeader,
   } = useStreamText(contentHeader);
-  const { text: textFooter, timestamp: timestampFooter, run: runFooter } = useStreamText(text2);
+
+  const {
+    text: textFooter,
+    timestamp: timestampFooter,
+    run: runFooter,
+    reset: resetFooter,
+  } = useStreamText(orderConfirmation);
 
   useEffect(() => {
     runHeader();
-  }, []);
+  }, [sessionKey, runHeader]);
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
       onAgentCommand(CreateCard);
-      // 逐帧发送，确保每条指令独立触发 Card 的 useEffect
       setTimeout(() => onAgentCommand(UpdateCard), 0);
       setTimeout(() => onAgentCommand(UpdateModel), 16);
-      runFooter();
     }
-  }, [streamStatusHeader]);
+  }, [streamStatusHeader, sessionKey]);
+
+  // 重新加载（完全重置）
+  const handleReload = useCallback(() => {
+    resetHeader();
+    resetFooter();
+    setCard([]);
+
+    onAgentCommand({
+      version: 'v0.9',
+      deleteSurface: { surfaceId: 'booking' },
+    });
+    onAgentCommand({
+      version: 'v0.9',
+      deleteSurface: { surfaceId: 'result' },
+    });
+
+    setTimeout(() => {
+      setSessionKey((prev) => prev + 1);
+    }, 100);
+  }, [resetHeader, resetFooter]);
 
   const items = [
     {
@@ -729,14 +902,20 @@ const App = () => {
         card,
       } as ContentType,
       role: 'assistant',
-      key: '1',
+      key: sessionKey,
     },
   ];
 
   return (
     <div>
-      {version}
+      <div style={{ marginBottom: 16 }}>
+        <Button type="primary" icon={<ReloadOutlined />} onClick={handleReload}>
+          重新加载
+        </Button>
+      </div>
+
       <XCard.Box
+        key={sessionKey}
         commands={commands}
         onAction={handleAction}
         components={{
