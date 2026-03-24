@@ -4,172 +4,17 @@ import { createComponentTransformer } from './format/components';
 import type { ComponentTransformer, ReactComponentTree } from './format/components';
 import type { Catalog } from './catalog';
 
+// v0.8 专用逻辑
+import { resolvePropsV08, extractDataUpdatesV08, applyDataModelUpdateV08 } from './Card.v0.8';
+
+// v0.9 专用逻辑
+import { resolvePropsV09, extractDataUpdatesV09, applyDataModelUpdateV09 } from './Card.v0.9';
+
+// 共享逻辑
+import { setValueByPath, validateComponentAgainstCatalog } from './utils';
+
 export interface CardProps {
   id: string;
-}
-
-/** 从嵌套对象中按路径取值，路径格式如 /booking/date */
-function getValueByPath(obj: Record<string, any>, path: string): any {
-  const parts = path.replace(/^\//, '').split('/');
-  return parts.reduce((cur, key) => (cur != null ? cur[key] : undefined), obj as any);
-}
-
-/** 判断字符串是否为数据绑定路径（以 / 开头） */
-function isPathValue(val: any): val is string {
-  return typeof val === 'string' && val.startsWith('/');
-}
-
-/** 判断一个值是否为 { path: string } 形式的路径对象 */
-function isPathObject(val: any): val is { path: string } {
-  return val !== null && typeof val === 'object' && typeof val.path === 'string';
-}
-
-/**
- * 验证组件是否符合 catalog 定义
- * @param catalog catalog 定义
- * @param componentName 组件名称
- * @param componentProps 组件属性
- * @returns { valid: boolean, errors: string[] }
- */
-function validateComponentAgainstCatalog(
-  catalog: Catalog | undefined,
-  componentName: string,
-  componentProps: Record<string, any>,
-): { valid: boolean; errors: string[] } {
-  const errors: string[] = [];
-
-  // 如果没有 catalog，默认通过
-  if (!catalog || !catalog.components) {
-    return { valid: true, errors: [] };
-  }
-
-  // 检查组件是否在 catalog 中定义
-  const componentDef = catalog.components[componentName];
-  if (!componentDef) {
-    errors.push(`Component "${componentName}" is not defined in catalog`);
-    return { valid: false, errors };
-  }
-
-  // 检查必填字段
-  const requiredFields = componentDef.required || [];
-  for (const field of requiredFields) {
-    if (!(field in componentProps)) {
-      errors.push(`Missing required field "${field}" for component "${componentName}"`);
-    }
-  }
-
-  // 检查属性是否在 schema 中定义（警告级别，不阻止渲染）
-  if (componentDef.properties) {
-    const definedProps = Object.keys(componentDef.properties);
-    const actualProps = Object.keys(componentProps).filter(
-      (key) => !['id', 'children', 'component'].includes(key),
-    );
-
-    for (const prop of actualProps) {
-      if (!definedProps.includes(prop)) {
-        errors.push(
-          `Warning: Property "${prop}" is not defined in catalog for component "${componentName}"`,
-        );
-      }
-    }
-  }
-
-  return { valid: errors.length === 0, errors };
-}
-
-/** 将 props 中的路径值替换为 dataModel 中的真实值 */
-function resolveProps(
-  props: Record<string, any>,
-  dataModel: Record<string, any>,
-): Record<string, any> {
-  const resolved: Record<string, any> = {};
-  for (const [key, val] of Object.entries(props)) {
-    // 处理 { path: string } 形式的路径对象
-    if (isPathObject(val)) {
-      resolved[key] = getValueByPath(dataModel, val.path);
-    }
-    // 处理字符串路径（向后兼容）
-    else if (isPathValue(val)) {
-      resolved[key] = getValueByPath(dataModel, val);
-    }
-    // 字面值直接使用
-    else {
-      resolved[key] = val;
-    }
-  }
-  return resolved;
-}
-
-/** 按路径将值写入嵌套对象（immutable），路径格式如 /booking/selectedCoffee */
-function setValueByPath(obj: Record<string, any>, path: string, value: any): Record<string, any> {
-  const parts = path.replace(/^\//, '').split('/');
-  const next = { ...obj };
-  let cur: Record<string, any> = next;
-  for (let i = 0; i < parts.length - 1; i++) {
-    cur[parts[i]] = cur[parts[i]] ? { ...cur[parts[i]] } : {};
-    cur = cur[parts[i]];
-  }
-  cur[parts[parts.length - 1]] = value;
-  return next;
-}
-
-/**
- * 解析 action.event.context 中的路径绑定，从 dataModel 中提取实际值
- * @param action action 配置对象
- * @param dataModel 当前数据模型
- * @returns 解析后的 context 对象
- */
-function resolveActionContext(
-  action: any,
-  dataModel: Record<string, any>,
-): Record<string, any> | undefined {
-  const context = action?.event?.context;
-  if (!context || typeof context !== 'object') {
-    return undefined;
-  }
-
-  const resolved: Record<string, any> = {};
-  for (const [key, val] of Object.entries(context)) {
-    // 处理 { path: string } 形式的路径绑定
-    if (isPathObject(val)) {
-      resolved[key] = getValueByPath(dataModel, val.path);
-    }
-    // 字面值直接使用
-    else {
-      resolved[key] = val;
-    }
-  }
-  return resolved;
-}
-
-/**
- * 根据 action.event.context 中的路径配置，将组件传递的值写入 dataModel
- * @param action action 配置对象
- * @param componentContext 组件传递的上下文数据
- * @returns 需要更新的数据路径和值的数组 [{ path: '/booking/res/time', value: '...' }]
- */
-function extractDataUpdates(
-  action: any,
-  componentContext: Record<string, any>,
-): Array<{ path: string; value: any }> {
-  const context = action?.event?.context;
-  if (!context || typeof context !== 'object') {
-    return [];
-  }
-
-  const updates: Array<{ path: string; value: any }> = [];
-  for (const [key, val] of Object.entries(context)) {
-    // 只处理 { path: string } 形式的路径绑定
-    if (isPathObject(val)) {
-      // 从组件传递的 context 中查找对应 key 的值
-      // 组件传递的值优先级最高，如果没有则使用 dataModel 中的当前值（用于读取）
-      const componentValue = componentContext[key];
-      if (componentValue !== undefined) {
-        updates.push({ path: val.path, value: componentValue });
-      }
-    }
-  }
-  return updates;
 }
 
 /** 递归渲染单个节点，子节点通过 getById 查找 */
@@ -181,6 +26,7 @@ function renderNode(
   onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void,
   onDataChange?: (path: string, value: any) => void,
   catalog?: Catalog,
+  commandVersion?: 'v0.8' | 'v0.9',
 ): React.ReactNode {
   const node = transformer.getById(nodeId);
 
@@ -195,6 +41,7 @@ function renderNode(
       onAction={onAction}
       onDataChange={onDataChange}
       catalog={catalog}
+      commandVersion={commandVersion}
     />
   );
 }
@@ -209,6 +56,8 @@ interface NodeRendererProps {
   onDataChange?: (path: string, value: any) => void;
   /** catalog 用于验证组件 */
   catalog?: Catalog;
+  /** 命令版本 */
+  commandVersion?: 'v0.8' | 'v0.9';
 }
 
 const NodeRenderer: React.FC<NodeRendererProps> = ({
@@ -219,10 +68,9 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
   onAction,
   onDataChange,
   catalog,
+  commandVersion = 'v0.8',
 }) => {
   const { type, props, children } = node;
-
-  console.log(`NodeRenderer: rendering node type="${type}"`, { props, hasCatalog: !!catalog });
 
   // 验证组件是否符合 catalog 定义
   const validation = validateComponentAgainstCatalog(catalog, type, props);
@@ -236,9 +84,7 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
   }
 
   // 从注册的组件映射中查找对应组件
-  // 如果 catalog 中没有定义该组件，且不在自定义组件列表中，则不渲染
   const Component = components[type];
-  console.log(`NodeRenderer: Component for "${type}"`, { found: !!Component });
 
   if (!Component) {
     // 检查是否在 catalog 中定义
@@ -259,22 +105,34 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
     return null;
   }
 
-  // 将 props 中的路径绑定替换为 dataModel 中的真实值
-  const resolvedProps = resolveProps(props, dataModel);
+  // 根据版本使用不同的 resolveProps
+  const resolvedProps =
+    commandVersion === 'v0.9'
+      ? resolvePropsV09(props, dataModel)
+      : resolvePropsV08(props, dataModel);
 
   // 将 onAction 注入给所有自定义组件，由组件自行决定何时、如何触发
-  // 同时注入 action 配置，组件可以访问 action.event.name 和 action.event.context
   if (typeof Component !== 'string') {
     // 包装 onAction，使其能够传递 action 配置
     resolvedProps.onAction = (name: string, context: Record<string, any>) => {
       // 从 resolvedProps 中获取 action 配置（已解析路径绑定）
       const actionConfig = resolvedProps.action;
+      console.log(`NodeRenderer onAction:`, { name, context, actionConfig });
       onAction?.(name, context, actionConfig);
     };
   }
 
   const childNodes = children?.map((childId) =>
-    renderNode(childId, transformer, components, dataModel, onAction, onDataChange, catalog),
+    renderNode(
+      childId,
+      transformer,
+      components,
+      dataModel,
+      onAction,
+      onDataChange,
+      catalog,
+      commandVersion,
+    ),
   );
 
   return <Component {...resolvedProps}>{childNodes}</Component>;
@@ -287,6 +145,7 @@ const Card: React.FC<CardProps> = ({ id }) => {
     onAction,
     catalogMap,
     surfaceCatalogMap,
+    commandVersion = 'v0.8',
   } = React.useContext(BoxContext);
 
   // 每个 Card 实例持有独立的 transformer，维护各自的组件缓存
@@ -299,105 +158,150 @@ const Card: React.FC<CardProps> = ({ id }) => {
   const catalogId = surfaceCatalogMap ? surfaceCatalogMap.get(id) : undefined;
   const catalog = catalogId && catalogMap ? catalogMap.get(catalogId) : undefined;
 
-  console.log(`Card ${id}:`, { catalogId, catalog: !!catalog, hasCommands: !!commands });
-
   // 用 rootNode 驱动重新渲染
   const [rootNode, setRootNode] = useState<ReactComponentTree | null>(null);
 
   // 数据模型，存储 updateDataModel 写入的值
   const [dataModel, setDataModel] = useState<Record<string, any>>({});
 
+  // 用于追踪是否收到 beginRendering 命令（v0.8）
+  const [pendingRender, setPendingRender] = useState<{ surfaceId: string; root: string } | null>(
+    null,
+  );
+  // 存储转换后的组件树，等待 beginRendering 触发渲染
+  const pendingNodeTreeRef = useRef<ReactComponentTree | null>(null);
+  // 追踪是否已经渲染过（使用 ref 避免依赖循环）
+  const hasRenderedRef = useRef(false);
+
   useEffect(() => {
     if (!commands) return;
-    if ('updateComponents' in commands && commands.updateComponents.surfaceId === id) {
-      const version = 'version' in commands ? commands.version : 'v0.8';
-      const nodeTree = transformerRef.current!.transform(
-        commands.updateComponents.components,
-        version as 'v0.8' | 'v0.9',
-      );
-      setRootNode(nodeTree);
+
+    // ===== v0.9 命令处理 =====
+    if ('version' in commands && commands.version === 'v0.9') {
+      if ('updateComponents' in commands && commands.updateComponents.surfaceId === id) {
+        const nodeTree = transformerRef.current!.transform(
+          commands.updateComponents.components,
+          'v0.9',
+        );
+        setRootNode(nodeTree);
+        hasRenderedRef.current = true;
+      }
+
+      if ('updateDataModel' in commands && commands.updateDataModel.surfaceId === id) {
+        const { path, value } = commands.updateDataModel;
+        setDataModel((prev) => applyDataModelUpdateV09(prev, path, value));
+      }
+
+      if ('deleteSurface' in commands && commands.deleteSurface.surfaceId === id) {
+        setRootNode(null);
+        setDataModel({});
+        hasRenderedRef.current = false;
+      }
+      return;
     }
 
-    if ('updateDataModel' in commands && commands.updateDataModel.surfaceId === id) {
-      const { path, value } = commands.updateDataModel;
-      // 将路径写入 dataModel，支持 /booking/date 这样的嵌套路径
-      const parts = path.replace(/^\//, '').split('/');
-      setDataModel((prev) => {
-        const next = { ...prev };
-        let cur: Record<string, any> = next;
-        for (let i = 0; i < parts.length - 1; i++) {
-          cur[parts[i]] = cur[parts[i]] ? { ...cur[parts[i]] } : {};
-          cur = cur[parts[i]];
+    // ===== v0.8 命令处理 =====
+    // surfaceUpdate: 定义组件结构
+    if ('surfaceUpdate' in commands && commands.surfaceUpdate.surfaceId === id) {
+      const nodeTree = transformerRef.current!.transform(commands.surfaceUpdate.components, 'v0.8');
+      // 存储转换后的组件树
+      pendingNodeTreeRef.current = nodeTree;
+
+      // 如果已经渲染过，直接更新
+      if (hasRenderedRef.current) {
+        const rootNodeFromCache = transformerRef.current!.getById('root');
+        if (rootNodeFromCache) {
+          setRootNode(rootNodeFromCache);
         }
-        cur[parts[parts.length - 1]] = value;
-        return next;
-      });
+      }
     }
 
+    // dataModelUpdate: 更新数据模型（v0.8 格式）
+    if ('dataModelUpdate' in commands && commands.dataModelUpdate.surfaceId === id) {
+      const { contents } = commands.dataModelUpdate;
+      setDataModel((prev) => applyDataModelUpdateV08(prev, contents));
+    }
+
+    // beginRendering: 开始渲染
+    if ('beginRendering' in commands && commands.beginRendering.surfaceId === id) {
+      const { root } = commands.beginRendering;
+      // 查找 root 组件并开始渲染
+      const nodeTree = transformerRef.current!.getById(root);
+      if (nodeTree) {
+        setRootNode(nodeTree);
+        setPendingRender(null);
+        hasRenderedRef.current = true;
+      } else {
+        // 如果 root 还未定义，记录等待状态
+        setPendingRender({ surfaceId: id, root });
+      }
+    }
+
+    // deleteSurface: 删除 surface
     if ('deleteSurface' in commands && commands.deleteSurface.surfaceId === id) {
-      // 清空组件树和数据模型，使 Card 不再渲染任何内容
       setRootNode(null);
       setDataModel({});
+      setPendingRender(null);
+      pendingNodeTreeRef.current = null;
+      hasRenderedRef.current = false;
+      transformerRef.current!.reset();
     }
-  }, [commands, id]);
-
-  console.log(`Card ${id}: rendering`, { hasRootNode: !!rootNode, rootNode });
+  }, [commands, id, pendingRender]);
 
   if (!rootNode) {
-    console.log(`Card ${id}: no rootNode, returning null`);
     return null;
   }
 
   /**
    * action 触发时的处理函数
-   * 1. 自动根据 action.event.context 中的路径配置更新 dataModel
-   * 2. 向上层上报完整的事件信息
-   * @param name 事件名称
-   * @param context 组件传递的上下文数据（由组件自行构造）
-   * @param actionConfig action 配置，包含 event.name 和 event.context
+   * 根据版本使用不同的 extractDataUpdates 和 resolveActionContext
    */
   const handleAction = (name: string, context: Record<string, any>, actionConfig?: any) => {
-    // 1. 根据 action.event.context 的路径配置，自动更新 dataModel
-    const dataUpdates = extractDataUpdates(actionConfig, context);
+    console.log(`Card ${id} handleAction:`, {
+      name,
+      context,
+      actionConfig,
+      commandVersion,
+      currentDataModel: dataModel,
+    });
+
+    // 根据版本使用不同的 extractDataUpdates
+    const dataUpdates =
+      commandVersion === 'v0.9'
+        ? extractDataUpdatesV09(actionConfig, context)
+        : extractDataUpdatesV08(actionConfig, context);
+
+    console.log(`Card ${id} dataUpdates:`, dataUpdates);
+
+    // 先更新 dataModel
+    let newDataModel = dataModel;
     if (dataUpdates.length > 0) {
-      setDataModel((prev) => {
-        let next = prev;
-        for (const { path, value } of dataUpdates) {
-          next = setValueByPath(next, path, value);
-        }
-        return next;
-      });
+      newDataModel = dataUpdates.reduce((prev, { path, value }) => {
+        return setValueByPath(prev, path, value);
+      }, dataModel);
+
+      console.log(`Card ${id} newDataModel:`, newDataModel);
+      setDataModel(newDataModel);
     }
 
-    // 2. 解析 action.event.context 中读取的值（从更新后的 dataModel）
-    // 使用 setTimeout 确保 dataModel 更新后再解析
-    setTimeout(() => {
-      const resolvedContext = resolveActionContext(actionConfig, dataModel);
-      const mergedContext = {
-        ...resolvedContext,
-        ...context, // 组件传递的 context 优先级更高
-      };
+    // 合并组件传递的 context 和解析的 context
+    // 组件传递的 context 优先级更高（因为已经是实际值）
+    const mergedContext = {
+      ...context,
+    };
 
-      // 3. 向上层上报事件
-      onAction?.({
-        name,
-        surfaceId: id,
-        context: mergedContext,
-      });
-    }, 0);
+    // 向上层上报事件
+    onAction?.({
+      name,
+      surfaceId: id,
+      context: mergedContext,
+    });
   };
 
   /** 组件 onChange 写回 dataModel（双向绑定） */
   const handleDataChange = (path: string, value: any) => {
     setDataModel((prev) => setValueByPath(prev, path, value));
   };
-
-  console.log(`Card ${id}: rendering`, { hasRootNode: !!rootNode, rootNode });
-
-  if (!rootNode) {
-    console.log(`Card ${id}: no rootNode, returning null`);
-    return null;
-  }
 
   return (
     <NodeRenderer
@@ -408,6 +312,7 @@ const Card: React.FC<CardProps> = ({ id }) => {
       onAction={handleAction}
       onDataChange={handleDataChange}
       catalog={catalog}
+      commandVersion={commandVersion}
     />
   );
 };

@@ -1,16 +1,10 @@
 import { ReloadOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
-import type { Catalog, XAgentCommand_v0_9 } from '@ant-design/x-card';
-import { registerCatalog, XCard } from '@ant-design/x-card';
+import type { XAgentCommand_v0_8 } from '@ant-design/x-card';
+import { XCard } from '@ant-design/x-card';
 import XMarkdown from '@ant-design/x-markdown';
 import { Badge, Button, Card, Progress, Space, Tag, Typography } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-
-// 导入本地 catalog schema
-import localCatalog from './catalog.json';
-
-// 注册本地 catalog
-registerCatalog(localCatalog as unknown as Catalog);
 
 // ─── 类型定义 ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
@@ -73,15 +67,20 @@ const role = {
 // ─── ProductCard 组件（产品卡片） ────────────────────────────────────────────
 interface ProductCardProps {
   name?: string;
-  price?: number;
+  price?: number | string;
   category?: string;
-  stock?: number;
+  stock?: number | string;
   tag?: string;
-  index?: number;
+  index?: number | string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock, tag, index }) => {
   const [visible, setVisible] = useState(false);
+
+  // v0.8 的值可能是字符串形式传入，需要转换
+  const numPrice = typeof price === 'string' ? Number(price) : price;
+  const numStock = typeof stock === 'string' ? Number(stock) : stock;
+  const numIndex = typeof index === 'string' ? Number(index) : index;
 
   useEffect(() => {
     // 延迟显示，实现渐进动画
@@ -89,10 +88,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
       () => {
         setVisible(true);
       },
-      index ? index * 150 : 0,
+      numIndex ? numIndex * 150 : 0,
     );
     return () => clearTimeout(timer);
-  }, [index]);
+  }, [numIndex]);
 
   return (
     <Card
@@ -107,9 +106,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         border: '1px solid #f0f0f0',
       }}
-      bodyStyle={{ padding: 16 }}
+      styles={{ body: { padding: 16 } }}
     >
-      <Space direction="vertical" style={{ width: '100%' }} size={8}>
+      <Space vertical style={{ width: '100%' }} size={8}>
         {/* 标签和名称 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Typography.Text
@@ -137,7 +136,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
         {/* 价格 */}
         <div>
           <Typography.Text style={{ fontSize: 20, fontWeight: 700, color: '#ff4d4f' }}>
-            ¥{price}
+            ¥{numPrice}
           </Typography.Text>
         </div>
 
@@ -152,7 +151,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
             }
           />
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-            库存: {stock}
+            库存: {numStock}
           </Typography.Text>
         </div>
       </Space>
@@ -192,9 +191,9 @@ const ProductContainer: React.FC<ProductContainerProps> = ({ children }) => {
 
 // ─── LoadingIndicator 组件（加载指示器） ─────────────────────────────────────
 interface LoadingIndicatorProps {
-  progress?: number;
-  total?: number;
-  loading?: boolean;
+  progress?: number | string;
+  total?: number | string;
+  loading?: boolean | string;
 }
 
 const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
@@ -202,7 +201,12 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
   total = 100,
   loading,
 }) => {
-  const percent = Math.round((progress / total) * 100);
+  // v0.8 的值可能是字符串形式传入，需要转换
+  const numProgress = typeof progress === 'string' ? Number(progress) : progress;
+  const numTotal = typeof total === 'string' ? Number(total) : total;
+  const boolLoading = typeof loading === 'string' ? loading === 'true' : loading;
+
+  const percent = Math.round((numProgress / numTotal) * 100);
 
   return (
     <div
@@ -215,18 +219,18 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
         maxWidth: 400,
       }}
     >
-      <Space vertical style={{ width: '100%' }} size={12}>
+      <Space direction="vertical" style={{ width: '100%' }} size={12}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography.Text style={{ fontSize: 14, fontWeight: 500 }}>
-            {loading ? '正在加载产品数据...' : '加载完成'}
+            {boolLoading ? '正在加载产品数据...' : '加载完成'}
           </Typography.Text>
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-            {progress}/{total} 件产品
+            {numProgress}/{numTotal} 件产品
           </Typography.Text>
         </div>
         <Progress
           percent={percent}
-          status={loading ? 'active' : 'success'}
+          status={boolLoading ? 'active' : 'success'}
           strokeColor={{
             '0%': '#108ee9',
             '100%': '#87d068',
@@ -291,85 +295,128 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── Agent 指令 ────────────────────────────────────────────────────────────────
-const CreateCard: XAgentCommand_v0_9 = {
-  version: 'v0.9',
-  createSurface: {
-    surfaceId: 'progressive-demo',
-    catalogId: 'local://coffee_booking_catalog.json',
+// ═══════════════════════════════════════════════════════════════════════════════
+// v0.8 Agent 命令定义
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// v0.8 命令: 创建加载指示器 surface
+const CreateLoadingIndicatorSurface: XAgentCommand_v0_8 = {
+  surfaceUpdate: {
+    surfaceId: 'loading-indicator',
+    components: [
+      {
+        id: 'root',
+        component: {
+          LoadingIndicator: {
+            progress: { literalString: '0' },
+            total: { literalString: '8' },
+            loading: { literalString: 'true' },
+          },
+        },
+      },
+    ],
   },
 };
 
-// 创建更新卡片指令（根据产品数据）
-const UpdateProductCard = (products: Product[]): XAgentCommand_v0_9 => {
+// v0.8 命令: 开始渲染加载指示器
+const BeginLoadingIndicator: XAgentCommand_v0_8 = {
+  beginRendering: {
+    surfaceId: 'loading-indicator',
+    root: 'root',
+  },
+};
+
+// v0.8 命令: 更新加载指示器
+const UpdateLoadingIndicator = (
+  progress: number,
+  total: number,
+  loading: boolean,
+): XAgentCommand_v0_8 => ({
+  surfaceUpdate: {
+    surfaceId: 'loading-indicator',
+    components: [
+      {
+        id: 'root',
+        component: {
+          LoadingIndicator: {
+            progress: { literalString: String(progress) },
+            total: { literalString: String(total) },
+            loading: { literalString: String(loading) },
+          },
+        },
+      },
+    ],
+  },
+});
+
+// v0.8 命令: 删除加载指示器
+const DeleteLoadingIndicator: XAgentCommand_v0_8 = {
+  deleteSurface: {
+    surfaceId: 'loading-indicator',
+  },
+};
+
+// v0.8 命令: 创建产品展示 surface（渐进式更新）
+const CreateProductSurface = (products: Product[]): XAgentCommand_v0_8 => {
   const productComponents = products.map((product, idx) => ({
     id: `product-${product.id}`,
-    component: 'ProductCard',
-    name: product.name,
-    price: product.price,
-    category: product.category,
-    stock: product.stock,
-    tag: product.tag,
-    index: idx,
+    component: {
+      ProductCard: {
+        name: { literalString: product.name },
+        price: { literalString: String(product.price) },
+        category: { literalString: product.category },
+        stock: { literalString: String(product.stock) },
+        tag: product.tag ? { literalString: product.tag } : undefined,
+        index: { literalString: String(idx) },
+      },
+    },
   }));
 
   return {
-    version: 'v0.9',
-    updateComponents: {
+    surfaceUpdate: {
       surfaceId: 'progressive-demo',
       components: [
         ...productComponents,
         {
           id: 'root',
-          component: 'ProductContainer',
-          children: products.map((p) => `product-${p.id}`),
+          component: {
+            ProductContainer: {
+              children: { explicitList: products.map((p) => `product-${p.id}`) },
+            },
+          },
         },
       ],
     },
   };
 };
 
-// 创建加载指示器指令
-const CreateLoadingIndicator = (): XAgentCommand_v0_9 => ({
-  version: 'v0.9',
-  createSurface: {
-    surfaceId: 'loading-indicator',
-    catalogId: 'local://coffee_booking_catalog.json',
+// v0.8 命令: 开始渲染产品展示
+const BeginProductSurface: XAgentCommand_v0_8 = {
+  beginRendering: {
+    surfaceId: 'progressive-demo',
+    root: 'root',
   },
-});
+};
 
-const UpdateLoadingIndicator = (
-  progress: number,
-  total: number,
-  loading: boolean,
-): XAgentCommand_v0_9 => ({
-  version: 'v0.9',
-  updateComponents: {
-    surfaceId: 'loading-indicator',
-    components: [
-      {
-        id: 'loading',
-        component: 'LoadingIndicator',
-        progress,
-        total,
-        loading,
-      },
-    ],
+// v0.8 命令: 删除产品展示
+const DeleteProductSurface: XAgentCommand_v0_8 = {
+  deleteSurface: {
+    surfaceId: 'progressive-demo',
   },
-});
+};
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  const [commands, setCommands] = useState<XAgentCommand_v0_9>();
+  const [commands, setCommands] = useState<XAgentCommand_v0_8>();
   const [sessionKey, setSessionKey] = useState(0);
 
   const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
   const batchCountRef = useRef(0);
 
-  const onAgentCommand = (command: XAgentCommand_v0_9) => {
-    if ('createSurface' in command) {
-      const surfaceId = command.createSurface.surfaceId;
+  const onAgentCommand = (command: XAgentCommand_v0_8) => {
+    if ('surfaceUpdate' in command) {
+      const surfaceId = command.surfaceUpdate.surfaceId;
       setCard((prev) => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
@@ -408,15 +455,24 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      onAgentCommand(CreateLoadingIndicator());
+      // v0.8 命令序列:
+      // 1. 创建并渲染加载指示器
+      onAgentCommand(CreateLoadingIndicatorSurface);
       setTimeout(() => {
-        onAgentCommand(UpdateLoadingIndicator(0, 8, true));
+        onAgentCommand(BeginLoadingIndicator);
       }, 50);
 
+      // 2. 创建产品 surface（初始为空）
       setTimeout(() => {
-        onAgentCommand(CreateCard);
+        onAgentCommand(CreateProductSurface([]));
       }, 100);
 
+      // 3. 开始渲染产品 surface
+      setTimeout(() => {
+        onAgentCommand(BeginProductSurface);
+      }, 150);
+
+      // 4. 开始渐进式加载
       setTimeout(() => {
         startProgressiveLoading();
       }, 300);
@@ -431,6 +487,7 @@ const App = () => {
 
     const loadNextBatch = () => {
       if (batchCountRef.current >= allProducts.length) {
+        // 加载完成，更新加载指示器状态
         onAgentCommand(UpdateLoadingIndicator(8, 8, false));
         setTimeout(() => runFooter(), 500);
         return;
@@ -444,8 +501,8 @@ const App = () => {
       onAgentCommand(UpdateLoadingIndicator(progress, 8, true));
 
       setTimeout(() => {
-        // 传入累积的所有产品
-        onAgentCommand(UpdateProductCard([...loadedProducts]));
+        // v0.8: 使用 surfaceUpdate 更新整个产品列表
+        onAgentCommand(CreateProductSurface([...loadedProducts]));
       }, 50);
 
       batchCountRef.current++;
@@ -466,14 +523,9 @@ const App = () => {
     batchCountRef.current = 0;
     setCard([]);
 
-    onAgentCommand({
-      version: 'v0.9',
-      deleteSurface: { surfaceId: 'loading-indicator' },
-    });
-    onAgentCommand({
-      version: 'v0.9',
-      deleteSurface: { surfaceId: 'progressive-demo' },
-    });
+    // v0.8: 删除所有 surface
+    onAgentCommand(DeleteLoadingIndicator);
+    onAgentCommand(DeleteProductSurface);
 
     setTimeout(() => {
       setSessionKey((prev) => prev + 1);

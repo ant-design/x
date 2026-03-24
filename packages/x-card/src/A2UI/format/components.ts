@@ -14,24 +14,46 @@ function isPathObject(val: any): val is { path: string } {
   return val !== null && typeof val === 'object' && typeof val.path === 'string';
 }
 
+/** 判断一个值是否为 { literalString: string } 形式的字面字符串对象（v0.8 特有） */
+function isLiteralStringValue(val: any): val is { literalString: string } {
+  return val !== null && typeof val === 'object' && typeof val.literalString === 'string';
+}
+
+/** 判断一个值是否为 { explicitList: string[] } 形式（v0.8 children 格式） */
+function isExplicitList(val: any): val is { explicitList: string[] } {
+  return val !== null && typeof val === 'object' && Array.isArray(val.explicitList);
+}
+
 function parseV08Node(comp: ComponentWrapper_v0_8): ReactComponentTree {
   const [type, config] = Object.entries(comp.component)[0];
 
   const props: Record<string, any> = {};
   for (const [key, val] of Object.entries(config)) {
     if (['child', 'children'].includes(key)) continue;
-    // v0.8 中 value 支持 { path } 或 { literalString } 两种特有格式，单独处理
-    if (key === 'value') {
-      if (val !== undefined) {
-        props.value = 'path' in val ? val.path : val.literalString;
-      }
-      continue;
+    // v0.8 中支持三种格式：
+    // 1. { path: string } - 数据绑定路径
+    // 2. { literalString: string } - 字面字符串
+    // 3. 字面值直接使用
+    if (isPathObject(val)) {
+      props[key] = val.path;
+    } else if (isLiteralStringValue(val)) {
+      props[key] = val.literalString;
+    } else {
+      props[key] = val;
     }
-    // 其余字段：字面值直接使用，{ path } 形式提取路径字符串
-    props[key] = isPathObject(val) ? val.path : val;
   }
 
-  const childIds: string[] = config.children ?? (config.child ? [config.child] : []);
+  // 解析 children 字段，支持 string[] 或 { explicitList: string[] }
+  let childIds: string[] = [];
+  if (config.children) {
+    if (isExplicitList(config.children)) {
+      childIds = config.children.explicitList;
+    } else if (Array.isArray(config.children)) {
+      childIds = config.children;
+    }
+  } else if (config.child) {
+    childIds = [config.child];
+  }
 
   return {
     type,

@@ -2,13 +2,18 @@
 // Flexible component system supporting dynamic component types
 
 /** 数据绑定路径对象 */
-interface PathValue {
+export interface PathValue {
   path: string;
 }
 
 /** 字面字符串值对象（v0.8 特有） */
-interface LiteralStringValue {
+export interface LiteralStringValue {
   literalString: string;
+}
+
+/** v0.8 children 字段格式，支持数组或 explicitList 对象 */
+export interface ExplicitList {
+  explicitList: string[];
 }
 
 // Component wrapper structure with standard fields and custom properties
@@ -18,7 +23,7 @@ export interface ComponentWrapper_v0_8 {
     [componentType: string]: {
       // Standard fields for component relationships
       child?: string;
-      children?: string[];
+      children?: string[] | ExplicitList;
       // 任何字段均支持字面值或 PathValue / LiteralStringValue 数据绑定形式
       // 例：{ "text": "Hello" } 或 { "text": { "path": "/user/name" } } 或 { "text": { "literalString": "Hello" } }
       [key: string]: any;
@@ -56,11 +61,19 @@ interface BeginRenderingCommand {
   };
 }
 
+// Command to delete a surface
+interface DeleteSurfaceCommand {
+  deleteSurface: {
+    surfaceId: string;
+  };
+}
+
 // Union type for all possible commands
 export type A2UICommand_v0_8 =
   | SurfaceUpdateCommand
   | DataModelUpdateCommand
-  | BeginRenderingCommand;
+  | BeginRenderingCommand
+  | DeleteSurfaceCommand;
 
 // Backward compatible type alias
 export type XAgentCommand_v0_8 = A2UICommand_v0_8;

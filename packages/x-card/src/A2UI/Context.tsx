@@ -10,6 +10,8 @@ interface IBoxContext {
   catalogMap?: Map<string, Catalog>;
   /** surfaceId -> catalogId 的映射 */
   surfaceCatalogMap?: Map<string, string>;
+  /** 当前命令的版本 */
+  commandVersion?: 'v0.8' | 'v0.9';
 }
 
 const BoxContext = createContext<IBoxContext>({
