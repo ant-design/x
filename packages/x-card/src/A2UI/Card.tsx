@@ -164,10 +164,8 @@ const Card: React.FC<CardProps> = ({ id }) => {
   // 数据模型，存储 updateDataModel 写入的值
   const [dataModel, setDataModel] = useState<Record<string, any>>({});
 
-  // 用于追踪是否收到 beginRendering 命令（v0.8）
-  const [pendingRender, setPendingRender] = useState<{ surfaceId: string; root: string } | null>(
-    null,
-  );
+  // 用于追踪是否收到 beginRendering 命令（v0.8），使用 ref 避免触发 useEffect 重新执行
+  const pendingRenderRef = useRef<{ surfaceId: string; root: string } | null>(null);
   // 存储转换后的组件树，等待 beginRendering 触发渲染
   const pendingNodeTreeRef = useRef<ReactComponentTree | null>(null);
   // 追踪是否已经渲染过（使用 ref 避免依赖循环）
@@ -183,8 +181,11 @@ const Card: React.FC<CardProps> = ({ id }) => {
           commands.updateComponents.components,
           'v0.9',
         );
-        setRootNode(nodeTree);
-        hasRenderedRef.current = true;
+        // 只有当 componentMap 中存在 root 节点时才更新渲染，避免覆盖已有内容
+        if (nodeTree) {
+          setRootNode(nodeTree);
+          hasRenderedRef.current = true;
+        }
       }
 
       if ('updateDataModel' in commands && commands.updateDataModel.surfaceId === id) {
@@ -196,6 +197,7 @@ const Card: React.FC<CardProps> = ({ id }) => {
         setRootNode(null);
         setDataModel({});
         hasRenderedRef.current = false;
+        transformerRef.current!.reset();
       }
       return;
     }
@@ -229,11 +231,11 @@ const Card: React.FC<CardProps> = ({ id }) => {
       const nodeTree = transformerRef.current!.getById(root);
       if (nodeTree) {
         setRootNode(nodeTree);
-        setPendingRender(null);
+        pendingRenderRef.current = null;
         hasRenderedRef.current = true;
       } else {
-        // 如果 root 还未定义，记录等待状态
-        setPendingRender({ surfaceId: id, root });
+        // 如果 root 还未定义，记录等待状态（使用 ref 避免触发 useEffect 重新执行）
+        pendingRenderRef.current = { surfaceId: id, root };
       }
     }
 
@@ -241,12 +243,12 @@ const Card: React.FC<CardProps> = ({ id }) => {
     if ('deleteSurface' in commands && commands.deleteSurface.surfaceId === id) {
       setRootNode(null);
       setDataModel({});
-      setPendingRender(null);
+      pendingRenderRef.current = null;
       pendingNodeTreeRef.current = null;
       hasRenderedRef.current = false;
       transformerRef.current!.reset();
     }
-  }, [commands, id, pendingRender]);
+  }, [commands, id]);
 
   if (!rootNode) {
     return null;

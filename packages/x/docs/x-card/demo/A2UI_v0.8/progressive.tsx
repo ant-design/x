@@ -214,12 +214,13 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
         padding: '16px 20px',
         background: '#fff',
         borderRadius: 12,
+        marginBlock: 16,
         border: '1px solid #e8e8e8',
         minWidth: 320,
-        maxWidth: 400,
+        maxWidth: 720,
       }}
     >
-      <Space direction="vertical" style={{ width: '100%' }} size={12}>
+      <Space vertical style={{ width: '100%' }} size={12}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography.Text style={{ fontSize: 14, fontWeight: 500 }}>
             {boolLoading ? '正在加载产品数据...' : '加载完成'}
@@ -522,6 +523,7 @@ const App = () => {
     resetFooter();
     batchCountRef.current = 0;
     setCard([]);
+    setCommands(undefined);
 
     // v0.8: 删除所有 surface
     onAgentCommand(DeleteLoadingIndicator);

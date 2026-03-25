@@ -76,7 +76,7 @@ const Box: React.FC<BoxProps> = ({ children, commands, components, onAction }) =
         commandVersion,
       }}
     >
-      <div>{children}</div>
+      {children}
     </Context.Provider>
   );
 };

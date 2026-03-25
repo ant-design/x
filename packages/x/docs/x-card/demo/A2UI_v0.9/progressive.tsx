@@ -210,9 +210,10 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
         padding: '16px 20px',
         background: '#fff',
         borderRadius: 12,
+        marginBlock: 16,
         border: '1px solid #e8e8e8',
         minWidth: 320,
-        maxWidth: 400,
+        maxWidth: 720,
       }}
     >
       <Space vertical style={{ width: '100%' }} size={12}>
@@ -348,7 +349,7 @@ const UpdateLoadingIndicator = (
     surfaceId: 'loading-indicator',
     components: [
       {
-        id: 'loading',
+        id: 'root',
         component: 'LoadingIndicator',
         progress,
         total,
@@ -465,6 +466,7 @@ const App = () => {
     resetFooter();
     batchCountRef.current = 0;
     setCard([]);
+    setCommands(undefined);
 
     onAgentCommand({
       version: 'v0.9',

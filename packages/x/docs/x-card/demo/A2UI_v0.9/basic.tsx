@@ -134,6 +134,7 @@ const BookForm: React.FC<BookFormProps> = ({ children }) => {
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
         minWidth: 280,
+        marginBlock: 16,
         maxWidth: 400,
       }}
     >
@@ -172,33 +173,15 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     const eventName = action?.event?.name;
     if (!eventName || !onAction) return;
 
-    // 根据 action.event.context 的 key 来构造 context
+    // 业务逻辑验证：根据 res 数据决定 status
+    // res 和 status 均已由 resolvePropsV09 从 dataModel 解析后作为 props 传入
     const context: Record<string, any> = {};
-    if (action?.event?.context) {
-      Object.keys(action.event.context).forEach((key) => {
-        const contextValue = action.event!.context![key];
-
-        // 如果是 { path: string } 形式，使用从 dataModel 解析的值（如 res）
-        if (contextValue && typeof contextValue === 'object' && 'path' in contextValue) {
-          context[key] = res;
-        }
-        // 否则直接使用字面值（如 status: 'success'）
-        else {
-          context[key] = contextValue;
-        }
-      });
-    }
-
-    // 组件内部可以根据业务逻辑修改或添加 context
-    // 例如：验证数据，决定 status 的值
-    if (context.status === undefined || typeof context.status === 'object') {
-      // 如果 status 未设置或是路径绑定，由组件决定
-      if (!res?.time || !res?.coffee) {
-        context.status = 'error';
-        context.errorMessage = '请先选择日期和咖啡';
-      } else {
-        context.status = 'success';
-      }
+    if (!res?.time || !res?.coffee) {
+      context.status = 'error';
+      context.errorMessage = '请先选择日期和咖啡';
+    } else {
+      context.status = 'success';
+      context.res = res;
     }
 
     onAction(eventName, context);
@@ -877,6 +860,7 @@ const App = () => {
     resetHeader();
     resetFooter();
     setCard([]);
+    setCommands(undefined);
 
     onAgentCommand({
       version: 'v0.9',

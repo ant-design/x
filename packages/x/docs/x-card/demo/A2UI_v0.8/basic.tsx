@@ -128,6 +128,7 @@ const BookForm: React.FC<BookFormProps> = ({ children }) => {
         padding: '20px 20px 16px',
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+        marginBlock: 16,
         minWidth: 280,
         maxWidth: 400,
       }}
@@ -540,7 +541,7 @@ const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
         component: {
           Text: {
             text: { literalString: '咖啡店单机' },
-            usageHint: 'h1',
+            variant: { literalString: 'h1' },
           },
         },
       },
@@ -772,6 +773,7 @@ const App = () => {
     resetHeader();
     resetFooter();
     setCard([]);
+    setCommands(undefined);
     setSessionKey((prev) => prev + 1);
   }, [resetHeader, resetFooter]);
 
