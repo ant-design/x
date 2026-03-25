@@ -1,7 +1,6 @@
 /* eslint-disable camelcase, no-async-promise-executor */
 import runScript from '@npmcli/run-script';
 import chalk from 'chalk';
-import fetch from 'isomorphic-fetch';
 import Spinnies from 'spinnies';
 import checkRepo from './check-repo';
 
@@ -58,22 +57,6 @@ process.on('SIGINT', () => {
   process.exit(1);
 });
 
-// 检查包是否已存在于 npm
-async function checkPackageExistsOnNpm(packageName: string): Promise<boolean> {
-  try {
-    const res = await fetch(`https://registry.npmjs.org/${packageName}`);
-    if (res.ok) {
-      const data = await res.json();
-      // npm registry 返回 {"error":"Not found"} 时，res.ok 仍为 true
-      // 需要检查是否有 versions 字段
-      return !!data?.versions && Object.keys(data.versions).length > 0;
-    }
-    return false;
-  } catch {
-    return false;
-  }
-}
-
 const runPrePublish = async () => {
   await checkRepo();
 
@@ -118,28 +101,7 @@ const runPrePublish = async () => {
   showMessage(`[CI] test 执行成功`, 'succeed');
 
   await runScript({ event: 'test:dekko', path: '.', stdio: 'inherit' });
-
-  // 获取当前包名并检查是否已存在于 npm
-  const argKey = process.argv.slice(2)[0];
-  if (argKey) {
-    const packageName = `@ant-design/${argKey}`;
-    const packageExists = await checkPackageExistsOnNpm(packageName);
-
-    if (packageExists) {
-      showMessage(`[CI] 正在执行 package-diff`, true);
-      await runScript({ event: 'test:package-diff', path: '.', stdio: 'inherit' });
-      showMessage(`[CI] package-diff 执行成功`, 'succeed');
-    } else {
-      showMessage(
-        chalk.cyan(`😃 Package ${packageName} not found in npm registry. Skip package-diff check.`),
-        'succeed',
-      );
-    }
-  } else {
-    // 如果没有指定包名，仍然执行 package-diff（兼容旧行为）
-    await runScript({ event: 'test:package-diff', path: '.', stdio: 'inherit' });
-  }
-
+  await runScript({ event: 'test:package-diff', path: '.', stdio: 'inherit' });
   showMessage(`文件检查通过，准备发布！`, 'succeed');
 
   new Notifier().notify({
