@@ -1,6 +1,6 @@
 ---
 name: use-x-chat
-version: 2.3.0-beta.1
+version: 2.3.0-beta.2
 description: Focus on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, etc.
 ---
 
