@@ -64,7 +64,9 @@ async function checkPackageExistsOnNpm(packageName: string): Promise<boolean> {
     const res = await fetch(`https://registry.npmjs.org/${packageName}`);
     if (res.ok) {
       const data = await res.json();
-      return !!data?.versions;
+      // npm registry 返回 {"error":"Not found"} 时，res.ok 仍为 true
+      // 需要检查是否有 versions 字段
+      return !!data?.versions && Object.keys(data.versions).length > 0;
     }
     return false;
   } catch {
