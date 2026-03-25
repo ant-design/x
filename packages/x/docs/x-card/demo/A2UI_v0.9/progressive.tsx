@@ -32,20 +32,34 @@ interface Product {
 
 const allProducts: Product[][] = [
   [
-    { id: 1, name: '无线蓝牙耳机', price: 299, category: '数码', stock: 156, tag: '热销' },
-    { id: 2, name: '机械键盘', price: 459, category: '数码', stock: 89 },
+    {
+      id: 1,
+      name: 'Wireless Bluetooth Earphones',
+      price: 299,
+      category: 'Digital',
+      stock: 156,
+      tag: 'Hot',
+    },
+    { id: 2, name: 'Mechanical Keyboard', price: 459, category: 'Digital', stock: 89 },
   ],
   [
-    { id: 3, name: '智能手表', price: 1299, category: '穿戴', stock: 45, tag: '新品' },
-    { id: 4, name: '便携充电宝', price: 99, category: '配件', stock: 234 },
+    { id: 3, name: 'Smart Watch', price: 1299, category: 'Wearable', stock: 45, tag: 'New' },
+    { id: 4, name: 'Portable Power Bank', price: 99, category: 'Accessories', stock: 234 },
   ],
   [
-    { id: 5, name: '降噪耳机', price: 899, category: '数码', stock: 67, tag: '推荐' },
-    { id: 6, name: '无线充电器', price: 149, category: '配件', stock: 178 },
+    {
+      id: 5,
+      name: 'Noise Cancelling Headphones',
+      price: 899,
+      category: 'Digital',
+      stock: 67,
+      tag: 'Recommended',
+    },
+    { id: 6, name: 'Wireless Charger', price: 149, category: 'Accessories', stock: 178 },
   ],
   [
-    { id: 7, name: '智能音箱', price: 399, category: '家居', stock: 112, tag: '热销' },
-    { id: 8, name: '运动手环', price: 199, category: '穿戴', stock: 256 },
+    { id: 7, name: 'Smart Speaker', price: 399, category: 'Home', stock: 112, tag: 'Hot' },
+    { id: 8, name: 'Fitness Tracker', price: 199, category: 'Wearable', stock: 256 },
   ],
 ];
 
@@ -152,7 +166,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
             }
           />
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-            库存: {stock}
+            Stock: {stock}
           </Typography.Text>
         </div>
       </Space>
@@ -219,10 +233,10 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
       <Space vertical style={{ width: '100%' }} size={12}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography.Text style={{ fontSize: 14, fontWeight: 500 }}>
-            {loading ? '正在加载产品数据...' : '加载完成'}
+            {loading ? 'Loading product data...' : 'Loading complete'}
           </Typography.Text>
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-            {progress}/{total} 件产品
+            {progress}/{total} products
           </Typography.Text>
         </div>
         <Progress
@@ -385,8 +399,8 @@ const App = () => {
   };
 
   const welcomeText =
-    '🎉 欢迎体验渐进式产品展示！\n\n产品数据将分批次加载，每次加载2件产品，您可以观察到组件如何逐渐展示。';
-  const completeText = '✅ 所有产品加载完成！共加载 8 件产品。';
+    '🎉 Welcome to the progressive product showcase!\n\nProduct data will be loaded in batches, 2 products at a time. You can observe how components are displayed progressively.';
+  const completeText = '✅ All products loaded! Total 8 products loaded.';
 
   const {
     text: textHeader,
@@ -500,7 +514,7 @@ const App = () => {
     <div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" icon={<ReloadOutlined />} onClick={handleReload}>
-          重新加载
+          Reload
         </Button>
       </div>
 

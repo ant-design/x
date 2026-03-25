@@ -4,7 +4,7 @@ import util from 'util';
 type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 
 // This function can not move to external file since jest setup not support
-export function fillWindowEnv(window: Window | DOMWindow) {
+export function fillWindowEnv(window: Window) {
   const win = window as Writeable<Window> & typeof globalThis;
   win.resizeTo = (width, height) => {
     win.innerWidth = width || win.innerWidth;

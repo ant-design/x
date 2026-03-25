@@ -14,8 +14,9 @@ import localCatalog from './catalog.json';
 registerCatalog(localCatalog as unknown as Catalog);
 
 const contentHeader =
-  '您好！欢迎使用在线预订服务 🎉\n\n 请选择您希望预订的日期和时间，我们将为您安排最合适的座位，期待您的光临～';
-const orderConfirmation = '✅ 预订成功！您的订单已确认，期待您的光临～';
+  'Hello! Welcome to our online booking service 🎉\n\n Please select your preferred date and time, and we will arrange the best seat for you. We look forward to seeing you!';
+const orderConfirmation =
+  '✅ Booking confirmed! Your order has been confirmed. We look forward to seeing you!';
 
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
@@ -113,7 +114,7 @@ const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status 
       disabled={disabled}
       onChange={handleChange}
       format="YYYY-MM-DD"
-      placeholder="请选择日期"
+      placeholder="Select date"
       style={{ width: '100%' }}
     />
   );
@@ -173,12 +174,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     const eventName = action?.event?.name;
     if (!eventName || !onAction) return;
 
-    // 业务逻辑验证：根据 res 数据决定 status
-    // res 和 status 均已由 resolvePropsV09 从 dataModel 解析后作为 props 传入
+    // Business logic validation: determine status based on res data
+    // res and status are both passed as props after being resolved from dataModel by resolvePropsV09
     const context: Record<string, any> = {};
     if (!res?.time || !res?.coffee) {
       context.status = 'error';
-      context.errorMessage = '请先选择日期和咖啡';
+      context.errorMessage = 'Please select date and coffee first';
     } else {
       context.status = 'success';
       context.res = res;
@@ -466,7 +467,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
               letterSpacing: 0.5,
             }}
           >
-            {name ?? '未知咖啡'}
+            {name ?? 'Unknown Coffee'}
           </Typography.Text>
           {tag && (
             <Tag
@@ -516,7 +517,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
               <Typography.Text
                 style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', display: 'block' }}
               >
-                价格
+                Price
               </Typography.Text>
               <Typography.Text style={{ fontSize: 20, fontWeight: 700, color: '#ffd580' }}>
                 ¥{price}
@@ -531,7 +532,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
               <Typography.Text
                 style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', display: 'block' }}
               >
-                预订时间
+                Booking Time
               </Typography.Text>
               <Typography.Text style={{ fontSize: 12, color: 'rgba(255,255,255,0.85)' }}>
                 {formattedDate}
@@ -555,7 +556,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
         >
           <span style={{ fontSize: 14 }}>✅</span>
           <Typography.Text style={{ fontSize: 13, color: '#95de64', fontWeight: 500 }}>
-            预订成功，期待您的光临！
+            Booking confirmed! We look forward to seeing you!
           </Typography.Text>
         </div>
       </div>
@@ -630,7 +631,7 @@ const UpdateCard: XAgentCommand_v0_9 = {
       {
         id: 'title',
         component: 'Text',
-        text: '咖啡店单机',
+        text: 'Coffee Shop Order',
         variant: 'h1',
       },
       {
@@ -651,7 +652,7 @@ const UpdateCard: XAgentCommand_v0_9 = {
       {
         id: 'submit-text',
         component: 'Text',
-        text: '确定点单',
+        text: 'Confirm Order',
       },
       {
         component: 'CoffeeList',
@@ -713,25 +714,25 @@ const UpdateModel: XAgentCommand_v0_9 = {
     path: '/booking',
     value: {
       res: {
-        time: new Date().toISOString(), // 初始化为当前日期
+        time: new Date().toISOString(), // Initialize to current date
       },
       list: {
-        description: '咖啡列表',
+        description: 'Coffee List',
         data: [
           {
             id: 1,
-            name: '拿铁咖啡',
-            description: '浓缩 + 蒸汽牛奶，丝滑顺口',
+            name: 'Latte',
+            description: 'Espresso + Steamed Milk, smooth and silky',
             price: 32,
-            tag: '热销',
+            tag: 'Hot',
           },
-          { id: 2, name: '美式咖啡', description: '纯粹苦香，清爽提神', price: 25 },
+          { id: 2, name: 'Americano', description: 'Pure bitter aroma, refreshing', price: 25 },
           {
             id: 3,
-            name: '卡布奇诺',
-            description: '奶泡丰富，经典意式风味',
+            name: 'Cappuccino',
+            description: 'Rich foam, classic Italian style',
             price: 30,
-            tag: '推荐',
+            tag: 'Recommended',
           },
         ],
       },
@@ -797,17 +798,17 @@ const App = () => {
     }
   };
 
-  /** 处理 Card 内部 action 事件（完全自动化） */
+  /** Handle Card internal action events (fully automated) */
   const handleAction = (payload: ActionPayload) => {
     if (payload.name === 'confirm_booking') {
       const { res, status } = payload.context || {};
 
-      // 只在成功时显示结果卡片
+      // Only show result card on success
       if (status === 'success' && res) {
-        // 1. 显示确认文本
+        // 1. Show confirmation text
         runFooter();
 
-        // 2. 删除预订表单卡片
+        // 2. Delete booking form card
         onAgentCommand({
           version: 'v0.9',
           deleteSurface: {
@@ -815,15 +816,15 @@ const App = () => {
           },
         });
 
-        // 3. 创建并更新结果卡片（增加延迟确保 catalog 加载完成）
+        // 3. Create and update result card (add delay to ensure catalog is loaded)
         onAgentCommand(CreateResultCard);
 
-        // 增加 delay 确保命令被处理
+        // Add delay to ensure command is processed
         setTimeout(() => {
           onAgentCommand(UpdateResultCard(res));
         }, 200);
       } else if (status === 'error') {
-        console.log('❌ 预订失败:', payload.context?.errorMessage);
+        console.log('❌ Booking failed:', payload.context?.errorMessage);
       }
     }
   };
@@ -894,7 +895,7 @@ const App = () => {
     <div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" icon={<ReloadOutlined />} onClick={handleReload}>
-          重新加载
+          Reload
         </Button>
       </div>
 

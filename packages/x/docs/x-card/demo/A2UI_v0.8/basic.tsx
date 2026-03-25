@@ -8,8 +8,9 @@ import dayjs, { Dayjs } from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const contentHeader =
-  '您好！欢迎使用在线预订服务 🎉\n\n 请选择您希望预订的日期和时间，我们将为您安排最合适的座位，期待您的光临～';
-const orderConfirmation = '✅ 预订成功！您的订单已确认，期待您的光临～';
+  'Hello! Welcome to our online booking service 🎉\n\n Please select your preferred date and time, and we will arrange the best seat for you. We look forward to seeing you!';
+const orderConfirmation =
+  '✅ Booking confirmed! Your order has been confirmed. We look forward to seeing you!';
 
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
@@ -108,7 +109,7 @@ const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status 
       disabled={disabled}
       onChange={handleChange}
       format="YYYY-MM-DD"
-      placeholder="请选择日期"
+      placeholder="Select date"
       style={{ width: '100%' }}
     />
   );
@@ -172,10 +173,10 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     // 这里构造 context 上报给上层
     const context: Record<string, any> = {};
 
-    // 业务逻辑验证
+    // Business logic validation
     if (!res?.time || !res?.coffee) {
       context.status = 'error';
-      context.errorMessage = '请先选择日期和咖啡';
+      context.errorMessage = 'Please select date and coffee first';
     } else {
       context.status = 'success';
       context.res = res;
@@ -206,22 +207,22 @@ interface CoffeeItem {
   tag?: string;
 }
 
-// 默认咖啡列表数据
+// Default coffee list data
 const DEFAULT_COFFEE_LIST: CoffeeItem[] = [
   {
     id: 1,
-    name: '拿铁咖啡',
-    description: '浓缩 + 蒸汽牛奶，丝滑顺口',
+    name: 'Latte',
+    description: 'Espresso + Steamed Milk, smooth and silky',
     price: 32,
-    tag: '热销',
+    tag: 'Hot',
   },
-  { id: 2, name: '美式咖啡', description: '纯粹苦香，清爽提神', price: 25 },
+  { id: 2, name: 'Americano', description: 'Pure bitter aroma, refreshing', price: 25 },
   {
     id: 3,
-    name: '卡布奇诺',
-    description: '奶泡丰富，经典意式风味',
+    name: 'Cappuccino',
+    description: 'Rich foam, classic Italian style',
     price: 30,
-    tag: '推荐',
+    tag: 'Recommended',
   },
 ];
 
@@ -397,7 +398,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
           }}
         >
           <Typography.Text style={{ fontSize: 22, fontWeight: 700, color: '#fff' }}>
-            {name ?? '未知咖啡'}
+            {name ?? 'Unknown Coffee'}
           </Typography.Text>
           {tag && (
             <Tag
@@ -435,7 +436,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
               <Typography.Text
                 style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', display: 'block' }}
               >
-                价格
+                Price
               </Typography.Text>
               <Typography.Text style={{ fontSize: 20, fontWeight: 700, color: '#ffd580' }}>
                 ¥{price}
@@ -450,7 +451,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
               <Typography.Text
                 style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', display: 'block' }}
               >
-                预订时间
+                Booking Time
               </Typography.Text>
               <Typography.Text style={{ fontSize: 12, color: 'rgba(255,255,255,0.85)' }}>
                 {formattedDate}
@@ -473,7 +474,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
         >
           <span style={{ fontSize: 14 }}>✅</span>
           <Typography.Text style={{ fontSize: 13, color: '#95de64', fontWeight: 500 }}>
-            预订成功，期待您的光临！
+            Booking confirmed! We look forward to seeing you!
           </Typography.Text>
         </div>
       </div>
@@ -531,7 +532,7 @@ const useStreamText = (text: string) => {
 // v0.8 Agent 命令定义
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// v0.8 命令 1: surfaceUpdate - 定义组件结构
+// v0.8 Command 1: surfaceUpdate - Define component structure
 const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
   surfaceUpdate: {
     surfaceId: 'booking',
@@ -540,7 +541,7 @@ const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
         id: 'title',
         component: {
           Text: {
-            text: { literalString: '咖啡店单机' },
+            text: { literalString: 'Coffee Shop Order' },
             variant: { literalString: 'h1' },
           },
         },
@@ -566,7 +567,7 @@ const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
         id: 'coffee_list',
         component: {
           CoffeeList: {
-            description: { literalString: '请选择您喜欢的咖啡' },
+            description: { literalString: 'Please select your favorite coffee' },
             status: { path: '/status' },
             action: {
               name: 'select_coffee',
@@ -593,7 +594,7 @@ const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
         id: 'submit-text',
         component: {
           Text: {
-            text: { literalString: '确定点单' },
+            text: { literalString: 'Confirm Order' },
           },
         },
       },
@@ -629,7 +630,7 @@ const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
   },
 };
 
-// v0.8 命令 2: dataModelUpdate - 更新数据模型
+// v0.8 Command 2: dataModelUpdate - Update data model
 const DataModelUpdateCommand: XAgentCommand_v0_8 = {
   dataModelUpdate: {
     surfaceId: 'booking',
@@ -642,7 +643,7 @@ const DataModelUpdateCommand: XAgentCommand_v0_8 = {
   },
 };
 
-// v0.8 命令 3: beginRendering - 开始渲染
+// v0.8 Command 3: beginRendering - Start rendering
 const BeginRenderingCommand: XAgentCommand_v0_8 = {
   beginRendering: {
     surfaceId: 'booking',
@@ -650,7 +651,7 @@ const BeginRenderingCommand: XAgentCommand_v0_8 = {
   },
 };
 
-// 结果卡片命令
+// Result card command
 const ResultSurfaceUpdateCommand = (res: any): XAgentCommand_v0_8 => ({
   surfaceUpdate: {
     surfaceId: 'result',
@@ -686,7 +687,7 @@ const ResultBeginRenderingCommand: XAgentCommand_v0_8 = {
   },
 };
 
-// v0.8 命令: 删除 booking 卡片
+// v0.8 Command: Delete booking card
 const DeleteBookingCommand: XAgentCommand_v0_8 = {
   deleteSurface: {
     surfaceId: 'booking',
@@ -707,7 +708,7 @@ const App = () => {
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
     }
-    // 处理删除命令，从 card 列表中移除
+    // Handle delete command, remove from card list
     if ('deleteSurface' in command) {
       const surfaceId = command.deleteSurface.surfaceId;
       setCard((prev) => prev.filter((c) => c.id !== surfaceId));
@@ -715,7 +716,7 @@ const App = () => {
     setCommands(command);
   };
 
-  /** 处理 Card 内部 action 事件 */
+  /** Handle Card internal action events */
   const handleAction = (payload: ActionPayload) => {
     if (payload.name === 'confirm_booking') {
       const { res, status } = payload.context || {};
@@ -723,9 +724,9 @@ const App = () => {
       if (status === 'success' && res) {
         runFooter();
 
-        // v0.8: 先删除 booking 卡片
+        // v0.8: Delete booking card first
         onAgentCommand(DeleteBookingCommand);
-        // 创建结果卡片
+        // Create result card
         setTimeout(() => {
           onAgentCommand(ResultSurfaceUpdateCommand(res));
         }, 100);
@@ -733,7 +734,7 @@ const App = () => {
           onAgentCommand(ResultBeginRenderingCommand);
         }, 200);
       } else if (status === 'error') {
-        console.log('❌ 预订失败:', payload.context?.errorMessage);
+        console.log('❌ Booking failed:', payload.context?.errorMessage);
       }
     }
   };
@@ -759,12 +760,12 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // v0.8 命令序列：
-      // 1. surfaceUpdate - 定义组件结构
+      // v0.8 Command sequence:
+      // 1. surfaceUpdate - Define component structure
       onAgentCommand(SurfaceUpdateCommand);
-      // 2. dataModelUpdate - 填充数据
+      // 2. dataModelUpdate - Fill data
       setTimeout(() => onAgentCommand(DataModelUpdateCommand), 16);
-      // 3. beginRendering - 触发渲染
+      // 3. beginRendering - Trigger rendering
       setTimeout(() => onAgentCommand(BeginRenderingCommand), 32);
     }
   }, [streamStatusHeader, sessionKey]);
@@ -795,7 +796,7 @@ const App = () => {
     <div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" icon={<ReloadOutlined />} onClick={handleReload}>
-          重新加载
+          Reload
         </Button>
       </div>
 
