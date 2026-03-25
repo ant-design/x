@@ -120,6 +120,9 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
       console.log(`NodeRenderer onAction:`, { name, context, actionConfig });
       onAction?.(name, context, actionConfig);
     };
+
+    // 注入 onDataChange，用于组件直接更新 dataModel
+    resolvedProps.onDataChange = onDataChange;
   }
 
   const childNodes = children?.map((childId) =>

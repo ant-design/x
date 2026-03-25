@@ -6,5 +6,10 @@ export {
   type ActionPayload,
   type Catalog,
   type CatalogComponent,
+  registerCatalog,
+  loadCatalog,
+  validateComponent,
+  clearCatalogCache,
 } from './A2UI';
-export { registerCatalog, loadCatalog, validateComponent, clearCatalogCache } from './A2UI';
+export { default as Card } from './A2UI/Card';
+export { default as Box } from './A2UI/Box';
