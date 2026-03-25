@@ -62,7 +62,19 @@ async function checkVersion() {
       // Ignore the error
       .catch(() => new Promise(() => {})),
   );
-  const { versions } = await Promise.race(promises);
+  const result = await Promise.race(promises);
+  const versions = result?.versions;
+
+  // If the package doesn't exist yet (404), skip version check
+  if (!versions) {
+    spinner.info(
+      chalk.cyan(
+        '😃 Package not found in npm registry. This is a new package, skip version check.',
+      ),
+    );
+    spinner.succeed('版本检查通过');
+    return;
+  }
 
   if (version in versions) {
     spinner.fail(
