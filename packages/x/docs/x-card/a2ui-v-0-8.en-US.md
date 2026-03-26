@@ -6,6 +6,11 @@ title: A2UI v0.8
 <!-- prettier-ignore -->
 <code src="./demo/A2UI_v0.8/basic.tsx">Basic</code>
 <code src="./demo/A2UI_v0.8/progressive.tsx">Progressive</code>
+<code src="./demo/A2UI_v0.8/streaming.tsx">Streaming</code>
+<code src="./demo/A2UI_v0.8/nested-interaction.tsx">Nested Interaction</code>
+<code src="./demo/A2UI_v0.8/multi-card-sync.tsx">Multi Card Sync</code>
+<code src="./demo/A2UI_v0.8/filter-search.tsx">Filter Search</code>
+<code src="./demo/A2UI_v0.8/form-validation.tsx">Form Validation</code>
 
 ## API
 

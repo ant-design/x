@@ -123,13 +123,10 @@ describe('Box.tsx coverage', () => {
         </Box>,
       );
 
-      // 等待 catalog 加载
+      // 等待 useEffect 执行完成（catalog 从缓存加载）
       await waitFor(() => {
-        expect(console.log).toHaveBeenCalledWith(
-          'Box: catalog loaded',
-          catalogUrl,
-          expect.any(Object),
-        );
+        // 由于 catalog 已注册，loadCatalog 会直接返回缓存
+        expect(mockFetch).not.toHaveBeenCalled();
       });
 
       // 清除 console.log mock
@@ -190,11 +187,8 @@ describe('Box.tsx coverage', () => {
 
       // 等待第一次加载完成
       await waitFor(() => {
-        expect(console.log).toHaveBeenCalledWith(
-          'Box: catalog loaded',
-          catalogUrl,
-          expect.any(Object),
-        );
+        // catalog 从缓存加载，不需要 fetch
+        expect(mockFetch).not.toHaveBeenCalled();
       });
 
       // 清空 mock
@@ -220,12 +214,8 @@ describe('Box.tsx coverage', () => {
 
       // 等待 useEffect 执行
       await waitFor(() => {
-        // 由于已经加载过，应该再次打印 catalog loaded 日志
-        expect(console.log).toHaveBeenCalledWith(
-          'Box: catalog loaded',
-          catalogUrl,
-          expect.any(Object),
-        );
+        // 由于 catalog 已缓存，fetch 不应该被调用
+        expect(mockFetch).not.toHaveBeenCalled();
       });
     });
   });

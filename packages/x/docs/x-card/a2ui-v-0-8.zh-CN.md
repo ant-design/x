@@ -6,6 +6,11 @@ title: A2UI v0.8
 <!-- prettier-ignore -->
 <code src="./demo/A2UI_v0.8/basic.tsx">基础</code>
 <code src="./demo/A2UI_v0.8/progressive.tsx">渐进式</code>
+<code src="./demo/A2UI_v0.8/streaming.tsx">流式渲染</code>
+<code src="./demo/A2UI_v0.8/nested-interaction.tsx">嵌套交互</code>
+<code src="./demo/A2UI_v0.8/multi-card-sync.tsx">多卡片同步</code>
+<code src="./demo/A2UI_v0.8/filter-search.tsx">筛选搜索</code>
+<code src="./demo/A2UI_v0.8/form-validation.tsx">表单验证</code>
 
 ## API
 

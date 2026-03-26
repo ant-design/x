@@ -179,8 +179,10 @@ export function applyDataModelUpdateV08(
   for (const item of contents) {
     // item.key 作为顶层 key，item.valueMap 转换为对象
     const valueObj: Record<string, any> = {};
-    for (const { key, valueString } of item.valueMap) {
-      valueObj[key] = valueString;
+    if (Array.isArray(item.valueMap)) {
+      for (const { key, valueString } of item.valueMap) {
+        valueObj[key] = valueString;
+      }
     }
     next[item.key] = valueObj;
   }

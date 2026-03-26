@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local://cart_demo_catalog.json",
+  "title": "Shopping Cart Demo Catalog",
+  "description": "Custom catalog for shopping cart multi-card synchronization demo.",
+  "catalogId": "local://cart_demo_catalog.json",
+  "components": {
+    "Text": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "Text"
+        },
+        "text": {
+          "description": "The text content to display.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "variant": {
+          "type": "string",
+          "description": "A hint for the base text style.",
+          "enum": ["h1", "h2", "h3", "body", "success", "price", "discount"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "ProductListCard": {
+      "type": "object",
+      "description": "A card displaying available products for purchase.",
+      "properties": {
+        "component": {
+          "const": "ProductListCard"
+        },
+        "products": {
+          "description": "List of products to display.",
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "cartItems": {
+          "description": "Current items in cart for badge display.",
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for adding to cart.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context with path bindings",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "CartCard": {
+      "type": "object",
+      "description": "A card displaying shopping cart contents.",
+      "properties": {
+        "component": {
+          "const": "CartCard"
+        },
+        "items": {
+          "description": "Items in the shopping cart.",
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for cart operations.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context with path bindings",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "OrderSummaryCard": {
+      "type": "object",
+      "description": "A card displaying order summary with pricing.",
+      "properties": {
+        "component": {
+          "const": "OrderSummaryCard"
+        },
+        "items": {
+          "description": "Items in the shopping cart for calculation.",
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "discount": {
+          "description": "Discount percentage.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "shipping": {
+          "description": "Shipping fee.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for checkout.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "CardContainer": {
+      "type": "object",
+      "description": "A container component for layout.",
+      "properties": {
+        "component": {
+          "const": "CardContainer"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "layout": {
+          "type": "string",
+          "description": "Layout direction.",
+          "enum": ["horizontal", "vertical"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "SuccessResult": {
+      "type": "object",
+      "description": "A success result display after checkout.",
+      "properties": {
+        "component": {
+          "const": "SuccessResult"
+        },
+        "orderNumber": {
+          "type": "string",
+          "description": "Order number"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total amount paid"
+        },
+        "itemCount": {
+          "type": "number",
+          "description": "Number of items purchased"
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    }
+  },
+  "functions": {},
+  "$defs": {
+    "DynamicValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": ["path"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
