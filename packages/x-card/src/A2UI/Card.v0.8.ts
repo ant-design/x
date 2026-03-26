@@ -160,31 +160,40 @@ export function extractDataUpdatesV08(
 
 /**
  * 处理 v0.8 的 dataModelUpdate 命令
- * v0.8 格式: contents 是 [{ key, valueMap: [{ key, valueString }] }]
+ * v0.8 格式: contents 支持:
+ *   - [{ key, valueString }] - 直接存储字符串值
+ *   - [{ key, valueMap: [{ key, valueString }] }] - 转换为对象
  *
  * 示例输入:
- * contents: [{ key: 'res', valueMap: [{ key: 'time', valueString: '...' }] }]
+ * contents: [
+ *   { key: 'products', valueString: '[...]' },
+ *   { key: 'res', valueMap: [{ key: 'time', valueString: '...' }] }
+ * ]
  *
  * 输出 dataModel:
- * { res: { time: '...' } }
+ * { products: '[...]', res: { time: '...' } }
  */
 export function applyDataModelUpdateV08(
   prevDataModel: Record<string, any>,
   contents: Array<{
     key: string;
-    valueMap: Array<{ key: string; valueString: string }>;
+    valueString?: string;
+    valueMap?: Array<{ key: string; valueString: string }>;
   }>,
 ): Record<string, any> {
   const next = { ...prevDataModel };
   for (const item of contents) {
-    // item.key 作为顶层 key，item.valueMap 转换为对象
-    const valueObj: Record<string, any> = {};
-    if (Array.isArray(item.valueMap)) {
+    if ('valueString' in item && item.valueString !== undefined) {
+      // 直接存储字符串值
+      next[item.key] = item.valueString;
+    } else if (Array.isArray(item.valueMap)) {
+      // valueMap 转换为对象
+      const valueObj: Record<string, any> = {};
       for (const { key, valueString } of item.valueMap) {
         valueObj[key] = valueString;
       }
+      next[item.key] = valueObj;
     }
-    next[item.key] = valueObj;
   }
   return next;
 }

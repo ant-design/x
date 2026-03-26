@@ -45,7 +45,8 @@ interface DataModelUpdateCommand {
     surfaceId: string;
     contents: Array<{
       key: string;
-      valueMap: Array<{
+      valueString?: string;
+      valueMap?: Array<{
         key: string;
         valueString: string;
       }>;
