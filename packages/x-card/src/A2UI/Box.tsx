@@ -1,67 +1,57 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BoxProps } from './types/box';
 import Context from './Context';
 import { loadCatalog, type Catalog } from './catalog';
 import type { A2UICommand_v0_9 } from './types/command_v0.9';
 import type { A2UICommand_v0_8 } from './types/command_v0.8';
 
-/** 检测命令版本 */
-function detectCommandVersion(commands: A2UICommand_v0_9 | A2UICommand_v0_8): 'v0.8' | 'v0.9' {
-  if ('version' in commands) {
-    return commands.version;
-  }
-  return 'v0.8';
-}
-
-const Box: React.FC<BoxProps> = ({ children, commands, components, onAction }) => {
+const Box: React.FC<BoxProps> = ({ children, commands = [], components, onAction }) => {
   const [catalogMap, setCatalogMap] = useState<Map<string, Catalog>>(new Map());
   // 存储 surfaceId -> catalogId 的映射
   const [surfaceCatalogMap, setSurfaceCatalogMap] = useState<Map<string, string>>(new Map());
 
-  // 检测命令版本
-  const commandVersion = useMemo(
-    () => (commands ? detectCommandVersion(commands) : 'v0.8'),
-    [commands],
-  );
-
-  // 处理 v0.9 的 createSurface 命令
+  /**
+   * 监听命令队列变化，处理 createSurface（加载 catalog）和 deleteSurface（清理映射）。
+   * commands 数组由外部 demo 维护，每次追加新命令后引用变化，触发此 effect。
+   */
   useEffect(() => {
-    if (commands && 'createSurface' in commands) {
-      const { surfaceId, catalogId } = commands.createSurface;
-      console.log('Box: createSurface command received (v0.9)', { surfaceId, catalogId });
+    if (!commands || commands.length === 0) return;
 
-      // 记录 surfaceId -> catalogId 映射
-      if (catalogId) {
+    for (const cmd of commands) {
+      if ('createSurface' in cmd) {
+        const { surfaceId, catalogId } = (cmd as A2UICommand_v0_9 & { createSurface: any })
+          .createSurface;
+
+        if (catalogId) {
+          setSurfaceCatalogMap((prev) => {
+            if (prev.get(surfaceId) === catalogId) return prev;
+            return new Map(prev).set(surfaceId, catalogId);
+          });
+
+          // 加载 catalog（已缓存则直接命中，不重复请求）
+          loadCatalog(catalogId)
+            .then((catalog) => {
+              setCatalogMap((prev) => {
+                if (prev.has(catalogId)) return prev;
+                return new Map(prev).set(catalogId, catalog);
+              });
+            })
+            .catch((error) => {
+              console.error(`Failed to load catalog ${catalogId}:`, error);
+            });
+        }
+      }
+
+      // deleteSurface 时清理 surfaceCatalogMap 中的映射
+      if ('deleteSurface' in cmd) {
+        const surfaceId = (cmd as { deleteSurface: { surfaceId: string } }).deleteSurface.surfaceId;
         setSurfaceCatalogMap((prev) => {
-          const next = new Map(prev).set(surfaceId, catalogId);
-          console.log('Box: surfaceCatalogMap updated', next);
+          if (!prev.has(surfaceId)) return prev;
+          const next = new Map(prev);
+          next.delete(surfaceId);
           return next;
         });
-
-        // 加载 catalog
-        loadCatalog(catalogId)
-          .then((catalog) => {
-            console.log('Box: catalog loaded', catalogId, catalog);
-            setCatalogMap((prev) => {
-              if (prev.has(catalogId)) {
-                return prev;
-              }
-              return new Map(prev).set(catalogId, catalog);
-            });
-          })
-          .catch((error) => {
-            console.error(`Failed to load catalog ${catalogId}:`, error);
-          });
       }
-    }
-  }, [commands]);
-
-  // 处理 v0.8 的 surfaceUpdate 命令（记录 surface 信息）
-  useEffect(() => {
-    if (commands && 'surfaceUpdate' in commands) {
-      const { surfaceId } = commands.surfaceUpdate;
-      console.log('Box: surfaceUpdate command received (v0.8)', { surfaceId });
-      // v0.8 不需要 catalogId，使用默认 catalog
     }
   }, [commands]);
 
@@ -69,11 +59,10 @@ const Box: React.FC<BoxProps> = ({ children, commands, components, onAction }) =
     <Context.Provider
       value={{
         components,
-        commands,
+        commandQueue: commands as (A2UICommand_v0_9 | A2UICommand_v0_8)[],
         onAction,
         catalogMap,
         surfaceCatalogMap,
-        commandVersion,
       }}
     >
       {children}

@@ -37,24 +37,27 @@ describe('Box.tsx coverage', () => {
       // 测试覆盖 Box.tsx 行 34: catalogId 为 falsy 的分支
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: '', // 空 catalogId 测试 falsy 分支
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: '', // 空 catalogId 测试 falsy 分支
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
         </Box>,
       );
 
-      // 应该打印 createSurface 命令日志
-      expect(console.log).toHaveBeenCalledWith('Box: createSurface command received (v0.9)', {
-        surfaceId: 'card1',
-        catalogId: '',
-      });
+      // 不应该打印 catalog loaded 日志（因为 catalogId 为空）
+      expect(console.log).not.toHaveBeenCalledWith(
+        'Box: catalog loaded',
+        expect.anything(),
+        expect.anything(),
+      );
     });
   });
 
@@ -65,13 +68,15 @@ describe('Box.tsx coverage', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'https://example.com/fail-catalog.json',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'https://example.com/fail-catalog.json',
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
@@ -103,13 +108,15 @@ describe('Box.tsx coverage', () => {
       // 第一次渲染，catalog 已在缓存中
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: catalogUrl,
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -129,16 +136,17 @@ describe('Box.tsx coverage', () => {
       (console.log as jest.Mock).mockClear();
 
       // 重新渲染相同的命令，catalog 已缓存
-      // 这会触发 setCatalogMap 回调中的 prev.has(catalogId) 分支
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: catalogUrl,
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -165,13 +173,15 @@ describe('Box.tsx coverage', () => {
       // 使用 act 来确保状态更新完成
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: catalogUrl,
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -190,18 +200,18 @@ describe('Box.tsx coverage', () => {
       // 清空 mock
       (console.log as jest.Mock).mockClear();
 
-      // 再次触发相同的 createSurface 命令
-      // 由于 useEffect 的依赖数组是 [commands]，当 commands 对象引用改变时会重新执行
-      // 但此时 catalogMap 中已经有了该 catalogId，所以会走 prev.has(catalogId) 分支
+      // 再次触发相同的 createSurface 命令（新数组引用）
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: catalogUrl,
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />

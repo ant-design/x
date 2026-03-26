@@ -376,7 +376,8 @@ const UpdateLoadingIndicator = (
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  const [commands, setCommands] = useState<XAgentCommand_v0_9>();
+  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_9[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
   const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -389,13 +390,11 @@ const App = () => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
-      setCommands(command);
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
-      setCommands(command);
-    } else {
-      setCommands(command);
     }
+    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    setCommandQueue((prev) => [...prev, command]);
   };
 
   const welcomeText =
@@ -423,18 +422,14 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
+      // 按照 A2UI v0.9 规范顺序发送命令：
+      // 1. createSurface（初始化 Surface）
+      // 2. updateComponents（定义组件结构）
+      // 命令队列保证顺序处理，无需 setTimeout 魔法数字
       onAgentCommand(CreateLoadingIndicator());
-      setTimeout(() => {
-        onAgentCommand(UpdateLoadingIndicator(0, 8, true));
-      }, 50);
-
-      setTimeout(() => {
-        onAgentCommand(CreateCard);
-      }, 100);
-
-      setTimeout(() => {
-        startProgressiveLoading();
-      }, 300);
+      onAgentCommand(UpdateLoadingIndicator(0, 8, true));
+      onAgentCommand(CreateCard);
+      startProgressiveLoading();
     }
   }, [streamStatusHeader, sessionKey]);
 
@@ -479,21 +474,17 @@ const App = () => {
     resetHeader();
     resetFooter();
     batchCountRef.current = 0;
-    setCard([]);
-    setCommands(undefined);
 
-    onAgentCommand({
-      version: 'v0.9',
-      deleteSurface: { surfaceId: 'loading-indicator' },
-    });
-    onAgentCommand({
-      version: 'v0.9',
-      deleteSurface: { surfaceId: 'progressive-demo' },
-    });
+    const deleteCommands: XAgentCommand_v0_9[] = [
+      { version: 'v0.9', deleteSurface: { surfaceId: 'loading-indicator' } },
+      { version: 'v0.9', deleteSurface: { surfaceId: 'progressive-demo' } },
+    ];
+    setCommandQueue((prev) => [...prev, ...deleteCommands]);
+    setCard([]);
 
     setTimeout(() => {
       setSessionKey((prev) => prev + 1);
-    }, 100);
+    }, 50);
   }, [resetHeader, resetFooter]);
 
   const items = [
@@ -520,7 +511,7 @@ const App = () => {
 
       <XCard.Box
         key={sessionKey}
-        commands={commands}
+        commands={commandQueue}
         components={{
           ProductCard,
           ProductContainer,

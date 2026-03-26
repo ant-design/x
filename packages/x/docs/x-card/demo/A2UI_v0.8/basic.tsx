@@ -697,7 +697,8 @@ const DeleteBookingCommand: XAgentCommand_v0_8 = {
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  const [commands, setCommands] = useState<XAgentCommand_v0_8>();
+  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_8[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
   const onAgentCommand = (command: XAgentCommand_v0_8) => {
@@ -707,13 +708,11 @@ const App = () => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
+    } else if ('deleteSurface' in command) {
+      setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
     }
-    // Handle delete command, remove from card list
-    if ('deleteSurface' in command) {
-      const surfaceId = command.deleteSurface.surfaceId;
-      setCard((prev) => prev.filter((c) => c.id !== surfaceId));
-    }
-    setCommands(command);
+    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    setCommandQueue((prev) => [...prev, command]);
   };
 
   /** Handle Card internal action events */
@@ -726,13 +725,9 @@ const App = () => {
 
         // v0.8: Delete booking card first
         onAgentCommand(DeleteBookingCommand);
-        // Create result card
-        setTimeout(() => {
-          onAgentCommand(ResultSurfaceUpdateCommand(res));
-        }, 100);
-        setTimeout(() => {
-          onAgentCommand(ResultBeginRenderingCommand);
-        }, 200);
+        // Create result card — 命令队列保证顺序，无需 setTimeout
+        onAgentCommand(ResultSurfaceUpdateCommand(res));
+        onAgentCommand(ResultBeginRenderingCommand);
       } else if (status === 'error') {
         console.log('❌ Booking failed:', payload.context?.errorMessage);
       }
@@ -760,22 +755,26 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // v0.8 Command sequence:
-      // 1. surfaceUpdate - Define component structure
+      // v0.8 命令序列：surfaceUpdate → dataModelUpdate → beginRendering
+      // 命令队列保证顺序处理，无需 setTimeout 魔法数字
       onAgentCommand(SurfaceUpdateCommand);
-      // 2. dataModelUpdate - Fill data
-      setTimeout(() => onAgentCommand(DataModelUpdateCommand), 16);
-      // 3. beginRendering - Trigger rendering
-      setTimeout(() => onAgentCommand(BeginRenderingCommand), 32);
+      onAgentCommand(DataModelUpdateCommand);
+      onAgentCommand(BeginRenderingCommand);
     }
   }, [streamStatusHeader, sessionKey]);
 
   const handleReload = useCallback(() => {
     resetHeader();
     resetFooter();
+    const deleteCommands: XAgentCommand_v0_8[] = [
+      { deleteSurface: { surfaceId: 'booking' } },
+      { deleteSurface: { surfaceId: 'result' } },
+    ];
+    setCommandQueue((prev) => [...prev, ...deleteCommands]);
     setCard([]);
-    setCommands(undefined);
-    setSessionKey((prev) => prev + 1);
+    setTimeout(() => {
+      setSessionKey((prev) => prev + 1);
+    }, 50);
   }, [resetHeader, resetFooter]);
 
   const items = [
@@ -802,7 +801,7 @@ const App = () => {
 
       <XCard.Box
         key={sessionKey}
-        commands={commands}
+        commands={commandQueue}
         onAction={handleAction}
         components={{
           Text,

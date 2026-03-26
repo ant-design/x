@@ -778,7 +778,8 @@ const UpdateResultCard = (res: any): XAgentCommand_v0_9 => {
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  const [commands, setCommands] = useState<XAgentCommand_v0_9>();
+  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_9[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
   const onAgentCommand = (command: XAgentCommand_v0_9) => {
@@ -788,14 +789,11 @@ const App = () => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
-
-      setCommands(command);
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
-      setCommands(command);
-    } else {
-      setCommands(command);
     }
+    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    setCommandQueue((prev) => [...prev, command]);
   };
 
   /** Handle Card internal action events (fully automated) */
@@ -816,13 +814,9 @@ const App = () => {
           },
         });
 
-        // 3. Create and update result card (add delay to ensure catalog is loaded)
+        // 3. Create and update result card
         onAgentCommand(CreateResultCard);
-
-        // Add delay to ensure command is processed
-        setTimeout(() => {
-          onAgentCommand(UpdateResultCard(res));
-        }, 200);
+        onAgentCommand(UpdateResultCard(res));
       } else if (status === 'error') {
         console.log('❌ Booking failed:', payload.context?.errorMessage);
       }
@@ -850,9 +844,10 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
+      // 按照 A2UI v0.9 规范顺序发送命令，命令队列保证顺序处理，无需 setTimeout
       onAgentCommand(CreateCard);
-      setTimeout(() => onAgentCommand(UpdateCard), 0);
-      setTimeout(() => onAgentCommand(UpdateModel), 16);
+      onAgentCommand(UpdateCard);
+      onAgentCommand(UpdateModel);
     }
   }, [streamStatusHeader, sessionKey]);
 
@@ -860,21 +855,18 @@ const App = () => {
   const handleReload = useCallback(() => {
     resetHeader();
     resetFooter();
-    setCard([]);
-    setCommands(undefined);
 
-    onAgentCommand({
-      version: 'v0.9',
-      deleteSurface: { surfaceId: 'booking' },
-    });
-    onAgentCommand({
-      version: 'v0.9',
-      deleteSurface: { surfaceId: 'result' },
-    });
+    // 通过 deleteSurface 命令驱动 Surface 清理
+    const deleteCommands: XAgentCommand_v0_9[] = [
+      { version: 'v0.9', deleteSurface: { surfaceId: 'booking' } },
+      { version: 'v0.9', deleteSurface: { surfaceId: 'result' } },
+    ];
+    setCommandQueue((prev) => [...prev, ...deleteCommands]);
+    setCard([]);
 
     setTimeout(() => {
       setSessionKey((prev) => prev + 1);
-    }, 100);
+    }, 50);
   }, [resetHeader, resetFooter]);
 
   const items = [
@@ -901,7 +893,7 @@ const App = () => {
 
       <XCard.Box
         key={sessionKey}
-        commands={commands}
+        commands={commandQueue}
         onAction={handleAction}
         components={{
           Text,

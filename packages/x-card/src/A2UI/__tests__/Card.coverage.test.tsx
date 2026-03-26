@@ -44,22 +44,27 @@ describe('Card.tsx coverage', () => {
 
       const { unmount } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'test-catalog',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'test-catalog',
+              },
             },
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestComponent',
-                },
-              ],
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
@@ -92,22 +97,27 @@ describe('Card.tsx coverage', () => {
 
       const { unmount } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'test-catalog-2',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'test-catalog-2',
+              },
             },
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'UnknownComponent',
-                },
-              ],
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'UnknownComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
@@ -134,18 +144,20 @@ describe('Card.tsx coverage', () => {
       // 使用 'div' 作为组件
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'div',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'div',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           // @ts-ignore - 测试字符串组件
           components={{ div: 'div' }}
         >
@@ -169,19 +181,21 @@ describe('Card.tsx coverage', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'ParentComponent',
-                  children: ['nonExistentChild'], // 引用不存在的子节点
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ParentComponent',
+                    children: ['nonExistentChild'], // 引用不存在的子节点
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ ParentComponent }}
         >
           <Card id="card1" />
@@ -206,25 +220,29 @@ describe('Card.tsx coverage', () => {
       // 先进行初始渲染并触发 beginRendering
       const { rerender } = render(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: {
-                    TestComponent: {
-                      text: 'initial',
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      TestComponent: {
+                        text: 'initial',
+                      },
                     },
                   },
-                },
-              ],
+                ],
+              },
             },
-            beginRendering: {
-              surfaceId: 'card1',
-              root: 'root',
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -236,21 +254,23 @@ describe('Card.tsx coverage', () => {
       // 发送新的 surfaceUpdate 命令，此时 hasRenderedRef 为 true
       rerender(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: {
-                    TestComponent: {
-                      text: 'updated',
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      TestComponent: {
+                        text: 'updated',
+                      },
                     },
                   },
-                },
-              ],
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -274,25 +294,29 @@ describe('Card.tsx coverage', () => {
       // 先设置组件结构和数据绑定
       const { rerender } = render(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: {
-                    TestComponent: {
-                      value: { path: '/data/time' },
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      TestComponent: {
+                        value: { path: '/data/time' },
+                      },
                     },
                   },
-                },
-              ],
+                ],
+              },
             },
-            beginRendering: {
-              surfaceId: 'card1',
-              root: 'root',
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -306,17 +330,19 @@ describe('Card.tsx coverage', () => {
       // v0.8 dataModelUpdate 格式: contents: [{ key: string, valueMap: [{ key: string, valueString: string }] }]
       rerender(
         <Box
-          commands={{
-            dataModelUpdate: {
-              surfaceId: 'card1',
-              contents: [
-                {
-                  key: 'data',
-                  valueMap: [{ key: 'time', valueString: 'data from update' }],
-                },
-              ],
+          commands={[
+            {
+              dataModelUpdate: {
+                surfaceId: 'card1',
+                contents: [
+                  {
+                    key: 'data',
+                    valueMap: [{ key: 'time', valueString: 'data from update' }],
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -355,27 +381,29 @@ describe('Card.tsx coverage', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'ClickableComponent',
-                  // action 配置，包含 path 绑定
-                  // v0.9 格式: action.event.context
-                  action: {
-                    event: {
-                      context: {
-                        resultValue: { path: '/result/value' },
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    // action 配置，包含 path 绑定
+                    // v0.9 格式: action.event.context
+                    action: {
+                      event: {
+                        context: {
+                          resultValue: { path: '/result/value' },
+                        },
                       },
                     },
                   },
-                },
-              ],
+                ],
+              },
             },
-          }}
+          ]}
           components={{ ClickableComponent }}
           onAction={onAction}
         >
@@ -422,33 +450,37 @@ describe('Card.tsx coverage', () => {
 
       render(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: {
-                    ClickableComponent: {
-                      // v0.8 格式: action.context 是数组
-                      action: {
-                        context: [
-                          {
-                            key: 'inputValue',
-                            value: { path: '/input/value' },
-                          },
-                        ],
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      ClickableComponent: {
+                        // v0.8 格式: action.context 是数组
+                        action: {
+                          context: [
+                            {
+                              key: 'inputValue',
+                              value: { path: '/input/value' },
+                            },
+                          ],
+                        },
                       },
                     },
                   },
-                },
-              ],
+                ],
+              },
             },
-            beginRendering: {
-              surfaceId: 'card1',
-              root: 'root',
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
             },
-          }}
+          ]}
           components={{ ClickableComponent }}
           onAction={onAction}
         >
@@ -496,19 +528,21 @@ describe('Card.tsx coverage', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'InputComponent',
-                  value: { path: '/form/input' },
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'InputComponent',
+                    value: { path: '/form/input' },
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ InputComponent }}
           onAction={onAction}
         >
@@ -541,18 +575,20 @@ describe('Card.tsx coverage', () => {
       // 此时 surfaceCatalogMap 应该为空，catalogId 应该为 undefined
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestComponent',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -571,22 +607,25 @@ describe('Card.tsx coverage', () => {
 
       render(
         <Box
-          // @ts-ignore - 测试没有 version 字段的命令
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: { TestComponent: {} },
-                },
-              ],
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: { TestComponent: {} },
+                  },
+                ],
+              },
             },
-            beginRendering: {
-              surfaceId: 'card1',
-              root: 'root',
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -605,13 +644,15 @@ describe('Card.tsx coverage', () => {
       // 使用 updateComponents 但不提供有效的组件
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [], // 空组件列表
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [], // 空组件列表
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -633,21 +674,25 @@ describe('Card.tsx coverage', () => {
       // 先渲染一次建立 hasRenderedRef
       const { rerender } = render(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: { TestComponent: { text: 'initial' } },
-                },
-              ],
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: { TestComponent: { text: 'initial' } },
+                  },
+                ],
+              },
             },
-            beginRendering: {
-              surfaceId: 'card1',
-              root: 'root',
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -661,12 +706,14 @@ describe('Card.tsx coverage', () => {
       // 更新但提供空的组件列表，此时 rootNodeFromCache 会返回 undefined
       rerender(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [], // 空组件，不会更新 root
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [], // 空组件，不会更新 root
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />

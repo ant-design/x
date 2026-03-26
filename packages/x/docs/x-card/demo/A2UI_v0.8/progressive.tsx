@@ -423,7 +423,8 @@ const DeleteProductSurface: XAgentCommand_v0_8 = {
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  const [commands, setCommands] = useState<XAgentCommand_v0_8>();
+  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_8[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
   const loadingTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -436,13 +437,11 @@ const App = () => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
-      setCommands(command);
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
-      setCommands(command);
-    } else {
-      setCommands(command);
     }
+    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    setCommandQueue((prev) => [...prev, command]);
   };
 
   const welcomeText =
@@ -470,27 +469,15 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // v0.8 命令序列:
-      // 1. 创建并渲染加载指示器
+      // v0.8 命令序列：surfaceUpdate → beginRendering
+      // 命令队列保证顺序处理，无需 setTimeout 魔法数字
       onAgentCommand(CreateLoadingIndicatorSurface);
-      setTimeout(() => {
-        onAgentCommand(BeginLoadingIndicator);
-      }, 50);
-
-      // 2. 创建产品 surface（初始为空）
-      setTimeout(() => {
-        onAgentCommand(CreateProductSurface([]));
-      }, 100);
-
-      // 3. 开始渲染产品 surface
-      setTimeout(() => {
-        onAgentCommand(BeginProductSurface);
-      }, 150);
-
-      // 4. 开始渐进式加载
-      setTimeout(() => {
-        startProgressiveLoading();
-      }, 300);
+      onAgentCommand(BeginLoadingIndicator);
+      // 创建产品 surface（初始为空）并立即开始渲染
+      onAgentCommand(CreateProductSurface([]));
+      onAgentCommand(BeginProductSurface);
+      // 开始渐进式加载
+      startProgressiveLoading();
     }
   }, [streamStatusHeader, sessionKey]);
 
@@ -536,16 +523,15 @@ const App = () => {
     resetHeader();
     resetFooter();
     batchCountRef.current = 0;
-    setCard([]);
-    setCommands(undefined);
 
-    // v0.8: 删除所有 surface
+    // 通过 deleteSurface 命令驱动 Surface 清理，不再直接操作 setCard/setCommands
     onAgentCommand(DeleteLoadingIndicator);
     onAgentCommand(DeleteProductSurface);
 
-    setTimeout(() => {
-      setSessionKey((prev) => prev + 1);
-    }, 100);
+    // 重置命令队列，避免 key 变化后旧命令重放
+    setCommandQueue([]);
+    setCard([]);
+    setSessionKey((prev) => prev + 1);
   }, [resetHeader, resetFooter]);
 
   const items = [
@@ -572,7 +558,7 @@ const App = () => {
 
       <XCard.Box
         key={sessionKey}
-        commands={commands}
+        commands={commandQueue}
         components={{
           ProductCard,
           ProductContainer,

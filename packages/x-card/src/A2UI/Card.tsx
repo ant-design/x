@@ -117,7 +117,6 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
     resolvedProps.onAction = (name: string, context: Record<string, any>) => {
       // 从 resolvedProps 中获取 action 配置（已解析路径绑定）
       const actionConfig = resolvedProps.action;
-      console.log(`NodeRenderer onAction:`, { name, context, actionConfig });
       onAction?.(name, context, actionConfig);
     };
 
@@ -143,12 +142,11 @@ const NodeRenderer: React.FC<NodeRendererProps> = ({
 
 const Card: React.FC<CardProps> = ({ id }) => {
   const {
-    commands,
+    commandQueue,
     components = {},
     onAction,
     catalogMap,
     surfaceCatalogMap,
-    commandVersion = 'v0.8',
   } = React.useContext(BoxContext);
 
   // 每个 Card 实例持有独立的 transformer，维护各自的组件缓存
@@ -167,6 +165,9 @@ const Card: React.FC<CardProps> = ({ id }) => {
   // 数据模型，存储 updateDataModel 写入的值
   const [dataModel, setDataModel] = useState<Record<string, any>>({});
 
+  // 追踪当前 surface 的命令版本（per-surface，避免全局共享污染）
+  const [commandVersion, setCommandVersion] = useState<'v0.8' | 'v0.9'>('v0.8');
+
   // 用于追踪是否收到 beginRendering 命令（v0.8），使用 ref 避免触发 useEffect 重新执行
   const pendingRenderRef = useRef<{ surfaceId: string; root: string } | null>(null);
   // 存储转换后的组件树，等待 beginRendering 触发渲染
@@ -174,84 +175,146 @@ const Card: React.FC<CardProps> = ({ id }) => {
   // 追踪是否已经渲染过（使用 ref 避免依赖循环）
   const hasRenderedRef = useRef(false);
 
+  /**
+   * 监听命令队列变化，消费所有与本 Card（surfaceId === id）相关的命令。
+   * 使用 for...of 遍历整个队列，确保同一渲染周期内的多条命令都被处理。
+   */
   useEffect(() => {
-    if (!commands) return;
+    if (commandQueue.length === 0) return;
 
-    // ===== v0.9 命令处理 =====
-    if ('version' in commands && commands.version === 'v0.9') {
-      if ('updateComponents' in commands && commands.updateComponents.surfaceId === id) {
-        const nodeTree = transformerRef.current!.transform(
-          commands.updateComponents.components,
-          'v0.9',
-        );
-        // 只有当 componentMap 中存在 root 节点时才更新渲染，避免覆盖已有内容
+    // 过滤出属于本 surface 的命令
+    const myCommands = commandQueue.filter((cmd) => {
+      if ('createSurface' in cmd) return cmd.createSurface.surfaceId === id;
+      if ('updateComponents' in cmd) return cmd.updateComponents.surfaceId === id;
+      if ('updateDataModel' in cmd) return cmd.updateDataModel.surfaceId === id;
+      if ('deleteSurface' in cmd) return cmd.deleteSurface.surfaceId === id;
+      if ('surfaceUpdate' in cmd) return cmd.surfaceUpdate.surfaceId === id;
+      if ('dataModelUpdate' in cmd) return cmd.dataModelUpdate.surfaceId === id;
+      if ('beginRendering' in cmd) return cmd.beginRendering.surfaceId === id;
+      return false;
+    });
+
+    if (myCommands.length === 0) return;
+
+    // 批量处理本 surface 的所有命令，按顺序执行
+    let nextDataModel = dataModel;
+    let nextRootNode = rootNode;
+    let nextCommandVersion = commandVersion;
+    let hasDataModelChange = false;
+    let hasRootNodeChange = false;
+
+    for (const cmd of myCommands) {
+      // ===== v0.9 命令处理 =====
+      if ('version' in cmd && cmd.version === 'v0.9') {
+        nextCommandVersion = 'v0.9';
+
+        if ('createSurface' in cmd) {
+          // createSurface 仅用于初始化，catalog 加载由 Box 处理
+          // 如果是重新创建（之前已删除），重置状态
+          if (!hasRenderedRef.current) {
+            nextRootNode = null;
+            nextDataModel = {};
+            hasRootNodeChange = true;
+            hasDataModelChange = true;
+          }
+        }
+
+        if ('updateComponents' in cmd) {
+          const nodeTree = transformerRef.current!.transform(
+            cmd.updateComponents.components,
+            'v0.9',
+          );
+          if (nodeTree) {
+            nextRootNode = nodeTree;
+            hasRenderedRef.current = true;
+            hasRootNodeChange = true;
+          }
+        }
+
+        if ('updateDataModel' in cmd) {
+          const { path, value } = cmd.updateDataModel;
+          nextDataModel = applyDataModelUpdateV09(nextDataModel, path, value);
+          hasDataModelChange = true;
+        }
+
+        if ('deleteSurface' in cmd) {
+          nextRootNode = null;
+          nextDataModel = {};
+          hasRenderedRef.current = false;
+          hasRootNodeChange = true;
+          hasDataModelChange = true;
+          transformerRef.current!.reset();
+          pendingRenderRef.current = null;
+          pendingNodeTreeRef.current = null;
+        }
+
+        continue;
+      }
+
+      // ===== v0.8 命令处理 =====
+      nextCommandVersion = 'v0.8';
+
+      // surfaceUpdate: 定义组件结构
+      if ('surfaceUpdate' in cmd) {
+        const nodeTree = transformerRef.current!.transform(cmd.surfaceUpdate.components, 'v0.8');
+        pendingNodeTreeRef.current = nodeTree;
+
+        // 如果已经渲染过，直接更新
+        if (hasRenderedRef.current) {
+          const rootNodeFromCache = transformerRef.current!.getById('root');
+          if (rootNodeFromCache) {
+            nextRootNode = rootNodeFromCache;
+            hasRootNodeChange = true;
+          }
+        }
+      }
+
+      // dataModelUpdate: 更新数据模型（v0.8 格式）
+      if ('dataModelUpdate' in cmd) {
+        const { contents } = cmd.dataModelUpdate;
+        nextDataModel = applyDataModelUpdateV08(nextDataModel, contents);
+        hasDataModelChange = true;
+      }
+
+      // beginRendering: 开始渲染
+      if ('beginRendering' in cmd) {
+        const { root } = cmd.beginRendering;
+        const nodeTree = transformerRef.current!.getById(root);
         if (nodeTree) {
-          setRootNode(nodeTree);
+          nextRootNode = nodeTree;
+          pendingRenderRef.current = null;
           hasRenderedRef.current = true;
+          hasRootNodeChange = true;
+        } else {
+          pendingRenderRef.current = { surfaceId: id, root };
         }
       }
 
-      if ('updateDataModel' in commands && commands.updateDataModel.surfaceId === id) {
-        const { path, value } = commands.updateDataModel;
-        setDataModel((prev) => applyDataModelUpdateV09(prev, path, value));
-      }
-
-      if ('deleteSurface' in commands && commands.deleteSurface.surfaceId === id) {
-        setRootNode(null);
-        setDataModel({});
+      // deleteSurface: 删除 surface
+      if ('deleteSurface' in cmd) {
+        nextRootNode = null;
+        nextDataModel = {};
         hasRenderedRef.current = false;
+        hasRootNodeChange = true;
+        hasDataModelChange = true;
         transformerRef.current!.reset();
-      }
-      return;
-    }
-
-    // ===== v0.8 命令处理 =====
-    // surfaceUpdate: 定义组件结构
-    if ('surfaceUpdate' in commands && commands.surfaceUpdate.surfaceId === id) {
-      const nodeTree = transformerRef.current!.transform(commands.surfaceUpdate.components, 'v0.8');
-      // 存储转换后的组件树
-      pendingNodeTreeRef.current = nodeTree;
-
-      // 如果已经渲染过，直接更新
-      if (hasRenderedRef.current) {
-        const rootNodeFromCache = transformerRef.current!.getById('root');
-        if (rootNodeFromCache) {
-          setRootNode(rootNodeFromCache);
-        }
-      }
-    }
-
-    // dataModelUpdate: 更新数据模型（v0.8 格式）
-    if ('dataModelUpdate' in commands && commands.dataModelUpdate.surfaceId === id) {
-      const { contents } = commands.dataModelUpdate;
-      setDataModel((prev) => applyDataModelUpdateV08(prev, contents));
-    }
-
-    // beginRendering: 开始渲染
-    if ('beginRendering' in commands && commands.beginRendering.surfaceId === id) {
-      const { root } = commands.beginRendering;
-      // 查找 root 组件并开始渲染
-      const nodeTree = transformerRef.current!.getById(root);
-      if (nodeTree) {
-        setRootNode(nodeTree);
         pendingRenderRef.current = null;
-        hasRenderedRef.current = true;
-      } else {
-        // 如果 root 还未定义，记录等待状态（使用 ref 避免触发 useEffect 重新执行）
-        pendingRenderRef.current = { surfaceId: id, root };
+        pendingNodeTreeRef.current = null;
       }
     }
 
-    // deleteSurface: 删除 surface
-    if ('deleteSurface' in commands && commands.deleteSurface.surfaceId === id) {
-      setRootNode(null);
-      setDataModel({});
-      pendingRenderRef.current = null;
-      pendingNodeTreeRef.current = null;
-      hasRenderedRef.current = false;
-      transformerRef.current!.reset();
+    // 批量提交状态变更，减少重渲染次数
+    if (nextCommandVersion !== commandVersion) {
+      setCommandVersion(nextCommandVersion);
     }
-  }, [commands, id]);
+    if (hasRootNodeChange) {
+      setRootNode(nextRootNode);
+    }
+    if (hasDataModelChange) {
+      setDataModel(nextDataModel);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [commandQueue, id]);
 
   if (!rootNode) {
     return null;
@@ -262,21 +325,11 @@ const Card: React.FC<CardProps> = ({ id }) => {
    * 根据版本使用不同的 extractDataUpdates 和 resolveActionContext
    */
   const handleAction = (name: string, context: Record<string, any>, actionConfig?: any) => {
-    console.log(`Card ${id} handleAction:`, {
-      name,
-      context,
-      actionConfig,
-      commandVersion,
-      currentDataModel: dataModel,
-    });
-
     // 根据版本使用不同的 extractDataUpdates
     const dataUpdates =
       commandVersion === 'v0.9'
         ? extractDataUpdatesV09(actionConfig, context)
         : extractDataUpdatesV08(actionConfig, context);
-
-    console.log(`Card ${id} dataUpdates:`, dataUpdates);
 
     // 先更新 dataModel
     let newDataModel = dataModel;
@@ -285,21 +338,14 @@ const Card: React.FC<CardProps> = ({ id }) => {
         return setValueByPath(prev, path, value);
       }, dataModel);
 
-      console.log(`Card ${id} newDataModel:`, newDataModel);
       setDataModel(newDataModel);
     }
-
-    // 合并组件传递的 context 和解析的 context
-    // 组件传递的 context 优先级更高（因为已经是实际值）
-    const mergedContext = {
-      ...context,
-    };
 
     // 向上层上报事件
     onAction?.({
       name,
       surfaceId: id,
-      context: mergedContext,
+      context: { ...context },
     });
   };
 

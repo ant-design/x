@@ -81,29 +81,31 @@ describe('Box Component', () => {
     });
 
     it('should handle surfaceUpdate command', async () => {
-      const commands: XAgentCommand_v0_8 = {
-        surfaceUpdate: {
-          surfaceId: 'card1',
-          components: [
-            {
-              id: 'root',
-              component: {
-                TestContainer: {
-                  children: ['text1'],
+      const commands: XAgentCommand_v0_8[] = [
+        {
+          surfaceUpdate: {
+            surfaceId: 'card1',
+            components: [
+              {
+                id: 'root',
+                component: {
+                  TestContainer: {
+                    children: ['text1'],
+                  },
                 },
               },
-            },
-            {
-              id: 'text1',
-              component: {
-                TestText: {
-                  text: 'Hello World',
+              {
+                id: 'text1',
+                component: {
+                  TestText: {
+                    text: 'Hello World',
+                  },
                 },
               },
-            },
-          ],
+            ],
+          },
         },
-      };
+      ];
 
       const components = {
         TestContainer,
@@ -121,12 +123,14 @@ describe('Box Component', () => {
     });
 
     it('should handle beginRendering command', async () => {
-      const commands: XAgentCommand_v0_8 = {
-        beginRendering: {
-          surfaceId: 'card1',
-          root: 'root',
+      const commands: XAgentCommand_v0_8[] = [
+        {
+          beginRendering: {
+            surfaceId: 'card1',
+            root: 'root',
+          },
         },
-      };
+      ];
 
       render(
         <Box commands={commands}>
@@ -145,21 +149,23 @@ describe('Box Component', () => {
       // 先通过 surfaceUpdate 设置组件
       const { rerender } = render(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: {
-                    TestComponent: {
-                      value: { path: '/data/field' },
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      TestComponent: {
+                        value: { path: '/data/field' },
+                      },
                     },
                   },
-                },
-              ],
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -169,9 +175,11 @@ describe('Box Component', () => {
       // 更新 dataModel
       rerender(
         <Box
-          commands={{
-            beginRendering: { surfaceId: 'card1', root: 'root' },
-          }}
+          commands={[
+            {
+              beginRendering: { surfaceId: 'card1', root: 'root' },
+            },
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -182,23 +190,27 @@ describe('Box Component', () => {
     it('should handle deleteSurface command', async () => {
       const { rerender } = render(
         <Box
-          commands={{
-            surfaceUpdate: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: {
-                    TestContainer: {},
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      TestContainer: {},
+                    },
                   },
-                },
-              ],
+                ],
+              },
             },
-            beginRendering: {
-              surfaceId: 'card1',
-              root: 'root',
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
             },
-          }}
+          ]}
           components={{ TestContainer }}
         >
           <Card id="card1" />
@@ -210,11 +222,13 @@ describe('Box Component', () => {
       // 删除 surface
       rerender(
         <Box
-          commands={{
-            deleteSurface: {
-              surfaceId: 'card1',
+          commands={[
+            {
+              deleteSurface: {
+                surfaceId: 'card1',
+              },
             },
-          }}
+          ]}
           components={{ TestContainer }}
         >
           <Card id="card1" />
@@ -234,13 +248,15 @@ describe('Box Component', () => {
         return <div data-testid="version">{context.commandVersion}</div>;
       };
 
-      const commands: A2UICommand_v0_9 = {
-        version: 'v0.9',
-        updateComponents: {
-          surfaceId: 'card1',
-          components: [],
+      const commands: A2UICommand_v0_9[] = [
+        {
+          version: 'v0.9',
+          updateComponents: {
+            surfaceId: 'card1',
+            components: [],
+          },
         },
-      };
+      ];
 
       render(
         <Box commands={commands}>
@@ -251,24 +267,26 @@ describe('Box Component', () => {
     });
 
     it('should handle updateComponents command', async () => {
-      const commands: A2UICommand_v0_9 = {
-        version: 'v0.9',
-        updateComponents: {
-          surfaceId: 'card1',
-          components: [
-            {
-              id: 'root',
-              component: 'TestContainer',
-              children: ['text1'],
-            },
-            {
-              id: 'text1',
-              component: 'TestText',
-              text: 'Hello v0.9',
-            },
-          ],
+      const commands: A2UICommand_v0_9[] = [
+        {
+          version: 'v0.9',
+          updateComponents: {
+            surfaceId: 'card1',
+            components: [
+              {
+                id: 'root',
+                component: 'TestContainer',
+                children: ['text1'],
+              },
+              {
+                id: 'text1',
+                component: 'TestText',
+                text: 'Hello v0.9',
+              },
+            ],
+          },
         },
-      };
+      ];
 
       render(
         <Box commands={commands} components={{ TestContainer, TestText }}>
@@ -288,19 +306,21 @@ describe('Box Component', () => {
       // 先渲染组件
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestComponent',
-                  value: { path: '/data/field' },
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestComponent',
+                    value: { path: '/data/field' },
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -313,14 +333,16 @@ describe('Box Component', () => {
       // 更新 dataModel
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateDataModel: {
-              surfaceId: 'card1',
-              path: '/data/field',
-              value: 'updated value',
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/data/field',
+                value: 'updated value',
+              },
             },
-          }}
+          ]}
           components={{ TestComponent }}
         >
           <Card id="card1" />
@@ -333,18 +355,20 @@ describe('Box Component', () => {
     it('should handle deleteSurface command in v0.9', async () => {
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestContainer',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestContainer',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestContainer }}
         >
           <Card id="card1" />
@@ -355,12 +379,14 @@ describe('Box Component', () => {
 
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            deleteSurface: {
-              surfaceId: 'card1',
+          commands={[
+            {
+              version: 'v0.9',
+              deleteSurface: {
+                surfaceId: 'card1',
+              },
             },
-          }}
+          ]}
           components={{ TestContainer }}
         >
           <Card id="card1" />
@@ -384,13 +410,15 @@ describe('Box Component', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'https://example.com/catalog.json',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'https://example.com/catalog.json',
+              },
             },
-          }}
+          ]}
           components={{ TestContainer }}
         >
           <Card id="card1" />
@@ -415,13 +443,15 @@ describe('Box Component', () => {
       // 先创建一个 Box，触发 createSurface
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: localCatalogId,
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: localCatalogId,
+              },
             },
-          }}
+          ]}
           components={{ TestContainer }}
         >
           <Card id="card1" />
@@ -454,18 +484,20 @@ describe('Box Component', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'ClickableComponent',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ ClickableComponent }}
           onAction={onAction}
         >
@@ -498,18 +530,20 @@ describe('Box Component', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'test-surface',
-              components: [
-                {
-                  id: 'root',
-                  component: 'ActionComponent',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'test-surface',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ActionComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ ActionComponent }}
           onAction={onAction}
         >
@@ -554,23 +588,28 @@ describe('Box Component', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'validation-catalog',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'validation-catalog',
+              },
             },
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'ValidComponent',
-                  // 缺少 requiredField
-                },
-              ],
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ValidComponent',
+                    // 缺少 requiredField
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ ValidComponent }}
         >
           <Card id="card1" />
@@ -598,22 +637,27 @@ describe('Box Component', () => {
 
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'missing-component-catalog',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'missing-component-catalog',
+              },
             },
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'MissingComponent',
-                },
-              ],
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'MissingComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
@@ -641,13 +685,15 @@ describe('Box Component', () => {
 
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            createSurface: {
-              surfaceId: 'card1',
-              catalogId: 'error-test-catalog',
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'error-test-catalog',
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
@@ -666,18 +712,20 @@ describe('Box Component', () => {
       // 然后发送 updateComponents 命令
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'UnknownComponent',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'UnknownComponent',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{}}
         >
           <Card id="card1" />
@@ -696,19 +744,21 @@ describe('Box Component', () => {
     it('should render multiple cards independently', async () => {
       render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestText',
-                  text: 'Card 1',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestText',
+                    text: 'Card 1',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestText }}
         >
           <Card id="card1" />
@@ -724,19 +774,21 @@ describe('Box Component', () => {
     it('should handle different cards with different commands', async () => {
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestText',
-                  text: 'Card 1',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestText',
+                    text: 'Card 1',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestText }}
         >
           <Card id="card1" />
@@ -749,19 +801,21 @@ describe('Box Component', () => {
       // 更新 card2
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card2',
-              components: [
-                {
-                  id: 'root',
-                  component: 'TestText',
-                  text: 'Card 2',
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card2',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'TestText',
+                    text: 'Card 2',
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ TestText }}
         >
           <Card id="card1" />
@@ -782,19 +836,21 @@ describe('Box Component', () => {
 
       const { rerender } = render(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateComponents: {
-              surfaceId: 'card1',
-              components: [
-                {
-                  id: 'root',
-                  component: 'DataComponent',
-                  value: { path: '/user/name' },
-                },
-              ],
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'DataComponent',
+                    value: { path: '/user/name' },
+                  },
+                ],
+              },
             },
-          }}
+          ]}
           components={{ DataComponent }}
         >
           <Card id="card1" />
@@ -807,14 +863,16 @@ describe('Box Component', () => {
       // 更新 dataModel
       rerender(
         <Box
-          commands={{
-            version: 'v0.9',
-            updateDataModel: {
-              surfaceId: 'card1',
-              path: '/user/name',
-              value: 'Alice',
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/user/name',
+                value: 'Alice',
+              },
             },
-          }}
+          ]}
           components={{ DataComponent }}
         >
           <Card id="card1" />
