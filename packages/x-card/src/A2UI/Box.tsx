@@ -7,12 +7,12 @@ import type { A2UICommand_v0_8 } from './types/command_v0.8';
 
 const Box: React.FC<BoxProps> = ({ children, commands = [], components, onAction }) => {
   const [catalogMap, setCatalogMap] = useState<Map<string, Catalog>>(new Map());
-  // 存储 surfaceId -> catalogId 的映射
+  // Store surfaceId -> catalogId mapping
   const [surfaceCatalogMap, setSurfaceCatalogMap] = useState<Map<string, string>>(new Map());
 
   /**
-   * 监听命令队列变化，处理 createSurface（加载 catalog）和 deleteSurface（清理映射）。
-   * commands 数组由外部 demo 维护，每次追加新命令后引用变化，触发此 effect。
+   * Listen to command queue changes, handle createSurface (load catalog) and deleteSurface (clear mapping).
+   * The commands array is maintained by external demo, reference changes after each new command is appended, triggering this effect.
    */
   useEffect(() => {
     if (!commands || commands.length === 0) return;
@@ -28,7 +28,7 @@ const Box: React.FC<BoxProps> = ({ children, commands = [], components, onAction
             return new Map(prev).set(surfaceId, catalogId);
           });
 
-          // 加载 catalog（已缓存则直接命中，不重复请求）
+          // Load catalog (cached ones will be hit directly, no duplicate requests)
           loadCatalog(catalogId)
             .then((catalog) => {
               setCatalogMap((prev) => {
@@ -42,7 +42,7 @@ const Box: React.FC<BoxProps> = ({ children, commands = [], components, onAction
         }
       }
 
-      // deleteSurface 时清理 surfaceCatalogMap 中的映射
+      // Clear mapping in surfaceCatalogMap when deleteSurface
       if ('deleteSurface' in cmd) {
         const surfaceId = (cmd as { deleteSurface: { surfaceId: string } }).deleteSurface.surfaceId;
         setSurfaceCatalogMap((prev) => {

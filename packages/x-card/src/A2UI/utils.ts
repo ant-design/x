@@ -1,15 +1,15 @@
 /**
- * Card 共享工具函数
- * v0.8 和 v0.9 版本共用的工具函数
+ * Card shared utility functions
+ * Utility functions shared by v0.8 and v0.9 versions
  */
 
-/** 从嵌套对象中按路径取值，路径格式如 /booking/date */
+/** Get value from nested object by path, path format like /booking/date */
 export function getValueByPath(obj: Record<string, any>, path: string): any {
   const parts = path.replace(/^\//, '').split('/');
   return parts.reduce((cur, key) => (cur != null ? cur[key] : undefined), obj as any);
 }
 
-/** 按路径将值写入嵌套对象（immutable），路径格式如 /booking/selectedCoffee */
+/** Write value to nested object by path (immutable), path format like /booking/selectedCoffee */
 export function setValueByPath(
   obj: Record<string, any>,
   path: string,
@@ -26,21 +26,21 @@ export function setValueByPath(
   return next;
 }
 
-/** 判断字符串是否为数据绑定路径（以 / 开头） */
+/** Check if string is a data binding path (starts with /) */
 export function isPathValue(val: any): val is string {
   return typeof val === 'string' && val.startsWith('/');
 }
 
-/** 判断一个值是否为 { path: string } 形式的路径对象 */
+/** Check if a value is a path object in { path: string } format */
 export function isPathObject(val: any): val is { path: string } {
   return val !== null && typeof val === 'object' && typeof val.path === 'string';
 }
 
 /**
- * 验证组件是否符合 catalog 定义
- * @param catalog catalog 定义
- * @param componentName 组件名称
- * @param componentProps 组件属性
+ * Validate if component conforms to catalog definition
+ * @param catalog catalog definition
+ * @param componentName component name
+ * @param componentProps component properties
  * @returns { valid: boolean, errors: string[] }
  */
 export function validateComponentAgainstCatalog(
@@ -50,19 +50,19 @@ export function validateComponentAgainstCatalog(
 ): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 
-  // 如果没有 catalog，默认通过
+  // If no catalog, pass by default
   if (!catalog || !catalog.components) {
     return { valid: true, errors: [] };
   }
 
-  // 检查组件是否在 catalog 中定义
+  // Check if component is defined in catalog
   const componentDef = catalog.components[componentName];
   if (!componentDef) {
     errors.push(`Component "${componentName}" is not defined in catalog`);
     return { valid: false, errors };
   }
 
-  // 检查必填字段
+  // Check required fields
   const requiredFields = componentDef.required || [];
   for (const field of requiredFields) {
     if (!(field in componentProps)) {
@@ -70,7 +70,7 @@ export function validateComponentAgainstCatalog(
     }
   }
 
-  // 检查属性是否在 schema 中定义（警告级别，不阻止渲染）
+  // Check if properties are defined in schema (warning level, does not block rendering)
   if (componentDef.properties) {
     const definedProps = Object.keys(componentDef.properties);
     const actualProps = Object.keys(componentProps).filter(
