@@ -29,7 +29,7 @@ exports[`LaTeX Plugin should handle LaTeX with surrounding text 1`] = `
                 />
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.05764em;"
+                  style="margin-right: 0.0576em;"
                 >
                   E
                 </span>
@@ -235,7 +235,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                                 />
                                 <span
                                   class="mord mathnormal"
-                                  style="margin-right: 0.03588em;"
+                                  style="margin-right: 0.0359em;"
                                 >
                                   y
                                 </span>
@@ -245,7 +245,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                                 </span>
                                 <span
                                   class="mord mathnormal"
-                                  style="margin-right: 0.03588em;"
+                                  style="margin-right: 0.0359em;"
                                 >
                                   y
                                 </span>
@@ -308,7 +308,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                                 />
                                 <span
                                   class="mord mathnormal"
-                                  style="margin-right: 0.04398em;"
+                                  style="margin-right: 0.044em;"
                                 >
                                   z
                                 </span>
@@ -581,7 +581,7 @@ exports[`LaTeX Plugin should handle complex LaTeX expressions 1`] = `
                             >
                               <span
                                 class="mord mathnormal mtight"
-                                style="margin-right: 0.05724em;"
+                                style="margin-right: 0.0572em;"
                               >
                                 j
                               </span>
@@ -662,7 +662,7 @@ exports[`LaTeX Plugin should handle complex LaTeX expressions 1`] = `
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     y
                   </span>
@@ -691,7 +691,7 @@ exports[`LaTeX Plugin should handle complex LaTeX expressions 1`] = `
                             >
                               <span
                                 class="mord mathnormal mtight"
-                                style="margin-right: 0.05724em;"
+                                style="margin-right: 0.0572em;"
                               >
                                 j
                               </span>
@@ -842,7 +842,7 @@ exports[`LaTeX Plugin should handle mixed LaTeX syntaxes 1`] = `
                 >
                   <span
                     class="mop op-symbol large-op"
-                    style="margin-right: 0.44445em; position: relative; top: -0.0011em;"
+                    style="margin-right: 0.4445em; position: relative; top: -0.0011em;"
                   >
                     ∫
                   </span>
@@ -919,7 +919,7 @@ exports[`LaTeX Plugin should handle mixed LaTeX syntaxes 1`] = `
                 />
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.10764em;"
+                  style="margin-right: 0.1076em;"
                 >
                   f
                 </span>
@@ -1198,7 +1198,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1230,7 +1230,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                               >
                                 <span
                                   class="mord mathnormal mtight"
-                                  style="margin-right: 0.13889em;"
+                                  style="margin-right: 0.1389em;"
                                 >
                                   P
                                 </span>
@@ -1293,7 +1293,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1362,7 +1362,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 />
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.05278em;"
+                  style="margin-right: 0.0528em;"
                 >
                   β
                 </span>
@@ -1392,7 +1392,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1421,7 +1421,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                             >
                               <span
                                 class="mord mathnormal mtight"
-                                style="margin-right: 0.13889em;"
+                                style="margin-right: 0.1389em;"
                               >
                                 P
                               </span>
@@ -1473,7 +1473,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1571,7 +1571,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1603,7 +1603,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                               >
                                 <span
                                   class="mord mathnormal mtight"
-                                  style="margin-right: 0.13889em;"
+                                  style="margin-right: 0.1389em;"
                                 >
                                   P
                                 </span>
@@ -1666,7 +1666,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1735,7 +1735,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 />
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.05278em;"
+                  style="margin-right: 0.0528em;"
                 >
                   β
                 </span>
@@ -1765,7 +1765,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -1794,7 +1794,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                             >
                               <span
                                 class="mord mathnormal mtight"
-                                style="margin-right: 0.13889em;"
+                                style="margin-right: 0.1389em;"
                               >
                                 P
                               </span>
@@ -1846,7 +1846,7 @@ exports[`LaTeX Plugin should parse consecutive block formulas with indentation (
                 >
                   <span
                     class="mord mathnormal"
-                    style="margin-right: 0.03588em;"
+                    style="margin-right: 0.0359em;"
                   >
                     v
                   </span>
@@ -2181,7 +2181,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = 
                 />
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.10764em;"
+                  style="margin-right: 0.1076em;"
                 >
                   f
                 </span>
@@ -2264,7 +2264,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = 
                 </span>
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.03588em;"
+                  style="margin-right: 0.0359em;"
                 >
                   y
                 </span>
@@ -2301,7 +2301,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = 
                 </span>
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.10764em;"
+                  style="margin-right: 0.1076em;"
                 >
                   f
                 </span>
@@ -2384,7 +2384,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = 
                 </span>
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.10764em;"
+                  style="margin-right: 0.1076em;"
                 >
                   f
                 </span>
@@ -2395,7 +2395,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $$\\n..\\n$$ syntax 1`] = 
                 </span>
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.03588em;"
+                  style="margin-right: 0.0359em;"
                 >
                   y
                 </span>
@@ -2442,7 +2442,7 @@ exports[`LaTeX Plugin should render inline LaTeX with $..$ syntax 1`] = `
                 />
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.05764em;"
+                  style="margin-right: 0.0576em;"
                 >
                   E
                 </span>
@@ -2588,7 +2588,7 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                               >
                                 <span
                                   class="mord mathnormal mtight"
-                                  style="margin-right: 0.07153em;"
+                                  style="margin-right: 0.0715em;"
                                 >
                                   C
                                 </span>
@@ -2599,13 +2599,13 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                                 </span>
                                 <span
                                   class="mord mathnormal mtight"
-                                  style="margin-right: 0.07847em;"
+                                  style="margin-right: 0.0785em;"
                                 >
                                   I
                                 </span>
                                 <span
                                   class="mord mathnormal mtight"
-                                  style="margin-right: 0.13889em;"
+                                  style="margin-right: 0.1389em;"
                                 >
                                   P
                                 </span>
@@ -2624,7 +2624,7 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                 </span>
                 <span
                   class="mord mathnormal"
-                  style="margin-right: 0.02778em;"
+                  style="margin-right: 0.0278em;"
                 >
                   θ
                 </span>
@@ -2756,7 +2756,7 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                     >
                       <span
                         class="mord mathnormal"
-                        style="margin-right: 0.02778em;"
+                        style="margin-right: 0.0278em;"
                       >
                         r
                       </span>
@@ -2817,7 +2817,7 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                     </span>
                     <span
                       class="mord mathnormal"
-                      style="margin-right: 0.02778em;"
+                      style="margin-right: 0.0278em;"
                     >
                       θ
                     </span>
@@ -2955,7 +2955,7 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                     >
                       <span
                         class="mord mathnormal"
-                        style="margin-right: 0.02778em;"
+                        style="margin-right: 0.0278em;"
                       >
                         r
                       </span>
@@ -3016,7 +3016,7 @@ exports[`LaTeX Plugin should render inline LaTeX with [\\n..\\n] syntax 1`] = `
                     </span>
                     <span
                       class="mord mathnormal"
-                      style="margin-right: 0.02778em;"
+                      style="margin-right: 0.0278em;"
                     >
                       θ
                     </span>
