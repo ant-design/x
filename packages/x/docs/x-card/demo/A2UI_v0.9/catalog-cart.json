@@ -290,6 +290,69 @@
       },
       "required": ["component"],
       "additionalProperties": true
+    },
+    "ColWrapper": {
+      "type": "object",
+      "description": "A column wrapper for Row layout.",
+      "properties": {
+        "component": {
+          "const": "ColWrapper"
+        },
+        "span": {
+          "type": "number",
+          "description": "Column span (1-24)"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "MultiCardContainer": {
+      "type": "object",
+      "description": "A container with Row layout for multiple cards.",
+      "properties": {
+        "component": {
+          "const": "MultiCardContainer"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "CheckoutSuccessCard": {
+      "type": "object",
+      "description": "A success card displayed after checkout.",
+      "properties": {
+        "component": {
+          "const": "CheckoutSuccessCard"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total amount paid"
+        },
+        "itemCount": {
+          "type": "number",
+          "description": "Number of items purchased"
+        },
+        "orderNumber": {
+          "type": "string",
+          "description": "Order number"
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
     }
   },
   "functions": {},

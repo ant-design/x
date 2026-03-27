@@ -7,6 +7,7 @@ import {
   Badge,
   Button,
   Card,
+  Col,
   Divider,
   Empty,
   InputNumber,
@@ -20,7 +21,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const { Title, Text } = Typography;
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -31,7 +32,7 @@ type ContentType = {
 const contentHeader =
   'Welcome to Smart Shopping Cart! 🛒\n\nBrowse products, add them to your cart, and see real-time price calculations. Experience the power of multi-surface collaboration!';
 
-// ─── 商品数据 ─────────────────────────────────────────────────────────────────
+// ─── Product Data ─────────────────────────────────────────────────────────────────
 interface Product {
   id: number;
   name: string;
@@ -98,13 +99,13 @@ const allProducts: Product[] = [
   },
 ];
 
-// ─── 购物车项类型 ─────────────────────────────────────────────────────────────
+// ─── Cart Item Type ─────────────────────────────────────────────────────────────
 interface CartItem {
   product: Product;
   quantity: number;
 }
 
-// ─── 角色配置 ────────────────────────────────────────────────────────────────
+// ─── Role Configuration ────────────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -125,7 +126,30 @@ const role = {
   },
 };
 
-// ─── ProductListCard 组件 ─────────────────────────────────────────────────────
+// ─── JSON String Parser Utility ─────────────────────────────────────────────────────
+function parseJsonString<T>(val: any, fallback: T): T {
+  if (typeof val === 'string') {
+    try {
+      return JSON.parse(val) as T;
+    } catch {
+      return fallback;
+    }
+  }
+  return val ?? fallback;
+}
+
+// ─── ColWrapper Component (for column layout within Row) ────────────────────────────────────
+interface ColWrapperProps {
+  span?: number | string;
+  children?: React.ReactNode;
+}
+
+const ColWrapper: React.FC<ColWrapperProps> = ({ span = 8, children }) => {
+  const numSpan = typeof span === 'string' ? parseInt(span, 10) : span;
+  return <Col span={numSpan}>{children}</Col>;
+};
+
+// ─── ProductListCard Component ─────────────────────────────────────────────────────
 interface ProductListCardProps {
   products?: Product[];
   cart?: CartItem[];
@@ -142,6 +166,11 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
   onAction,
   action,
 }) => {
+  // products in dataModel is stored as JSON string, needs to be parsed
+  const parsedProducts: Product[] = parseJsonString(products, allProducts);
+  // cart in dataModel is stored as JSON string, needs to be parsed
+  const parsedCart: CartItem[] = parseJsonString(cart, []);
+
   const handleAddToCart = (product: Product) => {
     if (!action?.name) return;
 
@@ -155,8 +184,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
   };
 
   const getCartQuantity = (productId: number) => {
-    if (!Array.isArray(cart)) return 0;
-    const item = cart.find((c) => c.product.id === productId);
+    const item = parsedCart.find((c) => c.product.id === productId);
     return item?.quantity || 0;
   };
 
@@ -166,7 +194,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
         <Space>
           <span style={{ fontSize: 18 }}>📦</span>
           <span>Product List</span>
-          <Tag color="blue">{products.length} items</Tag>
+          <Tag color="blue">{parsedProducts.length} items</Tag>
         </Space>
       }
       style={{
@@ -179,7 +207,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
       }}
     >
       <List
-        dataSource={products}
+        dataSource={parsedProducts}
         renderItem={(product) => {
           const inCart = getCartQuantity(product.id);
           return (
@@ -271,7 +299,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
   );
 };
 
-// ─── CartCard 组件 ─────────────────────────────────────────────────────────────
+// ─── CartCard Component ─────────────────────────────────────────────────────────────
 interface CartCardProps {
   cart?: CartItem[];
   onAction?: (name: string, context: Record<string, any>) => void;
@@ -286,22 +314,21 @@ interface CartCardProps {
 }
 
 const CartCard: React.FC<CartCardProps> = ({ cart = [], onAction, updateAction, removeAction }) => {
+  // cart in dataModel is stored as JSON string, needs to be parsed
+  const parsedCart: CartItem[] = parseJsonString(cart, []);
+
   const handleQuantityChange = (productId: number, quantity: number) => {
     if (!updateAction?.name) return;
-
-    const context: Record<string, any> = { productId, quantity };
-    onAction?.(updateAction.name, context);
+    onAction?.(updateAction.name, { productId, quantity });
   };
 
   const handleRemove = (productId: number) => {
     if (!removeAction?.name) return;
-
-    const context: Record<string, any> = { productId };
-    onAction?.(removeAction.name, context);
+    onAction?.(removeAction.name, { productId });
   };
 
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const totalItems = parsedCart.reduce((sum, item) => sum + item.quantity, 0);
+  const subtotal = parsedCart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
     <Card
@@ -322,7 +349,7 @@ const CartCard: React.FC<CartCardProps> = ({ cart = [], onAction, updateAction, 
         body: { maxHeight: 380, overflow: 'auto' },
       }}
     >
-      {cart.length === 0 ? (
+      {parsedCart.length === 0 ? (
         <Empty
           description="Cart is empty"
           style={{ padding: '40px 0' }}
@@ -331,7 +358,7 @@ const CartCard: React.FC<CartCardProps> = ({ cart = [], onAction, updateAction, 
       ) : (
         <>
           <List
-            dataSource={cart}
+            dataSource={parsedCart}
             renderItem={(item) => (
               <List.Item style={{ padding: '12px 0' }}>
                 <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: 12 }}>
@@ -401,7 +428,7 @@ const CartCard: React.FC<CartCardProps> = ({ cart = [], onAction, updateAction, 
   );
 };
 
-// ─── OrderSummaryCard 组件 ─────────────────────────────────────────────────────
+// ─── OrderSummaryCard Component ─────────────────────────────────────────────────────
 interface OrderSummaryCardProps {
   cart?: CartItem[];
   onAction?: (name: string, context: Record<string, any>) => void;
@@ -416,30 +443,33 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
   onAction,
   checkoutAction,
 }) => {
-  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  // cart in dataModel is stored as JSON string, needs to be parsed
+  const parsedCart: CartItem[] = parseJsonString(cart, []);
 
-  // 计算优惠
+  const subtotal = parsedCart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const totalItems = parsedCart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Calculate discount
   const discount = subtotal >= 10000 ? subtotal * 0.1 : subtotal >= 5000 ? subtotal * 0.05 : 0;
   const discountRate = subtotal >= 10000 ? '10%' : subtotal >= 5000 ? '5%' : '0%';
 
-  // 运费
+  // Shipping fee
   const shipping = subtotal >= 1000 ? 0 : 15;
 
-  // 最终总价
+  // Final total
   const total = subtotal - discount + shipping;
 
   const handleCheckout = () => {
     if (!checkoutAction?.name) return;
 
-    const context: Record<string, any> = {
-      cart,
+    onAction?.(checkoutAction.name, {
+      cart: parsedCart,
       subtotal,
       discount,
       shipping,
       total,
-    };
-    onAction?.(checkoutAction.name, context);
+      itemCount: totalItems,
+    });
   };
 
   return (
@@ -458,13 +488,13 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
       }}
     >
       <Space direction="vertical" style={{ width: '100%' }} size={12}>
-        {/* 商品数量 */}
+        {/* Item count */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Text type="secondary">Items:</Text>
           <Text>{totalItems} items</Text>
         </div>
 
-        {/* 小计 */}
+        {/* Subtotal */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Text type="secondary">Subtotal:</Text>
           <Text>¥{subtotal.toLocaleString()}</Text>
@@ -472,7 +502,7 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
 
         <Divider style={{ margin: '8px 0' }} />
 
-        {/* 优惠 */}
+        {/* Discount */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Space>
             <Text type="secondary">Discount:</Text>
@@ -485,7 +515,7 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
           <Text type="success">-¥{discount.toLocaleString()}</Text>
         </div>
 
-        {/* 运费 */}
+        {/* Shipping */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Text type="secondary">Shipping:</Text>
           {shipping === 0 ? <Text type="success">Free</Text> : <Text>¥{shipping}</Text>}
@@ -493,7 +523,7 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
 
         <Divider style={{ margin: '8px 0' }} />
 
-        {/* 总价 */}
+        {/* Total price */}
         <div
           style={{
             display: 'flex',
@@ -509,7 +539,7 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
           </Title>
         </div>
 
-        {/* 优惠提示 */}
+        {/* Discount tip */}
         {subtotal < 5000 && (
           <div
             style={{
@@ -553,12 +583,12 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
           </div>
         )}
 
-        {/* 结账按钮 */}
+        {/* Checkout button */}
         <Button
           type="primary"
           size="large"
           block
-          disabled={cart.length === 0}
+          disabled={parsedCart.length === 0}
           onClick={handleCheckout}
           style={{ marginTop: 8, height: 48, borderRadius: 8 }}
         >
@@ -569,7 +599,7 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
   );
 };
 
-// ─── MultiCardContainer 组件 ───────────────────────────────────────────────────
+// ─── MultiCardContainer Component (three-column horizontal layout container) ──────────────────────────────
 interface MultiCardContainerProps {
   children?: React.ReactNode;
 }
@@ -583,15 +613,16 @@ const MultiCardContainer: React.FC<MultiCardContainerProps> = ({ children }) => 
         padding: '24px',
         background: '#fff',
         boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-        minWidth: 900,
       }}
     >
-      <Row gutter={24}>{children}</Row>
+      <Row gutter={16} align="stretch">
+        {children}
+      </Row>
     </div>
   );
 };
 
-// ─── CheckoutSuccessCard 组件 ──────────────────────────────────────────────────
+// ─── CheckoutSuccessCard Component ──────────────────────────────────────────────────
 interface CheckoutSuccessCardProps {
   total?: number;
   itemCount?: number;
@@ -603,6 +634,10 @@ const CheckoutSuccessCard: React.FC<CheckoutSuccessCardProps> = ({
   itemCount = 0,
   orderNumber,
 }) => {
+  // literalString passes values as strings, needs to be converted to numbers
+  const numericTotal = typeof total === 'string' ? parseFloat(total as string) : total;
+  const numericItemCount =
+    typeof itemCount === 'string' ? parseInt(itemCount as string, 10) : itemCount;
   return (
     <Card
       style={{
@@ -653,12 +688,12 @@ const CheckoutSuccessCard: React.FC<CheckoutSuccessCardProps> = ({
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
             <Text style={{ color: 'rgba(255,255,255,0.7)' }}>Items:</Text>
-            <Text style={{ color: '#fff' }}>{itemCount} items</Text>
+            <Text style={{ color: '#fff' }}>{numericItemCount} items</Text>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <Text style={{ color: 'rgba(255,255,255,0.7)' }}>Total:</Text>
             <Text strong style={{ color: '#fff', fontSize: 18 }}>
-              ¥{total.toLocaleString()}
+              ¥{numericTotal.toLocaleString()}
             </Text>
           </div>
         </div>
@@ -676,7 +711,7 @@ const CheckoutSuccessCard: React.FC<CheckoutSuccessCardProps> = ({
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -723,20 +758,21 @@ const useStreamText = (text: string) => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// v0.8 Agent 命令定义
+// v0.8 Agent Command Definition
+// Three cards merged in one Surface, implementing three-column layout via MultiCardContainer + ColWrapper
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// 创建商品列表 Surface
-const ProductListSurfaceUpdateCommand: XAgentCommand_v0_8 = {
+const ShopSurfaceUpdateCommand: XAgentCommand_v0_8 = {
   surfaceUpdate: {
-    surfaceId: 'products',
+    surfaceId: 'shop',
     components: [
+      // Product list card
       {
         id: 'product-list-card',
         component: {
           ProductListCard: {
             products: { path: '/products' },
-            cart: { path: '/shared/cart' },
+            cart: { path: '/cart' },
             action: {
               name: 'add_to_cart',
               context: [{ key: 'product', value: { path: '/addedProduct' } }],
@@ -744,35 +780,12 @@ const ProductListSurfaceUpdateCommand: XAgentCommand_v0_8 = {
           },
         },
       },
-      {
-        id: 'root',
-        component: {
-          div: {
-            style: { literalString: 'padding: 0;' },
-          },
-        },
-      },
-    ],
-  },
-};
-
-const ProductListBeginRenderingCommand: XAgentCommand_v0_8 = {
-  beginRendering: {
-    surfaceId: 'products',
-    root: 'root',
-  },
-};
-
-// 创建购物车 Surface
-const CartSurfaceUpdateCommand: XAgentCommand_v0_8 = {
-  surfaceUpdate: {
-    surfaceId: 'cart',
-    components: [
+      // Shopping cart card
       {
         id: 'cart-card',
         component: {
           CartCard: {
-            cart: { path: '/shared/cart' },
+            cart: { path: '/cart' },
             updateAction: {
               name: 'update_quantity',
               context: [
@@ -787,35 +800,12 @@ const CartSurfaceUpdateCommand: XAgentCommand_v0_8 = {
           },
         },
       },
-      {
-        id: 'root',
-        component: {
-          div: {
-            style: { literalString: 'padding: 0;' },
-          },
-        },
-      },
-    ],
-  },
-};
-
-const CartBeginRenderingCommand: XAgentCommand_v0_8 = {
-  beginRendering: {
-    surfaceId: 'cart',
-    root: 'root',
-  },
-};
-
-// 创建订单摘要 Surface
-const OrderSummarySurfaceUpdateCommand: XAgentCommand_v0_8 = {
-  surfaceUpdate: {
-    surfaceId: 'summary',
-    components: [
+      // Order summary card
       {
         id: 'order-summary-card',
         component: {
           OrderSummaryCard: {
-            cart: { path: '/shared/cart' },
+            cart: { path: '/cart' },
             checkoutAction: {
               name: 'checkout',
               context: [{ key: 'orderData', value: { path: '/orderData' } }],
@@ -823,11 +813,42 @@ const OrderSummarySurfaceUpdateCommand: XAgentCommand_v0_8 = {
           },
         },
       },
+      // Wrap each card with ColWrapper to implement equal-width three columns
+      {
+        id: 'col-products',
+        component: {
+          ColWrapper: {
+            span: { literalString: '8' },
+            child: 'product-list-card',
+          },
+        },
+      },
+      {
+        id: 'col-cart',
+        component: {
+          ColWrapper: {
+            span: { literalString: '8' },
+            child: 'cart-card',
+          },
+        },
+      },
+      {
+        id: 'col-summary',
+        component: {
+          ColWrapper: {
+            span: { literalString: '8' },
+            child: 'order-summary-card',
+          },
+        },
+      },
+      // Root container: MultiCardContainer contains three columns
       {
         id: 'root',
         component: {
-          div: {
-            style: { literalString: 'padding: 0;' },
+          MultiCardContainer: {
+            children: {
+              explicitList: ['col-products', 'col-cart', 'col-summary'],
+            },
           },
         },
       },
@@ -835,31 +856,31 @@ const OrderSummarySurfaceUpdateCommand: XAgentCommand_v0_8 = {
   },
 };
 
-const OrderSummaryBeginRenderingCommand: XAgentCommand_v0_8 = {
+const ShopBeginRenderingCommand: XAgentCommand_v0_8 = {
   beginRendering: {
-    surfaceId: 'summary',
+    surfaceId: 'shop',
     root: 'root',
   },
 };
 
-// 初始化数据模型
+// Initialize data model
 const InitialDataModelUpdateCommand: XAgentCommand_v0_8 = {
   dataModelUpdate: {
-    surfaceId: 'products',
+    surfaceId: 'shop',
     contents: [
       {
         key: 'products',
         valueString: JSON.stringify(allProducts),
       },
       {
-        key: 'shared',
-        valueMap: [{ key: 'cart', valueString: '[]' }],
+        key: 'cart',
+        valueString: '[]',
       },
     ],
   },
 };
 
-// 结账成功后创建成功卡片
+// Create success card after checkout
 const CheckoutSuccessSurfaceUpdateCommand = (
   total: number,
   itemCount: number,
@@ -878,14 +899,6 @@ const CheckoutSuccessSurfaceUpdateCommand = (
           },
         },
       },
-      {
-        id: 'root',
-        component: {
-          div: {
-            style: { literalString: 'padding: 20px 0;' },
-          },
-        },
-      },
     ],
   },
 });
@@ -893,7 +906,7 @@ const CheckoutSuccessSurfaceUpdateCommand = (
 const CheckoutSuccessBeginRenderingCommand: XAgentCommand_v0_8 = {
   beginRendering: {
     surfaceId: 'checkout-success',
-    root: 'root',
+    root: 'success-card',
   },
 };
 
@@ -903,7 +916,7 @@ const App = () => {
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_8[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
-  // 购物车状态（用于跨 Surface 数据共享）
+  // Cart state (for cross-component data sharing)
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const onAgentCommand = (command: XAgentCommand_v0_8) => {
@@ -919,7 +932,7 @@ const App = () => {
     setCommandQueue((prev) => [...prev, command]);
   };
 
-  // 处理购物车操作
+  // Handle cart operations
   const handleAction = (payload: ActionPayload) => {
     const { name, context } = payload;
 
@@ -962,18 +975,16 @@ const App = () => {
         const { total, itemCount } = context || {};
         const orderNumber = `ORD-${Date.now().toString(36).toUpperCase()}`;
 
-        // 删除所有购物相关的 Surface
-        onAgentCommand({ deleteSurface: { surfaceId: 'products' } });
-        onAgentCommand({ deleteSurface: { surfaceId: 'cart' } });
-        onAgentCommand({ deleteSurface: { surfaceId: 'summary' } });
+        // Delete shopping Surface
+        onAgentCommand({ deleteSurface: { surfaceId: 'shop' } });
 
-        // 创建结账成功卡片
+        // Create checkout success card
         setTimeout(() => {
           onAgentCommand(CheckoutSuccessSurfaceUpdateCommand(total, itemCount, orderNumber));
           onAgentCommand(CheckoutSuccessBeginRenderingCommand);
         }, 100);
 
-        // 清空购物车
+        // Clear cart
         setCart([]);
         break;
       }
@@ -993,45 +1004,33 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // 创建三个 Surface（商品列表、购物车、订单摘要）
-      onAgentCommand(ProductListSurfaceUpdateCommand);
-      onAgentCommand(CartSurfaceUpdateCommand);
-      onAgentCommand(OrderSummarySurfaceUpdateCommand);
+      onAgentCommand(ShopSurfaceUpdateCommand);
       onAgentCommand(InitialDataModelUpdateCommand);
-      onAgentCommand(ProductListBeginRenderingCommand);
-      onAgentCommand(CartBeginRenderingCommand);
-      onAgentCommand(OrderSummaryBeginRenderingCommand);
+      onAgentCommand(ShopBeginRenderingCommand);
     }
   }, [streamStatusHeader, sessionKey]);
 
-  // 当购物车变化时，更新所有 Surface 的数据模型
+  // Update Surface data model when cart changes
   useEffect(() => {
-    if (card.length > 0 && cart.length >= 0) {
-      const cartDataString = JSON.stringify(cart);
-
-      // 更新所有 Surface 的共享购物车数据
-      ['products', 'cart', 'summary'].forEach((surfaceId) => {
-        onAgentCommand({
-          dataModelUpdate: {
-            surfaceId,
-            contents: [
-              {
-                key: 'shared',
-                valueMap: [{ key: 'cart', valueString: cartDataString }],
-              },
-            ],
-          },
-        });
+    if (card.some((c) => c.id === 'shop')) {
+      onAgentCommand({
+        dataModelUpdate: {
+          surfaceId: 'shop',
+          contents: [
+            {
+              key: 'cart',
+              valueString: JSON.stringify(cart),
+            },
+          ],
+        },
       });
     }
-  }, [cart, card.length]);
+  }, [cart]);
 
   const handleReload = useCallback(() => {
     resetHeader();
     const deleteCommands: XAgentCommand_v0_8[] = [
-      { deleteSurface: { surfaceId: 'products' } },
-      { deleteSurface: { surfaceId: 'cart' } },
-      { deleteSurface: { surfaceId: 'summary' } },
+      { deleteSurface: { surfaceId: 'shop' } },
       { deleteSurface: { surfaceId: 'checkout-success' } },
     ];
     setCommandQueue((prev) => [...prev, ...deleteCommands]);
@@ -1073,6 +1072,7 @@ const App = () => {
           OrderSummaryCard,
           CheckoutSuccessCard,
           MultiCardContainer,
+          ColWrapper,
         }}
       >
         <Bubble.List items={items} style={{ height: 700 }} role={role} />

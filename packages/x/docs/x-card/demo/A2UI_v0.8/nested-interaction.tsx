@@ -10,13 +10,13 @@ import { Bubble } from '@ant-design/x';
 import type { ActionPayload, XAgentCommand_v0_8 } from '@ant-design/x-card';
 import { XCard } from '@ant-design/x-card';
 import XMarkdown from '@ant-design/x-markdown';
-import { Button, Card, Collapse, CollapseProps, List, Space, Tag, Typography } from 'antd';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Button, Card, Collapse, CollapseProps, Space, Tag, Typography } from 'antd';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 数据类型定义
+// Data Type Definitions
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface FileNode {
@@ -41,7 +41,7 @@ interface FileDetail {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 模拟数据
+// Mock Data
 // ─────────────────────────────────────────────────────────────────────────────
 
 const PROJECT_FILES: FileNode[] = [
@@ -196,7 +196,7 @@ const PANEL_DATA = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 内容渲染相关
+// Content rendering related
 // ─────────────────────────────────────────────────────────────────────────────
 
 const contentHeader =
@@ -230,10 +230,10 @@ const role = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 组件定义
+// Component Definitions
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Text 组件
+// Text Component
 interface TextProps {
   text?: string;
   variant?: 'h1' | 'h2' | 'h3' | 'body' | string;
@@ -253,7 +253,7 @@ const TextComponent: React.FC<TextProps> = ({ text, variant, children }) => {
   return <p style={style}>{content}</p>;
 };
 
-// 文件树节点组件
+// File Tree Node Component
 interface TreeNodeProps {
   node: FileNode;
   level: number;
@@ -324,7 +324,7 @@ const TreeNode: React.FC<TreeNodeProps> = ({ node, level, selectedKey, onFileCli
   );
 };
 
-// 文件树组件
+// File Tree Component
 interface FileTreeProps {
   files?: FileNode[];
   action?: {
@@ -385,7 +385,7 @@ const FileTree: React.FC<FileTreeProps> = ({ files, action, onAction, selectedFi
   );
 };
 
-// 文件详情卡片组件
+// File Detail Card Component
 interface FileDetailCardProps {
   file?: FileDetail;
   onClose?: () => void;
@@ -476,7 +476,7 @@ const FileDetailCard: React.FC<FileDetailCardProps> = ({ file, onClose }) => {
   );
 };
 
-// 手风琴面板组件
+// Accordion Panel Component
 interface AccordionPanelProps {
   panels?: Array<{ id: string; title: string; content: string }>;
   children?: React.ReactNode;
@@ -510,7 +510,7 @@ const AccordionPanel: React.FC<AccordionPanelProps> = ({ panels, children }) => 
   );
 };
 
-// 主容器组件
+// Main Container Component
 interface MainContainerProps {
   children?: React.ReactNode;
 }
@@ -536,7 +536,7 @@ const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 流式文本 Hook
+// Streaming Text Hook
 // ─────────────────────────────────────────────────────────────────────────────
 
 const useStreamText = (text: string) => {
@@ -585,7 +585,7 @@ const useStreamText = (text: string) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// v0.8 Agent 命令定义
+// v0.8 Agent Command Definition
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SurfaceUpdateCommand: XAgentCommand_v0_8 = {
@@ -649,10 +649,13 @@ const DataModelUpdateCommand: XAgentCommand_v0_8 = {
     contents: [
       {
         key: 'panels',
-        valueList: PANEL_DATA.map((p) => ({
-          id: p.id,
-          title: p.title,
-          content: p.content,
+        valueMap: PANEL_DATA.map((p) => ({
+          key: p.id,
+          valueString: JSON.stringify({
+            id: p.id,
+            title: p.title,
+            content: p.content,
+          }),
         })),
       },
     ],
@@ -667,7 +670,7 @@ const BeginRenderingCommand: XAgentCommand_v0_8 = {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// App 组件
+// App Component
 // ─────────────────────────────────────────────────────────────────────────────
 
 const App = () => {

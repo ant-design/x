@@ -6,13 +6,13 @@ import XMarkdown from '@ant-design/x-markdown';
 import { Badge, Button, Card, Progress, Space, Tag, Typography } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-// 导入本地 catalog schema
+// Import local catalog schema
 import localCatalog from './catalog.json';
 
-// 注册本地 catalog
+// Register local catalog
 registerCatalog(localCatalog as unknown as Catalog);
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -20,7 +20,7 @@ type ContentType = {
   card: CardNode[];
 };
 
-// ─── 模拟数据：产品列表（分批次加载） ──────────────────────────────────────
+// ─── Mock Data: Product List (Batch Loading) ──────────────────────────────────────
 interface Product {
   id: number;
   name: string;
@@ -63,7 +63,7 @@ const allProducts: Product[][] = [
   ],
 ];
 
-// ─── 角色配置 ────────────────────────────────────────────────────────────────
+// ─── Role Configuration ────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -84,7 +84,7 @@ const role = {
   },
 };
 
-// ─── ProductCard 组件（产品卡片） ────────────────────────────────────────────
+// ─── ProductCard Component ────────────────────────────────────────────
 interface ProductCardProps {
   name?: string;
   price?: number;
@@ -98,7 +98,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // 延迟显示，实现渐进动画
+    // Delayed display for progressive animation
     const timer = setTimeout(
       () => {
         setVisible(true);
@@ -121,10 +121,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         border: '1px solid #f0f0f0',
       }}
-      bodyStyle={{ padding: 16 }}
+      styles={{ body: { padding: 16 } }}
     >
       <Space direction="vertical" style={{ width: '100%' }} size={8}>
-        {/* 标签和名称 */}
+        {/* Tag and name */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <Typography.Text
             strong
@@ -148,14 +148,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
           )}
         </div>
 
-        {/* 价格 */}
+        {/* Price */}
         <div>
           <Typography.Text style={{ fontSize: 20, fontWeight: 700, color: '#ff4d4f' }}>
             ¥{price}
           </Typography.Text>
         </div>
 
-        {/* 底部信息 */}
+        {/* Footer info */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Badge
             color="blue"
@@ -174,7 +174,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ name, price, category, stock,
   );
 };
 
-// ─── ProductContainer 组件（产品容器） ────────────────────────────────────────
+// ─── ProductContainer Component ────────────────────────────────────────
 interface ProductContainerProps {
   children?: React.ReactNode;
 }
@@ -204,7 +204,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({ children }) => {
   );
 };
 
-// ─── LoadingIndicator 组件（加载指示器） ─────────────────────────────────────
+// ─── LoadingIndicator Component ─────────────────────────────────────
 interface LoadingIndicatorProps {
   progress?: number;
   total?: number;
@@ -253,7 +253,7 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -262,7 +262,7 @@ const useStreamText = (text: string) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const run = useCallback(() => {
-    // 清除之前的定时器
+    // Clear previous timer
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
@@ -285,12 +285,12 @@ const useStreamText = (text: string) => {
   }, [text]);
 
   const reset = useCallback(() => {
-    // 清除定时器
+    // Clear timer
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-    // 重置状态
+    // Reset state
     textRef.current = 0;
     textTimestamp.current = 0;
     setTextIndex(0);
@@ -306,7 +306,7 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── Agent 指令 ────────────────────────────────────────────────────────────────
+// ─── Agent Commands ────────────────────────────────────────────────────────────────
 const CreateCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
@@ -315,7 +315,7 @@ const CreateCard: XAgentCommand_v0_9 = {
   },
 };
 
-// 创建更新卡片指令（根据产品数据）
+// Create update card command (based on product data)
 const UpdateProductCard = (products: Product[]): XAgentCommand_v0_9 => {
   const productComponents = products.map((product, idx) => ({
     id: `product-${product.id}`,
@@ -344,7 +344,7 @@ const UpdateProductCard = (products: Product[]): XAgentCommand_v0_9 => {
   };
 };
 
-// 创建加载指示器指令
+// Create loading indicator command
 const CreateLoadingIndicator = (): XAgentCommand_v0_9 => ({
   version: 'v0.9',
   createSurface: {
@@ -373,10 +373,10 @@ const UpdateLoadingIndicator = (
   },
 });
 
-// ─── App ──────────────────────────────────────────────────────────────────────
+// ─── App ────────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  // Command queue: append new commands, array reference change triggers Box/Card useEffect
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_9[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
@@ -393,7 +393,7 @@ const App = () => {
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
     }
-    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    // Append to queue end, ensure every command is processed by Box/Card
     setCommandQueue((prev) => [...prev, command]);
   };
 
@@ -422,10 +422,10 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // 按照 A2UI v0.9 规范顺序发送命令：
-      // 1. createSurface（初始化 Surface）
-      // 2. updateComponents（定义组件结构）
-      // 命令队列保证顺序处理，无需 setTimeout 魔法数字
+      // Send commands in A2UI v0.9 spec order:
+      // 1. createSurface (initialize Surface)
+      // 2. updateComponents (define component structure)
+      // Command queue guarantees sequential processing, no setTimeout magic numbers needed
       onAgentCommand(CreateLoadingIndicator());
       onAgentCommand(UpdateLoadingIndicator(0, 8, true));
       onAgentCommand(CreateCard);
@@ -436,7 +436,7 @@ const App = () => {
   const startProgressiveLoading = useCallback(() => {
     batchCountRef.current = 0;
 
-    // 累积已加载的产品
+    // Accumulated loaded products
     const loadedProducts: Product[] = [];
 
     const loadNextBatch = () => {
@@ -447,14 +447,14 @@ const App = () => {
       }
 
       const currentProducts = allProducts[batchCountRef.current];
-      // 累积产品
+      // Accumulate products
       loadedProducts.push(...currentProducts);
 
       const progress = (batchCountRef.current + 1) * 2;
       onAgentCommand(UpdateLoadingIndicator(progress, 8, true));
 
       setTimeout(() => {
-        // 传入累积的所有产品
+        // Pass all accumulated products
         onAgentCommand(UpdateProductCard([...loadedProducts]));
       }, 50);
 

@@ -11,7 +11,6 @@ import {
   Input,
   Rate,
   Row,
-  Select,
   Slider,
   Space,
   Tag,
@@ -20,9 +19,8 @@ import {
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const { Title, Text } = Typography;
-const { Option } = Select;
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -33,7 +31,7 @@ type ContentType = {
 const contentHeader =
   'Welcome to Product Search! 🔍\n\nFind the perfect product by filtering by category, price, and rating. Results will update in real-time as you adjust filters.';
 
-// ─── 产品数据 ─────────────────────────────────────────────────────────────────
+// ─── Product Data ─────────────────────────────────────────────────────────────────
 interface Product {
   id: number;
   name: string;
@@ -138,7 +136,7 @@ const allProducts: Product[] = [
   },
 ];
 
-// ─── 角色配置 ────────────────────────────────────────────────────────────────
+// ─── Role Configuration ────────────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -159,12 +157,35 @@ const role = {
   },
 };
 
-// ─── FilterPanel 组件 ─────────────────────────────────────────────────────────
+// ─── JSON String Parser Utility ─────────────────────────────────────────────────────
+function parseJsonString<T>(val: any, fallback: T): T {
+  if (typeof val === 'string') {
+    try {
+      return JSON.parse(val) as T;
+    } catch {
+      return fallback;
+    }
+  }
+  return val ?? fallback;
+}
+
+// ─── ColWrapper Component (for column layout within Row) ────────────────────────────────────
+interface ColWrapperProps {
+  span?: number | string;
+  children?: React.ReactNode;
+}
+
+const ColWrapper: React.FC<ColWrapperProps> = ({ span = 8, children }) => {
+  const numSpan = typeof span === 'string' ? parseInt(span, 10) : span;
+  return <Col span={numSpan}>{children}</Col>;
+};
+
+// ─── FilterPanel Component ─────────────────────────────────────────────────────────
 interface FilterPanelProps {
   categories?: string[];
-  selectedCategories?: string[];
-  priceRange?: [number, number];
-  minRating?: number;
+  selectedCategories?: string[] | string;
+  priceRange?: [number, number] | string;
+  minRating?: number | string;
   searchKeyword?: string;
   onAction?: (name: string, context: Record<string, any>) => void;
   action?: {
@@ -182,18 +203,37 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   onAction,
   action,
 }) => {
+  // dataModel stores each field as JSON string, needs to be parsed
+  const parsedSelectedCategories: string[] = parseJsonString(selectedCategories, []);
+  const parsedPriceRange: [number, number] = parseJsonString(priceRange, [0, 1500]);
+  const parsedMinRating: number =
+    typeof minRating === 'string' ? parseFloat(minRating) || 0 : (minRating ?? 0);
+  const parsedSearchKeyword: string =
+    typeof searchKeyword === 'string' ? searchKeyword : String(searchKeyword ?? '');
+
   const [filters, setFilters] = useState({
-    categories: selectedCategories,
-    priceRange,
-    minRating,
-    searchKeyword,
+    categories: parsedSelectedCategories,
+    priceRange: parsedPriceRange,
+    minRating: parsedMinRating,
+    searchKeyword: parsedSearchKeyword,
   });
+
+  // Sync local state when external props change (driven by dataModel update)
+  useEffect(() => {
+    setFilters({
+      categories: parsedSelectedCategories,
+      priceRange: parsedPriceRange,
+      minRating: parsedMinRating,
+      searchKeyword: parsedSearchKeyword,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategories, priceRange, minRating, searchKeyword]);
 
   const handleFilterChange = (newFilters: Partial<typeof filters>) => {
     const updatedFilters = { ...filters, ...newFilters };
     setFilters(updatedFilters);
 
-    // 上报筛选条件变化
+    // Report filter condition changes
     if (action?.name && action.context) {
       const context: Record<string, any> = {};
       action.context.forEach((item) => {
@@ -214,6 +254,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       style={{
         borderRadius: 12,
         boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        height: '100%',
       }}
     >
       <Space direction="vertical" style={{ width: '100%' }} size={20}>
@@ -241,7 +282,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             onChange={(checked) => handleFilterChange({ categories: checked as string[] })}
           >
             <Row>
-              {categories.map((cat) => (
+              {(Array.isArray(categories)
+                ? categories
+                : ['Electronics', 'Wearable', 'Accessories', 'Home']
+              ).map((cat) => (
                 <Col span={12} key={cat} style={{ marginBottom: 8 }}>
                   <Checkbox value={cat}>{cat}</Checkbox>
                 </Col>
@@ -283,31 +327,59 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   );
 };
 
-// ─── ProductList 组件 ──────────────────────────────────────────────────────────
+// ─── ProductList Component ──────────────────────────────────────────────────────────
+interface FiltersType {
+  categories: string[];
+  priceRange: [number, number];
+  minRating: number;
+  searchKeyword: string;
+}
+
 interface ProductListProps {
   products?: Product[];
-  filters?: {
-    categories: string[];
-    priceRange: [number, number];
-    minRating: number;
-    searchKeyword: string;
-  };
+  filters?: FiltersType | string;
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products = allProducts, filters }) => {
+  // dataModel stores filters as valueMap object, each field value is string, needs to be parsed
+  const parsedFilters: FiltersType | undefined = (() => {
+    if (!filters) return undefined;
+    if (typeof filters === 'string') {
+      return parseJsonString<FiltersType>(filters, {
+        categories: [],
+        priceRange: [0, 1500],
+        minRating: 0,
+        searchKeyword: '',
+      });
+    }
+    // filters is an object, but each field may be a string (from valueMap)
+    return {
+      categories: parseJsonString((filters as any).categories, []),
+      priceRange: parseJsonString((filters as any).priceRange, [0, 1500]),
+      minRating:
+        typeof (filters as any).minRating === 'string'
+          ? parseFloat((filters as any).minRating) || 0
+          : ((filters as any).minRating ?? 0),
+      searchKeyword:
+        typeof (filters as any).searchKeyword === 'string'
+          ? (filters as any).searchKeyword
+          : String((filters as any).searchKeyword ?? ''),
+    };
+  })();
+
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
 
-    // 模拟搜索延迟
+    // Simulate search delay
     const timer = setTimeout(() => {
       let result = products;
 
-      // 搜索关键词
-      if (filters?.searchKeyword) {
-        const keyword = filters.searchKeyword.toLowerCase();
+      // Search keyword
+      if (parsedFilters?.searchKeyword) {
+        const keyword = parsedFilters.searchKeyword.toLowerCase();
         result = result.filter(
           (p) =>
             p.name.toLowerCase().includes(keyword) ||
@@ -316,21 +388,21 @@ const ProductList: React.FC<ProductListProps> = ({ products = allProducts, filte
         );
       }
 
-      // 分类筛选
-      if (filters?.categories && filters.categories.length > 0) {
-        result = result.filter((p) => filters.categories.includes(p.category));
+      // Category filter
+      if (parsedFilters?.categories && parsedFilters.categories.length > 0) {
+        result = result.filter((p) => parsedFilters.categories.includes(p.category));
       }
 
-      // 价格范围
-      if (filters?.priceRange) {
+      // Price range
+      if (parsedFilters?.priceRange) {
         result = result.filter(
-          (p) => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1],
+          (p) => p.price >= parsedFilters.priceRange[0] && p.price <= parsedFilters.priceRange[1],
         );
       }
 
-      // 最低评分
-      if (filters?.minRating && filters.minRating > 0) {
-        result = result.filter((p) => p.rating >= filters.minRating);
+      // Minimum rating
+      if (parsedFilters?.minRating && parsedFilters.minRating > 0) {
+        result = result.filter((p) => p.rating >= parsedFilters.minRating);
       }
 
       setFilteredProducts(result);
@@ -416,7 +488,7 @@ const ProductList: React.FC<ProductListProps> = ({ products = allProducts, filte
   );
 };
 
-// ─── FilterContainer 组件 ──────────────────────────────────────────────────────
+// ─── FilterContainer Component (left-right two-column layout container) ──────────────────────────────────
 interface FilterContainerProps {
   children?: React.ReactNode;
 }
@@ -430,15 +502,16 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ children }) => {
         padding: '20px',
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-        minWidth: 600,
       }}
     >
-      <Row gutter={24}>{children}</Row>
+      <Row gutter={24} align="stretch">
+        {children}
+      </Row>
     </div>
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -485,7 +558,8 @@ const useStreamText = (text: string) => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// v0.8 Agent 命令定义
+// v0.8 Agent Command Definition
+// FilterPanel (left 1/3) + ProductList (right 2/3) via ColWrapper for two-column layout
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const FilterSurfaceUpdateCommand: XAgentCommand_v0_8 = {
@@ -520,12 +594,31 @@ const FilterSurfaceUpdateCommand: XAgentCommand_v0_8 = {
           },
         },
       },
+      // Wrap with ColWrapper to implement left 1/3 filter panel + right 2/3 product list
+      {
+        id: 'col-filter',
+        component: {
+          ColWrapper: {
+            span: { literalString: '8' },
+            child: 'filter-panel',
+          },
+        },
+      },
+      {
+        id: 'col-products',
+        component: {
+          ColWrapper: {
+            span: { literalString: '16' },
+            child: 'product-list',
+          },
+        },
+      },
       {
         id: 'root',
         component: {
           FilterContainer: {
             children: {
-              explicitList: ['filter-panel', 'product-list'],
+              explicitList: ['col-filter', 'col-products'],
             },
           },
         },
@@ -558,7 +651,7 @@ const FilterBeginRenderingCommand: XAgentCommand_v0_8 = {
   },
 };
 
-// ─── App ──────────────────────────────────────────────────────────────────────
+// ─── App Component ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_8[]>([]);
@@ -579,7 +672,7 @@ const App = () => {
 
   const handleAction = (payload: ActionPayload) => {
     if (payload.name === 'update_filters') {
-      // 过滤器变化时更新数据模型
+      // Update data model when filter changes
       const { filters } = payload.context || {};
       if (filters) {
         onAgentCommand({
@@ -663,6 +756,7 @@ const App = () => {
           FilterPanel,
           ProductList,
           FilterContainer,
+          ColWrapper,
         }}
       >
         <Bubble.List items={items} style={{ height: 700 }} role={role} />

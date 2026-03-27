@@ -39,7 +39,7 @@ const role = {
   },
 };
 
-// ─── Text 组件 ────────────────────────────────────────────────────────────────
+// ─── Text Component ────────────────────────────────────────────────────────
 interface TextProps {
   text?: string;
   variant?: 'h1' | 'h2' | 'h3' | 'body' | 'success' | string;
@@ -68,13 +68,13 @@ const Text: React.FC<TextProps> = ({ text, variant, children, status }) => {
   };
   const style = styleMap[variant ?? 'body'] ?? styleMap.body;
 
-  // 如果有 status 且为 success，使用 success 样式
+  // If status is success, use success style
   const finalStyle = status === 'success' ? styleMap.success : style;
 
   return <p style={finalStyle}>{content}</p>;
 };
 
-// ─── DateTimeInput 组件 ───────────────────────────────────────────────────────
+// ─── DateTimeInput Component ───────────────────────────────────────────────────────
 interface DateTimeInputProps {
   action?: {
     name: string;
@@ -92,7 +92,7 @@ const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status 
     setDateValue(val);
     if (!action?.name || !val) return;
 
-    // v0.8 格式: action.context 是数组 [{ key, value: { path } }]
+    // v0.8 format: action.context is an array [{ key, value: { path } }]
     const context: Record<string, any> = {};
     if (action.context) {
       action.context.forEach((item) => {
@@ -115,7 +115,7 @@ const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status 
   );
 };
 
-// ─── BookForm 组件 ────────────────────────────────────────────────────────────
+// ─── BookForm Component ────────────────────────────────────────────────────────────
 interface BookFormProps {
   children?: React.ReactNode;
 }
@@ -141,7 +141,7 @@ const BookForm: React.FC<BookFormProps> = ({ children }) => {
   );
 };
 
-// ─── ActionButton 组件 ────────────────────────────────────────────────────────
+// ─── ActionButton Component ────────────────────────────────────────────────────────
 interface ActionButtonProps {
   action?: {
     name: string;
@@ -168,9 +168,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     const eventName = action?.name;
     if (!eventName || !onAction) return;
 
-    // v0.8 格式: action.context 是数组
-    // 组件已经通过 props 接收了路径绑定的值（如 res、status）
-    // 这里构造 context 上报给上层
+    // v0.8 format: action.context is an array is an array
+    // Component has already received path-bound values via props (like res, status)
+    // Here we construct context to report to the upper layer
     const context: Record<string, any> = {};
 
     // Business logic validation
@@ -197,7 +197,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   );
 };
 
-// ─── CoffeeList 组件 ──────────────────────────────────────────────────────────
+// ─── CoffeeList Component ──────────────────────────────────────────────────────────
 interface CoffeeItem {
   id?: string | number;
   name: string;
@@ -239,7 +239,7 @@ interface CoffeeListProps {
 }
 
 const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, status, action }) => {
-  // 如果没有传入 list，使用默认数据
+  // If no list is passed, use default data
   const coffeeList = list && list.length > 0 ? list : DEFAULT_COFFEE_LIST;
 
   const handleSelect = (itemId: string | number) => {
@@ -248,7 +248,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
     const selectedCoffee = coffeeList.find((item, index) => (item.id ?? index) === itemId);
     if (!selectedCoffee) return;
 
-    // v0.8 格式: action.context 是数组
+    // v0.8 format: action.context is an array
     const context: Record<string, any> = {};
     if (action.context) {
       action.context.forEach((item) => {
@@ -340,7 +340,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
   );
 };
 
-// ─── CoffeeResultCard 组件 ────────────────────────────────────────────────────
+// ─── CoffeeResultCard Component ────────────────────────────────────────────────────
 interface CoffeeResultCardProps {
   name?: string;
   description?: string;
@@ -357,7 +357,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
   tag,
   date,
 }) => {
-  const formattedDate = date ? dayjs(date).format('YYYY年MM月DD日 HH:mm') : '';
+  const formattedDate = date ? dayjs(date).format('YYYY-MM-DD HH:mm') : '';
 
   return (
     <div
@@ -454,7 +454,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
                 Booking Time
               </Typography.Text>
               <Typography.Text style={{ fontSize: 12, color: 'rgba(255,255,255,0.85)' }}>
-                {formattedDate}
+                {date ? dayjs(date).format('YYYY-MM-DD HH:mm') : ''}
               </Typography.Text>
             </div>
           )}
@@ -482,7 +482,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -529,7 +529,7 @@ const useStreamText = (text: string) => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// v0.8 Agent 命令定义
+// v0.8 Agent Command Definition
 // ═══════════════════════════════════════════════════════════════════════════════
 
 // v0.8 Command 1: surfaceUpdate - Define component structure
@@ -694,10 +694,10 @@ const DeleteBookingCommand: XAgentCommand_v0_8 = {
   },
 };
 
-// ─── App ──────────────────────────────────────────────────────────────────────
+// ─── App Component ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  // Command queue: each time a new command is appended, the entire array reference changes to trigger Box/Card's useEffect
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_8[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
@@ -711,7 +711,7 @@ const App = () => {
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
     }
-    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    // Append to end of queue, ensuring every command is processed by Box/Card
     setCommandQueue((prev) => [...prev, command]);
   };
 
@@ -725,7 +725,7 @@ const App = () => {
 
         // v0.8: Delete booking card first
         onAgentCommand(DeleteBookingCommand);
-        // Create result card — 命令队列保证顺序，无需 setTimeout
+        // Create result card — command queue guarantees order, no setTimeout needed
         onAgentCommand(ResultSurfaceUpdateCommand(res));
         onAgentCommand(ResultBeginRenderingCommand);
       } else if (status === 'error') {
@@ -755,8 +755,8 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // v0.8 命令序列：surfaceUpdate → dataModelUpdate → beginRendering
-      // 命令队列保证顺序处理，无需 setTimeout 魔法数字
+      // v0.8 command sequence: surfaceUpdate → dataModelUpdate → beginRendering
+      // Command queue guarantees sequential processing, no setTimeout magic numbers needed
       onAgentCommand(SurfaceUpdateCommand);
       onAgentCommand(DataModelUpdateCommand);
       onAgentCommand(BeginRenderingCommand);

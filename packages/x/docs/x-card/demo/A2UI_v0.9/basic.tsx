@@ -7,10 +7,10 @@ import { Button, DatePicker, Radio, Space, Tag, Typography } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-// 导入本地 catalog schema
+// Import local catalog schema
 import localCatalog from './catalog.json';
 
-// 注册本地 catalog
+// Register local catalog
 registerCatalog(localCatalog as unknown as Catalog);
 
 const contentHeader =
@@ -45,7 +45,7 @@ const role = {
   },
 };
 
-// ─── Text 组件 ────────────────────────────────────────────────────────────────
+// ─── Text Component ────────────────────────────────────────────────────────────────
 interface TextProps {
   text?: string;
   variant?: 'h1' | 'h2' | 'h3' | 'body' | string;
@@ -75,7 +75,7 @@ const Text: React.FC<TextProps> = ({ text, variant, children }) => {
   return <p style={style}>{content}</p>;
 };
 
-// ─── DateTimeInput 组件 ───────────────────────────────────────────────────────
+// ─── DateTimeInput Component ───────────────────────────────────────────────────────
 interface DateTimeInputProps {
   action?: {
     event?: {
@@ -95,11 +95,11 @@ const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status 
     setDateValue(val);
     if (!action?.event?.name || !val) return;
 
-    // 根据 action.event.context 的 key 来构造 context
+    // Construct context based on action.event.context keys
     const context: Record<string, any> = {};
     if (action.event.context) {
-      // context 中的 key 就是组件需要传递的数据字段
-      // 例如 { time: { path: '/booking/res/time' } } 中的 time
+      // The key in context is the data field that the component needs to pass
+      // For example, { time: { path: '/booking/res/time' } } contains 'time'
       Object.keys(action.event.context).forEach((key) => {
         context[key] = val.toISOString();
       });
@@ -120,7 +120,7 @@ const DateTimeInput: React.FC<DateTimeInputProps> = ({ action, onAction, status 
   );
 };
 
-// ─── BookForm 组件 ────────────────────────────────────────────────────────────
+// ─── BookForm Component ────────────────────────────────────────────────────────────
 interface BookFormProps {
   children?: React.ReactNode;
 }
@@ -157,7 +157,7 @@ interface ActionButtonProps {
   variant?: string;
   children?: React.ReactNode;
   status?: 'success' | 'error' | 'loading';
-  res?: any; // 从 dataModel 绑定的 res 数据
+  res?: any; // res data bound from dataModel
   [key: string]: any;
 }
 
@@ -200,7 +200,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   );
 };
 
-// ─── CoffeeList 组件 ──────────────────────────────────────────────────────────
+// ─── CoffeeList Component ──────────────────────────────────────────────────────────
 interface CoffeeItem {
   id?: string | number;
   name: string;
@@ -213,10 +213,10 @@ interface CoffeeItem {
 interface CoffeeListProps {
   list?: CoffeeItem[];
   description?: string;
-  /** 当前选中项的 id（受控） */
+  /** Currently selected item id (controlled) */
   value?: string | number;
   status?: 'success';
-  /** Card 内部 action 触发器 */
+  /** Card internal action trigger */
   onAction?: (name: string, context: Record<string, any>) => void;
   action?: {
     event?: {
@@ -235,12 +235,12 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
     const selectedCoffee = list.find((item, index) => (item.id ?? index) === itemId);
     if (!selectedCoffee) return;
 
-    // 根据 action.event.context 的 key 来构造 context
+    // Construct context based on action.event.context keys
     const context: Record<string, any> = {};
     if (action.event.context) {
       Object.keys(action.event.context).forEach((key) => {
-        // context 中的 key 就是组件需要传递的数据字段
-        // 例如 { coffee: { path: '/booking/res/coffee' } } 中的 coffee
+        // The key in context is the data field that the component needs to pass
+        // For example, { coffee: { path: '/booking/res/coffee' } } contains 'coffee'
         context[key] = selectedCoffee;
       });
     }
@@ -281,7 +281,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
                 transition: 'background 0.2s',
               }}
             >
-              {/* 图片 / 占位图标 */}
+              {/* Image / Placeholder icon */}
               <div
                 style={{
                   width: 48,
@@ -306,7 +306,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
                 )}
               </div>
 
-              {/* 文字信息 */}
+              {/* Text information */}
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                   <Typography.Text
@@ -343,7 +343,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
                 )}
               </div>
 
-              {/* 价格 */}
+              {/* Price */}
               {item.price !== undefined && (
                 <Typography.Text
                   style={{
@@ -365,7 +365,7 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
   );
 };
 
-// ─── CoffeeResultCard 组件 ────────────────────────────────────────────────────
+// ─── CoffeeResultCard Component ────────────────────────────────────────────────────
 interface CoffeeResultCardProps {
   name?: string;
   description?: string;
@@ -383,7 +383,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
   image,
   date,
 }) => {
-  const formattedDate = date ? dayjs(date).format('YYYY年MM月DD日 HH:mm') : '';
+  const formattedDate = date ? dayjs(date).format('YYYY-MM-DD HH:mm') : '';
 
   return (
     <div
@@ -397,7 +397,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
         position: 'relative',
       }}
     >
-      {/* 顶部装饰光晕 */}
+      {/* Top decorative glow */}
       <div
         style={{
           position: 'absolute',
@@ -411,7 +411,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
         }}
       />
 
-      {/* 咖啡图标区域 */}
+      {/* Coffee icon area */}
       <div
         style={{
           display: 'flex',
@@ -447,9 +447,9 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
         </div>
       </div>
 
-      {/* 内容区域 */}
+      {/* Content area */}
       <div style={{ padding: '0 24px 24px' }}>
-        {/* 标题行 */}
+        {/* Title row */}
         <div
           style={{
             display: 'flex',
@@ -486,7 +486,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
           )}
         </div>
 
-        {/* 描述 */}
+        {/* Description */}
         {description && (
           <Typography.Text
             style={{
@@ -501,7 +501,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
           </Typography.Text>
         )}
 
-        {/* 分割线 */}
+        {/* Divider */}
         <div
           style={{
             height: 1,
@@ -510,7 +510,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
           }}
         />
 
-        {/* 价格 & 日期信息 */}
+        {/* Price & date info */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {price !== undefined ? (
             <div>
@@ -541,7 +541,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
           )}
         </div>
 
-        {/* 底部成功标签 */}
+        {/* Bottom success tag */}
         <div
           style={{
             marginTop: 16,
@@ -564,7 +564,7 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -614,7 +614,7 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── Agent 指令 ───────────────────────────────────────────────────────────────
+// ─── Agent Commands ───────────────────────────────────────────────────────────────
 const CreateCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
@@ -740,7 +740,7 @@ const UpdateModel: XAgentCommand_v0_9 = {
   },
 };
 
-// ─── 结果卡片配置 ─────────────────────────────────────────────────────────────
+// ─── Result Card Configuration ─────────────────────────────────────────────────────
 const CreateResultCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
@@ -778,7 +778,7 @@ const UpdateResultCard = (res: any): XAgentCommand_v0_9 => {
 // ─── App ──────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
-  // 命令队列：每次追加新命令，整个数组引用变化触发 Box/Card 的 useEffect
+  // Command queue: each time a new command is appended, the entire array reference changes to trigger Box/Card's useEffect
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_9[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
@@ -792,7 +792,7 @@ const App = () => {
     } else if ('deleteSurface' in command) {
       setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
     }
-    // 追加到队列末尾，保证每条命令都被 Box/Card 处理
+    // Append to end of queue, ensuring each command is processed by Box/Card
     setCommandQueue((prev) => [...prev, command]);
   };
 
@@ -844,19 +844,19 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // 按照 A2UI v0.9 规范顺序发送命令，命令队列保证顺序处理，无需 setTimeout
+      // Send commands in A2UI v0.9 spec order, command queue ensures sequential processing, no setTimeout needed
       onAgentCommand(CreateCard);
       onAgentCommand(UpdateCard);
       onAgentCommand(UpdateModel);
     }
   }, [streamStatusHeader, sessionKey]);
 
-  // 重新加载（完全重置）
+  // Reload (complete reset)
   const handleReload = useCallback(() => {
     resetHeader();
     resetFooter();
 
-    // 通过 deleteSurface 命令驱动 Surface 清理
+    // Drive Surface cleanup via deleteSurface command
     const deleteCommands: XAgentCommand_v0_9[] = [
       { version: 'v0.9', deleteSurface: { surfaceId: 'booking' } },
       { version: 'v0.9', deleteSurface: { surfaceId: 'result' } },

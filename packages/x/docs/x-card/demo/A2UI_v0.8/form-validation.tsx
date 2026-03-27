@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -20,7 +20,7 @@ type ContentType = {
 const contentHeader =
   'Welcome to register! 🎉\n\nPlease fill in your information to create an account. We will verify your information step by step.';
 
-// ─── 角色配置 ────────────────────────────────────────────────────────────────
+// ─── Role Configuration ────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -41,7 +41,7 @@ const role = {
   },
 };
 
-// ─── RegistrationForm 组件 ─────────────────────────────────────────────────────
+// ─── RegistrationForm Component ─────────────────────────────────────────────────────
 interface RegistrationFormProps {
   step?: number;
   status?: 'error' | 'success' | 'loading';
@@ -61,12 +61,14 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   action,
 }) => {
   const [form] = Form.useForm();
-  const [currentStep, setCurrentStep] = useState(step);
+  // step passed by literalString is a string, needs to be converted to number
+  const numericStep = typeof step === 'string' ? parseInt(step as string, 10) : step;
+  const [currentStep, setCurrentStep] = useState(numericStep);
   const [formStatus, setFormStatus] = useState<'error' | 'success' | 'loading' | null>(null);
 
   useEffect(() => {
-    setCurrentStep(step);
-  }, [step]);
+    setCurrentStep(numericStep);
+  }, [numericStep]);
 
   useEffect(() => {
     setFormStatus(status ?? null);
@@ -74,13 +76,13 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
   const handleNext = async () => {
     try {
-      // 根据当前步骤验证对应字段
+      // Validate corresponding fields based on current step
       const fieldsToValidate =
         currentStep === 0 ? ['username', 'email'] : ['password', 'confirmPassword'];
 
       await form.validateFields(fieldsToValidate);
 
-      // 验证成功，上报数据
+      // Validation successful, submit data
       const values = form.getFieldsValue();
 
       if (action?.name && action.context) {
@@ -94,14 +96,14 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         onAction?.(action.name, context);
       }
 
-      // 如果是最后一步，提交表单
+      // If this is the last step, submit the form
       if (currentStep === 1) {
         handleSubmit(values);
       } else {
         setCurrentStep(currentStep + 1);
       }
     } catch (error) {
-      // 验证失败，不执行任何操作
+      // Validation failed, do nothing
       console.log('Validation failed:', error);
     }
   };
@@ -292,7 +294,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   );
 };
 
-// ─── SuccessCard 组件 ──────────────────────────────────────────────────────────
+// ─── SuccessCard Component ──────────────────────────────────────────────────────────
 interface SuccessCardProps {
   username?: string;
   email?: string;
@@ -349,7 +351,7 @@ const SuccessCard: React.FC<SuccessCardProps> = ({ username, email, accountType 
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -396,7 +398,7 @@ const useStreamText = (text: string) => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// v0.8 Agent 命令定义
+// v0.8 Agent Command Definitions
 // ═══════════════════════════════════════════════════════════════════════════════
 
 // Command 1: surfaceUpdate - Define registration form
@@ -423,16 +425,6 @@ const FormSurfaceUpdateCommand: XAgentCommand_v0_8 = {
           },
         },
       },
-      {
-        id: 'root',
-        component: {
-          RegistrationForm: {
-            children: {
-              explicitList: ['registration-form'],
-            },
-          },
-        },
-      },
     ],
   },
 };
@@ -444,7 +436,7 @@ const FormDataModelUpdateCommand: XAgentCommand_v0_8 = {
     contents: [
       {
         key: 'status',
-        valueMap: [{ key: 'value', valueString: '' }],
+        valueString: '',
       },
     ],
   },

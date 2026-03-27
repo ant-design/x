@@ -11,7 +11,6 @@ import {
   Input,
   Rate,
   Row,
-  Select,
   Slider,
   Space,
   Tag,
@@ -19,19 +18,18 @@ import {
 } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-// 导入本地 catalog schema
+// Import local catalog schema
 import localCatalog from './catalog-filter.json';
 
-// 注册本地 catalog
+// Register local catalog
 registerCatalog(localCatalog as unknown as Catalog);
 
 const { Title, Text } = Typography;
-const { Option } = Select;
 
 const contentHeader =
   'Welcome to Product Search! 🔍\n\nFind the perfect product by filtering by category, price, and rating. Results will update in real-time as you adjust filters.';
 
-// ─── 产品数据 ─────────────────────────────────────────────────────────────────
+// ─── Product Data ─────────────────────────────────────────────────────────────────
 interface Product {
   id: number;
   name: string;
@@ -136,7 +134,7 @@ const allProducts: Product[] = [
   },
 ];
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -144,7 +142,7 @@ type ContentType = {
   card: CardNode[];
 };
 
-// ─── 角色配置 ────────────────────────────────────────────────────────────────
+// ─── Role Configuration ────────────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -165,7 +163,7 @@ const role = {
   },
 };
 
-// ─── FilterPanel 组件 ─────────────────────────────────────────────────────────
+// ─── FilterPanel Component ─────────────────────────────────────────────────────────
 interface FilterPanelProps {
   categories?: string[];
   selectedCategories?: string[];
@@ -292,7 +290,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   );
 };
 
-// ─── ProductList 组件 ──────────────────────────────────────────────────────────
+// ─── ProductList Component ──────────────────────────────────────────────────────────
 interface ProductListProps {
   products?: Product[];
   filters?: {
@@ -420,12 +418,14 @@ const ProductList: React.FC<ProductListProps> = ({ products = allProducts, filte
   );
 };
 
-// ─── FilterContainer 组件 ──────────────────────────────────────────────────────
+// ─── FilterContainer Component ──────────────────────────────────────────────────────
 interface FilterContainerProps {
   children?: React.ReactNode;
 }
 
 const FilterContainer: React.FC<FilterContainerProps> = ({ children }) => {
+  // Convert children to array, first child component (FilterPanel) takes 8 columns, second (ProductList) takes 16 columns
+  const childArray = React.Children.toArray(children);
   return (
     <div
       style={{
@@ -437,12 +437,18 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ children }) => {
         minWidth: 600,
       }}
     >
-      <Row gutter={24}>{children}</Row>
+      <Row gutter={24}>
+        {childArray.map((child, index) => (
+          <Col key={index} span={index === 0 ? 8 : 16}>
+            {child}
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -492,7 +498,7 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── Agent 指令 ───────────────────────────────────────────────────────────────
+// ─── Agent Commands ───────────────────────────────────────────────────────────────
 const CreateCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {

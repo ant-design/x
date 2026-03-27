@@ -1,34 +1,27 @@
 import { DeleteOutlined, ReloadOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import { Bubble } from '@ant-design/x';
-import type { ActionPayload, Catalog, XAgentCommand_v0_9 } from '@ant-design/x-card';
-import { registerCatalog, XCard } from '@ant-design/x-card';
+import type { ActionPayload, XAgentCommand_v0_9 } from '@ant-design/x-card';
+import { XCard } from '@ant-design/x-card';
 import XMarkdown from '@ant-design/x-markdown';
 import {
   Badge,
   Button,
   Card,
+  Col,
   Divider,
   Empty,
   InputNumber,
   List,
+  Row,
   Space,
   Tag,
   Typography,
 } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-// 导入本地 catalog schema
-import localCatalog from './catalog-cart.json';
+const { Title, Text } = Typography;
 
-// 注册本地 catalog
-registerCatalog(localCatalog as unknown as Catalog);
-
-const contentHeader =
-  'Welcome to our online store! Browse our products and add them to your cart. Your shopping cart and order summary will update in real-time across all cards.';
-const orderConfirmation =
-  'Thank you for your order! Your items will be shipped soon. Have a great day!';
-
-// ─── 类型定义 ───────────────────────────────────────────────────────────────────
+// ─── Type Definitions ───────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -37,20 +30,81 @@ type ContentType = {
 };
 
 interface Product {
-  id: string | number;
+  id: number;
   name: string;
-  description?: string;
+  description: string;
   price: number;
+  category: string;
   image?: string;
   tag?: string;
-  stock?: number;
+  stock: number;
 }
 
-interface CartItem extends Product {
+interface CartItem {
+  product: Product;
   quantity: number;
 }
 
-// ─── Role 定义 ──────────────────────────────────────────────────────────────────
+// ─── Product Data ─────────────────────────────────────────────────────────────────
+const allProducts: Product[] = [
+  {
+    id: 1,
+    name: 'iPhone 15 Pro',
+    description: 'A17 Pro chip, 48MP camera system',
+    price: 7999,
+    category: 'Electronics',
+    tag: 'Hot',
+    stock: 50,
+  },
+  {
+    id: 2,
+    name: 'MacBook Air M3',
+    description: 'M3 chip, 15-inch Liquid Retina display',
+    price: 10999,
+    category: 'Electronics',
+    tag: 'New',
+    stock: 30,
+  },
+  {
+    id: 3,
+    name: 'AirPods Pro 2',
+    description: 'Active Noise Cancellation, Adaptive Audio',
+    price: 1899,
+    category: 'Accessories',
+    tag: 'Popular',
+    stock: 100,
+  },
+  {
+    id: 4,
+    name: 'Apple Watch Ultra 2',
+    description: 'The most rugged Apple Watch, titanium case',
+    price: 6499,
+    category: 'Wearable',
+    stock: 25,
+  },
+  {
+    id: 5,
+    name: 'iPad Pro M2',
+    description: 'M2 chip, 12.9-inch Liquid Retina XDR display',
+    price: 9299,
+    category: 'Electronics',
+    tag: 'Recommended',
+    stock: 40,
+  },
+  {
+    id: 6,
+    name: 'Magic Keyboard',
+    description: 'Wireless, rechargeable, with Touch ID',
+    price: 1999,
+    category: 'Accessories',
+    stock: 80,
+  },
+];
+
+const contentHeader =
+  'Welcome to Smart Shopping Cart! 🛒\n\nBrowse products, add them to your cart, and see real-time price calculations. Experience the power of multi-surface collaboration!';
+
+// ─── Role Definition ──────────────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -71,103 +125,45 @@ const role = {
   },
 };
 
-// ─── Text 组件 ────────────────────────────────────────────────────────────────
-interface TextProps {
-  text?: string;
-  variant?: 'h1' | 'h2' | 'h3' | 'body' | 'success' | 'price' | 'discount' | string;
+// ─── ColWrapper Component (for column layout within Row) ────────────────────────────────────
+interface ColWrapperProps {
+  span?: number | string;
   children?: React.ReactNode;
 }
 
-const Text: React.FC<TextProps> = ({ text, variant, children }) => {
-  const content = text ?? children;
-  if (!content) return null;
-  const styleMap: Record<string, React.CSSProperties> = {
-    h1: { fontSize: 20, fontWeight: 700, margin: '0 0 12px' },
-    h2: { fontSize: 17, fontWeight: 600, margin: '0 0 8px' },
-    h3: { fontSize: 15, fontWeight: 600, margin: '0 0 6px' },
-    body: { fontSize: 14, margin: 0 },
-    success: {
-      fontSize: 14,
-      fontWeight: 600,
-      color: '#52c41a',
-      margin: '4px 0 0',
-      padding: '6px 10px',
-      borderRadius: 8,
-      background: '#f6ffed',
-      border: '1px solid #b7eb8f',
-    },
-    price: {
-      fontSize: 18,
-      fontWeight: 700,
-      color: '#f5222d',
-      margin: 0,
-    },
-    discount: {
-      fontSize: 14,
-      color: '#52c41a',
-      fontWeight: 600,
-    },
-  };
-  const style = styleMap[variant ?? 'body'] ?? styleMap.body;
-  return <p style={style}>{content}</p>;
+const ColWrapper: React.FC<ColWrapperProps> = ({ span = 8, children }) => {
+  const numSpan = typeof span === 'string' ? parseInt(span, 10) : span;
+  return <Col span={numSpan}>{children}</Col>;
 };
 
-// ─── CardContainer 组件 ────────────────────────────────────────────────────────
-interface CardContainerProps {
-  children?: React.ReactNode;
-  layout?: 'horizontal' | 'vertical';
-}
-
-const CardContainer: React.FC<CardContainerProps> = ({ children, layout = 'horizontal' }) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: layout === 'horizontal' ? 'row' : 'column',
-        gap: 16,
-        flexWrap: 'wrap',
-        justifyContent: layout === 'horizontal' ? 'center' : undefined,
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
-// ─── ProductListCard 组件 ──────────────────────────────────────────────────────
+// ─── ProductListCard Component ─────────────────────────────────────────────────────
 interface ProductListCardProps {
   products?: Product[];
-  cartItems?: CartItem[];
+  cart?: CartItem[];
+  onAction?: (name: string, context: Record<string, any>) => void;
   action?: {
     event?: {
       name?: string;
       context?: Record<string, any>;
     };
   };
-  onAction?: (name: string, context: Record<string, any>) => void;
 }
 
 const ProductListCard: React.FC<ProductListCardProps> = ({
-  products,
-  cartItems = [],
-  action,
+  products = allProducts,
+  cart = [],
   onAction,
+  action,
 }) => {
   const handleAddToCart = (product: Product) => {
     if (!action?.event?.name) return;
 
-    const context: Record<string, any> = {};
-    if (action.event.context) {
-      Object.keys(action.event.context).forEach((key) => {
-        context[key] = product;
-      });
-    }
+    const context: Record<string, any> = { product };
     onAction?.(action.event.name, context);
   };
 
-  const getCartQuantity = (productId: string | number) => {
-    if (!Array.isArray(cartItems)) return 0;
-    const item = cartItems.find((item) => item.id === productId);
+  const getCartQuantity = (productId: number) => {
+    const item = cart.find((c) => c.product.id === productId);
     return item?.quantity || 0;
   };
 
@@ -175,29 +171,39 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
     <Card
       title={
         <Space>
+          <span style={{ fontSize: 18 }}>📦</span>
           <span>Product List</span>
-          <Badge count={cartItems.length} style={{ backgroundColor: '#1890ff' }} />
+          <Tag color="blue">{products.length} items</Tag>
         </Space>
       }
-      style={{ width: 380, borderRadius: 12 }}
+      style={{
+        borderRadius: 12,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        height: '100%',
+      }}
       styles={{
-        header: { borderBottom: '1px solid #f0f0f0' },
-        body: { padding: 16, maxHeight: 400, overflow: 'auto' },
+        body: { maxHeight: 450, overflow: 'auto' },
       }}
     >
       <List
         dataSource={products}
-        renderItem={(item) => {
-          const cartQty = getCartQuantity(item.id);
+        renderItem={(product) => {
+          const inCart = getCartQuantity(product.id);
           return (
-            <List.Item style={{ borderBottom: '1px solid #f5f5f5', padding: '12px 0' }}>
-              <div style={{ display: 'flex', width: '100%', gap: 12 }}>
-                {/* 产品图片占位 */}
+            <List.Item style={{ padding: '12px 0' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '100%',
+                  gap: 12,
+                }}
+              >
                 <div
                   style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 8,
+                    width: 56,
+                    height: 56,
+                    borderRadius: 12,
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     display: 'flex',
                     alignItems: 'center',
@@ -205,80 +211,63 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
                     flexShrink: 0,
                   }}
                 >
-                  {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 8 }}
-                    />
-                  ) : (
-                    <span style={{ fontSize: 24 }}>📦</span>
-                  )}
+                  <span style={{ fontSize: 24 }}>
+                    {product.category === 'Electronics'
+                      ? '📱'
+                      : product.category === 'Accessories'
+                        ? '🎧'
+                        : product.category === 'Wearable'
+                          ? '⌚'
+                          : '📦'}
+                  </span>
                 </div>
 
-                {/* 产品信息 */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                    <Typography.Text strong style={{ fontSize: 14 }}>
-                      {item.name}
-                    </Typography.Text>
-                    {item.tag && (
+                    <Text strong style={{ fontSize: 14 }} ellipsis>
+                      {product.name}
+                    </Text>
+                    {product.tag && (
                       <Tag
                         style={{
                           fontSize: 11,
                           padding: '0 6px',
                           lineHeight: '18px',
-                          borderRadius: 8,
+                          borderRadius: 6,
                           margin: 0,
                         }}
                         color="orange"
                       >
-                        {item.tag}
-                      </Tag>
-                    )}
-                    {cartQty > 0 && (
-                      <Tag
-                        style={{
-                          fontSize: 11,
-                          padding: '0 6px',
-                          lineHeight: '18px',
-                          borderRadius: 8,
-                          margin: 0,
-                        }}
-                        color="blue"
-                      >
-                        In Cart: {cartQty}
+                        {product.tag}
                       </Tag>
                     )}
                   </div>
-                  {item.description && (
-                    <Typography.Text
-                      type="secondary"
-                      style={{ fontSize: 12, display: 'block', marginBottom: 4 }}
-                      ellipsis
-                    >
-                      {item.description}
-                    </Typography.Text>
-                  )}
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
+                  <Text type="secondary" style={{ fontSize: 12 }} ellipsis>
+                    {product.description}
+                  </Text>
+                </div>
+
+                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <Text strong style={{ fontSize: 15, color: '#1890ff', display: 'block' }}>
+                    ¥{product.price.toLocaleString()}
+                  </Text>
+                  <Button
+                    type={inCart > 0 ? 'default' : 'primary'}
+                    size="small"
+                    onClick={() => handleAddToCart(product)}
+                    style={{ marginTop: 4, minWidth: 80 }}
+                    icon={
+                      inCart > 0 ? (
+                        <Badge count={inCart} size="small" offset={[6, -2]}>
+                          <ShoppingCartOutlined />
+                        </Badge>
+                      ) : (
+                        <ShoppingCartOutlined />
+                      )
+                    }
                   >
-                    <Typography.Text style={{ fontSize: 16, fontWeight: 700, color: '#f5222d' }}>
-                      ¥{item.price.toFixed(2)}
-                    </Typography.Text>
-                    <Button
-                      type="primary"
-                      size="small"
-                      icon={<ShoppingCartOutlined />}
-                      onClick={() => handleAddToCart(item)}
-                    >
-                      Add to Cart
-                    </Button>
-                  </div>
+                    {inCart > 0 ? 'Add More' : 'Add'}
+                  </Button>
                 </div>
               </div>
             </List.Item>
@@ -289,73 +278,75 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
   );
 };
 
-// ─── CartCard 组件 ──────────────────────────────────────────────────────────────
+// ─── CartCard Component ─────────────────────────────────────────────────────────────
 interface CartCardProps {
-  items?: CartItem[];
-  action?: {
+  cart?: CartItem[];
+  onAction?: (name: string, context: Record<string, any>) => void;
+  updateAction?: {
     event?: {
       name?: string;
       context?: Record<string, any>;
     };
   };
-  onAction?: (name: string, context: Record<string, any>) => void;
+  removeAction?: {
+    event?: {
+      name?: string;
+      context?: Record<string, any>;
+    };
+  };
 }
 
-const CartCard: React.FC<CartCardProps> = ({ items = [], action, onAction }) => {
-  const handleQuantityChange = (productId: string | number, quantity: number) => {
-    if (!action?.event?.name) return;
-
-    const context: Record<string, any> = {
-      productId,
-      quantity,
-      actionType: 'update',
-    };
-    onAction?.(action.event.name, context);
+const CartCard: React.FC<CartCardProps> = ({ cart = [], onAction, updateAction, removeAction }) => {
+  const handleQuantityChange = (productId: number, quantity: number) => {
+    if (!updateAction?.event?.name) return;
+    onAction?.(updateAction.event.name, { productId, quantity });
   };
 
-  const handleRemove = (productId: string | number) => {
-    if (!action?.event?.name) return;
-
-    const context: Record<string, any> = {
-      productId,
-      actionType: 'remove',
-    };
-    onAction?.(action.event.name, context);
+  const handleRemove = (productId: number) => {
+    if (!removeAction?.event?.name) return;
+    onAction?.(removeAction.event.name, { productId });
   };
 
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
   return (
     <Card
       title={
         <Space>
-          <ShoppingCartOutlined />
+          <Badge count={totalItems} size="small" offset={[4, -2]}>
+            <ShoppingCartOutlined style={{ fontSize: 18 }} />
+          </Badge>
           <span>Shopping Cart</span>
-          <Badge count={totalItems} style={{ backgroundColor: '#52c41a' }} />
         </Space>
       }
-      style={{ width: 380, borderRadius: 12 }}
+      style={{
+        borderRadius: 12,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        height: '100%',
+      }}
       styles={{
-        header: { borderBottom: '1px solid #f0f0f0' },
-        body: { padding: 16, maxHeight: 400, overflow: 'auto' },
+        body: { maxHeight: 380, overflow: 'auto' },
       }}
     >
-      {items.length === 0 ? (
-        <Empty description="Your cart is empty" style={{ padding: '20px 0' }} />
+      {cart.length === 0 ? (
+        <Empty
+          description="Cart is empty"
+          style={{ padding: '40px 0' }}
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+        />
       ) : (
         <>
           <List
-            dataSource={items}
+            dataSource={cart}
             renderItem={(item) => (
-              <List.Item style={{ borderBottom: '1px solid #f5f5f5', padding: '12px 0' }}>
-                <div style={{ display: 'flex', width: '100%', gap: 12, alignItems: 'center' }}>
-                  {/* 产品图片占位 */}
+              <List.Item style={{ padding: '12px 0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: 12 }}>
                   <div
                     style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 8,
+                      width: 44,
+                      height: 44,
+                      borderRadius: 10,
                       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                       display: 'flex',
                       alignItems: 'center',
@@ -363,47 +354,53 @@ const CartCard: React.FC<CartCardProps> = ({ items = [], action, onAction }) => 
                       flexShrink: 0,
                     }}
                   >
-                    <span style={{ fontSize: 20 }}>📦</span>
+                    <span style={{ fontSize: 18 }}>
+                      {item.product.category === 'Electronics'
+                        ? '📱'
+                        : item.product.category === 'Accessories'
+                          ? '🎧'
+                          : item.product.category === 'Wearable'
+                            ? '⌚'
+                            : '📦'}
+                    </span>
                   </div>
 
-                  {/* 产品信息 */}
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <Typography.Text strong style={{ fontSize: 14, display: 'block' }}>
-                      {item.name}
-                    </Typography.Text>
-                    <Typography.Text style={{ fontSize: 13, color: '#f5222d' }}>
-                      ¥{item.price.toFixed(2)} x {item.quantity} = ¥
-                      {(item.price * item.quantity).toFixed(2)}
-                    </Typography.Text>
+                    <Text strong style={{ fontSize: 13 }} ellipsis>
+                      {item.product.name}
+                    </Text>
+                    <Text type="secondary" style={{ fontSize: 12, display: 'block' }}>
+                      ¥{item.product.price.toLocaleString()} x {item.quantity}
+                    </Text>
                   </div>
 
-                  {/* 数量控制 */}
-                  <Space>
+                  <Space.Compact size="small">
                     <InputNumber
                       min={1}
-                      max={item.stock || 99}
+                      max={item.product.stock}
                       value={item.quantity}
-                      size="small"
-                      onChange={(value) => handleQuantityChange(item.id, value || 1)}
+                      onChange={(val) => handleQuantityChange(item.product.id, val || 1)}
                       style={{ width: 60 }}
+                      controls={{ upIcon: null, downIcon: null }}
                     />
                     <Button
                       danger
-                      size="small"
                       icon={<DeleteOutlined />}
-                      onClick={() => handleRemove(item.id)}
+                      onClick={() => handleRemove(item.product.id)}
                     />
-                  </Space>
+                  </Space.Compact>
                 </div>
               </List.Item>
             )}
           />
+
           <Divider style={{ margin: '12px 0' }} />
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography.Text type="secondary">Subtotal:</Typography.Text>
-            <Typography.Text style={{ fontSize: 16, fontWeight: 700, color: '#f5222d' }}>
-              ¥{subtotal.toFixed(2)}
-            </Typography.Text>
+            <Text strong>Subtotal:</Text>
+            <Text strong style={{ fontSize: 16, color: '#1890ff' }}>
+              ¥{subtotal.toLocaleString()}
+            </Text>
           </div>
         </>
       )}
@@ -411,81 +408,101 @@ const CartCard: React.FC<CartCardProps> = ({ items = [], action, onAction }) => 
   );
 };
 
-// ─── OrderSummaryCard 组件 ──────────────────────────────────────────────────────
+// ─── OrderSummaryCard Component ─────────────────────────────────────────────────────
 interface OrderSummaryCardProps {
-  items?: CartItem[];
-  discount?: number;
-  shipping?: number;
-  action?: {
+  cart?: CartItem[];
+  onAction?: (name: string, context: Record<string, any>) => void;
+  checkoutAction?: {
     event?: {
       name?: string;
       context?: Record<string, any>;
     };
   };
-  onAction?: (name: string, context: Record<string, any>) => void;
 }
 
 const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
-  items = [],
-  discount = 0,
-  shipping = 0,
-  action,
+  cart = [],
   onAction,
+  checkoutAction,
 }) => {
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
-  const discountAmount = subtotal * (discount / 100);
-  const total = subtotal - discountAmount + shipping;
+  const subtotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Calculate discount
+  const discount = subtotal >= 10000 ? subtotal * 0.1 : subtotal >= 5000 ? subtotal * 0.05 : 0;
+  const discountRate = subtotal >= 10000 ? '10%' : subtotal >= 5000 ? '5%' : '0%';
+
+  // Shipping fee
+  const shipping = subtotal >= 1000 ? 0 : 15;
+
+  // Final total
+  const total = subtotal - discount + shipping;
 
   const handleCheckout = () => {
-    if (!action?.event?.name) return;
+    if (!checkoutAction?.event?.name) return;
 
-    const context: Record<string, any> = {
-      items,
+    onAction?.(checkoutAction.event.name, {
+      cart,
       subtotal,
-      discount: discountAmount,
+      discount,
       shipping,
       total,
       itemCount: totalItems,
-    };
-    onAction?.(action.event.name, context);
+    });
   };
 
   return (
     <Card
-      title="Order Summary"
-      style={{ width: 380, borderRadius: 12 }}
-      styles={{
-        header: { borderBottom: '1px solid #f0f0f0' },
-        body: { padding: 16 },
+      title={
+        <Space>
+          <span style={{ fontSize: 18 }}>📋</span>
+          <span>Order Summary</span>
+        </Space>
+      }
+      style={{
+        borderRadius: 12,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        background: 'linear-gradient(180deg, #fafafa 0%, #ffffff 100%)',
+        height: '100%',
       }}
     >
       <Space direction="vertical" style={{ width: '100%' }} size={12}>
-        {/* 商品数量 */}
+        {/* Item count */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography.Text type="secondary">Items ({totalItems}):</Typography.Text>
-          <Typography.Text>¥{subtotal.toFixed(2)}</Typography.Text>
+          <Text type="secondary">Items:</Text>
+          <Text>{totalItems} items</Text>
         </div>
 
-        {/* 优惠 */}
-        {discount > 0 && (
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Typography.Text type="secondary">Discount ({discount}%):</Typography.Text>
-            <Typography.Text style={{ color: '#52c41a' }}>
-              -¥{discountAmount.toFixed(2)}
-            </Typography.Text>
-          </div>
-        )}
-
-        {/* 运费 */}
+        {/* Subtotal */}
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography.Text type="secondary">Shipping:</Typography.Text>
-          <Typography.Text>{shipping === 0 ? 'Free' : `¥${shipping.toFixed(2)}`}</Typography.Text>
+          <Text type="secondary">Subtotal:</Text>
+          <Text>¥{subtotal.toLocaleString()}</Text>
         </div>
 
         <Divider style={{ margin: '8px 0' }} />
 
-        {/* 总计 */}
+        {/* Discount */}
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Space>
+            <Text type="secondary">Discount:</Text>
+            {discount > 0 && (
+              <Tag color="green" style={{ margin: 0 }}>
+                {discountRate} off
+              </Tag>
+            )}
+          </Space>
+          <Text type="success">-¥{discount.toLocaleString()}</Text>
+        </div>
+
+        {/* Shipping */}
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Text type="secondary">Shipping:</Text>
+          {shipping === 0 ? <Text type="success">Free</Text> : <Text>¥{shipping}</Text>}
+        </div>
+
+        <Divider style={{ margin: '8px 0' }} />
+
+        {/* Total price */}
         <div
           style={{
             display: 'flex',
@@ -493,90 +510,183 @@ const OrderSummaryCard: React.FC<OrderSummaryCardProps> = ({
             alignItems: 'center',
           }}
         >
-          <Typography.Text strong style={{ fontSize: 16 }}>
+          <Title level={4} style={{ margin: 0 }}>
             Total:
-          </Typography.Text>
-          <Typography.Text style={{ fontSize: 20, fontWeight: 700, color: '#f5222d' }}>
-            ¥{total.toFixed(2)}
-          </Typography.Text>
+          </Title>
+          <Title level={3} style={{ margin: 0, color: '#ff4d4f' }}>
+            ¥{total.toLocaleString()}
+          </Title>
         </div>
 
-        {/* 结算按钮 */}
+        {/* Discount tip */}
+        {subtotal < 5000 && (
+          <div
+            style={{
+              padding: '8px 12px',
+              background: '#fff7e6',
+              borderRadius: 8,
+              border: '1px solid #ffd591',
+            }}
+          >
+            <Text style={{ fontSize: 12, color: '#d46b08' }}>
+              💡 Spend ¥{(5000 - subtotal).toLocaleString()} more for 5% off!
+            </Text>
+          </div>
+        )}
+        {subtotal >= 5000 && subtotal < 10000 && (
+          <div
+            style={{
+              padding: '8px 12px',
+              background: '#fff7e6',
+              borderRadius: 8,
+              border: '1px solid #ffd591',
+            }}
+          >
+            <Text style={{ fontSize: 12, color: '#d46b08' }}>
+              💡 Spend ¥{(10000 - subtotal).toLocaleString()} more for 10% off!
+            </Text>
+          </div>
+        )}
+        {subtotal >= 10000 && (
+          <div
+            style={{
+              padding: '8px 12px',
+              background: '#f6ffed',
+              borderRadius: 8,
+              border: '1px solid #b7eb8f',
+            }}
+          >
+            <Text style={{ fontSize: 12, color: '#52c41a' }}>
+              🎉 You've got the maximum discount!
+            </Text>
+          </div>
+        )}
+
+        {/* Checkout button */}
         <Button
           type="primary"
-          block
           size="large"
-          disabled={items.length === 0}
+          block
+          disabled={cart.length === 0}
           onClick={handleCheckout}
-          style={{ marginTop: 8, borderRadius: 8 }}
+          style={{ marginTop: 8, height: 48, borderRadius: 8 }}
         >
-          Checkout
+          Checkout (¥{total.toLocaleString()})
         </Button>
-
-        {items.length > 0 && (
-          <Typography.Text
-            type="secondary"
-            style={{ fontSize: 12, textAlign: 'center', display: 'block' }}
-          >
-            Estimated delivery: 3-5 business days
-          </Typography.Text>
-        )}
       </Space>
     </Card>
   );
 };
 
-// ─── SuccessResult 组件 ────────────────────────────────────────────────────────
-interface SuccessResultProps {
-  orderNumber?: string;
-  total?: number;
-  itemCount?: number;
+// ─── MultiCardContainer Component (three-column horizontal layout container) ──────────────────────────────
+interface MultiCardContainerProps {
+  children?: React.ReactNode;
 }
 
-const SuccessResult: React.FC<SuccessResultProps> = ({ orderNumber, total, itemCount }) => {
+const MultiCardContainer: React.FC<MultiCardContainerProps> = ({ children }) => {
+  return (
+    <div
+      style={{
+        borderRadius: 16,
+        border: '1.5px solid #e8e8e8',
+        padding: '24px',
+        background: '#fff',
+        boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+      }}
+    >
+      <Row gutter={16} align="stretch">
+        {children}
+      </Row>
+    </div>
+  );
+};
+
+// ─── CheckoutSuccessCard Component ──────────────────────────────────────────────────
+interface CheckoutSuccessCardProps {
+  total?: number;
+  itemCount?: number;
+  orderNumber?: string;
+}
+
+const CheckoutSuccessCard: React.FC<CheckoutSuccessCardProps> = ({
+  total = 0,
+  itemCount = 0,
+  orderNumber,
+}) => {
   return (
     <Card
       style={{
-        width: 380,
-        borderRadius: 12,
-        background: 'linear-gradient(145deg, #f6ffed 0%, #ffffff 100%)',
-        border: '1px solid #b7eb8f',
-      }}
-      styles={{
-        body: { padding: 24, textAlign: 'center' },
+        borderRadius: 16,
+        background: 'linear-gradient(145deg, #52c41a 0%, #73d13d 100%)',
+        border: 'none',
+        boxShadow: '0 8px 24px rgba(82,196,26,0.35)',
+        maxWidth: 400,
+        margin: '0 auto',
       }}
     >
-      <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
-      <Typography.Title level={4} style={{ margin: '0 0 8px', color: '#52c41a' }}>
-        Order Placed Successfully!
-      </Typography.Title>
-      <Typography.Text type="secondary" style={{ display: 'block', marginBottom: 16 }}>
-        Thank you for your purchase
-      </Typography.Text>
+      <div style={{ textAlign: 'center', padding: '20px 0' }}>
+        <div
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto 16px',
+          }}
+        >
+          <span style={{ fontSize: 40 }}>✅</span>
+        </div>
 
-      <Divider style={{ margin: '16px 0' }} />
+        <Title level={3} style={{ color: '#fff', margin: '0 0 8px' }}>
+          Order Placed!
+        </Title>
+        <Text style={{ color: 'rgba(255,255,255,0.85)', display: 'block', marginBottom: 24 }}>
+          Thank you for your purchase!
+        </Text>
 
-      <Space direction="vertical" style={{ width: '100%' }} size={8}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography.Text type="secondary">Order Number:</Typography.Text>
-          <Typography.Text strong>{orderNumber}</Typography.Text>
+        <div
+          style={{
+            background: 'rgba(255,255,255,0.15)',
+            borderRadius: 12,
+            padding: 16,
+            marginBottom: 16,
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+            <Text style={{ color: 'rgba(255,255,255,0.7)' }}>Order Number:</Text>
+            <Text strong style={{ color: '#fff' }}>
+              {orderNumber}
+            </Text>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+            <Text style={{ color: 'rgba(255,255,255,0.7)' }}>Items:</Text>
+            <Text style={{ color: '#fff' }}>{itemCount} items</Text>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Text style={{ color: 'rgba(255,255,255,0.7)' }}>Total:</Text>
+            <Text strong style={{ color: '#fff', fontSize: 18 }}>
+              ¥{total.toLocaleString()}
+            </Text>
+          </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography.Text type="secondary">Items:</Typography.Text>
-          <Typography.Text>{itemCount}</Typography.Text>
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Typography.Text type="secondary">Total Paid:</Typography.Text>
-          <Typography.Text style={{ fontSize: 16, fontWeight: 700, color: '#f5222d' }}>
-            ¥{total?.toFixed(2)}
-          </Typography.Text>
-        </div>
-      </Space>
+
+        <Button
+          ghost
+          size="large"
+          style={{ borderRadius: 8 }}
+          onClick={() => window.location.reload()}
+        >
+          Continue Shopping
+        </Button>
+      </div>
     </Card>
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -585,9 +695,7 @@ const useStreamText = (text: string) => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const run = useCallback(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
+    if (timerRef.current) clearInterval(timerRef.current);
 
     timerRef.current = setInterval(() => {
       if (textRef.current < text.length) {
@@ -599,9 +707,7 @@ const useStreamText = (text: string) => {
         setTextIndex(textRef.current);
       } else {
         setStreamStatus('FINISHED');
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
+        if (timerRef.current) clearInterval(timerRef.current);
       }
     }, 100);
   }, [text]);
@@ -626,325 +732,227 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── Agent 指令 ───────────────────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════════
+// v0.9 Agent Command Definition
+// Three cards merged in one Surface, implementing three-column layout via MultiCardContainer + ColWrapper
+// ═══════════════════════════════════════════════════════════════════════════════
 
-// 创建三个 Surface 的命令
-const CreateProductListCard: XAgentCommand_v0_9 = {
+// Create shopping Surface
+const CreateShopSurface: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
-    surfaceId: 'productList',
+    surfaceId: 'shop',
     catalogId: 'local://cart_demo_catalog.json',
   },
 };
 
-const CreateCartCard: XAgentCommand_v0_9 = {
-  version: 'v0.9',
-  createSurface: {
-    surfaceId: 'cart',
-    catalogId: 'local://cart_demo_catalog.json',
-  },
-};
-
-const CreateOrderSummaryCard: XAgentCommand_v0_9 = {
-  version: 'v0.9',
-  createSurface: {
-    surfaceId: 'orderSummary',
-    catalogId: 'local://cart_demo_catalog.json',
-  },
-};
-
-// 更新商品列表卡片
-const UpdateProductListCard: XAgentCommand_v0_9 = {
+// Update shopping Surface components (three-column layout)
+const UpdateShopComponents: XAgentCommand_v0_9 = {
   version: 'v0.9',
   updateComponents: {
-    surfaceId: 'productList',
+    surfaceId: 'shop',
     components: [
+      // Product list card
       {
-        id: 'product-list',
+        id: 'product-list-card',
         component: 'ProductListCard',
-        products: { path: '/store/products' },
-        cartItems: { path: '/store/cart' },
+        products: { path: '/products' },
+        cart: { path: '/cart' },
         action: {
           event: {
             name: 'add_to_cart',
-            context: {
-              product: {},
-            },
+            context: { product: {} },
           },
         },
       },
-      {
-        id: 'root',
-        component: 'CardContainer',
-        layout: 'vertical',
-        children: ['product-list'],
-      },
-    ],
-  },
-};
-
-// 更新购物车卡片
-const UpdateCartCard: XAgentCommand_v0_9 = {
-  version: 'v0.9',
-  updateComponents: {
-    surfaceId: 'cart',
-    components: [
+      // Shopping cart card
       {
         id: 'cart-card',
         component: 'CartCard',
-        items: { path: '/store/cart' },
-        action: {
+        cart: { path: '/cart' },
+        updateAction: {
           event: {
-            name: 'update_cart',
-            context: {
-              productId: {},
-              quantity: {},
-              actionType: {},
-            },
+            name: 'update_quantity',
+            context: { productId: {}, quantity: {} },
+          },
+        },
+        removeAction: {
+          event: {
+            name: 'remove_from_cart',
+            context: { productId: {} },
           },
         },
       },
+      // Order summary card
       {
-        id: 'root',
-        component: 'CardContainer',
-        layout: 'vertical',
-        children: ['cart-card'],
-      },
-    ],
-  },
-};
-
-// 更新订单摘要卡片
-const UpdateOrderSummaryCard: XAgentCommand_v0_9 = {
-  version: 'v0.9',
-  updateComponents: {
-    surfaceId: 'orderSummary',
-    components: [
-      {
-        id: 'order-summary',
+        id: 'order-summary-card',
         component: 'OrderSummaryCard',
-        items: { path: '/store/cart' },
-        discount: { path: '/store/discount' },
-        shipping: { path: '/store/shipping' },
-        action: {
+        cart: { path: '/cart' },
+        checkoutAction: {
           event: {
             name: 'checkout',
-            context: {
-              items: {},
-              subtotal: {},
-              discount: {},
-              shipping: {},
-              total: {},
-              itemCount: {},
-            },
+            context: { orderData: {} },
           },
         },
       },
+      // Wrap each card with ColWrapper to implement equal-width three columns
+      {
+        id: 'col-products',
+        component: 'ColWrapper',
+        span: 8,
+        children: ['product-list-card'],
+      },
+      {
+        id: 'col-cart',
+        component: 'ColWrapper',
+        span: 8,
+        children: ['cart-card'],
+      },
+      {
+        id: 'col-summary',
+        component: 'ColWrapper',
+        span: 8,
+        children: ['order-summary-card'],
+      },
+      // Root container: MultiCardContainer contains three columns
       {
         id: 'root',
-        component: 'CardContainer',
-        layout: 'vertical',
-        children: ['order-summary'],
+        component: 'MultiCardContainer',
+        children: ['col-products', 'col-cart', 'col-summary'],
       },
     ],
   },
 };
 
-// 初始化数据模型
+// Initialize data model
 const InitDataModel: XAgentCommand_v0_9 = {
   version: 'v0.9',
   updateDataModel: {
-    surfaceId: 'productList',
-    path: '/store',
+    surfaceId: 'shop',
+    path: '/',
     value: {
-      products: [
-        {
-          id: 1,
-          name: 'Wireless Bluetooth Headphones',
-          description: 'Premium sound quality with active noise cancellation',
-          price: 299,
-          tag: 'Best Seller',
-          stock: 50,
-        },
-        {
-          id: 2,
-          name: 'Smart Watch Pro',
-          description: 'Health monitoring, GPS, and 7-day battery life',
-          price: 599,
-          tag: 'New',
-          stock: 30,
-        },
-        {
-          id: 3,
-          name: 'Mechanical Keyboard',
-          description: 'RGB backlight, hot-swappable switches',
-          price: 399,
-          stock: 100,
-        },
-        {
-          id: 4,
-          name: 'USB-C Hub 7-in-1',
-          description: 'HDMI, USB 3.0, SD card reader, PD charging',
-          price: 159,
-          tag: 'Hot',
-          stock: 200,
-        },
-        {
-          id: 5,
-          name: 'Portable Power Bank',
-          description: '20000mAh, 65W fast charging, compact design',
-          price: 199,
-          stock: 150,
-        },
-      ],
+      products: allProducts,
       cart: [],
-      discount: 10, // 10% discount
-      shipping: 0, // Free shipping
     },
   },
 };
 
-// 创建成功结果卡片
-const CreateSuccessResult: XAgentCommand_v0_9 = {
+// Create success card after checkout
+const CreateCheckoutSuccessSurface: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
-    surfaceId: 'successResult',
+    surfaceId: 'checkout-success',
     catalogId: 'local://cart_demo_catalog.json',
   },
 };
 
-const UpdateSuccessResult = (data: any): XAgentCommand_v0_9 => ({
+const UpdateCheckoutSuccessComponents = (
+  total: number,
+  itemCount: number,
+  orderNumber: string,
+): XAgentCommand_v0_9 => ({
   version: 'v0.9',
   updateComponents: {
-    surfaceId: 'successResult',
+    surfaceId: 'checkout-success',
     components: [
       {
-        id: 'success-result',
-        component: 'SuccessResult',
-        orderNumber: `ORD-${Date.now().toString(36).toUpperCase()}`,
-        total: data?.total,
-        itemCount: data?.itemCount,
-      },
-      {
         id: 'root',
-        component: 'CardContainer',
-        layout: 'vertical',
-        children: ['success-result'],
+        component: 'CheckoutSuccessCard',
+        total,
+        itemCount,
+        orderNumber,
       },
     ],
   },
 });
 
-// ─── App ──────────────────────────────────────────────────────────────────────
+// ─── App Component ──────────────────────────────────────────────────────────────────────
 const App = () => {
-  const [cards, setCards] = useState<CardNode[]>([]);
+  const [card, setCard] = useState<CardNode[]>([]);
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_9[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
+
+  // Cart state (for cross-component data sharing)
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   const onAgentCommand = (command: XAgentCommand_v0_9) => {
     if ('createSurface' in command) {
       const surfaceId = command.createSurface.surfaceId;
-      setCards((prev) => {
+      setCard((prev) => {
         if (prev.some((c) => c.id === surfaceId)) return prev;
         return [...prev, { id: surfaceId, timestamp: Date.now() }];
       });
     } else if ('deleteSurface' in command) {
-      setCards((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
+      setCard((prev) => prev.filter((c) => c.id !== command.deleteSurface.surfaceId));
     }
     setCommandQueue((prev) => [...prev, command]);
   };
 
-  // 处理 Card 内部 action 事件
+  // Handle cart operations
   const handleAction = (payload: ActionPayload) => {
     const { name, context } = payload;
 
     switch (name) {
       case 'add_to_cart': {
-        // 添加商品到购物车
-        const product = context?.product;
-        if (product) {
-          // 通过 updateDataModel 更新购物车数据
-          onAgentCommand({
-            version: 'v0.9',
-            updateDataModel: {
-              surfaceId: 'productList',
-              path: '/store/cart',
-              value: { __action: 'add', item: { ...product, quantity: 1 } },
-            },
-          });
-        }
-        break;
-      }
+        const product = context?.product as Product;
+        if (!product) return;
 
-      case 'update_cart': {
-        // 更新购物车商品数量或移除商品
-        const { productId, quantity, actionType } = context || {};
-        if (actionType === 'remove') {
-          onAgentCommand({
-            version: 'v0.9',
-            updateDataModel: {
-              surfaceId: 'productList',
-              path: '/store/cart',
-              value: { __action: 'remove', productId },
-            },
-          });
-        } else if (actionType === 'update') {
-          onAgentCommand({
-            version: 'v0.9',
-            updateDataModel: {
-              surfaceId: 'productList',
-              path: '/store/cart',
-              value: { __action: 'update', productId, quantity },
-            },
-          });
-        }
-        break;
-      }
-
-      case 'checkout': {
-        // 结算流程
-        runFooter();
-
-        // 删除所有购物相关卡片
-        onAgentCommand({ version: 'v0.9', deleteSurface: { surfaceId: 'productList' } });
-        onAgentCommand({ version: 'v0.9', deleteSurface: { surfaceId: 'cart' } });
-        onAgentCommand({ version: 'v0.9', deleteSurface: { surfaceId: 'orderSummary' } });
-
-        // 创建并显示成功结果卡片
-        onAgentCommand(CreateSuccessResult);
-        onAgentCommand(UpdateSuccessResult(context));
-
-        // 清空购物车数据
-        onAgentCommand({
-          version: 'v0.9',
-          updateDataModel: {
-            surfaceId: 'productList',
-            path: '/store/cart',
-            value: [],
-          },
+        setCart((prev) => {
+          const existing = prev.find((item) => item.product.id === product.id);
+          if (existing) {
+            return prev.map((item) =>
+              item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
+            );
+          }
+          return [...prev, { product, quantity: 1 }];
         });
         break;
       }
 
-      default:
-        console.log('Unknown action:', name, context);
+      case 'update_quantity': {
+        const { productId, quantity } = context || {};
+        if (!productId || !quantity) return;
+
+        setCart((prev) =>
+          prev.map((item) => (item.product.id === productId ? { ...item, quantity } : item)),
+        );
+        break;
+      }
+
+      case 'remove_from_cart': {
+        const { productId } = context || {};
+        if (!productId) return;
+
+        setCart((prev) => prev.filter((item) => item.product.id !== productId));
+        break;
+      }
+
+      case 'checkout': {
+        const { total, itemCount } = context || {};
+        const orderNumber = `ORD-${Date.now().toString(36).toUpperCase()}`;
+
+        // Delete shopping Surface
+        onAgentCommand({ version: 'v0.9', deleteSurface: { surfaceId: 'shop' } });
+
+        // Create checkout success card
+        setTimeout(() => {
+          onAgentCommand(CreateCheckoutSuccessSurface);
+          onAgentCommand(UpdateCheckoutSuccessComponents(total, itemCount, orderNumber));
+        }, 100);
+
+        // Clear cart
+        setCart([]);
+        break;
+      }
     }
   };
 
   const {
     text: textHeader,
     streamStatus: streamStatusHeader,
-    timestamp: timestampHeader,
     run: runHeader,
     reset: resetHeader,
   } = useStreamText(contentHeader);
-
-  const {
-    text: textFooter,
-    timestamp: timestampFooter,
-    run: runFooter,
-    reset: resetFooter,
-  } = useStreamText(orderConfirmation);
 
   useEffect(() => {
     runHeader();
@@ -952,49 +960,47 @@ const App = () => {
 
   useEffect(() => {
     if (streamStatusHeader === 'FINISHED') {
-      // 创建三个 Surface
-      onAgentCommand(CreateProductListCard);
-      onAgentCommand(CreateCartCard);
-      onAgentCommand(CreateOrderSummaryCard);
-
-      // 更新组件
-      onAgentCommand(UpdateProductListCard);
-      onAgentCommand(UpdateCartCard);
-      onAgentCommand(UpdateOrderSummaryCard);
-
-      // 初始化数据模型
+      onAgentCommand(CreateShopSurface);
+      onAgentCommand(UpdateShopComponents);
       onAgentCommand(InitDataModel);
     }
   }, [streamStatusHeader, sessionKey]);
 
-  // 重新加载
+  // Update Surface data model when cart changes
+  useEffect(() => {
+    if (card.some((c) => c.id === 'shop')) {
+      onAgentCommand({
+        version: 'v0.9',
+        updateDataModel: {
+          surfaceId: 'shop',
+          path: '/cart',
+          value: cart,
+        },
+      });
+    }
+  }, [cart]);
+
   const handleReload = useCallback(() => {
     resetHeader();
-    resetFooter();
-
-    // 删除所有 Surface
     const deleteCommands: XAgentCommand_v0_9[] = [
-      { version: 'v0.9', deleteSurface: { surfaceId: 'productList' } },
-      { version: 'v0.9', deleteSurface: { surfaceId: 'cart' } },
-      { version: 'v0.9', deleteSurface: { surfaceId: 'orderSummary' } },
-      { version: 'v0.9', deleteSurface: { surfaceId: 'successResult' } },
+      { version: 'v0.9', deleteSurface: { surfaceId: 'shop' } },
+      { version: 'v0.9', deleteSurface: { surfaceId: 'checkout-success' } },
     ];
     setCommandQueue((prev) => [...prev, ...deleteCommands]);
-    setCards([]);
-
+    setCard([]);
+    setCart([]);
     setTimeout(() => {
       setSessionKey((prev) => prev + 1);
     }, 50);
-  }, [resetHeader, resetFooter]);
+  }, [resetHeader]);
 
   const items = [
     {
       content: {
         texts: [
-          { text: textHeader, timestamp: timestampHeader },
-          { text: textFooter, timestamp: timestampFooter },
+          { text: textHeader, timestamp: streamStatusHeader === 'RUNNING' ? Date.now() : 0 },
         ].filter((item) => item.timestamp !== 0),
-        card: cards,
+        card,
       } as ContentType,
       role: 'assistant',
       key: sessionKey,
@@ -1005,7 +1011,7 @@ const App = () => {
     <div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" icon={<ReloadOutlined />} onClick={handleReload}>
-          Reset Demo
+          Reload
         </Button>
       </div>
 
@@ -1014,15 +1020,15 @@ const App = () => {
         commands={commandQueue}
         onAction={handleAction}
         components={{
-          Text,
-          CardContainer,
           ProductListCard,
           CartCard,
           OrderSummaryCard,
-          SuccessResult,
+          CheckoutSuccessCard,
+          MultiCardContainer,
+          ColWrapper,
         }}
       >
-        <Bubble.List items={items} style={{ height: 720 }} role={role} />
+        <Bubble.List items={items} style={{ height: 700 }} role={role} />
       </XCard.Box>
     </div>
   );

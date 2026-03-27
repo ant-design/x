@@ -6,13 +6,13 @@ import XMarkdown from '@ant-design/x-markdown';
 import { Button, Card, List, Progress, Rate, Spin, Tag, Typography } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-// 导入本地 catalog schema
+// Import local catalog schema
 import localCatalog from './catalog-streaming.json';
 
-// 注册本地 catalog
+// Register local catalog
 registerCatalog(localCatalog as unknown as Catalog);
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -40,7 +40,7 @@ const role = {
   },
 };
 
-// ─── 餐厅数据 ────────────────────────────────────────────────────────────────────
+// ─── Restaurant Data ────────────────────────────────────────────────────────────────────
 interface RestaurantItem {
   id: string;
   name: string;
@@ -56,47 +56,51 @@ interface RestaurantItem {
 const RESTAURANT_DATA: RestaurantItem[] = [
   {
     id: 'r1',
-    name: '江南小馆',
-    cuisine: '江浙菜',
+    name: 'Jiangnan Bistro',
+    cuisine: 'Jiangsu-Zhejiang',
     rating: 4.8,
     priceRange: '¥80-150',
     distance: '500m',
-    tags: ['本帮菜', '环境优雅'],
-    description: '正宗江浙风味，精选本地食材，传统工艺烹制。招牌菜：红烧肉、清蒸鲈鱼。',
+    tags: ['Local Cuisine', 'Elegant Ambiance'],
+    description:
+      'Authentic Jiangsu-Zhejiang flavors with locally sourced ingredients. Signature dishes: Braised Pork, Steamed Sea Bass.',
   },
   {
     id: 'r2',
-    name: '川味居',
-    cuisine: '川菜',
+    name: 'Sichuan House',
+    cuisine: 'Sichuan',
     rating: 4.6,
     priceRange: '¥60-120',
     distance: '800m',
-    tags: ['麻辣鲜香', '性价比高'],
-    description: '地道川味，麻辣鲜香。推荐：水煮鱼、麻婆豆腐、回锅肉。',
+    tags: ['Spicy & Flavorful', 'Great Value'],
+    description:
+      'Authentic Sichuan cuisine, spicy and aromatic. Recommended: Boiled Fish, Mapo Tofu, Twice-cooked Pork.',
   },
   {
     id: 'r3',
-    name: '樱花日料',
-    cuisine: '日本料理',
+    name: 'Sakura Japanese',
+    cuisine: 'Japanese',
     rating: 4.9,
     priceRange: '¥150-300',
     distance: '1.2km',
-    tags: ['精致料理', '约会首选'],
-    description: '新鲜刺身、精致寿司，日式传统与现代融合。主厨来自东京银座。',
+    tags: ['Exquisite Cuisine', 'Perfect for Dates'],
+    description:
+      'Fresh sashimi, exquisite sushi, fusion of traditional and modern Japanese. Chef from Tokyo Ginza.',
   },
   {
     id: 'r4',
-    name: '意式花园',
-    cuisine: '西餐',
+    name: 'Italian Garden',
+    cuisine: 'Western',
     rating: 4.5,
     priceRange: '¥120-250',
     distance: '900m',
-    tags: ['浪漫氛围', '手工意面'],
-    description: '正宗意大利风味，手工制作意面，进口食材。招牌：奶油蘑菇意面、提拉米苏。',
+    tags: ['Romantic Atmosphere', 'Handmade Pasta'],
+    description:
+      'Authentic Italian flavors, handmade pasta with imported ingredients. Signature: Creamy Mushroom Pasta, Tiramisu.',
   },
 ];
 
-// ─── Text 组件 ────────────────────────────────────────────────────────────────
+// ─── Text Component ────────────────────────────────────────────────────────────────
 interface TextProps {
   text?: string;
   variant?: 'h1' | 'h2' | 'h3' | 'body' | 'success' | string;
@@ -129,7 +133,7 @@ const Text: React.FC<TextProps> = ({ text, variant, children, status }) => {
   return <p style={finalStyle}>{content}</p>;
 };
 
-// ─── LoadingProgress 组件 ──────────────────────────────────────────────────────
+// ─── LoadingProgress Component ──────────────────────────────────────────────────────
 interface LoadingProgressProps {
   percent?: number;
   status?: 'active' | 'success' | 'normal';
@@ -155,7 +159,7 @@ const LoadingProgress: React.FC<LoadingProgressProps> = ({
     >
       <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
         <Typography.Text type="secondary" style={{ fontSize: 13 }}>
-          {text || '正在加载推荐结果...'}
+          {text || 'Loading recommendations...'}
         </Typography.Text>
         <Typography.Text style={{ fontSize: 13, fontWeight: 500 }}>
           {Math.round(percent)}%
@@ -174,7 +178,7 @@ const LoadingProgress: React.FC<LoadingProgressProps> = ({
   );
 };
 
-// ─── RestaurantCard 组件 ────────────────────────────────────────────────────────
+// ─── RestaurantCard Component ────────────────────────────────────────────────────────
 interface RestaurantCardProps {
   restaurant?: RestaurantItem;
   index?: number;
@@ -186,7 +190,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
 
   useEffect(() => {
     if (!isLoading && restaurant) {
-      // 逐个加载动画延迟
+      // Staggered loading animation delay
       const timer = setTimeout(() => {
         setVisible(true);
       }, index * 200);
@@ -204,7 +208,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'center', padding: 20 }}>
-          <Spin tip="加载中..." />
+          <Spin tip="Loading..." />
         </div>
       </Card>
     );
@@ -226,7 +230,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
       styles={{ body: { padding: '16px 20px' } }}
     >
       <div style={{ display: 'flex', gap: 16 }}>
-        {/* 左侧图标 */}
+        {/* Left icon */}
         <div
           style={{
             width: 64,
@@ -243,7 +247,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
           🍽️
         </div>
 
-        {/* 右侧内容 */}
+        {/* Right content */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
             <Typography.Text strong style={{ fontSize: 16 }}>
@@ -297,7 +301,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
   );
 };
 
-// ─── RestaurantList 组件 ────────────────────────────────────────────────────────
+// ─── RestaurantList Component ────────────────────────────────────────────────────────
 interface RestaurantListProps {
   restaurants?: RestaurantItem[];
   loadingProgress?: number;
@@ -321,12 +325,15 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
         maxWidth: 480,
       }}
     >
-      {/* 进度条 */}
+      {/* Progress bar */}
       {isStreaming && loadingProgress < 100 && (
-        <LoadingProgress percent={loadingProgress} text="AI 正在为您筛选推荐..." />
+        <LoadingProgress
+          percent={loadingProgress}
+          text="AI is selecting recommendations for you..."
+        />
       )}
 
-      {/* 餐厅列表 */}
+      {/* Restaurant list */}
       <List
         dataSource={visibleRestaurants}
         renderItem={(item, index) => (
@@ -334,7 +341,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
         )}
       />
 
-      {/* 加载完成提示 */}
+      {/* Loading complete message */}
       {!isStreaming && safeRestaurants.length > 0 && (
         <div
           style={{
@@ -344,7 +351,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
           }}
         >
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
-            ✅ 已为您推荐 {safeRestaurants.length} 家餐厅
+            ✅ Recommended {safeRestaurants.length} restaurants for you
           </Typography.Text>
         </div>
       )}
@@ -352,7 +359,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   );
 };
 
-// ─── Container 组件 ────────────────────────────────────────────────────────────
+// ─── Container Component ────────────────────────────────────────────────────────────
 interface ContainerProps {
   children?: React.ReactNode;
 }
@@ -376,7 +383,7 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -422,7 +429,7 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── 进度 Hook ────────────────────────────────────────────────────────────────
+// ─── Progress Hook ────────────────────────────────────────────────────────────────
 const useProgress = () => {
   const [progress, setProgress] = useState(0);
   const [progressStatus, setProgressStatus] = useState<'active' | 'success'>('active');
@@ -441,7 +448,7 @@ const useProgress = () => {
           setProgressStatus('success');
           return 100;
         }
-        // 模拟真实加载：速度不均匀
+        // Simulate real loading: uneven speed
         const increment = Math.random() * 8 + 2;
         return Math.min(prev + increment, 100);
       });
@@ -461,26 +468,26 @@ const useProgress = () => {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 流式推荐文本内容
+// Streaming Recommendation Text Content
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const INTRO_TEXT = `您好！我是您的美食推荐助手 🍽️
+const INTRO_TEXT = `Hello! I'm your food recommendation assistant 🍽️
 
-根据您的位置和偏好，我正在为您筛选附近最优质的餐厅...
+Based on your location and preferences, I'm selecting the best restaurants nearby for you...
 
-以下是我的推荐理由：
+Here are my recommendation criteria:
 
-1. **距离优先**：优先推荐步行15分钟内可达的餐厅
-2. **品质保障**：筛选评分4.5以上的优质商家
-3. **口味多样**：涵盖中餐、日料、西餐等多种风味
+1. **Distance First**: Prioritizing restaurants within 15 minutes walking distance
+2. **Quality Guaranteed**: Selecting only restaurants with ratings above 4.5
+3. **Diverse Cuisines**: Covering Chinese, Japanese, Western, and more
 
-正在为您生成个性化推荐...`;
+Generating personalized recommendations for you...`;
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// v0.9 Agent 命令定义
+// v0.9 Agent Command Definitions
 // ═══════════════════════════════════════════════════════════════════════════════
 
-// 创建 Surface 命令
+// Create Surface Command
 const CreateSurfaceCommand: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
@@ -489,7 +496,7 @@ const CreateSurfaceCommand: XAgentCommand_v0_9 = {
   },
 };
 
-// 更新组件命令
+// Update Components Command
 const UpdateComponentsCommand: XAgentCommand_v0_9 = {
   version: 'v0.9',
   updateComponents: {
@@ -498,14 +505,14 @@ const UpdateComponentsCommand: XAgentCommand_v0_9 = {
       {
         id: 'title',
         component: 'Text',
-        text: 'AI 美食推荐',
+        text: 'AI Food Recommendations',
         variant: 'h1',
       },
       {
         id: 'progress',
         component: 'LoadingProgress',
         percent: { path: '/progress' },
-        status: 'active',
+        status: { path: '/progressStatus' },
       },
       {
         id: 'restaurant-list',
@@ -523,7 +530,7 @@ const UpdateComponentsCommand: XAgentCommand_v0_9 = {
   },
 };
 
-// 创建进度更新命令
+// Create progress update command
 const createProgressUpdateCommand = (percent: number): XAgentCommand_v0_9 => ({
   version: 'v0.9',
   updateDataModel: {
@@ -533,7 +540,7 @@ const createProgressUpdateCommand = (percent: number): XAgentCommand_v0_9 => ({
   },
 });
 
-// 创建餐厅列表更新命令（增量更新）
+// Create restaurant list update command (incremental update)
 const createRestaurantUpdateCommand = (restaurants: RestaurantItem[]): XAgentCommand_v0_9 => ({
   version: 'v0.9',
   updateDataModel: {
@@ -543,7 +550,7 @@ const createRestaurantUpdateCommand = (restaurants: RestaurantItem[]): XAgentCom
   },
 });
 
-// 创建流式状态更新命令
+// Create streaming status update command
 const createStreamingStatusCommand = (isStreaming: boolean): XAgentCommand_v0_9 => ({
   version: 'v0.9',
   updateDataModel: {
@@ -553,13 +560,23 @@ const createStreamingStatusCommand = (isStreaming: boolean): XAgentCommand_v0_9 
   },
 });
 
-// ─── App ──────────────────────────────────────────────────────────────────────
+// Create progress status update command
+const createProgressStatusCommand = (status: 'active' | 'success'): XAgentCommand_v0_9 => ({
+  version: 'v0.9',
+  updateDataModel: {
+    surfaceId: 'recommendation',
+    path: '/progressStatus',
+    value: status,
+  },
+});
+
+// ─── App ────────────────────────────────────────────────────────────────────────
 const App = () => {
   const [card, setCard] = useState<CardNode[]>([]);
   const [commandQueue, setCommandQueue] = useState<XAgentCommand_v0_9[]>([]);
   const [sessionKey, setSessionKey] = useState(0);
 
-  // 流式文本状态
+  // Streaming text state
   const {
     text: streamText,
     streamStatus,
@@ -568,10 +585,10 @@ const App = () => {
     reset: resetStream,
   } = useStreamText(INTRO_TEXT);
 
-  // 进度状态
+  // Progress state
   const { progress, progressStatus, start: startProgress, reset: resetProgress } = useProgress();
 
-  // 已加载的餐厅
+  // Loaded restaurants
   const [loadedRestaurants, setLoadedRestaurants] = useState<RestaurantItem[]>([]);
 
   const onAgentCommand = (command: XAgentCommand_v0_9) => {
@@ -587,7 +604,7 @@ const App = () => {
     setCommandQueue((prev) => [...prev, command]);
   };
 
-  // 重置整个流程
+  // Reset the entire process
   const handleReload = useCallback(() => {
     resetStream();
     resetProgress();
@@ -604,41 +621,42 @@ const App = () => {
     }, 50);
   }, [resetStream, resetProgress]);
 
-  // 流式文本开始
+  // Start streaming text
   useEffect(() => {
     runStream();
   }, [sessionKey, runStream]);
 
-  // 文本流式完成后，开始加载组件
+  // After streaming text completes, start loading components
   useEffect(() => {
     if (streamStatus === 'FINISHED') {
-      // 按照 A2UI v0.9 规范顺序发送命令
-      // 1. 创建 Surface
+      // Send commands in A2UI v0.9 spec order
+      // 1. Create Surface
       onAgentCommand(CreateSurfaceCommand);
 
-      // 2. 更新组件配置
+      // 2. Update components configuration
       onAgentCommand(UpdateComponentsCommand);
 
-      // 3. 初始化数据模型
+      // 3. Initialize data model
       onAgentCommand(createStreamingStatusCommand(true));
       onAgentCommand(createRestaurantUpdateCommand([]));
+      onAgentCommand(createProgressStatusCommand('active'));
 
-      // 4. 开始进度动画
+      // 4. Start progress animation
       startProgress();
     }
   }, [streamStatus, sessionKey, startProgress]);
 
-  // 进度更新时，增量添加餐厅卡片
+  // When progress updates, incrementally add restaurant cards
   useEffect(() => {
     if (progress > 0 && progressStatus === 'active') {
-      // 更新进度
+      // Update progress
       onAgentCommand(createProgressUpdateCommand(progress));
 
-      // 根据进度计算应该显示几个餐厅
+      // Calculate how many restaurants to show based on progress
       const visibleCount = Math.ceil((progress / 100) * RESTAURANT_DATA.length);
       const newRestaurants = RESTAURANT_DATA.slice(0, visibleCount);
 
-      // 增量更新餐厅列表
+      // Incrementally update restaurant list
       if (newRestaurants.length !== loadedRestaurants.length) {
         setLoadedRestaurants(newRestaurants);
         onAgentCommand(createRestaurantUpdateCommand(newRestaurants));
@@ -646,11 +664,12 @@ const App = () => {
     }
   }, [progress, progressStatus]);
 
-  // 进度完成
+  // Progress complete
   useEffect(() => {
     if (progressStatus === 'success' && loadedRestaurants.length === RESTAURANT_DATA.length) {
-      // 设置 isStreaming 为 false
+      // Set isStreaming to false, progress status to success
       onAgentCommand(createStreamingStatusCommand(false));
+      onAgentCommand(createProgressStatusCommand('success'));
     }
   }, [progressStatus, loadedRestaurants.length]);
 
@@ -671,7 +690,7 @@ const App = () => {
     <div>
       <div style={{ marginBottom: 16 }}>
         <Button type="primary" icon={<ReloadOutlined />} onClick={handleReload}>
-          重新推荐
+          Recommend Again
         </Button>
       </div>
 

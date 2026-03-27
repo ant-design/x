@@ -6,10 +6,10 @@ import XMarkdown from '@ant-design/x-markdown';
 import { Button, Form, Input, message, Select, Space, Steps, Typography } from 'antd';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-// 导入本地 catalog schema
+// Import local catalog schema
 import localCatalog from './catalog-form.json';
 
-// 注册本地 catalog
+// Register local catalog
 registerCatalog(localCatalog as unknown as Catalog);
 
 const { Title, Text } = Typography;
@@ -18,7 +18,7 @@ const { Option } = Select;
 const contentHeader =
   'Welcome to register! 🎉\n\nPlease fill in your information to create an account. We will verify your information step by step.';
 
-// ─── 类型定义 ────────────────────────────────────────────────────────────────
+// ─── Type Definitions ────────────────────────────────────────────────────────────────
 type TextNode = { text: string; timestamp: number };
 type CardNode = { timestamp: number; id: string };
 type ContentType = {
@@ -26,7 +26,7 @@ type ContentType = {
   card: CardNode[];
 };
 
-// ─── 角色配置 ────────────────────────────────────────────────────────────────
+// ─── Role Configuration ────────────────────────────────────────────────────────────────
 const role = {
   assistant: {
     contentRender: (content: ContentType) => {
@@ -47,7 +47,7 @@ const role = {
   },
 };
 
-// ─── RegistrationForm 组件 ─────────────────────────────────────────────────────
+// ─── RegistrationForm Component ─────────────────────────────────────────────────────
 interface RegistrationFormProps {
   step?: number;
   status?: 'error' | 'success' | 'loading';
@@ -299,7 +299,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   );
 };
 
-// ─── SuccessCard 组件 ──────────────────────────────────────────────────────────
+// ─── SuccessCard Component ──────────────────────────────────────────────────────────
 interface SuccessCardProps {
   username?: string;
   email?: string;
@@ -356,7 +356,7 @@ const SuccessCard: React.FC<SuccessCardProps> = ({ username, email, accountType 
   );
 };
 
-// ─── 流式文本 Hook ────────────────────────────────────────────────────────────
+// ─── Streaming Text Hook ────────────────────────────────────────────────────────────
 const useStreamText = (text: string) => {
   const textRef = React.useRef(0);
   const [textIndex, setTextIndex] = React.useState(0);
@@ -406,7 +406,7 @@ const useStreamText = (text: string) => {
   };
 };
 
-// ─── Agent 指令 ───────────────────────────────────────────────────────────────
+// ─── Agent Commands ───────────────────────────────────────────────────────────────
 const CreateCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
@@ -421,7 +421,7 @@ const UpdateCard: XAgentCommand_v0_9 = {
     surfaceId: 'registration',
     components: [
       {
-        id: 'registration-form',
+        id: 'root',
         component: 'RegistrationForm',
         step: 0,
         status: { path: '/registration/status' },
@@ -453,7 +453,7 @@ const UpdateModel: XAgentCommand_v0_9 = {
   },
 };
 
-// ─── 结果卡片配置 ─────────────────────────────────────────────────────────────
+// ─── Result Card Configuration ─────────────────────────────────────────────────────
 const CreateResultCard: XAgentCommand_v0_9 = {
   version: 'v0.9',
   createSurface: {
@@ -469,7 +469,7 @@ const UpdateResultCard = (formData: any): XAgentCommand_v0_9 => {
       surfaceId: 'result',
       components: [
         {
-          id: 'success-card',
+          id: 'root',
           component: 'SuccessCard',
           username: formData?.username,
           email: formData?.email,
