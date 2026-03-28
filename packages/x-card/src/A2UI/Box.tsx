@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BoxProps } from './types/box';
 import Context from './Context';
 import { loadCatalog, type Catalog } from './catalog';
@@ -9,15 +9,31 @@ const Box: React.FC<BoxProps> = ({ children, commands = [], components, onAction
   const [catalogMap, setCatalogMap] = useState<Map<string, Catalog>>(new Map());
   // Store surfaceId -> catalogId mapping
   const [surfaceCatalogMap, setSurfaceCatalogMap] = useState<Map<string, string>>(new Map());
+  // Track the number of already-processed commands to avoid re-processing on every render
+  const processedCommandsCount = useRef(0);
 
   /**
    * Listen to command queue changes, handle createSurface (load catalog) and deleteSurface (clear mapping).
    * The commands array is maintained by external demo, reference changes after each new command is appended, triggering this effect.
+   * Only new commands (appended since last render) are processed to avoid redundant work as the queue grows.
    */
   useEffect(() => {
-    if (!commands || commands.length === 0) return;
+    // commands was cleared or reset — reset the counter and bail out
+    if (!commands || commands.length === 0) {
+      processedCommandsCount.current = 0;
+      return;
+    }
 
-    for (const cmd of commands) {
+    // commands array was replaced with a shorter one (e.g. reset by parent) — reset counter and reprocess from scratch
+    if (commands.length < processedCommandsCount.current) {
+      processedCommandsCount.current = 0;
+    }
+
+    // Only process commands added since the last effect run
+    const newCommands = commands.slice(processedCommandsCount.current);
+    if (newCommands.length === 0) return;
+
+    for (const cmd of newCommands) {
       if ('createSurface' in cmd) {
         const { surfaceId, catalogId } = (cmd as A2UICommand_v0_9 & { createSurface: any })
           .createSurface;
@@ -53,6 +69,9 @@ const Box: React.FC<BoxProps> = ({ children, commands = [], components, onAction
         });
       }
     }
+
+    // Advance the pointer to the end of the current commands array
+    processedCommandsCount.current = commands.length;
   }, [commands]);
 
   return (

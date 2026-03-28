@@ -27,30 +27,69 @@ export function resolvePropsV09(
 ): Record<string, any> {
   const resolved: Record<string, any> = {};
   for (const [key, val] of Object.entries(props)) {
-    resolved[key] = resolveValueV09(val, dataModel);
+    if (key === 'action') {
+      // action.event.context 中的 { path } 是写入目标，需要精确处理，不能走通用路径解析
+      resolved[key] = resolveActionPropV09(val, dataModel);
+    } else {
+      resolved[key] = resolveValueV09(val, dataModel);
+    }
   }
   return resolved;
 }
 
 /**
+ * 精确处理 action prop：
+ * - action.event.name / 其他字段 → 正常解析路径引用
+ * - action.event.context → 保留所有 { path } 结构（写入目标，不做读取替换）
+ */
+function resolveActionPropV09(action: any, dataModel: Record<string, any>): any {
+  if (!action || typeof action !== 'object') return action;
+
+  const result: Record<string, any> = {};
+  for (const [k, v] of Object.entries(action)) {
+    if (k === 'event') {
+      result[k] = resolveActionEventV09(v, dataModel);
+    } else {
+      result[k] = resolveValueV09(v, dataModel);
+    }
+  }
+  return result;
+}
+
+/**
+ * 精确处理 action.event：
+ * - event.context → 原样保留（{ path } 是写入目标）
+ * - event 其他字段（如 name）→ 正常解析
+ */
+function resolveActionEventV09(event: any, dataModel: Record<string, any>): any {
+  if (!event || typeof event !== 'object') return event;
+
+  const result: Record<string, any> = {};
+  for (const [k, v] of Object.entries(event)) {
+    if (k === 'context') {
+      // context 中的 { path } 是写入目标，原样保留，不做路径读取
+      result[k] = v;
+    } else {
+      result[k] = resolveValueV09(v, dataModel);
+    }
+  }
+  return result;
+}
+
+/**
  * 递归解析值中的路径引用（v0.9 版本）
  *
- * 特殊处理：
  * - { path: string } → 从 dataModel 读取值
- * - action.event.context 中的 { key: { path } } → 保留 { path } 结构（写入目标）
+ * - 字符串路径（/xxx）→ 从 dataModel 读取值（向后兼容）
+ * - 数组 / 对象 → 递归处理
+ * - 字面值 → 原样返回
+ *
+ * 注意：action.event.context 的特殊处理已在 resolvePropsV09 入口处分支，
+ * 此函数无需感知 action 上下文，保持纯粹的递归解析逻辑。
  */
-function resolveValueV09(
-  val: any,
-  dataModel: Record<string, any>,
-  isActionEventContext = false,
-): any {
+function resolveValueV09(val: any, dataModel: Record<string, any>): any {
   // 处理 { path: string } 形式的路径对象
-  // 但在 action.event.context 中，{ path } 是写入目标，需要保留
   if (isPathObject(val)) {
-    if (isActionEventContext) {
-      // 在 action.event.context 中，保留 { path } 结构
-      return val;
-    }
     return getValueByPath(dataModel, val.path);
   }
   // 处理字符串路径（向后兼容）
@@ -59,19 +98,13 @@ function resolveValueV09(
   }
   // 数组递归处理
   if (Array.isArray(val)) {
-    return val.map((item) => resolveValueV09(item, dataModel, false));
+    return val.map((item) => resolveValueV09(item, dataModel));
   }
   // 对象递归处理
   if (val && typeof val === 'object') {
     const result: Record<string, any> = {};
     for (const [k, v] of Object.entries(val)) {
-      // 特殊处理：action.event.context 中的 { path } 是写入目标，应该保留
-      if (k === 'context' && 'name' in val) {
-        // 这个对象有 name 和 context，可能是 action.event
-        result[k] = resolveValueV09(v, dataModel, true);
-      } else {
-        result[k] = resolveValueV09(v, dataModel, isActionEventContext);
-      }
+      result[k] = resolveValueV09(v, dataModel);
     }
     return result;
   }
