@@ -137,7 +137,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
               >
                 <span
                   class="strut"
-                  style="height: 1.5em; vertical-align: -0.5em;"
+                  style="height: 1.2em; vertical-align: -0.35em;"
                 />
                 <span
                   class="mord"
@@ -156,10 +156,10 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                         >
                           <span
                             class="vlist"
-                            style="height: 1em;"
+                            style="height: 0.85em;"
                           >
                             <span
-                              style="top: -3.16em;"
+                              style="top: -3.01em;"
                             >
                               <span
                                 class="pstrut"
@@ -187,7 +187,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                         >
                           <span
                             class="vlist"
-                            style="height: 0.5em;"
+                            style="height: 0.35em;"
                           >
                             <span />
                           </span>
@@ -205,10 +205,10 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                         >
                           <span
                             class="vlist"
-                            style="height: 1em;"
+                            style="height: 0.85em;"
                           >
                             <span
-                              style="top: -3.16em;"
+                              style="top: -3.01em;"
                             >
                               <span
                                 class="pstrut"
@@ -263,7 +263,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                         >
                           <span
                             class="vlist"
-                            style="height: 0.5em;"
+                            style="height: 0.35em;"
                           >
                             <span />
                           </span>
@@ -285,10 +285,10 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                         >
                           <span
                             class="vlist"
-                            style="height: 1em;"
+                            style="height: 0.85em;"
                           >
                             <span
-                              style="top: -3.16em;"
+                              style="top: -3.01em;"
                             >
                               <span
                                 class="pstrut"
@@ -326,7 +326,7 @@ exports[`LaTeX Plugin should handle align* syntax replacement 1`] = `
                         >
                           <span
                             class="vlist"
-                            style="height: 0.5em;"
+                            style="height: 0.35em;"
                           >
                             <span />
                           </span>
