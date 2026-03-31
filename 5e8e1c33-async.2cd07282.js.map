@@ -1,0 +1,1 @@
+{"version":3,"sources":["docs/x-skill/skills.zh-CN.md?type=text"],"sourcesContent":["\n  import '/home/runner/work/x/x/packages/x/docs/x-skill/skills.zh-CN.md?watch=parent';\n  export const texts = [{\"value\":\"Ant Design X 提供了以下核心技能，帮助您快速构建 AI 对话应用：\",\"paraId\":0}];\n  "],"names":[],"mappings":"+PAEe,6CAAA,QADN,YACA,IAAM,EAAQ,CAAC,CAAC,MAAQ,wJAA0C,OAAS,CAAC,EAAE"}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../node_modules/react-syntax-highlighter/dist/esm/languages/prism/core.js"],"sourcesContent":["import Prism from 'prismjs';\nexport default Prism.languages.core;"],"names":[],"mappings":"6PACA,+CAAA,UAAA,EAAe,kBADG,oBACE,CAAC,SAAS,CAAC,IAAI"}

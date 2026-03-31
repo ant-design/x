@@ -1,0 +1,2 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["bca4894c"],{bca4894c:function(e,c,t){"use strict";t.d(c,"__esModule",{value:!0}),t.e(c,{ArchitectureModule:function(){return u.ArchitectureModule;},createArchitectureServices:function(){return u.createArchitectureServices;}});var u=t("507c798c");t("1b906791");}}]);
+//# sourceMappingURL=bca4894c-async.f4f9e56f.js.map
