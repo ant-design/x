@@ -18,7 +18,7 @@ tag: vVERSION
 
 ## 2.5.0
 
-`2016-03-31`
+`2026-03-31`
 
 ### @ant-design/x-card
 
