@@ -21,7 +21,7 @@ tag: vVERSION
 
 ### @ant-design/x-card
 
-- 🔥 新模块 X Card 基于 A2UI 协议的动态卡片渲染组件，让 AI Agent 能够通过结构化的 JSON 消息流，动态构建和渲染交互式界面。
+- 🔥 新模块 X Card 基于 A2UI 协议的动态卡片渲染组件，让 AI Agent 能够通过结构化的 JSON 消息流，动态构建和渲染交互式界面。[#1836](https://github.com/ant-design/x/pull/1836) 由 [kimteayon](https://github.com/kimteayon) 提交
 
 ### 其他
 
