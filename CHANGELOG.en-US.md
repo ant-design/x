@@ -22,7 +22,7 @@ tag: vVERSION
 
 ### @ant-design/x-card
 
-- New module X Card, a dynamic card rendering component based on A2UI protocol, enabling AI Agents to dynamically build and render interactive interfaces through structured JSON message streams.
+- 🔥 New module X Card, a dynamic card rendering component based on A2UI protocol, enabling AI Agents to dynamically build and render interactive interfaces through structured JSON message streams.
 
 ### Others
 
