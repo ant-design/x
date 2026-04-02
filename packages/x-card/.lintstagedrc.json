@@ -1,0 +1,4 @@
+{
+  "*.{ts,tsx}": ["biome lint --fix"],
+  "*.{ts,tsx,less,md}": ["prettier --write"]
+}

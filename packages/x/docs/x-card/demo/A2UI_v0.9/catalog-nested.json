@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local://nested_interaction_catalog.json",
+  "title": "Nested Interaction Catalog",
+  "description": "Custom catalog for nested interaction demo components - File Browser with Accordion.",
+  "catalogId": "local://nested_interaction_catalog.json",
+  "components": {
+    "Text": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "Text"
+        },
+        "text": {
+          "description": "The text content to display.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "variant": {
+          "type": "string",
+          "description": "A hint for the base text style.",
+          "enum": ["h1", "h2", "h3", "body", "success"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "FileTree": {
+      "type": "object",
+      "description": "A tree component for browsing file structure.",
+      "properties": {
+        "component": {
+          "const": "FileTree"
+        },
+        "files": {
+          "description": "File tree data structure.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": { "type": "string" },
+                  "name": { "type": "string" },
+                  "type": { "type": "string", "enum": ["file", "folder"] },
+                  "children": { "type": "array" },
+                  "size": { "type": "number" },
+                  "modified": { "type": "string" },
+                  "language": { "type": "string" },
+                  "description": { "type": "string" }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "selectedFile": {
+          "description": "Currently selected file.",
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for file selection.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context with path bindings",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "FileDetailCard": {
+      "type": "object",
+      "description": "A card component to display file details.",
+      "properties": {
+        "component": {
+          "const": "FileDetailCard"
+        },
+        "file": {
+          "description": "File detail object.",
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "path": { "type": "string" },
+                "size": { "type": "number" },
+                "modified": { "type": "string" },
+                "language": { "type": "string" },
+                "description": { "type": "string" }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "AccordionPanel": {
+      "type": "object",
+      "description": "An accordion panel component with collapsible sections.",
+      "properties": {
+        "component": {
+          "const": "AccordionPanel"
+        },
+        "panels": {
+          "description": "Array of panel data.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "title": { "type": "string" },
+                  "content": { "type": "string" }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "MainContainer": {
+      "type": "object",
+      "description": "A container component for nested layout.",
+      "properties": {
+        "component": {
+          "const": "MainContainer"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    }
+  },
+  "functions": {},
+  "$defs": {
+    "DynamicValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": ["path"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "FileNode": {
+      "type": "object",
+      "properties": {
+        "key": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["file", "folder"] },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/FileNode" }
+        },
+        "size": { "type": "number" },
+        "modified": { "type": "string" },
+        "language": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "FileDetail": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "path": { "type": "string" },
+        "size": { "type": "number" },
+        "modified": { "type": "string" },
+        "language": { "type": "string" },
+        "description": { "type": "string" },
+        "content": { "type": "string" }
+      }
+    },
+    "PanelData": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-markdown",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "scripts": {
     "compile": "father build",
     "tsc": "tsc --noEmit",
@@ -79,7 +79,7 @@
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "streamdown": "^2.4.0",
-    "vite": "^7.3.1"
+    "vite": "^8.0.0"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

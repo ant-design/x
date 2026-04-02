@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local://filter_search_catalog.json",
+  "title": "Filter Search Catalog",
+  "description": "Custom catalog for filter and search demo components.",
+  "catalogId": "local://filter_search_catalog.json",
+  "components": {
+    "FilterPanel": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "FilterPanel"
+        },
+        "selectedCategories": {
+          "description": "Selected categories for filtering.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "priceRange": {
+          "description": "Price range filter.",
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "minRating": {
+          "description": "Minimum rating filter.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "searchKeyword": {
+          "description": "Search keyword.",
+          "type": "string"
+        },
+        "action": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "context": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ProductList": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "ProductList"
+        },
+        "filters": {
+          "description": "Filter configuration object.",
+          "type": "object"
+        }
+      }
+    },
+    "FilterContainer": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "FilterContainer"
+        },
+        "children": {
+          "description": "Child component IDs.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

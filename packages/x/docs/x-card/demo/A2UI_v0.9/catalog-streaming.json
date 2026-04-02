@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local://restaurant_streaming_catalog.json",
+  "title": "Restaurant Streaming Catalog",
+  "description": "Custom catalog for restaurant streaming demo components.",
+  "catalogId": "local://restaurant_streaming_catalog.json",
+  "components": {
+    "Text": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "Text"
+        },
+        "text": {
+          "description": "The text content to display.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "variant": {
+          "type": "string",
+          "description": "A hint for the base text style.",
+          "enum": ["h1", "h2", "h3", "body", "success"]
+        },
+        "status": {
+          "description": "The status of the text (for conditional styling).",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "LoadingProgress": {
+      "type": "object",
+      "description": "A loading progress indicator with progress bar.",
+      "properties": {
+        "component": {
+          "const": "LoadingProgress"
+        },
+        "percent": {
+          "description": "Current progress percentage (0-100).",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Progress bar status.",
+          "enum": ["active", "success", "normal"]
+        },
+        "text": {
+          "type": "string",
+          "description": "Optional text to display above the progress bar."
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "RestaurantCard": {
+      "type": "object",
+      "description": "A card to display restaurant information.",
+      "properties": {
+        "component": {
+          "const": "RestaurantCard"
+        },
+        "restaurant": {
+          "type": "object",
+          "description": "Restaurant data object.",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "cuisine": {
+              "type": "string"
+            },
+            "rating": {
+              "type": "number"
+            },
+            "priceRange": {
+              "type": "string"
+            },
+            "distance": {
+              "type": "string"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        },
+        "index": {
+          "type": "number",
+          "description": "Index for animation delay."
+        },
+        "isLoading": {
+          "type": "boolean",
+          "description": "Whether the card is in loading state."
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "RestaurantList": {
+      "type": "object",
+      "description": "A list container for restaurant cards with streaming support.",
+      "properties": {
+        "component": {
+          "const": "RestaurantList"
+        },
+        "restaurants": {
+          "description": "Array of restaurant items.",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "loadingProgress": {
+          "description": "Current loading progress (0-100).",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "isStreaming": {
+          "description": "Whether currently in streaming mode.",
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "Container": {
+      "type": "object",
+      "description": "A container component for layout.",
+      "properties": {
+        "component": {
+          "const": "Container"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    }
+  },
+  "functions": {},
+  "$defs": {
+    "DynamicValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": ["path"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}
