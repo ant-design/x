@@ -55,7 +55,7 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "dompurify": "^3.2.6",
-    "html-react-parser": "^5.2.13",
+    "html-react-parser": "^6.0.0",
     "katex": "^0.16.22",
     "marked": "^15.0.12"
   },
