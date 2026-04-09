@@ -202,4 +202,14 @@ describe('ThoughtChain Component', () => {
     expect(itemElement).toBeInTheDocument();
     expect(window.getComputedStyle(itemElement as Element).backgroundColor).toBe('red');
   });
+
+  it('should not have duplicate className on root element', () => {
+    const { container } = render(<ThoughtChain className="my-custom-class" items={items} />);
+
+    const root = container.querySelector('.ant-thought-chain');
+    // className should appear only once in the class list
+    const classList = Array.from(root!.classList);
+    const count = classList.filter((c) => c === 'my-custom-class').length;
+    expect(count).toBe(1);
+  });
 });
