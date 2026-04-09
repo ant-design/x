@@ -59,7 +59,6 @@ const ForwardThoughtChain = React.forwardRef<any, ThoughtChainProps>((props, ref
     rootClassName,
     hashId,
     cssVarCls,
-    className,
     classNames.root,
     `${prefixCls}-box`,
     {
@@ -142,5 +141,5 @@ if (process.env.NODE_ENV !== 'production') {
   ThoughtChain.displayName = 'ThoughtChain';
 }
 
-export type { ThoughtChainProps, ThoughtChainItemType, ThoughtChainItemProps };
+export type { ThoughtChainItemProps, ThoughtChainItemType, ThoughtChainProps };
 export default ThoughtChain;

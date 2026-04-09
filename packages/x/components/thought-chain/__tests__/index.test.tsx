@@ -1,4 +1,4 @@
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, RocketOutlined } from '@ant-design/icons';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
@@ -201,5 +201,77 @@ describe('ThoughtChain Component', () => {
     const itemElement = container.querySelector('.ant-thought-chain-node');
     expect(itemElement).toBeInTheDocument();
     expect(window.getComputedStyle(itemElement as Element).backgroundColor).toBe('red');
+  });
+
+  it('should preserve custom icon when status is also provided', () => {
+    const { container } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'icon-test',
+            title: 'Test',
+            icon: <RocketOutlined data-testid="custom-icon" />,
+            status: 'loading',
+          },
+        ]}
+      />,
+    );
+
+    // Custom icon should be rendered, not the default LoadingOutlined
+    const statusEl = container.querySelector('.ant-thought-chain-status');
+    expect(statusEl).toBeTruthy();
+    // The custom RocketOutlined icon should be present
+    expect(statusEl!.querySelector('.anticon-rocket')).toBeTruthy();
+    // The default LoadingOutlined from status should NOT be present
+    expect(statusEl!.querySelector('.anticon-loading')).toBeFalsy();
+  });
+
+  it('should fall back to status icon when no custom icon is provided', () => {
+    const { container } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'status-only',
+            title: 'Test',
+            status: 'success',
+          },
+        ]}
+      />,
+    );
+
+    const statusEl = container.querySelector('.ant-thought-chain-status');
+    expect(statusEl).toBeTruthy();
+    // Should show the success CheckCircleOutlined icon
+    expect(statusEl!.querySelector('.anticon-check-circle')).toBeTruthy();
+  });
+
+  it('should not have duplicate className on root element', () => {
+    const { container } = render(<ThoughtChain className="my-custom-class" items={items} />);
+
+    const root = container.querySelector('.ant-thought-chain');
+    // className should appear only once in the class list
+    const classList = Array.from(root!.classList);
+    const count = classList.filter((c) => c === 'my-custom-class').length;
+    expect(count).toBe(1);
+  });
+
+  it('should handle undefined expandedKeys gracefully for collapsible items', () => {
+    // Render without expandedKeys prop — contentOpen should be false, not undefined
+    const { container } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'collapse-test',
+            title: 'Collapsible',
+            content: 'Hidden content',
+            collapsible: true,
+          },
+        ]}
+      />,
+    );
+
+    // Content should NOT be visible (collapsed by default)
+    const contentEl = container.querySelector('.ant-thought-chain-node-content');
+    expect(contentEl).toBeFalsy();
   });
 });
