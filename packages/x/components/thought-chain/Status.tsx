@@ -74,7 +74,7 @@ const Status: React.FC<StatusProps> = (props) => {
   // ============================ Style ============================
   const statusCls = `${prefixCls}-status`;
 
-  const IconNode = status ? StatusIcon[status] : icon;
+  const IconNode = icon || (status ? StatusIcon[status] : null);
 
   // ============================ Render ============================
   return (

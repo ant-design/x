@@ -53,14 +53,24 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   // ============================ Content Open ============================
   const contentOpen = expandedKeys?.includes(key);
-  let iconNode: React.ReactNode = <div className={clsx(`${nodeCls}-index-icon`)}>{index + 1}</div>;
-
-  iconNode = icon === false ? null : icon || iconNode;
+  let iconNode: React.ReactNode;
+  if (icon === false) {
+    iconNode = null;
+  } else if (icon) {
+    // User explicitly provided an icon — always use it
+    iconNode = icon;
+  } else if (status) {
+    // No user icon but has status — let Status component show the status icon
+    iconNode = undefined;
+  } else {
+    // No user icon and no status — show the default index number
+    iconNode = <div className={clsx(`${nodeCls}-index-icon`)}>{index + 1}</div>;
+  }
 
   // ============================ Render ============================
   return (
     <div {...domProps} className={clsx(nodeCls, className, classNames.item)} style={props.style}>
-      {iconNode && (
+      {(iconNode || status) && (
         <Status
           className={clsx(`${nodeCls}-icon`, classNames.itemIcon, {
             [`${nodeCls}-icon-${line}`]: typeof line !== 'boolean',
