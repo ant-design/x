@@ -202,4 +202,24 @@ describe('ThoughtChain Component', () => {
     expect(itemElement).toBeInTheDocument();
     expect(window.getComputedStyle(itemElement as Element).backgroundColor).toBe('red');
   });
+
+  it('should handle undefined expandedKeys gracefully for collapsible items', () => {
+    // Render without expandedKeys prop — contentOpen should be false, not undefined
+    const { container } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'collapse-test',
+            title: 'Collapsible',
+            content: 'Hidden content',
+            collapsible: true,
+          },
+        ]}
+      />,
+    );
+
+    // Content should NOT be visible (collapsed by default)
+    const contentEl = container.querySelector('.ant-thought-chain-node-content');
+    expect(contentEl).toBeFalsy();
+  });
 });
