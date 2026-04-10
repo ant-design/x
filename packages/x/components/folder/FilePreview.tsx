@@ -82,6 +82,11 @@ const FileView: React.FC<FileViewProps> = (props) => {
     }
 
     if (!selectedFile || selectedFile.length === 0) {
+      // 如果 emptyRender 为 false,则不显示空状态
+      if (emptyRender === false) {
+        return null;
+      }
+
       const emptyNode =
         typeof emptyRender === 'function'
           ? emptyRender()
@@ -107,7 +112,10 @@ const FileView: React.FC<FileViewProps> = (props) => {
 
     // Handle custom content title
     let headerNode: React.ReactNode;
-    if (previewTitle) {
+    if (previewTitle === false) {
+      // 如果 previewTitle 为 false,则不显示标题
+      headerNode = null;
+    } else if (previewTitle) {
       headerNode =
         typeof previewTitle === 'function'
           ? previewTitle({ title, path, content: fileContent })

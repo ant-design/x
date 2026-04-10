@@ -18,7 +18,7 @@ const { DirectoryTree: AntDirectoryTree } = Tree;
 
 export interface DirectoryTreeProps {
   treeData: FolderTreeData[];
-  directoryIcons?: Record<'directory' | string, React.ReactNode | (() => React.ReactNode)>;
+  directoryIcons?: false | Record<'directory' | string, React.ReactNode | (() => React.ReactNode)>;
   selectedKeys?: string[];
   expandedKeys?: string[];
   onSelect?: TreeProps['onSelect'];
@@ -56,6 +56,11 @@ const DirectoryTree: React.FC<DirectoryTreeProps> = ({
 
   const getIcon = useCallback(
     (node: FolderTreeData) => {
+      // 如果 directoryIcons 为 false,则不显示图标
+      if (directoryIcons === false) {
+        return null;
+      }
+
       if (isFolder(node)) {
         const icon = directoryIcons?.directory;
         if (typeof icon === 'function') {
@@ -112,7 +117,12 @@ const DirectoryTree: React.FC<DirectoryTreeProps> = ({
   );
 
   const treeDataConverted = convertToTreeData(treeData);
-  const titleNode = typeof directoryTitle === 'function' ? directoryTitle() : directoryTitle;
+  const titleNode =
+    directoryTitle === false
+      ? null
+      : typeof directoryTitle === 'function'
+        ? directoryTitle()
+        : directoryTitle;
   // ============================ Prefix ============================
   const { getPrefixCls } = useXProviderContext();
   const prefixCls = getPrefixCls('folder', customizePrefixCls);
