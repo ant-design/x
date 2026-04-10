@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, render } from '../../../tests/utils';
-import Folder, { type FolderRef } from '../index';
+import Folder, { FolderRef } from '../index';
 
 const mockTreeData = [
   {
