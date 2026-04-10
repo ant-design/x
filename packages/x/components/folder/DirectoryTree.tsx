@@ -56,8 +56,8 @@ const DirectoryTree: React.FC<DirectoryTreeProps> = ({
 
   const getIcon = useCallback(
     (node: FolderTreeData) => {
-      // 如果 directoryIcons 为 false,则不显示图标
-      if (directoryIcons === false) {
+      // If directoryIcons is false or null, do not display icons
+      if (directoryIcons === false || directoryIcons === null) {
         return null;
       }
 
@@ -118,7 +118,7 @@ const DirectoryTree: React.FC<DirectoryTreeProps> = ({
 
   const treeDataConverted = convertToTreeData(treeData);
   const titleNode =
-    directoryTitle === false
+    directoryTitle === false || directoryTitle === null
       ? null
       : typeof directoryTitle === 'function'
         ? directoryTitle()

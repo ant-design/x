@@ -82,8 +82,8 @@ const FileView: React.FC<FileViewProps> = (props) => {
     }
 
     if (!selectedFile || selectedFile.length === 0) {
-      // 如果 emptyRender 为 false,则不显示空状态
-      if (emptyRender === false) {
+      // If emptyRender is false or null, do not display empty state
+      if (emptyRender === false || emptyRender === null) {
         return null;
       }
 
@@ -112,8 +112,8 @@ const FileView: React.FC<FileViewProps> = (props) => {
 
     // Handle custom content title
     let headerNode: React.ReactNode;
-    if (previewTitle === false) {
-      // 如果 previewTitle 为 false,则不显示标题
+    if (previewTitle === false || previewTitle === null) {
+      // If previewTitle is false or null, do not display title
       headerNode = null;
     } else if (previewTitle) {
       headerNode =
@@ -172,9 +172,11 @@ const FileView: React.FC<FileViewProps> = (props) => {
 
     return (
       <>
-        <div className={clsx(`${previewCls}-title-wrapper`, classNames?.previewTitle)}>
-          {headerNode}
-        </div>
+        {headerNode && (
+          <div className={clsx(`${previewCls}-title-wrapper`, classNames?.previewTitle)}>
+            {headerNode}
+          </div>
+        )}
         <div className={clsx(`${previewCls}-content`, classNames?.previewRender)}>
           {contentNode}
         </div>

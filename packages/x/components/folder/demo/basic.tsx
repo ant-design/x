@@ -678,10 +678,6 @@ export default ChatWithRegenerate;
 
 export default () => (
   <div style={{ padding: 24, height: 500 }}>
-    <Folder
-      treeData={treeData}
-      previewTitle={null}
-      defaultSelectedFile={['use-x-chat', 'SKILL.md']}
-    />
+    <Folder treeData={treeData} defaultSelectedFile={['use-x-chat', 'SKILL.md']} />
   </div>
 );
