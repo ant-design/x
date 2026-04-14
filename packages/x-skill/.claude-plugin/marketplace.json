@@ -38,6 +38,14 @@
       "source": "./",
       "strict": false,
       "skills": ["./skills/x-markdown"]
+    },
+    {
+      "name": "x-components",
+      "description": "Ant Design X UI component skill package, covering all components: Bubble, Sender, Conversations, Prompts, ThoughtChain, Actions, Welcome, Attachments, Sources, Suggestion, Think, FileCard, CodeHighlighter, Mermaid, XProvider, and Notification",
+      "descriptionZh": "Ant Design X UI 组件技能包，覆盖所有组件的使用指南：Bubble、Sender、Conversations、Prompts、ThoughtChain、Actions、Welcome、Attachments、Sources、Suggestion、Think、FileCard、CodeHighlighter、Mermaid、XProvider 和 Notification",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/x-components"]
     }
   ]
 }

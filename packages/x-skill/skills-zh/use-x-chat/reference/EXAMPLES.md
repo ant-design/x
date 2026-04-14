@@ -1,255 +1,380 @@
-# 完整示例项目
+# 完整示例
 
-## 带有对话管理的完整项目
+## 1. 基础聊天（OpenAI Provider）
 
 ```tsx
-import React, { useRef, useState } from 'react';
-import { useXChat } from '@ant-design/x-sdk';
-import { chatProvider } from '../services/chatService';
-import type { ChatMessage } from '../providers/ChatProvider';
-import { Bubble, Sender, Conversations, type ConversationsProps } from '@ant-design/x';
-import { GetRef } from 'antd';
+import React, { useRef } from 'react';
+import { Bubble, Sender } from '@ant-design/x';
+import { OpenAIChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import type { XModelMessage, XModelParams, XModelResponse } from '@ant-design/x-sdk';
+import XMarkdown from '@ant-design/x-markdown';
 
-const App: React.FC = () => {
-  const [conversations, setConversations] = useState([{ key: '1', label: '新对话' }]);
-  const [activeKey, setActiveKey] = useState('1');
-  const senderRef = useRef<GetRef<typeof Sender>>(null);
-  // 新建对话
-  const handleNewConversation = () => {
-    const newKey = Date.now().toString();
-    const newConversation = {
-      key: newKey,
-      label: `对话 ${conversations.length + 1}`,
-    };
-    setConversations((prev) => [...prev, newConversation]);
-    setActiveKey(newKey);
-  };
+const BASE_URL = 'https://api.openai.com/v1/chat/completions';
+const MODEL = 'gpt-4o';
 
-  // 删除对话
-  const handleDeleteConversation = (key: string) => {
-    setConversations((prev) => {
-      const filtered = prev.filter((item) => item.key !== key);
-      if (filtered.length === 0) {
-        // 如果没有对话了，创建一个新的
-        const newKey = Date.now().toString();
-        return [{ key: newKey, label: '新对话' }];
-      }
-      return filtered;
-    });
+const App = () => {
+  const [provider] = React.useState(
+    new OpenAIChatProvider({
+      request: XRequest<XModelParams, XModelResponse, XModelMessage>(BASE_URL, {
+        manual: true,
+        headers: { Authorization: 'Bearer your-api-key' },
+        params: { model: MODEL, stream: true },
+      }),
+    }),
+  );
 
-    // 如果删除的是当前激活的对话，切换到第一个
-    if (activeKey === key) {
-      setActiveKey(conversations[0]?.key || '1');
-    }
-  };
-
-  const { messages, onRequest, isRequesting, abort } = useXChat<
-    ChatMessage,
-    ChatMessage,
-    { query: string },
-    { content: string; time: string; status: 'success' | 'error' }
-  >({
-    provider: chatProvider,
-    conversationKey: activeKey,
-    requestFallback: (_, { error }) => {
-      if (error.name === 'AbortError') {
-        return { content: '已取消', role: 'assistant' as const, timestamp: Date.now() };
-      }
-      return { content: '请求失败', role: 'assistant' as const, timestamp: Date.now() };
-    },
-  });
-
-  const menuConfig: ConversationsProps['menu'] = (conversation) => ({
-    items: [
+  const { messages, onRequest, isRequesting, abort, onReload } = useXChat({
+    provider,
+    defaultMessages: [
+      { id: '0', message: { role: 'user', content: '你好' }, status: 'success' },
       {
-        label: '删除',
-        key: 'delete',
-        danger: true,
+        id: '1',
+        message: { role: 'assistant', content: '你好！有什么可以帮你的？' },
+        status: 'success',
       },
     ],
-    onClick: ({ key: menuKey }) => {
-      if (menuKey === 'delete') {
-        handleDeleteConversation(conversation.key);
+    requestPlaceholder: () => ({ content: '正在思考中...', role: 'assistant' }),
+    requestFallback: (_, { error, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return { content: messageInfo?.message?.content || '已取消', role: 'assistant' };
       }
+      return { content: '请求失败，请重试', role: 'assistant' };
     },
   });
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      {/* 会话列表 */}
-      <div
-        style={{
-          width: 240,
-          borderRight: '1px solid #f0f0f0',
-          display: 'flex',
-          flexDirection: 'column',
+    <div style={{ display: 'flex', flexDirection: 'column', height: 600 }}>
+      <Bubble.List
+        style={{ flex: 1 }}
+        role={{
+          assistant: {
+            placement: 'start',
+            contentRender(content: string) {
+              return <XMarkdown content={content} />;
+            },
+          },
+          user: { placement: 'end' },
         }}
-      >
-        <Conversations
-          creation={{
-            onClick: handleNewConversation,
-          }}
-          items={conversations}
-          activeKey={activeKey}
-          menu={menuConfig}
-          onActiveChange={setActiveKey}
-        />
-      </div>
+        items={messages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+        }))}
+      />
+      <Sender
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(content) => {
+          onRequest({ messages: [{ role: 'user', content }] });
+        }}
+      />
+    </div>
+  );
+};
 
-      {/* 聊天区域 */}
+export default App;
+```
+
+## 2. 多会话管理（useXConversations + useXChat）
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { Bubble, Conversations, Sender } from '@ant-design/x';
+import { OpenAIChatProvider, useXChat, useXConversations, XRequest } from '@ant-design/x-sdk';
+import type { XModelParams, XModelResponse } from '@ant-design/x-sdk';
+import { GetRef } from 'antd';
+
+const BASE_URL = 'https://api.openai.com/v1/chat/completions';
+
+// 每个会话维持独立的 Provider 实例
+const providerCache = new Map<string, OpenAIChatProvider>();
+
+function getProvider(key: string): OpenAIChatProvider {
+  if (!providerCache.has(key)) {
+    providerCache.set(
+      key,
+      new OpenAIChatProvider({
+        request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
+          manual: true,
+          headers: { Authorization: 'Bearer your-api-key' },
+          params: { model: 'gpt-4o', stream: true },
+        }),
+      }),
+    );
+  }
+  return providerCache.get(key)!;
+}
+
+const App = () => {
+  const senderRef = useRef<GetRef<typeof Sender>>(null);
+
+  const {
+    conversations,
+    activeConversationKey,
+    setActiveConversationKey,
+    addConversation,
+    removeConversation,
+  } = useXConversations({
+    defaultConversations: [{ key: 'conv-1', label: '新对话' }],
+    defaultActiveConversationKey: 'conv-1',
+  });
+
+  const { messages, onRequest, isRequesting, abort, queueRequest } = useXChat({
+    provider: getProvider(activeConversationKey),
+    conversationKey: activeConversationKey,
+    // 异步加载历史消息
+    defaultMessages: async ({ conversationKey }) => {
+      // const history = await api.getHistory(conversationKey);
+      return [];
+    },
+    requestFallback: (_, { error, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return { content: messageInfo?.message?.content || '已取消', role: 'assistant' };
+      }
+      return { content: '请求失败，请重试', role: 'assistant' };
+    },
+  });
+
+  // 切换会话时清空输入框
+  useEffect(() => {
+    senderRef.current?.clear?.();
+  }, [activeConversationKey]);
+
+  const handleNewConversation = () => {
+    const newKey = `conv-${Date.now()}`;
+    addConversation({ key: newKey, label: `新对话 ${conversations.length + 1}` });
+    setActiveConversationKey(newKey);
+  };
+
+  const handleDeleteConversation = (key: string) => {
+    removeConversation(key);
+    if (activeConversationKey === key) {
+      const remaining = conversations.filter((c) => c.key !== key);
+      if (remaining.length > 0) setActiveConversationKey(remaining[0].key);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Conversations
+        style={{ width: 240, borderRight: '1px solid #f0f0f0' }}
+        items={conversations}
+        activeKey={activeConversationKey}
+        onActiveChange={setActiveConversationKey}
+        creation={{ onClick: handleNewConversation }}
+        menu={(conv) => ({
+          items: [{ label: '删除', key: 'delete', danger: true }],
+          onClick: ({ key }) => key === 'delete' && handleDeleteConversation(conv.key),
+        })}
+      />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div
-          style={{ padding: 16, borderBottom: '1px solid #f0f0f0', fontSize: 16, fontWeight: 500 }}
-        >
-          {conversations.find((c) => c.key === activeKey)?.label || '对话'}
-        </div>
-
-        <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
-          <Bubble.List
-            role={{
-              assistant: {
-                placement: 'start',
-              },
-              user: {
-                placement: 'end',
-              },
-            }}
-            items={messages.map((msg) => ({
-              key: msg.id,
-              content: msg.message.content,
-              role: msg.message.role,
-              loading: msg.status === 'loading',
-            }))}
-          />
-        </div>
-
+        <Bubble.List
+          style={{ flex: 1, padding: 16 }}
+          role={{ assistant: { placement: 'start' }, user: { placement: 'end' } }}
+          items={messages.map(({ id, message, status }) => ({
+            key: id,
+            role: message.role,
+            content: message.content,
+            loading: status === 'loading',
+          }))}
+        />
         <div style={{ padding: 16, borderTop: '1px solid #f0f0f0' }}>
           <Sender
-            loading={isRequesting}
             ref={senderRef}
-            onSubmit={(content: string) => {
-              onRequest({ query: content });
-              senderRef.current?.clear?.();
-            }}
+            loading={isRequesting}
             onCancel={abort}
-            placeholder="输入消息..."
+            onSubmit={(val) => {
+              onRequest({ messages: [{ role: 'user', content: val }] });
+            }}
           />
         </div>
       </div>
     </div>
   );
 };
+
 export default App;
 ```
 
-## 带状态管理的重新发送
+## 3. 带重新生成功能
 
 ```tsx
 import React, { useRef, useState } from 'react';
-import { useXChat } from '@ant-design/x-sdk';
 import { Bubble, Sender } from '@ant-design/x';
-import { Button, type GetRef } from 'antd';
-import { chatProvider } from '../services/chatService';
-import type { ChatMessage } from '../providers/ChatProvider';
+import { SyncOutlined } from '@ant-design/icons';
+import { OpenAIChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import { Button, Tooltip, GetRef } from 'antd';
 
-const ChatWithRegenerate: React.FC = () => {
+const App = () => {
   const senderRef = useRef<GetRef<typeof Sender>>(null);
-  const { messages, onReload, isRequesting, onRequest, abort } = useXChat<
-    ChatMessage,
-    ChatMessage,
-    { query: string },
-    { content: string; time: string; status: 'success' | 'error' }
-  >({
-    provider: chatProvider,
-    requestPlaceholder: {
-      content: '正在思考中...',
-      role: 'assistant',
-      timestamp: Date.now(),
-    },
-    requestFallback: (_, { error, errorInfo, messageInfo }) => {
+  const [regeneratingId, setRegeneratingId] = useState<string | number | null>(null);
+
+  const [provider] = React.useState(
+    new OpenAIChatProvider({
+      request: XRequest(BASE_URL, { manual: true, params: { model: 'gpt-4o', stream: true } }),
+    }),
+  );
+
+  const { messages, onRequest, onReload, isRequesting, abort } = useXChat({
+    provider,
+    requestPlaceholder: () => ({ content: '正在思考中...', role: 'assistant' }),
+    requestFallback: (_, { error, messageInfo }) => {
       if (error.name === 'AbortError') {
-        return {
-          content: messageInfo?.message?.content || '已取消回复',
-          role: 'assistant' as const,
-          timestamp: Date.now(),
-        };
+        return { content: messageInfo?.message?.content || '已取消', role: 'assistant' };
       }
-      return {
-        content: errorInfo?.error?.message || '网络异常，请稍后重试',
-        role: 'assistant' as const,
-        timestamp: Date.now(),
-      };
+      return { content: '请求失败，请重试', role: 'assistant' };
     },
   });
 
-  // 跟踪正在重新生成的消息ID
-  const [regeneratingId, setRegeneratingId] = useState<string | number | null>(null);
-
-  const handleRegenerate = (messageId: string | number): void => {
-    setRegeneratingId(messageId);
-    onReload(
-      messageId,
-      {},
-      {
-        extraInfo: { regenerate: true },
-      },
-    );
+  const handleRegenerate = (id: string | number) => {
+    setRegeneratingId(id);
+    onReload(id, {}, { extraInfo: { isRegenerate: true } });
   };
 
   return (
     <div>
       <Bubble.List
-        role={{
-          assistant: {
-            placement: 'start',
-          },
-          user: {
-            placement: 'end',
-          },
-        }}
-        items={messages.map((msg) => ({
-          key: msg.id,
-          content: msg.message.content,
-          role: msg.message.role,
-          loading: msg.status === 'loading',
-          footer: msg.message.role === 'assistant' && (
-            <Button
-              type="text"
-              size="small"
-              loading={regeneratingId === msg.id && isRequesting}
-              onClick={() => handleRegenerate(msg.id)}
-              disabled={isRequesting && regeneratingId !== msg.id}
-            >
-              {regeneratingId === msg.id ? '生成中...' : '重新生成'}
-            </Button>
-          ),
+        role={{ assistant: { placement: 'start' }, user: { placement: 'end' } }}
+        items={messages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+          footer:
+            message.role === 'assistant' ? (
+              <Tooltip title="重新生成">
+                <Button
+                  size="small"
+                  type="text"
+                  icon={<SyncOutlined />}
+                  loading={regeneratingId === id && isRequesting}
+                  disabled={isRequesting && regeneratingId !== id}
+                  onClick={() => handleRegenerate(id)}
+                />
+              </Tooltip>
+            ) : undefined,
         }))}
       />
-      <div>
-        <Sender
-          loading={isRequesting}
-          onSubmit={(content: string) => {
-            onRequest({ query: content });
-            senderRef.current?.clear?.();
-          }}
-          onCancel={abort}
-          ref={senderRef}
-          placeholder="输入消息..."
-          allowSpeech
-          prefix={
-            <Sender.Header
-              title="AI 助手"
-              open={false}
-              styles={{
-                content: { padding: 0 },
-              }}
-            />
-          }
-        />
-      </div>
+      <Sender
+        ref={senderRef}
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(val) => {
+          onRequest({ messages: [{ role: 'user', content: val }] });
+          senderRef.current?.clear?.();
+        }}
+      />
     </div>
   );
 };
+```
 
-export default ChatWithRegenerate;
+## 4. 带系统提示词（developer 角色）
+
+```tsx
+const App = () => {
+  const [provider] = React.useState(
+    new OpenAIChatProvider({
+      request: XRequest(BASE_URL, { manual: true, params: { model: 'gpt-4o', stream: true } }),
+    }),
+  );
+
+  const { messages, onRequest, setMessage, isRequesting, abort } = useXChat({
+    provider,
+    defaultMessages: [
+      // developer 角色作为系统提示词，OpenAIChatProvider 会自动携带到每次请求
+      {
+        id: 'sys',
+        message: { role: 'developer', content: '你是一个专业的前端工程师助手' },
+        status: 'success',
+      },
+    ],
+    requestFallback: (_, { error }) => ({
+      content: error.name === 'AbortError' ? '已取消' : '请求失败',
+      role: 'assistant',
+    }),
+  });
+
+  // 过滤掉 developer 消息不展示
+  const displayMessages = messages.filter((m) => m.message.role !== 'developer');
+
+  // 动态修改系统提示
+  const updateSystemPrompt = (prompt: string) => {
+    setMessage('sys', { message: { role: 'developer', content: prompt } });
+  };
+
+  return (
+    <div>
+      <Bubble.List
+        role={{ assistant: { placement: 'start' }, user: { placement: 'end' } }}
+        items={displayMessages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+        }))}
+      />
+      <Sender
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(val) => onRequest({ messages: [{ role: 'user', content: val }] })}
+      />
+    </div>
+  );
+};
+```
+
+## 5. 使用 parser（一条消息拆分为多条气泡）
+
+```tsx
+// 场景：DeepSeek R1 的 reasoning_content + content 需要分开展示
+import { DeepSeekChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import type { XModelMessage, SSEFields, XModelResponse } from '@ant-design/x-sdk';
+
+interface MyMessage extends XModelMessage {
+  reasoning?: string; // 思考链内容
+}
+
+const [provider] = React.useState(
+  new DeepSeekChatProvider({
+    request: XRequest(BASE_URL, {
+      manual: true,
+      params: { model: 'deepseek-reasoner', stream: true },
+    }),
+  }),
+);
+
+const { parsedMessages, onRequest, isRequesting, abort } = useXChat<
+  MyMessage,
+  { role: string; content: string } // ParsedMessage
+>({
+  provider,
+  // parser 将一条消息转为多条气泡
+  parser: (message: MyMessage) => {
+    const result: { role: string; content: string }[] = [];
+    if (message.reasoning) {
+      result.push({ role: 'reasoning', content: message.reasoning });
+    }
+    if (message.content) {
+      result.push({ role: 'assistant', content: message.content as string });
+    }
+    return result.length > 0 ? result : { role: message.role, content: message.content as string };
+  },
+});
+
+// 使用 parsedMessages 而非 messages
+<Bubble.List
+  role={{
+    assistant: { placement: 'start' },
+    user: { placement: 'end' },
+    reasoning: { placement: 'start', variant: 'borderless' },
+  }}
+  items={parsedMessages.map(({ id, message, status }) => ({
+    key: id,
+    role: message.role,
+    content: message.content,
+    loading: status === 'loading',
+  }))}
+/>;
 ```
