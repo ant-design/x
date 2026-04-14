@@ -78,7 +78,7 @@ const roles = {
 | Prop         | Purpose                                                                    |
 | ------------ | -------------------------------------------------------------------------- |
 | `items`      | Array of bubble items with `key`, `role`, `content`, and any `Bubble` prop |
-| `roles`      | Map of role name → default props for that role                             |
+| `role`       | Map of role name → default props for that role                             |
 | `autoScroll` | Auto-scroll to bottom on new messages                                      |
 
 ---

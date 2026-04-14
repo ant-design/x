@@ -4,7 +4,7 @@
 
 ```tsx | pure
 type useXChat<
-  ChatMessage extends SimpleType = object,
+  ChatMessage extends SimpleType = string,
   ParsedMessage extends SimpleType = ChatMessage,
   Input = RequestParams<ChatMessage>,
   Output = SSEOutput,

@@ -3,7 +3,7 @@
 ```ts | pure
 type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, string>> = (
   baseURL: string,
-  options: XRequestOptions<Input, Output>,
+  options?: XRequestOptions<Input, Output>,
 ) => XRequestClass<Input, Output>;
 ```
 

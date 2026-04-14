@@ -167,12 +167,9 @@ export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 export type DividerRoleProps = Partial<DividerBubbleProps>;
 export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
 
-export type RoleType = Partial<
-  'ai' | 'system' | 'user', RoleProps | FuncRoleProps>
-> & { divider: DividerRoleProps | FuncDividerRoleProps } & Record<
-    string,
-    RoleProps | FuncRoleProps
-  >;
+export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> & {
+  divider?: DividerRoleProps | FuncDividerRoleProps;
+} & Record<string, RoleProps | FuncRoleProps>;
 ```
 
 #### Bubble.List autoScroll Top Alignment
