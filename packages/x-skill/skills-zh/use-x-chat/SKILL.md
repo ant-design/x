@@ -40,7 +40,7 @@ npm install @ant-design/x-sdk@latest @ant-design/x@latest
 
 ```ts
 import { MyChatProvider } from './MyChatProvider';
-import XRequest from '@ant-design/x-sdk';
+import { XRequest } from '@ant-design/x-sdk';
 
 // ⚠️ manual: true 是必须的
 const provider = new MyChatProvider({

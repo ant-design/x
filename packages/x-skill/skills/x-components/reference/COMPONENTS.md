@@ -68,7 +68,7 @@ const roles = {
     content: msg.content,
     loading: msg.loading,
   }))}
-  roles={roles}
+  role={roles}
   autoScroll
 />;
 ```

@@ -1006,7 +1006,7 @@ Common props ref: [Common props](/docs/react/common-props)
 <!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| treeData | File tree data | [FolderTreeData](#foldertreenode)[] | `[]` | - |
+| treeData | File tree data | [FolderTreeData](#foldertreedata)[] | `[]` | - |
 | selectable | Whether to enable selection functionality | boolean | `true` | - |
 | selectedFile | Selected file paths (controlled) | string[] | - | - |
 | defaultSelectedFile | Default selected file paths | string[] | `[]` | - |
@@ -1032,7 +1032,7 @@ Common props ref: [Common props](/docs/react/common-props)
 | title | Display name | string | - | - |
 | path | File path | string | - | - |
 | content | File content (optional) | string | - | - |
-| children | Sub-items (valid only for folder type) | [FolderTreeData](#foldertreenode)[] | - | - |
+| children | Sub-items (valid only for folder type) | [FolderTreeData](#foldertreedata)[] | - | - |
 
 ### FileContentService
 

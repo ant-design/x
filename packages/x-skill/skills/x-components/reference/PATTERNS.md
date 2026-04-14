@@ -79,7 +79,7 @@ export default function ChatPage() {
             <Bubble.List
               style={{ flex: 1, overflow: 'auto', padding: 16 }}
               items={messages}
-              roles={roles}
+              role={roles}
               autoScroll
             />
           )}
@@ -169,7 +169,7 @@ const bubbleItems = parsedMessages.map((msg) => ({
   loading: msg.status === 'loading' && !msg.message.content,
 }));
 
-<Bubble.List items={bubbleItems} roles={roles} autoScroll />
+<Bubble.List items={bubbleItems} role={roles} autoScroll />
 <Sender
   loading={isRequesting}
   onSubmit={(msg) => onRequest({ message: { role: 'user', content: msg } })}
