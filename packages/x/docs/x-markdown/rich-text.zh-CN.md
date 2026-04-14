@@ -2,11 +2,12 @@
 group:
   title: 组件
   order: 5
-title: 富文本增强
+title: 高亮
+subtitle: Code
 order: 4
 ---
 
-将 Markdown 映射为富文本组件，当前示例聚焦：
+将 Markdown 映射为代码高亮组件。以下仅为示例，你可以按业务注册任意自定义组件：
 
 - 代码高亮（CodeHighlighter）
 
@@ -16,5 +17,5 @@ order: 4
 ## 相关
 
 - [总览](/x-markdowns/components-cn)
-- [聊天增强](/x-markdowns/chat-enhancement-cn)
-- [数据展示](/x-markdowns/data-display-cn)
+- [对话](/x-markdowns/chat-enhancement-cn)
+- [图表](/x-markdowns/data-display-cn)
