@@ -6,7 +6,7 @@
       {
         "skill": "use-x-chat",
         "name": "use-x-chat",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Focus on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, etc.",
         "descZh": "专注讲解如何使用 useXChat Hook，包括自定义 Provider 的集成、消息管理、错误处理等",
         "tags": ["chat", "hook", "sdk"]
@@ -14,7 +14,7 @@
       {
         "skill": "x-chat-provider",
         "name": "x-chat-provider",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Focus on implementing custom Chat Provider, helping to adapt any streaming interface to Ant Design X standard format",
         "descZh": "专注于自定义 Chat Provider 的实现，帮助将任意流式接口适配为 Ant Design X 标准格式",
         "tags": ["chat", "provider", "sdk"]
@@ -22,7 +22,7 @@
       {
         "skill": "x-request",
         "name": "x-request",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Focus on explaining the practical configuration and usage of XRequest, providing accurate configuration instructions based on official documentation",
         "descZh": "专注讲解 XRequest 的实际配置和使用，基于官方文档提供准确的配置说明",
         "tags": ["request", "sdk"]
@@ -36,7 +36,7 @@
       {
         "skill": "x-markdown",
         "name": "x-markdown",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Use when building or reviewing Markdown rendering with @ant-design/x-markdown, including streaming Markdown, custom component mapping, plugins, themes, and chat-oriented rich content.",
         "descZh": "当任务涉及 @ant-design/x-markdown 的 Markdown 渲染、流式输出、自定义组件映射、插件、主题或聊天富内容展示时使用。",
         "tags": ["sdk"]

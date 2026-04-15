@@ -2,11 +2,12 @@
 group:
   title: 组件
   order: 5
-title: 数据展示
+title: 图表
+subtitle: Mermaid · AntV
 order: 3
 ---
 
-将 Markdown 内容映射为数据展示组件，当前示例聚焦：
+将 Markdown 内容映射为图表组件。以下仅为示例，你可以按业务注册任意自定义组件：
 
 - Mermaid 图表渲染
 - AntV 信息图渲染
@@ -18,5 +19,5 @@ order: 3
 ## 相关
 
 - [总览](/x-markdowns/components-cn)
-- [聊天增强](/x-markdowns/chat-enhancement-cn)
-- [富文本增强](/x-markdowns/rich-text-cn)
+- [对话](/x-markdowns/chat-enhancement-cn)
+- [高亮](/x-markdowns/rich-text-cn)

@@ -184,4 +184,28 @@ describe('LaTeX Plugin', () => {
     expect(katexElements).toHaveLength(2);
     expect(container).toMatchSnapshot();
   });
+
+  it('should render multi-line \\[..\\] as block-level formula', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>
+        {'content\n\\[\\frac{a}{b}\n\\]\ncontent'}
+      </XMarkdown>,
+    );
+
+    // 验证渲染为块级公式
+    expect(container.querySelector('.block-katex')).toBeInTheDocument();
+    expect(container.querySelector('.inline-katex')).not.toBeInTheDocument();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should still render single-line \\[..\\] as inline formula', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{'hello \\[E=mc^2\\] world'}</XMarkdown>,
+    );
+
+    // 验证渲染为行内公式
+    expect(container.querySelector('.inline-katex')).toBeInTheDocument();
+    expect(container.querySelector('.block-katex')).not.toBeInTheDocument();
+    expect(container).toMatchSnapshot();
+  });
 });
