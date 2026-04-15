@@ -207,9 +207,12 @@ describe('ThoughtChain Component', () => {
     const { container } = render(<ThoughtChain className="my-custom-class" items={items} />);
 
     const root = container.querySelector('.ant-thought-chain');
-    // className should appear only once in the class list
-    const classList = Array.from(root!.classList);
-    const count = classList.filter((c) => c === 'my-custom-class').length;
+    expect(root).toBeTruthy();
+    // Read the raw class attribute string instead of classList, because
+    // DOMTokenList de-duplicates tokens per DOM spec and cannot detect
+    // duplicate tokens in the source class attribute.
+    const classAttr = root!.getAttribute('class') ?? '';
+    const count = (classAttr.match(/\bmy-custom-class\b/g) ?? []).length;
     expect(count).toBe(1);
   });
 
