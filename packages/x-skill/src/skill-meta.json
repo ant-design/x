@@ -12,6 +12,14 @@
         "tags": ["chat", "hook", "sdk"]
       },
       {
+        "skill": "x-card",
+        "name": "x-card",
+        "version": "2.5.0",
+        "desc": "Use when building AI-driven UIs with @ant-design/x-card — covers XCard.Box, XCard.Card, A2UI v0.9 commands, data binding, catalogs, actions, and streaming patterns.",
+        "descZh": "当需要用 @ant-design/x-card 让 AI Agent 动态渲染富交互 UI 时使用——涵盖 XCard.Box、XCard.Card、A2UI v0.9 命令、数据绑定、Catalog、Actions 和流式渲染模式。",
+        "tags": ["sdk"]
+      },
+      {
         "skill": "x-chat-provider",
         "name": "x-chat-provider",
         "version": "2.5.0",
