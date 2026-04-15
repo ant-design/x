@@ -1,25 +1,22 @@
-import { BgColorsOutlined, LinkOutlined, SmileOutlined, SunOutlined } from '@ant-design/icons';
+import { SunOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Badge, Button, Dropdown } from 'antd';
 import { CompactTheme, DarkTheme } from 'antd-token-previewer/es/icons';
-import { FormattedMessage, useLocation } from 'dumi';
+import { FormattedMessage } from 'dumi';
 import React, { use, useRef } from 'react';
 
 import useThemeAnimation from '../../../hooks/useThemeAnimation';
 import type { SiteContextProps } from '../../slots/SiteContext';
 import SiteContext from '../../slots/SiteContext';
-import { getLocalizedPathname, isZhCN } from '../../utils';
-import Link from '../Link';
 import ThemeIcon from './ThemeIcon';
 
-export type ThemeName = 'light' | 'dark' | 'compact' | 'motion-off' | 'happy-work';
+export type ThemeName = 'light' | 'dark' | 'compact' | 'motion-off';
 
 export interface ThemeSwitchProps {
   value?: ThemeName[];
 }
 
 const ThemeSwitch: React.FC<ThemeSwitchProps> = () => {
-  const { pathname, search } = useLocation();
   const { theme, updateSiteConfig } = use<SiteContextProps>(SiteContext);
   const toggleAnimationTheme = useThemeAnimation();
   const lastThemeKey = useRef<string>(theme.includes('dark') ? 'dark' : 'light');
@@ -49,26 +46,6 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = () => {
       key: 'compact',
       showBadge: () => theme.includes('compact'),
     },
-    {
-      type: 'divider',
-    },
-    {
-      id: 'app.theme.switch.happy-work',
-      icon: <SmileOutlined />,
-      key: 'happy-work',
-      showBadge: () => theme.includes('happy-work'),
-    },
-    {
-      type: 'divider',
-    },
-    {
-      id: 'app.footer.theme',
-      icon: <BgColorsOutlined />,
-      key: 'theme-editor',
-      extra: <LinkOutlined />,
-      isLink: true,
-      linkPath: '/theme-editor',
-    },
   ];
 
   // 构建下拉菜单项
@@ -77,26 +54,19 @@ const ThemeSwitch: React.FC<ThemeSwitchProps> = () => {
       return { type: 'divider' as const, key: `divider-${i}` };
     }
 
-    const { id, icon, key, showBadge, extra, isLink, linkPath } = option;
+    const { id, icon, key, showBadge } = option;
 
     return {
-      label: isLink ? (
-        <Link to={getLocalizedPathname(linkPath!, isZhCN(pathname), search)}>
-          <FormattedMessage id={id} />
-        </Link>
-      ) : (
-        <FormattedMessage id={id} />
-      ),
+      label: <FormattedMessage id={id} />,
       icon,
       key: key || i,
-      extra: showBadge ? (showBadge() ? badge : null) : extra,
+      extra: showBadge ? (showBadge() ? badge : null) : null,
     };
   });
 
   // 处理主题切换
   const handleThemeChange = (key: string, domEvent: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    // 主题编辑器特殊处理
-    if (key === 'theme-editor' || key === lastThemeKey.current) {
+    if (key === lastThemeKey.current) {
       return;
     }
 
