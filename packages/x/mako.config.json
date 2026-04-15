@@ -1,6 +1,6 @@
 {
   "optimization": {
-    "skipModules": false,
+    "skipModules": true,
     "concatenateModules": false
   },
   "codeSplitting": {
