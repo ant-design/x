@@ -50,8 +50,17 @@ function extractApiContent(filePath: string): string {
       apiStartIndex++;
     }
 
-    // Stop at ## Semantic DOM or ## Design Token sections to keep output concise
-    const stopSections = ['## Semantic DOM', '## Design Token', '## Theme Variables'];
+    // Stop at non-API sections to keep output concise
+    const stopSections = [
+      '## Semantic DOM',
+      '## 语义化 DOM',
+      '## Design Token',
+      '## 主题变量',
+      '## Theme Variables',
+      '## FAQ',
+      '## 系统权限设置',
+      '## System Permission Settings',
+    ];
     const endIndex = lines.findIndex(
       (line, i) => i > apiIndex && stopSections.some((s) => line.trim().startsWith(s)),
     );

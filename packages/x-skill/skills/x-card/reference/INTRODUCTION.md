@@ -1,8 +1,3 @@
----
-order: 1
-title: Introduction
----
-
 # @ant-design/x-card
 
 `@ant-design/x-card` is a dynamic card rendering component based on the [A2UI protocol](https://a2ui.org/concepts/data-flow/), enabling AI Agents to dynamically build and render interactive UIs through structured JSON message streams.

@@ -45,7 +45,6 @@ const skillConfig: Config = {
     ],
     'x-request': 'packages/x/docs/x-sdk/x-request.zh-CN.md',
     'x-card': [
-      'packages/x/docs/x-card/introduce.zh-CN.md',
       'packages/x/docs/x-card/a2ui-v-0-9.zh-CN.md',
       'packages/x/docs/x-card/a2ui-v-0-8.zh-CN.md',
     ],
@@ -77,7 +76,6 @@ const skillConfig: Config = {
     ],
     'x-request': 'packages/x/docs/x-sdk/x-request.en-US.md',
     'x-card': [
-      'packages/x/docs/x-card/introduce.en-US.md',
       'packages/x/docs/x-card/a2ui-v-0-9.en-US.md',
       'packages/x/docs/x-card/a2ui-v-0-8.en-US.md',
     ],
