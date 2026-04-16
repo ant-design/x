@@ -29,7 +29,12 @@
       "descriptionZh": "Ant Design X SDK 核心技能包，包含 useXChat、XRequest 和自定义 Provider 等完整功能",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/use-x-chat", "./skills/x-chat-provider", "./skills/x-request"]
+      "skills": [
+        "./skills/use-x-chat",
+        "./skills/x-chat-provider",
+        "./skills/x-request",
+        "./skills/x-card"
+      ]
     },
     {
       "name": "x-markdown",

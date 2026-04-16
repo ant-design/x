@@ -231,6 +231,7 @@ export default function App() {
 - **表单输入组件必须用 `value: { path: "..." }` 双向绑定** —— 字面量值不会更新数据模型。
 - **流式场景**：追加新命令到数组而不是替换整个数组 —— Card 会增量处理差异。
 - **`action.event.context` 中的路径是写入目标** —— 它们指向用户输入数据在数据模型中的存储位置，不要作为读取来源解析。
+- **v0.8 的 `action.context` 是数组格式** —— `[{ key, value: { path } }]`，与 v0.9 的对象格式 `{ key: { path } }` 不同，混用会导致 action 数据丢失。
 
 # 🤝 技能协作
 

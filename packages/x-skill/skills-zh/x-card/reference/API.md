@@ -180,23 +180,37 @@ interface ComponentWrapper_v0_8 {
       // 例 "Button"
       child?: string;
       children?: string[] | { explicitList: string[] };
+      action?: ActionConfig_v0_8; // v0.8 action 格式
       [key: string]: any; // 支持 { path } 或 { literalString } 绑定
     };
   };
+}
+
+// v0.8 action 格式：context 是数组，与 v0.9 的对象格式不同
+interface ActionConfig_v0_8 {
+  name: string;
+  context?: Array<{
+    key: string;
+    value: PathValue | LiteralStringValue | any; // { path } 是写入目标
+  }>;
+}
+
+interface LiteralStringValue {
+  literalString: string; // v0.8 特有，等价于 v0.9 中的直接字符串字面量
 }
 
 interface DataModelUpdate_v0_8 {
   surfaceId: string;
   contents: Array<{
     key: string;
-    valueString?: string;
-    valueMap?: Array<{ key: string; valueString: string }>;
+    valueString?: string; // 直接存储字符串值
+    valueMap?: Array<{ key: string; valueString: string }>; // 转换为对象
   }>;
 }
 
 interface BeginRendering_v0_8 {
   surfaceId: string;
-  root: string; // 根组件 ID
+  root: string; // 根组件 ID，v0.8 须显式指定
 }
 
 interface DeleteSurface_v0_8 {

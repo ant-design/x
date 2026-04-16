@@ -161,28 +161,74 @@ interface UpdateDataModelPayload {
 | 组件结构 | 嵌套 `{ "Button": { props } }` | 扁平 `{ id, component: "Button", ...props }` |
 | 渲染触发 | 需要额外发 `beginRendering` | `updateComponents` 收到即渲染 |
 | 数据更新 | `dataModelUpdate` + `contents` 数组 | `updateDataModel` + `path` + `value` |
+| 数据路径 | 顶层 key，不支持 JSON Pointer | JSON Pointer（`/user/name`） |
 | 字符串字面量 | `{ "literalString": "text" }` | 直接用字符串 `"text"` |
-| 命令键名 | `surfaceUpdate` | `updateComponents` |
+| action.context 格式 | 数组 `[{ key, value: { path } }]` | 对象 `{ key: { path } }` |
+| 命令键名 | `surfaceUpdate` / `dataModelUpdate` / `beginRendering` | `updateComponents` / `updateDataModel` |
 
-**v0.8 示例（新功能请勿使用）：**
+**v0.8 完整命令序列示例（新功能请勿使用）：**
 
-```json
+```jsonl
+// 1. 发送组件结构（隐式创建 Surface）
 {
   "surfaceUpdate": {
     "surfaceId": "s1",
-    "components": [{ "id": "btn", "component": { "Button": { "text": "点击" } } }]
+    "components": [
+      { "id": "root", "component": { "Column": { "children": { "explicitList": ["title", "btn"] } } } },
+      { "id": "title", "component": { "Text": { "text": { "path": "/user/name" } } } },
+      {
+        "id": "btn",
+        "component": {
+          "Button": {
+            "text": { "literalString": "提交" },
+            "action": {
+              "name": "submit",
+              "context": [{ "key": "name", "value": { "path": "/form/name" } }]
+            }
+          }
+        }
+      }
+    ]
   }
 }
+
+// 2. 更新数据模型（key-value 格式，不支持 JSON Pointer）
+{
+  "dataModelUpdate": {
+    "surfaceId": "s1",
+    "contents": [
+      { "key": "user", "valueMap": [{ "key": "name", "valueString": "Alice" }] },
+      { "key": "status", "valueString": "ready" }
+    ]
+  }
+}
+
+// 3. 触发渲染（必须显式发送，指定根组件 ID）
+{ "beginRendering": { "surfaceId": "s1", "root": "root" } }
 ```
+
+> ⚠️ v0.8 中 `action.context` 是**数组**格式 `[{ key, value: { path } }]`，与 v0.9 的**对象**格式 `{ key: { path } }` 完全不同。
 
 **v0.9 等价写法：**
 
-```json
+```jsonl
+{ "version": "v0.9", "createSurface": { "surfaceId": "s1", "catalogId": "local://cat.json" } }
 {
   "version": "v0.9",
   "updateComponents": {
     "surfaceId": "s1",
-    "components": [{ "id": "btn", "component": "Button", "text": "点击" }]
+    "components": [
+      { "id": "root", "component": "Column", "children": ["title", "btn"] },
+      { "id": "title", "component": "Text", "text": { "path": "/user/name" } },
+      {
+        "id": "btn",
+        "component": "Button",
+        "text": "提交",
+        "action": { "event": { "name": "submit", "context": { "name": { "path": "/form/name" } } } }
+      }
+    ]
   }
 }
+{ "version": "v0.9", "updateDataModel": { "surfaceId": "s1", "path": "/user/name", "value": "Alice" } }
+{ "version": "v0.9", "updateDataModel": { "surfaceId": "s1", "path": "/status", "value": "ready" } }
 ```

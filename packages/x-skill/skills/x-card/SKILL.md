@@ -84,6 +84,7 @@ XCard.Box
 ```typescript
 interface BoxProps {
   commands?: (XAgentCommand_v0_9 | XAgentCommand_v0_8)[];
+  /** Component names must start with an uppercase letter (React component convention) */
   components?: Record<string, React.ComponentType<any>>;
   onAction?: (payload: ActionPayload) => void;
   children?: React.ReactNode; // Should contain XCard.Card elements
@@ -104,7 +105,11 @@ interface CardProps {
 interface ActionPayload {
   name: string; // from action.event.name
   surfaceId: string; // which surface triggered it
-  context: Record<string, any>; // resolved values from data model
+  /**
+   * Complete dataModel snapshot of the surface at the time the action fired.
+   * This is the entire data model, not just the fields listed in action.event.context.
+   */
+  context: Record<string, any>;
 }
 ```
 

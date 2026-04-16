@@ -44,6 +44,11 @@ const skillConfig: Config = {
       'packages/x/docs/x-sdk/use-x-conversations.zh-CN.md',
     ],
     'x-request': 'packages/x/docs/x-sdk/x-request.zh-CN.md',
+    'x-card': [
+      'packages/x/docs/x-card/introduce.zh-CN.md',
+      'packages/x/docs/x-card/a2ui-v-0-9.zh-CN.md',
+      'packages/x/docs/x-card/a2ui-v-0-8.zh-CN.md',
+    ],
     'x-markdown': 'packages/x/docs/x-markdown/examples.zh-CN.md',
     'x-components': [
       'packages/x/components/bubble/index.zh-CN.md',
@@ -71,6 +76,11 @@ const skillConfig: Config = {
       'packages/x/docs/x-sdk/use-x-conversations.en-US.md',
     ],
     'x-request': 'packages/x/docs/x-sdk/x-request.en-US.md',
+    'x-card': [
+      'packages/x/docs/x-card/introduce.en-US.md',
+      'packages/x/docs/x-card/a2ui-v-0-9.en-US.md',
+      'packages/x/docs/x-card/a2ui-v-0-8.en-US.md',
+    ],
     'x-markdown': 'packages/x/docs/x-markdown/examples.en-US.md',
     'x-components': [
       'packages/x/components/bubble/index.en-US.md',
