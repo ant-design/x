@@ -3,7 +3,7 @@
 ```ts | pure
 type XRequestFunction<Input = Record<PropertyKey, any>, Output = Record<string, string>> = (
   baseURL: string,
-  options?: XRequestOptions<Input, Output>,
+  options: XRequestOptions<Input, Output>,
 ) => XRequestClass<Input, Output>;
 ```
 
@@ -73,45 +73,4 @@ interface XFetchMiddlewares {
   onRequest?: (...ags: Parameters<typeof fetch>) => Promise<Parameters<typeof fetch>>;
   onResponse?: (response: Response) => Promise<Response>;
 }
-```
-
-## FAQ
-
-### When using transformStream in XRequest, it causes stream locking issues on the second input request. How to solve this?
-
-```ts | pure
-onError TypeError: Failed to execute 'getReader' on 'ReadableStream': ReadableStreamDefaultReader constructor can only accept readable streams that are not yet locked to a reader
-```
-
-The Web Streams API stipulates that a stream can only be locked by one reader at the same time. Reuse will cause an error. Therefore, when using TransformStream, you need to pay attention to the following points:
-
-1. Ensure that the transformStream function returns a new ReadableStream object, not the same object.
-2. Ensure that the transformStream function does not perform multiple read operations on response.body.
-
-**Recommended Writing**
-
-```tsx | pure
-const [provider] = React.useState(
-  new CustomProvider({
-    request: XRequest(url, {
-      manual: true,
-      // Recommended: transformStream returns a new instance with a function
-      transformStream: () =>
-        new TransformStream({
-          transform(chunk, controller) {
-            // Your custom processing logic
-            controller.enqueue({ data: chunk });
-          },
-        }),
-      // Other configurations...
-    }),
-  }),
-);
-```
-
-```tsx | pure
-const request = XRequest(url, {
-  manual: true,
-  transformStream: new TransformStream({ ... }), // Do not persist in Provider/useState
-});
 ```

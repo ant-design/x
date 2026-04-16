@@ -808,20 +808,6 @@ type PresetIcons =
 | extension | 扩展内容     | React.ReactNode                               | -         | -    |
 | overflow  | 超出展示方式 | 'scrollX' \| 'scrollY' \| 'wrap'              | 'wrap'    | -    |
 
-## 语义化 DOM
-
-### FileCard
-
-<code src="./demo/_semantic.tsx" simplify="true"></code>
-
-### FileCard.List
-
-<code src="./demo/_semantic-list.tsx" simplify="true"></code>
-
-## 主题变量（Design Token）
-
-<ComponentTokenTable component="FileCard"></ComponentTokenTable>
-
 ---
 
 ## Sources
@@ -955,7 +941,7 @@ type ShortcutKeys<CustomKey = number | 'number'> =
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | permission | 表明当前用户是否授予当前来源（origin）显示 web 通知的权限。 | NotificationPermission | - | - |
-| requestPermission | 向用户为当前来源请求显示通知的权限。 | ()=> Promise\<NotificationPermission\> | - | - |
+| requestPermission| 向用户为当前来源请求显示通知的权限。 | ()=> Promise\<NotificationPermission\> | - | - |
 |open |向用户推送一个通知|(config: XNotificationOpenArgs)=> void | - | - |
 |close|关闭已推送的通知，可以传入tag列表关闭指定通知，没有参数则会关闭所有通知|(config?: string[])=> void | - | - |
 
@@ -1013,22 +999,6 @@ type useNotification = [
 ];
 ```
 
-## 系统权限设置
-
-### 在 Windows 上更改 `通知` 设置
-
-在 Windows 系统上不同版本系统的设置路径会有不同，可大概参考路径：“开始”菜单 > “设置”> “系统” > 然后在左侧选择 “通知和操作”，之后可以对全局通知以及应用通知等进行操作。
-
-### 在 Mac 上更改 `通知` 设置
-
-在 Mac 上，使用 ”通知“ 设置来指定不想被通知打扰的时段，并控制通知在 ”通知中心“ 中的显示方式。若要更改这些设置，请选取 ”苹果“菜单> ”系统设置“，然后点按边栏中的 ”通知”（你可能需要向下滚动）。
-
-## FAQ
-
-### 已经获取了当前来源 `origin` 显示系统通知的权限，`onShow` 回调也触发了，为何还是无法展示推送的通知？
-
-`Notification` 为系统通知，需要确保设备开启了对应浏览器应用的通知权限。
-
 ---
 
 ## Folder
@@ -1077,11 +1047,3 @@ interface FileContentService {
   loadFileContent(filePath: string): Promise<string>;
 }
 ```
-
-## 语义化 DOM
-
-<code src="./demo/_semantic.tsx" simplify="true"></code>
-
-## 主题变量（Design Token）
-
-<ComponentTokenTable component="Folder"></ComponentTokenTable>

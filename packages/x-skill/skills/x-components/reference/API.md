@@ -167,9 +167,12 @@ export type FuncRoleProps = (data: BubbleItemType) => RoleProps;
 export type DividerRoleProps = Partial<DividerBubbleProps>;
 export type FuncDividerRoleProps = (data: BubbleItemType) => DividerRoleProps;
 
-export type RoleType = Partial<Record<'ai' | 'system' | 'user', RoleProps | FuncRoleProps>> & {
-  divider?: DividerRoleProps | FuncDividerRoleProps;
-} & Record<string, RoleProps | FuncRoleProps>;
+export type RoleType = Partial<
+  'ai' | 'system' | 'user', RoleProps | FuncRoleProps>
+> & { divider: DividerRoleProps | FuncDividerRoleProps } & Record<
+    string,
+    RoleProps | FuncRoleProps
+  >;
 ```
 
 #### Bubble.List autoScroll Top Alignment
@@ -976,22 +979,6 @@ type useNotification = [
 ];
 ```
 
-## System Permission Settings
-
-### Change `Notification` settings on Windows
-
-The setting path for different versions of the Windows system will be different. You can refer to the approximate path: "Start" menu > "Settings" > "System" > and then select "Notifications & actions" on the left, after which you can operate on global notifications and application notifications.
-
-### Change `Notification` settings on Mac
-
-On a Mac, use the "Notifications" settings to specify the period during which you do not want to be disturbed by notifications, and control how notifications are displayed in the "Notification Center". To change these settings, choose "Apple" menu > "System Settings", then click "Notifications" in the sidebar (you may need to scroll down).
-
-## FAQ
-
-### I have obtained the permission for the current `origin` to display system notifications, and the `onShow` callback has also been triggered. Why can't the pushed notification be displayed?
-
-`Notification` is a system-level feature. Please ensure that notifications are enabled for the browser application on your device.
-
 ---
 
 ## Folder
@@ -1003,7 +990,7 @@ Common props ref: [Common props](/docs/react/common-props)
 <!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| treeData | File tree data | [FolderTreeData](#foldertreedata)[] | `[]` | - |
+| treeData | File tree data | [FolderTreeData](#foldertreenode)[] | `[]` | - |
 | selectable | Whether to enable selection functionality | boolean | `true` | - |
 | selectedFile | Selected file paths (controlled) | string[] | - | - |
 | defaultSelectedFile | Default selected file paths | string[] | `[]` | - |
@@ -1029,7 +1016,7 @@ Common props ref: [Common props](/docs/react/common-props)
 | title | Display name | string | - | - |
 | path | File path | string | - | - |
 | content | File content (optional) | string | - | - |
-| children | Sub-items (valid only for folder type) | [FolderTreeData](#foldertreedata)[] | - | - |
+| children | Sub-items (valid only for folder type) | [FolderTreeData](#foldertreenode)[] | - | - |
 
 ### FileContentService
 

@@ -1,118 +1,105 @@
-# API 参考
+## A2UI v0.9
 
-`@ant-design/x-card` 的完整 TypeScript 类型。
+通用属性参考：[通用属性](/docs/react/common-props)
 
----
+### BoxProps
 
-## React 组件
+Box 组件作为容器，用于管理 Card 实例和命令分发。
 
-### XCard.Box
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| children | 子元素 | React.ReactNode | - | - |
+| components | 自定义组件映射，组件名称必须以大写字母开头 | Record\<string, React.ComponentType\<any\>\> | - | - |
+| commands | A2UI 命令对象 | A2UICommand_v0_9 \| XAgentCommand_v0_8 | - | - |
+| onAction | Card 内部组件触发 action 时的回调函数 | (payload: ActionPayload) => void | - | - |
+
+### CardProps
+
+Card 组件用于渲染单个 Surface。
+
+| 属性 | 说明                               | 类型   | 默认值 | 版本 |
+| ---- | ---------------------------------- | ------ | ------ | ---- |
+| id   | Surface ID，对应命令中的 surfaceId | string | -      | -    |
+
+### ActionPayload
+
+action 事件的数据结构。
+
+| 属性      | 说明                               | 类型                  | 默认值 | 版本 |
+| --------- | ---------------------------------- | --------------------- | ------ | ---- |
+| name      | 事件名称                           | string                | -      | -    |
+| surfaceId | 触发该 action 的 surfaceId         | string                | -      | -    |
+| context   | 当前 surface 的完整 dataModel 快照 | Record\<string, any\> | -      | -    |
+
+### A2UICommand_v0_9
+
+v0.9 版本的命令类型，支持以下命令：
+
+#### CreateSurfaceCommand
+
+创建新的 Surface。
+
+| 属性                    | 说明                    | 类型   | 默认值 | 版本 |
+| ----------------------- | ----------------------- | ------ | ------ | ---- |
+| version                 | 版本号                  | 'v0.9' | -      | -    |
+| createSurface.surfaceId | Surface ID              | string | -      | -    |
+| createSurface.catalogId | 组件目录 URL 或本地标识 | string | -      | -    |
+
+#### UpdateComponentsCommand
+
+更新 Surface 上的组件。
+
+| 属性                        | 说明       | 类型                 | 默认值 | 版本 |
+| --------------------------- | ---------- | -------------------- | ------ | ---- |
+| version                     | 版本号     | 'v0.9'               | -      | -    |
+| updateComponents.surfaceId  | Surface ID | string               | -      | -    |
+| updateComponents.components | 组件列表   | BaseComponent_v0_9[] | -      | -    |
+
+#### BaseComponent_v0_9
 
 ```typescript
-interface BoxProps {
-  /** 命令队列 —— 追加新命令；每次更新不要替换整个数组 */
-  commands?: (XAgentCommand_v0_9 | XAgentCommand_v0_8)[];
-  /**
-   * 组件名称 → React 组件实现的映射
-   * 组件名称必须以大写字母开头（符合 React 组件规范）
-   */
-  components?: Record<string, React.ComponentType<any>>;
-  /** Surface 组件触发 Action 时调用 */
-  onAction?: (payload: ActionPayload) => void;
-  children?: React.ReactNode;
-}
-```
-
-### XCard.Card
-
-```typescript
-interface CardProps {
-  /** 该卡片渲染的 surfaceId */
-  id: string;
-}
-```
-
----
-
-## 命令类型（v0.9）
-
-```typescript
-type XAgentCommand_v0_9 =
-  | { version: 'v0.9'; createSurface: CreateSurfacePayload }
-  | { version: 'v0.9'; updateComponents: UpdateComponentsPayload }
-  | { version: 'v0.9'; updateDataModel: UpdateDataModelPayload }
-  | { version: 'v0.9'; deleteSurface: DeleteSurfacePayload };
-
-interface CreateSurfacePayload {
-  surfaceId: string;
-  catalogId: string;
-  // 注意：theme 和 sendDataModel 为 A2UI 协议规范字段，当前实现尚未支持，传入会被静默忽略
-}
-
-interface UpdateComponentsPayload {
-  surfaceId: string;
-  components: BaseComponent_v0_9[];
-}
-
 interface BaseComponent_v0_9 {
   id: string;
   component: string;
   child?: string;
-  children?: string[]; // 子组件 ID 数组；模板迭代用 { path, componentId } 对象（运行时支持，类型层未体现）
+  children?: string[];
   [key: string]: any | PathValue;
 }
+```
 
+#### UpdateDataModelCommand
+
+更新数据模型。
+
+| 属性                      | 说明       | 类型   | 默认值 | 版本 |
+| ------------------------- | ---------- | ------ | ------ | ---- |
+| version                   | 版本号     | 'v0.9' | -      | -    |
+| updateDataModel.surfaceId | Surface ID | string | -      | -    |
+| updateDataModel.path      | 数据路径   | string | -      | -    |
+| updateDataModel.value     | 数据值     | any    | -      | -    |
+
+#### DeleteSurfaceCommand
+
+删除 Surface。
+
+| 属性                    | 说明       | 类型   | 默认值 | 版本 |
+| ----------------------- | ---------- | ------ | ------ | ---- |
+| version                 | 版本号     | 'v0.9' | -      | -    |
+| deleteSurface.surfaceId | Surface ID | string | -      | -    |
+
+### PathValue
+
+数据绑定路径对象。
+
+```typescript
 interface PathValue {
   path: string;
 }
-
-interface UpdateDataModelPayload {
-  surfaceId: string;
-  path: string; // JSON Pointer（RFC 6901），根路径用 "/"
-  value: any; // 要写入的值
-}
-
-interface DeleteSurfacePayload {
-  surfaceId: string;
-}
 ```
 
----
+### Catalog
 
-## Action 类型
-
-```typescript
-interface ActionPayload {
-  name: string;
-  surfaceId: string;
-  /**
-   * 触发 Action 时当前 Surface 的完整 dataModel 快照。
-   * 注意：这是整个数据模型，不只是 action.event.context 中定义的字段。
-   * 例：{ form: { email: '...', name: '...' }, ui: { loading: false } }
-   */
-  context: Record<string, any>;
-}
-
-// 服务端 Action 定义（写在组件上）
-interface ServerAction {
-  event: {
-    name: string;
-    context: Record<string, any | PathValue>;
-  };
-}
-
-// 客户端函数 Action
-interface FunctionAction {
-  functionCall: {
-    call: string;
-    args: Record<string, any>;
-  };
-}
-```
-
----
-
-## Catalog 类型
+组件目录定义。
 
 ```typescript
 interface Catalog {
@@ -125,95 +112,171 @@ interface Catalog {
   functions?: Record<string, any>;
   $defs?: Record<string, any>;
 }
+```
 
+### CatalogComponent
+
+Catalog 中的组件定义。
+
+```typescript
 interface CatalogComponent {
   type: 'object';
+  allOf?: any[];
   properties?: Record<string, any>;
   required?: string[];
-  allOf?: any[];
   [key: string]: any;
 }
 ```
 
----
+### Catalog 相关方法
 
-## Catalog API 函数
+#### registerCatalog
+
+注册本地 catalog。
 
 ```typescript
-/** 注册本地 Catalog（挂载前调用） */
-function registerCatalog(catalog: Catalog): void;
+registerCatalog(catalog: Catalog): void
+```
 
-/** 按 ID 加载 Catalog —— 先查本地注册表，再远程获取 */
-function loadCatalog(catalogId: string): Promise<Catalog>;
+#### loadCatalog
 
-/** 对照已加载的 Catalog 校验组件属性 */
-function validateComponent(
-  catalog: Catalog,
-  componentName: string,
-  componentProps: Record<string, any>,
-): boolean;
+加载 catalog（支持远程 URL 或本地注册的 schema）。
 
-/** 清除内存中的 Catalog 缓存 */
-function clearCatalogCache(): void;
+```typescript
+loadCatalog(catalogId: string): Promise<Catalog>
+```
+
+#### validateComponent
+
+验证组件是否符合 catalog 定义。
+
+```typescript
+validateComponent(catalog: Catalog, componentName: string, componentProps: Record<string, any>): boolean
+```
+
+#### clearCatalogCache
+
+清除 catalog 缓存。
+
+```typescript
+clearCatalogCache(): void
 ```
 
 ---
 
-## v0.8 类型（已废弃）
+## A2UI v0.8
+
+通用属性参考：[通用属性](/docs/react/common-props)
+
+### BoxProps
+
+Box 组件作为容器，用于管理 Card 实例和命令分发。
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| children | 子元素 | React.ReactNode | - | - |
+| components | 自定义组件映射，组件名称必须以大写字母开头 | Record\<string, React.ComponentType\<any\>\> | - | - |
+| commands | A2UI 命令对象 | A2UICommand_v0_9 \| XAgentCommand_v0_8 | - | - |
+| onAction | Card 内部组件触发 action 时的回调函数 | (payload: ActionPayload) => void | - | - |
+
+### CardProps
+
+Card 组件用于渲染单个 Surface。
+
+| 属性 | 说明                               | 类型   | 默认值 | 版本 |
+| ---- | ---------------------------------- | ------ | ------ | ---- |
+| id   | Surface ID，对应命令中的 surfaceId | string | -      | -    |
+
+### ActionPayload
+
+action 事件的数据结构。
+
+| 属性      | 说明                               | 类型                  | 默认值 | 版本 |
+| --------- | ---------------------------------- | --------------------- | ------ | ---- |
+| name      | 事件名称                           | string                | -      | -    |
+| surfaceId | 触发该 action 的 surfaceId         | string                | -      | -    |
+| context   | 当前 surface 的完整 dataModel 快照 | Record\<string, any\> | -      | -    |
+
+### XAgentCommand_v0_8
+
+v0.8 版本的命令类型，支持以下命令：
+
+#### SurfaceUpdateCommand
+
+更新 Surface 上的组件。
+
+| 属性                     | 说明       | 类型                    | 默认值 | 版本 |
+| ------------------------ | ---------- | ----------------------- | ------ | ---- |
+| surfaceUpdate.surfaceId  | Surface ID | string                  | -      | -    |
+| surfaceUpdate.components | 组件列表   | ComponentWrapper_v0_8[] | -      | -    |
+
+#### ComponentWrapper_v0_8
+
+v0.8 版本的组件包装结构。
 
 ```typescript
-type XAgentCommand_v0_8 =
-  | { surfaceUpdate: SurfaceUpdate_v0_8 }
-  | { dataModelUpdate: DataModelUpdate_v0_8 }
-  | { beginRendering: BeginRendering_v0_8 }
-  | { deleteSurface: DeleteSurface_v0_8 };
-
-interface SurfaceUpdate_v0_8 {
-  surfaceId: string;
-  components: ComponentWrapper_v0_8[];
-}
-
 interface ComponentWrapper_v0_8 {
   id: string;
   component: {
     [componentType: string]: {
-      // 例 "Button"
       child?: string;
-      children?: string[] | { explicitList: string[] };
-      action?: ActionConfig_v0_8; // v0.8 action 格式
-      [key: string]: any; // 支持 { path } 或 { literalString } 绑定
+      children?: string[] | ExplicitList;
+      [key: string]: any | PathValue | LiteralStringValue;
     };
   };
 }
+```
 
-// v0.8 action 格式：context 是数组，与 v0.9 的对象格式不同
-interface ActionConfig_v0_8 {
-  name: string;
-  context?: Array<{
-    key: string;
-    value: PathValue | LiteralStringValue | any; // { path } 是写入目标
-  }>;
+#### ExplicitList
+
+```typescript
+interface ExplicitList {
+  explicitList: string[];
 }
+```
 
+#### DataModelUpdateCommand
+
+更新数据模型（v0.8 格式）。
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| dataModelUpdate.surfaceId | Surface ID | string | - | - |
+| dataModelUpdate.contents | 数据内容列表 | Array\<{ key: string; valueMap: Array\<{ key: string; valueString: string }\> }\> | - | - |
+
+#### BeginRenderingCommand
+
+开始渲染。
+
+| 属性                     | 说明       | 类型   | 默认值 | 版本 |
+| ------------------------ | ---------- | ------ | ------ | ---- |
+| beginRendering.surfaceId | Surface ID | string | -      | -    |
+| beginRendering.root      | 根组件 ID  | string | -      | -    |
+
+#### DeleteSurfaceCommand
+
+删除 Surface。
+
+| 属性                    | 说明       | 类型   | 默认值 | 版本 |
+| ----------------------- | ---------- | ------ | ------ | ---- |
+| deleteSurface.surfaceId | Surface ID | string | -      | -    |
+
+### PathValue
+
+数据绑定路径对象。
+
+```typescript
+interface PathValue {
+  path: string;
+}
+```
+
+### LiteralStringValue
+
+字面字符串值对象（v0.8 特有）。
+
+```typescript
 interface LiteralStringValue {
-  literalString: string; // v0.8 特有，等价于 v0.9 中的直接字符串字面量
-}
-
-interface DataModelUpdate_v0_8 {
-  surfaceId: string;
-  contents: Array<{
-    key: string;
-    valueString?: string; // 直接存储字符串值
-    valueMap?: Array<{ key: string; valueString: string }>; // 转换为对象
-  }>;
-}
-
-interface BeginRendering_v0_8 {
-  surfaceId: string;
-  root: string; // 根组件 ID，v0.8 须显式指定
-}
-
-interface DeleteSurface_v0_8 {
-  surfaceId: string;
+  literalString: string;
 }
 ```

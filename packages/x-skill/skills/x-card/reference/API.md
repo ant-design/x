@@ -1,111 +1,105 @@
-# API Reference
+## A2UI v0.9
 
-Full TypeScript types for `@ant-design/x-card`.
+Common props ref: [Common Props](/docs/react/common-props)
 
----
+### BoxProps
 
-## React Components
+Box component serves as a container to manage Card instances and command dispatching.
 
-### XCard.Box
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| children | Child elements | React.ReactNode | - | - |
+| components | Custom component mapping, component names must start with uppercase letters | Record\<string, React.ComponentType\<any\>\> | - | - |
+| commands | A2UI command object | A2UICommand_v0_9 \| XAgentCommand_v0_8 | - | - |
+| onAction | Callback function when action is triggered inside Card | (payload: ActionPayload) => void | - | - |
+
+### CardProps
+
+Card component is used to render a single Surface.
+
+| Property | Description                                        | Type   | Default | Version |
+| -------- | -------------------------------------------------- | ------ | ------- | ------- |
+| id       | Surface ID, corresponding to surfaceId in commands | string | -       | -       |
+
+### ActionPayload
+
+Data structure for action events.
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| name | Event name | string | - | - |
+| surfaceId | The surfaceId that triggered the action | string | - | - |
+| context | Complete dataModel snapshot of current surface | Record\<string, any\> | - | - |
+
+### A2UICommand_v0_9
+
+Command type for v0.9 version, supporting the following commands:
+
+#### CreateSurfaceCommand
+
+Create a new Surface.
+
+| Property                | Description                               | Type   | Default | Version |
+| ----------------------- | ----------------------------------------- | ------ | ------- | ------- |
+| version                 | Version number                            | 'v0.9' | -       | -       |
+| createSurface.surfaceId | Surface ID                                | string | -       | -       |
+| createSurface.catalogId | Component catalog URL or local identifier | string | -       | -       |
+
+#### UpdateComponentsCommand
+
+Update components on a Surface.
+
+| Property                    | Description    | Type                 | Default | Version |
+| --------------------------- | -------------- | -------------------- | ------- | ------- |
+| version                     | Version number | 'v0.9'               | -       | -       |
+| updateComponents.surfaceId  | Surface ID     | string               | -       | -       |
+| updateComponents.components | Component list | BaseComponent_v0_9[] | -       | -       |
+
+#### BaseComponent_v0_9
 
 ```typescript
-interface BoxProps {
-  /** Command queue — append new commands; do NOT replace entire array on each update */
-  commands?: (XAgentCommand_v0_9 | XAgentCommand_v0_8)[];
-  /** Map of component name → React component implementation */
-  components?: Record<string, React.ComponentType<any>>;
-  /** Called when a surface component triggers an action */
-  onAction?: (payload: ActionPayload) => void;
-  children?: React.ReactNode;
-}
-```
-
-### XCard.Card
-
-```typescript
-interface CardProps {
-  /** The surfaceId this card renders */
-  id: string;
-}
-```
-
----
-
-## Command Types (v0.9)
-
-```typescript
-type XAgentCommand_v0_9 =
-  | { version: 'v0.9'; createSurface: CreateSurfacePayload }
-  | { version: 'v0.9'; updateComponents: UpdateComponentsPayload }
-  | { version: 'v0.9'; updateDataModel: UpdateDataModelPayload }
-  | { version: 'v0.9'; deleteSurface: DeleteSurfacePayload };
-
-interface CreateSurfacePayload {
-  surfaceId: string;
-  catalogId: string;
-  theme?: { primaryColor?: string; iconUrl?: string; agentDisplayName?: string };
-  sendDataModel?: boolean;
-}
-
-interface UpdateComponentsPayload {
-  surfaceId: string;
-  components: BaseComponent_v0_9[];
-}
-
 interface BaseComponent_v0_9 {
   id: string;
   component: string;
   child?: string;
-  children?: string[] | { path: string; componentId: string };
+  children?: string[];
   [key: string]: any | PathValue;
 }
+```
 
+#### UpdateDataModelCommand
+
+Update data model.
+
+| Property                  | Description    | Type   | Default | Version |
+| ------------------------- | -------------- | ------ | ------- | ------- |
+| version                   | Version number | 'v0.9' | -       | -       |
+| updateDataModel.surfaceId | Surface ID     | string | -       | -       |
+| updateDataModel.path      | Data path      | string | -       | -       |
+| updateDataModel.value     | Data value     | any    | -       | -       |
+
+#### DeleteSurfaceCommand
+
+Delete a Surface.
+
+| Property                | Description    | Type   | Default | Version |
+| ----------------------- | -------------- | ------ | ------- | ------- |
+| version                 | Version number | 'v0.9' | -       | -       |
+| deleteSurface.surfaceId | Surface ID     | string | -       | -       |
+
+### PathValue
+
+Data binding path object.
+
+```typescript
 interface PathValue {
   path: string;
 }
-
-interface UpdateDataModelPayload {
-  surfaceId: string;
-  path?: string; // JSON Pointer (RFC 6901). Default: "/" (full replace)
-  value?: any; // Omit to delete key at path
-}
-
-interface DeleteSurfacePayload {
-  surfaceId: string;
-}
 ```
 
----
+### Catalog
 
-## Action Types
-
-```typescript
-interface ActionPayload {
-  name: string;
-  surfaceId: string;
-  context: Record<string, any>;
-}
-
-// Server action definition (on component)
-interface ServerAction {
-  event: {
-    name: string;
-    context: Record<string, any | PathValue>;
-  };
-}
-
-// Client-side function action
-interface FunctionAction {
-  functionCall: {
-    call: string;
-    args: Record<string, any>;
-  };
-}
-```
-
----
-
-## Catalog Types
+Component catalog definition.
 
 ```typescript
 interface Catalog {
@@ -118,64 +112,171 @@ interface Catalog {
   functions?: Record<string, any>;
   $defs?: Record<string, any>;
 }
+```
 
+### CatalogComponent
+
+Component definition in Catalog.
+
+```typescript
 interface CatalogComponent {
   type: 'object';
+  allOf?: any[];
   properties?: Record<string, any>;
   required?: string[];
-  allOf?: any[];
   [key: string]: any;
 }
 ```
 
----
+### Catalog Methods
 
-## Catalog API Functions
+#### registerCatalog
+
+Register a local catalog.
 
 ```typescript
-/** Register a local catalog (call before mounting) */
-function registerCatalog(catalog: Catalog): void;
+registerCatalog(catalog: Catalog): void
+```
 
-/** Load a catalog by ID — checks local registry first, then remote fetch */
-function loadCatalog(catalogId: string): Promise<Catalog>;
+#### loadCatalog
 
-/** Validate a component's props against a loaded catalog */
-function validateComponent(
-  catalog: Catalog,
-  componentName: string,
-  componentProps: Record<string, any>,
-): boolean;
+Load a catalog (supports remote URL or locally registered schema).
 
-/** Clear the in-memory catalog cache */
-function clearCatalogCache(): void;
+```typescript
+loadCatalog(catalogId: string): Promise<Catalog>
+```
+
+#### validateComponent
+
+Validate whether a component conforms to catalog definition.
+
+```typescript
+validateComponent(catalog: Catalog, componentName: string, componentProps: Record<string, any>): boolean
+```
+
+#### clearCatalogCache
+
+Clear catalog cache.
+
+```typescript
+clearCatalogCache(): void
 ```
 
 ---
 
-## v0.8 Types (deprecated)
+## A2UI v0.8
+
+Common props ref: [Common Props](/docs/react/common-props)
+
+### BoxProps
+
+Box component serves as a container to manage Card instances and command dispatching.
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| children | Child elements | React.ReactNode | - | - |
+| components | Custom component mapping, component names must start with uppercase letters | Record\<string, React.ComponentType\<any\>\> | - | - |
+| commands | A2UI command object | A2UICommand_v0_9 \| XAgentCommand_v0_8 | - | - |
+| onAction | Callback function when action is triggered inside Card | (payload: ActionPayload) => void | - | - |
+
+### CardProps
+
+Card component is used to render a single Surface.
+
+| Property | Description                                        | Type   | Default | Version |
+| -------- | -------------------------------------------------- | ------ | ------- | ------- |
+| id       | Surface ID, corresponding to surfaceId in commands | string | -       | -       |
+
+### ActionPayload
+
+Data structure for action events.
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| name | Event name | string | - | - |
+| surfaceId | The surfaceId that triggered the action | string | - | - |
+| context | Complete dataModel snapshot of current surface | Record\<string, any\> | - | - |
+
+### XAgentCommand_v0_8
+
+Command type for v0.8 version, supporting the following commands:
+
+#### SurfaceUpdateCommand
+
+Update components on a Surface.
+
+| Property                 | Description    | Type                    | Default | Version |
+| ------------------------ | -------------- | ----------------------- | ------- | ------- |
+| surfaceUpdate.surfaceId  | Surface ID     | string                  | -       | -       |
+| surfaceUpdate.components | Component list | ComponentWrapper_v0_8[] | -       | -       |
+
+#### ComponentWrapper_v0_8
+
+Component wrapper structure for v0.8 version.
 
 ```typescript
-type XAgentCommand_v0_8 =
-  | { updateComponents: UpdateComponents_v0_8 }
-  | { dataModelUpdate: DataModelUpdate_v0_8 };
-
-interface UpdateComponents_v0_8 {
-  surfaceId: string;
-  catalogId: string;
-  components: ComponentWrapper_v0_8[];
-}
-
 interface ComponentWrapper_v0_8 {
   id: string;
-  component: Record<string, Record<string, any>>; // { "Button": { props } }
+  component: {
+    [componentType: string]: {
+      child?: string;
+      children?: string[] | ExplicitList;
+      [key: string]: any | PathValue | LiteralStringValue;
+    };
+  };
 }
+```
 
-interface DataModelUpdate_v0_8 {
-  surfaceId: string;
-  contents: Array<{
-    key: string;
-    valueString?: string;
-    valueMap?: Array<{ key: string; valueString: string }>;
-  }>;
+#### ExplicitList
+
+```typescript
+interface ExplicitList {
+  explicitList: string[];
+}
+```
+
+#### DataModelUpdateCommand
+
+Update data model (v0.8 format).
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| dataModelUpdate.surfaceId | Surface ID | string | - | - |
+| dataModelUpdate.contents | Data content list | Array\<{ key: string; valueMap: Array\<{ key: string; valueString: string }\> }\> | - | - |
+
+#### BeginRenderingCommand
+
+Begin rendering.
+
+| Property                 | Description       | Type   | Default | Version |
+| ------------------------ | ----------------- | ------ | ------- | ------- |
+| beginRendering.surfaceId | Surface ID        | string | -       | -       |
+| beginRendering.root      | Root component ID | string | -       | -       |
+
+#### DeleteSurfaceCommand
+
+Delete a Surface.
+
+| Property                | Description | Type   | Default | Version |
+| ----------------------- | ----------- | ------ | ------- | ------- |
+| deleteSurface.surfaceId | Surface ID  | string | -       | -       |
+
+### PathValue
+
+Data binding path object.
+
+```typescript
+interface PathValue {
+  path: string;
+}
+```
+
+### LiteralStringValue
+
+Literal string value object (v0.8 specific).
+
+```typescript
+interface LiteralStringValue {
+  literalString: string;
 }
 ```
