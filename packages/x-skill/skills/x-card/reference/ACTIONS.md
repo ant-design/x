@@ -22,7 +22,11 @@ Component (Button click)
 interface ActionPayload {
   name: string; // from action.event.name
   surfaceId: string; // which surface triggered this
-  context: Record<string, any>; // resolved values from data model
+  /**
+   * Complete dataModel snapshot of the current Surface when the action fired.
+   * This is the entire data model, not just the fields declared in action.event.context.
+   */
+  context: Record<string, any>;
 }
 ```
 
@@ -54,12 +58,21 @@ When the user clicks the button, `onAction` receives:
 {
   name: 'submit_form',
   surfaceId: 'contact_form',
+  // context is a complete dataModel snapshot of the current Surface
   context: {
-    email: 'alice@example.com',   // resolved from /form/email
-    name: 'Alice',                // resolved from /form/name
-    subscribe: true               // resolved from /form/subscribe
+    form: {
+      email: 'alice@example.com',
+      name: 'Alice',
+      subscribe: true
+    },
+    ui: { loading: false }
+    // ... all fields in the data model
   }
 }
+
+// Access values by following the data model structure:
+// payload.context.form.email
+// payload.context.form.name
 ```
 
 ---
@@ -69,7 +82,8 @@ When the user clicks the button, `onAction` receives:
 ```tsx
 const handleAction = (payload: ActionPayload) => {
   if (payload.name === 'submit_form') {
-    const { email, name } = payload.context;
+    // context is a complete dataModel snapshot — access by data model structure
+    const { email, name } = payload.context.form;
     // 1. Call your agent API
     // 2. Push new commands in response
     setCmdQueue(prev => [
@@ -138,7 +152,7 @@ const formCommands: XAgentCommand_v0_9[] = [
   { version: 'v0.9', updateDataModel: { surfaceId: 'form', path: '/form', value: { email: '' } } },
 ];
 
-// 2. Handle submission
+// 2. Handle submission (context is a complete dataModel snapshot)
 const handleAction = async (payload: ActionPayload) => {
   if (payload.name === 'submit') {
     // Show loading

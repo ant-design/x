@@ -136,7 +136,7 @@ interface UpdateDataModelPayload {
 { "version": "v0.9", "updateDataModel": { "surfaceId": "s1", "path": "/user/tempData" } }
 ```
 
-**Streaming pattern** — send structure first, then
+**Streaming pattern** — send structure first, then push data step by step:
 
 ```jsonl
 {"version":"v0.9","createSurface":{"surfaceId":"s1","catalogId":"local://cat.json"}}

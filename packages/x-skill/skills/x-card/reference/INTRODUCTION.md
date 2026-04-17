@@ -369,7 +369,7 @@ Each Surface has an independent JSON data model:
 
 ### JSON Pointer Paths
 
-Uses RFC 6901 standard JSON Pointer to access
+Uses RFC 6901 standard JSON Pointer to access data:
 
 - `/user/name` → `"Alice"`
 - `/reservation/guests` → `2`
