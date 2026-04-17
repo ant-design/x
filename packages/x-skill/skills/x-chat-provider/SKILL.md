@@ -1,6 +1,6 @@
 ---
 name: x-chat-provider
-version: 2.5.0
+version: 2.6.0
 description: Focus on implementing custom Chat Provider, helping to adapt any streaming interface to Ant Design X standard format
 ---
 
@@ -13,195 +13,117 @@ description: Focus on implementing custom Chat Provider, helping to adapt any st
 ## Table of Contents
 
 - [📦 Technology Stack Overview](#-technology-stack-overview)
-  - [Ant Design X Ecosystem](#ant-design-x-ecosystem)
-  - [Core Concepts](#core-concepts)
 - [🚀 Quick Start](#-quick-start)
-  - [Dependency Management](#dependency-management)
   - [Built-in Provider](#built-in-provider)
   - [When to Use Custom Provider](#when-to-use-custom-provider)
 - [📋 Four Steps to Implement Custom Provider](#-four-steps-to-implement-custom-provider)
-  - [Step1: Analyze Interface Format](#step1-analyze-interface-format)
-  - [Step2: Create Provider Class](#step2-create-provider-class)
-  - [Step3: Check Files](#step3-check-files)
-  - [Step4: Use Provider](#step4-use-provider)
+- [🔑 Core Types and Exports](#-core-types-and-exports)
+- [⚙️ XRequest Advanced Configuration](#️-xrequest-advanced-configuration)
+  - [callbacks](#callbacks)
+  - [retryInterval Retry](#retryinterval-retry)
+  - [transformStream Custom Stream](#transformstream-custom-stream)
 - [🔧 Common Scenario Adaptation](#-common-scenario-adaptation)
-- [📋 Joint Skill Usage](#-joint-skill-usage)
-  - [Scenario1: Complete AI Conversation Application](#scenario1-complete-ai-conversation-application)
-  - [Scenario2: Only Create Provider](#scenario2-only-create-provider)
-  - [Scenario3: Use Built-in Provider](#scenario3-use-built-in-provider)
 - [⚠️ Important Reminders](#️-important-reminders)
-  - [Mandatory Rule: Prohibit Writing request Method](#mandatory-rule-prohibit-writing-request-method)
 - [⚡ Quick Checklist](#-quick-checklist)
 - [🚨 Development Rules](#-development-rules)
 - [🔗 Reference Resources](#-reference-resources)
-  - [📚 Core Reference Documentation](#-core-reference-documentation)
-  - [🌐 SDK Official Documentation](#-sdk-official-documentation)
-  - [💻 Example Code](#-example-code)
 
 # 📦 Technology Stack Overview
 
-### 🏗️ Ant Design X Ecosystem Architecture
+| Layer            | Package Name               | Core Purpose               |
+| ---------------- | -------------------------- | -------------------------- |
+| **UI Layer**     | **@ant-design/x**          | React UI component library |
+| **Logic Layer**  | **@ant-design/x-sdk**      | Development toolkit        |
+| **Render Layer** | **@ant-design/x-markdown** | Markdown renderer          |
 
-| Layer | Package Name | Core Purpose | Typical Usage Scenarios |
-| --- | --- | --- | --- |
-| **UI Layer** | **@ant-design/x** | React UI component library | Build chat interfaces, bubbles, input boxes |
-| **Logic Layer** | **@ant-design/x-sdk** | Development toolkit | Data flow management, Provider, Hook |
-| **Render Layer** | **@ant-design/x-markdown** | Markdown renderer | Content display, code highlighting |
-
-> ⚠️ **Important Reminder**: These three packages have different functional positioning, please import required features from the correct package
->
-> ```ts
-> // ✅ Correct import examples
-> import { Bubble } from '@ant-design/x'; // UI component
-> import { AbstractChatProvider } from '@ant-design/x-sdk'; // Provider base class
-> import { XRequest } from '@ant-design/x-sdk'; // Request tool
-> ```
-
-### 🔑 Core Concept Analysis
-
-```mermaid
-graph LR
-    A[Original API Interface] -->|Adapt| B[Chat Provider]
-    B -->|Provide Data| C[useXChat Hook]
-    C -->|Render| D[Ant Design X UI]
-    E[XRequest] -->|Network Request| B
+```ts
+// ✅ Correct import examples
+import { Bubble } from '@ant-design/x';
+import { AbstractChatProvider, OpenAIChatProvider } from '@ant-design/x-sdk';
+import XRequest from '@ant-design/x-sdk';
 ```
-
-| Concept | Role Positioning | Core Responsibility | Usage Scenario |
-| --- | --- | --- | --- |
-| **Chat Provider** | 🔄 Data Adapter | Convert any interface format to Ant Design X standard format | Private API adaptation, format conversion |
-| **useXChat** | ⚛️ React Hook | Manage conversation state, message flow, request control | Build AI conversation interface |
-| **XRequest** | 🌐 Request Tool | Handle all network communication, authentication, error handling | Unified request management |
 
 # 🚀 Quick Start
-
-### 📋 Environment Preparation
-
-#### System Requirements
-
-| Package | Version Requirement | Auto Install | Purpose |
-| --- | --- | --- | --- |
-| **@ant-design/x-sdk** | ≥2.2.2 | ✅ | Core SDK, includes Provider and Hook |
-| **@ant-design/x** | Latest version | ✅ | UI component library, build chat interface |
-
-#### 🛠️ One-click Environment Check
-
-```bash
-# Auto check and fix version
-npm ls @ant-design/x-sdk
-# If version doesn't match, auto prompt:
-npm install @ant-design/x-sdk@latest
-```
-
-#### 📊 Version Compatibility Matrix
-
-| SDK Version | Supported Features          | Compatibility            |
-| ----------- | --------------------------- | ------------------------ |
-| ≥2.2.2      | Full Provider functionality | ✅ Recommended           |
-| 2.2.0       | Basic functionality         | ⚠️ Partial compatibility |
-| <2.2.0      | Not supported               | ❌ Need upgrade          |
 
 ### 🎯 Provider Selection Decision Tree
 
 ```mermaid
 graph TD
-    A[Start] --> B{Use Standard API?}
-    B -->|Yes| C[Use Built-in Provider]
-    B -->|No| D{Private API?}
-    D -->|Yes| E[Custom Provider]
-    D -->|No| F{Special Format?}
-    F -->|Yes| E
-    F -->|No| C
-
-    C --> G[OpenAI/DeepSeek Provider]
-    E --> H[Four Steps to Create Custom Provider]
+    A[Start] --> B{Use standard OpenAI/DeepSeek API?}
+    B -->|Yes| C[Use built-in Provider]
+    B -->|No| D{Raw data format as message?}
+    D -->|Yes| E[Use DefaultChatProvider]
+    D -->|No| F[Custom Provider]
+    C --> G[OpenAIChatProvider / DeepSeekChatProvider]
+    E --> H[Pass-through, no conversion needed]
+    F --> I[Four-step custom Provider]
 ```
 
 ### 🏭 Built-in Provider Overview
 
-#### Out-of-the-box Providers
+| Provider Type | Applicable Scenario | Import |
+| --- | --- | --- |
+| **OpenAIChatProvider** | Standard OpenAI API format | `import { OpenAIChatProvider } from '@ant-design/x-sdk'` |
+| **DeepSeekChatProvider** | Standard DeepSeek API format | `import { DeepSeekChatProvider } from '@ant-design/x-sdk'` |
+| **DefaultChatProvider** | Pass-through raw response, no format conversion | `import { DefaultChatProvider } from '@ant-design/x-sdk'` |
 
-| Provider Type         | Applicable Scenario   | Usage Method      |
-| --------------------- | --------------------- | ----------------- |
-| **OpenAI Provider**   | Standard OpenAI API   | Direct import use |
-| **DeepSeek Provider** | Standard DeepSeek API | Direct import use |
+> ⚠️ Export names are `OpenAIChatProvider` / `DeepSeekChatProvider` / `DefaultChatProvider`, watch spelling
 
-#### Quick Decision Guide
+#### DefaultChatProvider Use Case
 
-| Scenario                     | Recommended Solution       | Example                      |
-| ---------------------------- | -------------------------- | ---------------------------- |
-| Call official OpenAI         | Built-in OpenAI Provider   | `new OpenAIProvider()`       |
-| Call official DeepSeek       | Built-in DeepSeek Provider | `new DeepSeekProvider()`     |
-| Company internal API         | Custom Provider            | See four-step implementation |
-| Third-party non-standard API | Custom Provider            | See four-step implementation |
+`DefaultChatProvider` **passes through raw response data** without any conversion. Suitable for:
+
+- The interface response format is already what you want to display
+- You want full control over `Bubble.List`'s `contentRender` to render messages
+
+```ts
+import { DefaultChatProvider, XRequest } from '@ant-design/x-sdk';
+
+interface ChatInput {
+  query: string;
+  stream?: boolean;
+}
+
+interface ChatOutput {
+  choices: Array<{ message: { content: string; role: string } }>;
+}
+
+// DefaultChatProvider generic: <ChatMessage, Input, Output>
+// ChatMessage is your Output type (passed through directly)
+const provider = new DefaultChatProvider<ChatOutput | ChatInput, ChatInput, ChatOutput>({
+  request: XRequest('https://your-api.com/chat', {
+    manual: true,
+    params: { stream: false },
+  }),
+});
+
+// Render using contentRender in Bubble.List's role config
+// role={{ assistant: { contentRender(content) { return content?.choices?.[0]?.message?.content } } }}
+```
+
+> ⚠️ When using `DefaultChatProvider`, `ChatMessage` is typically your `Output` type or a union type; rendering requires `contentRender`
 
 # 📋 Four Steps to Implement Custom Provider
 
-## 🎯 Implementation Path Overview
+## Step 1: Analyze Interface Format ⏱️ 2 minutes
 
-```mermaid
-journey
-    title Custom Provider Implementation Path
-    section Analysis Phase
-      Interface Analysis: 2: User
-    section Development Phase
-      Create Class: 5: User
-      Check Validation: 1: User
-    section Integration Phase
-      Configure Usage: 1: User
-```
+| Information Type    | Example Value               |
+| ------------------- | --------------------------- |
+| **Interface URL**   | `https://your-api.com/chat` |
+| **Request Method**  | JSON, POST                  |
+| **Response Format** | Server-Sent Events          |
+| **Auth Method**     | Bearer Token                |
 
-## Step1: Analyze Interface Format ⏱️ 2 minutes
-
-### 📋 Interface Information Collection Table
-
-| Information Type          | Example Value               | Your Interface  |
-| ------------------------- | --------------------------- | --------------- |
-| **Interface URL**         | `https://your-api.com/chat` | `_____________` |
-| **Request Method**        | POST                        | `_____________` |
-| **Request Format**        | JSON                        | `_____________` |
-| **Response Format**       | Server-Sent Events          | `_____________` |
-| **Authentication Method** | Bearer Token                | `_____________` |
-
-### 🔍 Interface Format Template
-
-#### ✅ Request Format Example
-
-```ts
-// Your actual request format
-interface MyAPIRequest {
-  query: string; // User question
-  context?: string; // Conversation history (optional)
-  model?: string; // Model selection (optional)
-  stream?: boolean; // Whether streaming (optional)
-}
-```
-
-#### ✅ Response Format Example
-
-```ts
-// Streaming response format
-// Actual response: data: {"content": "answer content"}
-interface MyAPIResponse {
-  content: string; // Answer fragment
-  finish_reason?: string; // End marker
-}
-
-// End marker: data: [DONE]
-```
-
-## Step2: Create Provider Class ⏱️ 5 minutes
-
-### 🏗️ Code Template (Copy and Use)
+## Step 2: Create Provider Class ⏱️ 5 minutes
 
 ```ts
 // MyChatProvider.ts
 import { AbstractChatProvider } from '@ant-design/x-sdk';
+import type { TransformMessage } from '@ant-design/x-sdk';
+import type { XRequestOptions } from '@ant-design/x-sdk';
 
-// ====== 1st modification: Define your interface types ======
 interface MyInput {
   query: string;
-  context?: string;
   model?: string;
   stream?: boolean;
 }
@@ -214,261 +136,251 @@ interface MyOutput {
 interface MyMessage {
   content: string;
   role: 'user' | 'assistant';
-  timestamp: number;
 }
 
-// ====== 2nd modification: Modify class name ======
 export class MyChatProvider extends AbstractChatProvider<MyMessage, MyInput, MyOutput> {
-  // Parameter conversion: convert useXChat parameters to your API parameters
+  // Parameter conversion: merge onRequest params + XRequest default params
+  // options comes from XRequest(url, options), can access options.params etc.
   transformParams(
     requestParams: Partial<MyInput>,
     options: XRequestOptions<MyInput, MyOutput, MyMessage>,
   ): MyInput {
-    if (typeof requestParams !== 'object') {
-      throw new Error('requestParams must be an object');
-    }
-
     return {
-      query: requestParams.query || '',
-      context: requestParams.context,
-      model: 'gpt-3.5-turbo', // Adjust according to your API
-      stream: true,
       ...(options?.params || {}),
+      query: requestParams.query || '',
+      model: 'gpt-3.5-turbo',
+      stream: true,
     };
   }
 
-  // Local message: user sent message format
+  // Local message: convert onRequest params to the user-side display message (can return array)
   transformLocalMessage(requestParams: Partial<MyInput>): MyMessage {
     return {
       content: requestParams.query || '',
       role: 'user',
-      timestamp: Date.now(),
     };
   }
 
-  // ====== 3rd modification: Response data conversion ======
-  transformMessage(info: { originMessage: MyMessage; chunk: MyOutput }): MyMessage {
+  // Response conversion:
+  // info.originMessage: previous content of this message (for stream accumulation)
+  // info.chunk: current streaming chunk
+  // info.chunks: all received chunks (used in onSuccess)
+  // info.status: current status
+  // ⚠️ Return only MyMessage type; do NOT add a status field
+  transformMessage(info: TransformMessage<MyMessage, MyOutput>): MyMessage {
     const { originMessage, chunk } = info;
 
-    // Handle end marker
     if (!chunk?.content || chunk.content === '[DONE]') {
-      return { ...originMessage, status: 'success' as const };
+      return { ...(originMessage || { content: '', role: 'assistant' }) };
     }
 
-    // Accumulate response content
     return {
-      ...originMessage,
-      content: `${originMessage.content || ''}${chunk.content || ''}`,
-      role: 'assistant' as const,
-      status: 'loading' as const,
+      content: `${originMessage?.content || ''}${chunk.content}`,
+      role: 'assistant',
     };
   }
 }
 ```
 
-### 🚨 Development Notes
+## Step 3: Verify ⏱️ 1 minute
 
-- ✅ **Only change 3 places**: interface types, class name, response conversion logic
-- ✅ **Prohibit implementing request method**: Network requests handled by XRequest
-- ✅ **Maintain type safety**: Use TypeScript strict mode
+| Check Item                    | Description                                                   |
+| ----------------------------- | ------------------------------------------------------------- |
+| **Only 3 methods**            | transformParams, transformLocalMessage, transformMessage      |
+| **transformParams signature** | Must include second parameter `options: XRequestOptions<...>` |
+| **No status in return**       | transformMessage return value has no status field             |
+| **No request method**         | Confirm no request method implemented                         |
+| **Type check passes**         | `tsc --noEmit` no errors                                      |
 
-## Step3: Check Validation ⏱️ 1 minute
-
-### ✅ Quick Checklist
-
-| Check Item             | Status | Description                           |
-| ---------------------- | ------ | ------------------------------------- |
-| **Correct class name** | ⏳     | `MyChatProvider` → Your class name    |
-| **Type matching**      | ⏳     | Interface types match actual API      |
-| **Complete methods**   | ⏳     | All 3 methods implemented             |
-| **No request method**  | ⏳     | Confirm no request method implemented |
-| **Type check passed**  | ⏳     | `tsc --noEmit` no errors              |
-
-### 🔍 Validation Code
-
-```bash
-# Run type check
-npx tsc --noEmit MyChatProvider.ts
-
-# Expected result: no error output
-```
-
-## Step4: Configure Usage ⏱️ 1 minute
-
-### 🔧 Complete Integration Example
+## Step 4: Use Provider ⏱️ 1 minute
 
 ```ts
-// 1. Import dependencies
 import { MyChatProvider } from './MyChatProvider';
-import { XRequest } from '@ant-design/x-sdk';
+import XRequest from '@ant-design/x-sdk';
 
-// 2. Configure XRequest (handled by x-request skill)
-const request = XRequest('https://your-api.com/chat', {
-  // Authentication configuration
-  headers: {
-    Authorization: 'Bearer your-token-here',
-    'Content-Type': 'application/json',
-  },
-
-  // Default parameters
-  params: {
-    model: 'gpt-3.5-turbo',
-    max_tokens: 1000,
-    temperature: 0.7,
-  },
-
-  // Streaming configuration
-  manual: true,
-});
-
-// 3. Create Provider instance
+// ⚠️ Must pass manual: true, otherwise AbstractChatProvider constructor will throw
 const provider = new MyChatProvider({
-  request, // Must pass XRequest instance
+  request: XRequest('https://your-api.com/chat', {
+    manual: true,
+    headers: {
+      Authorization: 'Bearer your-token',
+      'Content-Type': 'application/json',
+    },
+    params: {
+      model: 'gpt-3.5-turbo',
+      stream: true,
+    },
+  }),
 });
 
-// 4. Now can be used with useXChat
-// This part is handled by use-x-chat skill
 export { provider };
 ```
 
-### 🎉 Usage Advantages
+# 🔑 Core Types and Exports
 
-- **Zero network code**: XRequest handles all network details
-- **Type safety**: Complete TypeScript support
-- **Easy testing**: Can mock XRequest for unit testing
-- **Unified configuration**: Authentication, parameters, error handling centralized management
+Key types exported from `@ant-design/x-sdk`:
+
+```ts
+import type {
+  // OpenAI standard message format
+  XModelMessage, // { role: string; content: string | { text: string; type: string } }
+  XModelParams, // Full OpenAI request params type (model, messages, stream, temperature, etc.)
+  XModelResponse, // Full OpenAI response type (choices, usage, etc.)
+
+  // SSE stream field types
+  SSEFields, // 'data' | 'event' | 'id' | 'retry'
+  SSEOutput, // Partial<Record<SSEFields, any>>
+
+  // Provider related
+  TransformMessage, // { originMessage, chunk, chunks, status, responseHeaders }
+
+  // XRequest related
+  XRequestOptions, // Full request config
+  XRequestCallbacks, // { onUpdate, onSuccess, onError }
+
+  // Message related
+  MessageInfo, // { id, message, status, extraInfo }
+} from '@ant-design/x-sdk';
+```
+
+### XModelMessage Structure (OpenAI message format)
+
+```ts
+// XModelMessage is the standard OpenAI message format
+// Used for OpenAIChatProvider / DeepSeekChatProvider ChatMessage generic
+const userMessage: XModelMessage = { role: 'user', content: 'Hello' };
+const systemMessage: XModelMessage = { role: 'system', content: 'You are an assistant' };
+const developerMessage: XModelMessage = { role: 'developer', content: 'System prompt' };
+```
+
+### SSEOutput and SSEFields
+
+```ts
+// SSEOutput is the type for raw SSE stream data
+// { data?: string; event?: string; id?: string; retry?: number }
+// DeepSeekChatProvider uses Partial<Record<SSEFields, XModelResponse>>
+
+import { DeepSeekChatProvider, XRequest } from '@ant-design/x-sdk';
+import type { SSEFields, XModelParams, XModelResponse } from '@ant-design/x-sdk';
+
+const provider = new DeepSeekChatProvider({
+  request: XRequest<XModelParams, Partial<Record<SSEFields, XModelResponse>>>(
+    'https://api.deepseek.com/v1/chat/completions',
+    {
+      manual: true,
+      params: { model: 'deepseek-chat', stream: true },
+    },
+  ),
+});
+```
+
+# ⚙️ XRequest Advanced Configuration
+
+## callbacks
+
+`callbacks` allows monitoring request events at the Provider level. The third parameter in callbacks is the `MessageInfo` processed by `transformMessage`:
+
+```ts
+const provider = new OpenAIChatProvider({
+  request: XRequest<XModelParams, XModelResponse, XModelMessage>(BASE_URL, {
+    manual: true,
+    callbacks: {
+      // onUpdate: triggered on each streaming chunk arrival
+      // chunk: current chunk; responseHeaders: response headers; message: current MessageInfo
+      onUpdate: (chunk, responseHeaders, message) => {
+        console.log('Stream update:', message?.message?.content);
+      },
+      // onSuccess: triggered when all chunks are received
+      // chunks: all chunks array; message: final MessageInfo
+      onSuccess: (chunks, responseHeaders, message) => {
+        console.log('Request complete:', message?.message?.content);
+        // Good place for analytics, logging, etc.
+      },
+      // onError: triggered on request failure (including AbortError)
+      // error: error object; errorInfo: extra error info; message: MessageInfo at failure
+      onError: (error, errorInfo, responseHeaders, message) => {
+        console.error('Request failed:', error.message);
+      },
+    },
+    params: { model: 'gpt-4o', stream: true },
+  }),
+});
+```
+
+> ⚠️ `callbacks` and `useXChat`'s `requestFallback` do not conflict — both execute. `callbacks` is better for logging/reporting; `requestFallback` controls UI display.
+
+## retryInterval Retry
+
+```ts
+const request = XRequest('https://your-api.com/chat', {
+  manual: true,
+  // Retry interval after failure (ms)
+  retryInterval: 3000,
+  // Max retry count (unlimited if not set)
+  retryTimes: 3,
+  // onError can also return a number to dynamically set retry interval
+  callbacks: {
+    onError: (error) => {
+      if (error.name === 'AbortError') return; // Don't retry on user cancel
+      return 5000; // Return number = retry after 5s (higher priority than retryInterval)
+    },
+  },
+});
+```
+
+## transformStream Custom Stream
+
+Use when the server returns a non-standard SSE stream format:
+
+```ts
+const request = XRequest('https://your-api.com/chat', {
+  manual: true,
+  // Fixed TransformStream
+  transformStream: new TransformStream({
+    transform(chunk, controller) {
+      controller.enqueue(JSON.parse(chunk));
+    },
+  }),
+  // Or decide dynamically based on URL and response headers
+  transformStream: (baseURL, responseHeaders) => {
+    if (responseHeaders.get('x-stream-type') === 'ndjson') {
+      return new TransformStream({
+        /* ... */
+      });
+    }
+    return undefined; // Use default SSE parsing
+  },
+});
+```
 
 # 🔧 Common Scenario Adaptation
 
-## 📚 Scenario Adaptation Guide
+> 📖 **Complete Examples**: [EXAMPLES.md](reference/EXAMPLES.md)
 
-| Scenario Type | Difficulty | Example Link | Description |
-| --- | --- | --- | --- |
-| **Standard OpenAI** | 🟢 Simple | [Built-in Provider Example](reference/EXAMPLES.md#scenario1-openai-format) | Direct use of built-in Provider |
-| **Standard DeepSeek** | 🟢 Simple | [Built-in Provider Example](reference/EXAMPLES.md#scenario2-deepseek-format) | Direct use of built-in Provider |
-| **Private API** | 🟡 Medium | [Custom Provider Details](reference/EXAMPLES.md#scenario3-custom-provider) | Need four-step implementation |
+| Scenario Type             | Difficulty | Description                                  |
+| ------------------------- | ---------- | -------------------------------------------- |
+| **Standard OpenAI**       | 🟢         | Use built-in `OpenAIChatProvider` directly   |
+| **Standard DeepSeek**     | 🟢         | Use built-in `DeepSeekChatProvider` directly |
+| **Pass-through raw data** | 🟢         | Use `DefaultChatProvider`                    |
+| **Private SSE API**       | 🟡         | Four-step custom Provider                    |
+| **Multi-field response**  | 🟡         | Custom Provider + complex ChatMessage        |
+| **Non-SSE stream**        | 🔴         | Custom Provider + transformStream            |
 
-> 📖 **Complete Examples**: [EXAMPLES.md](reference/EXAMPLES.md) contains complete code for all actual scenarios
+# ⚠️ Important Reminders
 
-# 📋 Joint Skill Usage Guide
-
-## 🎯 Skill Relationship Diagram
-
-```mermaid
-graph TD
-    User[Developer] --> A{Choose Solution}
-
-    A -->|Standard API| B[Built-in Provider]
-    A -->|Private API| C[Custom Provider]
-
-    B --> D[use-x-chat]
-    C --> E[x-chat-provider]
-    E --> D
-
-    D --> F[x-request]
-    F --> G[Final Application]
-```
-
-## 📊 Skill Comparison Table
-
-| Skill Role | Skill Name | Prerequisites | Core Responsibility | Usage Scenario |
-| --- | --- | --- | --- | --- |
-| **🏗️ Creator** | **x-chat-provider** | None | Create custom Provider | Adapt private/non-standard APIs |
-| **⚛️ User** | **use-x-chat** | Needs Provider | Build AI conversation interface | React component development |
-| **🔧 Configurer** | **x-request** | None | Configure request parameters authentication | Unified network request management |
-
-## 🎯 Combined Usage Scenarios
-
-### 🚀 Scenario1: Complete AI Conversation Application
-
-**Applicable**: Build complete AI conversation product from scratch
-
-```mermaid
-sequenceDiagram
-    participant Dev as Developer
-    participant CP as x-chat-provider
-    participant UX as use-x-chat
-    participant XR as x-request
-
-    Dev->>CP: 1. Create custom Provider
-    CP->>Dev: Return adapted Provider
-    Dev->>XR: 2. Configure XRequest parameters
-    XR->>Dev: Return configured request
-    Dev->>UX: 3. Use Provider to build interface
-    UX->>Dev: Complete AI conversation application
-```
-
-**Implementation Steps**:
-
-1. **x-chat-provider** → Create custom Provider (four-step implementation)
-2. **x-request** → Configure authentication, parameters, error handling
-3. **use-x-chat** → Build React chat interface
-
-### 🎯 Scenario2: Only Create Provider
-
-**Applicable**: Provide Provider for other frameworks or teams
-
-```mermaid
-graph LR
-    A[Private API] -->|Adapt| B[Custom Provider]
-    B -->|Export| C[Other Framework Usage]
-    B -->|Publish| D[NPM Package]
-```
-
-**Core Value**:
-
-- 🔧 **Decoupling**: Provider separated from UI framework
-- 📦 **Reusability**: Can be used by multiple projects
-- 🚀 **Efficiency**: Develop once, use everywhere
-
-### ⚡ Scenario3: Use Built-in Provider
-
-**Applicable**: Quick prototype development or standard API calls
-
-```mermaid
-graph LR
-    A[Standard API] -->|Built-in| B[OpenAI/DeepSeek Provider]
-    B -->|Direct Use| C[use-x-chat]
-    C -->|Configure| D[x-request]
-    D --> E[Quick Launch]
-```
-
-**Advantages**:
-
-- ⚡ **Zero Development**: No need for custom Provider
-- 🎯 **Zero Configuration**: Built-in best practices
-- 🚀 **Ultra-fast Launch**: Complete in 5 minutes
-
-## ⚠️ Important Reminders
-
-### 🚨 Mandatory Rule: Prohibit Writing request Method!
-
-**Mandatory Requirements**:
-
-- 🚫 **Absolutely prohibit** implementing `request` method in Provider
-- ✅ **Must use** XRequest to handle all network requests
-- ✅ **Only focus** on data conversion logic (transformParams, transformLocalMessage, transformMessage)
-
-**❌ Serious Error (Absolutely Prohibited)**:
+### 🚨 Mandatory Rule: Never write a request method!
 
 ```ts
-// ❌ Serious error: implement request method yourself
+// ❌ Serious error
 class MyProvider extends AbstractChatProvider {
   async request(params: any) {
-    // Prohibit writing network request logic!
-    const response = await fetch(this.url, { ... });
-    return response;
+    /* Forbidden! */
   }
 }
-```
 
-**✅ Mandatory Requirement (Only Correct Way)**:
-
-```ts
-// ✅ Mandatory requirement: use XRequest, prohibit implementing request method
+// ✅ Only correct approach: implement only the three conversion methods
 class MyProvider extends AbstractChatProvider {
-  // Prohibit implementing request method!
-  transformParams(params) {
+  transformParams(params, options) {
     /* ... */
   }
   transformLocalMessage(params) {
@@ -478,41 +390,57 @@ class MyProvider extends AbstractChatProvider {
     /* ... */
   }
 }
+```
 
-// Mandatory use of XRequest:
-const provider = new MyProvider({
-  request: XRequest('https://your-api.com/chat'),
-});
+### ⚠️ transformMessage must not return status
+
+```ts
+// ❌ Wrong
+transformMessage(info) {
+  return { content: '...', status: 'error' }; // ❌ status is managed by the framework
+}
+
+// ✅ Correct
+transformMessage(info) {
+  return { content: '...' }; // ✅
+}
+```
+
+### ⚠️ Provider instantiation notes
+
+```ts
+// ✅ In React components, use useState to ensure only created once
+const [provider] = React.useState(
+  new MyChatProvider({
+    request: XRequest(URL, { manual: true }),
+  }),
+);
+
+// ❌ Don't create directly in render function (creates new instance on every render)
+// const provider = new MyChatProvider(...); // inside component body causes issues
 ```
 
 # ⚡ Quick Checklist
 
-Before creating Provider, confirm:
+Before creating Provider:
 
-- [ ] Interface documentation obtained
-- [ ] Request/response format confirmed
-- [ ] Message structure defined
-- [ ] Interface availability tested
-- [ ] **Decided to use XRequest** (avoid writing request method yourself!)
+- [ ] Have interface docs and response format
+- [ ] Confirmed whether custom is needed (or if built-in Provider suffices)
+- [ ] Defined Input, Output, ChatMessage types
 
 After completion:
 
-- [ ] Provider class can be instantiated normally
-- [ ] **Only implemented three required methods** (transformParams, transformLocalMessage, transformMessage)
-- [ ] **Absolutely prohibit implementing request method** (mandatory use XRequest for network requests)
-- [ ] Edge cases handled (empty data, error responses)
-- [ ] **Type check passed** (ensure all TypeScript types are correct)
-- [ ] **Remove unused exports** (clean up unused export items)
+- [ ] **Only implemented the three required methods**
+- [ ] **transformParams includes second parameter options**
+- [ ] **transformMessage return value has no status field**
+- [ ] **XRequest configured with manual: true**
+- [ ] **Absolutely no request method implemented**
+- [ ] Provider wrapped with `useState` in React component
+- [ ] Type check passes (`tsc --noEmit`)
 
 # 🚨 Development Rules
 
-## Test Case Rules
-
 - **If the user does not explicitly need test cases, do not add test files**
-- **Only create test cases when the user explicitly requests them**
-
-## Code Quality Rules
-
 - **After completion, must check types**: Run `tsc --noEmit` to ensure no type errors
 - **Keep code clean**: Remove all unused variables and imports
 
@@ -530,4 +458,5 @@ After completion:
 
 ## 💻 Example Code
 
-- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx) - Complete example of custom Provider
+- [custom-provider-width-ui.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/chat-providers/custom-provider-width-ui.tsx)
+- [openai-callback.tsx](https://github.com/ant-design/x/blob/main/packages/x/docs/x-sdk/demos/x-chat/openai-callback.tsx)

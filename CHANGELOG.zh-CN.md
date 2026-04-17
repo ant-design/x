@@ -15,6 +15,29 @@ tag: vVERSION
 
 ---
 
+## 2.6.0
+
+`2026-04-17`
+
+### @ant-design/x
+
+- 🐛 修复 ThoughtChain 组件根元素重复传入 `className` 的问题，并将 `contentOpen` 默认值修正为 `false`，避免未传 `expandedKeys` 时出现 `undefined`。[#1851](https://github.com/ant-design/x/pull/1851) 由 [feoyang](https://github.com/feoyang) 提交
+- 🐛 修复 Folder 组件标题展示异常的问题。[#1855](https://github.com/ant-design/x/pull/1855) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 支持在段落（paragraph）中渲染块级 LaTeX 公式，使用 `<span>` 替代 `<div>` 以兼容行内上下文。[#1859](https://github.com/ant-design/x/pull/1859) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-skill
+
+- 🆕 新增 `x-components` skill，提供 `@ant-design/x` 全组件 API 文档、使用模式与最佳实践参考。[#1862](https://github.com/ant-design/x/pull/1862) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🆕 新增 `x-card` skill，提供 `@ant-design/x-card` 动态卡片组件的完整 API、数据绑定、Actions 与 Commands 参考文档。[#1865](https://github.com/ant-design/x/pull/1865) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🛠 更新 `use-x-chat`、`x-chat-provider`、`x-request` skill 内容，同步最新 API 与示例。[#1862](https://github.com/ant-design/x/pull/1862) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 📖 修复 X SDK 使用文档中的链接错误。[#1856](https://github.com/ant-design/x/pull/1856) 由 [xiaohp](https://github.com/xiaohp) 提交
+
 ## 2.5.0
 
 `2026-03-31`
