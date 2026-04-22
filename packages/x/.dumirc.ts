@@ -24,12 +24,14 @@ export default defineConfig({
         }
       : false,
   hash: true,
-  mfsu: {},
+  // mfsu 在 mako bundler 下不支持（dumi 会强制设为 false），且与 mako 同时配置无意义
+  // mfsu: {},
   mako: ['Darwin', 'Linux'].includes(os.type()) ? {} : false,
   crossorigin: {},
   runtimePublicPath: {},
   fastRefresh: true,
-  devtool: 'eval-source-map',
+  // mako bundler 会将 devtool 强制转为 'source-map'（完整 source map），开发时关闭可大幅提升 HMR 速度
+  devtool: false,
   outputPath: '_site',
   favicons: [
     'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original',
@@ -85,9 +87,9 @@ export default defineConfig({
   analyze:
     process.env.NODE_ENV === 'production'
       ? false
-      : {
-          analyzerPort: 'auto',
-        },
+      : process.env.ANALYZE
+        ? { analyzerPort: 'auto' }
+        : false,
   links: [
     {
       rel: 'prefetch',
