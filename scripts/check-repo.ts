@@ -26,7 +26,7 @@ async function checkVersion() {
   spinner.start('正在检查当前版本是否已经存在');
   const version = getCurrentVersion();
 
-  type RaceUrlKey = 'x' | 'x-sdk' | 'x-markdown' | 'x-skill';
+  type RaceUrlKey = 'x' | 'x-sdk' | 'x-markdown' | 'x-skill' | 'x-card';
   const raceUrlObj: Record<RaceUrlKey, string[]> = {
     x: ['http://registry.npmjs.org/@ant-design/x', 'https://registry.npmmirror.com/@ant-design/x'],
     'x-sdk': [
@@ -40,6 +40,10 @@ async function checkVersion() {
     'x-skill': [
       'http://registry.npmjs.org/@ant-design/x-skill',
       'https://registry.npmmirror.com/@ant-design/x-skill',
+    ],
+    'x-card': [
+      'http://registry.npmjs.org/@ant-design/x-card',
+      'https://registry.npmmirror.com/@ant-design/x-card',
     ],
   };
 
@@ -58,7 +62,19 @@ async function checkVersion() {
       // Ignore the error
       .catch(() => new Promise(() => {})),
   );
-  const { versions } = await Promise.race(promises);
+  const result = await Promise.race(promises);
+  const versions = result?.versions;
+
+  // If the package doesn't exist yet (404), skip version check
+  if (!versions) {
+    spinner.info(
+      chalk.cyan(
+        '😃 Package not found in npm registry. This is a new package, skip version check.',
+      ),
+    );
+    spinner.succeed('版本检查通过');
+    return;
+  }
 
   if (version in versions) {
     spinner.fail(

@@ -1,8 +1,10 @@
+## useXChat
+
 ### useXChat
 
 ```tsx | pure
 type useXChat<
-  ChatMessage extends SimpleType = object,
+  ChatMessage extends SimpleType = string,
   ParsedMessage extends SimpleType = ChatMessage,
   Input = RequestParams<ChatMessage>,
   Output = SSEOutput,
@@ -26,7 +28,7 @@ type useXChat<
 | conversationKey | Session unique identifier (globally unique), used to distinguish different sessions | string | Symbol('ConversationKey') | - |
 | defaultMessages | Default display messages | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
-| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; errorInfo: any; messages: ChatMessage[], message: ChatMessage }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
+| requestFallback | Fallback message for failed requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>,info: { error: Error; errorInfo: any; messages: ChatMessage[], messageInfo: MessageInfo\<ChatMessage\> }) => ChatMessage\|Promise\<ChatMessage\> | - | - |
 | requestPlaceholder | Placeholder message during requests. When not provided, no message will be displayed | ChatMessage \| (requestParams: Partial\<Input\>, info: { messages: Message[] }) => ChatMessage \| Promise\<Message\> | - | - |
 
 ### XChatConfigReturnType
@@ -38,11 +40,11 @@ type useXChat<
 | isDefaultMessagesRequesting | Whether the default message list is requesting | boolean | false | 2.2.0 |
 | messages | Current managed message list content | MessageInfo\<ChatMessage\>[] | - | - |
 | parsedMessages | Content translated through `parser` | MessageInfo\<ParsedMessages\>[] | - | - |
-| onReload | Regenerate, will send request to backend and update the message with new returned data | (id: string \| number, requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
-| onRequest | Add a Message and trigger request | (requestParams: Partial\<Input\>, opts: { extra: AnyObject }) => void | - | - |
+| onReload | Regenerate, will send request to backend and update the message with new returned data | (id: string \| number, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
+| onRequest | Add a Message and trigger request | (requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
 | setMessages | Directly modify messages without triggering requests | (messages: Partial\<MessageInfo\<ChatMessage\>\>[]) => void | - | - |
 | setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
-| removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => void | - | - |
+| removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => boolean | - | - |
 | queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
 
 #### MessageInfo
@@ -52,7 +54,7 @@ interface MessageInfo<ChatMessage> {
   id: number | string;
   message: ChatMessage;
   status: MessageStatus;
-  extra?: AnyObject;
+  extraInfo?: AnyObject;
 }
 ```
 
@@ -60,4 +62,42 @@ interface MessageInfo<ChatMessage> {
 
 ```ts
 type MessageStatus = 'local' | 'loading' | 'updating' | 'success' | 'error' | 'abort';
+```
+
+---
+
+## useXConversations
+
+### useXConversations
+
+```tsx | pure
+type useXConversations = (config: XConversationConfig) => {
+  conversations: ConversationData[];
+  activeConversationKey: string;
+  setActiveConversationKey: (key: string) => boolean;
+  addConversation: (conversation: ConversationData, placement?: 'prepend' | 'append') => boolean;
+  removeConversation: (key: string) => boolean;
+  setConversation: (key: string, conversation: ConversationData) => boolean;
+  getConversation: (key: string) => ConversationData;
+  setConversations: (conversations: ConversationData[]) => boolean;
+  getMessages: (conversationKey: string) => any[];
+};
+```
+
+### XConversationConfig
+
+```tsx | pure
+interface XConversationConfig {
+  defaultConversations?: ConversationData[];
+  defaultActiveConversationKey?: string;
+}
+```
+
+### ConversationData
+
+```tsx | pure
+interface ConversationData extends AnyObject {
+  key: string;
+  label?: string;
+}
 ```

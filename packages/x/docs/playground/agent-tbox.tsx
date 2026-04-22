@@ -287,8 +287,9 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     chatList: css`
+      flex: 1;
+      overflow-y: auto;
       display: flex;
-      height: calc(100% - 120px);
       flex-direction: column;
       align-items: center;
       width: 100%;
@@ -296,7 +297,7 @@ const useStyle = createStyles(({ token, css }) => {
     placeholder: css`
       padding-top: 32px;
       width: 100%;
-      padding-inline: ${token.paddingLG}px;
+      padding: ${token.paddingLG}px;
       box-sizing: border-box;
     `,
     // sender 样式

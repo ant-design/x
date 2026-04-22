@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-skill",
-  "version": "2.4.0",
+  "version": "2.6.0",
   "description": "CLI tool for installing AI skills to development tools like Claude, Cursor, etc.",
   "homepage": "https://x.ant.design/x-skills/introduce",
   "bugs": {

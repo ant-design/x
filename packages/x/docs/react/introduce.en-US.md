@@ -14,6 +14,10 @@ A React UI library based on the Ant Design system, designed for AI-driven interf
 
 An optimized Markdown rendering solution for streaming content, with powerful extension capabilities. Supports formulas, code highlighting, mermaid charts, and delivers excellent performance for smooth content display. For details, click [here](/x-markdowns/introduce).
 
+**`@ant-design/x-card` - Dynamic Card Renderer**
+
+A dynamic card rendering component based on the A2UI protocol, enabling AI Agents to dynamically build interactive interfaces through structured JSON message streams. Supports streaming rendering, data binding, and reactive updates. Suitable for AI assistant interfaces, smart forms, data visualization, and more. For details, click [here](/x-cards/introduce).
+
 **`@ant-design/x-sdk` - AI Conversation Data Flow Management**
 
 Provides a complete set of tool APIs, out-of-the-box AI conversation data flow management, simplifying development and improving efficiency. For details, click [here](/x-sdks/introduce).

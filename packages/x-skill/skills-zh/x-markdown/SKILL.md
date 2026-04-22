@@ -1,6 +1,6 @@
 ---
 name: x-markdown
-version: 2.4.0
+version: 2.6.0
 description: 当任务涉及 @ant-design/x-markdown 的 Markdown 渲染、流式输出、自定义组件映射、插件、主题或聊天富内容展示时使用。
 ---
 

@@ -91,6 +91,10 @@
 
 `@ant-design/x-markdown` 旨在提供流式友好、强拓展性和高性能的 Markdown 渲染器。提供流式渲染公式、代码高亮、mermaid 等能力，详情点击[这里](packages/x-markdown/README-zh_CN.md)。
 
+## 🎴 动态卡片渲染器
+
+`@ant-design/x-card` 是一个基于 A2UI 协议的动态卡片渲染组件，让 AI Agent 能够通过结构化的 JSON 消息流，动态构建和渲染交互式界面。支持流式渲染、数据绑定和响应式更新，详情点击[这里](packages/x-card/README.md)。
+
 ## 🚀 Skill
 
 `@ant-design/x-skill` 是专为 Ant Design X 打造的智能技能库，提供了一系列精心设计的 Agent 技能。这些技能能够显著提升开发效率，帮助您快速构建高质量的 AI 对话应用，并有效解决开发过程中遇到的各种问题，详情点击[这里](packages/x-skill/README-zh_CN.md)。
