@@ -2,10 +2,10 @@
 
 exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_2a_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_4a_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_2a_"
+    class="ant-file-card css-var-_r_4a_"
   >
     <audio
       class="ant-file-card-audio"
@@ -14,7 +14,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_2a_"
+    class="ant-file-card css-var-_r_4a_"
   >
     <video
       class="ant-file-card-video"
@@ -23,7 +23,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_2a_"
+    class="ant-file-card css-var-_r_4a_"
   >
     <div
       class="ant-file-card-file"
@@ -85,7 +85,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_2a_"
+    class="ant-file-card css-var-_r_4a_"
   >
     <div
       class="ant-file-card-file"
@@ -153,10 +153,10 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_29_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_49_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -211,7 +211,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -266,7 +266,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -321,7 +321,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -376,7 +376,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -431,7 +431,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -486,7 +486,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -541,7 +541,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -597,7 +597,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -653,7 +653,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -712,7 +712,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_29_"
+    class="ant-file-card css-var-_r_49_"
   >
     <div
       class="ant-file-card-file"
@@ -774,10 +774,10 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/custom-description.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_28_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_48_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_28_"
+    class="ant-file-card css-var-_r_48_"
   >
     <div
       class="ant-file-card-file"
@@ -829,17 +829,17 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
           style="margin-top: 4px; line-height: 1.5;"
         >
           <div
-            class="ant-flex css-var-_r_28_ ant-flex-align-center ant-flex-justify-space-between"
+            class="ant-flex css-var-_r_48_ ant-flex-align-center ant-flex-justify-space-between"
             style="width: 100%;"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_r_28_"
+              class="ant-typography ant-typography-secondary css-var-_r_48_"
               style="font-size: 12px;"
             >
               Size: 2 MB
             </span>
             <button
-              class="ant-btn css-var-_r_28_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
+              class="ant-btn css-var-_r_48_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
               style="font-size: 12px; padding: 2px 8px; height: auto; line-height: 1.5;"
               type="button"
             >
@@ -876,7 +876,7 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_28_"
+    class="ant-file-card css-var-_r_48_"
   >
     <div
       class="ant-file-card-file"
@@ -928,17 +928,17 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
           style="margin-top: 4px; line-height: 1.5;"
         >
           <div
-            class="ant-flex css-var-_r_28_ ant-flex-align-center ant-flex-justify-space-between"
+            class="ant-flex css-var-_r_48_ ant-flex-align-center ant-flex-justify-space-between"
             style="width: 100%;"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_r_28_"
+              class="ant-typography ant-typography-secondary css-var-_r_48_"
               style="font-size: 12px;"
             >
               Size: 10 MB
             </span>
             <button
-              class="ant-btn css-var-_r_28_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
+              class="ant-btn css-var-_r_48_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
               style="font-size: 12px; padding: 2px 8px; height: auto; line-height: 1.5;"
               type="button"
             >
@@ -975,7 +975,7 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_28_"
+    class="ant-file-card css-var-_r_48_"
   >
     <div
       class="ant-file-card-file"
@@ -1027,17 +1027,17 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
           style="margin-top: 4px; line-height: 1.5;"
         >
           <div
-            class="ant-flex css-var-_r_28_ ant-flex-align-center ant-flex-justify-space-between"
+            class="ant-flex css-var-_r_48_ ant-flex-align-center ant-flex-justify-space-between"
             style="width: 100%;"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_r_28_"
+              class="ant-typography ant-typography-secondary css-var-_r_48_"
               style="font-size: 12px;"
             >
               Size: 5 MB
             </span>
             <button
-              class="ant-btn css-var-_r_28_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
+              class="ant-btn css-var-_r_48_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
               style="font-size: 12px; padding: 2px 8px; height: auto; line-height: 1.5;"
               type="button"
             >
@@ -1080,10 +1080,10 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
 
 exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_27_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_47_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_27_"
+    class="ant-file-card css-var-_r_47_"
   >
     <div
       class="ant-file-card-file"
@@ -1138,7 +1138,7 @@ exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_27_"
+    class="ant-file-card css-var-_r_47_"
   >
     <div
       class="ant-file-card-file"
@@ -1200,16 +1200,19 @@ exports[`renders components/file-card/demo/icon.tsx extend context correctly 2`]
 
 exports[`renders components/file-card/demo/image.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_21_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_3t_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_21_"
+    class="ant-file-card css-var-_r_3t_"
   >
     <div
       class="ant-file-card-image"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_21_ ant-image-css-var"
+        aria-label="image-file.png"
+        class="ant-image ant-file-card-image-img css-var-_r_3t_ ant-image-css-var"
+        role="button"
+        tabindex="0"
       >
         <img
           alt="image-file.png"
@@ -1223,15 +1226,18 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_21_"
+    class="ant-file-card css-var-_r_3t_"
   >
     <div
       class="ant-file-card-image"
       style="width: 100px; height: 100px;"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_21_ ant-image-css-var"
+        aria-label="image-file.png"
+        class="ant-image ant-file-card-image-img css-var-_r_3t_ ant-image-css-var"
+        role="button"
         style="width: 100px; height: 100px;"
+        tabindex="0"
       >
         <img
           alt="image-file.png"
@@ -1248,7 +1254,7 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_21_"
+    class="ant-file-card css-var-_r_3t_"
   >
     <div
       class="ant-file-card-file"
@@ -1309,16 +1315,16 @@ exports[`renders components/file-card/demo/image.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/image-loading.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_24_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_42_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_24_"
+    class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_r_42_"
   >
     <div
       class="ant-space-item"
     >
       <button
-        class="ant-btn css-var-_r_24_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_42_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         disabled=""
         type="button"
       >
@@ -1331,7 +1337,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
       class="ant-space-item"
     >
       <button
-        class="ant-btn css-var-_r_24_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+        class="ant-btn css-var-_r_42_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
         type="button"
       >
         <span>
@@ -1341,15 +1347,18 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_24_"
+    class="ant-file-card css-var-_r_42_"
   >
     <div
       class="ant-file-card-image ant-file-card-loading"
       style="width: 200px;"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_24_ ant-image-css-var"
+        aria-label="image-file.png"
+        class="ant-image ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
+        role="button"
         style="width: 200px;"
+        tabindex="0"
       >
         <img
           alt="image-file.png"
@@ -1361,13 +1370,13 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
           class="ant-image-placeholder"
         >
           <div
-            class="ant-file-card css-var-_r_24_"
+            class="ant-file-card css-var-_r_42_"
           >
             <div
               class="ant-file-card-image"
             >
               <div
-                class="ant-image ant-file-card-image-img css-var-_r_24_ ant-image-css-var"
+                class="ant-image ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
               >
                 <img
                   alt="placeholder image"
@@ -1386,7 +1395,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
         style="width: 200px;"
       >
         <div
-          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_24_"
+          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_42_"
           style="width: 100%; height: 100%;"
         >
           <div
@@ -1394,12 +1403,12 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             style="width: 100%; height: 100%;"
           >
             <div
-              class="ant-file-card-image-spin ant-file-card-image-spin-small ant-flex css-var-_r_24_ ant-flex-align-center ant-flex-gap-small"
+              class="ant-file-card-image-spin ant-file-card-image-spin-small ant-flex css-var-_r_42_ ant-flex-align-center ant-flex-gap-small"
             >
               <div
                 aria-busy="true"
                 aria-live="polite"
-                class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-section css-var-_r_24_"
+                class="ant-spin ant-spin-sm ant-spin-spinning ant-spin-section css-var-_r_42_"
               >
                 <span
                   class="ant-spin-dot-holder"
@@ -1455,13 +1464,16 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_24_"
+    class="ant-file-card css-var-_r_42_"
   >
     <div
       class="ant-file-card-image ant-file-card-loading"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_24_ ant-image-css-var"
+        aria-label="image-file.png"
+        class="ant-image ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
+        role="button"
+        tabindex="0"
       >
         <img
           alt="image-file.png"
@@ -1472,13 +1484,13 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
           class="ant-image-placeholder"
         >
           <div
-            class="ant-file-card css-var-_r_24_"
+            class="ant-file-card css-var-_r_42_"
           >
             <div
               class="ant-file-card-image"
             >
               <div
-                class="ant-image ant-file-card-image-img css-var-_r_24_ ant-image-css-var"
+                class="ant-image ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
               >
                 <img
                   alt="placeholder image"
@@ -1496,7 +1508,7 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
         class="ant-file-card-image-loading"
       >
         <div
-          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_24_"
+          class="ant-skeleton ant-skeleton-element ant-skeleton-active ant-file-card-image-skeleton css-var-_r_42_"
           style="width: 100%; height: 100%;"
         >
           <div
@@ -1504,12 +1516,12 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             style="width: 100%; height: 100%;"
           >
             <div
-              class="ant-file-card-image-spin ant-file-card-image-spin-middle ant-flex css-var-_r_24_ ant-flex-align-center ant-flex-gap-small"
+              class="ant-file-card-image-spin ant-file-card-image-spin-middle ant-flex css-var-_r_42_ ant-flex-align-center ant-flex-gap-small"
             >
               <div
                 aria-busy="true"
                 aria-live="polite"
-                class="ant-spin ant-spin-spinning ant-spin-section css-var-_r_24_"
+                class="ant-spin ant-spin-spinning ant-spin-section css-var-_r_42_"
               >
                 <span
                   class="ant-spin-dot-holder"
@@ -1575,11 +1587,11 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
 
 exports[`renders components/file-card/demo/list.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_1n_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_3a_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   style="width: 900px;"
 >
   <div
-    class="ant-file-card-list css-var-_r_1n_"
+    class="ant-file-card-list css-var-_r_3a_"
   >
     <div
       class="ant-file-card-list-content"
@@ -1588,7 +1600,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file"
@@ -1671,7 +1683,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file"
@@ -1754,7 +1766,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file"
@@ -1837,7 +1849,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file"
@@ -1920,7 +1932,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file"
@@ -2003,7 +2015,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file"
@@ -2085,7 +2097,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list css-var-_r_1n_"
+    class="ant-file-card-list css-var-_r_3a_"
   >
     <div
       class="ant-file-card-list-content ant-file-card-list-small"
@@ -2094,7 +2106,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2177,7 +2189,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2260,7 +2272,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2343,7 +2355,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2426,7 +2438,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2509,7 +2521,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-file ant-file-card-file-small"
@@ -2591,7 +2603,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list css-var-_r_1n_"
+    class="ant-file-card-list css-var-_r_3a_"
   >
     <div
       class="ant-file-card-list-content"
@@ -2600,13 +2612,16 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2624,13 +2639,16 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2648,13 +2666,16 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2672,13 +2693,16 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2696,13 +2720,16 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2720,13 +2747,16 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2743,7 +2773,7 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card-list css-var-_r_1n_"
+    class="ant-file-card-list css-var-_r_3a_"
   >
     <div
       class="ant-file-card-list-content"
@@ -2752,15 +2782,18 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
               style="width: 230px; height: 230px;"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2781,15 +2814,18 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
               style="width: 230px; height: 230px;"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2810,15 +2846,18 @@ exports[`renders components/file-card/demo/list.tsx extend context correctly 1`]
         class="ant-file-card-list-item"
       >
         <div
-          class="ant-file-card css-var-_r_1n_"
+          class="ant-file-card css-var-_r_3a_"
         >
           <div
             class="ant-file-card-image"
             style="width: 230px; height: 230px;"
           >
             <div
-              class="ant-image ant-file-card-image-img css-var-_r_1n_ ant-image-css-var"
+              aria-label="image-file.png"
+              class="ant-image ant-file-card-image-img css-var-_r_3a_ ant-image-css-var"
+              role="button"
               style="width: 230px; height: 230px;"
+              tabindex="0"
             >
               <img
                 alt="image-file.png"
@@ -2847,7 +2886,7 @@ exports[`renders components/file-card/demo/mask.tsx extend context correctly 1`]
   style="display: flex; gap: 16px; flex-wrap: wrap;"
 >
   <div
-    class="ant-file-card css-var-_r_1l_"
+    class="ant-file-card css-var-_r_37_"
   >
     <div
       class="ant-file-card-file"
@@ -2952,13 +2991,16 @@ exports[`renders components/file-card/demo/mask.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_1l_"
+    class="ant-file-card css-var-_r_37_"
   >
     <div
       class="ant-file-card-image"
     >
       <div
-        class="ant-image ant-file-card-image-img css-var-_r_1l_ ant-image-css-var"
+        aria-label="image.jpg"
+        class="ant-image ant-file-card-image-img css-var-_r_37_ ant-image-css-var"
+        role="button"
+        tabindex="0"
       >
         <img
           alt="image.jpg"
@@ -2972,7 +3014,7 @@ exports[`renders components/file-card/demo/mask.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_1l_"
+    class="ant-file-card css-var-_r_37_"
   >
     <video
       class="ant-file-card-video"
@@ -3064,7 +3106,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-0.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-0.png"
@@ -3112,7 +3157,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-1.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-1.png"
@@ -3160,7 +3208,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-2.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-2.png"
@@ -3208,7 +3259,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-3.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-3.png"
@@ -3256,7 +3310,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-4.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-4.png"
@@ -3304,7 +3361,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-5.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-5.png"
@@ -3352,7 +3412,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-6.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-6.png"
@@ -3400,7 +3463,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-7.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-7.png"
@@ -3448,7 +3514,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-8.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-8.png"
@@ -3496,7 +3565,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-9.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-9.png"
@@ -3544,7 +3616,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-10.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-10.png"
@@ -3592,7 +3667,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-11.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-11.png"
@@ -3640,7 +3718,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-12.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-12.png"
@@ -3688,7 +3769,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-13.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-13.png"
@@ -3736,7 +3820,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-14.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-14.png"
@@ -3784,7 +3871,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-15.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-15.png"
@@ -3832,7 +3922,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-16.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-16.png"
@@ -3880,7 +3973,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-17.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-17.png"
@@ -3928,7 +4024,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-18.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-18.png"
@@ -3976,7 +4075,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-19.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-19.png"
@@ -4024,7 +4126,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-20.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-20.png"
@@ -4072,7 +4177,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-21.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-21.png"
@@ -4120,7 +4228,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-22.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-22.png"
@@ -4168,7 +4279,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-23.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-23.png"
@@ -4216,7 +4330,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-24.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-24.png"
@@ -4264,7 +4381,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-25.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-25.png"
@@ -4312,7 +4432,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-26.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-26.png"
@@ -4360,7 +4483,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-27.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-27.png"
@@ -4408,7 +4534,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-28.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-28.png"
@@ -4456,7 +4585,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-29.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-29.png"
@@ -4504,7 +4636,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-30.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-30.png"
@@ -4552,7 +4687,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-31.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-31.png"
@@ -4600,7 +4738,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-32.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-32.png"
@@ -4648,7 +4789,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-33.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-33.png"
@@ -4696,7 +4840,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-34.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-34.png"
@@ -4744,7 +4891,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-35.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-35.png"
@@ -4792,7 +4942,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-36.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-36.png"
@@ -4840,7 +4993,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-37.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-37.png"
@@ -4888,7 +5044,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-38.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-38.png"
@@ -4936,7 +5095,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-39.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-39.png"
@@ -4984,7 +5146,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-40.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-40.png"
@@ -5032,7 +5197,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-41.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-41.png"
@@ -5080,7 +5248,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-42.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-42.png"
@@ -5128,7 +5299,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-43.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-43.png"
@@ -5176,7 +5350,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-44.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-44.png"
@@ -5224,7 +5401,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-45.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-45.png"
@@ -5272,7 +5452,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-46.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-46.png"
@@ -5320,7 +5503,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-47.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-47.png"
@@ -5368,7 +5554,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-48.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-48.png"
@@ -5416,7 +5605,10 @@ exports[`renders components/file-card/demo/overflow.tsx extend context correctly
             class="ant-file-card-image"
           >
             <div
+              aria-label="image-file-49.png"
               class="ant-image ant-file-card-image-img css-var-_r_1_ ant-image-css-var"
+              role="button"
+              tabindex="0"
             >
               <img
                 alt="image-file-49.png"

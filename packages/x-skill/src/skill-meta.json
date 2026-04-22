@@ -6,15 +6,23 @@
       {
         "skill": "use-x-chat",
         "name": "use-x-chat",
-        "version": "2.4.0",
-        "desc": "Focus on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, etc.",
-        "descZh": "专注讲解如何使用 useXChat Hook，包括自定义 Provider 的集成、消息管理、错误处理等",
-        "tags": ["chat", "hook", "sdk"]
+        "version": "2.5.0",
+        "desc": "Focus on explaining how to use the useXChat Hook, including custom Provider integration, message management, error handling, multi-conversation management, and more",
+        "descZh": "专注讲解如何使用 useXChat Hook，包括自定义 Provider 的集成、消息管理、错误处理、多会话管理等",
+        "tags": ["agent", "chat", "hook", "sdk"]
+      },
+      {
+        "skill": "x-card",
+        "name": "x-card",
+        "version": "2.5.0",
+        "desc": "Use when building AI-driven UIs with @ant-design/x-card — covers XCard.Box, XCard.Card, A2UI v0.9 commands, data binding, catalogs, actions, and streaming patterns.",
+        "descZh": "当需要用 @ant-design/x-card 让 AI Agent 动态渲染富交互 UI 时使用——涵盖 XCard.Box、XCard.Card、A2UI v0.9 命令、数据绑定、Catalog、Actions 和流式渲染模式。",
+        "tags": ["A2UI", "agent"]
       },
       {
         "skill": "x-chat-provider",
         "name": "x-chat-provider",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Focus on implementing custom Chat Provider, helping to adapt any streaming interface to Ant Design X standard format",
         "descZh": "专注于自定义 Chat Provider 的实现，帮助将任意流式接口适配为 Ant Design X 标准格式",
         "tags": ["chat", "provider", "sdk"]
@@ -22,10 +30,24 @@
       {
         "skill": "x-request",
         "name": "x-request",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Focus on explaining the practical configuration and usage of XRequest, providing accurate configuration instructions based on official documentation",
         "descZh": "专注讲解 XRequest 的实际配置和使用，基于官方文档提供准确的配置说明",
         "tags": ["request", "sdk"]
+      }
+    ]
+  },
+  "x-components": {
+    "description": "Ant Design X UI component skill package, covering all components: Bubble, Sender, Conversations, Prompts, ThoughtChain, Actions, Welcome, Attachments, Sources, Suggestion, Think, FileCard, CodeHighlighter, Mermaid, XProvider, and Notification",
+    "descriptionZh": "Ant Design X UI 组件技能包，覆盖所有组件的使用指南：Bubble、Sender、Conversations、Prompts、ThoughtChain、Actions、Welcome、Attachments、Sources、Suggestion、Think、FileCard、CodeHighlighter、Mermaid、XProvider 和 Notification",
+    "skills": [
+      {
+        "skill": "x-components",
+        "name": "x-components",
+        "version": "2.5.0",
+        "desc": "Use when building AI chat UIs with @ant-design/x components — covers Bubble, Sender, Conversations, Prompts, ThoughtChain, Actions, Welcome, Attachments, Sources, Suggestion, Think, FileCard, CodeHighlighter, Mermaid, Folder, XProvider, and Notification.",
+        "descZh": "使用 @ant-design/x 组件库构建 AI 对话 UI 时使用 —— 涵盖 Bubble、Sender、Conversations、Prompts、ThoughtChain、Actions、Welcome、Attachments、Sources、Suggestion、Think、FileCard、CodeHighlighter、Mermaid、Folder、XProvider 和 Notification。",
+        "tags": ["components", "agent"]
       }
     ]
   },
@@ -36,10 +58,10 @@
       {
         "skill": "x-markdown",
         "name": "x-markdown",
-        "version": "2.4.0",
+        "version": "2.5.0",
         "desc": "Use when building or reviewing Markdown rendering with @ant-design/x-markdown, including streaming Markdown, custom component mapping, plugins, themes, and chat-oriented rich content.",
         "descZh": "当任务涉及 @ant-design/x-markdown 的 Markdown 渲染、流式输出、自定义组件映射、插件、主题或聊天富内容展示时使用。",
-        "tags": ["sdk"]
+        "tags": ["markdown"]
       }
     ]
   }

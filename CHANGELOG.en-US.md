@@ -16,6 +16,41 @@ tag: vVERSION
 
 ---
 
+## 2.6.0
+
+`2026-04-17`
+
+### @ant-design/x
+
+- 🐛 Fix duplicate `className` passed to the root element of `ThoughtChain`, and default `contentOpen` to `false` to prevent `undefined` when `expandedKeys` is not provided. [#1851](https://github.com/ant-design/x/pull/1851) by [feoyang](https://github.com/feoyang)
+- 🐛 Fix Folder component title display bug. [#1855](https://github.com/ant-design/x/pull/1855) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 Support rendering block-level LaTeX formulas inside paragraphs, using `<span>` instead of `<div>` to be compatible with inline contexts. [#1859](https://github.com/ant-design/x/pull/1859) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-skill
+
+- 🆕 Added `x-components` skill, providing full API documentation, usage patterns, and best practices for all `@ant-design/x` components. [#1862](https://github.com/ant-design/x/pull/1862) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added `x-card` skill, providing complete API reference, data binding, Actions, and Commands documentation for `@ant-design/x-card`. [#1865](https://github.com/ant-design/x/pull/1865) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Updated `use-x-chat`, `x-chat-provider`, and `x-request` skill content to sync with the latest APIs and examples. [#1862](https://github.com/ant-design/x/pull/1862) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Fix broken documentation link in the X SDK usage guide. [#1856](https://github.com/ant-design/x/pull/1856) by [xiaohp](https://github.com/xiaohp)
+
+## 2.5.0
+
+`2026-03-31`
+
+### @ant-design/x-card
+
+- 🔥 New module X Card, a dynamic card rendering component based on A2UI protocol, enabling AI Agents to dynamically build and render interactive interfaces through structured JSON message streams.[#1836](https://github.com/ant-design/x/pull/1836) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1830](https://github.com/ant-design/x/pull/1830) by [1uokun](https://github.com/1uokun)
+
 ## 2.4.0
 
 `2026-03-13`

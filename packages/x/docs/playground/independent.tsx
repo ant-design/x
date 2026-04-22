@@ -110,7 +110,6 @@ const useStyle = createStyles(({ token, css }) => {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      padding-block: ${token.paddingLG}px;
       justify-content: space-between;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
@@ -132,16 +131,16 @@ const useStyle = createStyles(({ token, css }) => {
       }
     `,
     chatList: css`
+      flex: 1;
+      overflow-y: auto;
       display: flex;
-      height: calc(100% - 120px);
       flex-direction: column;
       align-items: center;
       width: 100%;
     `,
     placeholder: css`
-      padding-top: 32px;
       width: 100%;
-      padding-inline: ${token.paddingLG}px;
+      padding: ${token.paddingLG}px;
       box-sizing: border-box;
     `,
     // sender 样式
@@ -754,7 +753,7 @@ const Independent: React.FC = () => {
       gap={12}
       align="center"
       style={{
-        marginInline: 24,
+        margin: 8,
       }}
     >
       {/* 🌟 提示词 */}

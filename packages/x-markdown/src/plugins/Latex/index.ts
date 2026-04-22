@@ -16,6 +16,7 @@ type LatexOption = {
 type Token = {
   text: string;
   displayMode: boolean;
+  isBlock?: boolean;
 };
 
 type Render = (token: Token) => string;
@@ -51,17 +52,30 @@ function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
       const match = src.match(inlineRuleNonStandard);
       if (!match) return;
 
-      const rawText = (match[1] || match[2] || match[3] || '').trim();
-      const text = replaceAlignStart ? replaceAlign(rawText) : rawText;
+      const rawText = match[1] || match[2] || match[3] || '';
+      const text = replaceAlignStart ? replaceAlign(rawText.trim()) : rawText.trim();
+
+      // 对于 \[...\] 语法，如果内容包含换行，标记为块级公式
+      // 注意：换行检测必须在 trim 之前进行
+      const isBracketSyntax = match[3] !== undefined;
+      const hasNewline = rawText.includes('\n');
 
       return {
         type: 'inlineKatex',
         raw: match[0],
         text,
         displayMode: true,
+        isBlock: isBracketSyntax && hasNewline,
       };
     },
-    renderer: (token: Token) => `<span class="inline-katex">${renderer(token)}</span>`,
+    renderer: (token: Token & { isBlock?: boolean }) => {
+      const html = renderer(token);
+      // 如果标记为块级，使用 block 级别的 HTML 结构
+      if (token.isBlock) {
+        return `<span class="block-katex">${html}</span>`;
+      }
+      return `<span class="inline-katex">${html}</span>`;
+    },
   };
 }
 

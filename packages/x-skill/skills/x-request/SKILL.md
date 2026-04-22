@@ -1,6 +1,6 @@
 ---
 name: x-request
-version: 2.4.0
+version: 2.6.0
 description: Focus on explaining the practical configuration and usage of XRequest, providing accurate configuration instructions based on official documentation
 ---
 

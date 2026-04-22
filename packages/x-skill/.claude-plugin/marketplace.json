@@ -3,7 +3,7 @@
   "metadata": {
     "description": "Ant Design X intelligent agent skills collection",
     "descriptionZh": "Ant Design X 智能技能库，提供完整的 AI 对话应用开发技能",
-    "version": "2.4.0",
+    "version": "2.6.0",
     "author": "Ant Design X Team",
     "homepage": "https://github.com/ant-design/x",
     "repository": {
@@ -29,7 +29,12 @@
       "descriptionZh": "Ant Design X SDK 核心技能包，包含 useXChat、XRequest 和自定义 Provider 等完整功能",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/use-x-chat", "./skills/x-chat-provider", "./skills/x-request"]
+      "skills": [
+        "./skills/use-x-chat",
+        "./skills/x-chat-provider",
+        "./skills/x-request",
+        "./skills/x-card"
+      ]
     },
     {
       "name": "x-markdown",
@@ -38,6 +43,14 @@
       "source": "./",
       "strict": false,
       "skills": ["./skills/x-markdown"]
+    },
+    {
+      "name": "x-components",
+      "description": "Ant Design X UI component skill package, covering all components: Bubble, Sender, Conversations, Prompts, ThoughtChain, Actions, Welcome, Attachments, Sources, Suggestion, Think, FileCard, CodeHighlighter, Mermaid, XProvider, and Notification",
+      "descriptionZh": "Ant Design X UI 组件技能包，覆盖所有组件的使用指南：Bubble、Sender、Conversations、Prompts、ThoughtChain、Actions、Welcome、Attachments、Sources、Suggestion、Think、FileCard、CodeHighlighter、Mermaid、XProvider 和 Notification",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/x-components"]
     }
   ]
 }

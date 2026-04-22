@@ -7,11 +7,11 @@ tag: Updated
 order: 0
 ---
 
-This guide introduces how to integrate OpenAI model services into applications built with Ant Design X. For details, see [X SDK](/sdks/introduce).
+This guide introduces how to integrate OpenAI model services into applications built with Ant Design X. For details, see [X SDK](/x-sdks/introduce).
 
 ## Integrate with X SDK
 
-Using URL to integrate Model is a basic capability provided by X SDK. For details, see [X SDK](/sdks/introduce).
+Using URL to integrate Model is a basic capability provided by X SDK. For details, see [X SDK](/x-sdks/introduce).
 
 ### Example
 
