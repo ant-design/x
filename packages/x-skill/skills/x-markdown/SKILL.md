@@ -1,6 +1,6 @@
 ---
 name: x-markdown
-version: 2.5.0
+version: 2.6.0
 description: Use when building or reviewing Markdown rendering with @ant-design/x-markdown, including streaming Markdown, custom component mapping, plugins, themes, and chat-oriented rich content.
 ---
 
