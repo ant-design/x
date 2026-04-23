@@ -1,4 +1,4 @@
-import { useIntl } from 'dumi';
+import { useIntl } from 'dumi/dist/client/theme-api';
 
 export interface LocaleMap<
   K extends PropertyKey = PropertyKey,

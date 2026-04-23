@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@ant-design/x-skill": ["src/*"]
+    }
+  },
+  "include": ["**/*"]
+}

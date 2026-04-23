@@ -15,6 +15,96 @@ tag: vVERSION
 
 ---
 
+## 2.6.0
+
+`2026-04-17`
+
+### @ant-design/x
+
+- 🐛 修复 ThoughtChain 组件根元素重复传入 `className` 的问题，并将 `contentOpen` 默认值修正为 `false`，避免未传 `expandedKeys` 时出现 `undefined`。[#1851](https://github.com/ant-design/x/pull/1851) 由 [feoyang](https://github.com/feoyang) 提交
+- 🐛 修复 Folder 组件标题展示异常的问题。[#1855](https://github.com/ant-design/x/pull/1855) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 支持在段落（paragraph）中渲染块级 LaTeX 公式，使用 `<span>` 替代 `<div>` 以兼容行内上下文。[#1859](https://github.com/ant-design/x/pull/1859) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-skill
+
+- 🆕 新增 `x-components` skill，提供 `@ant-design/x` 全组件 API 文档、使用模式与最佳实践参考。[#1862](https://github.com/ant-design/x/pull/1862) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🆕 新增 `x-card` skill，提供 `@ant-design/x-card` 动态卡片组件的完整 API、数据绑定、Actions 与 Commands 参考文档。[#1865](https://github.com/ant-design/x/pull/1865) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🛠 更新 `use-x-chat`、`x-chat-provider`、`x-request` skill 内容，同步最新 API 与示例。[#1862](https://github.com/ant-design/x/pull/1862) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 📖 修复 X SDK 使用文档中的链接错误。[#1856](https://github.com/ant-design/x/pull/1856) 由 [xiaohp](https://github.com/xiaohp) 提交
+
+## 2.5.0
+
+`2026-03-31`
+
+### @ant-design/x-card
+
+- 🔥 新模块 X Card 基于 A2UI 协议的动态卡片渲染组件，让 AI Agent 能够通过结构化的 JSON 消息流，动态构建和渲染交互式界面。[#1836](https://github.com/ant-design/x/pull/1836) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 📖 优化官网站点提升用户体验。[#1830](https://github.com/ant-design/x/pull/1830) 由 [1uokun](https://github.com/1uokun) 提交
+
+## 2.4.0
+
+`2026-03-13`
+
+### @ant-design/x
+
+- 🔥 新组件 Folder。[#1797](https://github.com/ant-design/x/pull/1797) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🆕 强化 FileCard 的 `description`、`mask`、`onClick` 配置的能力。[#1807](https://github.com/ant-design/x/pull/1807) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown 流式渲染新增 `tail` 配置，支持自定义尾缀内容与尾缀组件，并避免尾缀出现在未完成组件之前。[#1296](https://github.com/ant-design/x/pull/1296) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复 XMarkdown 自定义组件流式状态识别问题，正确处理 void elements，并隔离同名组件多实例的 `streamStatus`。[#1590](https://github.com/ant-design/x/pull/1590) 由 [Last-Order](https://github.com/Last-Order) 提交
+- 🛠 导出 XMarkdown 的 `StreamCacheTokenType` 类型，便于外部复用流式渲染相关类型。[#1592](https://github.com/ant-design/x/pull/1592) 由 [Last-Order](https://github.com/Last-Order) 提交
+- 📖 新增 XMarkdown Playground，并重构 streaming、examples、data-display 文档，补充 AntV Infographic 示例。[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-skill
+
+- 🆕 发布 x-markdown skill。[#1813](https://github.com/ant-design/x/pull/1813) 由 [Div627](https://github.com/Div627) 提交
+
+### 其他
+
+- 🐛 修复 useShortcutKeys 错误的事件处理。[#1822](https://github.com/ant-design/x/pull/1822) 由 [cxybd](https://github.com/cxybd) 提交
+- 🛠 将所有组件 useMergedState 升级为 useControlledState。[#1808](https://github.com/ant-design/x/pull/1808) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 优化官网站点提升用户体验。[#1814](https://github.com/ant-design/x/pull/1814) 由 [Div627](https://github.com/Div627) 提交、[#1793](https://github.com/ant-design/x/pull/1793) 由 [kimteayon](https://github.com/kimteayon) 提交、[#1792](https://github.com/ant-design/x/pull/1792) 由 [Div627](https://github.com/Div627) 提交、[#1780](https://github.com/ant-design/x/pull/1780) 由 [Div627](https://github.com/Div627) 提交、[#1779](https://github.com/ant-design/x/pull/1779) 由 [Div627](https://github.com/Div627) 提交
+
+## 2.3.0
+
+`2026-02-26`
+
+### @ant-design/x
+
+- 🆕 Conversation 的 onActiveChange 回调现在同时返回被激活的项及其键值，同时更新 useMergedState 为 useControlledState。[#1762](https://github.com/ant-design/x/pull/1762) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 优化 Sender 禁用状态按钮的视觉表现，统一添加透明边框处理，确保不同按钮变体在禁用时的外观一致。[#1751](https://github.com/ant-design/x/pull/1751) 由 [Rain120](https://github.com/Rain120) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown 新增 escapeRawHtml 属性，允许用户在渲染时选择是否对原始 HTML 进行转义。[#1769](https://github.com/ant-design/x/pull/1769) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复 XMarkdown 列表中遇到未闭合行内代码时的渲染，确保列表标记在特殊未闭合情况仍被保留。[#1739](https://github.com/ant-design/x/pull/1739) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 改进了块级 LaTeX 公式的解析，对结尾处的空白与缩进处理更宽容，提升了对不同行尾格式的兼容性，减少误判与渲染问题。[#1744](https://github.com/ant-design/x/pull/1744) 由 [Waiter](https://github.com/Waiter) 提交
+- 🐛 优化深色模式 CodeHighlighter，Mermaid 插件样式问题。[#1766](https://github.com/ant-design/x/pull/1766) 由 [menghany](https://github.com/menghany) 提交
+
+### @ant-design/x-sdk
+
+- 🆕 useXChat 新增 queueRequest 方法，实现 ConversationKey 和 SessionId 的初始化消息发送。[#1761](https://github.com/ant-design/x/pull/1761) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-skill
+
+- 🆕 新增 skill 安装指令，同时发布 use-x-chat、x-chat-provider、x-request 三个 skill。[#1753](https://github.com/ant-design/x/pull/1768)、[#1767](https://github.com/ant-design/x/pull/1767) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 🛠 修复了因依赖升级导致的构建错误问题。 [#1754](https://github.com/ant-design/x/pull/1754) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🛠 解决 CodeSandbox 预览中 domhandler 的 ModuleNotFoundError 错误。[#1754](https://github.com/ant-design/x/pull/1754) 由 [Div627](https://github.com/Div627) 提交
+
 ## 2.2.2
 
 `2026-02-06`

@@ -4,7 +4,7 @@ import * as React from 'react';
 import ActionButton, { ActionButtonContext } from '../ActionButton';
 import StopLoadingIcon from './StopLoading';
 
-function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
+const LoadingButton = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { prefixCls } = React.useContext(ActionButtonContext);
   const { className } = props;
 
@@ -20,6 +20,6 @@ function LoadingButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
       ref={ref}
     />
   );
-}
+});
 
-export default React.forwardRef(LoadingButton);
+export default LoadingButton;

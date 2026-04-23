@@ -2,16 +2,16 @@
 
 exports[`renders components/bubble/demo/animation.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_3v_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
+  class="ant-flex css-var-_r_40_ ant-flex-align-stretch ant-flex-gap-small ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-_r_3v_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_40_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       非流式数据 / Non-streaming data:
     </span>
     <button
-      class="ant-btn css-var-_r_3v_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      class="ant-btn css-var-_r_40_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
       type="button"
     >
       <span>
@@ -19,7 +19,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
       </span>
     </button>
     <button
-      class="ant-btn css-var-_r_3v_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_r_40_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -28,17 +28,17 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </button>
   </div>
   <div
-    class="ant-flex css-var-_r_3v_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_40_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       动画效果 / Animation effects:
     </span>
     <div
-      class="ant-radio-group ant-radio-group-outline css-var-_r_3v_ ant-radio-css-var"
+      class="ant-radio-group ant-radio-group-outline css-var-_r_40_ ant-radio-css-var"
       role="radiogroup"
     >
       <label
-        class="ant-radio-wrapper ant-radio-wrapper-checked css-var-_r_3v_ ant-radio-css-var"
+        class="ant-radio-wrapper ant-radio-wrapper-checked css-var-_r_40_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target ant-radio-checked"
@@ -58,7 +58,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
         </span>
       </label>
       <label
-        class="ant-radio-wrapper css-var-_r_3v_ ant-radio-css-var"
+        class="ant-radio-wrapper css-var-_r_40_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target"
@@ -77,7 +77,7 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
         </span>
       </label>
       <label
-        class="ant-radio-wrapper css-var-_r_3v_ ant-radio-css-var"
+        class="ant-radio-wrapper css-var-_r_40_ ant-radio-css-var"
       >
         <span
           class="ant-radio ant-wave-target"
@@ -98,14 +98,14 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </div>
   </div>
   <div
-    class="ant-flex css-var-_r_3v_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_40_ ant-flex-align-center ant-flex-gap-small"
   >
     <span>
       保留公共前缀 / Preserve common prefix:
     </span>
     <button
       aria-checked="false"
-      class="ant-switch css-var-_r_3v_"
+      class="ant-switch css-var-_r_40_"
       role="switch"
       type="button"
     >
@@ -125,20 +125,20 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 1
     </button>
   </div>
   <div
-    class="ant-divider css-var-_r_3v_ ant-divider-horizontal ant-divider-rail"
+    class="ant-divider css-var-_r_40_ ant-divider-horizontal ant-divider-rail"
     role="separator"
   />
   <div
-    class="ant-flex css-var-_r_3v_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-_r_40_ ant-flex-align-center ant-flex-gap-small"
   >
     <div
-      class="ant-bubble css-var-_r_41_ ant-bubble-start ant-bubble-loading"
+      class="ant-bubble css-var-_r_42_ ant-bubble-start ant-bubble-loading"
     >
       <div
         class="ant-bubble-avatar"
       >
         <span
-          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_41_ ant-avatar-css-var"
+          class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_42_ ant-avatar-css-var"
         >
           <span
             aria-label="user"
@@ -183,13 +183,13 @@ exports[`renders components/bubble/demo/animation.tsx extend context correctly 2
 
 exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-bubble css-var-_r_3o_ ant-bubble-start"
+  class="ant-bubble css-var-_r_3p_ ant-bubble-start"
 >
   <div
     class="ant-bubble-avatar"
   >
     <span
-      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3o_ ant-avatar-css-var"
+      class="ant-avatar ant-avatar-circle ant-avatar-icon css-var-_r_3p_ ant-avatar-css-var"
     >
       <span
         aria-label="ant-design"
@@ -233,60 +233,64 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
       class="ant-bubble-footer ant-bubble-footer-start"
     >
       <div
-        class="ant-actions css-var-_r_3o_"
+        class="ant-actions css-var-_r_3p_"
       >
         <div
           class="ant-actions-list ant-actions-variant-borderless"
         >
           <span
-            class="ant-actions-copy ant-actions ant-actions-item css-var-_r_3o_ css-var-_r_3o_"
+            class="ant-actions-copy ant-actions ant-actions-item css-var-_r_3p_ css-var-_r_3p_"
           >
-            <button
-              aria-describedby="test-id"
-              aria-label="Copy"
-              class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-              type="button"
+            <span
+              class="ant-actions-copy-actions"
             >
-              <span
-                aria-label="copy"
-                class="anticon anticon-copy"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  data-icon="copy"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3o_ ant-tooltip-placement-top"
-              style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-            >
-              <div
-                class="ant-tooltip-arrow"
-                style="position: absolute; bottom: 0px; left: 0px;"
+              <button
+                aria-describedby="test-id"
+                aria-label="Copy"
+                class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                type="button"
               >
                 <span
-                  class="ant-tooltip-arrow-content"
-                />
-              </div>
+                  aria-label="copy"
+                  class="anticon anticon-copy"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="copy"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                    />
+                  </svg>
+                </span>
+              </button>
               <div
-                class="ant-tooltip-container"
-                id="test-id"
-                role="tooltip"
+                class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3p_ ant-tooltip-placement-top"
+                style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
               >
-                Copy
+                <div
+                  class="ant-tooltip-arrow"
+                  style="position: absolute; bottom: 0px; left: 0px;"
+                >
+                  <span
+                    class="ant-tooltip-arrow-content"
+                  />
+                </div>
+                <div
+                  class="ant-tooltip-container"
+                  id="test-id"
+                  role="tooltip"
+                >
+                  Copy
+                </div>
               </div>
-            </div>
+            </span>
           </span>
           <div
             class="ant-actions-item"
@@ -316,7 +320,7 @@ exports[`renders components/bubble/demo/basic.tsx extend context correctly 1`] =
               </span>
             </div>
             <div
-              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3o_ ant-tooltip-placement-top"
+              class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_3p_ ant-tooltip-placement-top"
               style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
             >
               <div
@@ -363,7 +367,9 @@ exports[`renders components/bubble/demo/custom-content.tsx extend context correc
         >
           <div
             class="ant-image css-var-_r_3m_ ant-image-css-var"
+            role="button"
             style="height: 50px;"
+            tabindex="0"
           >
             <img
               class="ant-image-img"
@@ -2224,52 +2230,56 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 <span
                   class="ant-actions-copy ant-actions ant-actions-item css-var-_r_1r_ css-var-_r_1r_"
                 >
-                  <button
-                    aria-describedby="test-id"
-                    aria-label="Copy"
-                    class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                    type="button"
+                  <span
+                    class="ant-actions-copy-actions"
                   >
-                    <span
-                      aria-label="copy"
-                      class="anticon anticon-copy"
-                      role="img"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        data-icon="copy"
-                        fill="currentColor"
-                        focusable="false"
-                        height="1em"
-                        viewBox="64 64 896 896"
-                        width="1em"
-                      >
-                        <path
-                          d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
-                    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                  >
-                    <div
-                      class="ant-tooltip-arrow"
-                      style="position: absolute; bottom: 0px; left: 0px;"
+                    <button
+                      aria-describedby="test-id"
+                      aria-label="Copy"
+                      class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                      type="button"
                     >
                       <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                        aria-label="copy"
+                        class="anticon anticon-copy"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="copy"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-arrow"
+                        style="position: absolute; bottom: 0px; left: 0px;"
+                      >
+                        <span
+                          class="ant-tooltip-arrow-content"
+                        />
+                      </div>
+                      <div
+                        class="ant-tooltip-container"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 </span>
                 <div
                   class="ant-actions ant-actions-feedback css-var-_r_1r_ ant-actions-list"
@@ -2361,52 +2371,56 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 <span
                   class="ant-actions-copy ant-actions ant-actions-item css-var-_r_1r_ css-var-_r_1r_"
                 >
-                  <button
-                    aria-describedby="test-id"
-                    aria-label="Copy"
-                    class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                    type="button"
+                  <span
+                    class="ant-actions-copy-actions"
                   >
-                    <span
-                      aria-label="copy"
-                      class="anticon anticon-copy"
-                      role="img"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        data-icon="copy"
-                        fill="currentColor"
-                        focusable="false"
-                        height="1em"
-                        viewBox="64 64 896 896"
-                        width="1em"
-                      >
-                        <path
-                          d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
-                    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                  >
-                    <div
-                      class="ant-tooltip-arrow"
-                      style="position: absolute; bottom: 0px; left: 0px;"
+                    <button
+                      aria-describedby="test-id"
+                      aria-label="Copy"
+                      class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                      type="button"
                     >
                       <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                        aria-label="copy"
+                        class="anticon anticon-copy"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="copy"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-arrow"
+                        style="position: absolute; bottom: 0px; left: 0px;"
+                      >
+                        <span
+                          class="ant-tooltip-arrow-content"
+                        />
+                      </div>
+                      <div
+                        class="ant-tooltip-container"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 </span>
                 <div
                   class="ant-actions ant-actions-feedback css-var-_r_1r_ ant-actions-list"
@@ -2497,52 +2511,56 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 <span
                   class="ant-actions-copy ant-actions ant-actions-item css-var-_r_1r_ css-var-_r_1r_"
                 >
-                  <button
-                    aria-describedby="test-id"
-                    aria-label="Copy"
-                    class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                    type="button"
+                  <span
+                    class="ant-actions-copy-actions"
                   >
-                    <span
-                      aria-label="copy"
-                      class="anticon anticon-copy"
-                      role="img"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        data-icon="copy"
-                        fill="currentColor"
-                        focusable="false"
-                        height="1em"
-                        viewBox="64 64 896 896"
-                        width="1em"
-                      >
-                        <path
-                          d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
-                    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                  >
-                    <div
-                      class="ant-tooltip-arrow"
-                      style="position: absolute; bottom: 0px; left: 0px;"
+                    <button
+                      aria-describedby="test-id"
+                      aria-label="Copy"
+                      class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                      type="button"
                     >
                       <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                        aria-label="copy"
+                        class="anticon anticon-copy"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="copy"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-arrow"
+                        style="position: absolute; bottom: 0px; left: 0px;"
+                      >
+                        <span
+                          class="ant-tooltip-arrow-content"
+                        />
+                      </div>
+                      <div
+                        class="ant-tooltip-container"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 </span>
                 <div
                   class="ant-actions ant-actions-feedback css-var-_r_1r_ ant-actions-list"
@@ -2633,52 +2651,56 @@ exports[`renders components/bubble/demo/list-extra.tsx extend context correctly 
                 <span
                   class="ant-actions-copy ant-actions ant-actions-item css-var-_r_1r_ css-var-_r_1r_"
                 >
-                  <button
-                    aria-describedby="test-id"
-                    aria-label="Copy"
-                    class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
-                    type="button"
+                  <span
+                    class="ant-actions-copy-actions"
                   >
-                    <span
-                      aria-label="copy"
-                      class="anticon anticon-copy"
-                      role="img"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        data-icon="copy"
-                        fill="currentColor"
-                        focusable="false"
-                        height="1em"
-                        viewBox="64 64 896 896"
-                        width="1em"
-                      >
-                        <path
-                          d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
-                    style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
-                  >
-                    <div
-                      class="ant-tooltip-arrow"
-                      style="position: absolute; bottom: 0px; left: 0px;"
+                    <button
+                      aria-describedby="test-id"
+                      aria-label="Copy"
+                      class="ant-actions-copy-copy ant-actions-copy-copy-icon-only"
+                      type="button"
                     >
                       <span
-                        class="ant-tooltip-arrow-content"
-                      />
-                    </div>
+                        aria-label="copy"
+                        class="anticon anticon-copy"
+                        role="img"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          data-icon="copy"
+                          fill="currentColor"
+                          focusable="false"
+                          height="1em"
+                          viewBox="64 64 896 896"
+                          width="1em"
+                        >
+                          <path
+                            d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                          />
+                        </svg>
+                      </span>
+                    </button>
                     <div
-                      class="ant-tooltip-container"
-                      id="test-id"
-                      role="tooltip"
+                      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1r_ ant-tooltip-placement-top"
+                      style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
                     >
-                      Copy
+                      <div
+                        class="ant-tooltip-arrow"
+                        style="position: absolute; bottom: 0px; left: 0px;"
+                      >
+                        <span
+                          class="ant-tooltip-arrow-content"
+                        />
+                      </div>
+                      <div
+                        class="ant-tooltip-container"
+                        id="test-id"
+                        role="tooltip"
+                      >
+                        Copy
+                      </div>
                     </div>
-                  </div>
+                  </span>
                 </span>
                 <div
                   class="ant-actions ant-actions-feedback css-var-_r_1r_ ant-actions-list"

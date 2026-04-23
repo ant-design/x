@@ -5,10 +5,10 @@ import useSpeech from '../hooks/use-speech';
 // Mock dependencies
 jest.mock('@rc-component/util', () => ({
   useEvent: (fn: any) => fn,
-  useMergedState: (defaultValue: any, options: any) => {
+  useControlledState: (defaultValue: any, value?: any) => {
     const React = require('react');
-    const [value, setValue] = React.useState(options?.value ?? defaultValue);
-    return [value, setValue];
+    const [stateValue, setStateValue] = React.useState(value ?? defaultValue);
+    return [stateValue, setStateValue];
   },
 }));
 

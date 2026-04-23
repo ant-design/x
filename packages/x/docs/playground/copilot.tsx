@@ -204,15 +204,17 @@ const useCopilotStyle = createStyles(({ token, css }) => {
     `,
     // chatList 样式
     chatList: css`
+      flex:1;
+      overflow-y: auto;
+      padding-inline: 16px;
       margin-block-start: ${token.margin}px;
       display: flex;
-      height: calc(100% - 194px);
       flex-direction: column;
     `,
     chatWelcome: css`
       margin-inline: ${token.margin}px;
       padding: 12px 16px;
-      border-radius: 2px 12px 12px 12px;
+      border-radius: 12px;
       background: ${token.colorBgTextHover};
       margin-bottom: ${token.margin}px;
     `,
@@ -433,7 +435,6 @@ const Copilot = (props: CopilotProps) => {
         /** 消息列表 */
         <Bubble.List
           ref={listRef}
-          style={{ paddingInline: 16 }}
           items={messages?.map((i) => ({
             ...i.message,
             key: i.id,
@@ -457,9 +458,6 @@ const Copilot = (props: CopilotProps) => {
             title={locale.iCanHelp}
             items={MOCK_QUESTIONS.map((i) => ({ key: i, description: i }))}
             onItemClick={(info) => handleUserSubmit(info?.data?.description as string)}
-            style={{
-              marginInline: 16,
-            }}
             styles={{
               title: { fontSize: 14 },
             }}

@@ -202,4 +202,37 @@ describe('ThoughtChain Component', () => {
     expect(itemElement).toBeInTheDocument();
     expect(window.getComputedStyle(itemElement as Element).backgroundColor).toBe('red');
   });
+
+  it('should not have duplicate className on root element', () => {
+    const { container } = render(<ThoughtChain className="my-custom-class" items={items} />);
+
+    const root = container.querySelector('.ant-thought-chain');
+    expect(root).toBeTruthy();
+    // Read the raw class attribute string instead of classList, because
+    // DOMTokenList de-duplicates tokens per DOM spec and cannot detect
+    // duplicate tokens in the source class attribute.
+    const classAttr = root!.getAttribute('class') ?? '';
+    const count = (classAttr.match(/\bmy-custom-class\b/g) ?? []).length;
+    expect(count).toBe(1);
+  });
+
+  it('should handle undefined expandedKeys gracefully for collapsible items', () => {
+    // Render without expandedKeys prop — contentOpen should be false, not undefined
+    const { container } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'collapse-test',
+            title: 'Collapsible',
+            content: 'Hidden content',
+            collapsible: true,
+          },
+        ]}
+      />,
+    );
+
+    // Content should NOT be visible (collapsed by default)
+    const contentEl = container.querySelector('.ant-thought-chain-node-content');
+    expect(contentEl).toBeFalsy();
+  });
 });

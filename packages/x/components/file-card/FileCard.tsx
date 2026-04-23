@@ -47,10 +47,21 @@ export type PresetIcons =
   | 'java'
   | 'javascript'
   | 'python';
+
+type CardInfo = {
+  size: string;
+  icon: React.ReactNode;
+  namePrefix?: string;
+  nameSuffix?: string;
+  name?: string;
+  src?: string;
+  type?: `${CARD_TYPE}`;
+};
+type ExtendNode = false | React.ReactNode | ((info: CardInfo) => React.ReactNode);
 export interface FileCardProps
   extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
-    'content' | 'onAnimationStart' | 'onAnimationEnd'
+    'content' | 'onAnimationStart' | 'onAnimationEnd' | 'onClick'
   > {
   prefixCls?: string;
   style?: React.CSSProperties;
@@ -62,20 +73,21 @@ export interface FileCardProps
   name: string;
   byte?: number;
   size?: 'small' | 'default';
-  description?: React.ReactNode;
+  description?: ExtendNode;
   loading?: boolean;
   src?: string;
-  mask?: React.ReactNode;
+  mask?: ExtendNode;
   icon?: React.ReactNode | PresetIcons;
   type?: `${CARD_TYPE}`;
   imageProps?: ImageProps;
   spinProps?: SpinProps & {
     showText?: boolean;
     icon?: React.ReactNode;
+    size: 'small' | 'default' | 'large';
   };
   videoProps?: Partial<React.JSX.IntrinsicElements['video']>;
   audioProps?: Partial<React.JSX.IntrinsicElements['audio']>;
-  onClick?: () => void;
+  onClick?: (info: CardInfo, event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const IMAGE_EXT = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp', 'svg', 'jfif'];
@@ -304,7 +316,10 @@ const FileCard: React.FC<FileCardProps> = (props) => {
     ContentNode = (
       <File
         prefixCls={prefixCls}
-        name={namePrefix}
+        namePrefix={namePrefix}
+        name={name}
+        type={fileType}
+        src={src}
         ext={nameSuffix}
         size={size}
         byte={byte}

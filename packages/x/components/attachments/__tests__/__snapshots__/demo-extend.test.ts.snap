@@ -2,13 +2,13 @@
 
 exports[`renders components/attachments/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-app css-var-_r_1b_"
+  class="ant-app css-var-_r_29_"
 >
   <div
-    class="ant-flex css-var-_r_1b_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-_r_29_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_r_1b_ ant-sender-main"
+      class="ant-sender css-var-_r_29_ ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -17,7 +17,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
           class="ant-sender-prefix"
         >
           <span
-            class="ant-upload-wrapper css-var-_r_1b_"
+            class="ant-upload-wrapper css-var-_r_29_"
           >
             <div
               class="ant-upload ant-upload-select"
@@ -32,7 +32,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                   type="file"
                 />
                 <button
-                  class="ant-btn css-var-_r_1b_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+                  class="ant-btn css-var-_r_29_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
                   type="button"
                 >
                   <span
@@ -64,17 +64,17 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
           </span>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-_r_1b_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-_r_29_ ant-input-css-var ant-sender-input"
           style="overflow-y: hidden; resize: none;"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_r_1b_"
+            class="ant-sender-actions-list-presets ant-flex css-var-_r_29_"
           >
             <button
-              class="ant-btn css-var-_r_1b_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-_r_29_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -108,7 +108,7 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
     </div>
     <button
       aria-checked="false"
-      class="ant-switch css-var-_r_1b_"
+      class="ant-switch css-var-_r_29_"
       role="switch"
       type="button"
     >
@@ -131,14 +131,14 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
       </span>
     </button>
     <div
-      class="ant-attachment-drop-area css-var-_r_1b_"
+      class="ant-attachment-drop-area css-var-_r_29_"
       style="display: none;"
     >
       <div
         class="ant-attachment-placeholder"
       >
         <span
-          class="ant-upload-wrapper css-var-_r_1b_"
+          class="ant-upload-wrapper css-var-_r_29_"
         >
           <div
             class="ant-upload ant-upload-drag"
@@ -159,10 +159,10 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                 class="ant-upload-drag-container"
               >
                 <div
-                  class="ant-attachment-placeholder-inner ant-flex css-var-_r_1b_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
+                  class="ant-attachment-placeholder-inner ant-flex css-var-_r_29_ ant-flex-align-center ant-flex-justify-center ant-flex-vertical"
                 >
                   <span
-                    class="ant-typography ant-attachment-placeholder-icon css-var-_r_1b_"
+                    class="ant-typography ant-attachment-placeholder-icon css-var-_r_29_"
                   >
                     <span
                       aria-label="cloud-upload"
@@ -188,12 +188,12 @@ exports[`renders components/attachments/demo/basic.tsx extend context correctly 
                     </span>
                   </span>
                   <h5
-                    class="ant-typography ant-attachment-placeholder-title css-var-_r_1b_"
+                    class="ant-typography ant-attachment-placeholder-title css-var-_r_29_"
                   >
                     Drag & Drop files here
                   </h5>
                   <span
-                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_1b_"
+                    class="ant-typography ant-typography-secondary ant-attachment-placeholder-description css-var-_r_29_"
                   >
                     Support file type: image, video, audio, document, etc.
                   </span>
@@ -345,7 +345,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-0.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-0.jpg"
@@ -393,7 +396,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-1.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-1.jpg"
@@ -441,7 +447,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-2.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-2.jpg"
@@ -489,7 +498,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-3.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-3.jpg"
@@ -537,7 +549,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-4.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-4.jpg"
@@ -585,7 +600,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-5.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-5.jpg"
@@ -633,7 +651,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-6.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-6.jpg"
@@ -681,7 +702,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-7.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-7.jpg"
@@ -729,7 +753,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-8.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-8.jpg"
@@ -777,7 +804,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-9.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-9.jpg"
@@ -825,7 +855,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-10.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-10.jpg"
@@ -873,7 +906,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-11.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-11.jpg"
@@ -921,7 +957,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-12.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-12.jpg"
@@ -969,7 +1008,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-13.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-13.jpg"
@@ -1017,7 +1059,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-14.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-14.jpg"
@@ -1065,7 +1110,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-15.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-15.jpg"
@@ -1113,7 +1161,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-16.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-16.jpg"
@@ -1161,7 +1212,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-17.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-17.jpg"
@@ -1209,7 +1263,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-18.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-18.jpg"
@@ -1257,7 +1314,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-19.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-19.jpg"
@@ -1305,7 +1365,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-20.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-20.jpg"
@@ -1353,7 +1416,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-21.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-21.jpg"
@@ -1401,7 +1467,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-22.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-22.jpg"
@@ -1449,7 +1518,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-23.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-23.jpg"
@@ -1497,7 +1569,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-24.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-24.jpg"
@@ -1545,7 +1620,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-25.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-25.jpg"
@@ -1593,7 +1671,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-26.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-26.jpg"
@@ -1641,7 +1722,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-27.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-27.jpg"
@@ -1689,7 +1773,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-28.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-28.jpg"
@@ -1737,7 +1824,10 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
               class="ant-file-card-image ant-attachment-list-card-status-done"
             >
               <div
+                aria-label="file-29.jpg"
                 class="ant-image ant-file-card-image-img css-var-_r_b_ ant-image-css-var"
+                role="button"
+                tabindex="0"
               >
                 <img
                   alt="file-29.jpg"

@@ -18,6 +18,7 @@ import CodePenIcon from '../../icons/CodePenIcon';
 import CodeSandboxIcon from '../../icons/CodeSandboxIcon';
 import ExternalLinkIcon from '../../icons/ExternalLinkIcon';
 import DemoContext from '../../slots/DemoContext';
+import LiveError from '../../slots/LiveError';
 import SiteContext from '../../slots/SiteContext';
 import CodeBlockButton from './CodeBlockButton';
 import type { AntdPreviewerProps } from './Previewer';
@@ -41,10 +42,12 @@ const track = ({ type, demo }: { type: string; demo: string }) => {
 const useStyle = createStyles(({ token }) => {
   const { borderRadius } = token;
   return {
-    codeHideBtn: css`
+    stickyBox: css`
       position: sticky;
       bottom: 0;
       z-index: 1;
+    `,
+    codeHideBtn: css`
       width: 100%;
       height: 40px;
       display: flex;
@@ -289,6 +292,17 @@ import Demo from './demo';
 createRoot(document.getElementById('container')).render(<Demo />);
   `;
 
+  const useXMarkdown = Boolean(dependencies['@ant-design/x-markdown']);
+  const domhandlerBridgeContent =
+    "export { Comment, Text, Element, ProcessingInstruction } from 'domhandler';";
+  const fixDomhandlerPathScript = `const fs = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..');
+const dir = path.join(root, 'node_modules', 'html-dom-parser', 'esm', 'client', 'node_modules', 'domhandler', 'lib', 'esm');
+const content = "export { Comment, Text, Element, ProcessingInstruction } from 'domhandler';";
+fs.mkdirSync(dir, { recursive: true });
+fs.writeFileSync(path.join(dir, 'node.mjs'), content);
+`;
   const codesandboxPackage = {
     title: `${localizedTitle} - antd@${dependencies.antd}`,
     main: 'index.js',
@@ -307,6 +321,7 @@ createRoot(document.getElementById('container')).render(<Demo />);
       build: 'react-scripts build',
       test: 'react-scripts test --env=jsdom',
       eject: 'react-scripts eject',
+      ...(useXMarkdown && { postinstall: 'node scripts/fix-domhandler-path.js' }),
     },
     browserslist: ['>0.2%', 'not dead'],
   };
@@ -320,6 +335,12 @@ createRoot(document.getElementById('container')).render(<Demo />);
       'index.html': {
         content: html,
       },
+      ...(useXMarkdown && {
+        'scripts/fix-domhandler-path.js': { content: fixDomhandlerPathScript },
+        'node_modules/html-dom-parser/esm/client/node_modules/domhandler/lib/esm/node.mjs': {
+          content: domhandlerBridgeContent,
+        },
+      }),
     },
   };
 
@@ -500,18 +521,20 @@ createRoot(document.getElementById('container')).render(<Demo />);
             otherCode={otherCodeObject}
             jsxCode={jsx}
             styleCode={style}
-            error={liveDemoError}
             entryName={entryName}
             onSourceChange={setLiveDemoSource}
           />
-          <div
-            tabIndex={0}
-            role="button"
-            className={styles.codeHideBtn}
-            onClick={() => setCodeExpand(false)}
-          >
-            <UpOutlined />
-            <FormattedMessage id="app.demo.code.hide.simplify" />
+          <div className={styles.stickyBox}>
+            <LiveError error={liveDemoError} />
+            <div
+              tabIndex={0}
+              role="button"
+              className={styles.codeHideBtn}
+              onClick={() => setCodeExpand(false)}
+            >
+              <UpOutlined />
+              <FormattedMessage id="app.demo.code.hide.simplify" />
+            </div>
           </div>
         </section>
       )}

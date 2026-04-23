@@ -6,111 +6,20 @@ title: Overview
 order: 1
 ---
 
-The `components` property allows you to replace standard HTML tags with custom React components.
+The `components` property is the primary extension point in `@ant-design/x-markdown`. It lets you map Markdown/HTML nodes to your own React components so you can control rendering, streaming behavior, and business data interaction in one place. To extend further, see [Plugins](/x-markdowns/plugins) and custom renderers.
 
-## Basic Usage
+## Basic registration
 
 ```tsx
 import React from 'react';
-import { XMarkdown } from '@ant-design/x-markdown';
+import { Mermaid, Think, XMarkdown } from '@ant-design/x';
 
-const CustomHeading = ({ children, ...props }) => (
-  <h1 style={{ color: '#1890ff' }} {...props}>
-    {children}
-  </h1>
-);
-
-const App = () => <XMarkdown content="# Hello World" components={{ h1: CustomHeading }} />;
-```
-
-## Performance Optimization
-
-### 1. Avoid Inline Component Definitions
-
-```tsx
-// ❌ Bad: Creates new component on every render
-<XMarkdown components={{ h1: (props) => <h1 {...props} /> }} />;
-
-// ✅ Good: Use predefined component
-const Heading = (props) => <h1 {...props} />;
-<XMarkdown components={{ h1: Heading }} />;
-```
-
-### 2. Use React.memo
-
-```tsx
-const StaticContent = React.memo(({ children }) => <div className="static">{children}</div>);
-```
-
-## Streaming Rendering Handling
-
-XMarkdown will pass the `streamStatus` prop to components by default, indicating whether the component is closed, which is useful for handling streaming rendering.
-
-### Status Determination
-
-```tsx
-const StreamingComponent = ({ streamStatus, children }) => {
-  if (streamStatus === 'loading') {
-    return <div className="loading">Loading...</div>;
-  }
-  return <div>{children}</div>;
-};
-```
-
-## Data Fetching Example
-
-Components support two data fetching methods: directly parsing data from Markdown, or initiating network requests independently.
-
-### Data Fetching
-
-```tsx
-const UserCard = ({ domNode, streamStatus }) => {
-  const [user, setUser] = useState(null);
-  const username = domNode.attribs?.['data-username'];
-
-  useEffect(() => {
-    if (username && streamStatus === 'done') {
-      fetch(`/api/users/${username}`)
-        .then((r) => r.json())
-        .then(setUser);
-    }
-  }, [username, streamStatus]);
-
-  if (!user) return <div>Loading...</div>;
-
-  return (
-    <div className="user-card">
-      <img src={user.avatar} alt={user.name} />
-      <span>{user.name}</span>
-    </div>
-  );
-};
-```
-
-## Supported Tag Mapping
-
-### Standard HTML Tags
-
-| Tag        | Component Name |
-| ---------- | -------------- |
-| `a`        | `a`            |
-| `h1-h6`    | `h1-h6`        |
-| `p`        | `p`            |
-| `img`      | `img`          |
-| `table`    | `table`        |
-| `ul/ol/li` | `ul/ol/li`     |
-| `code/pre` | `code/pre`     |
-
-### Custom Tags
-
-```tsx
-// Support any custom tags
 <XMarkdown
   components={{
-    'my-component': MyComponent,
-    'user-card': UserCard,
+    think: Think,
+    mermaid: Mermaid,
   }}
-/>
+/>;
 ```
 
 ## ComponentProps
@@ -122,59 +31,16 @@ const UserCard = ({ domNode, streamStatus }) => {
 | children | Content wrapped in the component, containing the text content of DOM nodes | `React.ReactNode` | - |
 | rest | Component properties, supports all standard HTML attributes (such as `href`, `title`, `className`, etc.) and custom data attributes | `Record<string, any>` | - |
 
-## FAQ
+## Best Practices
 
-### Block-level HTML Tags Not Properly Closed
+1. Keep component references stable. Avoid inline function components in `components`.
+2. Use `streamStatus` to separate loading UI (`loading`) from finalized UI (`done`).
+3. If data depends on complete syntax, fetch or parse after `streamStatus === 'done'`.
+4. Keep custom tags semantically clear and avoid ambiguous mixed Markdown/HTML blocks.
 
-When block-level HTML tags contain empty lines (\n\n) internally, the Markdown parser treats empty lines as the start of new paragraphs, thereby interrupting recognition of the original HTML block. This causes closing tags to be incorrectly parsed as inline HTML or plain text, ultimately breaking the tag structure.
+## FAQ: Custom Tag Closing Issues
 
-**Example Problem:**
+If block-level custom tags contain unexpected blank lines, Markdown parsers may end the HTML block early and convert trailing content into paragraphs. To avoid this:
 
-Input Markdown:
-
-```markdown
-<think>
-This is thinking content
-
-The thinking content contains empty lines </think>
-
-This is main content
-```
-
-Incorrect Output:
-
-```html
-<think>
-  This is thinking content
-
-  <p>The thinking content contains empty lines</p>
-  <p>This is main content</p>
-</think>
-```
-
-**Root Cause:** According to [CommonMark](https://spec.commonmark.org/0.30/#html-blocks) specification, HTML block recognition depends on strict formatting rules. Once two consecutive line breaks (i.e., empty lines) appear inside an HTML block and do not meet specific HTML block type continuation conditions (such as `<div>`, `<pre>`, etc.), the parser will terminate the current HTML block and process subsequent content as Markdown paragraphs.
-
-Custom tags (like `<think>` ) are typically not recognized as "paragraph-spanning" HTML block types, making them highly susceptible to empty line interference.
-
-**Solutions:**
-
-1. **Option 1**: Remove all empty lines inside tags
-
-```markdown
-<think>
-This is thinking content
-The thinking content has no empty lines
-</think>
-```
-
-2. **Option 2**: Add empty lines before, after, and inside HTML tags to make them independent blocks
-
-```markdown
-<think>
-
-This is thinking content
-
-The thinking content contains empty lines
-
-</think>
-```
+1. Keep content inside custom tags contiguous when possible.
+2. Or place blank lines both before and after the full custom block so the parser treats it as an independent block.

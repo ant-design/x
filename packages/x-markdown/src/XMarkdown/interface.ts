@@ -31,6 +31,20 @@ export enum StreamCacheTokenType {
 
 type Token = Tokens.Generic;
 
+interface TailConfig {
+  /**
+   * @description 尾部显示的内容，默认为 `▋`
+   * @description The content to display as tail, default is `▋`
+   * @default '▋'
+   */
+  content?: string;
+  /**
+   * @description 自定义尾部组件，优先级高于 content
+   * @description Custom tail component, takes precedence over content
+   */
+  component?: React.ComponentType<{ content?: string }>;
+}
+
 interface StreamingOption {
   /**
    * @description 指示是否还有后续内容块，为 false 时刷新所有缓存并完成渲染
@@ -49,6 +63,12 @@ interface StreamingOption {
    * @description Configuration for text appearance animation effects
    */
   animationConfig?: AnimationConfig;
+  /**
+   * @description 是否启用尾部动画；传入 `true` 使用默认 `▋`，传入对象可自定义内容
+   * @description Whether to enable tail animation; pass `true` for default `▋`, or object to customize content
+   * @default false
+   */
+  tail?: boolean | TailConfig;
   /**
    * @description 未完成的 Markdown 格式转换为自定义加载组件的映射配置，用于在流式渲染过程中为未闭合的链接和图片提供自定义loading组件
    * @description Mapping configuration to convert incomplete Markdown formats to custom loading components, used to provide custom loading components for unclosed links and images during streaming rendering
@@ -159,6 +179,12 @@ interface XMarkdownProps {
    * @default false
    */
   protectCustomTagNewlines?: boolean;
+  /**
+   * @description 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容
+   * @description Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content
+   * @default false
+   */
+  escapeRawHtml?: boolean;
   /*
    * @description 是否启用调试模式，显示性能监控浮层，包含 FPS、内存占用、渲染时间等关键指标
    * @description Whether to enable debug mode, displaying performance monitoring overlay with FPS, memory usage, render time and other key metrics
@@ -167,4 +193,12 @@ interface XMarkdownProps {
   debug?: boolean;
 }
 
-export type { XMarkdownProps, Token, Tokens, StreamStatus, ComponentProps, StreamingOption };
+export type {
+  XMarkdownProps,
+  Token,
+  Tokens,
+  StreamStatus,
+  ComponentProps,
+  StreamingOption,
+  TailConfig,
+};

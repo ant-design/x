@@ -4,7 +4,7 @@ import * as React from 'react';
 import ActionButton, { ActionButtonContext } from '../ActionButton';
 import RecordingIcon from './RecordingIcon';
 
-function SpeechButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
+const SpeechButton = React.forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     speechRecording,
     disabled: rootDisabled,
@@ -31,6 +31,6 @@ function SpeechButton(props: ButtonProps, ref: React.Ref<HTMLButtonElement>) {
       ref={ref}
     />
   );
-}
+});
 
-export default React.forwardRef(SpeechButton);
+export default SpeechButton;

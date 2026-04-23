@@ -433,7 +433,7 @@ exports[`renders components/conversations/demo/controlled-mode.tsx extend contex
     style="width: 256px; background: #ffffff; border-radius: 6px;"
   >
     <li
-      class="ant-conversations-item"
+      class="ant-conversations-item ant-conversations-item-active"
       title="Help Me Write"
     >
       <div

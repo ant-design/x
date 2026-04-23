@@ -102,26 +102,33 @@ const App = () => {
   };
 
   return (
-    <Flex vertical gap="small" style={{ height: 600, overflow: 'auto' }} ref={contentRef}>
-      <Space align="center" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button onClick={handleReRender}>Re-Render</Button>
+    <div style={{ height: 600, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <Space
+        align="center"
+        style={{ display: 'flex', justifyContent: 'flex-end', flexShrink: 0, marginBottom: 8 }}
+      >
+        <Button size="small" onClick={handleReRender}>
+          Re-Render
+        </Button>
       </Space>
 
-      <Bubble
-        style={{ width: '100%' }}
-        styles={{
-          body: { width: '100%' },
-        }}
-        variant="borderless"
-        content={text.slice(0, index)}
-        className={className}
-        contentRender={(content) => (
-          <XMarkdown debug streaming={{ enableAnimation: true, hasNextChunk }}>
-            {content}
-          </XMarkdown>
-        )}
-      />
-    </Flex>
+      <Flex vertical style={{ flex: 1, minHeight: 0, overflow: 'auto' }} ref={contentRef}>
+        <Bubble
+          style={{ width: '100%' }}
+          styles={{
+            body: { width: '100%' },
+          }}
+          variant="borderless"
+          content={text.slice(0, index)}
+          className={className}
+          contentRender={(content) => (
+            <XMarkdown debug streaming={{ enableAnimation: true, hasNextChunk }}>
+              {content}
+            </XMarkdown>
+          )}
+        />
+      </Flex>
+    </div>
   );
 };
 

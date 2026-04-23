@@ -22,6 +22,7 @@
   --hr-margin: 24px 0;
   --table-margin: 0 0 24px 0;
   --padding-code: 16px;
+  --xmd-tail-color: var(--text-color);
 }
 
 .x-markdown-dark h1,
@@ -150,7 +151,7 @@
   background-color: var(--cite-hover-bg);
 }
 
-.x-markdown-dark pre code:not([class$="-highlightCode-code"] pre code) {
+.x-markdown-dark pre code:not([class$="-codeHighlighter-code"] pre code) {
   display: block;
   background: var(--dark-bg) !important;
   padding: var(--padding-code);
@@ -161,7 +162,7 @@
   margin: var(--margin-pre);
 }
 
-.x-markdown-dark code:not([class$="-highlightCode-code"] code):not(pre code) {
+.x-markdown-dark code:not([class$="-codeHighlighter-code"] code):not(pre code) {
   background-color: var(--dark-bg) !important;
   color: var(--text-color) !important;
   border-radius: var(--border-radius-small);

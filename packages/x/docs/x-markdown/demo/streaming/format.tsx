@@ -6,40 +6,32 @@ import React, { useState } from 'react';
 const demos = [
   {
     title: 'Mixed Syntax',
-    content: `## Ant Design X｜AI interface solution 
-![Ant Design X](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
-    
-Ant Design X is a comprehensive toolkit for AI applications, integrating a UI component library, streaming Markdown rendering engine, and AI SDK.
+    content: `## Ant Design X
 
-- \`npm install @ant-design/x\`
-- \`npm install @ant-design/x-markdown\`
-- \`npm install @ant-design/x-sdk\`
+![Logo](https://mdn.alipayobjects.com/huamei_yz9z7c/afts/img/0lMhRYbo0-8AAAAAQDAAAAgADlJoAQFr/original)
 
-### \`@ant-design/x\`
+UI components, streaming Markdown, and AI SDK in one toolkit.
 
-A React UI library based on the Ant Design system, designed for **AI-driven interfaces**. [Click here for details.](/components/introduce/).
+- \`@ant-design/x\` — components
+- \`@ant-design/x-markdown\` — rendering
+- \`@ant-design/x-sdk\` — tools & chat
 
-### \`@ant-design/x-markdown\`
+### Get started
 
-An optimized Markdown rendering solution for **streaming content**. [Click here for details.](/x-markdowns/introduce).
+\`npm install @ant-design/x\`. See [components](/components/introduce/) and [Markdown](/x-markdowns/introduce) docs.
 
-### \`@ant-design/x-sdk\`
+| Package | Description |
+| --- | --- |
+| @ant-design/x | AI-oriented UI library |
+| @ant-design/x-markdown | Streaming Markdown |
+| @ant-design/x-sdk | Tools & APIs |
 
-Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/introduce).
-
-
-| Repo | Description |
-| ------ | ----------- |
-| @ant-design/x   | A React UI library based on the Ant Design system. |
-| @ant-design/x-markdown | An optimized Markdown rendering solution for **streaming content**. |
-| @ant-design/x-sdk    | Provides a complete set of **tool APIs**. |
-
-<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>
+<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="AGI interface solution based on Ant Design"></welcome>
 `,
   },
   {
     title: 'Link Syntax',
-    content: 'Visit [Ant Design X](https://github.com/ant-design/x)  for more details.',
+    content: 'Learn more: [Ant Design X](https://github.com/ant-design/x).',
   },
   {
     title: 'Image Syntax',
@@ -48,24 +40,23 @@ Provides a complete set of **tool APIs**. [Click here for details.](/x-sdks/intr
   },
   {
     title: 'Html',
-    content: `<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="Base on Ant Design, AGI product interface solution, create a better intelligent vision~"></welcome>`,
+    content: `<welcome data-icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp" title="Hello, I'm Ant Design X" data-description="AGI interface solution based on Ant Design"></welcome>`,
   },
   {
     title: 'Table',
-    content: `| Repo | Description |
-| ------ | ----------- |
-| @ant-design/x   | A React UI library based on the Ant Design system. |
-| @ant-design/x-markdown | An optimized Markdown rendering solution for streaming content. |
-| @ant-design/x-sdk    | Provides a complete set of tool APIs. |`,
+    content: `| Package | Description |
+| --- | --- |
+| @ant-design/x | AI-oriented UI library |
+| @ant-design/x-markdown | Streaming Markdown |
+| @ant-design/x-sdk | Tools & APIs |`,
   },
   {
     title: 'Emphasis',
-    content:
-      'This is **bold text** and this is *italic text*. You can also use ***bold and italic***.',
+    content: '**Bold**, *italic*, and ***both***.',
   },
   {
     title: 'InlineCode',
-    content: 'This is inline code: `npm install @ant-design/x-markdown`.',
+    content: 'Run `npm install @ant-design/x-markdown`.',
   },
 ];
 

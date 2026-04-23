@@ -16,6 +16,96 @@ tag: vVERSION
 
 ---
 
+## 2.6.0
+
+`2026-04-17`
+
+### @ant-design/x
+
+- 🐛 Fix duplicate `className` passed to the root element of `ThoughtChain`, and default `contentOpen` to `false` to prevent `undefined` when `expandedKeys` is not provided. [#1851](https://github.com/ant-design/x/pull/1851) by [feoyang](https://github.com/feoyang)
+- 🐛 Fix Folder component title display bug. [#1855](https://github.com/ant-design/x/pull/1855) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 Support rendering block-level LaTeX formulas inside paragraphs, using `<span>` instead of `<div>` to be compatible with inline contexts. [#1859](https://github.com/ant-design/x/pull/1859) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-skill
+
+- 🆕 Added `x-components` skill, providing full API documentation, usage patterns, and best practices for all `@ant-design/x` components. [#1862](https://github.com/ant-design/x/pull/1862) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added `x-card` skill, providing complete API reference, data binding, Actions, and Commands documentation for `@ant-design/x-card`. [#1865](https://github.com/ant-design/x/pull/1865) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Updated `use-x-chat`, `x-chat-provider`, and `x-request` skill content to sync with the latest APIs and examples. [#1862](https://github.com/ant-design/x/pull/1862) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Fix broken documentation link in the X SDK usage guide. [#1856](https://github.com/ant-design/x/pull/1856) by [xiaohp](https://github.com/xiaohp)
+
+## 2.5.0
+
+`2026-03-31`
+
+### @ant-design/x-card
+
+- 🔥 New module X Card, a dynamic card rendering component based on A2UI protocol, enabling AI Agents to dynamically build and render interactive interfaces through structured JSON message streams.[#1836](https://github.com/ant-design/x/pull/1836) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1830](https://github.com/ant-design/x/pull/1830) by [1uokun](https://github.com/1uokun)
+
+## 2.4.0
+
+`2026-03-13`
+
+### @ant-design/x
+
+- 🐛 Fix incorrect event handling in `useShortcutKeys`.[#1822](https://github.com/ant-design/x/pull/1822) by [cxybd](https://github.com/cxybd)
+- 🔥 New component Folder. [#1797](https://github.com/ant-design/x/pull/1797) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Enhanced FileCard's `description`, `mask`, and `onClick` configuration capabilities. [#1807](https://github.com/ant-design/x/pull/1807) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown streaming rendering adds `tail` configuration, supporting custom tail content and custom tail components while avoiding tail rendering before incomplete components. [#1296](https://github.com/ant-design/x/pull/1296) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown custom component streaming state detection to correctly handle void elements and isolate `streamStatus` across multiple instances with the same component name. [#1590](https://github.com/ant-design/x/pull/1590) by [Last-Order](https://github.com/Last-Order)
+- 🛠 Exported XMarkdown's `StreamCacheTokenType` type for external reuse of streaming-related types. [#1592](https://github.com/ant-design/x/pull/1592) by [Last-Order](https://github.com/Last-Order)
+- 📖 Added XMarkdown Playground and refreshed the streaming, examples, and data-display documentation, including the AntV Infographic example. [#1779](https://github.com/ant-design/x/pull/1779) by [Div627](https://github.com/Div627), [#1780](https://github.com/ant-design/x/pull/1780) by [Div627](https://github.com/Div627), [#1814](https://github.com/ant-design/x/pull/1814) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-skill
+
+- 🆕 Released x-markdown skill. [#1813](https://github.com/ant-design/x/pull/1813) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 🛠 Upgraded all components' useMergedState to useControlledState. [#1808](https://github.com/ant-design/x/pull/1808) by [kimteayon](https://github.com/kimteayon)
+- 📖 Optimized official website to improve user experience. [#1814](https://github.com/ant-design/x/pull/1814) by [Div627](https://github.com/Div627), [#1793](https://github.com/ant-design/x/pull/1793) by [kimteayon](https://github.com/kimteayon), [#1792](https://github.com/ant-design/x/pull/1792) by [Div627](https://github.com/Div627), [#1780](https://github.com/ant-design/x/pull/1780) by [Div627](https://github.com/Div627), [#1779](https://github.com/ant-design/x/pull/1779) by [Div627](https://github.com/Div627)
+
+## 2.3.0
+
+`2026-02-26`
+
+### @ant-design/x
+
+- 🆕 Conversation's onActiveChange callback now returns both the activated item and its key value, while updating useMergedState to useControlledState. [#1762](https://github.com/ant-design/x/pull/1762) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Optimized the visual presentation of Sender's disabled state buttons, unified the addition of transparent border handling to ensure consistent appearance across different button variants when disabled. [#1751](https://github.com/ant-design/x/pull/1751) by [Rain120](https://github.com/Rain120)
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown adds escapeRawHtml property, allowing users to choose whether to escape raw HTML during rendering. [#1769](https://github.com/ant-design/x/pull/1769) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown rendering when encountering unclosed inline code in lists, ensuring list markers are preserved in special unclosed cases. [#1739](https://github.com/ant-design/x/pull/1739) by [Div627](https://github.com/Div627)
+- 🐛 Improved parsing of block-level LaTeX formulas, with more tolerant handling of trailing whitespace and indentation, enhancing compatibility with different line ending formats and reducing misjudgment and rendering issues. [#1744](https://github.com/ant-design/x/pull/1744) by [Waiter](https://github.com/Waiter)
+- 🐛 Optimized dark mode CodeHighlighter and Mermaid plugin styling issues. [#1766](https://github.com/ant-design/x/pull/1766) by [menghany](https://github.com/menghany)
+
+### @ant-design/x-sdk
+
+- 🆕 useXChat adds queueRequest method, implementing initialization message sending for ConversationKey and SessionId. [#1761](https://github.com/ant-design/x/pull/1761) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-skill
+
+- 🆕 Added skill installation commands, simultaneously releasing three skills: use-x-chat, x-chat-provider, and x-request. [#1753](https://github.com/ant-design/x/pull/1753), [#1767](https://github.com/ant-design/x/pull/1767) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 🛠 Fixed build errors caused by dependency upgrades. [#1754](https://github.com/ant-design/x/pull/1754) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Resolved domhandler's ModuleNotFoundError in CodeSandbox preview. [#1754](https://github.com/ant-design/x/pull/1754) by [Div627](https://github.com/Div627)
+
 ## 2.2.2
 
 `2026-02-06`

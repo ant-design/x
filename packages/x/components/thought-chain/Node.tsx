@@ -52,7 +52,7 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
   const nodeCls = `${prefixCls}-node`;
 
   // ============================ Content Open ============================
-  const contentOpen = expandedKeys?.includes(key);
+  const contentOpen = expandedKeys?.includes(key) ?? false;
   let iconNode: React.ReactNode = <div className={clsx(`${nodeCls}-index-icon`)}>{index + 1}</div>;
 
   iconNode = icon === false ? null : icon || iconNode;
