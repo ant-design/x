@@ -11,7 +11,12 @@ import { resolvePropsV08, extractDataUpdatesV08, applyDataModelUpdateV08 } from 
 import { resolvePropsV09, extractDataUpdatesV09, applyDataModelUpdateV09 } from './Card.v0.9';
 
 // Shared logic
-import { setValueByPath, validateComponentAgainstCatalog } from './utils';
+import {
+  setValueByPath,
+  validateComponentAgainstCatalog,
+  getValueByPath,
+  isPathObject,
+} from './utils';
 
 export interface CardProps {
   id: string;
@@ -342,16 +347,75 @@ const Card: React.FC<CardProps> = ({ id }) => {
     }
 
     // Report event to upper layer
+    // 先解析 context 中的 path 引用为实际值
+    const resolvedContext = resolveActionContextPathRefs(actionConfig, context, newDataModel);
     onAction?.({
       name,
       surfaceId: id,
-      context: { ...context },
+      context: resolvedContext,
     });
   };
 
   /** Component onChange writes back to dataModel (two-way binding) */
   const handleDataChange = (path: string, value: any) => {
     setDataModel((prev) => setValueByPath(prev, path, value));
+  };
+
+  /**
+   * 解析 action context 中的 path 引用为实际值
+   * 支持 v0.8 和 v0.9 两种格式
+   *
+   * v0.9: action.event.context = { key: { path, label? } }
+   * v0.8: action.context = [{ key, value: { path } }]
+   *
+   * 仅当 context 中的值本身是 { path: "xxx" } 格式时才进行转换
+   * 这样可以保留组件传递的实际值不被错误转换
+   */
+  const resolveActionContextPathRefs = (
+    actionConfig: any,
+    componentContext: Record<string, any>,
+    dataModel: Record<string, any>,
+  ): Record<string, any> => {
+    if (!actionConfig) return componentContext;
+
+    const resolvedContext: Record<string, any> = {};
+
+    // v0.9 格式: action.event.context = { key: { path, label? } }
+    const v09Context = actionConfig?.event?.context;
+    if (v09Context && typeof v09Context === 'object' && !Array.isArray(v09Context)) {
+      for (const [key, val] of Object.entries(componentContext)) {
+        // 仅当 context 中的值本身是 path 对象格式时才转换
+        if (isPathObject(val)) {
+          // 从 dataModel 读取实际值
+          const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
+          // 保留其他属性（如 label），将 path 替换为 value
+          const { path, ...rest } = val as { path: string; [key: string]: any };
+          resolvedContext[key] = { value: actualValue, ...rest };
+        } else {
+          // 非 path 对象格式的值直接保留
+          resolvedContext[key] = val;
+        }
+      }
+      return resolvedContext;
+    }
+
+    // v0.8 格式: action.context = [{ key, value: { path } }]
+    const v08Context = actionConfig?.context;
+    if (Array.isArray(v08Context)) {
+      for (const [key, val] of Object.entries(componentContext)) {
+        // 仅当 context 中的值本身是 path 对象格式时才转换
+        if (isPathObject(val)) {
+          // 从 dataModel 读取实际值
+          const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
+          resolvedContext[key] = { value: actualValue };
+        } else {
+          resolvedContext[key] = val;
+        }
+      }
+    }
+
+    // 如果没有匹配到任何格式，返回原始 context
+    return Object.keys(resolvedContext).length > 0 ? resolvedContext : componentContext;
   };
 
   return (

@@ -22,9 +22,87 @@ Component (Button click)
 interface ActionPayload {
   name: string; // from action.event.name
   surfaceId: string; // which surface triggered this
-  context: Record<string, any>; // full dataModel snapshot of the current surface
+  /**
+   * Context passed by component, with path references automatically resolved.
+   * Path references in action.event.context are converted to { value } format.
+   */
+  context: Record<string, any>;
 }
 ```
+
+---
+
+## Path Reference Resolution
+
+When a component triggers an action, X-Card automatically resolves path references in the context to actual values.
+
+### v0.9 Format
+
+```json
+{
+  "id": "submit_btn",
+  "component": "Button",
+  "action": {
+    "event": {
+      "name": "submit_form",
+      "context": {
+        "username": { "path": "/form/username", "label": "用户名" },
+        "email": { "path": "/form/email", "label": "邮箱" }
+      }
+    }
+  }
+}
+```
+
+When the user clicks the button, `onAction` receives:
+
+```typescript
+{
+  name: 'submit_form',
+  surfaceId: 'contact_form',
+  context: {
+    // Path references are automatically resolved to { value } format
+    username: { value: '张三', label: '用户名' },
+    email: { value: 'test@example.com', label: '邮箱' }
+  }
+}
+```
+
+### v0.8 Format
+
+In v0.8, action context uses array format:
+
+```json
+{
+  "id": "submit_btn",
+  "component": {
+    "Button": {
+      "action": {
+        "name": "submit_form",
+        "context": [
+          { "key": "username", "value": { "path": "/form/username" } },
+          { "key": "email", "value": { "path": "/form/email" } }
+        ]
+      }
+    }
+  }
+}
+```
+
+Resolved payload:
+
+```typescript
+{
+  name: 'submit_form',
+  surfaceId: 'contact_form',
+  context: {
+    username: { value: '张三' },
+    email: { value: 'test@example.com' }
+  }
+}
+```
+
+> **Note**: Only values that are `{ path: "xxx" }` format in the context are converted. Actual values passed by component (e.g., `{ value: "actual_value" }`) are preserved without conversion.
 
 ---
 
@@ -55,14 +133,10 @@ When the user clicks the button, `onAction` receives:
   name: 'submit_form',
   surfaceId: 'contact_form',
   context: {
-    // Full dataModel snapshot of the surface — all fields are accessible,
-    // not just those listed in action.event.context
-    form: {
-      email: 'alice@example.com',
-      name: 'Alice',
-      subscribe: true
-    },
-    // ...any other top-level keys in the dataModel are also present
+    // Path references are automatically resolved to { value } format
+    email: { value: 'alice@example.com' },
+    name: { value: 'Alice' },
+    subscribe: { value: true }
   }
 }
 ```

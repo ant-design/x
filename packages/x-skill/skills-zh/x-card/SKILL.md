@@ -105,7 +105,20 @@ interface CardProps {
 interface ActionPayload {
   name: string; // 来自 action.event.name
   surfaceId: string; // 触发动作的 Surface
-  context: Record<string, any>; // 触发时的完整 dataModel 快照（不只是 action.event.context 定义的字段）
+  /**
+   * 组件传递的上下文，已自动解析 path 引用
+   *
+   * 对于 action.event.context 中使用 { path: "xxx" } 格式的字段：
+   * - X-Card 会自动将其解析为 { value: "实际值" } 格式
+   * - 其他属性（如 label）会被保留
+   *
+   * 示例输入配置：
+   *   { username: { path: "/form/username", label: "用户名" } }
+   *
+   * 示例解析后 context：
+   *   { username: { value: "张三", label: "用户名" } }
+   */
+  context: Record<string, any>;
 }
 ```
 
@@ -231,6 +244,7 @@ export default function App() {
 - **表单输入组件必须用 `value: { path: "..." }` 双向绑定** —— 字面量值不会更新数据模型。
 - **流式场景**：追加新命令到数组而不是替换整个数组 —— Card 会增量处理差异。
 - **`action.event.context` 中的路径是写入目标** —— 它们指向用户输入数据在数据模型中的存储位置，不要作为读取来源解析。
+- **Action context 中的 path 引用会被自动解析** —— 触发 action 时，X-Card 会自动将 action 配置中的 `{ path: "xxx" }` 转换为 `{ value: "实际值" }` 格式。这适用于 v0.9（`action.event.context = { key: { path } }`）和 v0.8（`action.context = [{ key, value: { path } }]`）两种格式。
 - **v0.8 的 `action.context` 是数组格式** —— `[{ key, value: { path } }]`，与 v0.9 的对象格式 `{ key: { path } }` 不同，混用会导致 action 数据丢失。
 
 # 🤝 技能协作

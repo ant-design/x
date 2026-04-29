@@ -23,12 +23,86 @@ interface ActionPayload {
   name: string; // 来自 action.event.name
   surfaceId: string; // 触发动作的 Surface
   /**
-   * 触发 Action 时当前 Surface 的完整 dataModel 快照。
-   * 这是整个数据模型，不只是 action.event.context 中定义的字段。
+   * 组件传递的上下文，已自动解析 path 引用为实际值。
+   * action.event.context 中的 { path: "xxx" } 会被转换为 { value: "实际值" } 格式。
    */
   context: Record<string, any>;
 }
 ```
+
+---
+
+## Path 引用自动解析
+
+当组件触发 action 时，X-Card 会自动将 context 中的 path 引用解析为实际值。
+
+### v0.9 格式
+
+```json
+{
+  "id": "submit_btn",
+  "component": "Button",
+  "action": {
+    "event": {
+      "name": "submit_form",
+      "context": {
+        "username": { "path": "/form/username", "label": "用户名" },
+        "email": { "path": "/form/email", "label": "邮箱" }
+      }
+    }
+  }
+}
+```
+
+用户点击按钮时，`onAction` 收到：
+
+```typescript
+{
+  name: 'submit_form',
+  surfaceId: 'contact_form',
+  // path 引用自动解析为 { value } 格式
+  context: {
+    username: { value: '张三', label: '用户名' },
+    email: { value: 'test@example.com', label: '邮箱' }
+  }
+}
+```
+
+### v0.8 格式
+
+v0.8 使用数组格式定义路径绑定：
+
+```json
+{
+  "id": "submit_btn",
+  "component": {
+    "Button": {
+      "action": {
+        "name": "submit_form",
+        "context": [
+          { "key": "username", "value": { "path": "/form/username" } },
+          { "key": "email", "value": { "path": "/form/email" } }
+        ]
+      }
+    }
+  }
+}
+```
+
+解析后的 payload：
+
+```typescript
+{
+  name: 'submit_form',
+  surfaceId: 'contact_form',
+  context: {
+    username: { value: '张三' },
+    email: { value: 'test@example.com' }
+  }
+}
+```
+
+> **注意**：只有 context 中本身就是 `{ path: "xxx" }` 格式的值才会被转换。组件传递的实际值（如 `{ value: "实际值" }`）不会被错误转换。
 
 ---
 
@@ -58,21 +132,13 @@ interface ActionPayload {
 {
   name: 'submit_form',
   surfaceId: 'contact_form',
-  // context 是当前 Surface 完整的 dataModel 快照
+  // path 引用自动解析为 { value } 格式
   context: {
-    form: {
-      email: 'alice@example.com',
-      name: 'Alice',
-      subscribe: true
-    },
-    ui: { loading: false }
-    // ... 数据模型中的所有字段
+    email: { value: 'alice@example.com' },
+    name: { value: 'Alice' },
+    subscribe: { value: true }
   }
 }
-
-// 从 context 中取值时，按照数据模型结构访问：
-// payload.context.form.email
-// payload.context.form.name
 ```
 
 ---
