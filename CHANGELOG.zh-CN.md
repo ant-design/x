@@ -23,6 +23,15 @@ tag: vVERSION
 
 - 🆕 XProvider 新增 `zeroRuntime` 属性，支持 Zero Runtime CSS-in-JS 模式，在构建时提取样式，避免运行时样式注入，提升性能。[#1737](https://github.com/ant-design/x/pull/1737) 由 [seanparmelee](https://github.com/seanparmelee) 提交
 
+### @ant-design/x-card
+
+- 🆕 新增 Action 上下文路径自动解析能力（`resolveActionContextPathRefs`），支持 v0.9 和 v0.8 两种格式，触发 action 时自动将 `context` 中的 `{ path }` 引用解析为 dataModel 中的实际值，并与组件运行时传入的 context 合并上报。[#1887](https://github.com/ant-design/x/pull/1887) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 新增 v0.8 / v0.9 Action Context 解析示例文档（`action-context-resolve`）。[#1887](https://github.com/ant-design/x/pull/1887) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-skill
+
+- 🛠 更新 `x-card` skill 的 ACTIONS 参考文档，补充 Path 引用自动解析说明及正确的 React 使用示例。[#1887](https://github.com/ant-design/x/pull/1887) 由 [kimteayon](https://github.com/kimteayon) 提交
+
 ### 其他
 
 - 📖 官网新增搜索栏，提升文档检索体验。[#1831](https://github.com/ant-design/x/pull/1831) 由 [1uokun](https://github.com/1uokun) 提交

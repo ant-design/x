@@ -16,6 +16,27 @@ tag: vVERSION
 
 ---
 
+## 2.7.0
+
+`2026-04-30`
+
+### @ant-design/x
+
+- 🆕 `XProvider` adds `zeroRuntime` prop to support Zero Runtime CSS-in-JS mode, extracting styles at build time to avoid runtime style injection and improve performance. [#1737](https://github.com/ant-design/x/pull/1737) by [seanparmelee](https://github.com/seanparmelee)
+
+### @ant-design/x-card
+
+- 🆕 Added `resolveActionContextPathRefs` for automatic action context path resolution. Supports both v0.9 and v0.8 formats — when an action is triggered, `{ path }` references in `context` are automatically resolved to actual values from the dataModel and merged with the component's runtime context. [#1887](https://github.com/ant-design/x/pull/1887) by [kimteayon](https://github.com/kimteayon)
+- 📖 Added `action-context-resolve` demo documentation for both v0.8 and v0.9 formats. [#1887](https://github.com/ant-design/x/pull/1887) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-skill
+
+- 🛠 Updated `x-card` skill ACTIONS reference documentation with path reference resolution details and corrected React usage examples. [#1887](https://github.com/ant-design/x/pull/1887) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Added search bar to the official website to improve documentation discoverability. [#1831](https://github.com/ant-design/x/pull/1831) by [1uokun](https://github.com/1uokun)
+
 ## 2.6.0
 
 `2026-04-17`
