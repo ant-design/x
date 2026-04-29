@@ -368,8 +368,10 @@ const Card: React.FC<CardProps> = ({ id }) => {
    * v0.9: action.event.context = { key: { path, label? } }
    * v0.8: action.context = [{ key, value: { path } }]
    *
-   * 仅当 context 中的值本身是 { path: "xxx" } 格式时才进行转换
-   * 这样可以保留组件传递的实际值不被错误转换
+   * 遍历 actionConfig 中定义的 context 配置，将 path 引用解析为 dataModel 中的实际值，
+   * 再与 componentContext 合并（componentContext 优先级更高，可覆盖配置中的值）。
+   * 这样即使组件触发 action 时传入空 context（如 Submit 按钮），
+   * 配置中定义的 path 引用也能被正确解析。
    */
   const resolveActionContextPathRefs = (
     actionConfig: any,
@@ -378,44 +380,46 @@ const Card: React.FC<CardProps> = ({ id }) => {
   ): Record<string, any> => {
     if (!actionConfig) return componentContext;
 
-    const resolvedContext: Record<string, any> = {};
-
     // v0.9 格式: action.event.context = { key: { path, label? } }
     const v09Context = actionConfig?.event?.context;
     if (v09Context && typeof v09Context === 'object' && !Array.isArray(v09Context)) {
-      for (const [key, val] of Object.entries(componentContext)) {
-        // 仅当 context 中的值本身是 path 对象格式时才转换
+      // 遍历 actionConfig 中定义的 context 配置，解析 path 引用
+      const resolvedFromConfig: Record<string, any> = {};
+      for (const [key, val] of Object.entries(v09Context)) {
         if (isPathObject(val)) {
-          // 从 dataModel 读取实际值
+          // 从 dataModel 读取实际值，保留其他属性（如 label），将 path 替换为 value
           const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
-          // 保留其他属性（如 label），将 path 替换为 value
           const { path, ...rest } = val as { path: string; [key: string]: any };
-          resolvedContext[key] = { value: actualValue, ...rest };
+          resolvedFromConfig[key] = { value: actualValue, ...rest };
         } else {
-          // 非 path 对象格式的值直接保留
-          resolvedContext[key] = val;
+          resolvedFromConfig[key] = val;
         }
       }
-      return resolvedContext;
+      // 将配置解析结果与 componentContext 合并，componentContext 中的值优先（组件运行时传入的实际值）
+      return { ...resolvedFromConfig, ...componentContext };
     }
 
     // v0.8 格式: action.context = [{ key, value: { path } }]
     const v08Context = actionConfig?.context;
     if (Array.isArray(v08Context)) {
-      for (const [key, val] of Object.entries(componentContext)) {
-        // 仅当 context 中的值本身是 path 对象格式时才转换
+      // 遍历 actionConfig 中定义的 context 配置，解析 path 引用
+      const resolvedFromConfig: Record<string, any> = {};
+      for (const item of v08Context) {
+        const { key, value: val } = item as { key: string; value: any };
+        if (key === undefined) continue;
         if (isPathObject(val)) {
-          // 从 dataModel 读取实际值
           const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
-          resolvedContext[key] = { value: actualValue };
+          resolvedFromConfig[key] = { value: actualValue };
         } else {
-          resolvedContext[key] = val;
+          resolvedFromConfig[key] = val;
         }
       }
+      // 将配置解析结果与 componentContext 合并，componentContext 中的值优先
+      return { ...resolvedFromConfig, ...componentContext };
     }
 
     // 如果没有匹配到任何格式，返回原始 context
-    return Object.keys(resolvedContext).length > 0 ? resolvedContext : componentContext;
+    return componentContext;
   };
 
   return (

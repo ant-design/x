@@ -1505,4 +1505,238 @@ describe('Card.tsx additional branch coverage', () => {
       });
     });
   });
+
+  describe('resolveActionContextPathRefs with empty componentContext (Submit button scenario)', () => {
+    it('should resolve path refs from actionConfig even when componentContext is empty (v0.9)', async () => {
+      // 测试修复后的核心场景：Submit 按钮触发 action 时传入空 context {}
+      // 但 actionConfig.event.context 中定义了 path 引用，应该从 dataModel 中读取值
+      const onAction = jest.fn();
+
+      const SubmitButton: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="submit-btn"
+          onClick={() =>
+            // Submit 按钮触发 action 时传入空 context
+            componentOnAction?.('submit', {})
+          }
+        >
+          Submit
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/form/username',
+                value: 'alice',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/form/email',
+                value: 'alice@example.com',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'SubmitButton',
+                    action: {
+                      event: {
+                        name: 'submit',
+                        // actionConfig 中定义了 path 引用，即使组件传入空 context 也应被解析
+                        context: {
+                          username: { path: '/form/username', label: '用户名' },
+                          email: { path: '/form/email' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ SubmitButton }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('submit-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'submit',
+            surfaceId: 'card1',
+            context: expect.objectContaining({
+              // path 引用应从 dataModel 中解析，即使 componentContext 为空
+              username: expect.objectContaining({ value: 'alice', label: '用户名' }),
+              email: expect.objectContaining({ value: 'alice@example.com' }),
+            }),
+          }),
+        );
+      });
+    });
+
+    it('should resolve path refs from actionConfig even when componentContext is empty (v0.8)', async () => {
+      // 测试 v0.8 格式下 Submit 按钮（空 componentContext）场景
+      const onAction = jest.fn();
+
+      const SubmitButton: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="submit-btn-v08"
+          onClick={() =>
+            // Submit 按钮触发 action 时传入空 context
+            componentOnAction?.('submit', {})
+          }
+        >
+          Submit
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      SubmitButton: {
+                        action: {
+                          // v0.8 格式: context 是数组
+                          context: [{ key: 'formData', value: { path: '/form/data' } }],
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ SubmitButton }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('submit-btn-v08'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'submit',
+            surfaceId: 'card1',
+            // v0.8 格式下，即使 componentContext 为空，也应从 actionConfig 解析 path 引用
+            context: expect.objectContaining({
+              formData: expect.objectContaining({ value: undefined }),
+            }),
+          }),
+        );
+      });
+    });
+
+    it('should merge componentContext over actionConfig resolved values (componentContext takes priority)', async () => {
+      // 测试合并优先级：componentContext 中的值应覆盖 actionConfig 解析出的值
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="priority-btn"
+          onClick={() =>
+            // 组件传入的 context 中 username 是实际值（非 path 对象），应优先于 actionConfig 解析值
+            componentOnAction?.('click', {
+              username: 'runtime-value',
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/form/username',
+                value: 'config-value',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    action: {
+                      event: {
+                        name: 'click',
+                        context: {
+                          username: { path: '/form/username' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('priority-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            context: expect.objectContaining({
+              // componentContext 中的 runtime-value 应覆盖 actionConfig 解析出的 config-value
+              username: 'runtime-value',
+            }),
+          }),
+        );
+      });
+    });
+  });
 });
