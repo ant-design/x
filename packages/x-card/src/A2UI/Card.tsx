@@ -6,9 +6,11 @@ import type { Catalog } from './catalog';
 
 // v0.8 specific logic
 import { resolvePropsV08, extractDataUpdatesV08, applyDataModelUpdateV08 } from './Card.v0.8';
+import type { ActionConfigV08 } from './Card.v0.8';
 
 // v0.9 specific logic
 import { resolvePropsV09, extractDataUpdatesV09, applyDataModelUpdateV09 } from './Card.v0.9';
+import type { ActionConfigV09 } from './Card.v0.9';
 
 // Shared logic
 import { setValueByPath, validateComponentAgainstCatalog } from './utils';
@@ -17,13 +19,16 @@ export interface CardProps {
   id: string;
 }
 
+/** actionConfig 联合类型，兼容 v0.8 和 v0.9 格式 */
+type ActionConfig = ActionConfigV08 | ActionConfigV09;
+
 /** Recursively render a single node, child nodes are found via getById */
 function renderNode(
   nodeId: string,
   transformer: ComponentTransformer,
   components: Record<string, React.ComponentType<any>>,
   dataModel: Record<string, any>,
-  onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void,
+  onAction?: (name: string, context: Record<string, any>, actionConfig?: ActionConfig) => void,
   onDataChange?: (path: string, value: any) => void,
   catalog?: Catalog,
   commandVersion?: 'v0.8' | 'v0.9',
@@ -51,7 +56,7 @@ interface NodeRendererProps {
   transformer: ComponentTransformer;
   components: Record<string, React.ComponentType<any>>;
   dataModel: Record<string, any>;
-  onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void;
+  onAction?: (name: string, context: Record<string, any>, actionConfig?: ActionConfig) => void;
   /** Callback when component writes back to dataModel via onChange, path is the binding path */
   onDataChange?: (path: string, value: any) => void;
   /** catalog for component validation */
@@ -324,7 +329,11 @@ const Card: React.FC<CardProps> = ({ id }) => {
    * Handler when action is triggered
    * Use different extractDataUpdates and resolveActionContext based on version
    */
-  const handleAction = (name: string, context: Record<string, any>, actionConfig?: any) => {
+  const handleAction = (
+    name: string,
+    context: Record<string, any>,
+    actionConfig?: ActionConfig,
+  ) => {
     // Use different extractDataUpdates based on version
     const dataUpdates =
       commandVersion === 'v0.9'

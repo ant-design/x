@@ -23,9 +23,27 @@ import {
   validateComponentAgainstCatalog,
 } from './utils';
 
+/** v0.8 action.context 中单个条目的类型（正常格式） */
+export interface ActionContextItemV08 {
+  key: string;
+  value: { path: string } | { literalString: string } | unknown;
+}
+
+/** v0.8 action 配置类型 */
+export interface ActionConfigV08 {
+  name?: string;
+  /** 运行时可能收到非法值，函数内部通过 Array.isArray 防御 */
+  context?: ActionContextItemV08[] | unknown;
+  [key: string]: unknown;
+}
+
 /** 判断一个值是否为 { literalString: string } 形式的字面字符串对象 */
-export function isLiteralStringObject(val: any): val is { literalString: string } {
-  return val !== null && typeof val === 'object' && typeof val.literalString === 'string';
+export function isLiteralStringObject(val: unknown): val is { literalString: string } {
+  return (
+    val !== null &&
+    typeof val === 'object' &&
+    typeof (val as Record<string, unknown>).literalString === 'string'
+  );
 }
 
 /** 将 props 中的路径值替换为 dataModel 中的真实值（v0.8 版本） */
@@ -93,7 +111,7 @@ function resolveValueV08(val: any, dataModel: Record<string, any>, isActionConte
  * v0.8 格式: action.context 是数组 [{ key, value: { path: string } | literal }]
  */
 export function resolveActionContextV08(
-  action: any,
+  action: ActionConfigV08 | undefined,
   dataModel: Record<string, any>,
 ): Record<string, any> | undefined {
   const context = action?.context;
@@ -133,7 +151,7 @@ export function resolveActionContextV08(
  * @returns 需要更新的数据路径和值的数组
  */
 export function extractDataUpdatesV08(
-  action: any,
+  action: ActionConfigV08 | undefined,
   componentContext: Record<string, any>,
 ): Array<{ path: string; value: any }> {
   const context = action?.context;

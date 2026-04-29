@@ -726,4 +726,86 @@ describe('Card.tsx coverage', () => {
       });
     });
   });
+
+  describe('v0.9 action context literal value', () => {
+    it('should report component runtime context, not config literal values', async () => {
+      // 验证 v0.9 的行为：上报的 context 来自组件运行时传入，而非配置侧字面量。
+      // 配置侧的 { path } 绑定仅用于写回 dataModel，字面量不会被合并到上报 context。
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: Record<string, any>) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="click-btn"
+          onClick={() =>
+            componentOnAction?.('click', {
+              // 只传 value，不传 label，以验证配置侧字面量不会出现在上报 context 中
+              value: 'runtime-value',
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    action: {
+                      event: {
+                        name: 'click',
+                        context: {
+                          // 配置侧字面量：不会出现在上报 context 中
+                          label: 'static-label',
+                          // 配置侧 path 绑定：用于将组件传入的 value 写回 dataModel
+                          value: { path: '/data/value' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('click-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            // 上报的 context 只包含组件运行时传入的值
+            context: expect.objectContaining({
+              value: 'runtime-value',
+            }),
+          }),
+        );
+        // 配置侧字面量 label 不会出现在上报 context 中
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            context: expect.not.objectContaining({
+              label: 'static-label',
+            }),
+          }),
+        );
+      });
+    });
+  });
 });

@@ -20,6 +20,23 @@ import {
   validateComponentAgainstCatalog,
 } from './utils';
 
+/** v0.9 action.event.context 中单个值的类型 */
+export type ActionContextValueV09 = { path: string } | unknown;
+
+/** v0.9 action.event 类型 */
+export interface ActionEventV09 {
+  name?: string;
+  /** 运行时可能收到非法值（数组、字符串、null），函数内部通过类型守卫防御 */
+  context?: Record<string, unknown> | unknown;
+  [key: string]: unknown;
+}
+
+/** v0.9 action 配置类型 */
+export interface ActionConfigV09 {
+  event?: ActionEventV09;
+  [key: string]: unknown;
+}
+
 /** 将 props 中的路径值替换为 dataModel 中的真实值 */
 export function resolvePropsV09(
   props: Record<string, any>,
@@ -117,7 +134,7 @@ function resolveValueV09(val: any, dataModel: Record<string, any>): any {
  * v0.9 格式: action.event.context 是对象 { key: { path: string } | literal }
  */
 export function resolveActionContextV09(
-  action: any,
+  action: ActionConfigV09 | undefined,
   dataModel: Record<string, any>,
 ): Record<string, any> | undefined {
   const context = action?.event?.context;
@@ -147,7 +164,7 @@ export function resolveActionContextV09(
  * @returns 需要更新的数据路径和值的数组
  */
 export function extractDataUpdatesV09(
-  action: any,
+  action: ActionConfigV09 | undefined,
   componentContext: Record<string, any>,
 ): Array<{ path: string; value: any }> {
   const context = action?.event?.context;

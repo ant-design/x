@@ -15,6 +15,18 @@ tag: vVERSION
 
 ---
 
+## 2.7.0
+
+`2026-04-30`
+
+### @ant-design/x
+
+- 🆕 XProvider 新增 `zeroRuntime` 属性，支持 Zero Runtime CSS-in-JS 模式，在构建时提取样式，避免运行时样式注入，提升性能。[#1737](https://github.com/ant-design/x/pull/1737) 由 [seanparmelee](https://github.com/seanparmelee) 提交
+
+### 其他
+
+- 📖 官网新增搜索栏，提升文档检索体验。[#1831](https://github.com/ant-design/x/pull/1831) 由 [1uokun](https://github.com/1uokun) 提交
+
 ## 2.6.0
 
 `2026-04-17`
