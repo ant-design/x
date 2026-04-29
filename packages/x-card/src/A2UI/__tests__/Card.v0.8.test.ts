@@ -325,4 +325,38 @@ describe('applyDataModelUpdateV08', () => {
     expect(prev).toEqual({ existing: 'value' });
     expect(result.new).toBeDefined();
   });
+
+  it('should skip item when neither valueString nor valueMap exists (line 188 branch)', () => {
+    // 测试覆盖 Card.v0.8.ts 行 188: item 既没有 valueString 也没有 valueMap 时跳过
+    const prev = { existing: 'value' };
+    const contents = [
+      {
+        key: 'skipped',
+        // 既没有 valueString 也没有 valueMap
+      },
+      {
+        key: 'also-skipped',
+        valueString: undefined, // valueString 为 undefined
+      },
+    ] as any;
+    const result = applyDataModelUpdateV08(prev, contents);
+    // 两个 item 都应该被跳过，结果只有原有的 existing
+    expect(result).toEqual({ existing: 'value' });
+    expect(result.skipped).toBeUndefined();
+    expect(result['also-skipped']).toBeUndefined();
+  });
+
+  it('should apply valueString when it is an empty string', () => {
+    // 测试 valueString 为空字符串时（truthy check 的边界）
+    const prev = {};
+    const contents = [
+      {
+        key: 'emptyStr',
+        valueString: '',
+      },
+    ];
+    const result = applyDataModelUpdateV08(prev, contents);
+    // 空字符串 valueString 应该被存储（因为 item.valueString !== undefined）
+    expect(result.emptyStr).toBe('');
+  });
 });

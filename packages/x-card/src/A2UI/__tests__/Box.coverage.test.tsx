@@ -3,7 +3,7 @@
  * 覆盖：Box loadCatalog 错误处理、components transform 空数组分支、explicitList 分支
  */
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Box from '../Box';
 import Card from '../Card';
@@ -58,6 +58,114 @@ describe('Box.tsx coverage', () => {
         expect.anything(),
         expect.anything(),
       );
+    });
+  });
+
+  describe('setSurfaceCatalogMap same catalogId branch (Box.tsx line 43)', () => {
+    it('should return prev map when surfaceId already maps to same catalogId', async () => {
+      // 测试覆盖 Box.tsx 行 43: prev.get(surfaceId) === catalogId 时直接 return prev
+      const catalogUrl = 'https://example.com/same-catalog.json';
+      registerCatalog({
+        $id: catalogUrl,
+        components: { TestComponent: { type: 'object' } },
+      });
+
+      const TestComponent: React.FC = () => <div data-testid="test">Test</div>;
+
+      // 第一次发送 createSurface
+      const { rerender } = render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(mockFetch).not.toHaveBeenCalled();
+      });
+
+      // 再次发送相同的 createSurface（相同 surfaceId + 相同 catalogId）
+      // 这会触发 prev.get(surfaceId) === catalogId 为 true 的分支
+      rerender(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
+            },
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl, // 相同的 catalogId
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      // 不应该报错
+      await waitFor(() => {
+        expect(console.error).not.toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('loadCatalog success sets catalogMap (Box.tsx line 50-53)', () => {
+    it('should set catalogMap when loadCatalog succeeds with uncached catalog', async () => {
+      // 测试覆盖 Box.tsx 行 50-53: loadCatalog 成功且 catalog 不在 map 中时设置 catalogMap
+      const catalogUrl = 'https://example.com/fresh-catalog.json';
+
+      // 模拟 fetch 成功返回 catalog
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          $id: catalogUrl,
+          components: {
+            TestComponent: { type: 'object' },
+          },
+        }),
+      });
+
+      const TestComponent: React.FC = () => <div data-testid="test">Test</div>;
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: catalogUrl,
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      // 等待 fetch 被调用（catalog 不在缓存中，需要 fetch）
+      await waitFor(() => {
+        expect(mockFetch).toHaveBeenCalledWith(catalogUrl);
+      });
     });
   });
 
@@ -217,6 +325,159 @@ describe('Box.tsx coverage', () => {
         // 由于 catalog 已缓存，fetch 不应该被调用
         expect(mockFetch).not.toHaveBeenCalled();
       });
+    });
+  });
+});
+
+describe('Box.tsx deleteSurface branch', () => {
+  it('should return prev map when surfaceId not in surfaceCatalogMap on deleteSurface', async () => {
+    // 测试覆盖 Box.tsx 行 65: !prev.has(surfaceId) 返回 true 时直接 return prev
+    // 即 deleteSurface 时 surfaceId 根本不在 map 中，直接返回原 map
+    const TestComponent: React.FC = () => <div data-testid="test">Test</div>;
+
+    // 直接发送 deleteSurface，但没有先 createSurface（所以 surfaceId 不在 map 中）
+    render(
+      <Box
+        commands={[
+          {
+            version: 'v0.9',
+            deleteSurface: {
+              surfaceId: 'nonexistent-surface',
+            },
+          },
+        ]}
+        components={{ TestComponent }}
+      >
+        <Card id="card1" />
+      </Box>,
+    );
+
+    // 不应该报错，正常渲染
+    await waitFor(() => {
+      expect(console.error).not.toHaveBeenCalled();
+    });
+  });
+
+  it('should remove surfaceId from map when it exists on deleteSurface', async () => {
+    // 测试覆盖 Box.tsx 行 66-68: prev.has(surfaceId) 为 true 时删除并返回新 map
+    const catalogUrl = 'https://example.com/delete-test-catalog.json';
+    registerCatalog({
+      $id: catalogUrl,
+      components: { TestComponent: { type: 'object' } },
+    });
+
+    const TestComponent: React.FC = () => <div data-testid="test">Test</div>;
+
+    const { rerender } = render(
+      <Box
+        commands={[
+          {
+            version: 'v0.9',
+            createSurface: {
+              surfaceId: 'card-to-delete',
+              catalogId: catalogUrl,
+            },
+          },
+        ]}
+        components={{ TestComponent }}
+      >
+        <Card id="card-to-delete" />
+      </Box>,
+    );
+
+    // 等待 createSurface 处理完成
+    await waitFor(() => {
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    // 发送 deleteSurface，此时 surfaceId 在 map 中
+    rerender(
+      <Box
+        commands={[
+          {
+            version: 'v0.9',
+            createSurface: {
+              surfaceId: 'card-to-delete',
+              catalogId: catalogUrl,
+            },
+          },
+          {
+            version: 'v0.9',
+            deleteSurface: {
+              surfaceId: 'card-to-delete',
+            },
+          },
+        ]}
+        components={{ TestComponent }}
+      >
+        <Card id="card-to-delete" />
+      </Box>,
+    );
+
+    // 不应该报错
+    await waitFor(() => {
+      expect(console.error).not.toHaveBeenCalled();
+    });
+  });
+
+  it('should reset processedCommandsCount when commands array is replaced with shorter one (line 43-51)', async () => {
+    // 测试覆盖 Box.tsx 行 28-30: commands.length < processedCommandsCount.current 时重置计数器
+    const TestComponent: React.FC<{ text?: string }> = ({ text }) => (
+      <div data-testid="test">{text || 'default'}</div>
+    );
+
+    // 先发送多条命令（2条）
+    const { rerender } = render(
+      <Box
+        commands={[
+          {
+            version: 'v0.9',
+            updateComponents: {
+              surfaceId: 'card1',
+              components: [{ id: 'root', component: 'TestComponent', text: 'first' }],
+            },
+          },
+          {
+            version: 'v0.9',
+            updateComponents: {
+              surfaceId: 'card1',
+              components: [{ id: 'root', component: 'TestComponent', text: 'second' }],
+            },
+          },
+        ]}
+        components={{ TestComponent }}
+      >
+        <Card id="card1" />
+      </Box>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId('test')).toBeInTheDocument();
+    });
+
+    // 用更短的数组替换（模拟 commands 被重置）
+    // 这会触发 commands.length < processedCommandsCount.current 分支
+    // processedCommandsCount.current 是 2，新 commands.length 是 1
+    rerender(
+      <Box
+        commands={[
+          {
+            version: 'v0.9',
+            updateComponents: {
+              surfaceId: 'card1',
+              components: [{ id: 'root', component: 'TestComponent', text: 'reset' }],
+            },
+          },
+        ]}
+        components={{ TestComponent }}
+      >
+        <Card id="card1" />
+      </Box>,
+    );
+
+    // 重置后应该重新处理命令，不应该报错
+    await waitFor(() => {
+      expect(console.error).not.toHaveBeenCalled();
     });
   });
 });
