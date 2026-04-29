@@ -106,8 +106,17 @@ interface ActionPayload {
   name: string; // from action.event.name
   surfaceId: string; // which surface triggered it
   /**
-   * Complete dataModel snapshot of the surface at the time the action fired.
-   * This is the entire data model, not just the fields listed in action.event.context.
+   * Context passed by component, with path references automatically resolved.
+   *
+   * For action.event.context fields using { path: "xxx" } format:
+   * - X-Card automatically resolves them to { value: "actual_value" }
+   * - Other properties (like label) are preserved
+   *
+   * Example input config:
+   *   { username: { path: "/form/username", label: "用户名" } }
+   *
+   * Example resolved context:
+   *   { username: { value: "张三", label: "用户名" } }
    */
   context: Record<string, any>;
 }
@@ -235,6 +244,7 @@ export default function App() {
 - **Input components require `value: { path: "..." }` for two-way binding** — literal values do not update the data model.
 - **For streaming**: append new commands to the array rather than replacing it — Card processes the diff incrementally.
 - **`action.event.context` paths are write targets** — they point to where user-entered data lives in the data model; do not resolve them as read sources.
+- **Path references in action context are automatically resolved** — when an action is triggered, X-Card converts `{ path: "xxx" }` in the action config to `{ value: "actual_value" }` in the onAction payload. This works for both v0.9 (`action.event.context = { key: { path } }`) and v0.8 (`action.context = [{ key, value: { path } }]`) formats.
 
 # 🤝 Skill Collaboration
 

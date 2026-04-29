@@ -809,3 +809,1016 @@ describe('Card.tsx coverage', () => {
     });
   });
 });
+
+describe('Card.tsx additional branch coverage', () => {
+  describe('commandQueue filter return false branch (Card.tsx line 199)', () => {
+    it('should ignore commands that do not match any known command type', async () => {
+      // 测试覆盖 Card.tsx 行 199: filter 中 return false 分支
+      // 发送一个不包含任何已知命令类型的对象
+      const TestComponent: React.FC = () => <div data-testid="test">Test</div>;
+
+      render(
+        <Box
+          // @ts-ignore - 测试未知命令类型
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [{ id: 'root', component: 'TestComponent' }],
+              },
+            },
+            {
+              // 这个命令不包含任何已知的命令类型键，会触发 return false
+              // @ts-expect-error - 故意使用未知命令类型测试 filter return false 分支
+              unknownCommand: { surfaceId: 'card1' },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('test')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('resolveActionContextPathRefs v0.9 non-path-object branch (Card.tsx line 390-393)', () => {
+    it('should pass through non-path-object values in v0.9 context', async () => {
+      // 测试覆盖 Card.tsx 行 394-396: v0.9 context 中值不是 path 对象时直接保留
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="click-btn"
+          onClick={() =>
+            componentOnAction?.('click', {
+              // 传递一个普通字符串值（非 path 对象）
+              label: 'hello',
+              // 传递一个 path 对象（会被解析）
+              value: { path: '/data/value' },
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/data/value',
+                value: 'resolved-value',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    action: {
+                      event: {
+                        name: 'click',
+                        // context 中包含 path 对象和非 path 对象
+                        context: {
+                          label: 'static-label',
+                          value: { path: '/data/value' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('click-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            context: expect.objectContaining({
+              // 非 path 对象的 label 应该直接保留
+              label: 'hello',
+            }),
+          }),
+        );
+      });
+    });
+  });
+
+  describe('resolveActionContextPathRefs v0.8 non-path-object branch (Card.tsx line 409-410)', () => {
+    it('should pass through non-path-object values in v0.8 context', async () => {
+      // 测试覆盖 Card.tsx 行 411-413: v0.8 context 中值不是 path 对象时直接保留
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="click-btn-v08"
+          onClick={() =>
+            componentOnAction?.('click', {
+              // 传递一个普通字符串值（非 path 对象）
+              staticKey: 'static-value',
+              // 传递一个 path 对象（会被解析）
+              dynamicKey: { path: '/data/dynamic' },
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      ClickableComponent: {
+                        // v0.8 格式: action.context 是数组
+                        action: {
+                          context: [
+                            {
+                              key: 'staticKey',
+                              // 非 path 对象，直接是字面值
+                              value: 'literal-value',
+                            },
+                            {
+                              key: 'dynamicKey',
+                              value: { path: '/data/dynamic' },
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('click-btn-v08'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            // v0.8 中非 path 对象的值应该直接保留
+            context: expect.objectContaining({
+              staticKey: 'static-value',
+            }),
+          }),
+        );
+      });
+    });
+  });
+
+  describe('v0.9 createSurface when already rendered (Card.tsx line 219)', () => {
+    it('should not reset state when createSurface received after already rendered', async () => {
+      // 测试覆盖 Card.tsx 行 219: hasRenderedRef.current 为 true 时，v0.9 createSurface 不重置状态
+      const TestComponent: React.FC<{ text?: string }> = ({ text }) => (
+        <div data-testid="test">{text || 'default'}</div>
+      );
+
+      const { rerender } = render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [{ id: 'root', component: 'TestComponent', text: 'initial' }],
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('test').textContent).toBe('initial');
+      });
+
+      // 再次发送 createSurface（此时 hasRenderedRef.current 为 true）
+      rerender(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [{ id: 'root', component: 'TestComponent', text: 'initial' }],
+              },
+            },
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: '',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [{ id: 'root', component: 'TestComponent', text: 'after-recreate' }],
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('test').textContent).toBe('after-recreate');
+      });
+    });
+  });
+
+  describe('resolveActionContextPathRefs returns componentContext when no format matched (Card.tsx line 418)', () => {
+    it('should return original componentContext when actionConfig has no matching format', async () => {
+      // 测试覆盖 Card.tsx 行 418: resolvedContext 为空时返回原始 componentContext
+      // 当 actionConfig 存在但既没有 v0.9 event.context 也没有 v0.8 context 数组时
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="click-no-context"
+          onClick={() =>
+            componentOnAction?.('click', {
+              someValue: 'test',
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    // action 没有 event.context 也没有 context 数组
+                    action: {
+                      name: 'submit',
+                      // 没有 event 字段，也没有 context 数组
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('click-no-context'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            // 应该返回原始 componentContext
+            context: expect.objectContaining({
+              someValue: 'test',
+            }),
+          }),
+        );
+      });
+    });
+  });
+
+  describe('v0.8 resolveActionContextPathRefs with empty resolvedContext (Card.tsx line 418)', () => {
+    it('should return original componentContext when v0.8 context has no path objects', async () => {
+      // 测试 v0.8 格式下 resolvedContext 为空时返回原始 componentContext
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="click-v08-empty"
+          onClick={() =>
+            componentOnAction?.('click', {
+              someValue: 'test',
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      ClickableComponent: {
+                        action: {
+                          // v0.8 格式: context 是数组，但没有 path 对象
+                          context: [
+                            {
+                              key: 'literalKey',
+                              value: 'literal-value', // 非 path 对象
+                            },
+                          ],
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('click-v08-empty'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+          }),
+        );
+      });
+    });
+  });
+
+  describe('NodeRenderer commandVersion default v0.8 branch (Card.tsx line 76)', () => {
+    it('should use v0.8 as default commandVersion in NodeRenderer', async () => {
+      // 测试覆盖 Card.tsx 行 76: commandVersion = 'v0.8' 默认参数分支
+      // 当 commandVersion 未传给 NodeRenderer 时，默认使用 v0.8
+      // 这通过 renderNode 函数调用 NodeRenderer 时不传 commandVersion 来触发
+      const TestComponent: React.FC<{ text?: string }> = ({ text }) => (
+        <div data-testid="test">{text || 'default'}</div>
+      );
+
+      // 使用 v0.8 命令（不带 version 字段），NodeRenderer 会使用默认 commandVersion
+      render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      TestComponent: { text: 'v0.8-default' },
+                    },
+                    // 有子节点，会触发 renderNode 调用，renderNode 会传 commandVersion
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('test').textContent).toBe('v0.8-default');
+      });
+    });
+  });
+
+  describe('validation errors in development mode (Card.tsx line 84)', () => {
+    it('should warn for each validation error in development mode', async () => {
+      // 测试覆盖 Card.tsx 行 84-87: validation.errors.length > 0 且 dev 模式时 forEach 警告
+      const originalEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'development' as any;
+
+      // 注册一个有严格 schema 的 catalog
+      registerCatalog({
+        $id: 'validation-catalog',
+        components: {
+          StrictComponent: {
+            type: 'object',
+            required: ['requiredProp'],
+            properties: {
+              requiredProp: { type: 'string' },
+            },
+          },
+        },
+      });
+
+      const StrictComponent: React.FC<{ requiredProp?: string }> = ({ requiredProp }) => (
+        <div data-testid="strict">{requiredProp || 'missing'}</div>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'validation-catalog',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'StrictComponent',
+                    // 故意不传 requiredProp，触发 validation error
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ StrictComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('strict')).toBeInTheDocument();
+      });
+
+      process.env.NODE_ENV = originalEnv;
+    });
+  });
+
+  describe('catalog component not registered non-dev mode (Card.tsx line 97-105)', () => {
+    it('should return null without error in non-dev mode when component not in catalog', async () => {
+      // 测试覆盖 Card.tsx 行 97-105: catalog 存在且组件不在 catalog 中，非 dev 模式
+      const originalEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'production' as any;
+
+      registerCatalog({
+        $id: 'prod-catalog',
+        components: {
+          OtherComponent: { type: 'object' },
+        },
+      });
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'prod-catalog',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'UnknownComponent', // 不在 catalog 中
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{}}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      // 非 dev 模式下不应该有 console.error
+      await waitFor(() => {
+        expect(console.error).not.toHaveBeenCalled();
+      });
+
+      process.env.NODE_ENV = originalEnv;
+    });
+
+    it('should return null without warning in non-dev mode when component in catalog but not registered', async () => {
+      // 测试覆盖 Card.tsx 行 105-110: 组件在 catalog 中但未注册，非 dev 模式
+      const originalEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'production' as any;
+
+      registerCatalog({
+        $id: 'prod-catalog-2',
+        components: {
+          KnownComponent: { type: 'object' },
+        },
+      });
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              createSurface: {
+                surfaceId: 'card1',
+                catalogId: 'prod-catalog-2',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'KnownComponent', // 在 catalog 中但未注册
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{}} // 没有注册 KnownComponent
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      // 非 dev 模式下不应该有 console.warn
+      await waitFor(() => {
+        expect(console.warn).not.toHaveBeenCalled();
+      });
+
+      process.env.NODE_ENV = originalEnv;
+    });
+  });
+
+  describe('surfaceCatalogMap undefined branch (Card.tsx line 164 false branch)', () => {
+    it('should handle Card without Box wrapper (surfaceCatalogMap is undefined)', async () => {
+      // 测试覆盖 Card.tsx 行 164: surfaceCatalogMap 为 undefined 时返回 undefined
+      // BoxContext 的默认值中 surfaceCatalogMap 是 undefined
+      // 直接使用 BoxContext.Provider 并不传 surfaceCatalogMap
+      const BoxContext = require('../Context').default;
+      const TestComponent: React.FC = () => <div data-testid="test">Test</div>;
+
+      render(
+        <BoxContext.Provider
+          value={{
+            components: { TestComponent },
+            commandQueue: [
+              {
+                version: 'v0.9',
+                updateComponents: {
+                  surfaceId: 'card1',
+                  components: [{ id: 'root', component: 'TestComponent' }],
+                },
+              },
+            ],
+            // 故意不传 surfaceCatalogMap（undefined）
+            surfaceCatalogMap: undefined,
+            catalogMap: undefined,
+          }}
+        >
+          <Card id="card1" />
+        </BoxContext.Provider>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('test')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('v0.8 surfaceUpdate rootNodeFromCache null branch (Card.tsx line 270 false branch)', () => {
+    it('should not update rootNode when rootNodeFromCache is null after surfaceUpdate', async () => {
+      // 测试覆盖 Card.tsx 行 270: rootNodeFromCache 为 null 时不更新 rootNode
+      // 场景：hasRenderedRef 为 true，但 surfaceUpdate 传了空组件列表，getById('root') 返回 null
+      const TestComponent: React.FC<{ text?: string }> = ({ text }) => (
+        <div data-testid="test">{text || 'default'}</div>
+      );
+
+      // 先渲染一次（设置 hasRenderedRef.current = true）
+      const { rerender } = render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: { TestComponent: { text: 'initial' } },
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('test').textContent).toBe('initial');
+      });
+
+      // 发送 surfaceUpdate 但传空组件列表
+      // hasRenderedRef.current 为 true，但 getById('root') 会返回 null（因为 transform([]) 不更新缓存）
+      rerender(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [], // 空组件列表，transform 不会更新 root 缓存
+              },
+            },
+          ]}
+          components={{ TestComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      // rootNode 应该保持不变（因为 rootNodeFromCache 为 null，不更新）
+      await waitFor(() => {
+        expect(screen.getByTestId('test').textContent).toBe('initial');
+      });
+    });
+  });
+
+  describe('NodeRenderer without commandVersion prop (Card.tsx line 76 default branch)', () => {
+    it('should use v0.8 default when commandVersion not passed to NodeRenderer via renderNode', async () => {
+      // 测试覆盖 Card.tsx 行 76: commandVersion 默认值 'v0.8'
+      // renderNode 函数调用 NodeRenderer 时会传 commandVersion，但当 commandVersion 为 undefined 时触发默认值
+      // 通过 v0.8 模式（不带 version 字段）来触发，此时 commandVersion 为 'v0.8'
+      const ParentComponent: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
+        <div data-testid="parent">{children}</div>
+      );
+      const ChildComponent: React.FC<{ text?: string }> = ({ text }) => (
+        <div data-testid="child">{text || 'child-default'}</div>
+      );
+
+      // v0.8 模式，有子节点，会触发 renderNode 调用（传 commandVersion）
+      render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      ParentComponent: {
+                        // v0.8 格式：children 在 component config 中定义
+                        children: ['child1'],
+                      },
+                    },
+                  },
+                  {
+                    id: 'child1',
+                    component: {
+                      ChildComponent: { text: { literalString: 'child-text' } },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ ParentComponent, ChildComponent }}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByTestId('parent')).toBeInTheDocument();
+        expect(screen.getByTestId('child').textContent).toBe('child-text');
+      });
+    });
+  });
+
+  describe('resolveActionContextPathRefs with empty componentContext (Submit button scenario)', () => {
+    it('should resolve path refs from actionConfig even when componentContext is empty (v0.9)', async () => {
+      // 测试修复后的核心场景：Submit 按钮触发 action 时传入空 context {}
+      // 但 actionConfig.event.context 中定义了 path 引用，应该从 dataModel 中读取值
+      const onAction = jest.fn();
+
+      const SubmitButton: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="submit-btn"
+          onClick={() =>
+            // Submit 按钮触发 action 时传入空 context
+            componentOnAction?.('submit', {})
+          }
+        >
+          Submit
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/form/username',
+                value: 'alice',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/form/email',
+                value: 'alice@example.com',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'SubmitButton',
+                    action: {
+                      event: {
+                        name: 'submit',
+                        // actionConfig 中定义了 path 引用，即使组件传入空 context 也应被解析
+                        context: {
+                          username: { path: '/form/username', label: '用户名' },
+                          email: { path: '/form/email' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ SubmitButton }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('submit-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'submit',
+            surfaceId: 'card1',
+            context: expect.objectContaining({
+              // path 引用应从 dataModel 中解析，即使 componentContext 为空
+              username: expect.objectContaining({ value: 'alice', label: '用户名' }),
+              email: expect.objectContaining({ value: 'alice@example.com' }),
+            }),
+          }),
+        );
+      });
+    });
+
+    it('should resolve path refs from actionConfig even when componentContext is empty (v0.8)', async () => {
+      // 测试 v0.8 格式下 Submit 按钮（空 componentContext）场景
+      const onAction = jest.fn();
+
+      const SubmitButton: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="submit-btn-v08"
+          onClick={() =>
+            // Submit 按钮触发 action 时传入空 context
+            componentOnAction?.('submit', {})
+          }
+        >
+          Submit
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              surfaceUpdate: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: {
+                      SubmitButton: {
+                        action: {
+                          // v0.8 格式: context 是数组
+                          context: [{ key: 'formData', value: { path: '/form/data' } }],
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            {
+              beginRendering: {
+                surfaceId: 'card1',
+                root: 'root',
+              },
+            },
+          ]}
+          components={{ SubmitButton }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('submit-btn-v08'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'submit',
+            surfaceId: 'card1',
+            // v0.8 格式下，即使 componentContext 为空，也应从 actionConfig 解析 path 引用
+            context: expect.objectContaining({
+              formData: expect.objectContaining({ value: undefined }),
+            }),
+          }),
+        );
+      });
+    });
+
+    it('should merge componentContext over actionConfig resolved values (componentContext takes priority)', async () => {
+      // 测试合并优先级：componentContext 中的值应覆盖 actionConfig 解析出的值
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: any) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="priority-btn"
+          onClick={() =>
+            // 组件传入的 context 中 username 是实际值（非 path 对象），应优先于 actionConfig 解析值
+            componentOnAction?.('click', {
+              username: 'runtime-value',
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateDataModel: {
+                surfaceId: 'card1',
+                path: '/form/username',
+                value: 'config-value',
+              },
+            },
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    action: {
+                      event: {
+                        name: 'click',
+                        context: {
+                          username: { path: '/form/username' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('priority-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            context: expect.objectContaining({
+              // componentContext 中的 runtime-value 应覆盖 actionConfig 解析出的 config-value
+              username: 'runtime-value',
+            }),
+          }),
+        );
+      });
+    });
+  });
+});
