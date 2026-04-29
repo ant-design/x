@@ -148,7 +148,10 @@ When the user clicks the button, `onAction` receives:
 ```tsx
 const handleAction = (payload: ActionPayload) => {
   if (payload.name === 'submit_form') {
-    const { email, name } = payload.context;
+    // Each key in context corresponds to a path binding in the config,
+    // resolved to { value, ...rest } format
+    const email = payload.context.email?.value;
+    const name = payload.context.name?.value;
     // 1. Call your agent API
     // 2. Push new commands in response
     setCmdQueue(prev => [
@@ -218,15 +221,17 @@ const formCommands: XAgentCommand_v0_9[] = [
 ];
 
 // 2. Handle submission
+// Each key in context is resolved to { value, ...rest } format
 const handleAction = async (payload: ActionPayload) => {
   if (payload.name === 'submit') {
+    const email = payload.context.email?.value;
     // Show loading
     setCmdQueue((prev) => [
       ...prev,
       { version: 'v0.9', updateDataModel: { surfaceId: 'form', path: '/ui/loading', value: true } },
     ]);
     // Process with agent, then show result
-    const result = await callAgent(payload.context);
+    const result = await callAgent({ email });
     setCmdQueue((prev) => [
       ...prev,
       {

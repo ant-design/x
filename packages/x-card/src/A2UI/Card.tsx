@@ -397,9 +397,10 @@ const Card: React.FC<CardProps> = ({ id }) => {
       for (const [key, val] of Object.entries(v09Context)) {
         if (isPathObject(val)) {
           // 从 dataModel 读取实际值，保留其他属性（如 label），将 path 替换为 value
+          // 注意：value: actualValue 必须放在 ...rest 之后，防止 rest 中残留的 value 字段覆盖解析结果
           const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
           const { path, ...rest } = val as { path: string; [key: string]: any };
-          resolvedFromConfig[key] = { value: actualValue, ...rest };
+          resolvedFromConfig[key] = { ...rest, value: actualValue };
         } else {
           resolvedFromConfig[key] = val;
         }
