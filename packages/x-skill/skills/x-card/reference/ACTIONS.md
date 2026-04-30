@@ -148,8 +148,8 @@ When the user clicks the button, `onAction` receives:
 ```tsx
 const handleAction = (payload: ActionPayload) => {
   if (payload.name === 'submit_form') {
-    // Each key in context corresponds to a path binding in the config,
-    // resolved to { value, ...rest } format
+    // Keys using { path } bindings in the config are resolved to { value, ...rest } format.
+    // Literal values from the config and runtime values from the component are preserved as-is.
     const email = payload.context.email?.value;
     const name = payload.context.name?.value;
     // 1. Call your agent API
@@ -221,7 +221,8 @@ const formCommands: XAgentCommand_v0_9[] = [
 ];
 
 // 2. Handle submission
-// Each key in context is resolved to { value, ...rest } format
+// Keys using { path } bindings in the config are resolved to { value, ...rest } format.
+// Literal values from the config and runtime values from the component are preserved as-is.
 const handleAction = async (payload: ActionPayload) => {
   if (payload.name === 'submit') {
     const email = payload.context.email?.value;

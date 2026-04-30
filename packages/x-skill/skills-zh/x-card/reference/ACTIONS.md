@@ -148,7 +148,8 @@ v0.8 使用数组格式定义路径绑定：
 ```tsx
 const handleAction = (payload: ActionPayload) => {
   if (payload.name === 'submit_form') {
-    // context 中每个 key 对应配置里的 path 绑定，已解析为 { value, ...rest } 格式
+    // 配置中使用 { path } 绑定的 key 会被解析为 { value, ...rest } 格式；
+    // 配置侧字面量和组件运行时传入的值保持原样。
     const email = payload.context.email?.value;
     const name = payload.context.name?.value;
     // 1. 调用 Agent API
@@ -212,7 +213,8 @@ const formCommands: XAgentCommand_v0_9[] = [
 ];
 
 // 2. 处理提交
-// context 中每个 key 对应配置里的 path 绑定，已解析为 { value, ...rest } 格式
+// 配置中使用 { path } 绑定的 key 会被解析为 { value, ...rest } 格式；
+// 配置侧字面量和组件运行时传入的值保持原样。
 const handleAction = async (payload: ActionPayload) => {
   if (payload.name === 'submit') {
     const email = payload.context.email?.value;
