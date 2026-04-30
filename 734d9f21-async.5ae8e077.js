@@ -1,0 +1,1 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["734d9f21"],{"734d9f21":function(e,n,l){"use strict";l.d(n,"__esModule",{value:!0}),l.d(n,"texts",{enumerable:!0,get:function(){return s;}}),l("c668d290");let s=[];}}]);
