@@ -57,7 +57,7 @@
     "dompurify": "^3.2.6",
     "html-react-parser": "^5.2.13",
     "katex": "^0.16.22",
-    "marked": "^15.0.12"
+    "marked": "^18.0.2"
   },
   "devDependencies": {
     "@playwright/experimental-ct-react": "^1.56.1",
