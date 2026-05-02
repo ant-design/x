@@ -86,7 +86,7 @@ type PresetIcons =
 | extension | 扩展内容     | React.ReactNode                               | -         | -    |
 | overflow  | 超出展示方式 | 'scrollX' \| 'scrollY' \| 'wrap'              | 'wrap'    | -    |
 
-## 语义化 DOM
+## Semantic DOM
 
 ### FileCard
 
