@@ -134,5 +134,22 @@ export default function useSpeech(
     }
   });
 
+  // Cleanup SpeechRecognition on component unmount
+  React.useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch (e) {
+          // Recognition might not be started
+        }
+        recognitionRef.current.onstart = null;
+        recognitionRef.current.onend = null;
+        recognitionRef.current.onresult = null;
+        recognitionRef.current = null;
+      }
+    };
+  }, []);
+
   return [mergedAllowSpeech, triggerSpeech, recording] as const;
 }
