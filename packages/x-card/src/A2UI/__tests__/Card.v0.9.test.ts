@@ -115,6 +115,99 @@ describe('resolvePropsV09', () => {
     // 字面值保持不变
     expect(result.action.event.context.timestamp).toBe(12345);
   });
+
+  it('should resolve non-event fields in action prop (line 53 branch)', () => {
+    // 测试覆盖 Card.v0.9.ts 行 53: resolveActionPropV09 中非 event 字段走 resolveValueV09
+    // action 中除了 event 之外的字段（如 name、type 等）应该正常解析路径引用
+    const props = {
+      action: {
+        // 非 event 字段，包含路径引用
+        name: { path: '/action/name' },
+        type: 'submit',
+        // event 字段，context 中的 path 应该被保留
+        event: {
+          context: {
+            userId: { path: '/user/id' },
+          },
+        },
+      },
+    };
+    const dataModel = {
+      action: { name: 'resolved-action-name' },
+      user: { id: 'user-123' },
+    };
+    const result = resolvePropsV09(props, dataModel);
+    // 非 event 字段中的 path 应该被解析
+    expect(result.action.name).toBe('resolved-action-name');
+    // 字面值保持不变
+    expect(result.action.type).toBe('submit');
+    // event.context 中的 path 应该被保留
+    expect(result.action.event.context.userId).toEqual({ path: '/user/id' });
+  });
+
+  it('should resolve non-event fields with nested path in action (line 53 branch)', () => {
+    // 进一步测试 resolveActionPropV09 中非 event 字段的嵌套路径解析
+    const props = {
+      action: {
+        // 嵌套对象中包含路径引用
+        metadata: {
+          label: { path: '/ui/label' },
+          icon: 'star',
+        },
+        event: {
+          name: 'click',
+          context: {},
+        },
+      },
+    };
+    const dataModel = { ui: { label: 'Click Me' } };
+    const result = resolvePropsV09(props, dataModel);
+    // 非 event 字段中的嵌套路径应该被解析
+    expect(result.action.metadata.label).toBe('Click Me');
+    expect(result.action.metadata.icon).toBe('star');
+  });
+
+  it('should handle null/non-object action prop (line 46 branch)', () => {
+    // 测试覆盖 Card.v0.9.ts 行 46: resolveActionPropV09 中 action 为 null/非对象时直接返回
+    const props1 = { action: null };
+    const result1 = resolvePropsV09(props1, {});
+    expect(result1.action).toBeNull();
+
+    const props2 = { action: 'string-action' };
+    const result2 = resolvePropsV09(props2, {});
+    expect(result2.action).toBe('string-action');
+
+    const props3 = { action: 42 };
+    const result3 = resolvePropsV09(props3, {});
+    expect(result3.action).toBe(42);
+  });
+
+  it('should handle null/non-object event in action (line 65 branch)', () => {
+    // 测试覆盖 Card.v0.9.ts 行 65: resolveActionEventV09 中 event 为 null/非对象时直接返回
+    const props1 = {
+      action: {
+        event: null,
+      },
+    };
+    const result1 = resolvePropsV09(props1, {});
+    expect(result1.action.event).toBeNull();
+
+    const props2 = {
+      action: {
+        event: 'string-event',
+      },
+    };
+    const result2 = resolvePropsV09(props2, {});
+    expect(result2.action.event).toBe('string-event');
+
+    const props3 = {
+      action: {
+        event: undefined,
+      },
+    };
+    const result3 = resolvePropsV09(props3, {});
+    expect(result3.action.event).toBeUndefined();
+  });
 });
 
 describe('resolveActionContextV09', () => {

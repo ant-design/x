@@ -6,16 +6,26 @@ import type { Catalog } from './catalog';
 
 // v0.8 specific logic
 import { resolvePropsV08, extractDataUpdatesV08, applyDataModelUpdateV08 } from './Card.v0.8';
+import type { ActionConfigV08 } from './Card.v0.8';
 
 // v0.9 specific logic
 import { resolvePropsV09, extractDataUpdatesV09, applyDataModelUpdateV09 } from './Card.v0.9';
+import type { ActionConfigV09 } from './Card.v0.9';
 
 // Shared logic
-import { setValueByPath, validateComponentAgainstCatalog } from './utils';
+import {
+  setValueByPath,
+  validateComponentAgainstCatalog,
+  getValueByPath,
+  isPathObject,
+} from './utils';
 
 export interface CardProps {
   id: string;
 }
+
+/** actionConfig 联合类型，兼容 v0.8 和 v0.9 格式 */
+type ActionConfig = ActionConfigV08 | ActionConfigV09;
 
 /** Recursively render a single node, child nodes are found via getById */
 function renderNode(
@@ -23,7 +33,7 @@ function renderNode(
   transformer: ComponentTransformer,
   components: Record<string, React.ComponentType<any>>,
   dataModel: Record<string, any>,
-  onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void,
+  onAction?: (name: string, context: Record<string, any>, actionConfig?: ActionConfig) => void,
   onDataChange?: (path: string, value: any) => void,
   catalog?: Catalog,
   commandVersion?: 'v0.8' | 'v0.9',
@@ -51,7 +61,7 @@ interface NodeRendererProps {
   transformer: ComponentTransformer;
   components: Record<string, React.ComponentType<any>>;
   dataModel: Record<string, any>;
-  onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void;
+  onAction?: (name: string, context: Record<string, any>, actionConfig?: ActionConfig) => void;
   /** Callback when component writes back to dataModel via onChange, path is the binding path */
   onDataChange?: (path: string, value: any) => void;
   /** catalog for component validation */
@@ -324,7 +334,11 @@ const Card: React.FC<CardProps> = ({ id }) => {
    * Handler when action is triggered
    * Use different extractDataUpdates and resolveActionContext based on version
    */
-  const handleAction = (name: string, context: Record<string, any>, actionConfig?: any) => {
+  const handleAction = (
+    name: string,
+    context: Record<string, any>,
+    actionConfig?: ActionConfig,
+  ) => {
     // Use different extractDataUpdates based on version
     const dataUpdates =
       commandVersion === 'v0.9'
@@ -342,16 +356,80 @@ const Card: React.FC<CardProps> = ({ id }) => {
     }
 
     // Report event to upper layer
+    // 先解析 context 中的 path 引用为实际值
+    const resolvedContext = resolveActionContextPathRefs(actionConfig, context, newDataModel);
     onAction?.({
       name,
       surfaceId: id,
-      context: { ...context },
+      context: resolvedContext,
     });
   };
 
   /** Component onChange writes back to dataModel (two-way binding) */
   const handleDataChange = (path: string, value: any) => {
     setDataModel((prev) => setValueByPath(prev, path, value));
+  };
+
+  /**
+   * 解析 action context 中的 path 引用为实际值
+   * 支持 v0.8 和 v0.9 两种格式
+   *
+   * v0.9: action.event.context = { key: { path, label? } }
+   * v0.8: action.context = [{ key, value: { path } }]
+   *
+   * 遍历 actionConfig 中定义的 context 配置，将 path 引用解析为 dataModel 中的实际值，
+   * 再与 componentContext 合并（componentContext 优先级更高，可覆盖配置中的值）。
+   * 这样即使组件触发 action 时传入空 context（如 Submit 按钮），
+   * 配置中定义的 path 引用也能被正确解析。
+   */
+  const resolveActionContextPathRefs = (
+    actionConfig: any,
+    componentContext: Record<string, any>,
+    dataModel: Record<string, any>,
+  ): Record<string, any> => {
+    if (!actionConfig) return componentContext;
+
+    // v0.9 格式: action.event.context = { key: { path, label? } }
+    const v09Context = actionConfig?.event?.context;
+    if (v09Context && typeof v09Context === 'object' && !Array.isArray(v09Context)) {
+      // 遍历 actionConfig 中定义的 context 配置，解析 path 引用
+      const resolvedFromConfig: Record<string, any> = {};
+      for (const [key, val] of Object.entries(v09Context)) {
+        if (isPathObject(val)) {
+          // 从 dataModel 读取实际值，保留其他属性（如 label），将 path 替换为 value
+          // 注意：value: actualValue 必须放在 ...rest 之后，防止 rest 中残留的 value 字段覆盖解析结果
+          const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
+          const { path, ...rest } = val as { path: string; [key: string]: any };
+          resolvedFromConfig[key] = { ...rest, value: actualValue };
+        } else {
+          resolvedFromConfig[key] = val;
+        }
+      }
+      // 将配置解析结果与 componentContext 合并，componentContext 中的值优先（组件运行时传入的实际值）
+      return { ...resolvedFromConfig, ...componentContext };
+    }
+
+    // v0.8 格式: action.context = [{ key, value: { path } }]
+    const v08Context = actionConfig?.context;
+    if (Array.isArray(v08Context)) {
+      // 遍历 actionConfig 中定义的 context 配置，解析 path 引用
+      const resolvedFromConfig: Record<string, any> = {};
+      for (const item of v08Context) {
+        const { key, value: val } = item as { key: string; value: any };
+        if (key === undefined) continue;
+        if (isPathObject(val)) {
+          const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
+          resolvedFromConfig[key] = { value: actualValue };
+        } else {
+          resolvedFromConfig[key] = val;
+        }
+      }
+      // 将配置解析结果与 componentContext 合并，componentContext 中的值优先
+      return { ...resolvedFromConfig, ...componentContext };
+    }
+
+    // 如果没有匹配到任何格式，返回原始 context
+    return componentContext;
   };
 
   return (
