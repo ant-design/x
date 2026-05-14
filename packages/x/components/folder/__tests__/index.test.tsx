@@ -1397,7 +1397,6 @@ describe('Folder Component', () => {
     // This is hard to trigger in JSDOM because Dropdown's onOpenChange doesn't fire.
     // We need to right-click (sets isRightClickRef=true) AND have onSelect be called during that same event cycle.
     it('DirectoryTree: right-click sets isRightClickRef and intercepts onSelect', async () => {
-      const onSelect = jest.fn();
       const onSelectedFileChange = jest.fn();
       const menuItems = [{ key: 'copy', label: 'Copy' }];
       const { container } = render(
@@ -1421,7 +1420,7 @@ describe('Folder Component', () => {
     it('DirectoryTree: contextMenu open change to false resets right-click state', async () => {
       const onSelectedFileChange = jest.fn();
       const menuItems = [{ key: 'copy', label: 'Copy' }];
-      const { container, getByText } = render(
+      const { getByText } = render(
         <Folder
           treeData={mockTreeData}
           contextMenu={menuItems}
