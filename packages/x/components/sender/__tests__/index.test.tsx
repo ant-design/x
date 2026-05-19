@@ -177,6 +177,26 @@ describe('Sender Component', () => {
       });
       expect(onSubmit).toHaveBeenCalledWith('bamboo', [], undefined);
     });
+
+    it('should not submit when Enter is pressed within 100ms after composition end', () => {
+      const onSubmit = jest.fn();
+      const { container } = render(<Sender value="bamboo" onSubmit={onSubmit} />);
+      const textarea = container.querySelector('textarea')!;
+
+      act(() => {
+        fireEvent.compositionStart(textarea);
+      });
+
+      act(() => {
+        fireEvent.compositionEnd(textarea);
+      });
+
+      act(() => {
+        fireEvent.keyDown(textarea, { key: 'Enter', shiftKey: false });
+      });
+
+      expect(onSubmit).not.toHaveBeenCalled();
+    });
   });
 
   it('Sender.Header not can be focus', () => {

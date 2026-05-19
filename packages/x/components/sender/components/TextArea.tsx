@@ -101,6 +101,7 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   // ============================ Submit ============================
   const isCompositionRef = React.useRef(false);
+  const lastCompositionEndTick = React.useRef(0);
 
   const onInternalCompositionStart = () => {
     isCompositionRef.current = true;
@@ -108,13 +109,22 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   const onInternalCompositionEnd = () => {
     isCompositionRef.current = false;
+    lastCompositionEndTick.current = Date.now();
   };
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     const eventRes = onKeyDown?.(e);
     const { key, shiftKey, ctrlKey, altKey, metaKey } = e;
+    const COMPOSITION_END_DEBOUNCE_MS = 100;
+    const isJustFinishedComposition =
+      Date.now() - lastCompositionEndTick.current < COMPOSITION_END_DEBOUNCE_MS;
 
-    if (isCompositionRef.current || key !== 'Enter' || eventRes === false) {
+    if (
+      isCompositionRef.current ||
+      isJustFinishedComposition ||
+      key !== 'Enter' ||
+      eventRes === false
+    ) {
       return;
     }
 
