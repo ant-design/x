@@ -34,6 +34,121 @@ const escapeReplacements: Record<string, string> = {
 };
 const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
 
+const NATIVE_HTML_TAGS = new Set([
+  'a',
+  'abbr',
+  'address',
+  'area',
+  'article',
+  'aside',
+  'audio',
+  'b',
+  'base',
+  'bdi',
+  'bdo',
+  'blockquote',
+  'body',
+  'br',
+  'button',
+  'canvas',
+  'caption',
+  'cite',
+  'code',
+  'col',
+  'colgroup',
+  'data',
+  'datalist',
+  'dd',
+  'del',
+  'details',
+  'dfn',
+  'dialog',
+  'div',
+  'dl',
+  'dt',
+  'em',
+  'embed',
+  'fieldset',
+  'figcaption',
+  'figure',
+  'footer',
+  'form',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'head',
+  'header',
+  'hgroup',
+  'hr',
+  'html',
+  'i',
+  'iframe',
+  'img',
+  'input',
+  'ins',
+  'kbd',
+  'label',
+  'legend',
+  'li',
+  'link',
+  'main',
+  'map',
+  'mark',
+  'menu',
+  'meta',
+  'meter',
+  'nav',
+  'noscript',
+  'object',
+  'ol',
+  'optgroup',
+  'option',
+  'output',
+  'p',
+  'picture',
+  'pre',
+  'progress',
+  'q',
+  'rp',
+  'rt',
+  'ruby',
+  's',
+  'samp',
+  'script',
+  'search',
+  'section',
+  'select',
+  'slot',
+  'small',
+  'source',
+  'span',
+  'strong',
+  'style',
+  'sub',
+  'summary',
+  'sup',
+  'table',
+  'tbody',
+  'td',
+  'template',
+  'textarea',
+  'tfoot',
+  'th',
+  'thead',
+  'time',
+  'title',
+  'tr',
+  'track',
+  'u',
+  'ul',
+  'var',
+  'video',
+  'wbr',
+]);
+
 export function escapeHtml(html: string, encode?: boolean) {
   if (encode) {
     if (other.escapeTest.test(html)) {
@@ -53,6 +168,10 @@ const TAIL_MARKER = Symbol('tailMarker');
 
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
+
+type CustomTagPlaceholder = {
+  protected: string;
+};
 
 class Parser {
   options: ParserOptions;
@@ -173,7 +292,9 @@ class Parser {
     placeholders: Map<string, string>;
   } {
     const placeholders = new Map<string, string>();
-    const customTagNames = Object.keys(this.options.components || {});
+    const customTagNames = Object.keys(this.options.components || {}).filter(
+      (name) => !NATIVE_HTML_TAGS.has(name.toLowerCase()),
+    );
 
     if (customTagNames.length === 0) {
       return { protected: content, placeholders };
@@ -223,6 +344,12 @@ class Parser {
     const result: string[] = [];
     let lastIndex = 0;
 
+    const createPlaceholder = ({ protected: protectedContent }: CustomTagPlaceholder) => {
+      const ph = `\u0000XMDPLACEHOLDER${placeholderIndex++}\u0000`;
+      placeholders.set(ph, protectedContent);
+      return ph;
+    };
+
     for (const pos of positions) {
       if (pos.type === 'open') {
         // Self-closing tags don't have inner content
@@ -246,20 +373,29 @@ class Parser {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          if (innerContent.includes('\n\n')) {
-            const protectedInner = innerContent.replace(/\n\n/g, () => {
-              const ph = `__X_MD_PLACEHOLDER_${placeholderIndex++}__`;
-              placeholders.set(ph, '\n\n');
-              return ph;
-            });
-            result.push(openTag + protectedInner + closeTag);
-          } else {
-            result.push(openTag + innerContent + closeTag);
-          }
+          result.push(
+            createPlaceholder({
+              protected: openTag + innerContent + closeTag,
+            }),
+          );
 
           lastIndex = endPos;
         }
       }
+    }
+
+    if (stack.length > 0) {
+      const open = stack[0];
+      if (lastIndex < open.start) {
+        result.push(content.slice(lastIndex, open.start));
+      }
+      const unclosedContent = content.slice(open.start);
+      result.push(
+        createPlaceholder({
+          protected: unclosedContent,
+        }),
+      );
+      return { protected: result.join(''), placeholders };
     }
 
     if (lastIndex < content.length) {
@@ -273,10 +409,11 @@ class Parser {
     if (placeholders.size === 0) {
       return content;
     }
-    return content.replace(
-      /__X_MD_PLACEHOLDER_\d+__/g,
-      (match) => placeholders.get(match) ?? match,
-    );
+    let restored = content;
+    placeholders.forEach((value, placeholder) => {
+      restored = restored.split(placeholder).join(value);
+    });
+    return restored;
   }
 
   /**
@@ -337,14 +474,9 @@ class Parser {
     // Set tail injection flag
     this.injectTail = parseOptions?.injectTail ?? false;
 
-    // Protect custom tags if needed
-    if (this.options.protectCustomTagNewlines) {
-      const { protected: protectedContent, placeholders } = this.protectCustomTags(content);
-      const parsed = this.markdownInstance.parse(protectedContent) as string;
-      return this.restorePlaceholders(parsed, placeholders);
-    }
-
-    return this.markdownInstance.parse(content) as string;
+    const { protected: protectedContent, placeholders } = this.protectCustomTags(content);
+    const parsed = this.markdownInstance.parse(protectedContent) as string;
+    return this.restorePlaceholders(parsed, placeholders);
   }
 }
 

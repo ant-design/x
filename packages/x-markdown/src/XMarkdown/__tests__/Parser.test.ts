@@ -81,6 +81,34 @@ describe('Parser', () => {
   });
 
   describe('protectCustomTagNewlines', () => {
+    it('should keep markdown syntax inside custom tag children as plain text', () => {
+      const parser = new Parser({
+        components: { custom: 'div' },
+      });
+      const content = '<custom>{"sales":[{"name":"电子产品[202](红)","value":52000}]}</custom>';
+      const result = parser.parse(content);
+      expect(result).toContain('电子产品[202](红)');
+      expect(result).not.toContain('<a href=');
+    });
+
+    it('should keep markdown syntax inside unclosed custom tag children as plain text', () => {
+      const parser = new Parser({
+        components: { custom: 'div' },
+      });
+      const content = '<custom>{"sales":[{"name":"电子产品[202](红)","value":52000';
+      const result = parser.parse(content);
+      expect(result).toContain('电子产品[202](红)');
+      expect(result).not.toContain('<a href=');
+    });
+
+    it('should not protect native HTML tags configured as components', () => {
+      const parser = new Parser({
+        components: { p: 'p' },
+      });
+      const result = parser.parse('<p>[Google](https://google.com)</p>');
+      expect(result).toContain('<p>[Google](https://google.com)</p>');
+    });
+
     it('should protect newlines inside custom tags when protectCustomTagNewlines is true', () => {
       const parser = new Parser({
         protectCustomTagNewlines: true,
@@ -92,14 +120,15 @@ describe('Parser', () => {
       expect(result).not.toMatch(/<CustomComponent>First line<\/p>\s*<p>Second line/);
     });
 
-    it('should not protect newlines when protectCustomTagNewlines is false', () => {
+    it('should protect custom tag content when protectCustomTagNewlines is false', () => {
       const parser = new Parser({
         protectCustomTagNewlines: false,
         components: { CustomComponent: 'div' },
       });
       const content = '<CustomComponent>First line\n\nSecond line</CustomComponent>';
       const result = parser.parse(content);
-      expect(result).toContain('<p>');
+      expect(result).toContain('<CustomComponent>First line\n\nSecond line</CustomComponent>');
+      expect(result).not.toMatch(/<CustomComponent>First line<\/p>\s*<p>Second line/);
     });
 
     it('should work normally when protectCustomTagNewlines is true but no custom components', () => {

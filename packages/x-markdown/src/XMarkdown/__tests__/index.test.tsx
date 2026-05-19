@@ -176,6 +176,50 @@ describe('XMarkdown', () => {
     expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
   });
 
+  it('passes custom component children as plain text without parsing markdown links', () => {
+    let receivedChildren: React.ReactNode;
+    const markdown =
+      '<custom>{"sales":[{"name":"电子产品[202](红)","value":52000}],"majorGroupName":"华南师范大学[202](汕尾校区)"}</custom>';
+
+    const { container } = render(
+      <XMarkdown
+        content={markdown}
+        components={{
+          custom: (props) => {
+            receivedChildren = props.children;
+            return <span data-testid="custom">{props.children}</span>;
+          },
+        }}
+      />,
+    );
+
+    expect(receivedChildren).toBe(
+      '{"sales":[{"name":"电子产品[202](红)","value":52000}],"majorGroupName":"华南师范大学[202](汕尾校区)"}',
+    );
+    expect(container.querySelector('a')).not.toBeInTheDocument();
+  });
+
+  it('passes streaming custom component children as plain text before the tag is closed', () => {
+    let receivedChildren: React.ReactNode;
+    const markdown = '<custom>{"sales":[{"name":"电子产品[202](红)","value":52000';
+
+    const { container } = render(
+      <XMarkdown
+        content={markdown}
+        streaming={{ hasNextChunk: true }}
+        components={{
+          custom: (props) => {
+            receivedChildren = props.children;
+            return <span data-testid="custom">{props.children}</span>;
+          },
+        }}
+      />,
+    );
+
+    expect(receivedChildren).toBe('{"sales":[{"name":"电子产品[202](红)","value":52000');
+    expect(container.querySelector('a')).not.toBeInTheDocument();
+  });
+
   it('walkToken', () => {
     const walkTokens = (token: Token) => {
       if (token.type === 'heading') {
