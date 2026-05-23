@@ -20,7 +20,7 @@
     "lint": "npm run lint --workspaces",
     "tsc": "npm run tsc --workspaces",
     "test": "npm run test --workspaces",
-    "coverage": "npm run test --workspaces",
+    "coverage": "npm run coverage --workspaces",
     "test:dekko": "npm run test:dekko --workspaces",
     "test:package-diff": "npm run test:package-diff --workspaces"
   },
