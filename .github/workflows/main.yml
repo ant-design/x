@@ -13,7 +13,7 @@ jobs:
       - run: ut lint
       - run: ut tsc
       - run: ut compile
-      - run: ut coverage
+      - run: ut coverage --workspaces
       - run: ut test:dekko
       - uses: codecov/codecov-action@v6
         with:
