@@ -1,8 +1,5 @@
-import { enableFetchMocks } from 'jest-fetch-mock';
 import type { XRequestCallbacks, XRequestOptions } from '../index';
 import XRequest from '../index';
-
-enableFetchMocks();
 
 const baseURL = 'https://api.example.com/v1/chat';
 const callbacks: XRequestCallbacks<any> = {
@@ -21,17 +18,16 @@ const options: XRequestOptions = {
 
 describe('XRequest Class', () => {
   test('should throw error when abort', async () => {
-    // already mocked by jest-fetch-mock
-    (fetch as any).mockResponseOnce(() => {
-      return Promise.resolve({
-        body: '{}',
-        headers: {
-          'content-type': 'application/json; charset=utf-8',
-        },
+    const fetchMock = jest.fn((_url, init?: RequestInit) => {
+      return new Promise<Response>((_resolve, reject) => {
+        init?.signal?.addEventListener('abort', () => {
+          reject(new DOMException('The operation was aborted. ', 'AbortError'));
+        });
       });
     });
     const request = XRequest(baseURL, {
       ...options,
+      fetch: fetchMock,
     });
     request.abort();
     await request.asyncHandler;

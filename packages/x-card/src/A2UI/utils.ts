@@ -51,7 +51,7 @@ export function validateComponentAgainstCatalog(
   const errors: string[] = [];
 
   // If no catalog, pass by default
-  if (!catalog || !catalog.components) {
+  if (!catalog?.components) {
     return { valid: true, errors: [] };
   }
 

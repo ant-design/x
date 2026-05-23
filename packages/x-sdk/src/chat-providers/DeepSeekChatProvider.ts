@@ -36,7 +36,7 @@ export default class DeepSeekChatProvider<
     let role = 'assistant';
     try {
       let message: any;
-      if (responseHeaders.get('content-type')?.includes('text/event-stream')) {
+      if (responseHeaders?.get('content-type')?.includes('text/event-stream')) {
         if (chunk && chunk.data?.trim() !== '[DONE]') {
           message = JSON.parse(chunk.data);
         }
@@ -56,8 +56,8 @@ export default class DeepSeekChatProvider<
           }
         });
       }
-    } catch (error) {
-      console.error('transformMessage error', error);
+    } catch {
+      // Ignore malformed stream chunks and keep the current assistant message.
     }
     let content = '';
     let originMessageContent =

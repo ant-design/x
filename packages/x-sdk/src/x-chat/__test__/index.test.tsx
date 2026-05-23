@@ -11,7 +11,7 @@ interface ChatInput {
 }
 
 describe('useXChat', () => {
-  const requestNeverEnd = jest.fn(() => {});
+  const requestNeverEnd = jest.fn(() => new Promise<Response>(() => {}));
 
   beforeAll(() => {
     requestNeverEnd.mockClear();
@@ -107,10 +107,7 @@ describe('useXChat', () => {
       const provider = new DefaultChatProvider<SimpleType, any, any>({
         request: XRequest('http://localhost:8000/', {
           manual: true,
-          fetch: async () => {
-            await sleep(1000);
-            return Promise.resolve(new Response('{}'));
-          },
+          fetch: requestNeverEnd,
         }),
       });
       const { container } = render(<Demo provider={provider} requestPlaceholder="bamboo" />);
@@ -129,10 +126,7 @@ describe('useXChat', () => {
         request: XRequest('http://localhost:8000/', {
           manual: true,
           transformStream: transformStream,
-          fetch: async () => {
-            await sleep(1000);
-            return Promise.resolve(new Response('{}'));
-          },
+          fetch: requestNeverEnd,
         }),
       });
       const { container } = render(
@@ -218,6 +212,7 @@ describe('useXChat', () => {
     const provider = new DefaultChatProvider<SimpleType, any, any>({
       request: XRequest('http://localhost:8000/', {
         manual: true,
+        fetch: requestNeverEnd,
       }),
     });
     const { container } = render(

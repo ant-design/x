@@ -313,7 +313,7 @@ const ComponentChangelog: React.FC<Readonly<React.PropsWithChildren>> = (props) 
     });
   }, [list]);
 
-  if (!pathname.startsWith('/components/') || !list || !list.length) {
+  if (!pathname.startsWith('/components/') || !list?.length) {
     return null;
   }
 

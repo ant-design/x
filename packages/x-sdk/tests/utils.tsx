@@ -59,7 +59,7 @@ export function renderHook<T>(func: () => T): { result: React.RefObject<T | null
  */
 const pureRender = render;
 
-export { pureRender, customRender as render };
+export { customRender as render, pureRender };
 
 export const triggerResize = (target: Element) => {
   const originGetBoundingClientRect = target.getBoundingClientRect;
@@ -83,15 +83,16 @@ export const triggerResize = (target: Element) => {
 export async function waitFakeTimer(advanceTime = 1000, times = 20) {
   for (let i = 0; i < times; i += 1) {
     // eslint-disable-next-line no-await-in-loop
-    await act(async () => {
-      await Promise.resolve();
-
+    await Promise.resolve();
+    act(() => {
       if (advanceTime > 0) {
         jest.advanceTimersByTime(advanceTime);
       } else {
         jest.runAllTimers();
       }
     });
+    // eslint-disable-next-line no-await-in-loop
+    await Promise.resolve();
   }
 }
 

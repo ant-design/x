@@ -1058,7 +1058,7 @@ describe('DeepSeekChatProvider test', () => {
         status: 'loading',
         responseHeaders: undefined as any,
       });
-      expect(result).toEqual({ role: 'assistant', content: '' });
+      expect(result).toEqual({ role: 'assistant', content: 'test' });
     });
 
     it('should handle empty responseHeaders', () => {
@@ -1227,7 +1227,9 @@ describe('AbstractChatProvider test', () => {
   it('should throw error when manual is not true', () => {
     expect(() => {
       new DefaultChatProvider({
-        request: XRequest(baseURL, {}),
+        request: XRequest(baseURL, {
+          fetch: jest.fn(() => new Promise<Response>(() => {})),
+        }),
       });
     }).toThrow('request must be manual');
   });

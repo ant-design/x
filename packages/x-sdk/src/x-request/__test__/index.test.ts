@@ -98,7 +98,10 @@ describe('XRequest Class', () => {
     expect(callbacks.onSuccess).toHaveBeenCalledWith([options.params], headers);
     expect(callbacks.onError).not.toHaveBeenCalled();
     expect(callbacks.onUpdate).toHaveBeenCalledWith(options.params, headers);
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
     expect(request.run()).toBe(false);
+    expect(warnSpy).toHaveBeenCalledWith('The request is not manual, so it cannot be run!');
+    warnSpy.mockRestore();
   });
 
   test('should handle JSON response with success false and custom error fields', async () => {
@@ -423,6 +426,7 @@ describe('XRequest Class', () => {
     expect(callbacks.onError).toHaveBeenCalledWith(new Error(`Fetch failed`));
     // wait to retry
     await waitFakeTimer(500, 1);
+    await request.asyncHandler;
     expect(callbacks.onSuccess).toHaveBeenCalledWith([sseEvent], headers);
   });
 
