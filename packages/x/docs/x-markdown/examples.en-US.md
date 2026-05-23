@@ -37,6 +37,7 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 | openLinksInNewTab | Add `target="_blank"` to all links so they open in a new tab | `boolean` | `false` |
 | dompurifyConfig | DOMPurify config for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | protectCustomTagNewlines | Whether to preserve newlines inside custom tags | `boolean` | `false` |
+| rawCustomComponents | Treat children of HTML tags matched by `components` as raw plain text, without parsing Markdown or HTML inside | `boolean` | `false` |
 | escapeRawHtml | Escape raw HTML in Markdown as plain text (do not parse as real HTML), to prevent XSS while keeping content visible | `boolean` | `false` |
 | debug | Enable debug mode (performance overlay) | `boolean` | `false` |
 

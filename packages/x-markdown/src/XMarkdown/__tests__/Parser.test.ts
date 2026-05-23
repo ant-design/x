@@ -109,6 +109,44 @@ describe('Parser', () => {
       expect(result).toContain('<p>[Google](https://google.com)</p>');
     });
 
+    it('should keep CommonMark behavior for native HTML tag components by default', () => {
+      const parser = new Parser({
+        components: { span: 'span' },
+      });
+      const result = parser.parse('<span>*hello*</span>');
+      expect(result).toContain('<span><em>hello</em></span>');
+    });
+
+    it('should keep native HTML tag component children as plain text when enabled', () => {
+      const parser = new Parser({
+        components: { span: 'span' },
+        rawCustomComponents: true,
+      });
+      const result = parser.parse('<span>*hello* <i>world</i></span>');
+      expect(result).toContain('<span>*hello* &lt;i&gt;world&lt;&#x2F;i&gt;</span>');
+      expect(result).not.toContain('<em>hello</em>');
+    });
+
+    it('should only keep configured component tag children as plain text when enabled', () => {
+      const parser = new Parser({
+        components: { span: 'span' },
+        rawCustomComponents: true,
+      });
+      const result = parser.parse('<span>*hello*</span> <em>*world*</em>');
+      expect(result).toContain('<span>*hello*</span>');
+      expect(result).toContain('<em><em>world</em></em>');
+    });
+
+    it('should keep unclosed native HTML tag component children as plain text when enabled', () => {
+      const parser = new Parser({
+        components: { span: 'span' },
+        rawCustomComponents: true,
+      });
+      const result = parser.parse('<span>*hello* <i>world</i>');
+      expect(result).toContain('<span>*hello* &lt;i&gt;world&lt;&#x2F;i&gt;');
+      expect(result).not.toContain('<em>hello</em>');
+    });
+
     it('should protect newlines inside custom tags when protectCustomTagNewlines is true', () => {
       const parser = new Parser({
         protectCustomTagNewlines: true,

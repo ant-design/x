@@ -38,6 +38,8 @@ import { Mermaid, Think, XMarkdown } from '@ant-design/x';
 3. 依赖完整语法的数据解析，尽量在 `streamStatus === 'done'` 后执行。
 4. 自定义标签命名尽量语义化，减少 Markdown 与 HTML 混写歧义。
 
+默认情况下，原生 HTML 标签仍遵循 CommonMark 规则，行内 HTML 内部的 Markdown 可能继续被解析。如果希望 `components` 注册的标签内部内容按原始纯文本传给组件，可以开启 `rawCustomComponents`。
+
 ## FAQ: 自定义标签闭合异常
 
 如果块级自定义标签内部出现不符合预期的空行，Markdown 解析器可能提前结束 HTML 块，后续内容会被当作普通段落处理。建议：

@@ -7,6 +7,7 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
+  rawCustomComponents?: boolean;
   escapeRawHtml?: boolean;
 };
 
@@ -292,9 +293,9 @@ class Parser {
     placeholders: Map<string, string>;
   } {
     const placeholders = new Map<string, string>();
-    const customTagNames = Object.keys(this.options.components || {}).filter(
-      (name) => !NATIVE_HTML_TAGS.has(name.toLowerCase()),
-    );
+    const customTagNames = Object.keys(this.options.components || {}).filter((name) => {
+      return this.options.rawCustomComponents || !NATIVE_HTML_TAGS.has(name.toLowerCase());
+    });
 
     if (customTagNames.length === 0) {
       return { protected: content, placeholders };
@@ -375,7 +376,10 @@ class Parser {
 
           result.push(
             createPlaceholder({
-              protected: openTag + innerContent + closeTag,
+              protected:
+                openTag +
+                (this.options.rawCustomComponents ? escapeHtml(innerContent, true) : innerContent) +
+                closeTag,
             }),
           );
 
@@ -392,7 +396,9 @@ class Parser {
       const unclosedContent = content.slice(open.start);
       result.push(
         createPlaceholder({
-          protected: unclosedContent,
+          protected: this.options.rawCustomComponents
+            ? this.escapeUnclosedTagContent(unclosedContent, open.openTag)
+            : unclosedContent,
         }),
       );
       return { protected: result.join(''), placeholders };
@@ -403,6 +409,10 @@ class Parser {
     }
 
     return { protected: result.join(''), placeholders };
+  }
+
+  private escapeUnclosedTagContent(content: string, openTag: string): string {
+    return openTag + escapeHtml(content.slice(openTag.length), true);
   }
 
   private restorePlaceholders(content: string, placeholders: Map<string, string>): string {

@@ -220,6 +220,31 @@ describe('XMarkdown', () => {
     expect(container.querySelector('a')).not.toBeInTheDocument();
   });
 
+  it('keeps native component children as plain text when rawCustomComponents is true', () => {
+    let receivedChildren: React.ReactNode;
+    const markdown = '<span>*hello* <i>world</i></span>';
+
+    const { container } = render(
+      <XMarkdown
+        content={markdown}
+        rawCustomComponents
+        components={{
+          span: (props) => {
+            receivedChildren = props.children;
+            return <span data-testid="plain">{props.children}</span>;
+          },
+        }}
+      />,
+    );
+
+    expect(receivedChildren).toBe('*hello* <i>world</i>');
+    expect(container.querySelector('em')).not.toBeInTheDocument();
+    expect(container.querySelector('i')).not.toBeInTheDocument();
+    expect(container.querySelector('[data-testid="plain"]')).toHaveTextContent(
+      '*hello* <i>world</i>',
+    );
+  });
+
   it('walkToken', () => {
     const walkTokens = (token: Token) => {
       if (token.type === 'heading') {
