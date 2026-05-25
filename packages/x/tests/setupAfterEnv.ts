@@ -32,8 +32,25 @@ if (process.env.LIB_DIR === 'dist') {
   });
 }
 
+const dynamicCssVarClsRegExp = /^css-var-_[A-Za-z0-9_]+_$/;
+
 function cleanup(node: HTMLElement) {
   const childList = Array.from(node.childNodes);
+
+  if (node.nodeType === 1 && typeof node.getAttribute === 'function') {
+    const className = node.getAttribute('class');
+
+    if (className) {
+      node.setAttribute(
+        'class',
+        className
+          .split(' ')
+          .map((token) => (dynamicCssVarClsRegExp.test(token) ? 'css-var-root' : token))
+          .join(' '),
+      );
+    }
+  }
+
   node.innerHTML = '';
   childList.forEach((child) => {
     if (!(child instanceof Text)) {

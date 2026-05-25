@@ -2,7 +2,7 @@
 
 exports[`renders components/sources/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-sources css-var-_R_0_"
+  class="ant-sources css-var-root"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -95,7 +95,7 @@ exports[`renders components/sources/demo/basic.tsx correctly 1`] = `
 exports[`renders components/sources/demo/expand.tsx correctly 1`] = `
 Array [
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     style="margin-bottom:8px"
     type="button"
   >
@@ -105,7 +105,7 @@ Array [
   </button>,
   <br />,
   <div
-    class="ant-sources css-var-_R_0_"
+    class="ant-sources css-var-root"
   >
     <div
       class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -198,7 +198,7 @@ Array [
 
 exports[`renders components/sources/demo/icon.tsx correctly 1`] = `
 <div
-  class="ant-sources css-var-_R_0_"
+  class="ant-sources css-var-root"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-end"
@@ -365,7 +365,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
     Use the inline mode in the text
   </span>
   <div
-    class="ant-sources css-var-_R_0_ ant-sources-inline"
+    class="ant-sources css-var-root ant-sources-inline"
   >
     <div
       class="ant-sources ant-sources-title-wrapper"
@@ -381,7 +381,7 @@ exports[`renders components/sources/demo/inline.tsx correctly 1`] = `
     Use the inline mode in the text
   </span>
   <div
-    class="ant-sources css-var-_R_0_ ant-sources-inline"
+    class="ant-sources css-var-root ant-sources-inline"
   >
     <div
       class="ant-sources ant-sources-title-wrapper"

@@ -2,10 +2,10 @@
 
 exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-root ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -29,13 +29,13 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
       class="ant-sender-footer"
     >
       <div
-        class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-justify-space-between"
+        class="ant-flex css-var-root ant-flex-align-center ant-flex-justify-space-between"
       >
         <div
-          class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+          class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size:16px"
             type="button"
           >
@@ -64,10 +64,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </span>
           </button>
           <div
-            class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+            class="ant-sender ant-sender-switch css-var-root ant-sender-switch-checked"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-root ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -105,10 +105,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </button>
           </div>
           <div
-            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -142,10 +142,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </button>
           </div>
           <div
-            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -180,10 +180,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
           </div>
         </div>
         <div
-          class="ant-flex css-var-_R_0_ ant-flex-align-center"
+          class="ant-flex css-var-root ant-flex-align-center"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size:16px"
             type="button"
           >
@@ -212,14 +212,14 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </span>
           </button>
           <div
-            class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+            class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
             role="separator"
           />
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -253,7 +253,7 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -277,13 +277,13 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
       class="ant-sender-footer"
     >
       <div
-        class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-justify-space-between"
+        class="ant-flex css-var-root ant-flex-align-center ant-flex-justify-space-between"
       >
         <div
-          class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+          class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size:16px"
             type="button"
           >
@@ -312,10 +312,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </span>
           </button>
           <div
-            class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+            class="ant-sender ant-sender-switch css-var-root ant-sender-switch-checked"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-root ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -355,10 +355,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </button>
           </div>
           <div
-            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -392,10 +392,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </button>
           </div>
           <div
-            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+            class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+              class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
               type="button"
             >
               <span
@@ -430,10 +430,10 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
           </div>
         </div>
         <div
-          class="ant-flex css-var-_R_0_ ant-flex-align-center"
+          class="ant-flex css-var-root ant-flex-align-center"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size:16px"
             type="button"
           >
@@ -462,14 +462,14 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
             </span>
           </button>
           <div
-            class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+            class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
             role="separator"
           />
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -507,19 +507,19 @@ exports[`renders components/sender/demo/agent.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-root ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
         >
           Hello? this is X!
         </textarea>
@@ -527,10 +527,10 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
               type="button"
             >
               <span
@@ -562,13 +562,13 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
           readonly=""
         >
           Force as loading
@@ -577,10 +577,10 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-loading-button"
               type="button"
             >
               <span
@@ -639,13 +639,13 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main ant-sender-disabled"
+      class="ant-sender css-var-root ant-sender-main ant-sender-disabled"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input ant-input-disabled"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input ant-input-disabled"
           disabled=""
         >
           Set to disabled
@@ -654,10 +654,10 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -692,7 +692,7 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
               </span>
             </button>
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -730,11 +730,11 @@ exports[`renders components/sender/demo/basic.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/disable-ctrl.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-align-end"
+  class="ant-flex css-var-root ant-flex-align-end"
   style="height:350px"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -743,10 +743,10 @@ exports[`renders components/sender/demo/disable-ctrl.tsx correctly 1`] = `
         class="ant-sender-prefix"
       >
         <span
-          class="ant-badge css-var-_R_0_"
+          class="ant-badge css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             type="button"
           >
             <span
@@ -777,14 +777,14 @@ exports[`renders components/sender/demo/disable-ctrl.tsx correctly 1`] = `
         </span>
       </div>
       <textarea
-        class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
         placeholder="Enter to send message"
       />
       <div
         class="ant-sender-actions-list"
       >
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
           disabled=""
           type="button"
         >
@@ -820,11 +820,11 @@ exports[`renders components/sender/demo/disable-ctrl.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/disable-ctrl-slot.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-align-end"
+  class="ant-flex css-var-root ant-flex-align-end"
   style="height:350px"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -833,10 +833,10 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx correctly 1`] = `
         class="ant-sender-prefix"
       >
         <span
-          class="ant-badge css-var-_R_0_"
+          class="ant-badge css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             type="button"
           >
             <span
@@ -884,7 +884,7 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx correctly 1`] = `
         class="ant-sender-actions-list"
       >
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
           disabled=""
           type="button"
         >
@@ -920,13 +920,13 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
 <div
-  class="ant-sender css-var-_R_0_ ant-sender-main"
+  class="ant-sender css-var-root ant-sender-main"
 >
   <div
     class="ant-sender-content"
   >
     <textarea
-      class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+      class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
       placeholder="Press Enter to send message"
     />
   </div>
@@ -934,13 +934,13 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
     class="ant-sender-footer"
   >
     <div
-      class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-justify-space-between"
+      class="ant-flex css-var-root ant-flex-align-center ant-flex-justify-space-between"
     >
       <div
-        class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+        class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
       >
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+          class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
           style="font-size:18px;color:rgba(0,0,0,0.88)"
           type="button"
         >
@@ -969,13 +969,13 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
           </span>
         </button>
         <div
-          class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         Deep Thinking
         <button
           aria-checked="false"
-          class="ant-switch ant-switch-small css-var-_R_0_"
+          class="ant-switch ant-switch-small css-var-root"
           role="switch"
           type="button"
         >
@@ -994,11 +994,11 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
           </span>
         </button>
         <div
-          class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+          class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
           type="button"
         >
           <span
@@ -1030,10 +1030,10 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
         </button>
       </div>
       <div
-        class="ant-flex css-var-_R_0_ ant-flex-align-center"
+        class="ant-flex css-var-root ant-flex-align-center"
       >
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+          class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
           style="font-size:18px;color:rgba(0,0,0,0.88)"
           type="button"
         >
@@ -1062,11 +1062,11 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
           </span>
         </button>
         <div
-          class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+          class="ant-btn css-var-root ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
           disabled=""
           style="font-size:18px;color:rgba(0,0,0,0.88)"
           type="button"
@@ -1102,11 +1102,11 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
           </span>
         </button>
         <div
-          class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+          class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
           role="separator"
         />
         <button
-          class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+          class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
           type="button"
         >
           <span
@@ -1141,14 +1141,14 @@ exports[`renders components/sender/demo/footer.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/header.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-end"
+    class="ant-flex css-var-root ant-flex-align-end"
     style="height:350px"
   >
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -1157,7 +1157,7 @@ exports[`renders components/sender/demo/header.tsx correctly 1`] = `
           class="ant-sender-prefix"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size:16px"
             type="button"
           >
@@ -1187,17 +1187,17 @@ exports[`renders components/sender/demo/header.tsx correctly 1`] = `
           </button>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
           placeholder="← Click to open"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1235,14 +1235,14 @@ exports[`renders components/sender/demo/header.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/header-fixed.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-root ant-flex-align-flex-start ant-flex-gap-middle ant-flex-vertical"
   >
     <button
       aria-checked="true"
-      class="ant-switch css-var-_R_0_ ant-switch-checked"
+      class="ant-switch css-var-root ant-switch-checked"
       role="switch"
       type="button"
     >
@@ -1265,22 +1265,22 @@ exports[`renders components/sender/demo/header-fixed.tsx correctly 1`] = `
       </span>
     </button>
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1318,14 +1318,14 @@ exports[`renders components/sender/demo/header-fixed.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-end"
+    class="ant-flex css-var-root ant-flex-align-end"
     style="height:220px"
   >
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -1334,7 +1334,7 @@ exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
           class="ant-sender-prefix"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
             style="font-size:16px"
             type="button"
           >
@@ -1364,16 +1364,16 @@ exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
           </button>
         </div>
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
         />
         <div
           class="ant-sender-actions-list"
         >
           <div
-            class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+            class="ant-sender-actions-list-presets ant-flex css-var-root"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -1411,11 +1411,11 @@ exports[`renders components/sender/demo/paste-image.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap"
+  class="ant-flex css-var-root ant-flex-wrap-wrap"
   style="gap:12px"
 >
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1423,7 +1423,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1431,7 +1431,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1439,7 +1439,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1447,7 +1447,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1455,7 +1455,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1463,7 +1463,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1471,7 +1471,7 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <button
-    class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     type="button"
   >
     <span>
@@ -1479,13 +1479,13 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
     </span>
   </button>
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
       >
         Hello, welcome to use Ant Design X!
       </textarea>
@@ -1493,10 +1493,10 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+          class="ant-sender-actions-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -1532,19 +1532,19 @@ exports[`renders components/sender/demo/ref-action.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-root ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
           placeholder="Change button border radius"
         >
           Ask something?
@@ -1553,7 +1553,7 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
           class="ant-sender-actions-list"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-root ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             style="border-radius:12px"
             type="button"
           >
@@ -1585,13 +1585,13 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
           placeholder="Change button icon"
         >
           Ask something?
@@ -1600,7 +1600,7 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
           class="ant-sender-actions-list"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-root ant-btn-primary ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -1634,13 +1634,13 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
       </div>
     </div>
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
       >
         <textarea
-          class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+          class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
           placeholder="Loading not change button"
         >
           Ask something?
@@ -1649,7 +1649,7 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
           class="ant-sender-actions-list"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -1685,15 +1685,15 @@ exports[`renders components/sender/demo/send-style.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-vertical"
+  class="ant-flex css-var-root ant-flex-align-stretch ant-flex-vertical"
   style="gap:16px"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-wrap-wrap"
+    class="ant-flex css-var-root ant-flex-wrap-wrap"
     style="gap:8px"
   >
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1701,7 +1701,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1709,7 +1709,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1717,7 +1717,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1725,7 +1725,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1733,7 +1733,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1741,7 +1741,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1749,7 +1749,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1757,7 +1757,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1765,7 +1765,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1773,7 +1773,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1781,7 +1781,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1789,7 +1789,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1797,7 +1797,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1805,7 +1805,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1813,7 +1813,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1821,7 +1821,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
       </span>
     </button>
     <button
-      class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -1830,7 +1830,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
     </button>
   </div>
   <div
-    class="ant-sender css-var-_R_v_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
@@ -1853,10 +1853,10 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_R_v_"
+          class="ant-sender-actions-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_v_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -1891,7 +1891,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
             </span>
           </button>
           <button
-            class="ant-btn css-var-_R_v_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -1924,7 +1924,7 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+    class="ant-flex css-var-root ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
   >
     <div>
     </div>
@@ -1938,13 +1938,13 @@ exports[`renders components/sender/demo/slot-filling.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-root ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-suggestion ant-suggestion-content css-var-_R_0_"
+    class="ant-suggestion ant-suggestion-content css-var-root"
   >
     <div
-      class="ant-sender css-var-_R_0_ ant-sender-main"
+      class="ant-sender css-var-root ant-sender-main"
     >
       <div
         class="ant-sender-content"
@@ -1968,13 +1968,13 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
         class="ant-sender-footer"
       >
         <div
-          class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-justify-space-between"
+          class="ant-flex css-var-root ant-flex-align-center ant-flex-justify-space-between"
         >
           <div
-            class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+            class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               style="font-size:16px"
               type="button"
             >
@@ -2003,10 +2003,10 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </span>
             </button>
             <div
-              class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+              class="ant-sender ant-sender-switch css-var-root ant-sender-switch-checked"
             >
               <button
-                class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+                class="ant-btn css-var-root ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
                 type="button"
               >
                 <span
@@ -2046,10 +2046,10 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </button>
             </div>
             <div
-              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-root"
             >
               <button
-                class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+                class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
                 type="button"
               >
                 <span
@@ -2083,10 +2083,10 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </button>
             </div>
             <div
-              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-_R_0_"
+              class="ant-sender ant-sender-switch ant-dropdown-trigger css-var-root"
             >
               <button
-                class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+                class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
                 type="button"
               >
                 <span
@@ -2121,10 +2121,10 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
             </div>
           </div>
           <div
-            class="ant-flex css-var-_R_0_ ant-flex-align-center"
+            class="ant-flex css-var-root ant-flex-align-center"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+              class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
               style="font-size:16px"
               type="button"
             >
@@ -2153,14 +2153,14 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
               </span>
             </button>
             <div
-              class="ant-divider css-var-_R_0_ ant-divider-vertical ant-divider-rail"
+              class="ant-divider css-var-root ant-divider-vertical ant-divider-rail"
               role="separator"
             />
             <div
-              class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+              class="ant-sender-actions-list-presets ant-flex css-var-root"
             >
               <button
-                class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+                class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
                 disabled=""
                 type="button"
               >
@@ -2199,25 +2199,25 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx correctly 1`] =
 
 exports[`renders components/sender/demo/speech.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+          class="ant-sender-actions-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -2252,7 +2252,7 @@ exports[`renders components/sender/demo/speech.tsx correctly 1`] = `
             </span>
           </button>
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -2289,25 +2289,25 @@ exports[`renders components/sender/demo/speech.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/speech-custom.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+          class="ant-sender-actions-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
+            class="ant-btn css-var-root ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn"
             type="button"
           >
             <span
@@ -2335,7 +2335,7 @@ exports[`renders components/sender/demo/speech-custom.tsx correctly 1`] = `
             </span>
           </button>
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -2372,26 +2372,26 @@ exports[`renders components/sender/demo/speech-custom.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/submitType.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
         placeholder="Press Shift + Enter to send message"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-sender-actions-list-presets ant-flex css-var-_R_0_"
+          class="ant-sender-actions-list-presets ant-flex css-var-root"
         >
           <button
-            class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+            class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
             disabled=""
             type="button"
           >
@@ -2428,28 +2428,28 @@ exports[`renders components/sender/demo/submitType.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/suffix.tsx correctly 1`] = `
 <div
-  class="ant-app css-var-_R_0_"
+  class="ant-app css-var-root"
 >
   <div
-    class="ant-sender css-var-_R_0_ ant-sender-main"
+    class="ant-sender css-var-root ant-sender-main"
   >
     <div
       class="ant-sender-content"
     >
       <textarea
-        class="ant-input ant-input-borderless css-var-_R_0_ ant-input-css-var ant-sender-input"
+        class="ant-input ant-input-borderless css-var-root ant-input-css-var ant-sender-input"
       />
       <div
         class="ant-sender-actions-list"
       >
         <div
-          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_R_0_"
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-root"
         >
           <div
             class="ant-space-item"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_R_0_"
+              class="ant-typography ant-typography-secondary css-var-root"
               style="white-space:nowrap"
             >
               <small>
@@ -2461,7 +2461,7 @@ exports[`renders components/sender/demo/suffix.tsx correctly 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -2497,7 +2497,7 @@ exports[`renders components/sender/demo/suffix.tsx correctly 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
+              class="ant-btn css-var-root ant-btn-text ant-btn-color-primary ant-btn-variant-text ant-btn-icon-only ant-sender-actions-btn ant-sender-actions-btn-disabled"
               disabled=""
               type="button"
             >
@@ -2536,7 +2536,7 @@ exports[`renders components/sender/demo/suffix.tsx correctly 1`] = `
             class="ant-space-item"
           >
             <button
-              class="ant-btn css-var-_R_0_ ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
+              class="ant-btn css-var-root ant-btn-circle ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-icon-only ant-sender-actions-btn"
               type="button"
             >
               <span
@@ -2574,17 +2574,17 @@ exports[`renders components/sender/demo/suffix.tsx correctly 1`] = `
 
 exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
 <div
-  class="ant-flex css-var-_R_0_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-root ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
   >
     Default: 
     <div
-      class="ant-sender ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-root"
     >
       <button
-        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+        class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
         type="button"
       >
         <span
@@ -2619,14 +2619,14 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
   >
     Custom checked/unchecked content:
     <div
-      class="ant-sender ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-root"
     >
       <button
-        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+        class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
         type="button"
       >
         <span
@@ -2661,14 +2661,14 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
   >
     Disabled:
     <div
-      class="ant-sender ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-root"
     >
       <button
-        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+        class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
         disabled=""
         type="button"
       >
@@ -2704,14 +2704,14 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
   >
     Loading:
     <div
-      class="ant-sender ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-root"
     >
       <button
-        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-loading ant-sender-switch-content"
+        class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-loading ant-sender-switch-content"
         type="button"
       >
         <span
@@ -2746,14 +2746,14 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
   >
     DefaultValue:
     <div
-      class="ant-sender ant-sender-switch css-var-_R_0_ ant-sender-switch-checked"
+      class="ant-sender ant-sender-switch css-var-root ant-sender-switch-checked"
     >
       <button
-        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
+        class="ant-btn css-var-root ant-btn-default ant-btn-color-primary ant-btn-variant-outlined ant-sender-switch-content"
         type="button"
       >
         <span
@@ -2788,14 +2788,14 @@ exports[`renders components/sender/demo/switch.tsx correctly 1`] = `
     </div>
   </div>
   <div
-    class="ant-flex css-var-_R_0_ ant-flex-align-center ant-flex-gap-small"
+    class="ant-flex css-var-root ant-flex-align-center ant-flex-gap-small"
   >
     Controlled mode:
     <div
-      class="ant-sender ant-sender-switch css-var-_R_0_"
+      class="ant-sender ant-sender-switch css-var-root"
     >
       <button
-        class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
+        class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-sender-switch-content"
         type="button"
       >
         <span

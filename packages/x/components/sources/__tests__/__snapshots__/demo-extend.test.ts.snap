@@ -2,7 +2,7 @@
 
 exports[`renders components/sources/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-sources css-var-_r_7_"
+  class="ant-sources css-var-root"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -97,7 +97,7 @@ exports[`renders components/sources/demo/basic.tsx extend context correctly 2`] 
 exports[`renders components/sources/demo/expand.tsx extend context correctly 1`] = `
 Array [
   <button
-    class="ant-btn css-var-_r_6_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+    class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
     style="margin-bottom: 8px;"
     type="button"
   >
@@ -107,7 +107,7 @@ Array [
   </button>,
   <br />,
   <div
-    class="ant-sources css-var-_r_6_"
+    class="ant-sources css-var-root"
   >
     <div
       class="ant-sources-title-wrapper ant-sources-icon-position-start"
@@ -202,7 +202,7 @@ exports[`renders components/sources/demo/expand.tsx extend context correctly 2`]
 
 exports[`renders components/sources/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-sources css-var-_r_5_"
+  class="ant-sources css-var-root"
 >
   <div
     class="ant-sources-title-wrapper ant-sources-icon-position-end"
@@ -371,7 +371,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
     Use the inline mode in the text
   </span>
   <div
-    class="ant-sources css-var-_r_0_ ant-sources-inline"
+    class="ant-sources css-var-root ant-sources-inline"
   >
     <div
       aria-describedby="test-id"
@@ -384,7 +384,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
       </span>
     </div>
     <div
-      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-css-var css-var-_r_0_ css-var-_r_0_ ant-popover-placement-top"
+      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-css-var css-var-root css-var-root ant-popover-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -405,7 +405,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
           class="ant-popover-content"
         >
           <div
-            class="ant-sources-carousel-wrapper ant-sources css-var-_r_0_"
+            class="ant-sources-carousel-wrapper ant-sources css-var-root"
           >
             <div
               class="ant-sources-carousel-title"
@@ -467,7 +467,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
               </div>
             </div>
             <div
-              class="ant-carousel css-var-_r_0_"
+              class="ant-carousel css-var-root"
             >
               <div
                 class="slick-slider ant-sources-carousel slick-initialized"
@@ -573,7 +573,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
     Use the inline mode in the text
   </span>
   <div
-    class="ant-sources css-var-_r_0_ ant-sources-inline"
+    class="ant-sources css-var-root ant-sources-inline"
   >
     <div
       aria-describedby="test-id"
@@ -586,7 +586,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
       </span>
     </div>
     <div
-      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-css-var css-var-_r_0_ css-var-_r_0_ ant-popover-placement-top"
+      class="ant-popover ant-zoom-big-appear ant-zoom-big-appear-prepare ant-zoom-big ant-popover-css-var css-var-root css-var-root ant-popover-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -607,7 +607,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
           class="ant-popover-content"
         >
           <div
-            class="ant-sources-carousel-wrapper ant-sources css-var-_r_0_"
+            class="ant-sources-carousel-wrapper ant-sources css-var-root"
           >
             <div
               class="ant-sources-carousel-title"
@@ -669,7 +669,7 @@ exports[`renders components/sources/demo/inline.tsx extend context correctly 1`]
               </div>
             </div>
             <div
-              class="ant-carousel css-var-_r_0_"
+              class="ant-carousel css-var-root"
             >
               <div
                 class="slick-slider ant-sources-carousel slick-initialized"

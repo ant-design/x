@@ -2,7 +2,7 @@
 
 exports[`renders components/think/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-think css-var-_r_2_"
+  class="ant-think css-var-root"
 >
   <div
     class="ant-think-status-wrapper"
@@ -80,7 +80,7 @@ exports[`renders components/think/demo/expand.tsx extend context correctly 1`] =
 Array [
   <div>
     <button
-      class="ant-btn css-var-_r_1_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -90,7 +90,7 @@ Array [
   </div>,
   <br />,
   <div
-    class="ant-think css-var-_r_1_"
+    class="ant-think css-var-root"
   >
     <div
       class="ant-think-status-wrapper"
@@ -169,7 +169,7 @@ exports[`renders components/think/demo/status.tsx extend context correctly 1`] =
 Array [
   <div>
     <button
-      class="ant-btn css-var-_r_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-root ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       type="button"
     >
       <span>
@@ -179,7 +179,7 @@ Array [
   </div>,
   <br />,
   <div
-    class="ant-think css-var-_r_0_"
+    class="ant-think css-var-root"
   >
     <div
       class="ant-think-status-wrapper"
@@ -251,7 +251,7 @@ Array [
   </div>,
   <br />,
   <div
-    class="ant-think css-var-_r_0_"
+    class="ant-think css-var-root"
   >
     <div
       class="ant-think-status-wrapper"
