@@ -3,8 +3,6 @@ import SourceCodeEditor from 'dumi/theme-default/slots/SourceCodeEditor';
 import type { ComponentProps, FC } from 'react';
 import React from 'react';
 
-import LiveError from '../slots/LiveError';
-
 const useStyle = createStyles(({ token, css }) => {
   const { colorBgContainer } = token;
   return {
@@ -51,9 +49,7 @@ const useStyle = createStyles(({ token, css }) => {
 });
 
 const LiveCode: FC<
-  {
-    error: Error | null;
-  } & Pick<ComponentProps<typeof SourceCodeEditor>, 'lang' | 'initialValue' | 'onChange'>
+  Pick<ComponentProps<typeof SourceCodeEditor>, 'lang' | 'initialValue' | 'onChange'>
 > = (props) => {
   const { styles } = useStyle();
   return (
@@ -63,7 +59,6 @@ const LiveCode: FC<
         initialValue={props.initialValue}
         onChange={props.onChange}
       />
-      <LiveError error={props.error} />
     </div>
   );
 };

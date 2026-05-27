@@ -207,3 +207,8 @@ xmd-tail {
 .x-markdown .inline-katex .katex-display > .katex > .katex-html > .tag {
   position: static;
 }
+
+.x-markdown .block-katex {
+  display: block;
+  margin: 1em 0;
+}

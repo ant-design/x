@@ -15,7 +15,7 @@ jobs:
       - run: ut compile
       - run: ut coverage
       - run: ut test:dekko
-      - uses: codecov/codecov-action@v5
+      - uses: codecov/codecov-action@v6
         with:
           directories: packages/x,packages/x-markdown,packages/x-sdk
           token: ${{ secrets.CODECOV_TOKEN }}

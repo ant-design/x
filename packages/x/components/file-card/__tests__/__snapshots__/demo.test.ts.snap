@@ -1213,7 +1213,10 @@ Array [
         class="ant-file-card-image"
       >
         <div
+          aria-label="image-file.png"
           class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+          role="button"
+          tabindex="0"
         >
           <img
             alt="image-file.png"
@@ -1234,8 +1237,11 @@ Array [
         style="width:100px;height:100px"
       >
         <div
+          aria-label="image-file.png"
           class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+          role="button"
           style="width:100px;height:100px"
+          tabindex="0"
         >
           <img
             alt="image-file.png"
@@ -1351,8 +1357,11 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
       style="width:200px"
     >
       <div
+        aria-label="image-file.png"
         class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+        role="button"
         style="width:200px"
+        tabindex="0"
       >
         <img
           alt="image-file.png"
@@ -1464,7 +1473,10 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
       class="ant-file-card-image ant-file-card-loading"
     >
       <div
+        aria-label="image-file.png"
         class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+        role="button"
+        tabindex="0"
       >
         <img
           alt="image-file.png"
@@ -1728,7 +1740,10 @@ Array [
         class="ant-file-card-image"
       >
         <div
+          aria-label="image.jpg"
           class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
+          role="button"
+          tabindex="0"
         >
           <img
             alt="image.jpg"

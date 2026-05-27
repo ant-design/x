@@ -327,7 +327,9 @@ Array [
           >
             <div
               class="ant-image css-var-_R_0_ ant-image-css-var"
+              role="button"
               style="height:50px"
+              tabindex="0"
             >
               <img
                 class="ant-image-img"

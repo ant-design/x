@@ -2,6 +2,9 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@ant-design/x": ["components/index.ts"],
@@ -12,11 +15,13 @@
       "@ant-design/x-markdown/es/*": ["../x-markdown/src/*"],
       "@ant-design/x-markdown/lib/*": ["../x-markdown/src/*"],
       "@ant-design/x-markdown/plugins/*": ["../x-markdown/src/plugins/*"],
+      "@ant-design/x-card": ["../x-card/src/index.ts"],
       "@ant-design/x-sdk": ["../x-sdk/src/index.ts"],
       "@ant-design/x-skill/*": ["../x-skill/src/*"],
       "@ant-design/x-sdk/es/*": ["../x-sdk/src/*"],
       "@ant-design/x-sdk/lib/*": ["../x-sdk/src/*"]
     }
   },
-  "include": [".dumirc.ts", "**/*"]
+  "include": [".dumirc.ts", "**/*"],
+  "exclude": ["node_modules", "lib", "es", "dist"]
 }

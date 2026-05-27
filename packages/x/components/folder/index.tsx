@@ -33,7 +33,7 @@ export interface FolderProps {
   classNames?: Partial<Record<SemanticType, string>>;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   style?: React.CSSProperties;
-  directoryIcons?: Record<'directory' | string, React.ReactNode | (() => React.ReactNode)>;
+  directoryIcons?: false | Record<'directory' | string, React.ReactNode | (() => React.ReactNode)>;
   // Data properties
   treeData: FolderTreeData[];
   // Selection functionality
@@ -46,7 +46,7 @@ export interface FolderProps {
     content?: string;
   }) => void;
   directoryTreeWith?: number | string;
-  emptyRender?: React.ReactNode | (() => React.ReactNode);
+  emptyRender?: false | React.ReactNode | (() => React.ReactNode);
   previewRender?:
     | React.ReactNode
     | ((
@@ -72,8 +72,9 @@ export interface FolderProps {
   onFolderClick?: (folderPath: string) => void;
 
   // Custom titles
-  directoryTitle?: React.ReactNode | (() => React.ReactNode);
+  directoryTitle?: false | React.ReactNode | (() => React.ReactNode);
   previewTitle?:
+    | false
     | React.ReactNode
     | (({
         title,

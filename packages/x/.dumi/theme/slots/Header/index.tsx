@@ -33,7 +33,6 @@ const useStyle = createStyles(({ token, css }, { alertVisible }: { alertVisible:
       padding: 0 ${token.paddingLG}px;
       margin: 0 ${token.paddingLG}px;
       top: ${(token.headerHeight - token.paddingLG * 2) / 2 + (alertVisible ? token.alertHeight : 0)}px;
-      overflow: hidden;
       border-radius: ${token.indexRadius}px;
     `,
     mini: css`
@@ -72,6 +71,7 @@ const useStyle = createStyles(({ token, css }, { alertVisible }: { alertVisible:
         inset-inline-end: 0;
 
         pointer-events: none;
+        clip-path: inset(0 round ${token.indexRadius}px);
       };
 
       &::before {

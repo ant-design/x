@@ -18,6 +18,7 @@ import CodePenIcon from '../../icons/CodePenIcon';
 import CodeSandboxIcon from '../../icons/CodeSandboxIcon';
 import ExternalLinkIcon from '../../icons/ExternalLinkIcon';
 import DemoContext from '../../slots/DemoContext';
+import LiveError from '../../slots/LiveError';
 import SiteContext from '../../slots/SiteContext';
 import CodeBlockButton from './CodeBlockButton';
 import type { AntdPreviewerProps } from './Previewer';
@@ -41,10 +42,12 @@ const track = ({ type, demo }: { type: string; demo: string }) => {
 const useStyle = createStyles(({ token }) => {
   const { borderRadius } = token;
   return {
-    codeHideBtn: css`
+    stickyBox: css`
       position: sticky;
       bottom: 0;
       z-index: 1;
+    `,
+    codeHideBtn: css`
       width: 100%;
       height: 40px;
       display: flex;
@@ -518,18 +521,20 @@ fs.writeFileSync(path.join(dir, 'node.mjs'), content);
             otherCode={otherCodeObject}
             jsxCode={jsx}
             styleCode={style}
-            error={liveDemoError}
             entryName={entryName}
             onSourceChange={setLiveDemoSource}
           />
-          <div
-            tabIndex={0}
-            role="button"
-            className={styles.codeHideBtn}
-            onClick={() => setCodeExpand(false)}
-          >
-            <UpOutlined />
-            <FormattedMessage id="app.demo.code.hide.simplify" />
+          <div className={styles.stickyBox}>
+            <LiveError error={liveDemoError} />
+            <div
+              tabIndex={0}
+              role="button"
+              className={styles.codeHideBtn}
+              onClick={() => setCodeExpand(false)}
+            >
+              <UpOutlined />
+              <FormattedMessage id="app.demo.code.hide.simplify" />
+            </div>
           </div>
         </section>
       )}

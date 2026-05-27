@@ -8,6 +8,7 @@ import Link from '../../common/Link';
 import { getLocalizedPathname } from '../../utils';
 
 import type { SharedProps } from './interface';
+import SearchBar from './SearchBar';
 
 const zhHrefOrigin = 'https://ant-design-x.antgroup.com';
 
@@ -21,6 +22,7 @@ const locales = {
     blog: '博客',
     sdk: 'X SDK',
     skill: 'X Skill',
+    card: 'X Card',
     markdown: 'X Markdown',
     resources: '资源',
   },
@@ -33,6 +35,7 @@ const locales = {
     blog: 'Blog',
     sdk: 'X SDK',
     skill: 'X Skill',
+    card: 'X Card',
     markdown: 'X Markdown',
     resources: 'Resources',
   },
@@ -65,6 +68,11 @@ const defaultItems = [
     key: 'sdk',
   },
   {
+    path: '/x-cards/introduce',
+    basePath: '/x-card',
+    key: 'card',
+  },
+  {
     path: '/x-skills/introduce',
     basePath: '/x-skill',
     key: 'skill',
@@ -90,6 +98,7 @@ const useStyle = createStyles(({ token }) => {
       a {
         font-size: ${token.fontSizeLG}px;
         color: ${token.colorTextSecondary};
+        white-space: nowrap;
       };
 
       a:hover {
@@ -98,7 +107,6 @@ const useStyle = createStyles(({ token }) => {
     `,
     pc: css`
       height: 48px;
-      overflow: hidden;
 
       position: absolute;
       top: 50%;
@@ -126,9 +134,9 @@ const useStyle = createStyles(({ token }) => {
       padding: 0 !important;
     `,
     item_active: css`
-    color: ${token.colorText} !important;
-    font-weight: 500;
-  `,
+      color: ${token.colorText} !important;
+      font-weight: 500;
+    `,
   };
 });
 
@@ -191,6 +199,7 @@ const HeaderNavigation: React.FC<HeaderNavigationProps> = (props) => {
         className,
       )}
     >
+      <SearchBar isMobile={isMobile} />
       {items.map((item) => (
         <Link
           key={item.key}

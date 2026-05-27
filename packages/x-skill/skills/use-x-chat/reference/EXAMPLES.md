@@ -1,255 +1,402 @@
-# Complete Example Projects
+# Complete Examples
 
-## Project with Conversation Management
+## 1. Basic Chat (OpenAI Provider)
 
 ```tsx
-import React, { useRef, useState } from 'react';
-import { useXChat } from '@ant-design/x-sdk';
-import { chatProvider } from '../services/chatService';
-import type { ChatMessage } from '../providers/ChatProvider';
-import { Bubble, Sender, Conversations, type ConversationsProps } from '@ant-design/x';
-import { GetRef } from 'antd';
+import React, { useRef } from 'react';
+import { Bubble, Sender } from '@ant-design/x';
+import { OpenAIChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import type { XModelMessage, XModelParams, XModelResponse } from '@ant-design/x-sdk';
+import XMarkdown from '@ant-design/x-markdown';
 
-const App: React.FC = () => {
-  const [conversations, setConversations] = useState([{ key: '1', label: 'New Conversation' }]);
-  const [activeKey, setActiveKey] = useState('1');
-  const senderRef = useRef<GetRef<typeof Sender>>(null);
-  // Create new conversation
-  const handleNewConversation = () => {
-    const newKey = Date.now().toString();
-    const newConversation = {
-      key: newKey,
-      label: `Conversation ${conversations.length + 1}`,
-    };
-    setConversations((prev) => [...prev, newConversation]);
-    setActiveKey(newKey);
-  };
+const BASE_URL = 'https://api.openai.com/v1/chat/completions';
+const MODEL = 'gpt-4o';
 
-  // Delete conversation
-  const handleDeleteConversation = (key: string) => {
-    setConversations((prev) => {
-      const filtered = prev.filter((item) => item.key !== key);
-      if (filtered.length === 0) {
-        // If no conversations left, create a new one
-        const newKey = Date.now().toString();
-        return [{ key: newKey, label: 'New Conversation' }];
-      }
-      return filtered;
-    });
+const App = () => {
+  const [provider] = React.useState(
+    new OpenAIChatProvider({
+      request: XRequest<XModelParams, XModelResponse, XModelMessage>(BASE_URL, {
+        manual: true,
+        headers: { Authorization: 'Bearer your-api-key' },
+        params: { model: MODEL, stream: true },
+      }),
+    }),
+  );
 
-    // If deleted current active conversation, switch to first one
-    if (activeKey === key) {
-      setActiveKey(conversations[0]?.key || '1');
-    }
-  };
-
-  const { messages, onRequest, isRequesting, abort } = useXChat<
-    ChatMessage,
-    ChatMessage,
-    { query: string },
-    { content: string; time: string; status: 'success' | 'error' }
-  >({
-    provider: chatProvider,
-    conversationKey: activeKey,
-    requestFallback: (_, { error }) => {
-      if (error.name === 'AbortError') {
-        return { content: 'Cancelled', role: 'assistant' as const, timestamp: Date.now() };
-      }
-      return { content: 'Request failed', role: 'assistant' as const, timestamp: Date.now() };
-    },
-  });
-
-  const menuConfig: ConversationsProps['menu'] = (conversation) => ({
-    items: [
+  const { messages, onRequest, isRequesting, abort, onReload } = useXChat({
+    provider,
+    defaultMessages: [
+      { id: '0', message: { role: 'user', content: 'Hello' }, status: 'success' },
       {
-        label: 'Delete',
-        key: 'delete',
-        danger: true,
+        id: '1',
+        message: { role: 'assistant', content: 'Hello! How can I help you?' },
+        status: 'success',
       },
     ],
-    onClick: ({ key: menuKey }) => {
-      if (menuKey === 'delete') {
-        handleDeleteConversation(conversation.key);
+    requestPlaceholder: () => ({ content: 'Thinking...', role: 'assistant' }),
+    requestFallback: (_, { error, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return { content: messageInfo?.message?.content || 'Cancelled', role: 'assistant' };
       }
+      return { content: 'Request failed, please retry', role: 'assistant' };
     },
   });
 
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
-      {/* Conversation List */}
-      <div
-        style={{
-          width: 240,
-          borderRight: '1px solid #f0f0f0',
-          display: 'flex',
-          flexDirection: 'column',
+    <div style={{ display: 'flex', flexDirection: 'column', height: 600 }}>
+      <Bubble.List
+        style={{ flex: 1 }}
+        role={{
+          assistant: {
+            placement: 'start',
+            contentRender(content: string) {
+              return <XMarkdown content={content} />;
+            },
+          },
+          user: { placement: 'end' },
         }}
-      >
-        <Conversations
-          creation={{
-            onClick: handleNewConversation,
-          }}
-          items={conversations}
-          activeKey={activeKey}
-          menu={menuConfig}
-          onActiveChange={setActiveKey}
-        />
-      </div>
+        items={messages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+        }))}
+      />
+      <Sender
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(content) => {
+          onRequest({ messages: [{ role: 'user', content }] });
+        }}
+      />
+    </div>
+  );
+};
 
-      {/* Chat Area */}
+export default App;
+```
+
+## 2. Multi-conversation Management (useXConversations + useXChat)
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { Bubble, Conversations, Sender } from '@ant-design/x';
+import { OpenAIChatProvider, useXChat, useXConversations, XRequest } from '@ant-design/x-sdk';
+import type { XModelParams, XModelResponse } from '@ant-design/x-sdk';
+import { GetRef } from 'antd';
+
+const BASE_URL = 'https://api.openai.com/v1/chat/completions';
+
+// Each conversation maintains its own Provider instance
+const providerCache = new Map<string, OpenAIChatProvider>();
+
+function getProvider(key: string): OpenAIChatProvider {
+  if (!providerCache.has(key)) {
+    providerCache.set(
+      key,
+      new OpenAIChatProvider({
+        request: XRequest<XModelParams, XModelResponse>(BASE_URL, {
+          manual: true,
+          headers: { Authorization: 'Bearer your-api-key' },
+          params: { model: 'gpt-4o', stream: true },
+        }),
+      }),
+    );
+  }
+  return providerCache.get(key)!;
+}
+
+const App = () => {
+  const senderRef = useRef<GetRef<typeof Sender>>(null);
+
+  const {
+    conversations,
+    activeConversationKey,
+    setActiveConversationKey,
+    addConversation,
+    removeConversation,
+  } = useXConversations({
+    defaultConversations: [{ key: 'conv-1', label: 'New Conversation' }],
+    defaultActiveConversationKey: 'conv-1',
+  });
+
+  const { messages, onRequest, isRequesting, abort, queueRequest } = useXChat({
+    provider: getProvider(activeConversationKey),
+    conversationKey: activeConversationKey,
+    // Async load history messages
+    defaultMessages: async ({ conversationKey }) => {
+      // const history = await api.getHistory(conversationKey);
+      return [];
+    },
+    requestFallback: (_, { error, messageInfo }) => {
+      if (error.name === 'AbortError') {
+        return { content: messageInfo?.message?.content || 'Cancelled', role: 'assistant' };
+      }
+      return { content: 'Request failed, please retry', role: 'assistant' };
+    },
+  });
+
+  // Clear input on conversation switch
+  useEffect(() => {
+    senderRef.current?.clear?.();
+  }, [activeConversationKey]);
+
+  const handleNewConversation = () => {
+    const newKey = `conv-${Date.now()}`;
+    addConversation({ key: newKey, label: `New Conversation ${conversations.length + 1}` });
+    setActiveConversationKey(newKey);
+  };
+
+  const handleDeleteConversation = (key: string) => {
+    removeConversation(key);
+    if (activeConversationKey === key) {
+      const remaining = conversations.filter((c) => c.key !== key);
+      if (remaining.length > 0) setActiveConversationKey(remaining[0].key);
+    }
+  };
+
+  return (
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Conversations
+        style={{ width: 240, borderRight: '1px solid #f0f0f0' }}
+        items={conversations}
+        activeKey={activeConversationKey}
+        onActiveChange={setActiveConversationKey}
+        creation={{ onClick: handleNewConversation }}
+        menu={(conv) => ({
+          items: [{ label: 'Delete', key: 'delete', danger: true }],
+          onClick: ({ key }) => key === 'delete' && handleDeleteConversation(conv.key),
+        })}
+      />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div
-          style={{ padding: 16, borderBottom: '1px solid #f0f0f0', fontSize: 16, fontWeight: 500 }}
-        >
-          {conversations.find((c) => c.key === activeKey)?.label || 'Conversation'}
-        </div>
-
-        <div style={{ flex: 1, padding: 16, overflow: 'auto' }}>
-          <Bubble.List
-            role={{
-              assistant: {
-                placement: 'start',
-              },
-              user: {
-                placement: 'end',
-              },
-            }}
-            items={messages.map((msg) => ({
-              key: msg.id,
-              content: msg.message.content,
-              role: msg.message.role,
-              loading: msg.status === 'loading',
-            }))}
-          />
-        </div>
-
+        <Bubble.List
+          style={{ flex: 1, padding: 16 }}
+          role={{ assistant: { placement: 'start' }, user: { placement: 'end' } }}
+          items={messages.map(({ id, message, status }) => ({
+            key: id,
+            role: message.role,
+            content: message.content,
+            loading: status === 'loading',
+          }))}
+        />
         <div style={{ padding: 16, borderTop: '1px solid #f0f0f0' }}>
           <Sender
-            loading={isRequesting}
             ref={senderRef}
-            onSubmit={(content: string) => {
-              onRequest({ query: content });
-              senderRef.current?.clear?.();
-            }}
+            loading={isRequesting}
             onCancel={abort}
-            placeholder="Enter message..."
+            onSubmit={(val) => {
+              onRequest({ messages: [{ role: 'user', content: val }] });
+            }}
           />
         </div>
       </div>
     </div>
   );
 };
+
 export default App;
 ```
 
-## With State Management Resend
+## 3. With Regenerate Feature
 
 ```tsx
 import React, { useRef, useState } from 'react';
-import { useXChat } from '@ant-design/x-sdk';
 import { Bubble, Sender } from '@ant-design/x';
-import { Button, type GetRef } from 'antd';
-import { chatProvider } from '../services/chatService';
-import type { ChatMessage } from '../providers/ChatProvider';
+import { SyncOutlined } from '@ant-design/icons';
+import { OpenAIChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import { Button, Tooltip, GetRef } from 'antd';
 
-const ChatWithRegenerate: React.FC = () => {
+const App = () => {
   const senderRef = useRef<GetRef<typeof Sender>>(null);
-  const { messages, onReload, isRequesting, onRequest, abort } = useXChat<
-    ChatMessage,
-    ChatMessage,
-    { query: string },
-    { content: string; time: string; status: 'success' | 'error' }
-  >({
-    provider: chatProvider,
-    requestPlaceholder: {
-      content: 'Thinking...',
-      role: 'assistant',
-      timestamp: Date.now(),
-    },
-    requestFallback: (_, { error, errorInfo, messageInfo }) => {
+  const [regeneratingId, setRegeneratingId] = useState<string | number | null>(null);
+
+  const [provider] = React.useState(
+    new OpenAIChatProvider({
+      request: XRequest(BASE_URL, { manual: true, params: { model: 'gpt-4o', stream: true } }),
+    }),
+  );
+
+  const { messages, onRequest, onReload, isRequesting, abort } = useXChat({
+    provider,
+    requestPlaceholder: () => ({ content: 'Thinking...', role: 'assistant' }),
+    requestFallback: (_, { error, messageInfo }) => {
       if (error.name === 'AbortError') {
-        return {
-          content: messageInfo?.message?.content || 'Reply cancelled',
-          role: 'assistant' as const,
-          timestamp: Date.now(),
-        };
+        return { content: messageInfo?.message?.content || 'Cancelled', role: 'assistant' };
       }
-      return {
-        content: errorInfo?.error?.message || 'Network error, please try again later',
-        role: 'assistant' as const,
-        timestamp: Date.now(),
-      };
+      return { content: 'Request failed, please retry', role: 'assistant' };
     },
   });
 
-  // Track message ID being regenerated
-  const [regeneratingId, setRegeneratingId] = useState<string | number | null>(null);
-
-  const handleRegenerate = (messageId: string | number): void => {
-    setRegeneratingId(messageId);
-    onReload(
-      messageId,
-      {},
-      {
-        extraInfo: { regenerate: true },
-      },
-    );
+  const handleRegenerate = (id: string | number) => {
+    setRegeneratingId(id);
+    onReload(id, {}, { extraInfo: { isRegenerate: true } });
   };
 
   return (
     <div>
       <Bubble.List
-        role={{
-          assistant: {
-            placement: 'start',
-          },
-          user: {
-            placement: 'end',
-          },
-        }}
-        items={messages.map((msg) => ({
-          key: msg.id,
-          content: msg.message.content,
-          role: msg.message.role,
-          loading: msg.status === 'loading',
-          footer: msg.message.role === 'assistant' && (
-            <Button
-              type="text"
-              size="small"
-              loading={regeneratingId === msg.id && isRequesting}
-              onClick={() => handleRegenerate(msg.id)}
-              disabled={isRequesting && regeneratingId !== msg.id}
-            >
-              {regeneratingId === msg.id ? 'Generating...' : 'Regenerate'}
-            </Button>
-          ),
+        role={{ assistant: { placement: 'start' }, user: { placement: 'end' } }}
+        items={messages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+          footer:
+            message.role === 'assistant' ? (
+              <Tooltip title="Regenerate">
+                <Button
+                  size="small"
+                  type="text"
+                  icon={<SyncOutlined />}
+                  loading={regeneratingId === id && isRequesting}
+                  disabled={isRequesting && regeneratingId !== id}
+                  onClick={() => handleRegenerate(id)}
+                />
+              </Tooltip>
+            ) : undefined,
         }))}
       />
-      <div>
-        <Sender
-          loading={isRequesting}
-          onSubmit={(content: string) => {
-            onRequest({ query: content });
-            senderRef.current?.clear?.();
-          }}
-          onCancel={abort}
-          ref={senderRef}
-          placeholder="Enter message..."
-          allowSpeech
-          prefix={
-            <Sender.Header
-              title="AI Assistant"
-              open={false}
-              styles={{
-                content: { padding: 0 },
-              }}
-            />
-          }
-        />
-      </div>
+      <Sender
+        ref={senderRef}
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(val) => {
+          onRequest({ messages: [{ role: 'user', content: val }] });
+          senderRef.current?.clear?.();
+        }}
+      />
+    </div>
+  );
+};
+```
+
+## 4. With System Prompt (developer role)
+
+```tsx
+const App = () => {
+  const [provider] = React.useState(
+    new OpenAIChatProvider({
+      request: XRequest(BASE_URL, { manual: true, params: { model: 'gpt-4o', stream: true } }),
+    }),
+  );
+
+  const { messages, onRequest, setMessage, isRequesting, abort } = useXChat({
+    provider,
+    defaultMessages: [
+      // developer role as system prompt; OpenAIChatProvider automatically includes it in every request
+      {
+        id: 'sys',
+        message: {
+          role: 'developer',
+          content: 'You are a professional frontend engineer assistant',
+        },
+        status: 'success',
+      },
+    ],
+    requestFallback: (_, { error }) => ({
+      content: error.name === 'AbortError' ? 'Cancelled' : 'Request failed',
+      role: 'assistant',
+    }),
+  });
+
+  // Filter out developer messages from display
+  const displayMessages = messages.filter((m) => m.message.role !== 'developer');
+
+  // Dynamically update system prompt
+  const updateSystemPrompt = (prompt: string) => {
+    setMessage('sys', { message: { role: 'developer', content: prompt } });
+  };
+
+  return (
+    <div>
+      <Bubble.List
+        role={{ assistant: { placement: 'start' }, user: { placement: 'end' } }}
+        items={displayMessages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+        }))}
+      />
+      <Sender
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(val) => onRequest({ messages: [{ role: 'user', content: val }] })}
+      />
+    </div>
+  );
+};
+```
+
+## 5. Using parser (split one message into multiple bubbles)
+
+```tsx
+// Scenario: DeepSeek R1's reasoning_content + content need to be displayed separately
+import React from 'react';
+import { Bubble, Sender } from '@ant-design/x';
+import { DeepSeekChatProvider, useXChat, XRequest } from '@ant-design/x-sdk';
+import type { XModelMessage } from '@ant-design/x-sdk';
+
+interface MyMessage extends XModelMessage {
+  reasoning?: string; // Chain-of-thought content
+}
+
+const BASE_URL = 'YOUR_BASE_URL';
+
+const App = () => {
+  const [provider] = React.useState(
+    new DeepSeekChatProvider({
+      request: XRequest(BASE_URL, {
+        manual: true,
+        params: { model: 'deepseek-reasoner', stream: true },
+      }),
+    }),
+  );
+
+  const { parsedMessages, onRequest, isRequesting, abort } = useXChat<
+    MyMessage,
+    { role: string; content: string } // ParsedMessage
+  >({
+    provider,
+    // parser converts one message into multiple bubbles
+    parser: (message: MyMessage) => {
+      const result: { role: string; content: string }[] = [];
+      if (message.reasoning) {
+        result.push({ role: 'reasoning', content: message.reasoning });
+      }
+      if (message.content) {
+        result.push({ role: 'assistant', content: message.content as string });
+      }
+      return result.length > 0
+        ? result
+        : { role: message.role, content: message.content as string };
+    },
+  });
+
+  // Use parsedMessages instead of messages
+  return (
+    <div>
+      <Bubble.List
+        role={{
+          assistant: { placement: 'start' },
+          user: { placement: 'end' },
+          reasoning: { placement: 'start', variant: 'borderless' },
+        }}
+        items={parsedMessages.map(({ id, message, status }) => ({
+          key: id,
+          role: message.role,
+          content: message.content,
+          loading: status === 'loading',
+        }))}
+      />
+      <Sender
+        loading={isRequesting}
+        onCancel={abort}
+        onSubmit={(val) => onRequest({ messages: [{ role: 'user', content: val }] })}
+      />
     </div>
   );
 };
 
-export default ChatWithRegenerate;
+export default App;
 ```

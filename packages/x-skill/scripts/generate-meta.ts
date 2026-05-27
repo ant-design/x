@@ -268,4 +268,4 @@ if (require.main === module) {
   generateSkillMeta();
 }
 
-export { generateSkillMeta, scanSkills, extractSkillMetadata };
+export { extractSkillMetadata, generateSkillMeta, scanSkills };

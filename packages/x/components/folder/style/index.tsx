@@ -92,6 +92,7 @@ const genFilePreviewStyle: GenerateStyle<FolderToken> = (token) => {
       },
       [`${componentCls}-preview-content`]: {
         overflow: 'auto',
+        flex: 1,
         background: token.colorBgContainer,
         paddingInline: token.padding,
         paddingBlock: token.paddingXS,

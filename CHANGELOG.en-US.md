@@ -16,6 +16,62 @@ tag: vVERSION
 
 ---
 
+## 2.7.0
+
+`2026-04-30`
+
+### @ant-design/x
+
+- 🆕 `XProvider` adds `zeroRuntime` prop to support Zero Runtime CSS-in-JS mode, extracting styles at build time to avoid runtime style injection and improve performance. [#1737](https://github.com/ant-design/x/pull/1737) by [seanparmelee](https://github.com/seanparmelee)
+
+### @ant-design/x-card
+
+- 🆕 Added `resolveActionContextPathRefs` for automatic action context path resolution. Supports both v0.9 and v0.8 formats — when an action is triggered, `{ path }` references in `context` are automatically resolved to actual values from the dataModel and merged with the component's runtime context. [#1887](https://github.com/ant-design/x/pull/1887) by [kimteayon](https://github.com/kimteayon)
+- 📖 Added `action-context-resolve` demo documentation for both v0.8 and v0.9 formats. [#1887](https://github.com/ant-design/x/pull/1887) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-skill
+
+- 🛠 Updated `x-card` skill ACTIONS reference documentation with path reference resolution details and corrected React usage examples. [#1887](https://github.com/ant-design/x/pull/1887) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Added search bar to the official website to improve documentation discoverability. [#1831](https://github.com/ant-design/x/pull/1831) by [1uokun](https://github.com/1uokun)
+
+## 2.6.0
+
+`2026-04-17`
+
+### @ant-design/x
+
+- 🐛 Fix duplicate `className` passed to the root element of `ThoughtChain`, and default `contentOpen` to `false` to prevent `undefined` when `expandedKeys` is not provided. [#1851](https://github.com/ant-design/x/pull/1851) by [feoyang](https://github.com/feoyang)
+- 🐛 Fix Folder component title display bug. [#1855](https://github.com/ant-design/x/pull/1855) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 Support rendering block-level LaTeX formulas inside paragraphs, using `<span>` instead of `<div>` to be compatible with inline contexts. [#1859](https://github.com/ant-design/x/pull/1859) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-skill
+
+- 🆕 Added `x-components` skill, providing full API documentation, usage patterns, and best practices for all `@ant-design/x` components. [#1862](https://github.com/ant-design/x/pull/1862) by [kimteayon](https://github.com/kimteayon)
+- 🆕 Added `x-card` skill, providing complete API reference, data binding, Actions, and Commands documentation for `@ant-design/x-card`. [#1865](https://github.com/ant-design/x/pull/1865) by [kimteayon](https://github.com/kimteayon)
+- 🛠 Updated `use-x-chat`, `x-chat-provider`, and `x-request` skill content to sync with the latest APIs and examples. [#1862](https://github.com/ant-design/x/pull/1862) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Fix broken documentation link in the X SDK usage guide. [#1856](https://github.com/ant-design/x/pull/1856) by [xiaohp](https://github.com/xiaohp)
+
+## 2.5.0
+
+`2026-03-31`
+
+### @ant-design/x-card
+
+- 🔥 New module X Card, a dynamic card rendering component based on A2UI protocol, enabling AI Agents to dynamically build and render interactive interfaces through structured JSON message streams.[#1836](https://github.com/ant-design/x/pull/1836) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Optimized official website to improve user experience. [#1830](https://github.com/ant-design/x/pull/1830) by [1uokun](https://github.com/1uokun)
+
 ## 2.4.0
 
 `2026-03-13`
@@ -25,6 +81,13 @@ tag: vVERSION
 - 🐛 Fix incorrect event handling in `useShortcutKeys`.[#1822](https://github.com/ant-design/x/pull/1822) by [cxybd](https://github.com/cxybd)
 - 🔥 New component Folder. [#1797](https://github.com/ant-design/x/pull/1797) by [kimteayon](https://github.com/kimteayon)
 - 🆕 Enhanced FileCard's `description`, `mask`, and `onClick` configuration capabilities. [#1807](https://github.com/ant-design/x/pull/1807) by [kimteayon](https://github.com/kimteayon)
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown streaming rendering adds `tail` configuration, supporting custom tail content and custom tail components while avoiding tail rendering before incomplete components. [#1296](https://github.com/ant-design/x/pull/1296) by [Div627](https://github.com/Div627)
+- 🐛 Fixed XMarkdown custom component streaming state detection to correctly handle void elements and isolate `streamStatus` across multiple instances with the same component name. [#1590](https://github.com/ant-design/x/pull/1590) by [Last-Order](https://github.com/Last-Order)
+- 🛠 Exported XMarkdown's `StreamCacheTokenType` type for external reuse of streaming-related types. [#1592](https://github.com/ant-design/x/pull/1592) by [Last-Order](https://github.com/Last-Order)
+- 📖 Added XMarkdown Playground and refreshed the streaming, examples, and data-display documentation, including the AntV Infographic example. [#1779](https://github.com/ant-design/x/pull/1779) by [Div627](https://github.com/Div627), [#1780](https://github.com/ant-design/x/pull/1780) by [Div627](https://github.com/Div627), [#1814](https://github.com/ant-design/x/pull/1814) by [Div627](https://github.com/Div627)
 
 ### @ant-design/x-skill
 

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local://form_validation_catalog.json",
+  "title": "Form Validation Catalog",
+  "description": "Custom catalog for form validation demo components.",
+  "catalogId": "local://form_validation_catalog.json",
+  "components": {
+    "RegistrationForm": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "RegistrationForm"
+        },
+        "step": {
+          "description": "Current step of the form.",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Form status.",
+          "type": "string",
+          "enum": ["error", "success", "loading", ""]
+        },
+        "errorMessage": {
+          "description": "Error message to display.",
+          "type": "string"
+        },
+        "action": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "context": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SuccessCard": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "SuccessCard"
+        },
+        "username": {
+          "description": "Registered username.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Registered email.",
+          "type": "string"
+        },
+        "accountType": {
+          "description": "Account type.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
