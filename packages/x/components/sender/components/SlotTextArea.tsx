@@ -111,7 +111,14 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   // ============================ State =============================
   const [
     slotConfigMap,
-    { getSlotValues, setSlotValues, getNodeInfo, mergeSlotConfig, getNodeTextValue },
+    {
+      getSlotValues,
+      setSlotValues,
+      getNodeInfo,
+      mergeSlotConfig,
+      getNodeTextValue,
+      clear: clearSlotConfigState,
+    },
   ] = useSlotConfigState(slotConfig);
   const [slotPlaceholders, setSlotPlaceholders] = useState<Map<string, React.ReactNode>>(new Map());
   const [skillPlaceholders, setSkillPlaceholders] = useState<React.ReactNode>(null);
@@ -861,9 +868,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     editableDom.innerHTML = '';
     skillRef.current = null;
     skillDomRef.current = null;
-    slotConfigMap.clear();
+    clearSlotConfigState();
     insertSkill();
-    setSlotValues({});
     lastSelectionRef.current = null;
     slotDomMap?.current?.clear();
     onInternalInput(null as unknown as React.FormEvent<HTMLDivElement>);
