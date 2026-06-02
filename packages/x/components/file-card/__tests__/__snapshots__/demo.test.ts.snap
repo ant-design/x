@@ -1357,20 +1357,25 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
       style="width:200px"
     >
       <div
-        aria-label="image-file.png"
-        class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
-        role="button"
+        aria-busy="true"
+        class="ant-image ant-image-progress-wrapper ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
         style="width:200px"
-        tabindex="0"
       >
-        <img
-          alt="image-file.png"
-          class="ant-image-img"
-          width="200"
+        <span
+          aria-live="polite"
+          role="status"
+          style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0"
+        >
+          Loading
+        </span>
+        <div
+          class="ant-image-progress-ink-1"
         />
         <div
-          aria-hidden="true"
-          class="ant-image-placeholder"
+          class="ant-image-progress-ink-2"
+        />
+        <div
+          class="ant-image-progress-content"
         >
           <div
             class="ant-file-card css-var-_R_0_"
@@ -1389,9 +1394,6 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
             </div>
           </div>
         </div>
-        <div
-          class="ant-image-cover ant-image-cover-center"
-        />
       </div>
       <div
         class="ant-file-card-image-loading"
@@ -1473,18 +1475,24 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
       class="ant-file-card-image ant-file-card-loading"
     >
       <div
-        aria-label="image-file.png"
-        class="ant-image ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
-        role="button"
-        tabindex="0"
+        aria-busy="true"
+        class="ant-image ant-image-progress-wrapper ant-file-card-image-img css-var-_R_0_ ant-image-css-var"
       >
-        <img
-          alt="image-file.png"
-          class="ant-image-img"
+        <span
+          aria-live="polite"
+          role="status"
+          style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0"
+        >
+          Loading
+        </span>
+        <div
+          class="ant-image-progress-ink-1"
         />
         <div
-          aria-hidden="true"
-          class="ant-image-placeholder"
+          class="ant-image-progress-ink-2"
+        />
+        <div
+          class="ant-image-progress-content"
         >
           <div
             class="ant-file-card css-var-_R_0_"
@@ -1503,9 +1511,6 @@ exports[`renders components/file-card/demo/image-loading.tsx correctly 1`] = `
             </div>
           </div>
         </div>
-        <div
-          class="ant-image-cover ant-image-cover-center"
-        />
       </div>
       <div
         class="ant-file-card-image-loading"
