@@ -2,6 +2,13 @@
    XMarkdown – default css
    ========================================== */
 
+/*
+ * Default tag styles are gated behind `:not(.x-md-disable-all):not(.x-md-disable-<tag>)`
+ * so consumers can opt out via the `disableDefaultStyles` prop. This prevents the
+ * descendant-selector defaults (e.g. `ul`/`li`/`code`) from polluting elements
+ * rendered by custom components (such as antd `Collapse`) inside the container.
+ */
+
 @keyframes x-markdown-fade-in {
   from {
     opacity: 0;
@@ -63,95 +70,95 @@ xmd-tail {
   white-space: pre-wrap;
 }
 
-.x-markdown th,
-.x-markdown td {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-th) th,
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-td) td {
   padding: var(--td-th-padding);
 }
 
-.x-markdown th {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-th) th {
   font-weight: var(--border-font-weight);
 }
 
-.x-markdown pre table {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-table) pre table {
   box-shadow: none;
 }
 
-.x-markdown pre td,
-.x-markdown pre th {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-td) pre td,
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-th) pre th {
   padding: var(--pre-th-td-padding);
   border: none;
   text-align: left;
 }
 
-.x-markdown p {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-p) p {
   margin: var(--margin-block);
 }
 
-.x-markdown p:first-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-p) p:first-child {
   margin-top: 0;
 }
 
-.x-markdown p:last-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-p) p:last-child {
   margin-bottom: 0;
 }
 
-.x-markdown ul,
-.x-markdown ol {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ul) ul,
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ol) ol {
   margin: var(--margin-ul-ol);
   padding: var(--padding-ul-ol);
 }
 
-.x-markdown ul:first-child,
-.x-markdown ol:first-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ul) ul:first-child,
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ol) ol:first-child {
   margin-top: 0;
 }
 
-.x-markdown ul:last-child,
-.x-markdown ol:last-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ul) ul:last-child,
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ol) ol:last-child {
   margin-bottom: 0;
 }
 
-.x-markdown ol > li {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) ol > li {
   list-style: decimal;
 }
 
-.x-markdown ul > li {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) ul > li {
   list-style: disc;
 }
 
-.x-markdown li {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) li {
   margin: var(--margin-li);
 }
 
-.x-markdown li:first-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) li:first-child {
   margin-top: 0;
 }
 
-.x-markdown li:last-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) li:last-child {
   margin-bottom: 0;
 }
 
-.x-markdown pre {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-pre) pre {
   margin: var(--margin-pre);
   overflow-x: auto;
 }
 
-.x-markdown pre:first-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-pre) pre:first-child {
   margin-top: 0;
 }
 
-.x-markdown pre:last-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-pre) pre:last-child {
   margin-bottom: 0;
 }
 
-.x-markdown code {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-code) code {
   padding: var(--padding-code-inline);
   margin: var(--margin-code-inline);
   font-size: var(--code-inline-text);
   border-radius: var(--small-border-radius);
 }
 
-.x-markdown pre code {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-code) pre code {
   padding: 0;
   margin: 0;
   font-size: inherit;
@@ -159,17 +166,17 @@ xmd-tail {
   line-height: 2;
 }
 
-.x-markdown img {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-img) img {
   max-width: 100%;
   height: auto;
   margin: var(--image-margin);
 }
 
-.x-markdown hr {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-hr) hr {
   margin: var(--hr-margin);
 }
 
-.x-markdown table:not(pre) {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-table) table:not(pre) {
   margin: var(--table-margin);
   border-collapse: collapse;
   display: block;
@@ -178,11 +185,11 @@ xmd-tail {
   overflow: auto;
 }
 
-.x-markdown table:not(pre):first-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-table) table:not(pre):first-child {
   margin-top: 0;
 }
 
-.x-markdown table:not(pre):last-child {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-table) table:not(pre):last-child {
   margin-bottom: 0;
 }
 
