@@ -118,11 +118,11 @@ xmd-tail {
   margin-bottom: 0;
 }
 
-.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) ol > li {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ol):not(.x-md-disable-li) ol > li {
   list-style: decimal;
 }
 
-.x-markdown:not(.x-md-disable-all):not(.x-md-disable-li) ul > li {
+.x-markdown:not(.x-md-disable-all):not(.x-md-disable-ul):not(.x-md-disable-li) ul > li {
   list-style: disc;
 }
 
