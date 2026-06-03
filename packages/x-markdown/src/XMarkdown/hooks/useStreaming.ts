@@ -243,7 +243,8 @@ const useStreaming = (
 ) => {
   const { streaming, components = {} } = config || {};
   const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
-  const [output, setOutput] = useState('');
+  // Non-streaming: seed output with full input so the first paint renders complete content and avoids layout jitter.
+  const [output, setOutput] = useState(!enableCache && typeof input === 'string' ? input : '');
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
   const handleIncompleteMarkdown = useCallback(
