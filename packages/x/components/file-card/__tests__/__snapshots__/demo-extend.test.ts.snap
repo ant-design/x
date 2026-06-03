@@ -2,10 +2,10 @@
 
 exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_4a_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_46_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_4a_"
+    class="ant-file-card css-var-_r_46_"
   >
     <audio
       class="ant-file-card-audio"
@@ -14,7 +14,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_4a_"
+    class="ant-file-card css-var-_r_46_"
   >
     <video
       class="ant-file-card-video"
@@ -23,7 +23,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     />
   </div>
   <div
-    class="ant-file-card css-var-_r_4a_"
+    class="ant-file-card css-var-_r_46_"
   >
     <div
       class="ant-file-card-file"
@@ -85,7 +85,7 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_4a_"
+    class="ant-file-card css-var-_r_46_"
   >
     <div
       class="ant-file-card-file"
@@ -153,10 +153,10 @@ exports[`renders components/file-card/demo/audio.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_49_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_45_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -211,7 +211,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -266,7 +266,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -321,7 +321,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -376,7 +376,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -431,7 +431,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -486,7 +486,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -541,7 +541,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -597,7 +597,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -653,7 +653,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -712,7 +712,7 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 1`
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_49_"
+    class="ant-file-card css-var-_r_45_"
   >
     <div
       class="ant-file-card-file"
@@ -774,10 +774,10 @@ exports[`renders components/file-card/demo/basic.tsx extend context correctly 2`
 
 exports[`renders components/file-card/demo/custom-description.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_48_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_44_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_48_"
+    class="ant-file-card css-var-_r_44_"
   >
     <div
       class="ant-file-card-file"
@@ -829,17 +829,17 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
           style="margin-top: 4px; line-height: 1.5;"
         >
           <div
-            class="ant-flex css-var-_r_48_ ant-flex-align-center ant-flex-justify-space-between"
+            class="ant-flex css-var-_r_44_ ant-flex-align-center ant-flex-justify-space-between"
             style="width: 100%;"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_r_48_"
+              class="ant-typography ant-typography-secondary css-var-_r_44_"
               style="font-size: 12px;"
             >
               Size: 2 MB
             </span>
             <button
-              class="ant-btn css-var-_r_48_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
+              class="ant-btn css-var-_r_44_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
               style="font-size: 12px; padding: 2px 8px; height: auto; line-height: 1.5;"
               type="button"
             >
@@ -876,7 +876,7 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_48_"
+    class="ant-file-card css-var-_r_44_"
   >
     <div
       class="ant-file-card-file"
@@ -928,17 +928,17 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
           style="margin-top: 4px; line-height: 1.5;"
         >
           <div
-            class="ant-flex css-var-_r_48_ ant-flex-align-center ant-flex-justify-space-between"
+            class="ant-flex css-var-_r_44_ ant-flex-align-center ant-flex-justify-space-between"
             style="width: 100%;"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_r_48_"
+              class="ant-typography ant-typography-secondary css-var-_r_44_"
               style="font-size: 12px;"
             >
               Size: 10 MB
             </span>
             <button
-              class="ant-btn css-var-_r_48_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
+              class="ant-btn css-var-_r_44_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
               style="font-size: 12px; padding: 2px 8px; height: auto; line-height: 1.5;"
               type="button"
             >
@@ -975,7 +975,7 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_48_"
+    class="ant-file-card css-var-_r_44_"
   >
     <div
       class="ant-file-card-file"
@@ -1027,17 +1027,17 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
           style="margin-top: 4px; line-height: 1.5;"
         >
           <div
-            class="ant-flex css-var-_r_48_ ant-flex-align-center ant-flex-justify-space-between"
+            class="ant-flex css-var-_r_44_ ant-flex-align-center ant-flex-justify-space-between"
             style="width: 100%;"
           >
             <span
-              class="ant-typography ant-typography-secondary css-var-_r_48_"
+              class="ant-typography ant-typography-secondary css-var-_r_44_"
               style="font-size: 12px;"
             >
               Size: 5 MB
             </span>
             <button
-              class="ant-btn css-var-_r_48_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
+              class="ant-btn css-var-_r_44_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm"
               style="font-size: 12px; padding: 2px 8px; height: auto; line-height: 1.5;"
               type="button"
             >
@@ -1080,10 +1080,10 @@ exports[`renders components/file-card/demo/custom-description.tsx extend context
 
 exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_47_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_43_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-file-card css-var-_r_47_"
+    class="ant-file-card css-var-_r_43_"
   >
     <div
       class="ant-file-card-file"
@@ -1138,7 +1138,7 @@ exports[`renders components/file-card/demo/icon.tsx extend context correctly 1`]
     </div>
   </div>
   <div
-    class="ant-file-card css-var-_r_47_"
+    class="ant-file-card css-var-_r_43_"
   >
     <div
       class="ant-file-card-file"
@@ -1354,20 +1354,25 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
       style="width: 200px;"
     >
       <div
-        aria-label="image-file.png"
-        class="ant-image ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
-        role="button"
+        aria-busy="true"
+        class="ant-image ant-image-progress-wrapper ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
         style="width: 200px;"
-        tabindex="0"
       >
-        <img
-          alt="image-file.png"
-          class="ant-image-img"
-          width="200"
+        <span
+          aria-live="polite"
+          role="status"
+          style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0px;"
+        >
+          Loading
+        </span>
+        <div
+          class="ant-image-progress-ink-1"
         />
         <div
-          aria-hidden="true"
-          class="ant-image-placeholder"
+          class="ant-image-progress-ink-2"
+        />
+        <div
+          class="ant-image-progress-content"
         >
           <div
             class="ant-file-card css-var-_r_42_"
@@ -1386,9 +1391,6 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             </div>
           </div>
         </div>
-        <div
-          class="ant-image-cover ant-image-cover-center"
-        />
       </div>
       <div
         class="ant-file-card-image-loading"
@@ -1470,18 +1472,24 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
       class="ant-file-card-image ant-file-card-loading"
     >
       <div
-        aria-label="image-file.png"
-        class="ant-image ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
-        role="button"
-        tabindex="0"
+        aria-busy="true"
+        class="ant-image ant-image-progress-wrapper ant-file-card-image-img css-var-_r_42_ ant-image-css-var"
       >
-        <img
-          alt="image-file.png"
-          class="ant-image-img"
+        <span
+          aria-live="polite"
+          role="status"
+          style="position: absolute; width: 1px; height: 1px; padding: 0px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0px;"
+        >
+          Loading
+        </span>
+        <div
+          class="ant-image-progress-ink-1"
         />
         <div
-          aria-hidden="true"
-          class="ant-image-placeholder"
+          class="ant-image-progress-ink-2"
+        />
+        <div
+          class="ant-image-progress-content"
         >
           <div
             class="ant-file-card css-var-_r_42_"
@@ -1500,9 +1508,6 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             </div>
           </div>
         </div>
-        <div
-          class="ant-image-cover ant-image-cover-center"
-        />
       </div>
       <div
         class="ant-file-card-image-loading"

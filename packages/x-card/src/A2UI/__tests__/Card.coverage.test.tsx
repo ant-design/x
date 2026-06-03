@@ -726,6 +726,83 @@ describe('Card.tsx coverage', () => {
       });
     });
   });
+
+  describe('v0.9 action context literal value', () => {
+    it('should include config literal values in reported context', async () => {
+      // 验证 v0.9 的行为：resolveActionContextPathRefs 会将配置侧字面量合并到上报 context 中。
+      // 配置侧非 { path } 字面量（如 label: 'static-label'）会出现在上报 context 里；
+      // 组件运行时传入的同名 key 优先级更高，会覆盖配置侧的值。
+      const onAction = jest.fn();
+
+      const ClickableComponent: React.FC<{
+        onAction?: (name: string, ctx: Record<string, any>) => void;
+      }> = ({ onAction: componentOnAction }) => (
+        <button
+          type="button"
+          data-testid="click-btn"
+          onClick={() =>
+            componentOnAction?.('click', {
+              // 只传 value，不传 label，让 label 完全来自配置侧字面量
+              value: 'runtime-value',
+            })
+          }
+        >
+          Click
+        </button>
+      );
+
+      render(
+        <Box
+          commands={[
+            {
+              version: 'v0.9',
+              updateComponents: {
+                surfaceId: 'card1',
+                components: [
+                  {
+                    id: 'root',
+                    component: 'ClickableComponent',
+                    action: {
+                      event: {
+                        name: 'click',
+                        context: {
+                          // 配置侧字面量：会被合并到上报 context 中
+                          label: 'static-label',
+                          // 配置侧 path 绑定：解析后以 { value } 格式合并
+                          value: { path: '/data/value' },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          ]}
+          components={{ ClickableComponent }}
+          onAction={onAction}
+        >
+          <Card id="card1" />
+        </Box>,
+      );
+
+      fireEvent.click(screen.getByTestId('click-btn'));
+
+      await waitFor(() => {
+        expect(onAction).toHaveBeenCalledWith(
+          expect.objectContaining({
+            name: 'click',
+            surfaceId: 'card1',
+            context: expect.objectContaining({
+              // 组件运行时传入的 value 优先
+              value: 'runtime-value',
+              // 配置侧字面量 label 被合并到上报 context 中
+              label: 'static-label',
+            }),
+          }),
+        );
+      });
+    });
+  });
 });
 
 describe('Card.tsx additional branch coverage', () => {
@@ -766,7 +843,10 @@ describe('Card.tsx additional branch coverage', () => {
 
   describe('resolveActionContextPathRefs v0.9 non-path-object branch (Card.tsx line 390-393)', () => {
     it('should pass through non-path-object values in v0.9 context', async () => {
-      // 测试覆盖 Card.tsx 行 394-396: v0.9 context 中值不是 path 对象时直接保留
+      // 测试覆盖 Card.tsx 行 394-396: v0.9 context 中值不是 path 对象时直接保留并合并到上报 context。
+      // resolveActionContextPathRefs 会将配置侧字面量（如 label: 'static-label'）放入 resolvedFromConfig，
+      // 再与组件运行时 context 合并（运行时值优先）。
+      // 组件运行时只传 value，不传 label，因此 label 完全来自配置侧字面量。
       const onAction = jest.fn();
 
       const ClickableComponent: React.FC<{
@@ -777,10 +857,9 @@ describe('Card.tsx additional branch coverage', () => {
           data-testid="click-btn"
           onClick={() =>
             componentOnAction?.('click', {
-              // 传递一个普通字符串值（非 path 对象）
-              label: 'hello',
-              // 传递一个 path 对象（会被解析）
-              value: { path: '/data/value' },
+              // 只传 value（对应配置侧 path 绑定），不传 label
+              // label 完全来自配置侧字面量，验证字面量被正确合并到上报 context
+              value: 'runtime-value',
             })
           }
         >
@@ -810,9 +889,11 @@ describe('Card.tsx additional branch coverage', () => {
                     action: {
                       event: {
                         name: 'click',
-                        // context 中包含 path 对象和非 path 对象
+                        // context 中包含 path 对象和非 path 对象（字面量）
                         context: {
+                          // 字面量：会被合并到上报 context 中
                           label: 'static-label',
+                          // path 绑定：解析后以 { value } 格式合并
                           value: { path: '/data/value' },
                         },
                       },
@@ -837,8 +918,10 @@ describe('Card.tsx additional branch coverage', () => {
             name: 'click',
             surfaceId: 'card1',
             context: expect.objectContaining({
-              // 非 path 对象的 label 应该直接保留
-              label: 'hello',
+              // 组件运行时传入的 value 优先
+              value: 'runtime-value',
+              // 配置侧字面量 label 被合并到上报 context 中
+              label: 'static-label',
             }),
           }),
         );
@@ -848,7 +931,10 @@ describe('Card.tsx additional branch coverage', () => {
 
   describe('resolveActionContextPathRefs v0.8 non-path-object branch (Card.tsx line 409-410)', () => {
     it('should pass through non-path-object values in v0.8 context', async () => {
-      // 测试覆盖 Card.tsx 行 411-413: v0.8 context 中值不是 path 对象时直接保留
+      // 测试覆盖 Card.tsx 行 411-413: v0.8 context 中值不是 path 对象时直接保留并合并到上报 context。
+      // resolveActionContextPathRefs 会将配置侧字面量（如 staticKey: 'literal-value'）放入 resolvedFromConfig，
+      // 再与组件运行时 context 合并（运行时值优先）。
+      // 组件运行时只传 dynamicKey，不传 staticKey，因此 staticKey 完全来自配置侧字面量。
       const onAction = jest.fn();
 
       const ClickableComponent: React.FC<{
@@ -859,10 +945,9 @@ describe('Card.tsx additional branch coverage', () => {
           data-testid="click-btn-v08"
           onClick={() =>
             componentOnAction?.('click', {
-              // 传递一个普通字符串值（非 path 对象）
-              staticKey: 'static-value',
-              // 传递一个 path 对象（会被解析）
-              dynamicKey: { path: '/data/dynamic' },
+              // 只传 dynamicKey（对应配置侧 path 绑定），不传 staticKey
+              // staticKey 完全来自配置侧字面量，验证字面量被正确合并到上报 context
+              dynamicKey: 'runtime-dynamic',
             })
           }
         >
@@ -886,11 +971,12 @@ describe('Card.tsx additional branch coverage', () => {
                           context: [
                             {
                               key: 'staticKey',
-                              // 非 path 对象，直接是字面值
+                              // 非 path 对象，直接是字面值：会被合并到上报 context 中
                               value: 'literal-value',
                             },
                             {
                               key: 'dynamicKey',
+                              // path 绑定：解析后以 { value } 格式合并
                               value: { path: '/data/dynamic' },
                             },
                           ],
@@ -922,9 +1008,11 @@ describe('Card.tsx additional branch coverage', () => {
           expect.objectContaining({
             name: 'click',
             surfaceId: 'card1',
-            // v0.8 中非 path 对象的值应该直接保留
             context: expect.objectContaining({
-              staticKey: 'static-value',
+              // 组件运行时传入的 dynamicKey 优先
+              dynamicKey: 'runtime-dynamic',
+              // 配置侧字面量 staticKey 被合并到上报 context 中
+              staticKey: 'literal-value',
             }),
           }),
         );
@@ -1066,8 +1154,11 @@ describe('Card.tsx additional branch coverage', () => {
   });
 
   describe('v0.8 resolveActionContextPathRefs with empty resolvedContext (Card.tsx line 418)', () => {
-    it('should return original componentContext when v0.8 context has no path objects', async () => {
-      // 测试 v0.8 格式下 resolvedContext 为空时返回原始 componentContext
+    it('should merge config literal values into reported context when v0.8 context has no path objects', async () => {
+      // 测试 v0.8 格式下 context 数组中只有字面量（无 path 对象）时的行为：
+      // resolveActionContextPathRefs 会将配置侧字面量（literalKey: 'literal-value'）放入 resolvedFromConfig，
+      // 再与组件运行时 context 合并（运行时值优先）。
+      // 因此上报的 context 同时包含运行时传入的值和配置侧字面量。
       const onAction = jest.fn();
 
       const ClickableComponent: React.FC<{
@@ -1098,11 +1189,11 @@ describe('Card.tsx additional branch coverage', () => {
                     component: {
                       ClickableComponent: {
                         action: {
-                          // v0.8 格式: context 是数组，但没有 path 对象
+                          // v0.8 格式: context 是数组，但没有 path 对象，只有字面量
                           context: [
                             {
                               key: 'literalKey',
-                              value: 'literal-value', // 非 path 对象
+                              value: 'literal-value', // 非 path 对象，会被 extractDataUpdatesV08 跳过
                             },
                           ],
                         },
@@ -1133,6 +1224,12 @@ describe('Card.tsx additional branch coverage', () => {
           expect.objectContaining({
             name: 'click',
             surfaceId: 'card1',
+            context: expect.objectContaining({
+              // 组件运行时传入的值
+              someValue: 'test',
+              // 配置侧字面量被合并到上报 context 中
+              literalKey: 'literal-value',
+            }),
           }),
         );
       });
@@ -1241,6 +1338,8 @@ describe('Card.tsx additional branch coverage', () => {
 
       await waitFor(() => {
         expect(screen.getByTestId('strict')).toBeInTheDocument();
+        // 验证开发模式下 validation.errors.forEach 确实被执行，并输出了包含字段名的警告
+        expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('requiredProp'));
       });
 
       process.env.NODE_ENV = originalEnv;

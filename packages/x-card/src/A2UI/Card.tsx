@@ -6,9 +6,11 @@ import type { Catalog } from './catalog';
 
 // v0.8 specific logic
 import { resolvePropsV08, extractDataUpdatesV08, applyDataModelUpdateV08 } from './Card.v0.8';
+import type { ActionConfigV08 } from './Card.v0.8';
 
 // v0.9 specific logic
 import { resolvePropsV09, extractDataUpdatesV09, applyDataModelUpdateV09 } from './Card.v0.9';
+import type { ActionConfigV09 } from './Card.v0.9';
 
 // Shared logic
 import {
@@ -22,13 +24,16 @@ export interface CardProps {
   id: string;
 }
 
+/** actionConfig 联合类型，兼容 v0.8 和 v0.9 格式 */
+type ActionConfig = ActionConfigV08 | ActionConfigV09;
+
 /** Recursively render a single node, child nodes are found via getById */
 function renderNode(
   nodeId: string,
   transformer: ComponentTransformer,
   components: Record<string, React.ComponentType<any>>,
   dataModel: Record<string, any>,
-  onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void,
+  onAction?: (name: string, context: Record<string, any>, actionConfig?: ActionConfig) => void,
   onDataChange?: (path: string, value: any) => void,
   catalog?: Catalog,
   commandVersion?: 'v0.8' | 'v0.9',
@@ -56,7 +61,7 @@ interface NodeRendererProps {
   transformer: ComponentTransformer;
   components: Record<string, React.ComponentType<any>>;
   dataModel: Record<string, any>;
-  onAction?: (name: string, context: Record<string, any>, actionConfig?: any) => void;
+  onAction?: (name: string, context: Record<string, any>, actionConfig?: ActionConfig) => void;
   /** Callback when component writes back to dataModel via onChange, path is the binding path */
   onDataChange?: (path: string, value: any) => void;
   /** catalog for component validation */
@@ -329,7 +334,11 @@ const Card: React.FC<CardProps> = ({ id }) => {
    * Handler when action is triggered
    * Use different extractDataUpdates and resolveActionContext based on version
    */
-  const handleAction = (name: string, context: Record<string, any>, actionConfig?: any) => {
+  const handleAction = (
+    name: string,
+    context: Record<string, any>,
+    actionConfig?: ActionConfig,
+  ) => {
     // Use different extractDataUpdates based on version
     const dataUpdates =
       commandVersion === 'v0.9'
@@ -388,9 +397,10 @@ const Card: React.FC<CardProps> = ({ id }) => {
       for (const [key, val] of Object.entries(v09Context)) {
         if (isPathObject(val)) {
           // 从 dataModel 读取实际值，保留其他属性（如 label），将 path 替换为 value
+          // 注意：value: actualValue 必须放在 ...rest 之后，防止 rest 中残留的 value 字段覆盖解析结果
           const actualValue = getValueByPath(dataModel, (val as { path: string }).path);
           const { path, ...rest } = val as { path: string; [key: string]: any };
-          resolvedFromConfig[key] = { value: actualValue, ...rest };
+          resolvedFromConfig[key] = { ...rest, value: actualValue };
         } else {
           resolvedFromConfig[key] = val;
         }

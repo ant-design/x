@@ -148,8 +148,10 @@ v0.8 使用数组格式定义路径绑定：
 ```tsx
 const handleAction = (payload: ActionPayload) => {
   if (payload.name === 'submit_form') {
-    // context 是完整的 dataModel 快照，按数据模型结构取值
-    const { email, name } = payload.context.form;
+    // 配置中使用 { path } 绑定的 key 会被解析为 { value, ...rest } 格式；
+    // 配置侧字面量和组件运行时传入的值保持原样。
+    const email = payload.context.email?.value;
+    const name = payload.context.name?.value;
     // 1. 调用 Agent API
     // 2. 追加新命令作为响应
     setCmdQueue(prev => [
@@ -210,16 +212,19 @@ const formCommands: XAgentCommand_v0_9[] = [
   { version: 'v0.9', updateDataModel: { surfaceId: 'form', path: '/form', value: { email: '' } } },
 ];
 
-// 2. 处理提交（context 是完整 dataModel 快照）
+// 2. 处理提交
+// 配置中使用 { path } 绑定的 key 会被解析为 { value, ...rest } 格式；
+// 配置侧字面量和组件运行时传入的值保持原样。
 const handleAction = async (payload: ActionPayload) => {
   if (payload.name === 'submit') {
+    const email = payload.context.email?.value;
     // 显示加载状态
     setCmdQueue((prev) => [
       ...prev,
       { version: 'v0.9', updateDataModel: { surfaceId: 'form', path: '/ui/loading', value: true } },
     ]);
     // 调用 Agent 处理，返回后展示结果
-    const result = await callAgent(payload.context);
+    const result = await callAgent({ email });
     setCmdQueue((prev) => [
       ...prev,
       {
