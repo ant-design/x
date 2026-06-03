@@ -243,8 +243,9 @@ const useStreaming = (
 ) => {
   const { streaming, components = {} } = config || {};
   const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
+  const [streamingOutput, setStreamingOutput] = useState('');
   // Non-streaming: seed output with full input so the first paint renders complete content and avoids layout jitter.
-  const [output, setOutput] = useState(!enableCache && typeof input === 'string' ? input : '');
+  const output = enableCache ? streamingOutput : (typeof input === 'string' ? input : '');
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
   const handleIncompleteMarkdown = useCallback(
@@ -282,7 +283,7 @@ const useStreaming = (
   const processStreaming = useCallback(
     (text: string): void => {
       if (!text) {
-        setOutput('');
+        setStreamingOutput('');
         cacheRef.current = getInitialCache();
         return;
       }
@@ -323,7 +324,7 @@ const useStreaming = (
       }
 
       const incompletePlaceholder = handleIncompleteMarkdown(cache);
-      setOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
+      setStreamingOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
     },
     [handleIncompleteMarkdown],
   );
@@ -331,11 +332,13 @@ const useStreaming = (
   useEffect(() => {
     if (typeof input !== 'string') {
       console.error(`X-Markdown: input must be string, not ${typeof input}.`);
-      setOutput('');
+      setStreamingOutput('');
       return;
     }
 
-    enableCache ? processStreaming(input) : setOutput(input);
+    if (enableCache) {
+      processStreaming(input);
+    }
   }, [input, enableCache, processStreaming]);
 
   return output;
