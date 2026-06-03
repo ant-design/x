@@ -84,6 +84,23 @@ interface StreamingOption {
 
 type StreamStatus = 'loading' | 'done';
 
+/**
+ * @description 可关闭内置默认样式的标签
+ * @description Tags whose built-in default styles can be disabled
+ */
+type DefaultStyleTag =
+  | 'p'
+  | 'ul'
+  | 'ol'
+  | 'li'
+  | 'pre'
+  | 'code'
+  | 'table'
+  | 'th'
+  | 'td'
+  | 'img'
+  | 'hr';
+
 type ComponentProps<T extends Record<string, unknown> = Record<string, unknown>> =
   React.HTMLAttributes<HTMLElement> & {
     /**
@@ -191,14 +208,21 @@ interface XMarkdownProps {
    * @default false
    */
   debug?: boolean;
+  /**
+   * @description 是否关闭内置标签的默认样式。传入 `true` 关闭全部，传入数组按标签关闭（如 `['ul', 'ol', 'li']`），用于避免默认样式污染自定义组件内部的元素
+   * @description Whether to disable built-in default styles for tags. Pass `true` to disable all, or an array to disable specific tags (e.g. `['ul', 'ol', 'li']`), useful to prevent default styles from polluting elements inside custom components
+   * @default false
+   */
+  disableDefaultStyles?: boolean | DefaultStyleTag[];
 }
 
 export type {
-  XMarkdownProps,
+  ComponentProps,
+  DefaultStyleTag,
+  StreamingOption,
+  StreamStatus,
+  TailConfig,
   Token,
   Tokens,
-  StreamStatus,
-  ComponentProps,
-  StreamingOption,
-  TailConfig,
+  XMarkdownProps,
 };
