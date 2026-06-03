@@ -65,7 +65,7 @@ const List: React.FC<FileCardListProps> = (props) => {
     [`${prefixCls}-rtl`]: direction === 'rtl',
   });
 
-  const checkPing = () => {
+  const checkPing = React.useCallback(() => {
     const containerEle = containerRef.current;
 
     if (!containerEle) {
@@ -82,7 +82,7 @@ const List: React.FC<FileCardListProps> = (props) => {
       setPingStart(containerEle.scrollTop !== 0);
       setPingEnd(containerEle.scrollHeight - containerEle.clientHeight !== containerEle.scrollTop);
     }
-  };
+  }, [overflow]);
 
   React.useLayoutEffect(() => {
     if (!overflow || overflow === 'wrap') {
@@ -96,7 +96,7 @@ const List: React.FC<FileCardListProps> = (props) => {
     return () => {
       window.cancelAnimationFrame(frameId);
     };
-  }, [list, overflow]);
+  }, [list, overflow, checkPing]);
 
   const onScrollOffset = (offset: -1 | 1) => {
     const containerEle = containerRef.current;
