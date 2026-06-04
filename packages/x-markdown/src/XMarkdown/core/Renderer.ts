@@ -121,6 +121,13 @@ class Renderer {
   }
 
   public processHtml(htmlString: string): React.ReactNode {
+    // SSR / no DOM: DOMPurify needs a DOM to sanitize, so its default export has no
+    // `sanitize` method when there is no `window` (e.g. server pre-render). Skip rendering
+    // here and let the client hydrate, matching the pre-streaming-refactor server behavior.
+    if (typeof DOMPurify.sanitize !== 'function') {
+      return null;
+    }
+
     const unclosedTags = this.detectUnclosedTags(htmlString);
     const cidRef = { current: 0, tagIndexes: {} };
 
