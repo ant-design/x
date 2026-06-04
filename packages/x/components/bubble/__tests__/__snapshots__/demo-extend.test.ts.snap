@@ -4021,11 +4021,9 @@ exports[`renders components/bubble/demo/markdown.tsx extend context correctly 1`
             <div
               class="x-markdown"
             >
-              <blockquote>
-                <p>
-                  Render as markdown content to show rich text!
-                </p>
-              </blockquote>
+              <p>
+                Render as markdown content to show rich text!
+              </p>
               <p>
                 Link: 
                 <a
