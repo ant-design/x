@@ -1,6 +1,6 @@
 ---
 name: x-card
-version: 2.8.0-beta.1
+version: 2.9.0
 description: Use when building AI-driven UIs with @ant-design/x-card — covers XCard.Box, XCard.Card, A2UI v0.9 commands, data binding, catalogs, actions, and streaming patterns.
 ---
 

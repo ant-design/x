@@ -1,6 +1,6 @@
 ---
 name: x-components
-version: 2.8.0-beta.1
+version: 2.9.0
 description: Use when building AI chat UIs with @ant-design/x components — covers Bubble, Sender, Conversations, Prompts, ThoughtChain, Actions, Welcome, Attachments, Sources, Suggestion, Think, FileCard, CodeHighlighter, Mermaid, Folder, XProvider, and Notification.
 ---
 
