@@ -73,18 +73,33 @@ const useSlotConfigState = (
     mergeSlotConfig: (newSlotConfig: SlotConfigType[]) => void;
     getNodeInfo: (targetNode: HTMLElement) => NodeInfo | null;
     getNodeTextValue: (node: Node) => string;
+    clear: () => void;
   },
 ] => {
   const [state, _setState] = useState<SlotValues>({});
   const stateRef = useRef<SlotValues>(state);
   const slotConfigMapRef = useRef<Map<string, SlotConfigType>>(new Map());
+  // Track keys inserted at runtime via mergeSlotConfig so the slotConfig effect below
+  // can preserve them when the prop reference changes (e.g. parent re-renders with an
+  // inline `[]`); otherwise ref.insert(...) entries silently disappear from getValue().
+  //
+  // Grows monotonically until clear(); intentional, the residual cost is one string
+  // per ever-inserted key.
+  const runtimeKeysRef = useRef<Set<string>>(new Set());
 
   // 初始化 slotConfig
   useEffect(() => {
     if (!slotConfig) return;
-    slotConfigMapRef.current.clear();
+    slotConfigMapRef.current.forEach((_, key) => {
+      if (!runtimeKeysRef.current.has(key)) slotConfigMapRef.current.delete(key);
+    });
+
     buildSlotConfigMap(slotConfig, slotConfigMapRef.current);
+
     const newValues = buildSlotValues(slotConfig);
+    runtimeKeysRef.current.forEach((key) => {
+      if (key in stateRef.current) newValues[key] = stateRef.current[key];
+    });
     _setState(newValues);
     stateRef.current = newValues;
   }, [slotConfig]);
@@ -98,13 +113,22 @@ const useSlotConfigState = (
   const mergeSlotConfig = useCallback((newSlotConfig: SlotConfigType[]) => {
     const newValues = buildSlotValues(newSlotConfig);
 
-    // 更新配置映射
     newSlotConfig.forEach((node) => {
-      if (node.key) slotConfigMapRef.current.set(node.key, node);
+      if (node.key) {
+        slotConfigMapRef.current.set(node.key, node);
+        runtimeKeysRef.current.add(node.key);
+      }
     });
 
     _setState((prev) => ({ ...prev, ...newValues }));
     stateRef.current = { ...stateRef.current, ...newValues };
+  }, []);
+
+  const clear = useCallback(() => {
+    slotConfigMapRef.current.clear();
+    runtimeKeysRef.current.clear();
+    _setState({});
+    stateRef.current = {};
   }, []);
 
   const getNodeInfo = useCallback(
@@ -162,6 +186,7 @@ const useSlotConfigState = (
       mergeSlotConfig,
       getNodeInfo,
       getNodeTextValue,
+      clear,
     },
   ];
 };

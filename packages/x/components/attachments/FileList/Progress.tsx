@@ -14,7 +14,7 @@ export default function Progress(props: ProgressProps) {
     <AntdProgress
       type="circle"
       percent={percent}
-      size={token.fontSizeHeading2 * 2}
+      size={Number(token.fontSizeHeading2) * 2}
       strokeColor="#FFF"
       railColor="rgba(255, 255, 255, 0.3)"
       format={(ptg) => <span style={{ color: '#FFF' }}>{(ptg || 0).toFixed(0)}%</span>}
