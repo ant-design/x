@@ -74,7 +74,7 @@ interface FileContentService {
 }
 ```
 
-## 语义化 DOM
+## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 
