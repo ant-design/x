@@ -5,9 +5,11 @@ exports[`XMarkdown animation parent is custom components 1`] = `
   <div
     class="x-markdown"
   >
-    <p>
+    <span
+      style="animation: x-markdown-fade-in 200ms ease-in-out forwards; color: inherit;"
+    >
       This is Text.
-    </p>
+    </span>
   </div>
 </div>
 `;
@@ -17,13 +19,11 @@ exports[`XMarkdown animation parent is not custom components 1`] = `
   <div
     class="x-markdown"
   >
-    <p>
-      <span
-        style="animation: x-markdown-fade-in 200ms ease-in-out forwards; color: inherit;"
-      >
-        This is Text.
-      </span>
-    </p>
+    <span
+      style="animation: x-markdown-fade-in 200ms ease-in-out forwards; color: inherit;"
+    >
+      This is Text.
+    </span>
   </div>
 </div>
 `;
@@ -33,16 +33,14 @@ exports[`XMarkdown support checkbox is checked 1`] = `
   <div
     class="x-markdown"
   >
-    <ul>
-      <li>
-        <input
-          checked=""
-          disabled=""
-          type="checkbox"
-        />
-         checkbox
-      </li>
-    </ul>
+    <li>
+      <input
+        checked=""
+        disabled=""
+        type="checkbox"
+      />
+       checkbox
+    </li>
   </div>
 </div>
 `;
@@ -52,15 +50,13 @@ exports[`XMarkdown support checkbox not checked 1`] = `
   <div
     class="x-markdown"
   >
-    <ul>
-      <li>
-        <input
-          disabled=""
-          type="checkbox"
-        />
-         checkbox
-      </li>
-    </ul>
+    <li>
+      <input
+        disabled=""
+        type="checkbox"
+      />
+       checkbox
+    </li>
   </div>
 </div>
 `;
