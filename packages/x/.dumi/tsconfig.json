@@ -1,7 +1,11 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
   },
-  "include": ["**/*", "../typings/index.d.ts"]
+  "include": [],
+  "exclude": ["**/*"]
 }
