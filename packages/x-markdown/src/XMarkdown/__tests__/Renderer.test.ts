@@ -1032,20 +1032,28 @@ describe('Renderer', () => {
 
       const renderer = new Renderer({ components });
 
-      // Spy on DOMPurify.sanitize
-      const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
+      const createElementSpy = jest.spyOn(React, 'createElement');
 
+      // Verify that custom tags are preserved and dangerous tags (script) are removed
       const html = '<custom-tag>content</custom-tag><script>alert("xss")</script>';
       renderer.processHtml(html);
 
-      expect(sanitizeSpy).toHaveBeenCalledWith(
-        html,
+      // The custom tag should be rendered (via React.createElement)
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
         expect.objectContaining({
-          ADD_TAGS: expect.arrayContaining(['custom-tag']),
+          streamStatus: 'done',
         }),
       );
 
-      sanitizeSpy.mockRestore();
+      // The script tag should be stripped by DOMPurify — no createElement
+      // call should have 'alert' or 'script' in its arguments
+      const scriptCalls = createElementSpy.mock.calls.filter(
+        (call) => typeof call[0] === 'string' && (call[0] === 'script' || call[0] === 'Script'),
+      );
+      expect(scriptCalls).toHaveLength(0);
+
+      createElementSpy.mockRestore();
     });
 
     it('should respect user dompurifyConfig', () => {
@@ -1063,22 +1071,30 @@ describe('Renderer', () => {
         dompurifyConfig: userConfig,
       });
 
-      // Spy on DOMPurify.sanitize
-      const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
+      const createElementSpy = jest.spyOn(React, 'createElement');
 
+      // With ALLOWED_TAGS and ALLOWED_ATTR, only the custom-tag with class
+      // attribute should be preserved; id attribute should be stripped
       const html = '<custom-tag class="test" id="test-id">content</custom-tag>';
       renderer.processHtml(html);
 
-      expect(sanitizeSpy).toHaveBeenCalledWith(
-        html,
+      // The custom tag should be rendered with the class attribute
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
         expect.objectContaining({
-          ALLOWED_TAGS: expect.arrayContaining(['custom-tag']),
-          ALLOWED_ATTR: expect.arrayContaining(['class']),
-          ADD_TAGS: expect.arrayContaining(['custom-tag']),
+          class: 'test',
         }),
       );
 
-      sanitizeSpy.mockRestore();
+      // Verify id attribute is stripped (not in ALLOWED_ATTR)
+      expect(createElementSpy).not.toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          id: 'test-id',
+        }),
+      );
+
+      createElementSpy.mockRestore();
     });
   });
 
