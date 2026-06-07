@@ -64,7 +64,7 @@ function createPatchedDOMPurify(): typeof DOMPurify {
               if (value) return value;
               // Fallback: for Element nodes, use tagName directly
               if (this.nodeType === 1 && 'tagName' in this) {
-                return (this as Element).tagName;
+                return (this as unknown as { tagName: string }).tagName;
               }
               // Fallback: standard nodeName values for other node types
               switch (this.nodeType) {
