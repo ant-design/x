@@ -23,5 +23,5 @@
     }
   },
   "include": [".dumirc.ts", "**/*"],
-  "exclude": ["node_modules", "lib", "es", "dist"]
+  "exclude": ["node_modules", "lib", "es", "dist", ".dumi"]
 }
