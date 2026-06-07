@@ -326,7 +326,7 @@ class Parser {
 
     // If the last token is not text type, don't inject tail
     // This prevents tail from appearing before incomplete components
-    if (!lastNonEmptyToken || lastNonEmptyToken.type !== 'text') {
+    if (lastNonEmptyToken?.type !== 'text') {
       return null;
     }
 

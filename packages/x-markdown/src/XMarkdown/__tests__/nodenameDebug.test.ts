@@ -13,7 +13,7 @@ describe('Node.nodeName in happy-dom', () => {
 
     // Check what happens with the template content owner document
     const template = document.createElement('template');
-    if (template.content && template.content.ownerDocument) {
+    if (template.content?.ownerDocument) {
       const doc = template.content.ownerDocument;
       const el2 = doc.createElement('streaming-component');
       console.log('template doc createElement nodeName:', el2.nodeName);
