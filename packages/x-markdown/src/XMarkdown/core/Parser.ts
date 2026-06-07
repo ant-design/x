@@ -51,6 +51,13 @@ export function escapeHtml(html: string, encode?: boolean) {
 // Symbol to mark tokens for tail injection (avoids property name conflicts)
 const TAIL_MARKER = Symbol('tailMarker');
 
+// Sentinel characters (Unicode Private Use Area) wrapping placeholders for
+// protected newlines inside custom tags. Using PUA characters instead of `__`
+// avoids the placeholder being interpreted as markdown syntax (e.g. `__bold__`).
+const PLACEHOLDER_PREFIX = '\uE000X_MD_NL_';
+const PLACEHOLDER_SUFFIX = '\uE001';
+const PLACEHOLDER_REGEX = /\uE000X_MD_NL_\d+\uE001/g;
+
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
 
@@ -246,10 +253,14 @@ class Parser {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          if (innerContent.includes('\n\n')) {
-            const protectedInner = innerContent.replace(/\n\n/g, () => {
-              const ph = `__X_MD_PLACEHOLDER_${placeholderIndex++}__`;
-              placeholders.set(ph, '\n\n');
+          if (innerContent.includes('\n')) {
+            // Custom tag inner content is treated as opaque text. Protect every
+            // newline (not only blank lines) so that block-level markdown syntax
+            // inside the tag (e.g. ordered/unordered lists, headings) is not parsed
+            // and does not split the custom tag structure.
+            const protectedInner = innerContent.replace(/\n/g, () => {
+              const ph = `${PLACEHOLDER_PREFIX}${placeholderIndex++}${PLACEHOLDER_SUFFIX}`;
+              placeholders.set(ph, '\n');
               return ph;
             });
             result.push(openTag + protectedInner + closeTag);
@@ -273,10 +284,7 @@ class Parser {
     if (placeholders.size === 0) {
       return content;
     }
-    return content.replace(
-      /__X_MD_PLACEHOLDER_\d+__/g,
-      (match) => placeholders.get(match) ?? match,
-    );
+    return content.replace(PLACEHOLDER_REGEX, (match) => placeholders.get(match) ?? match);
   }
 
   /**
