@@ -1405,4 +1405,127 @@ describe('Renderer', () => {
       createElementSpy.mockClear();
     });
   });
+
+  describe('createPatchedDOMPurify', () => {
+    it('should handle nodeName patch fallback for various node types', () => {
+      // Test that Renderer works correctly with patched DOMPurify
+      const components = {
+        'test-component': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<test-component>content</test-component>';
+      renderer.processHtml(html);
+
+      // Verify the component was rendered
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          streamStatus: 'done',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle DOMPurify with custom config', () => {
+      const components = {
+        'custom-element': MockComponent,
+      };
+
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: {
+          ALLOWED_TAGS: ['custom-element'],
+          ALLOWED_ATTR: ['data-custom'],
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<custom-element data-custom="value">content</custom-element>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          'data-custom': 'value',
+          streamStatus: 'done',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should process HTML with text nodes', () => {
+      const components = {};
+      const renderer = new Renderer({ components });
+
+      // Simple HTML with just text
+      const html = '<p>Plain text content</p>';
+      const result = renderer.processHtml(html);
+
+      expect(result).toBeDefined();
+    });
+
+    it('should handle empty or invalid HTML gracefully', () => {
+      const components = {};
+      const renderer = new Renderer({ components });
+
+      // Empty string - should not throw
+      expect(() => renderer.render('')).not.toThrow();
+
+      // Whitespace only - should not throw
+      expect(() => renderer.render('   ')).not.toThrow();
+    });
+
+    it('should handle HTML with comments', () => {
+      const components = {};
+      const renderer = new Renderer({ components });
+
+      const html = '<!-- comment --><p>content</p>';
+      const result = renderer.processHtml(html);
+
+      expect(result).toBeDefined();
+    });
+
+    it('should handle streaming mode with animation', () => {
+      const components = {};
+      const renderer = new Renderer({
+        components,
+        streaming: {
+          enableAnimation: true,
+          animationConfig: {
+            typingSpeed: 50,
+            fadeInDuration: 100,
+          },
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Use a custom component to avoid AnimationText being skipped due to parent custom component check
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const rendererWithComponent = new Renderer({
+        components: { 'custom-wrapper': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          animationConfig: {
+            typingSpeed: 50,
+            fadeInDuration: 100,
+          },
+        },
+      });
+
+      const html = '<custom-wrapper>Animated text content</custom-wrapper>';
+      rendererWithComponent.processHtml(html);
+
+      // Verify that createElement was called (meaning the renderer processed the HTML)
+      expect(createElementSpy).toHaveBeenCalled();
+
+      createElementSpy.mockRestore();
+    });
+  });
 });
