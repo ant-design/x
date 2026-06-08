@@ -184,6 +184,7 @@ describe('XMarkdown', () => {
     const { container } = render(
       <XMarkdown
         content={markdown}
+        rawTextComponents
         components={{
           custom: (props) => {
             receivedChildren = props.children;
@@ -207,6 +208,7 @@ describe('XMarkdown', () => {
       <XMarkdown
         content={markdown}
         streaming={{ hasNextChunk: true }}
+        rawTextComponents
         components={{
           custom: (props) => {
             receivedChildren = props.children;
@@ -220,14 +222,14 @@ describe('XMarkdown', () => {
     expect(container.querySelector('a')).not.toBeInTheDocument();
   });
 
-  it('keeps native component children as plain text when rawCustomComponents is true', () => {
+  it('keeps native component children as plain text when rawTextComponents is true', () => {
     let receivedChildren: React.ReactNode;
     const markdown = '<span>*hello* <i>world</i></span>';
 
     const { container } = render(
       <XMarkdown
         content={markdown}
-        rawCustomComponents
+        rawTextComponents
         components={{
           span: (props) => {
             receivedChildren = props.children;

@@ -7,7 +7,7 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
-  rawCustomComponents?: boolean;
+  rawTextComponents?: boolean | string[];
   escapeRawHtml?: boolean;
 };
 
@@ -34,121 +34,6 @@ const escapeReplacements: Record<string, string> = {
   '/': '&#x2F;',
 };
 const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
-
-const NATIVE_HTML_TAGS = new Set([
-  'a',
-  'abbr',
-  'address',
-  'area',
-  'article',
-  'aside',
-  'audio',
-  'b',
-  'base',
-  'bdi',
-  'bdo',
-  'blockquote',
-  'body',
-  'br',
-  'button',
-  'canvas',
-  'caption',
-  'cite',
-  'code',
-  'col',
-  'colgroup',
-  'data',
-  'datalist',
-  'dd',
-  'del',
-  'details',
-  'dfn',
-  'dialog',
-  'div',
-  'dl',
-  'dt',
-  'em',
-  'embed',
-  'fieldset',
-  'figcaption',
-  'figure',
-  'footer',
-  'form',
-  'h1',
-  'h2',
-  'h3',
-  'h4',
-  'h5',
-  'h6',
-  'head',
-  'header',
-  'hgroup',
-  'hr',
-  'html',
-  'i',
-  'iframe',
-  'img',
-  'input',
-  'ins',
-  'kbd',
-  'label',
-  'legend',
-  'li',
-  'link',
-  'main',
-  'map',
-  'mark',
-  'menu',
-  'meta',
-  'meter',
-  'nav',
-  'noscript',
-  'object',
-  'ol',
-  'optgroup',
-  'option',
-  'output',
-  'p',
-  'picture',
-  'pre',
-  'progress',
-  'q',
-  'rp',
-  'rt',
-  'ruby',
-  's',
-  'samp',
-  'script',
-  'search',
-  'section',
-  'select',
-  'slot',
-  'small',
-  'source',
-  'span',
-  'strong',
-  'style',
-  'sub',
-  'summary',
-  'sup',
-  'table',
-  'tbody',
-  'td',
-  'template',
-  'textarea',
-  'tfoot',
-  'th',
-  'thead',
-  'time',
-  'title',
-  'tr',
-  'track',
-  'u',
-  'ul',
-  'var',
-  'video',
-  'wbr',
-]);
 
 export function escapeHtml(html: string, encode?: boolean) {
   if (encode) {
@@ -293,9 +178,10 @@ class Parser {
     placeholders: Map<string, string>;
   } {
     const placeholders = new Map<string, string>();
-    const customTagNames = Object.keys(this.options.components || {}).filter((name) => {
-      return this.options.rawCustomComponents || !NATIVE_HTML_TAGS.has(name.toLowerCase());
-    });
+    const rawTextTagNames = this.getRawTextTagNames();
+    const customTagNames = Object.keys(this.options.components || {}).filter((name) =>
+      this.shouldProtectComponentTag(name, rawTextTagNames),
+    );
 
     if (customTagNames.length === 0) {
       return { protected: content, placeholders };
@@ -369,6 +255,7 @@ class Parser {
           const openTag = open.openTag;
           const closeTag = pos.match;
           const innerContent = content.slice(startPos + openTag.length, pos.index);
+          const shouldEscapeInnerContent = rawTextTagNames.has(open.tagName);
 
           if (lastIndex < startPos) {
             result.push(content.slice(lastIndex, startPos));
@@ -378,7 +265,7 @@ class Parser {
             createPlaceholder({
               protected:
                 openTag +
-                (this.options.rawCustomComponents ? escapeHtml(innerContent, true) : innerContent) +
+                (shouldEscapeInnerContent ? escapeHtml(innerContent, true) : innerContent) +
                 closeTag,
             }),
           );
@@ -396,7 +283,7 @@ class Parser {
       const unclosedContent = content.slice(open.start);
       result.push(
         createPlaceholder({
-          protected: this.options.rawCustomComponents
+          protected: rawTextTagNames.has(open.tagName)
             ? this.escapeUnclosedTagContent(unclosedContent, open.openTag)
             : unclosedContent,
         }),
@@ -409,6 +296,24 @@ class Parser {
     }
 
     return { protected: result.join(''), placeholders };
+  }
+
+  private getRawTextTagNames(): Set<string> {
+    const { rawTextComponents, components } = this.options;
+    if (!rawTextComponents) {
+      return new Set();
+    }
+
+    if (rawTextComponents === true) {
+      return new Set(Object.keys(components || {}).map((name) => name.toLowerCase()));
+    }
+
+    return new Set(rawTextComponents.map((name) => name.toLowerCase()));
+  }
+
+  private shouldProtectComponentTag(tagName: string, rawTextTagNames: Set<string>): boolean {
+    const normalizedTagName = tagName.toLowerCase();
+    return rawTextTagNames.has(normalizedTagName) || !!this.options.protectCustomTagNewlines;
   }
 
   private escapeUnclosedTagContent(content: string, openTag: string): string {

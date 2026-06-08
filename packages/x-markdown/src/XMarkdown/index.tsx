@@ -21,7 +21,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     openLinksInNewTab,
     dompurifyConfig,
     protectCustomTagNewlines,
-    rawCustomComponents,
+    rawTextComponents,
     escapeRawHtml,
     debug,
     disableDefaultStyles,
@@ -73,7 +73,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
         openLinksInNewTab,
         components: mergedComponents,
         protectCustomTagNewlines,
-        rawCustomComponents,
+        rawTextComponents,
         escapeRawHtml,
       }),
     [
@@ -82,7 +82,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
       openLinksInNewTab,
       mergedComponents,
       protectCustomTagNewlines,
-      rawCustomComponents,
+      rawTextComponents,
       escapeRawHtml,
     ],
   );

@@ -197,11 +197,11 @@ interface XMarkdownProps {
    */
   protectCustomTagNewlines?: boolean;
   /**
-   * @description 是否将 components 命中的 HTML 标签内部内容按原始纯文本处理，不再继续解析其中的 Markdown 或 HTML
-   * @description Whether to treat children of HTML tags matched by components as raw plain text, without further parsing Markdown or HTML inside
+   * @description 是否将 components 命中的 HTML 标签内部内容按纯文本处理，不再继续解析其中的 Markdown 或 HTML。传入数组时仅命中指定标签
+   * @description Whether to treat children of HTML tags matched by components as raw text, without further parsing Markdown or HTML inside. Pass an array to target specific tags
    * @default false
    */
-  rawCustomComponents?: boolean;
+  rawTextComponents?: boolean | string[];
   /**
    * @description 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容
    * @description Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content

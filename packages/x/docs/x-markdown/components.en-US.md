@@ -38,7 +38,7 @@ import { Mermaid, Think, XMarkdown } from '@ant-design/x';
 3. If data depends on complete syntax, fetch or parse after `streamStatus === 'done'`.
 4. Keep custom tags semantically clear and avoid ambiguous mixed Markdown/HTML blocks.
 
-By default, native HTML tags still follow CommonMark rules, so Markdown inside inline HTML can continue to be parsed. Set `rawCustomComponents` when tags registered in `components` should receive their inner content as raw plain text.
+By default, HTML tags still follow CommonMark rules, so Markdown inside inline HTML can continue to be parsed. Set `rawTextComponents` when tags registered in `components` should receive their inner content as raw text. Pass an array, such as `rawTextComponents={['custom', 'chart']}`, to keep other component tags on the normal Markdown parsing path.
 
 ## FAQ: Custom Tag Closing Issues
 

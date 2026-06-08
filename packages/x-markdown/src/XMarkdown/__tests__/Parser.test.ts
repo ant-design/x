@@ -84,6 +84,7 @@ describe('Parser', () => {
     it('should keep markdown syntax inside custom tag children as plain text', () => {
       const parser = new Parser({
         components: { custom: 'div' },
+        rawTextComponents: true,
       });
       const content = '<custom>{"sales":[{"name":"电子产品[202](红)","value":52000}]}</custom>';
       const result = parser.parse(content);
@@ -94,6 +95,7 @@ describe('Parser', () => {
     it('should keep markdown syntax inside unclosed custom tag children as plain text', () => {
       const parser = new Parser({
         components: { custom: 'div' },
+        rawTextComponents: true,
       });
       const content = '<custom>{"sales":[{"name":"电子产品[202](红)","value":52000';
       const result = parser.parse(content);
@@ -120,17 +122,17 @@ describe('Parser', () => {
     it('should keep native HTML tag component children as plain text when enabled', () => {
       const parser = new Parser({
         components: { span: 'span' },
-        rawCustomComponents: true,
+        rawTextComponents: true,
       });
       const result = parser.parse('<span>*hello* <i>world</i></span>');
       expect(result).toContain('<span>*hello* &lt;i&gt;world&lt;&#x2F;i&gt;</span>');
       expect(result).not.toContain('<em>hello</em>');
     });
 
-    it('should only keep configured component tag children as plain text when enabled', () => {
+    it('should only keep configured component tag children as plain text when array is provided', () => {
       const parser = new Parser({
-        components: { span: 'span' },
-        rawCustomComponents: true,
+        components: { span: 'span', em: 'em' },
+        rawTextComponents: ['span'],
       });
       const result = parser.parse('<span>*hello*</span> <em>*world*</em>');
       expect(result).toContain('<span>*hello*</span>');
@@ -140,7 +142,7 @@ describe('Parser', () => {
     it('should keep unclosed native HTML tag component children as plain text when enabled', () => {
       const parser = new Parser({
         components: { span: 'span' },
-        rawCustomComponents: true,
+        rawTextComponents: true,
       });
       const result = parser.parse('<span>*hello* <i>world</i>');
       expect(result).toContain('<span>*hello* &lt;i&gt;world&lt;&#x2F;i&gt;');
@@ -158,15 +160,25 @@ describe('Parser', () => {
       expect(result).not.toMatch(/<CustomComponent>First line<\/p>\s*<p>Second line/);
     });
 
-    it('should protect custom tag content when protectCustomTagNewlines is false', () => {
+    it('should not protect custom tag newlines when protectCustomTagNewlines is false', () => {
       const parser = new Parser({
         protectCustomTagNewlines: false,
         components: { CustomComponent: 'div' },
       });
       const content = '<CustomComponent>First line\n\nSecond line</CustomComponent>';
       const result = parser.parse(content);
-      expect(result).toContain('<CustomComponent>First line\n\nSecond line</CustomComponent>');
-      expect(result).not.toMatch(/<CustomComponent>First line<\/p>\s*<p>Second line/);
+      expect(result).not.toContain('<CustomComponent>First line\n\nSecond line</CustomComponent>');
+    });
+
+    it('should protect newlines inside native component tags when protectCustomTagNewlines is true', () => {
+      const parser = new Parser({
+        protectCustomTagNewlines: true,
+        components: { div: 'div' },
+      });
+      const content = '<div>First line\n\nSecond line</div>';
+      const result = parser.parse(content);
+      expect(result).toContain('<div>First line\n\nSecond line</div>');
+      expect(result).not.toMatch(/<div>First line<\/p>\s*<p>Second line/);
     });
 
     it('should work normally when protectCustomTagNewlines is true but no custom components', () => {
