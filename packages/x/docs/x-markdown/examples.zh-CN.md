@@ -38,6 +38,7 @@ packageName: x-markdown
 | dompurifyConfig | HTML 净化与 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | protectCustomTagNewlines | 是否保留自定义标签内部的换行 | `boolean` | `false` |
 | escapeRawHtml | 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），用于防 XSS 同时保留内容 | `boolean` | `false` |
+| disableDefaultStyles | 是否关闭内置标签的默认样式。`true` 关闭全部，数组按标签关闭（如 `['ul', 'ol', 'li']`），用于避免默认样式污染自定义组件内部元素 | `boolean \| Array<'p' \| 'ul' \| 'ol' \| 'li' \| 'pre' \| 'code' \| 'table' \| 'th' \| 'td' \| 'img' \| 'hr'>` | `false` |
 | debug | 是否开启调试模式（显示性能监控浮层） | `boolean` | `false` |
 
 ### StreamingOption

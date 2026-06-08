@@ -58,9 +58,57 @@ export function fillWindowEnv(window: Window | DOMWindow) {
   });
 }
 
+/**
+ * happy-dom (>= 20.10.x) regression: the `nodeName` getter on `Node.prototype`
+ * returns '' for element instances (the working getter lives on
+ * `Element.prototype`). DOMPurify reads `nodeName` through the `Node.prototype`
+ * getter — per the DOM spec, `nodeName` is defined on `Node` — so every element
+ * is seen as an unknown tag and stripped while its text content is kept. This
+ * makes XMarkdown render only the inner text (no <p>/<div>/<h*> wrappers, raw
+ * HTML dropped). Restore a spec-correct getter on `Node.prototype` so DOMPurify
+ * (and any other consumer) reads the real node name.
+ */
+function fixNodeNameGetter() {
+  if (typeof Node === 'undefined' || !Node.prototype || typeof document === 'undefined') {
+    return;
+  }
+  const desc = Object.getOwnPropertyDescriptor(Node.prototype, 'nodeName');
+  const probe = document.createElement('div');
+  // Only patch when the Node.prototype getter is actually broken.
+  if (!desc?.get || desc.get.call(probe) === 'DIV') {
+    return;
+  }
+  Object.defineProperty(Node.prototype, 'nodeName', {
+    configurable: true,
+    get(this: Node): string {
+      switch (this.nodeType) {
+        case 1: // ELEMENT_NODE
+          return (this as Element).tagName;
+        case 3: // TEXT_NODE
+          return '#text';
+        case 8: // COMMENT_NODE
+          return '#comment';
+        case 4: // CDATA_SECTION_NODE
+          return '#cdata-section';
+        case 7: // PROCESSING_INSTRUCTION_NODE
+          return (this as ProcessingInstruction).target;
+        case 9: // DOCUMENT_NODE
+          return '#document';
+        case 10: // DOCUMENT_TYPE_NODE
+          return (this as DocumentType).name;
+        case 11: // DOCUMENT_FRAGMENT_NODE
+          return '#document-fragment';
+        default:
+          return (this as Element).tagName || '';
+      }
+    },
+  });
+}
+
 /* eslint-disable global-require */
 if (typeof window !== 'undefined') {
   fillWindowEnv(window);
+  fixNodeNameGetter();
 }
 
 global.requestAnimationFrame = global.requestAnimationFrame || global.setTimeout;
