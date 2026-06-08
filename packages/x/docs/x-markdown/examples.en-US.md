@@ -39,6 +39,7 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 | protectCustomTagNewlines | Whether to preserve newlines inside custom tags | `boolean` | `false` |
 | rawCustomComponents | Treat children of HTML tags matched by `components` as raw plain text, without parsing Markdown or HTML inside | `boolean` | `false` |
 | escapeRawHtml | Escape raw HTML in Markdown as plain text (do not parse as real HTML), to prevent XSS while keeping content visible | `boolean` | `false` |
+| disableDefaultStyles | Disable built-in default styles for tags. Pass `true` to disable all, or an array to disable specific tags (e.g. `['ul', 'ol', 'li']`), useful to prevent default styles from polluting elements inside custom components | `boolean \| Array<'p' \| 'ul' \| 'ol' \| 'li' \| 'pre' \| 'code' \| 'table' \| 'th' \| 'td' \| 'img' \| 'hr'>` | `false` |
 | debug | Enable debug mode (performance overlay) | `boolean` | `false` |
 
 ### StreamingOption

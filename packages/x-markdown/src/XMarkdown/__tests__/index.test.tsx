@@ -278,6 +278,61 @@ describe('XMarkdown', () => {
     expect(wrapper.innerHTML).toBe('<div>This is a paragraph.</div>\n');
   });
 
+  describe('disableDefaultStyles', () => {
+    it('should not add any disable class by default', () => {
+      const { container } = render(<XMarkdown content="- Item" />);
+      const wrapper = container.firstChild as HTMLElement;
+
+      expect(wrapper).toHaveClass('x-markdown');
+      expect(wrapper.className).not.toMatch(/x-md-disable/);
+    });
+
+    it('should add x-md-disable-all when disableDefaultStyles is true', () => {
+      const { container } = render(<XMarkdown content="- Item" disableDefaultStyles />);
+      const wrapper = container.firstChild as HTMLElement;
+
+      expect(wrapper).toHaveClass('x-markdown');
+      expect(wrapper).toHaveClass('x-md-disable-all');
+    });
+
+    it('should add per-tag disable classes when an array is provided', () => {
+      const { container } = render(
+        <XMarkdown content="- Item" disableDefaultStyles={['ul', 'ol', 'li']} />,
+      );
+      const wrapper = container.firstChild as HTMLElement;
+
+      expect(wrapper).toHaveClass('x-md-disable-ul');
+      expect(wrapper).toHaveClass('x-md-disable-ol');
+      expect(wrapper).toHaveClass('x-md-disable-li');
+      expect(wrapper).not.toHaveClass('x-md-disable-all');
+      expect(wrapper).not.toHaveClass('x-md-disable-code');
+    });
+
+    it('should not add any disable class when an empty array is provided', () => {
+      const { container } = render(<XMarkdown content="- Item" disableDefaultStyles={[]} />);
+      const wrapper = container.firstChild as HTMLElement;
+
+      expect(wrapper.className).not.toMatch(/x-md-disable/);
+    });
+
+    it('should keep working alongside rootClassName and className', () => {
+      const { container } = render(
+        <XMarkdown
+          content="- Item"
+          disableDefaultStyles={['ul']}
+          rootClassName="root-cls"
+          className="custom-cls"
+        />,
+      );
+      const wrapper = container.firstChild as HTMLElement;
+
+      expect(wrapper).toHaveClass('x-markdown');
+      expect(wrapper).toHaveClass('x-md-disable-ul');
+      expect(wrapper).toHaveClass('root-cls');
+      expect(wrapper).toHaveClass('custom-cls');
+    });
+  });
+
   it('support checkbox is checked', () => {
     const { container } = render(<XMarkdown content="- [x] checkbox" />);
     expect(container).toMatchSnapshot();

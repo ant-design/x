@@ -29,7 +29,7 @@ jest.mock('@rc-component/resize-observer', () => {
           ]);
         }, 0);
       }
-    }, [onResize, disabled]);
+    }, []);
 
     return children;
   };
@@ -215,6 +215,60 @@ it('should handle onClick', () => {
 
 // List 组件测试
 describe('FileCard.List', () => {
+  it('should refresh scrollX ping state when items update without remount', async () => {
+    const initialItems = [{ name: 'short-name.txt' }];
+    const nextItems = [
+      { name: 'very-long-file-name1.txt' },
+      { name: 'very-long-file-name2.txt' },
+      { name: 'very-long-file-name3.txt' },
+    ];
+
+    const { container, rerender } = render(
+      <div style={{ width: '150px' }}>
+        <FileCard.List items={initialItems} overflow="scrollX" />
+      </div>,
+    );
+
+    const scrollContainer = container.querySelector('.ant-file-card-list-content');
+    expect(scrollContainer).toBeTruthy();
+
+    Object.defineProperty(scrollContainer, 'scrollLeft', {
+      value: 0,
+      writable: true,
+      configurable: true,
+    });
+    Object.defineProperty(scrollContainer, 'clientWidth', {
+      value: 150,
+      writable: true,
+      configurable: true,
+    });
+    Object.defineProperty(scrollContainer, 'scrollWidth', {
+      value: 150,
+      writable: true,
+      configurable: true,
+    });
+
+    await waitFor(() => {
+      expect(container.querySelector('.ant-file-card-list-overflow-ping-end')).toBeFalsy();
+    });
+
+    Object.defineProperty(scrollContainer, 'scrollWidth', {
+      value: 420,
+      writable: true,
+      configurable: true,
+    });
+
+    rerender(
+      <div style={{ width: '150px' }}>
+        <FileCard.List items={nextItems} overflow="scrollX" />
+      </div>,
+    );
+
+    await waitFor(() => {
+      expect(container.querySelector('.ant-file-card-list-overflow-ping-end')).toBeTruthy();
+    });
+  });
+
   it('should render file list', () => {
     const { container } = render(
       <FileCard.List

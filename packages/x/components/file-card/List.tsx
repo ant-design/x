@@ -84,6 +84,20 @@ const List: React.FC<FileCardListProps> = (props) => {
     }
   };
 
+  React.useLayoutEffect(() => {
+    if (!overflow || overflow === 'wrap') {
+      return;
+    }
+
+    const frameId = window.requestAnimationFrame(() => {
+      checkPing();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [list, overflow]);
+
   const onScrollOffset = (offset: -1 | 1) => {
     const containerEle = containerRef.current;
 

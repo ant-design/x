@@ -24,13 +24,24 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     rawCustomComponents,
     escapeRawHtml,
     debug,
+    disableDefaultStyles,
   } = props;
   const tailContent = useMemo(() => resolveTailContent(streaming?.tail), [streaming?.tail]);
   const TailComponent = typeof streaming?.tail === 'object' ? streaming.tail.component : undefined;
   const shouldShowTail = !!streaming?.hasNextChunk && tailContent;
 
   // ============================ style ============================
-  const mergedCls = clsx('x-markdown', rootClassName, className);
+  const disableStyleCls = useMemo(() => {
+    if (disableDefaultStyles === true) {
+      return 'x-md-disable-all';
+    }
+    if (Array.isArray(disableDefaultStyles)) {
+      return disableDefaultStyles.map((tag) => `x-md-disable-${tag}`);
+    }
+    return undefined;
+  }, [disableDefaultStyles]);
+
+  const mergedCls = clsx('x-markdown', disableStyleCls, rootClassName, className);
 
   // ============================ Streaming ============================
   const output = useStreaming(content || children || '', { streaming, components });
