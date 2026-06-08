@@ -192,10 +192,16 @@ interface XMarkdownProps {
   dompurifyConfig?: DOMPurifyConfig;
   /**
    * @description 是否保护自定义标签中的换行符
-   * @description Whether to protect newlines in custom tags
+   * @description Whether to protect blank-line paragraph breaks in custom tags
    * @default false
    */
   protectCustomTagNewlines?: boolean;
+  /**
+   * @description 是否将自定义标签中的所有换行都视为纯文本，避免列表、标题、引用等块级 Markdown 被解析
+   * @description Whether to treat all newlines inside custom tags as plain text so block-level Markdown such as lists, headings, and blockquotes is not parsed
+   * @default false
+   */
+  protectAllCustomTagNewlines?: boolean;
   /**
    * @description 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），避免 XSS 同时保留内容
    * @description Whether to escape raw HTML in Markdown as plain text (not parsed as real HTML), avoiding XSS while preserving content

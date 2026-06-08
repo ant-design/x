@@ -179,7 +179,7 @@ describe('Parser', () => {
       expect(result).toContain('<CustomComponent>Single line content</CustomComponent>');
     });
 
-    it('should keep ordered list markup inside custom tags intact (issue #1896)', () => {
+    it('should keep block markdown parsing behavior when only protectCustomTagNewlines is enabled', () => {
       const parser = new Parser({
         protectCustomTagNewlines: true,
         components: { think: 'div' },
@@ -188,8 +188,20 @@ describe('Parser', () => {
         '<think>The user is asking what I can do.\n\nKey capabilities:\n1. one\n2. two\n</think>正文内容开始';
       const result = parser.parse(content);
 
-      // The closing tag must stay attached to the think component and not be
-      // split into a list item, and the inner content must be fully preserved.
+      expect(result).toContain('<ol>');
+      expect(result).toContain('<li>one</li>');
+      expect(result).toContain('正文内容开始');
+    });
+
+    it('should keep ordered list markup inside custom tags intact when protectAllCustomTagNewlines is enabled', () => {
+      const parser = new Parser({
+        protectAllCustomTagNewlines: true,
+        components: { think: 'div' },
+      });
+      const content =
+        '<think>The user is asking what I can do.\n\nKey capabilities:\n1. one\n2. two\n</think>正文内容开始';
+      const result = parser.parse(content);
+
       expect(result).toContain(
         '<think>The user is asking what I can do.\n\nKey capabilities:\n1. one\n2. two\n</think>',
       );
@@ -198,16 +210,15 @@ describe('Parser', () => {
       expect(result).not.toContain('<li>');
     });
 
-    it('should not turn protected placeholders into markdown emphasis', () => {
+    it('should not turn protected placeholders into markdown emphasis when protectAllCustomTagNewlines is enabled', () => {
       const parser = new Parser({
-        protectCustomTagNewlines: true,
+        protectAllCustomTagNewlines: true,
         components: { think: 'div' },
       });
       const content = '<think>line a\nline b\nline c</think>tail';
       const result = parser.parse(content);
 
       expect(result).toContain('<think>line a\nline b\nline c</think>');
-      // Placeholders must be fully restored, leaving no sentinel artifacts.
       expect(result).not.toContain('<strong>');
       expect(result).not.toMatch(/X_MD_NL_/);
     });

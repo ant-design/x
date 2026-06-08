@@ -7,6 +7,7 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
+  protectAllCustomTagNewlines?: boolean;
   escapeRawHtml?: boolean;
 };
 
@@ -175,7 +176,10 @@ class Parser {
     });
   }
 
-  private protectCustomTags(content: string): {
+  private protectCustomTags(
+    content: string,
+    protectAllNewlines: boolean,
+  ): {
     protected: string;
     placeholders: Map<string, string>;
   } {
@@ -187,6 +191,12 @@ class Parser {
     }
 
     let placeholderIndex = 0;
+    const protectNewlines = (value: string) =>
+      value.replace(/\n/g, () => {
+        const ph = `${PLACEHOLDER_PREFIX}${placeholderIndex++}${PLACEHOLDER_SUFFIX}`;
+        placeholders.set(ph, '\n');
+        return ph;
+      });
     const tagNamePattern = customTagNames
       .map((name) => name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
       .join('|');
@@ -253,16 +263,17 @@ class Parser {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          if (innerContent.includes('\n')) {
-            // Custom tag inner content is treated as opaque text. Protect every
-            // newline (not only blank lines) so that block-level markdown syntax
-            // inside the tag (e.g. ordered/unordered lists, headings) is not parsed
-            // and does not split the custom tag structure.
-            const protectedInner = innerContent.replace(/\n/g, () => {
-              const ph = `${PLACEHOLDER_PREFIX}${placeholderIndex++}${PLACEHOLDER_SUFFIX}`;
-              placeholders.set(ph, '\n');
-              return ph;
-            });
+          if (protectAllNewlines && innerContent.includes('\n')) {
+            // Treat the entire custom tag body as opaque text.
+            const protectedInner = protectNewlines(innerContent);
+            result.push(openTag + protectedInner + closeTag);
+          } else if (innerContent.includes('\n\n')) {
+            // Preserve the original behavior of only protecting blank-line
+            // paragraph breaks so existing block markdown inside custom tags
+            // keeps rendering unless the stronger flag is enabled.
+            const protectedInner = innerContent.replace(/\n{2,}/g, (newlines) =>
+              protectNewlines(newlines),
+            );
             result.push(openTag + protectedInner + closeTag);
           } else {
             result.push(openTag + innerContent + closeTag);
@@ -346,8 +357,11 @@ class Parser {
     this.injectTail = parseOptions?.injectTail ?? false;
 
     // Protect custom tags if needed
-    if (this.options.protectCustomTagNewlines) {
-      const { protected: protectedContent, placeholders } = this.protectCustomTags(content);
+    if (this.options.protectCustomTagNewlines || this.options.protectAllCustomTagNewlines) {
+      const { protected: protectedContent, placeholders } = this.protectCustomTags(
+        content,
+        !!this.options.protectAllCustomTagNewlines,
+      );
       const parsed = this.markdownInstance.parse(protectedContent) as string;
       return this.restorePlaceholders(parsed, placeholders);
     }
