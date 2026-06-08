@@ -247,6 +247,37 @@ describe('XMarkdown', () => {
     );
   });
 
+  it('only keeps selected component children as plain text when rawTextComponents is an array', () => {
+    let receivedSpanChildren: React.ReactNode;
+    let receivedNoteChildren: React.ReactNode;
+    const markdown = '<span>*hello* <i>world</i></span> <note>*parsed*</note>';
+
+    const { container } = render(
+      <XMarkdown
+        content={markdown}
+        rawTextComponents={['span']}
+        components={{
+          span: (props) => {
+            receivedSpanChildren = props.children;
+            return <span data-testid="plain">{props.children}</span>;
+          },
+          note: (props) => {
+            receivedNoteChildren = props.children;
+            return <span data-testid="note">{props.children}</span>;
+          },
+        }}
+      />,
+    );
+
+    expect(receivedSpanChildren).toBe('*hello* <i>world</i>');
+    expect(receivedNoteChildren).not.toBe('*parsed*');
+    expect(container.querySelector('[data-testid="plain"]')).toHaveTextContent(
+      '*hello* <i>world</i>',
+    );
+    expect(container.querySelector('[data-testid="plain"] i')).not.toBeInTheDocument();
+    expect(container.querySelector('[data-testid="note"] em')).toHaveTextContent('parsed');
+  });
+
   it('walkToken', () => {
     const walkTokens = (token: Token) => {
       if (token.type === 'heading') {
