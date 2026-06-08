@@ -203,7 +203,10 @@ class Parser {
         }),
     );
 
-    const protectedContent = this.protectComponentTagNewlines(rawTextProtectedContent);
+    const protectedContent = this.protectComponentTagNewlines(
+      rawTextProtectedContent,
+      createPlaceholder,
+    );
 
     return { protected: protectedContent, placeholders };
   }
@@ -312,7 +315,10 @@ class Parser {
     return result.join('');
   }
 
-  private protectComponentTagNewlines(content: string): string {
+  private protectComponentTagNewlines(
+    content: string,
+    createPlaceholder: (tag: CustomTagPlaceholder) => string,
+  ): string {
     if (!this.options.protectCustomTagNewlines) {
       return content;
     }
@@ -320,8 +326,14 @@ class Parser {
     return this.replaceComponentTags(
       content,
       new Set(Object.keys(this.options.components || {}).map((name) => name.toLowerCase())),
-      ({ openTag, innerContent, closeTag }) =>
-        `${openTag}${this.escapeNewlines(innerContent)}${closeTag ?? ''}`,
+      ({ openTag, innerContent, closeTag }) => {
+        if (!innerContent.includes('\n')) {
+          return `${openTag}${innerContent}${closeTag ?? ''}`;
+        }
+        return createPlaceholder({
+          protected: `${openTag}${innerContent}${closeTag ?? ''}`,
+        });
+      },
     );
   }
 
@@ -336,10 +348,6 @@ class Parser {
     }
 
     return new Set(rawTextComponents.map((name) => name.toLowerCase()));
-  }
-
-  private escapeNewlines(content: string): string {
-    return content.replace(/\n/g, '&#10;');
   }
 
   private restorePlaceholders(content: string, placeholders: Map<string, string>): string {
