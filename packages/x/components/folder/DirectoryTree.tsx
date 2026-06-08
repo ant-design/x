@@ -199,6 +199,9 @@ const DirectoryTree: React.FC<DirectoryTreeProps> = ({
 
   // Reset right-click flag when context menu closes
   const handleContextMenuOpenChange = (open: boolean) => {
+    if (open && !isRightClickRef.current) {
+      return;
+    }
     setContextMenuOpen(open);
     if (!open) {
       isRightClickRef.current = false;

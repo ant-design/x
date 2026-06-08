@@ -144,7 +144,7 @@ const ForwardFolder = React.forwardRef<FolderRef, FolderProps>((props, ref) => {
   /** Find a node by path segments (read from props.treeData) */
   const getNodeByPath = useCallback(
     (path: string[]): FolderTreeData | undefined => {
-      if (!path || path.length === 0) return undefined;
+      if (!path || path.length === 0 || !treeData) return undefined;
       const findNode = (nodes: FolderTreeData[], index = 0): FolderTreeData | undefined => {
         if (index >= path.length) return undefined;
         const segment = path[index];
@@ -209,11 +209,11 @@ const ForwardFolder = React.forwardRef<FolderRef, FolderProps>((props, ref) => {
     nativeElement: containerRef.current!,
     getNode: (path: string[]) => getNodeByPath(path),
     updateNode: (path: string[], data: Partial<FolderTreeData>) =>
-      walkTree(treeData, path, 0, 'update', data),
+      treeData ? walkTree(treeData, path, 0, 'update', data) : [],
     deleteNode: (path: string[]) =>
-      walkTree(treeData, path, 0, 'delete').filter(Boolean) as FolderTreeData[],
+      treeData ? (walkTree(treeData, path, 0, 'delete').filter(Boolean) as FolderTreeData[]) : [],
     addNode: (parentPath: string[], node: FolderTreeData) =>
-      walkTree(treeData, parentPath, 0, 'add', node),
+      treeData ? walkTree(treeData, parentPath, 0, 'add', node) : [],
   }));
 
   // ============================ State ============================
