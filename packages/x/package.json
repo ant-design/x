@@ -163,7 +163,7 @@
     "cross-fetch": "^4.0.0",
     "crypto": "^1.0.1",
     "dayjs": "^1.11.13",
-    "dumi": "~2.4.21",
+    "dumi": "2.4.28",
     "dumi-plugin-color-chunk": "^2.1.0",
     "esbuild-loader": "^4.2.2",
     "fast-glob": "^3.3.2",
