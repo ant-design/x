@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import React from 'react';
 import Renderer from '../core/Renderer';
 
@@ -1514,6 +1515,23 @@ describe('Renderer', () => {
       expect(createElementSpy).toHaveBeenCalled();
 
       createElementSpy.mockRestore();
+    });
+  });
+
+  describe('SSR / no DOM safety', () => {
+    it('returns null from processHtml when DOMPurify.sanitize is unavailable', () => {
+      const renderer = new Renderer({ components: { 'custom-tag': MockComponent } });
+      const originalSanitize = DOMPurify.sanitize;
+      // Simulate a server environment without a DOM, where DOMPurify's default
+      // export has no `sanitize` method.
+      (DOMPurify as any).sanitize = undefined;
+      try {
+        expect(renderer.processHtml('<custom-tag>content</custom-tag>')).toBeNull();
+        // render() delegates to processHtml and must not throw either.
+        expect(renderer.render('<p>hello</p>')).toBeNull();
+      } finally {
+        (DOMPurify as any).sanitize = originalSanitize;
+      }
     });
   });
 });
