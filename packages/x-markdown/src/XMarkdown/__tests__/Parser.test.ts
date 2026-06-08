@@ -178,6 +178,50 @@ describe('Parser', () => {
       const result = parser.parse(content);
       expect(result).toContain('<CustomComponent>Single line content</CustomComponent>');
     });
+
+    it('should keep block markdown parsing behavior when only protectCustomTagNewlines is enabled', () => {
+      const parser = new Parser({
+        protectCustomTagNewlines: true,
+        components: { think: 'div' },
+      });
+      const content =
+        '<think>The user is asking what I can do.\n\nKey capabilities:\n1. one\n2. two\n</think>正文内容开始';
+      const result = parser.parse(content);
+
+      expect(result).toContain('<ol>');
+      expect(result).toContain('<li>one</li>');
+      expect(result).toContain('正文内容开始');
+    });
+
+    it('should keep ordered list markup inside custom tags intact when disableCustomTagBlockMarkdown is enabled', () => {
+      const parser = new Parser({
+        disableCustomTagBlockMarkdown: true,
+        components: { think: 'div' },
+      });
+      const content =
+        '<think>The user is asking what I can do.\n\nKey capabilities:\n1. one\n2. two\n</think>正文内容开始';
+      const result = parser.parse(content);
+
+      expect(result).toContain(
+        '<think>The user is asking what I can do.\n\nKey capabilities:\n1. one\n2. two\n</think>',
+      );
+      expect(result).toContain('正文内容开始');
+      expect(result).not.toContain('<ol>');
+      expect(result).not.toContain('<li>');
+    });
+
+    it('should still parse inline markdown when disableCustomTagBlockMarkdown is enabled', () => {
+      const parser = new Parser({
+        disableCustomTagBlockMarkdown: true,
+        components: { think: 'div' },
+      });
+      const content = '<think>line a\n**bold**\nline c</think>tail';
+      const result = parser.parse(content);
+
+      expect(result).toContain('<think>line a\n<strong>bold</strong>\nline c</think>');
+      expect(result).not.toContain('<ol>');
+      expect(result).not.toMatch(/X_MD_NL_/);
+    });
   });
 
   describe('escapeHtml', () => {

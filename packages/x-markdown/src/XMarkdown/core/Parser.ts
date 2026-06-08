@@ -7,6 +7,7 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
+  disableCustomTagBlockMarkdown?: boolean;
   escapeRawHtml?: boolean;
 };
 
@@ -50,6 +51,13 @@ export function escapeHtml(html: string, encode?: boolean) {
 
 // Symbol to mark tokens for tail injection (avoids property name conflicts)
 const TAIL_MARKER = Symbol('tailMarker');
+
+// Sentinel characters (Unicode Private Use Area) wrapping placeholders for
+// protected newlines inside custom tags. Using PUA characters instead of `__`
+// avoids the placeholder being interpreted as markdown syntax (e.g. `__bold__`).
+const PLACEHOLDER_PREFIX = '\uE000X_MD_NL_';
+const PLACEHOLDER_SUFFIX = '\uE001';
+const PLACEHOLDER_REGEX = /\uE000X_MD_NL_\d+\uE001/g;
 
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
@@ -168,7 +176,10 @@ class Parser {
     });
   }
 
-  private protectCustomTags(content: string): {
+  private protectCustomTags(
+    content: string,
+    disableBlockMarkdown: boolean,
+  ): {
     protected: string;
     placeholders: Map<string, string>;
   } {
@@ -180,6 +191,12 @@ class Parser {
     }
 
     let placeholderIndex = 0;
+    const protectNewlines = (value: string) =>
+      value.replace(/\n/g, () => {
+        const ph = `${PLACEHOLDER_PREFIX}${placeholderIndex++}${PLACEHOLDER_SUFFIX}`;
+        placeholders.set(ph, '\n');
+        return ph;
+      });
     const tagNamePattern = customTagNames
       .map((name) => name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
       .join('|');
@@ -246,12 +263,18 @@ class Parser {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          if (innerContent.includes('\n\n')) {
-            const protectedInner = innerContent.replace(/\n\n/g, () => {
-              const ph = `__X_MD_PLACEHOLDER_${placeholderIndex++}__`;
-              placeholders.set(ph, '\n\n');
-              return ph;
-            });
+          if (disableBlockMarkdown && innerContent.includes('\n')) {
+            // Neutralize block-level markdown boundaries inside custom tags
+            // while still allowing inline markdown to be parsed later.
+            const protectedInner = protectNewlines(innerContent);
+            result.push(openTag + protectedInner + closeTag);
+          } else if (innerContent.includes('\n\n')) {
+            // Preserve the original behavior of only protecting blank-line
+            // paragraph breaks so existing block markdown inside custom tags
+            // keeps rendering unless the stronger flag is enabled.
+            const protectedInner = innerContent.replace(/\n{2,}/g, (newlines) =>
+              protectNewlines(newlines),
+            );
             result.push(openTag + protectedInner + closeTag);
           } else {
             result.push(openTag + innerContent + closeTag);
@@ -273,10 +296,7 @@ class Parser {
     if (placeholders.size === 0) {
       return content;
     }
-    return content.replace(
-      /__X_MD_PLACEHOLDER_\d+__/g,
-      (match) => placeholders.get(match) ?? match,
-    );
+    return content.replace(PLACEHOLDER_REGEX, (match) => placeholders.get(match) ?? match);
   }
 
   /**
@@ -338,8 +358,11 @@ class Parser {
     this.injectTail = parseOptions?.injectTail ?? false;
 
     // Protect custom tags if needed
-    if (this.options.protectCustomTagNewlines) {
-      const { protected: protectedContent, placeholders } = this.protectCustomTags(content);
+    if (this.options.protectCustomTagNewlines || this.options.disableCustomTagBlockMarkdown) {
+      const { protected: protectedContent, placeholders } = this.protectCustomTags(
+        content,
+        !!this.options.disableCustomTagBlockMarkdown,
+      );
       const parsed = this.markdownInstance.parse(protectedContent) as string;
       return this.restorePlaceholders(parsed, placeholders);
     }
