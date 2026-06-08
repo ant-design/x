@@ -13,7 +13,7 @@
 | openLinksInNewTab | 是否为所有链接添加 `target="_blank"` 并在新标签页打开 | `boolean` | `false` |
 | dompurifyConfig | HTML 净化与 XSS 防护的 DOMPurify 配置 | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | protectCustomTagNewlines | 是否保护自定义标签内部的空行分段，避免段落切分破坏标签结构 | `boolean` | `false` |
-| protectAllCustomTagNewlines | 是否将自定义标签内的所有换行都视为纯文本，避免列表、标题、引用等块级 Markdown 被解析 | `boolean` | `false` |
+| disableCustomTagBlockMarkdown | 是否禁用自定义标签内的块级 Markdown 解析，避免列表、标题、引用等被解析；行内 Markdown 仍会生效 | `boolean` | `false` |
 | escapeRawHtml | 是否将 Markdown 中的原始 HTML 转义为纯文本展示（不解析为真实 HTML），用于防 XSS 同时保留内容 | `boolean` | `false` |
 | debug | 是否开启调试模式（显示性能监控浮层） | `boolean` | `false` |
 

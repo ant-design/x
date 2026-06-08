@@ -7,7 +7,7 @@ type ParserOptions = {
   openLinksInNewTab?: boolean;
   components?: XMarkdownProps['components'];
   protectCustomTagNewlines?: boolean;
-  protectAllCustomTagNewlines?: boolean;
+  disableCustomTagBlockMarkdown?: boolean;
   escapeRawHtml?: boolean;
 };
 
@@ -264,7 +264,8 @@ class Parser {
           }
 
           if (protectAllNewlines && innerContent.includes('\n')) {
-            // Treat the entire custom tag body as opaque text.
+            // Neutralize block-level markdown boundaries inside custom tags
+            // while still allowing inline markdown to be parsed later.
             const protectedInner = protectNewlines(innerContent);
             result.push(openTag + protectedInner + closeTag);
           } else if (innerContent.includes('\n\n')) {
@@ -357,10 +358,10 @@ class Parser {
     this.injectTail = parseOptions?.injectTail ?? false;
 
     // Protect custom tags if needed
-    if (this.options.protectCustomTagNewlines || this.options.protectAllCustomTagNewlines) {
+    if (this.options.protectCustomTagNewlines || this.options.disableCustomTagBlockMarkdown) {
       const { protected: protectedContent, placeholders } = this.protectCustomTags(
         content,
-        !!this.options.protectAllCustomTagNewlines,
+        !!this.options.disableCustomTagBlockMarkdown,
       );
       const parsed = this.markdownInstance.parse(protectedContent) as string;
       return this.restorePlaceholders(parsed, placeholders);

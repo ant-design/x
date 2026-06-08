@@ -193,9 +193,9 @@ describe('Parser', () => {
       expect(result).toContain('正文内容开始');
     });
 
-    it('should keep ordered list markup inside custom tags intact when protectAllCustomTagNewlines is enabled', () => {
+    it('should keep ordered list markup inside custom tags intact when disableCustomTagBlockMarkdown is enabled', () => {
       const parser = new Parser({
-        protectAllCustomTagNewlines: true,
+        disableCustomTagBlockMarkdown: true,
         components: { think: 'div' },
       });
       const content =
@@ -210,16 +210,16 @@ describe('Parser', () => {
       expect(result).not.toContain('<li>');
     });
 
-    it('should not turn protected placeholders into markdown emphasis when protectAllCustomTagNewlines is enabled', () => {
+    it('should still parse inline markdown when disableCustomTagBlockMarkdown is enabled', () => {
       const parser = new Parser({
-        protectAllCustomTagNewlines: true,
+        disableCustomTagBlockMarkdown: true,
         components: { think: 'div' },
       });
-      const content = '<think>line a\nline b\nline c</think>tail';
+      const content = '<think>line a\n**bold**\nline c</think>tail';
       const result = parser.parse(content);
 
-      expect(result).toContain('<think>line a\nline b\nline c</think>');
-      expect(result).not.toContain('<strong>');
+      expect(result).toContain('<think>line a\n<strong>bold</strong>\nline c</think>');
+      expect(result).not.toContain('<ol>');
       expect(result).not.toMatch(/X_MD_NL_/);
     });
   });

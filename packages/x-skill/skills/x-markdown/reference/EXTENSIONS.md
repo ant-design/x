@@ -63,7 +63,7 @@ For customization:
 - Keep custom tag blocks well formed.
 - Avoid stray blank lines inside custom HTML blocks unless the syntax is intentional.
 - If only blank-line paragraph breaks inside custom tags need protection, use `protectCustomTagNewlines`.
-- If all newlines inside custom tags should stay as plain text, use `protectAllCustomTagNewlines`.
+- If block Markdown inside custom tags should be disabled while inline Markdown still works, use `disableCustomTagBlockMarkdown`.
 
 ## Pick the Right Tool
 

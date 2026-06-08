@@ -37,7 +37,7 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 | openLinksInNewTab | Add `target="_blank"` to all links so they open in a new tab | `boolean` | `false` |
 | dompurifyConfig | DOMPurify config for HTML sanitization and XSS protection | [`DOMPurify.Config`](https://github.com/cure53/DOMPurify#can-i-configure-dompurify) | - |
 | protectCustomTagNewlines | Whether to protect blank-line paragraph breaks inside custom tags so paragraph splitting does not break the tag structure | `boolean` | `false` |
-| protectAllCustomTagNewlines | Whether to treat all newlines inside custom tags as plain text so lists, headings, blockquotes, and other block Markdown are not parsed | `boolean` | `false` |
+| disableCustomTagBlockMarkdown | Whether to disable block Markdown parsing inside custom tags so lists, headings, blockquotes, and other block Markdown are not parsed; inline Markdown still works | `boolean` | `false` |
 | escapeRawHtml | Escape raw HTML in Markdown as plain text (do not parse as real HTML), to prevent XSS while keeping content visible | `boolean` | `false` |
 | disableDefaultStyles | Disable built-in default styles for tags. Pass `true` to disable all, or an array to disable specific tags (e.g. `['ul', 'ol', 'li']`), useful to prevent default styles from polluting elements inside custom components | `boolean \| Array<'p' \| 'ul' \| 'ol' \| 'li' \| 'pre' \| 'code' \| 'table' \| 'th' \| 'td' \| 'img' \| 'hr'>` | `false` |
 | debug | Enable debug mode (performance overlay) | `boolean` | `false` |
