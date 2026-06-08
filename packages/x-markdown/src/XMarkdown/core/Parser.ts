@@ -178,7 +178,7 @@ class Parser {
 
   private protectCustomTags(
     content: string,
-    protectAllNewlines: boolean,
+    disableBlockMarkdown: boolean,
   ): {
     protected: string;
     placeholders: Map<string, string>;
@@ -263,7 +263,7 @@ class Parser {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          if (protectAllNewlines && innerContent.includes('\n')) {
+          if (disableBlockMarkdown && innerContent.includes('\n')) {
             // Neutralize block-level markdown boundaries inside custom tags
             // while still allowing inline markdown to be parsed later.
             const protectedInner = protectNewlines(innerContent);
