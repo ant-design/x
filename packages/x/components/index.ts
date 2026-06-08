@@ -12,7 +12,7 @@ export type { ConversationItemType, ConversationsProps } from './conversations';
 export { default as Conversations } from './conversations';
 export type { FileCardListProps, FileCardProps } from './file-card';
 export { default as FileCard } from './file-card';
-export type { FolderProps } from './folder';
+export type { FolderProps, FolderRef, FolderTreeData } from './folder';
 export { default as Folder } from './folder';
 export type { MermaidProps } from './mermaid';
 export { default as Mermaid } from './mermaid';

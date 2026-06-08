@@ -1,4 +1,3 @@
-import DOMPurify from 'dompurify';
 import React from 'react';
 import Renderer from '../core/Renderer';
 
@@ -1032,20 +1031,28 @@ describe('Renderer', () => {
 
       const renderer = new Renderer({ components });
 
-      // Spy on DOMPurify.sanitize
-      const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
+      const createElementSpy = jest.spyOn(React, 'createElement');
 
+      // Verify that custom tags are preserved and dangerous tags (script) are removed
       const html = '<custom-tag>content</custom-tag><script>alert("xss")</script>';
       renderer.processHtml(html);
 
-      expect(sanitizeSpy).toHaveBeenCalledWith(
-        html,
+      // The custom tag should be rendered (via React.createElement)
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
         expect.objectContaining({
-          ADD_TAGS: expect.arrayContaining(['custom-tag']),
+          streamStatus: 'done',
         }),
       );
 
-      sanitizeSpy.mockRestore();
+      // The script tag should be stripped by DOMPurify — no createElement
+      // call should have 'alert' or 'script' in its arguments
+      const scriptCalls = createElementSpy.mock.calls.filter(
+        (call) => typeof call[0] === 'string' && (call[0] === 'script' || call[0] === 'Script'),
+      );
+      expect(scriptCalls).toHaveLength(0);
+
+      createElementSpy.mockRestore();
     });
 
     it('should respect user dompurifyConfig', () => {
@@ -1063,22 +1070,30 @@ describe('Renderer', () => {
         dompurifyConfig: userConfig,
       });
 
-      // Spy on DOMPurify.sanitize
-      const sanitizeSpy = jest.spyOn(DOMPurify, 'sanitize');
+      const createElementSpy = jest.spyOn(React, 'createElement');
 
+      // With ALLOWED_TAGS and ALLOWED_ATTR, only the custom-tag with class
+      // attribute should be preserved; id attribute should be stripped
       const html = '<custom-tag class="test" id="test-id">content</custom-tag>';
       renderer.processHtml(html);
 
-      expect(sanitizeSpy).toHaveBeenCalledWith(
-        html,
+      // The custom tag should be rendered with the class attribute
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
         expect.objectContaining({
-          ALLOWED_TAGS: expect.arrayContaining(['custom-tag']),
-          ALLOWED_ATTR: expect.arrayContaining(['class']),
-          ADD_TAGS: expect.arrayContaining(['custom-tag']),
+          class: 'test',
         }),
       );
 
-      sanitizeSpy.mockRestore();
+      // Verify id attribute is stripped (not in ALLOWED_ATTR)
+      expect(createElementSpy).not.toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          id: 'test-id',
+        }),
+      );
+
+      createElementSpy.mockRestore();
     });
   });
 
@@ -1388,6 +1403,117 @@ describe('Renderer', () => {
       const targetCall = createElementSpy.mock.calls.find((call) => call[0] === MockComponent);
       expect(targetCall?.[1]).not.toHaveProperty('checked');
       createElementSpy.mockClear();
+    });
+  });
+
+  describe('createPatchedDOMPurify', () => {
+    it('should handle nodeName patch fallback for various node types', () => {
+      // Test that Renderer works correctly with patched DOMPurify
+      const components = {
+        'test-component': MockComponent,
+      };
+
+      const renderer = new Renderer({ components });
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<test-component>content</test-component>';
+      renderer.processHtml(html);
+
+      // Verify the component was rendered
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          streamStatus: 'done',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should handle DOMPurify with custom config', () => {
+      const components = {
+        'custom-element': MockComponent,
+      };
+
+      const renderer = new Renderer({
+        components,
+        dompurifyConfig: {
+          ALLOWED_TAGS: ['custom-element'],
+          ALLOWED_ATTR: ['data-custom'],
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<custom-element data-custom="value">content</custom-element>';
+      renderer.processHtml(html);
+
+      expect(createElementSpy).toHaveBeenCalledWith(
+        MockComponent,
+        expect.objectContaining({
+          'data-custom': 'value',
+          streamStatus: 'done',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should process HTML with text nodes', () => {
+      const components = {};
+      const renderer = new Renderer({ components });
+
+      // Simple HTML with just text
+      const html = '<p>Plain text content</p>';
+      const result = renderer.processHtml(html);
+
+      expect(result).toBeDefined();
+    });
+
+    it('should handle empty or invalid HTML gracefully', () => {
+      const components = {};
+      const renderer = new Renderer({ components });
+
+      // Empty string - should not throw
+      expect(() => renderer.render('')).not.toThrow();
+
+      // Whitespace only - should not throw
+      expect(() => renderer.render('   ')).not.toThrow();
+    });
+
+    it('should handle HTML with comments', () => {
+      const components = {};
+      const renderer = new Renderer({ components });
+
+      const html = '<!-- comment --><p>content</p>';
+      const result = renderer.processHtml(html);
+
+      expect(result).toBeDefined();
+    });
+
+    it('should handle streaming mode with animation', () => {
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Use a custom component to avoid AnimationText being skipped due to parent custom component check
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const rendererWithComponent = new Renderer({
+        components: { 'custom-wrapper': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          animationConfig: {
+            fadeDuration: 100,
+            easing: 'ease-in',
+          },
+        },
+      });
+
+      const html = '<custom-wrapper>Animated text content</custom-wrapper>';
+      rendererWithComponent.processHtml(html);
+
+      // Verify that createElement was called (meaning the renderer processed the HTML)
+      expect(createElementSpy).toHaveBeenCalled();
+
+      createElementSpy.mockRestore();
     });
   });
 });
