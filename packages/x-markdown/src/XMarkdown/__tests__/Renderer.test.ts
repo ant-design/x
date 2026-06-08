@@ -1492,18 +1492,6 @@ describe('Renderer', () => {
     });
 
     it('should handle streaming mode with animation', () => {
-      const components = {};
-      const renderer = new Renderer({
-        components,
-        streaming: {
-          enableAnimation: true,
-          animationConfig: {
-            typingSpeed: 50,
-            fadeInDuration: 100,
-          },
-        },
-      });
-
       const createElementSpy = jest.spyOn(React, 'createElement');
 
       // Use a custom component to avoid AnimationText being skipped due to parent custom component check
@@ -1513,8 +1501,8 @@ describe('Renderer', () => {
         streaming: {
           enableAnimation: true,
           animationConfig: {
-            typingSpeed: 50,
-            fadeInDuration: 100,
+            fadeDuration: 100,
+            easing: 'ease-in',
           },
         },
       });
