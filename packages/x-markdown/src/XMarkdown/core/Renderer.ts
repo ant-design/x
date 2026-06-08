@@ -13,6 +13,132 @@ interface RendererOptions {
   streaming?: XMarkdownProps['streaming'];
 }
 
+/**
+ * Fix for DOMPurify 3.x in environments (e.g., happy-dom) where the cached
+ * Node.prototype getters return incorrect values for elements created in a
+ * different document context (the template content owner document).
+ *
+ * DOMPurify 3.x caches property getters from Node.prototype at module
+ * initialization time:
+ *   const getNodeName = lookupGetter(Node.prototype, 'nodeName');
+ *   const getNodeValue = lookupGetter(Node.prototype, 'nodeValue');
+ *
+ * In happy-dom, calling these cached getters on elements from the template
+ * content owner document returns empty string / null respectively, while
+ * direct property access returns the correct value. This causes DOMPurify
+ * to compute empty tagNames and strip nearly all elements from the output.
+ *
+ * The fix patches Node.prototype.nodeName and Node.prototype.nodeValue with
+ * safe fallbacks that use direct property access when the cached getter
+ * returns a falsy value. Then a fresh DOMPurify instance is created that
+ * picks up the patched getters.
+ *
+ * This is idempotent — calling it multiple times has no additional effect.
+ */
+let patchedDOMPurify: typeof DOMPurify | null = null;
+
+function createPatchedDOMPurify(): typeof DOMPurify {
+  if (patchedDOMPurify) return patchedDOMPurify;
+
+  if (typeof window !== 'undefined' && typeof Node !== 'undefined') {
+    // Detect if the Node.prototype.nodeName getter is broken for template
+    // content elements (the happy-dom bug).
+    try {
+      const template = document.createElement('template');
+      template.innerHTML = '<test-detect></test-detect>';
+      const testEl = template.content.firstChild;
+      if (testEl) {
+        const nodeNameGetter = Object.getOwnPropertyDescriptor(Node.prototype, 'nodeName')?.get;
+        const nodeValueGetter = Object.getOwnPropertyDescriptor(Node.prototype, 'nodeValue')?.get;
+
+        // If the cached getter returns empty/falsy for an element that has
+        // a valid nodeName via direct access, we need to patch.
+        const needsNodeNamePatch =
+          nodeNameGetter && testEl.nodeName && !nodeNameGetter.call(testEl);
+
+        if (needsNodeNamePatch) {
+          const originalNodeNameGet = nodeNameGetter;
+          Object.defineProperty(Node.prototype, 'nodeName', {
+            get: function (this: Node) {
+              const value = originalNodeNameGet!.call(this);
+              if (value) return value;
+              // Fallback: for Element nodes, use tagName directly
+              if (this.nodeType === 1 && 'tagName' in this) {
+                return (this as unknown as { tagName: string }).tagName;
+              }
+              // Fallback: standard nodeName values for other node types
+              switch (this.nodeType) {
+                case 3:
+                  return '#text';
+                case 4:
+                  return '#cdata-section';
+                case 7:
+                  return '#processing-instruction';
+                case 8:
+                  return '#comment';
+                case 9:
+                  return '#document';
+                case 11:
+                  return '#document-fragment';
+              }
+              return value;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+        }
+
+        // Check if nodeValue getter is also broken for text nodes
+        const needsNodeValuePatch =
+          nodeValueGetter &&
+          (() => {
+            template.innerHTML = '<div>test</div>';
+            const textNode = template.content.firstChild?.firstChild;
+            if (!textNode) return false;
+            const viaGetter = nodeValueGetter.call(textNode);
+            const viaDirect = textNode.nodeValue;
+            // getter returns null/undefined but direct access returns the value
+            return viaDirect != null && viaGetter == null;
+          })();
+
+        if (needsNodeValuePatch) {
+          const originalNodeValueGet = nodeValueGetter;
+          Object.defineProperty(Node.prototype, 'nodeValue', {
+            get: function (this: Node) {
+              const value = originalNodeValueGet!.call(this);
+              if (value !== null && value !== undefined) return value;
+              // For CharacterData nodes (text, comment, CDATA), fall back to
+              // the .data property which stores the text content in happy-dom.
+              if (
+                (this.nodeType === 3 || this.nodeType === 4 || this.nodeType === 8) &&
+                'data' in this
+              ) {
+                return (this as CharacterData).data;
+              }
+              return value;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+        }
+
+        if (needsNodeNamePatch || needsNodeValuePatch) {
+          // Create a fresh DOMPurify instance that will re-read (and cache)
+          // the patched getters from Node.prototype.
+          patchedDOMPurify = DOMPurify(window);
+          return patchedDOMPurify;
+        }
+      }
+    } catch {
+      // If detection fails (e.g., in SSR), fall through to default DOMPurify
+    }
+  }
+
+  // No patching needed — use the default exported instance
+  patchedDOMPurify = DOMPurify;
+  return patchedDOMPurify;
+}
+
 class Renderer {
   private readonly options: RendererOptions;
   private static readonly NON_WHITESPACE_REGEX = /[^\r\n\s]+/;
@@ -131,9 +257,13 @@ class Renderer {
     const unclosedTags = this.detectUnclosedTags(htmlString);
     const cidRef = { current: 0, tagIndexes: {} };
 
+    // Get a DOMPurify instance that works correctly in environments where
+    // Node.prototype getters are broken for template content elements.
+    const purify = createPatchedDOMPurify();
+
     // Use DOMPurify to clean HTML while preserving custom components and target attributes
     const purifyConfig = this.configureDOMPurify();
-    const cleanHtml = DOMPurify.sanitize(htmlString, purifyConfig);
+    const cleanHtml = purify.sanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {
       replace: this.createReplaceElement(unclosedTags, cidRef),

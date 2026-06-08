@@ -6,7 +6,7 @@ const MEASURE_SIZE = 200;
 
 export function previewImage(file: File | Blob): Promise<string> {
   return new Promise<string>((resolve) => {
-    if (!file || !file.type || !isImageFileType(file.type)) {
+    if (!file?.type || !isImageFileType(file.type)) {
       resolve('');
       return;
     }
