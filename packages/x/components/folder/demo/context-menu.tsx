@@ -234,7 +234,7 @@ export default () => {
 
         // ---- New File: add a child file under the folder via ref ----
         case 'newFile': {
-          const fileName = nextName('new_file') + '.ts';
+          const fileName = `${nextName('new_file')}.ts`;
           setData(
             (prev) =>
               ref?.addNode(pathSegments, {

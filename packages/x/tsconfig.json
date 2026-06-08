@@ -22,6 +22,6 @@
       "@ant-design/x-sdk/lib/*": ["../x-sdk/src/*"]
     }
   },
-  "include": [".dumirc.ts", "**/*"],
-  "exclude": ["node_modules", "lib", "es", "dist", ".dumi"]
+  "include": ["dumirc.ts", "components/**/*", "scripts/**/*", "tests/**/*", "typings/**/*"],
+  "exclude": ["node_modules", "lib", "es", "dist", ".dumi", ".dumirc.ts"]
 }
