@@ -59,6 +59,13 @@ type CustomTagPlaceholder = {
   protected: string;
 };
 
+type ComponentTagTransformOptions = {
+  tagName: string;
+  openTag: string;
+  innerContent: string;
+  closeTag?: string;
+};
+
 class Parser {
   options: ParserOptions;
   markdownInstance: Marked;
@@ -179,19 +186,40 @@ class Parser {
   } {
     const placeholders = new Map<string, string>();
     const rawTextTagNames = this.getRawTextTagNames();
-    const customTagNames = Object.keys(this.options.components || {}).filter((name) =>
-      this.shouldProtectComponentTag(name, rawTextTagNames),
+    let placeholderIndex = 0;
+
+    const createPlaceholder = ({ protected: protectedContent }: CustomTagPlaceholder) => {
+      const ph = `\u0000XMDPLACEHOLDER${placeholderIndex++}\u0000`;
+      placeholders.set(ph, protectedContent);
+      return ph;
+    };
+
+    const rawTextProtectedContent = this.replaceComponentTags(
+      content,
+      rawTextTagNames,
+      ({ openTag, innerContent, closeTag }) =>
+        createPlaceholder({
+          protected: `${openTag}${escapeHtml(innerContent, true)}${closeTag ?? ''}`,
+        }),
     );
 
-    if (customTagNames.length === 0) {
-      return { protected: content, placeholders };
+    const protectedContent = this.protectComponentTagNewlines(rawTextProtectedContent);
+
+    return { protected: protectedContent, placeholders };
+  }
+
+  private replaceComponentTags(
+    content: string,
+    tagNames: Set<string>,
+    transform: (options: ComponentTagTransformOptions) => string,
+  ): string {
+    if (tagNames.size === 0) {
+      return content;
     }
 
-    let placeholderIndex = 0;
-    const tagNamePattern = customTagNames
-      .map((name) => name.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+    const tagNamePattern = Array.from(tagNames)
+      .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
       .join('|');
-
     const openTagRegex = new RegExp(`<(${tagNamePattern})(?:\\s[^>]*)?>`, 'gi');
     const closeTagRegex = new RegExp(`</(${tagNamePattern})>`, 'gi');
 
@@ -231,12 +259,6 @@ class Parser {
     const result: string[] = [];
     let lastIndex = 0;
 
-    const createPlaceholder = ({ protected: protectedContent }: CustomTagPlaceholder) => {
-      const ph = `\u0000XMDPLACEHOLDER${placeholderIndex++}\u0000`;
-      placeholders.set(ph, protectedContent);
-      return ph;
-    };
-
     for (const pos of positions) {
       if (pos.type === 'open') {
         // Self-closing tags don't have inner content
@@ -255,20 +277,12 @@ class Parser {
           const openTag = open.openTag;
           const closeTag = pos.match;
           const innerContent = content.slice(startPos + openTag.length, pos.index);
-          const shouldEscapeInnerContent = rawTextTagNames.has(open.tagName);
 
           if (lastIndex < startPos) {
             result.push(content.slice(lastIndex, startPos));
           }
 
-          result.push(
-            createPlaceholder({
-              protected:
-                openTag +
-                (shouldEscapeInnerContent ? escapeHtml(innerContent, true) : innerContent) +
-                closeTag,
-            }),
-          );
+          result.push(transform({ tagName: open.tagName, openTag, innerContent, closeTag }));
 
           lastIndex = endPos;
         }
@@ -282,20 +296,33 @@ class Parser {
       }
       const unclosedContent = content.slice(open.start);
       result.push(
-        createPlaceholder({
-          protected: rawTextTagNames.has(open.tagName)
-            ? this.escapeUnclosedTagContent(unclosedContent, open.openTag)
-            : unclosedContent,
+        transform({
+          tagName: open.tagName,
+          openTag: open.openTag,
+          innerContent: unclosedContent.slice(open.openTag.length),
         }),
       );
-      return { protected: result.join(''), placeholders };
+      return result.join('');
     }
 
     if (lastIndex < content.length) {
       result.push(content.slice(lastIndex));
     }
 
-    return { protected: result.join(''), placeholders };
+    return result.join('');
+  }
+
+  private protectComponentTagNewlines(content: string): string {
+    if (!this.options.protectCustomTagNewlines) {
+      return content;
+    }
+
+    return this.replaceComponentTags(
+      content,
+      new Set(Object.keys(this.options.components || {}).map((name) => name.toLowerCase())),
+      ({ openTag, innerContent, closeTag }) =>
+        `${openTag}${this.escapeNewlines(innerContent)}${closeTag ?? ''}`,
+    );
   }
 
   private getRawTextTagNames(): Set<string> {
@@ -311,13 +338,8 @@ class Parser {
     return new Set(rawTextComponents.map((name) => name.toLowerCase()));
   }
 
-  private shouldProtectComponentTag(tagName: string, rawTextTagNames: Set<string>): boolean {
-    const normalizedTagName = tagName.toLowerCase();
-    return rawTextTagNames.has(normalizedTagName) || !!this.options.protectCustomTagNewlines;
-  }
-
-  private escapeUnclosedTagContent(content: string, openTag: string): string {
-    return openTag + escapeHtml(content.slice(openTag.length), true);
+  private escapeNewlines(content: string): string {
+    return content.replace(/\n/g, '&#10;');
   }
 
   private restorePlaceholders(content: string, placeholders: Map<string, string>): string {
@@ -378,7 +400,7 @@ class Parser {
 
     // If the last token is not text type, don't inject tail
     // This prevents tail from appearing before incomplete components
-    if (!lastNonEmptyToken || lastNonEmptyToken.type !== 'text') {
+    if (lastNonEmptyToken?.type !== 'text') {
       return null;
     }
 
