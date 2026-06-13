@@ -24,12 +24,14 @@ export default defineConfig({
         }
       : false,
   hash: true,
-  mfsu: {},
+  // mfsu 在 mako bundler 下不支持（dumi 会强制设为 false），且与 mako 同时配置无意义
+  // mfsu: {},
   mako: ['Darwin', 'Linux'].includes(os.type()) ? {} : false,
   crossorigin: {},
   runtimePublicPath: {},
   fastRefresh: true,
-  devtool: 'eval-source-map',
+  // mako bundler 会将 devtool 强制转为 'source-map'（完整 source map），开发时关闭可大幅提升 HMR 速度
+  devtool: false,
   outputPath: '_site',
   favicons: [
     'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original',
@@ -39,6 +41,7 @@ export default defineConfig({
       { type: 'doc', dir: 'docs' },
       { type: 'x-sdk', dir: 'docs/x-sdk' },
       { type: 'x-markdown', dir: 'docs/x-markdown' },
+      { type: 'x-card', dir: 'docs/x-card' },
       { type: 'x-skill', dir: 'docs/x-skill' },
     ],
     atomDirs: [{ type: 'component', dir: 'components' }],
@@ -60,9 +63,10 @@ export default defineConfig({
     '@ant-design/x/lib': path.join(__dirname, 'components'),
     '@ant-design/x/es': path.join(__dirname, 'components'),
     '@ant-design/x': path.join(__dirname, 'components'),
-    '@ant-design/x-markdown': '../x-markdown/src',
-    '@ant-design/x-sdk': '../x-sdk/src',
-    '@ant-design/x-skill': '../x-skill/src',
+    '@ant-design/x-card': path.join(__dirname, '../x-card/src'),
+    '@ant-design/x-markdown': path.join(__dirname, '../x-markdown/src'),
+    '@ant-design/x-sdk': path.join(__dirname, '../x-sdk/src'),
+    '@ant-design/x-skill': path.join(__dirname, '../x-skill/src'),
     // https://github.com/ant-design/ant-design/issues/46628
     '@ant-design/icons$': '@ant-design/icons/lib',
   },
@@ -83,9 +87,9 @@ export default defineConfig({
   analyze:
     process.env.NODE_ENV === 'production'
       ? false
-      : {
-          analyzerPort: 'auto',
-        },
+      : process.env.ANALYZE
+        ? { analyzerPort: 'auto' }
+        : false,
   links: [
     {
       rel: 'prefetch',

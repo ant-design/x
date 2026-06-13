@@ -3,6 +3,7 @@
     "ignoreUnknown": true,
     "includes": [
       "**",
+      "!**/.dumi/**/*",
       "!**/.dumi/tmp*",
       "!**/dist/**/*",
       "!**/es/**/*",

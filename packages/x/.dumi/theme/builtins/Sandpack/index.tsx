@@ -62,6 +62,7 @@ const Sandpack: React.FC<React.PropsWithChildren<SandpackProps>> = ({
       antd: '^6.1.1',
       '@ant-design/x': '^2.0.0',
       '@ant-design/x-markdown': '^2.0.0',
+      '@ant-design/x-card': '^2.0.0',
       '@ant-design/x-sdk': '^2.0.0',
       ...dependencies,
     },

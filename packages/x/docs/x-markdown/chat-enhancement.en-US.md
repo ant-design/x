@@ -2,11 +2,12 @@
 group:
   title: Components
   order: 5
-title: Chat Enhancement
+title: Chat
+subtitle: Think · Sources
 order: 2
 ---
 
-Map Markdown or custom tags to chat-oriented components. The current demos focus on:
+Map Markdown or custom tags to chat components. The following are examples only; you can register any custom component for your own scenarios:
 
 - Reasoning steps (Think)
 - References and citations (Sources)
@@ -18,5 +19,5 @@ Map Markdown or custom tags to chat-oriented components. The current demos focus
 ## See also
 
 - [Overview](/x-markdowns/components)
-- [Data display](/x-markdowns/data-display)
-- [Rich text enhancement](/x-markdowns/rich-text)
+- [Charts](/x-markdowns/data-display)
+- [Code](/x-markdowns/rich-text)

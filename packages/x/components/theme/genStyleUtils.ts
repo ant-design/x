@@ -17,8 +17,8 @@ export const { genStyleHooks, genComponentStyleHook, genSubStyleComponent } = ge
     };
   },
   useToken: () => {
-    const [theme, realToken, hashId, token, cssVar] = useInternalToken();
-    return { theme, realToken, hashId, token, cssVar };
+    const [theme, realToken, hashId, token, cssVar, zeroRuntime] = useInternalToken();
+    return { theme, realToken, hashId, token, cssVar, zeroRuntime };
   },
   useCSP: () => {
     const { csp } = useXProviderContext();

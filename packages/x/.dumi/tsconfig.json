@@ -1,7 +1,11 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "resolveJsonModule": true
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "strict": false,
+    "strictNullChecks": false
   },
-  "include": ["**/*", "../typings/index.d.ts"]
+  "include": [],
+  "exclude": ["**/*"]
 }

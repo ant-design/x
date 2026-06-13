@@ -87,9 +87,6 @@ const useStyle = createStyles(({ token, css }) => {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      padding-block: ${token.paddingLG}px;
-      padding-inline: ${token.paddingLG}px;
-      gap: 16px;
       .ant-bubble-content-updating {
         background-image: linear-gradient(90deg, #ff6b23 0%, #af3cb8 31%, #53b6ff 89%);
         background-size: 100% 2px;
@@ -97,10 +94,16 @@ const useStyle = createStyles(({ token, css }) => {
         background-position: bottom;
       }
     `,
+    chatList: css`
+      flex: 1;
+      overflow-y: auto;
+      margin-block-start: ${token.margin}px;
+    `,
+    chatSender: css`
+      padding: ${token.paddingXS}px;
+    `,
     startPage: css`
       display: flex;
-      width: 100%;
-      max-width: 840px;
       flex-direction: column;
       align-items: center;
       height: 100%;
@@ -110,14 +113,6 @@ const useStyle = createStyles(({ token, css }) => {
       font-size: 32px;
       margin-block-end: 38px;
       font-weight: 600;
-    `,
-    chatList: css`
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      flex-direction: column;
-      justify-content: space-between;
     `,
   };
 });
@@ -385,7 +380,6 @@ const App = () => {
                   styles={{
                     root: {
                       maxWidth: 940,
-                      height: 'calc(100% - 160px)',
                       marginBlockEnd: 24,
                     },
                   }}
@@ -399,56 +393,51 @@ const App = () => {
                   role={getRole(className)}
                 />
               )}
-              <div
-                style={{ width: '100%', maxWidth: 840 }}
-                className={clsx({ [styles.startPage]: messages.length === 0 })}
-              >
-                {messages.length === 0 && (
-                  <div className={styles.agentName}>{locale.agentName}</div>
-                )}
-                <Sender
-                  suffix={false}
-                  ref={senderRef}
-                  key={curConversation}
-                  slotConfig={slotConfig}
-                  loading={isRequesting}
-                  onSubmit={(val) => {
-                    if (!val) return;
-                    onRequest({
-                      messages: [{ role: 'user', content: val }],
-                      thinking: {
-                        type: 'disabled',
-                      },
-                    });
-                    listRef.current?.scrollTo({ top: 'bottom' });
-                    setActiveConversation(curConversation);
-                    senderRef.current?.clear?.();
-                  }}
-                  onCancel={() => {
-                    abort();
-                  }}
-                  placeholder={locale.placeholder}
-                  footer={(actionNode) => {
-                    return (
-                      <Flex justify="space-between" align="center">
-                        <Flex gap="small" align="center">
-                          <Sender.Switch
-                            value={deepThink}
-                            onChange={(checked: boolean) => {
-                              setDeepThink(checked);
-                            }}
-                            icon={<OpenAIOutlined />}
-                          >
-                            {locale.deepThink}
-                          </Sender.Switch>
-                        </Flex>
-                        <Flex align="center">{actionNode}</Flex>
+            </div>
+            <div className={clsx(styles.chatSender, { [styles.startPage]: messages.length === 0 })}>
+              {messages.length === 0 && <div className={styles.agentName}>{locale.agentName}</div>}
+              <Sender
+                suffix={false}
+                ref={senderRef}
+                key={curConversation}
+                slotConfig={slotConfig}
+                loading={isRequesting}
+                onSubmit={(val) => {
+                  if (!val) return;
+                  onRequest({
+                    messages: [{ role: 'user', content: val }],
+                    thinking: {
+                      type: 'disabled',
+                    },
+                  });
+                  listRef.current?.scrollTo({ top: 'bottom' });
+                  setActiveConversation(curConversation);
+                  senderRef.current?.clear?.();
+                }}
+                onCancel={() => {
+                  abort();
+                }}
+                placeholder={locale.placeholder}
+                footer={(actionNode) => {
+                  return (
+                    <Flex justify="space-between" align="center">
+                      <Flex gap="small" align="center">
+                        <Sender.Switch
+                          value={deepThink}
+                          onChange={(checked: boolean) => {
+                            setDeepThink(checked);
+                          }}
+                          icon={<OpenAIOutlined />}
+                        >
+                          {locale.deepThink}
+                        </Sender.Switch>
                       </Flex>
-                    );
-                  }}
-                  autoSize={{ minRows: 3, maxRows: 6 }}
-                />
-              </div>
+                      <Flex align="center">{actionNode}</Flex>
+                    </Flex>
+                  );
+                }}
+                autoSize={{ minRows: 3, maxRows: 6 }}
+              />
             </div>
           </div>
         </div>

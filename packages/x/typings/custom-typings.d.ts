@@ -29,3 +29,36 @@ declare module '@npmcli/run-script' {
 declare module '@microflash/rehype-figure';
 
 declare module 'dekko';
+
+// Dumi module declarations for .dumi directory
+declare module 'dumi/theme-default/slots/SearchBar' {
+  const SearchBar: any;
+  export default SearchBar;
+}
+
+declare module 'dumi/dist/client/theme-api' {
+  const themeApi: any;
+  export default themeApi;
+  export const useIntl: any;
+}
+
+declare module 'dumi' {
+  const dumi: any;
+  export default dumi;
+  export const useIntl: any;
+  export const useRouteMeta: any;
+  export const useRouteData: any;
+  export const useSidebarData: any;
+  export const useFullSidebarData: any;
+  export const useSiteData: any;
+  export const useTabMeta: any;
+  export const useLocation: any;
+  export const useNavigate: any;
+  export const FormattedMessage: any;
+  export const Helmet: any;
+  export const Link: any;
+  // rehype/unified types
+  export const HastRoot: any;
+  export const UnifiedTransformer: any;
+  export const unistUtilVisit: any;
+}

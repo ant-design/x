@@ -1,0 +1,428 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "local://coffee_booking_catalog.json",
+  "title": "Coffee Booking Catalog",
+  "description": "Custom catalog for coffee booking demo components.",
+  "catalogId": "local://coffee_booking_catalog.json",
+  "components": {
+    "Text": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "Text"
+        },
+        "text": {
+          "description": "The text content to display.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "variant": {
+          "type": "string",
+          "description": "A hint for the base text style.",
+          "enum": ["h1", "h2", "h3", "body", "success"]
+        },
+        "status": {
+          "description": "The status of the text (for conditional styling).",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "DateTimeInput": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "DateTimeInput"
+        },
+        "status": {
+          "description": "The status of the input (success, error, loading).",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for date selection.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context with path bindings",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "CoffeeList": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "CoffeeList"
+        },
+        "list": {
+          "description": "Coffee list data.",
+          "oneOf": [
+            {
+              "type": "array"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "description": {
+          "description": "Description text for the coffee list.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "status": {
+          "description": "The status of the list.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for coffee selection.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context with path bindings",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "ActionButton": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "const": "ActionButton"
+        },
+        "child": {
+          "type": "string",
+          "description": "The ID of the child component (e.g., text label)."
+        },
+        "variant": {
+          "type": "string",
+          "description": "Button style variant.",
+          "enum": ["default", "primary"]
+        },
+        "status": {
+          "description": "The status of the button.",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": ["path"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "res": {
+          "description": "Result data from dataModel.",
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": ["path"],
+          "additionalProperties": false
+        },
+        "action": {
+          "type": "object",
+          "description": "Action configuration for button click.",
+          "properties": {
+            "event": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Event name"
+                },
+                "context": {
+                  "type": "object",
+                  "description": "Event context with path bindings or literal values",
+                  "additionalProperties": true
+                }
+              },
+              "required": ["name"]
+            }
+          },
+          "required": ["event"]
+        }
+      },
+      "required": ["component", "action"],
+      "additionalProperties": true
+    },
+    "BookForm": {
+      "type": "object",
+      "description": "A form container component.",
+      "properties": {
+        "component": {
+          "const": "BookForm"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "CoffeeResultCard": {
+      "type": "object",
+      "description": "A card to display booking result.",
+      "properties": {
+        "component": {
+          "const": "CoffeeResultCard"
+        },
+        "name": {
+          "type": "string",
+          "description": "Coffee name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Coffee description"
+        },
+        "price": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "description": "Coffee price"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Tag label (e.g., '热销')"
+        },
+        "image": {
+          "type": "string",
+          "description": "Coffee image URL"
+        },
+        "date": {
+          "type": "string",
+          "description": "Booking date"
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "ProductCard": {
+      "type": "object",
+      "description": "A card to display product information.",
+      "properties": {
+        "component": {
+          "const": "ProductCard"
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name"
+        },
+        "price": {
+          "type": "number",
+          "description": "Product price"
+        },
+        "category": {
+          "type": "string",
+          "description": "Product category"
+        },
+        "stock": {
+          "type": "number",
+          "description": "Product stock quantity"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Tag label (e.g., '热销')"
+        },
+        "index": {
+          "type": "number",
+          "description": "Index for animation delay"
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "ProductContainer": {
+      "type": "object",
+      "description": "A container for product cards.",
+      "properties": {
+        "component": {
+          "const": "ProductContainer"
+        },
+        "children": {
+          "type": "array",
+          "description": "Child component IDs.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    },
+    "LoadingIndicator": {
+      "type": "object",
+      "description": "A loading progress indicator.",
+      "properties": {
+        "component": {
+          "const": "LoadingIndicator"
+        },
+        "progress": {
+          "type": "number",
+          "description": "Current progress count"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total count"
+        },
+        "loading": {
+          "type": "boolean",
+          "description": "Loading status"
+        }
+      },
+      "required": ["component"],
+      "additionalProperties": true
+    }
+  },
+  "functions": {},
+  "$defs": {
+    "DynamicValue": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": ["path"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

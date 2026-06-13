@@ -2,11 +2,12 @@
 group:
   title: Components
   order: 5
-title: Rich Text Enhancement
+title: Code
+subtitle: CodeHighlighter
 order: 4
 ---
 
-Map Markdown to rich text components. The current demo focuses on:
+Map Markdown to code highlighting components. The following are examples only; you can register any custom component for your own scenarios:
 
 - Code highlighting (CodeHighlighter)
 
@@ -16,5 +17,5 @@ Map Markdown to rich text components. The current demo focuses on:
 ## See also
 
 - [Overview](/x-markdowns/components)
-- [Chat enhancement](/x-markdowns/chat-enhancement)
-- [Data display](/x-markdowns/data-display)
+- [Chat](/x-markdowns/chat-enhancement)
+- [Charts](/x-markdowns/data-display)

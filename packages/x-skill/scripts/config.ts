@@ -7,7 +7,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 
 export interface SkillConfig {
-  [skillName: string]: string;
+  [skillName: string]: string | string[];
 }
 
 export interface Config {
@@ -39,14 +39,66 @@ const projectRoot = path.join(scriptDir, '..');
 // 原有的文档链接配置
 const skillConfig: Config = {
   zh: {
-    'use-x-chat': 'packages/x/docs/x-sdk/use-x-chat.zh-CN.md',
+    'use-x-chat': [
+      'packages/x/docs/x-sdk/use-x-chat.zh-CN.md',
+      'packages/x/docs/x-sdk/use-x-conversations.zh-CN.md',
+    ],
     'x-request': 'packages/x/docs/x-sdk/x-request.zh-CN.md',
+    'x-card': [
+      'packages/x/docs/x-card/a2ui-v-0-9.zh-CN.md',
+      'packages/x/docs/x-card/a2ui-v-0-8.zh-CN.md',
+    ],
     'x-markdown': 'packages/x/docs/x-markdown/examples.zh-CN.md',
+    'x-components': [
+      'packages/x/components/bubble/index.zh-CN.md',
+      'packages/x/components/sender/index.zh-CN.md',
+      'packages/x/components/conversations/index.zh-CN.md',
+      'packages/x/components/welcome/index.zh-CN.md',
+      'packages/x/components/prompts/index.zh-CN.md',
+      'packages/x/components/attachments/index.zh-CN.md',
+      'packages/x/components/suggestion/index.zh-CN.md',
+      'packages/x/components/think/index.zh-CN.md',
+      'packages/x/components/thought-chain/index.zh-CN.md',
+      'packages/x/components/actions/index.zh-CN.md',
+      'packages/x/components/file-card/index.zh-CN.md',
+      'packages/x/components/sources/index.zh-CN.md',
+      'packages/x/components/code-highlighter/index.zh-CN.md',
+      'packages/x/components/mermaid/index.zh-CN.md',
+      'packages/x/components/x-provider/index.zh-CN.md',
+      'packages/x/components/notification/index.zh-CN.md',
+      'packages/x/components/folder/index.zh-CN.md',
+    ],
   },
   en: {
-    'use-x-chat': 'packages/x/docs/x-sdk/use-x-chat.en-US.md',
+    'use-x-chat': [
+      'packages/x/docs/x-sdk/use-x-chat.en-US.md',
+      'packages/x/docs/x-sdk/use-x-conversations.en-US.md',
+    ],
     'x-request': 'packages/x/docs/x-sdk/x-request.en-US.md',
+    'x-card': [
+      'packages/x/docs/x-card/a2ui-v-0-9.en-US.md',
+      'packages/x/docs/x-card/a2ui-v-0-8.en-US.md',
+    ],
     'x-markdown': 'packages/x/docs/x-markdown/examples.en-US.md',
+    'x-components': [
+      'packages/x/components/bubble/index.en-US.md',
+      'packages/x/components/sender/index.en-US.md',
+      'packages/x/components/conversations/index.en-US.md',
+      'packages/x/components/welcome/index.en-US.md',
+      'packages/x/components/prompts/index.en-US.md',
+      'packages/x/components/attachments/index.en-US.md',
+      'packages/x/components/suggestion/index.en-US.md',
+      'packages/x/components/think/index.en-US.md',
+      'packages/x/components/thought-chain/index.en-US.md',
+      'packages/x/components/actions/index.en-US.md',
+      'packages/x/components/file-card/index.en-US.md',
+      'packages/x/components/sources/index.en-US.md',
+      'packages/x/components/code-highlighter/index.en-US.md',
+      'packages/x/components/mermaid/index.en-US.md',
+      'packages/x/components/x-provider/index.en-US.md',
+      'packages/x/components/notification/index.en-US.md',
+      'packages/x/components/folder/index.en-US.md',
+    ],
   },
   paths: {
     // 中文技能目录

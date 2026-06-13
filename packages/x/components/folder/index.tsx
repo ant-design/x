@@ -1,6 +1,7 @@
 import { useControlledState } from '@rc-component/util';
 import type { TreeProps } from 'antd';
 import { Flex, Splitter } from 'antd';
+import type { MenuProps } from 'antd/es/menu';
 import { clsx } from 'clsx';
 import React, { useCallback, useEffect, useState } from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
@@ -11,6 +12,8 @@ import { useXProviderContext } from '../x-provider';
 import DirectoryTree, { type FolderTreeData } from './DirectoryTree';
 import FilePreview from './FilePreview';
 import useStyle from './style';
+
+export type { FolderTreeData };
 
 // File content service interface
 export interface FileContentService {
@@ -33,7 +36,7 @@ export interface FolderProps {
   classNames?: Partial<Record<SemanticType, string>>;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
   style?: React.CSSProperties;
-  directoryIcons?: Record<'directory' | string, React.ReactNode | (() => React.ReactNode)>;
+  directoryIcons?: false | Record<'directory' | string, React.ReactNode | (() => React.ReactNode)>;
   // Data properties
   treeData: FolderTreeData[];
   // Selection functionality
@@ -46,7 +49,7 @@ export interface FolderProps {
     content?: string;
   }) => void;
   directoryTreeWith?: number | string;
-  emptyRender?: React.ReactNode | (() => React.ReactNode);
+  emptyRender?: false | React.ReactNode | (() => React.ReactNode);
   previewRender?:
     | React.ReactNode
     | ((
@@ -72,8 +75,9 @@ export interface FolderProps {
   onFolderClick?: (folderPath: string) => void;
 
   // Custom titles
-  directoryTitle?: React.ReactNode | (() => React.ReactNode);
+  directoryTitle?: false | React.ReactNode | (() => React.ReactNode);
   previewTitle?:
+    | false
     | React.ReactNode
     | (({
         title,
@@ -84,11 +88,25 @@ export interface FolderProps {
         path: string[];
         content: string;
       }) => React.ReactNode);
+
+  // Right-click context menu
+  /** Right-click context menu items, applies to all nodes. Can be overridden by `contextMenu` in `FolderTreeData`. Function form receives the node data and full path key */
+  contextMenu?: MenuProps['items'] | ((node: FolderTreeData, key: string) => MenuProps['items']);
+  /** Callback when right-clicking a node */
+  onRightClick?: TreeProps['onRightClick'];
 }
 
 // Ref interface type
 export type FolderRef = {
   nativeElement: HTMLDivElement;
+  /** Get a node by path segments, returns undefined if not found */
+  getNode: (path: string[]) => FolderTreeData | undefined;
+  /** Immutable update: merge partial data into the target node, returns new treeData */
+  updateNode: (path: string[], data: Partial<FolderTreeData>) => FolderTreeData[];
+  /** Immutable update: delete the target node, returns new treeData */
+  deleteNode: (path: string[]) => FolderTreeData[];
+  /** Immutable update: add a child node under the target folder, returns new treeData */
+  addNode: (parentPath: string[], node: FolderTreeData) => FolderTreeData[];
 };
 
 const ForwardFolder = React.forwardRef<FolderRef, FolderProps>((props, ref) => {
@@ -115,15 +133,88 @@ const ForwardFolder = React.forwardRef<FolderRef, FolderProps>((props, ref) => {
     onExpandedPathsChange,
     onFileClick,
     onFolderClick,
+    contextMenu,
+    onRightClick,
   } = props;
 
   // ============================= Refs =============================
   const containerRef = React.useRef<HTMLDivElement>(null);
-  useProxyImperativeHandle(ref, () => {
-    return {
-      nativeElement: containerRef.current!,
-    };
-  });
+
+  // ============================ Tree Helpers ============================
+  /** Find a node by path segments (read from props.treeData) */
+  const getNodeByPath = useCallback(
+    (path: string[]): FolderTreeData | undefined => {
+      if (!path || path.length === 0 || !treeData) return undefined;
+      const findNode = (nodes: FolderTreeData[], index = 0): FolderTreeData | undefined => {
+        if (index >= path.length) return undefined;
+        const segment = path[index];
+        for (const node of nodes) {
+          if (node.path === segment) {
+            return index === path.length - 1
+              ? node
+              : node.children
+                ? findNode(node.children, index + 1)
+                : undefined;
+          }
+        }
+        return undefined;
+      };
+      return findNode(treeData);
+    },
+    [treeData],
+  );
+
+  /** Immutable walk for update / delete / add */
+  const walkTree = useCallback(
+    (
+      nodes: FolderTreeData[],
+      path: string[],
+      index: number,
+      action: 'update' | 'delete' | 'add',
+      data?: Partial<FolderTreeData>,
+    ): FolderTreeData[] => {
+      const targetSegment = path[index];
+      const isLast = index === path.length - 1;
+
+      return nodes.map((node) => {
+        if (node.path !== targetSegment) return node;
+
+        if (isLast) {
+          switch (action) {
+            case 'update':
+              return { ...node, ...data };
+            case 'delete':
+              return null as unknown as FolderTreeData;
+            case 'add': {
+              const newChild = data as FolderTreeData;
+              const children = node.children ? [...node.children, newChild] : [newChild];
+              return { ...node, children };
+            }
+            default:
+              return node;
+          }
+        }
+
+        if (node.children) {
+          const newChildren = walkTree(node.children, path, index + 1, action, data);
+          return { ...node, children: newChildren.filter(Boolean) as FolderTreeData[] };
+        }
+        return node;
+      });
+    },
+    [],
+  );
+
+  useProxyImperativeHandle(ref, () => ({
+    nativeElement: containerRef.current!,
+    getNode: (path: string[]) => getNodeByPath(path),
+    updateNode: (path: string[], data: Partial<FolderTreeData>) =>
+      treeData ? walkTree(treeData, path, 0, 'update', data) : [],
+    deleteNode: (path: string[]) =>
+      treeData ? (walkTree(treeData, path, 0, 'delete').filter(Boolean) as FolderTreeData[]) : [],
+    addNode: (parentPath: string[], node: FolderTreeData) =>
+      treeData ? walkTree(treeData, parentPath, 0, 'add', node) : [],
+  }));
 
   // ============================ State ============================
 
@@ -343,6 +434,8 @@ const ForwardFolder = React.forwardRef<FolderRef, FolderProps>((props, ref) => {
                 onExpand={handleExpand}
                 defaultExpandAll={defaultExpandAll}
                 directoryTitle={directoryTitle}
+                contextMenu={contextMenu}
+                onRightClick={onRightClick}
               />
             </div>
           </Splitter.Panel>

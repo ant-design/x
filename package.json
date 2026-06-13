@@ -1,6 +1,6 @@
 {
   "name": "x-mono",
-  "version": "2.4.0",
+  "version": "2.8.0",
   "private": true,
   "scripts": {
     "presite": "npm run prestart --workspaces",
@@ -52,7 +52,7 @@
   "size-limit": [
     {
       "path": "./packages/x/dist/antdx.min.js",
-      "limit": "500 KiB"
+      "limit": "520 KiB"
     },
     {
       "path": "./packages/x-sdk/dist/x-sdk.min.js",

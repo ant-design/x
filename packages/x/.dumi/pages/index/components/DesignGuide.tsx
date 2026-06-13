@@ -103,7 +103,7 @@ const useStyle = createStyles(({ token, css }) => {
       line-height: 40px;
     `,
     chain_item_title: css`
-      font-size: ${token.fontSizeHeading1 + 10}px;
+      font-size: ${Number(token.fontSizeHeading1) + 10}px;
       line-height: 56px;
       font-weight: bold;
 

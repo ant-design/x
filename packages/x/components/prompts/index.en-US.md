@@ -32,22 +32,22 @@ The Prompts component is used to display a predefined set of questions or sugges
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | classNames | Custom style class names for different parts of each prompt item. | Record<SemanticType, string> | - | - |
-| items | List containing multiple prompt items. | PromptProps[] | - | - |
+| items | List containing multiple prompt items. | PromptsItemType[] | - | - |
 | prefixCls | Prefix for style class names. | string | - | - |
 | rootClassName | Style class name for the root node. | string | - | - |
 | styles | Custom styles for different parts of each prompt item. | Record<SemanticType, React.CSSProperties> | - | - |
 | title | Title displayed at the top of the prompt list. | React.ReactNode | - | - |
 | vertical | When set to `true`, the Prompts will be arranged vertically. | boolean | `false` | - |
 | wrap | When set to `true`, the Prompts will automatically wrap. | boolean | `false` | - |
-| onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptProps }) => void | - | - |
+| onItemClick | Callback function when a prompt item is clicked. | (info: { data: PromptsItemType }) => void | - | - |
 | fadeIn | Fade in effect | boolean | - | - |
 | fadeInLeft | Fade left in effect | boolean | - | - |
 
-### PromptProps
+### PromptsItemType
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| children | Nested child prompt items. | PromptProps[] | - | - |
+| children | Nested child prompt items. | PromptsItemType[] | - | - |
 | description | Prompt description providing additional information. | React.ReactNode | - | - |
 | disabled | When set to `true`, click events are disabled. | boolean | `false` | - |
 | icon | Prompt icon displayed on the left side of the prompt item. | React.ReactNode | - | - |

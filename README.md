@@ -91,6 +91,10 @@ Build excellent AI interfaces and pioneer intelligent new experiences.
 
 `@ant-design/x-markdown` aims to provide a streaming-friendly, highly extensible, and high-performance Markdown renderer. It supports streaming rendering of formulas, code highlighting, mermaid, and more. See details [here](packages/x-markdown/README.md).
 
+## 🎴 Dynamic Card Renderer
+
+`@ant-design/x-card` is a dynamic card rendering component based on the A2UI protocol, enabling AI Agents to dynamically build and render interactive interfaces through structured JSON message streams. It supports streaming rendering, data binding, and reactive updates. See details [here](packages/x-card/README.md).
+
 ## 🚀 Skill
 
 `@ant-design/x-skill` is an intelligent skill library specially designed for Ant Design X, providing a series of carefully designed Agent skills. These skills can significantly improve development efficiency, help you quickly build high-quality AI conversation applications, and effectively solve various problems encountered during development. See details [here](packages/x-skill/README.md).
