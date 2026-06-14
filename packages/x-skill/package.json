@@ -1,6 +1,6 @@
 {
   "name": "@ant-design/x-skill",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "CLI tool for installing AI skills to development tools like Claude, Cursor, etc.",
   "homepage": "https://x.ant.design/x-skills/introduce",
   "bugs": {
@@ -29,10 +29,10 @@
     "coverage": "echo 'coverage skipped for x-skill' && exit 0",
     "test:dekko": "tsx scripts/dekko.ts",
     "prepublishOnly": "tsx ../../scripts/pre-publish.ts x-skill",
-    "version": "tsx scripts/generate-version.ts",
+    "version": "tsx scripts/generate-version.ts && npm run generate-meta",
     "clean": "rm -rf coverage lib es",
     "start": "father build && node bin/index.js",
-    "prestart": "npm run version && npm run generate-meta",
+    "prestart": "npm run version",
     "lint": "biome lint src/",
     "tsc": "tsc --noEmit"
   },

@@ -25,6 +25,7 @@ tag: 2.4.0
 <code src="./demo/fully-controlled.tsx">Fully Controlled Mode</code>
 <code src="./demo/searchable.tsx">Searchable File Tree</code>
 <code src="./demo/custom-icons.tsx">Custom Icons</code>
+<code src="./demo/context-menu.tsx">Context Menu</code>
 
 ## API
 
@@ -53,6 +54,8 @@ Common props ref: [Common props](/docs/react/common-props)
 | directoryTitle | Directory tree title, set to `false` to hide | false \| React.ReactNode \| (() => React.ReactNode) | - | - |
 | previewTitle | File preview title | string \| (({ title, path, content }: { title: string; path: string[]; content: string }) => React.ReactNode) | - | - |
 | directoryIcons | Custom icon configuration, set to `false` to hide icons | false \| Record<'directory' \| string, React.ReactNode \| (() => React.ReactNode)> | - | - |
+| contextMenu | Context menu items for right-click, supports global configuration and function form (dynamically returns menu items based on node). Function form receives node data and full path key. Can be overridden by `contextMenu` in `FolderTreeData` | MenuProps['items'] \| ((node: [FolderTreeData](#foldertreenode), key: string) => MenuProps['items']) | - | - |
+| onRightClick | Callback when right-clicking a node | function({event, node}) | - | - |
 
 ### FolderTreeData
 
@@ -62,6 +65,7 @@ Common props ref: [Common props](/docs/react/common-props)
 | path | File path | string | - | - |
 | content | File content (optional) | string | - | - |
 | children | Sub-items (valid only for folder type) | [FolderTreeData](#foldertreenode)[] | - | - |
+| contextMenu | Right-click context menu items, set to `false` to disable context menu for this node. Takes priority over global `contextMenu`. Function form receives full path key | MenuProps['items'] \| false \| ((key: string) => MenuProps['items']) | - | - |
 
 ### FileContentService
 
@@ -72,6 +76,40 @@ interface FileContentService {
   loadFileContent(filePath: string): Promise<string>;
 }
 ```
+
+### Ref Methods
+
+Access component instance methods via `ref`.
+
+```tsx
+const folderRef = useRef<FolderRef>(null);
+
+// Get a node
+const node = folderRef.current?.getNode(['src', 'App.tsx']);
+
+// Rename: immutable update, returns new treeData
+const newData = folderRef.current?.updateNode(['src', 'App.tsx'], {
+  title: 'Main.tsx',
+  path: 'Main.tsx',
+});
+
+// Delete a node
+const newData = folderRef.current?.deleteNode(['src', 'unused.ts']);
+
+// Add a child node
+const newData = folderRef.current?.addNode(['src'], {
+  title: 'new.ts',
+  path: 'new.ts',
+  content: '',
+});
+```
+
+| Method | Description | Type |
+| --- | --- | --- |
+| getNode | Get node data by path | (path: string[]) => FolderTreeData \| undefined |
+| updateNode | Immutable update: merge partial fields into the target node, returns new treeData | (path: string[], data: Partial\<FolderTreeData\>) => FolderTreeData[] |
+| deleteNode | Immutable update: delete the target node, returns new treeData | (path: string[]) => FolderTreeData[] |
+| addNode | Immutable update: add a child node under the target folder, returns new treeData | (parentPath: string[], node: FolderTreeData) => FolderTreeData[] |
 
 ## Semantic DOM
 

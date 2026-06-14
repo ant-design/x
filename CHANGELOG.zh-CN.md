@@ -15,6 +15,34 @@ tag: vVERSION
 
 ---
 
+## 2.8.0
+
+`2026-06-08`
+
+### @ant-design/x
+
+- 🆕 Folder 组件新增右键菜单功能。[#1919](https://github.com/ant-design/x/pull/1919) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 FileCard.List 在 items 更新时滚动按钮状态未刷新的问题。[#1914](https://github.com/ant-design/x/pull/1914) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+- 🐛 修复 Sender 组件在 slotConfig ref 变化时运行时插入的 slots 被清空的问题。[#1900](https://github.com/ant-design/x/pull/1900) 由 [pikanohup](https://github.com/hooraypikachu) 提交
+- 🐛 修复设计令牌（design token）算术运算前的类型转换问题。[#1910](https://github.com/ant-design/x/pull/1910) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 新增 `disableDefaultStyles` 属性，支持禁用默认标签样式。[#1909](https://github.com/ant-design/x/pull/1909) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复自定义标签内换行符被错误解析的问题。[#1896](https://github.com/ant-design/x/pull/1896) 由 [ryker](https://github.com/2279549769) 提交
+- 🐛 修复流式渲染初始非流式输出时的布局抖动问题。[#1917](https://github.com/ant-design/x/pull/1917) 由 [Waiter](https://github.com/Waiter) 提交
+- 🐛 修复 SSR 环境下 DOMPurify 报错的问题。[#1917](https://github.com/ant-design/x/pull/1917) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复自定义标签内换行保护逻辑不完整的问题。[#1920](https://github.com/ant-design/x/pull/1920) 由 [18062706139fcz](https://github.com/18062706139fcz) 提交
+
+### @ant-design/x-sdk
+
+- 📖 修复 x-conversations 示例中 Chat Provider 缓存问题，使用 useRef 保持 provider 实例稳定。[#1925](https://github.com/ant-design/x/pull/1925) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+
+### 其他
+
+- 📖 修复 Prompts API 文档中过时的类型名称。[#1915](https://github.com/ant-design/x/pull/1915) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+- 🛠 锁定 dumi 版本为 2.4.28。[#1922](https://github.com/ant-design/x/pull/1922)
+
 ## 2.7.0
 
 `2026-04-30`

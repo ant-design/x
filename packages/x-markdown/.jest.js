@@ -11,6 +11,7 @@ const compileModules = [
   'khroma',
   'd3',
   'd3-',
+  'marked',
 ];
 
 const resolve = (p) => require.resolve(`@ant-design/tools/lib/jest/${p}`);
