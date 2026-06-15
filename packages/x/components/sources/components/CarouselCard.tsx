@@ -18,20 +18,37 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
 
   const compCls = `${prefixCls}-carousel`;
 
-  const [slide, setSlide] = useState<number>(0);
+  // Derive the target slide index from activeKey
+  const activeSlideIndex = React.useMemo(
+    () => Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0),
+    [items, activeKey],
+  );
+
+  const [slide, setSlide] = useState<number>(activeSlideIndex);
 
   const carouselRef = useRef<React.ComponentRef<typeof Carousel>>(null);
 
+  // The previous activeSlideIndex — used to detect external activeKey changes
+  const prevActiveSlideIndexRef = useRef(activeSlideIndex);
+
+  // When activeKey changes (activeSlideIndex differs), sync slide to it
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (activeSlideIndex !== prevActiveSlideIndexRef.current) {
+      prevActiveSlideIndexRef.current = activeSlideIndex;
+      setSlide(activeSlideIndex);
       if (carouselRef.current) {
-        const current = Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0);
-        setSlide(current);
-        carouselRef.current.goTo(current, false);
+        carouselRef.current.goTo(activeSlideIndex, false);
       }
-    }, 0);
-    return () => clearTimeout(timer);
-  }, [activeKey, items, setSlide]);
+    }
+  }, [activeSlideIndex]);
+
+  // On initial mount, sync the carousel position to the initial activeKey
+  useEffect(() => {
+    if (activeSlideIndex > 0 && carouselRef.current) {
+      carouselRef.current.goTo(activeSlideIndex, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClick = (item: SourcesItem) => {
     item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
@@ -46,7 +63,13 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             className={clsx(`${compCls}-btn`, `${compCls}-left-btn`, {
               [`${compCls}-btn-disabled`]: slide === 0,
             })}
-            onClick={() => carouselRef.current?.prev()}
+            onClick={() => {
+              if (slide > 0) {
+                const next = slide - 1;
+                setSlide(next);
+                carouselRef.current?.goTo(next, false);
+              }
+            }}
           >
             <LeftOutlined />
           </span>
@@ -54,22 +77,21 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             className={clsx(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
-            onClick={() => carouselRef.current?.next()}
+            onClick={() => {
+              const max = (items?.length || 1) - 1;
+              if (slide < max) {
+                const next = slide + 1;
+                setSlide(next);
+                carouselRef.current?.goTo(next, false);
+              }
+            }}
           >
             <RightOutlined />
           </span>
         </div>
         <div className={`${compCls}-page`}>{`${slide + 1}/${items?.length || 1}`}</div>
       </div>
-      <Carousel
-        className={compCls}
-        ref={carouselRef}
-        arrows={false}
-        infinite={false}
-        dots={false}
-        afterChange={setSlide}
-        beforeChange={(_, nextSlide) => setSlide(nextSlide)}
-      >
+      <Carousel className={compCls} ref={carouselRef} arrows={false} infinite={false} dots={false}>
         {items?.map((item, index) => (
           <div
             key={item.key || index}

@@ -58,6 +58,8 @@ const genActionsStyle: GenerateStyle<ActionsToken> = (token) => {
         justifyContent: 'center',
         lineHeight: token.lineHeight,
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        // Eliminate 300ms click delay on mobile/touch devices
+        touchAction: 'manipulation',
         [`${componentCls}-icon`]: {
           display: 'inline-flex',
           alignItems: 'center',

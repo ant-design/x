@@ -7,44 +7,45 @@ import Sources from '../index';
 
 // 模拟 Carousel 组件
 jest.mock('antd', () => {
-  const actualAntd = jest.requireActual('antd');
-  const React = require('react');
+  var actualAntd = jest.requireActual('antd');
+  var React = require('react');
+  var useState = React.useState;
+  var useImperativeHandle = React.useImperativeHandle;
+  var forwardRef = React.forwardRef;
+  var createElement = React.createElement;
+  var Children = React.Children;
 
-  const MockCarousel = React.forwardRef(({ beforeChange, children, ...props }: any, ref: any) => {
-    const [currentSlide, setCurrentSlide] = React.useState(0);
-    const totalSlides = React.Children.count(children);
+  var MockCarousel = forwardRef(function MockCarousel(props, ref) {
+    var children = props.children;
+    var totalSlides = Children.count(children);
+    var _s = useState(0);
+    var currentSlide = _s[0];
+    var setCurrentSlide = _s[1];
 
-    // 模拟 ref 方法
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
       prev: () => {
-        const newSlide = Math.max(0, currentSlide - 1);
-        setCurrentSlide(newSlide);
-        beforeChange?.(currentSlide, newSlide);
+        setCurrentSlide((s) => Math.max(0, s - 1));
       },
       next: () => {
-        const newSlide = Math.min(totalSlides - 1, currentSlide + 1);
-        setCurrentSlide(newSlide);
-        beforeChange?.(currentSlide, newSlide);
+        setCurrentSlide((s) => Math.min(totalSlides - 1, s + 1));
       },
-      goTo: (slide: number) => {
+      goTo: (slide) => {
         setCurrentSlide(slide);
-        beforeChange?.(currentSlide, slide);
       },
     }));
 
-    return (
-      <div {...props} data-current-slide={currentSlide}>
-        {children}
-      </div>
+    var restProps = Object.assign({}, props);
+    delete restProps.children;
+    return createElement(
+      'div',
+      Object.assign({}, restProps, { 'data-current-slide': currentSlide }),
+      children,
     );
   });
 
   MockCarousel.displayName = 'Carousel';
 
-  return {
-    ...actualAntd,
-    Carousel: MockCarousel,
-  };
+  return Object.assign({}, actualAntd, { Carousel: MockCarousel });
 });
 
 const items = [
@@ -248,6 +249,106 @@ describe('Sources Component', () => {
     expect(consoleSpy).toHaveBeenCalledWith('Clicked: 1. Data source');
 
     consoleSpy.mockRestore();
+  });
+
+  it('Sources should sync carousel index with activeKey changes', async () => {
+    const carouselItems = [
+      {
+        key: '1',
+        title: 'First Item',
+        url: 'https://first.com',
+        description: 'First description',
+      },
+      {
+        key: '2',
+        title: 'Second Item',
+        url: 'https://second.com',
+        description: 'Second description',
+      },
+      {
+        key: '3',
+        title: 'Third Item',
+        url: 'https://third.com',
+        description: 'Third description',
+      },
+    ];
+
+    const { container, rerender } = render(
+      <Sources title="Test" items={carouselItems} inline activeKey="1" />,
+    );
+
+    // Force Popover to render content by triggering hover
+    const titleWrapper = container.querySelector('.ant-sources-title-wrapper');
+    fireEvent.mouseEnter(titleWrapper!);
+    await waitFakeTimer();
+
+    const pageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(pageIndicator).toHaveTextContent('1/3');
+
+    // Change activeKey to "3" — the index should update to 3/3
+    rerender(<Sources title="Test" items={carouselItems} inline activeKey="3" />);
+    await waitFakeTimer();
+
+    // Re-query the page indicator after rerender
+    const updatedPageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(updatedPageIndicator).toHaveTextContent('3/3');
+
+    // Change activeKey back to "1" — the index should update to 1/3
+    rerender(<Sources title="Test" items={carouselItems} inline activeKey="1" />);
+    await waitFakeTimer();
+
+    const finalPageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(finalPageIndicator).toHaveTextContent('1/3');
+  });
+
+  it('Sources should update carousel index when activeKey changes after manual navigation', async () => {
+    const carouselItems = [
+      {
+        key: '1',
+        title: 'First Item',
+        url: 'https://first.com',
+        description: 'First description',
+      },
+      {
+        key: '2',
+        title: 'Second Item',
+        url: 'https://second.com',
+        description: 'Second description',
+      },
+      {
+        key: '3',
+        title: 'Third Item',
+        url: 'https://third.com',
+        description: 'Third description',
+      },
+    ];
+
+    const { container, rerender } = render(
+      <Sources title="Test" items={carouselItems} inline activeKey="1" />,
+    );
+
+    // Force Popover to render content by triggering hover
+    const titleWrapper = container.querySelector('.ant-sources-title-wrapper');
+    fireEvent.mouseEnter(titleWrapper!);
+    await waitFakeTimer();
+
+    const pageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(pageIndicator).toHaveTextContent('1/3');
+
+    // Simulate user clicking the right button to navigate to slide 2
+    const rightBtn = container.querySelector('.ant-sources-carousel-right-btn');
+    fireEvent.click(rightBtn!);
+    await waitFakeTimer();
+
+    // After manual navigation, page should show 2/3
+    expect(pageIndicator).toHaveTextContent('2/3');
+
+    // Now activeKey changes externally to "3" — should override manual navigation
+    rerender(<Sources title="Test" items={carouselItems} inline activeKey="3" />);
+    await waitFakeTimer();
+
+    const updatedPageIndicator = container.querySelector('.ant-sources-carousel-page');
+    expect(updatedPageIndicator).toHaveTextContent('3/3');
   });
 
   it('Sources should support onClick on line mode', () => {
