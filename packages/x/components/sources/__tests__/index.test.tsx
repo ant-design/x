@@ -17,20 +17,26 @@ jest.mock('antd', () => {
 
   var MockCarousel = forwardRef(function MockCarousel(props: any, ref: any) {
     var children = props.children;
+    var afterChange = props.afterChange;
     var totalSlides = Children.count(children);
     var _s = useState(0);
     var currentSlide = _s[0];
     var setCurrentSlide = _s[1];
 
+    var updateSlide = (next: number) => {
+      setCurrentSlide(next);
+      if (afterChange) afterChange(next);
+    };
+
     useImperativeHandle(ref, () => ({
       prev: () => {
-        setCurrentSlide((s: number) => Math.max(0, s - 1));
+        updateSlide(Math.max(0, currentSlide - 1));
       },
       next: () => {
-        setCurrentSlide((s: number) => Math.min(totalSlides - 1, s + 1));
+        updateSlide(Math.min(totalSlides - 1, currentSlide + 1));
       },
       goTo: (slide: number) => {
-        setCurrentSlide(slide);
+        updateSlide(slide);
       },
     }));
 
@@ -221,11 +227,30 @@ describe('Sources Component', () => {
     fireEvent.click(rightBtn!);
     await waitFakeTimer();
 
-    // 由于实际的 Carousel 组件行为复杂，我们简化测试，只验证点击事件能够触发
-    // 而不验证具体的状态变化，因为这在测试环境中很难模拟
-    expect(rightBtn).toBeTruthy();
-    expect(leftBtn).toBeTruthy();
+    expect(pageIndicator).toHaveTextContent('2/3');
+    expect(leftBtn).not.toHaveClass('ant-sources-carousel-btn-disabled');
+
+    // 点击右按钮到最后
+    fireEvent.click(rightBtn!);
+    await waitFakeTimer();
+
+    expect(pageIndicator).toHaveTextContent('3/3');
+    expect(rightBtn).toHaveClass('ant-sources-carousel-btn-disabled');
+
+    // 点击左按钮返回
     fireEvent.click(leftBtn!);
+    await waitFakeTimer();
+
+    expect(pageIndicator).toHaveTextContent('2/3');
+
+    // 在第一页时点击左按钮应无效
+    fireEvent.click(leftBtn!);
+    await waitFakeTimer();
+    fireEvent.click(leftBtn!);
+    await waitFakeTimer();
+
+    expect(pageIndicator).toHaveTextContent('1/3');
+    expect(leftBtn).toHaveClass('ant-sources-carousel-btn-disabled');
   });
 
   it('Sources should support onClick', () => {
