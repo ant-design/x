@@ -28,27 +28,12 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
 
   const carouselRef = useRef<React.ComponentRef<typeof Carousel>>(null);
 
-  // The previous activeSlideIndex — used to detect external activeKey changes
-  const prevActiveSlideIndexRef = useRef(activeSlideIndex);
-
-  // When activeKey changes (activeSlideIndex differs), sync slide to it
   useEffect(() => {
-    if (activeSlideIndex !== prevActiveSlideIndexRef.current) {
-      prevActiveSlideIndexRef.current = activeSlideIndex;
-      setSlide(activeSlideIndex);
-      if (carouselRef.current) {
-        carouselRef.current.goTo(activeSlideIndex, false);
-      }
-    }
-  }, [activeSlideIndex]);
-
-  // On initial mount, sync the carousel position to the initial activeKey
-  useEffect(() => {
-    if (activeSlideIndex > 0 && carouselRef.current) {
+    setSlide(activeSlideIndex);
+    if (carouselRef.current) {
       carouselRef.current.goTo(activeSlideIndex, false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [activeSlideIndex]);
 
   const handleClick = (item: SourcesItem) => {
     item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
@@ -91,7 +76,14 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
         </div>
         <div className={`${compCls}-page`}>{`${slide + 1}/${items?.length || 1}`}</div>
       </div>
-      <Carousel className={compCls} ref={carouselRef} arrows={false} infinite={false} dots={false}>
+      <Carousel
+        className={compCls}
+        ref={carouselRef}
+        arrows={false}
+        infinite={false}
+        dots={false}
+        afterChange={setSlide}
+      >
         {items?.map((item, index) => (
           <div
             key={item.key || index}

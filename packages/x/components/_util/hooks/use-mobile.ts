@@ -8,7 +8,7 @@ import React from 'react';
 const useMobile = () => {
   const [mobile, setMobile] = React.useState(false);
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     setMobile(getIsMobile());
   }, []);
 

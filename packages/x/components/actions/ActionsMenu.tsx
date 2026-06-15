@@ -28,7 +28,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
   const { prefixCls, classNames = {}, styles = {} } = React.useContext(ActionsContext) || {};
   const isMobile = useMobile();
 
-  const { subItems = [], triggerSubMenuAction } = item;
+  const { subItems = [], triggerSubMenuAction } = item || {};
   const mergedTriggerSubMenuAction = triggerSubMenuAction ?? (isMobile ? 'click' : 'hover');
   const icon = item?.icon ?? <EllipsisOutlined />;
 
