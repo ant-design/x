@@ -1,5 +1,4 @@
 import getIsMobile from '@rc-component/util/lib/isMobile';
-import React from 'react';
 import { renderHook } from '../../../tests/utils';
 import useMobile from '../hooks/use-mobile';
 

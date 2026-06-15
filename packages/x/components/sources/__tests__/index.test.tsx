@@ -15,7 +15,7 @@ jest.mock('antd', () => {
   var createElement = React.createElement;
   var Children = React.Children;
 
-  var MockCarousel = forwardRef(function MockCarousel(props, ref) {
+  var MockCarousel = forwardRef(function MockCarousel(props: any, ref: any) {
     var children = props.children;
     var totalSlides = Children.count(children);
     var _s = useState(0);
@@ -24,12 +24,12 @@ jest.mock('antd', () => {
 
     useImperativeHandle(ref, () => ({
       prev: () => {
-        setCurrentSlide((s) => Math.max(0, s - 1));
+        setCurrentSlide((s: number) => Math.max(0, s - 1));
       },
       next: () => {
-        setCurrentSlide((s) => Math.min(totalSlides - 1, s + 1));
+        setCurrentSlide((s: number) => Math.min(totalSlides - 1, s + 1));
       },
-      goTo: (slide) => {
+      goTo: (slide: number) => {
         setCurrentSlide(slide);
       },
     }));
