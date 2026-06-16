@@ -15,6 +15,55 @@ tag: vVERSION
 
 ---
 
+## 2.8.0
+
+`2026-06-08`
+
+### @ant-design/x
+
+- 🆕 Folder 组件新增右键菜单功能。[#1919](https://github.com/ant-design/x/pull/1919) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 FileCard.List 在 items 更新时滚动按钮状态未刷新的问题。[#1914](https://github.com/ant-design/x/pull/1914) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+- 🐛 修复 Sender 组件在 slotConfig ref 变化时运行时插入的 slots 被清空的问题。[#1900](https://github.com/ant-design/x/pull/1900) 由 [pikanohup](https://github.com/hooraypikachu) 提交
+- 🐛 修复设计令牌（design token）算术运算前的类型转换问题。[#1910](https://github.com/ant-design/x/pull/1910) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 新增 `disableDefaultStyles` 属性，支持禁用默认标签样式。[#1909](https://github.com/ant-design/x/pull/1909) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复自定义标签内换行符被错误解析的问题。[#1896](https://github.com/ant-design/x/pull/1896) 由 [ryker](https://github.com/2279549769) 提交
+- 🐛 修复流式渲染初始非流式输出时的布局抖动问题。[#1917](https://github.com/ant-design/x/pull/1917) 由 [Waiter](https://github.com/Waiter) 提交
+- 🐛 修复 SSR 环境下 DOMPurify 报错的问题。[#1917](https://github.com/ant-design/x/pull/1917) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复自定义标签内换行保护逻辑不完整的问题。[#1920](https://github.com/ant-design/x/pull/1920) 由 [18062706139fcz](https://github.com/18062706139fcz) 提交
+
+### @ant-design/x-sdk
+
+- 📖 修复 x-conversations 示例中 Chat Provider 缓存问题，使用 useRef 保持 provider 实例稳定。[#1925](https://github.com/ant-design/x/pull/1925) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+
+### 其他
+
+- 📖 修复 Prompts API 文档中过时的类型名称。[#1915](https://github.com/ant-design/x/pull/1915) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+- 🛠 锁定 dumi 版本为 2.4.28。[#1922](https://github.com/ant-design/x/pull/1922)
+
+## 2.7.0
+
+`2026-04-30`
+
+### @ant-design/x
+
+- 🆕 XProvider 新增 `zeroRuntime` 属性，支持 Zero Runtime CSS-in-JS 模式，在构建时提取样式，避免运行时样式注入，提升性能。[#1737](https://github.com/ant-design/x/pull/1737) 由 [seanparmelee](https://github.com/seanparmelee) 提交
+
+### @ant-design/x-card
+
+- 🆕 新增 Action 上下文路径自动解析能力（`resolveActionContextPathRefs`），支持 v0.9 和 v0.8 两种格式，触发 action 时自动将 `context` 中的 `{ path }` 引用解析为 dataModel 中的实际值，并与组件运行时传入的 context 合并上报。[#1887](https://github.com/ant-design/x/pull/1887) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 📖 新增 v0.8 / v0.9 Action Context 解析示例文档（`action-context-resolve`）。[#1887](https://github.com/ant-design/x/pull/1887) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### @ant-design/x-skill
+
+- 🛠 更新 `x-card` skill 的 ACTIONS 参考文档，补充 Path 引用自动解析说明及正确的 React 使用示例。[#1887](https://github.com/ant-design/x/pull/1887) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 📖 官网新增搜索栏，提升文档检索体验。[#1831](https://github.com/ant-design/x/pull/1831) 由 [1uokun](https://github.com/1uokun) 提交
+
 ## 2.6.0
 
 `2026-04-17`

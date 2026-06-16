@@ -11,6 +11,7 @@ title: A2UI v0.8
 <code src="./demo/A2UI_v0.8/multi-card-sync.tsx">Multi Card Sync</code>
 <code src="./demo/A2UI_v0.8/filter-search.tsx">Filter Search</code>
 <code src="./demo/A2UI_v0.8/form-validation.tsx">Form Validation</code>
+<code src="./demo/A2UI_v0.8/action-context-resolve.tsx">Action Context Resolve</code>
 
 ## API
 
@@ -43,7 +44,48 @@ Data structure for action events.
 | --- | --- | --- | --- | --- |
 | name | Event name | string | - | - |
 | surfaceId | The surfaceId that triggered the action | string | - | - |
-| context | Complete dataModel snapshot of current surface | Record\<string, any\> | - | - |
+| context | Context passed by component, with path references resolved | Record\<string, any\> | - | - |
+
+### Action Context Path Reference Resolution
+
+When a component triggers an action, X-Card automatically resolves path references in the context to actual values.
+
+#### Path Reference Format (v0.8)
+
+In v0.8, action configuration uses array format to define path binding:
+
+```json
+{
+  "id": "submit-btn",
+  "component": {
+    "Button": {
+      "action": {
+        "name": "agent:send_context_text",
+        "context": [
+          { "key": "username", "value": { "path": "/form/username" } },
+          { "key": "email", "value": { "path": "/form/email" } }
+        ]
+      }
+    }
+  }
+}
+```
+
+#### Resolution Result
+
+When user clicks the button to trigger action, the context received by `onAction` callback is automatically resolved:
+
+```json
+{
+  "username": { "value": "John" },
+  "email": { "value": "john@example.com" }
+}
+```
+
+**Note**:
+
+- Only values in `{ path: "xxx" }` format in the context are converted
+- Actual values passed by component are not incorrectly converted
 
 ### XAgentCommand_v0_8
 

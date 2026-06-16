@@ -84,7 +84,7 @@ const IncompleteEmphasis = (props: ComponentProps) => {
   const text = decodeURIComponent(String(props['data-raw'] || ''));
 
   const match = text.match(/^([*_]{1,3})([^*_]*)/);
-  if (!match || !match[2]) return null;
+  if (!match?.[2]) return null;
 
   const [, symbols, content] = match;
   const level = symbols.length;

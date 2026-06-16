@@ -62,7 +62,8 @@ import '@ant-design/x-markdown/themes/light.css';
 
 - 保持自定义标签结构完整
 - 除非语法有意为之，否则避免在自定义 HTML 块内部插入多余空行
-- 如果自定义标签内换行需要保留，检查 `protectCustomTagNewlines`
+- 如果只需要保护自定义标签内的空行分段，使用 `protectCustomTagNewlines`
+- 如果希望禁用自定义标签内的块级 Markdown 解析，同时保留行内 Markdown，使用 `disableCustomTagBlockMarkdown`
 
 ## 如何选工具
 

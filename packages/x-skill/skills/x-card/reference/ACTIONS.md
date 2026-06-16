@@ -22,9 +22,87 @@ Component (Button click)
 interface ActionPayload {
   name: string; // from action.event.name
   surfaceId: string; // which surface triggered this
-  context: Record<string, any>; // full dataModel snapshot of the current surface
+  /**
+   * Context passed by component, with path references automatically resolved.
+   * Path references in action.event.context are converted to { value } format.
+   */
+  context: Record<string, any>;
 }
 ```
+
+---
+
+## Path Reference Resolution
+
+When a component triggers an action, X-Card automatically resolves path references in the context to actual values.
+
+### v0.9 Format
+
+```json
+{
+  "id": "submit_btn",
+  "component": "Button",
+  "action": {
+    "event": {
+      "name": "submit_form",
+      "context": {
+        "username": { "path": "/form/username", "label": "用户名" },
+        "email": { "path": "/form/email", "label": "邮箱" }
+      }
+    }
+  }
+}
+```
+
+When the user clicks the button, `onAction` receives:
+
+```typescript
+{
+  name: 'submit_form',
+  surfaceId: 'contact_form',
+  context: {
+    // Path references are automatically resolved to { value } format
+    username: { value: '张三', label: '用户名' },
+    email: { value: 'test@example.com', label: '邮箱' }
+  }
+}
+```
+
+### v0.8 Format
+
+In v0.8, action context uses array format:
+
+```json
+{
+  "id": "submit_btn",
+  "component": {
+    "Button": {
+      "action": {
+        "name": "submit_form",
+        "context": [
+          { "key": "username", "value": { "path": "/form/username" } },
+          { "key": "email", "value": { "path": "/form/email" } }
+        ]
+      }
+    }
+  }
+}
+```
+
+Resolved payload:
+
+```typescript
+{
+  name: 'submit_form',
+  surfaceId: 'contact_form',
+  context: {
+    username: { value: '张三' },
+    email: { value: 'test@example.com' }
+  }
+}
+```
+
+> **Note**: Only values that are `{ path: "xxx" }` format in the context are converted. Actual values passed by component (e.g., `{ value: "actual_value" }`) are preserved without conversion.
 
 ---
 
@@ -55,14 +133,10 @@ When the user clicks the button, `onAction` receives:
   name: 'submit_form',
   surfaceId: 'contact_form',
   context: {
-    // Full dataModel snapshot of the surface — all fields are accessible,
-    // not just those listed in action.event.context
-    form: {
-      email: 'alice@example.com',
-      name: 'Alice',
-      subscribe: true
-    },
-    // ...any other top-level keys in the dataModel are also present
+    // Path references are automatically resolved to { value } format
+    email: { value: 'alice@example.com' },
+    name: { value: 'Alice' },
+    subscribe: { value: true }
   }
 }
 ```
@@ -74,7 +148,10 @@ When the user clicks the button, `onAction` receives:
 ```tsx
 const handleAction = (payload: ActionPayload) => {
   if (payload.name === 'submit_form') {
-    const { email, name } = payload.context;
+    // Keys using { path } bindings in the config are resolved to { value, ...rest } format.
+    // Literal values from the config and runtime values from the component are preserved as-is.
+    const email = payload.context.email?.value;
+    const name = payload.context.name?.value;
     // 1. Call your agent API
     // 2. Push new commands in response
     setCmdQueue(prev => [
@@ -144,15 +221,18 @@ const formCommands: XAgentCommand_v0_9[] = [
 ];
 
 // 2. Handle submission
+// Keys using { path } bindings in the config are resolved to { value, ...rest } format.
+// Literal values from the config and runtime values from the component are preserved as-is.
 const handleAction = async (payload: ActionPayload) => {
   if (payload.name === 'submit') {
+    const email = payload.context.email?.value;
     // Show loading
     setCmdQueue((prev) => [
       ...prev,
       { version: 'v0.9', updateDataModel: { surfaceId: 'form', path: '/ui/loading', value: true } },
     ]);
     // Process with agent, then show result
-    const result = await callAgent(payload.context);
+    const result = await callAgent({ email });
     setCmdQueue((prev) => [
       ...prev,
       {

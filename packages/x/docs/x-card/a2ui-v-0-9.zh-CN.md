@@ -11,6 +11,7 @@ title: A2UI v0.9
 <code src="./demo/A2UI_v0.9/multi-card-sync.tsx">多卡片同步</code>
 <code src="./demo/A2UI_v0.9/filter-search.tsx">筛选搜索</code>
 <code src="./demo/A2UI_v0.9/form-validation.tsx">表单验证</code>
+<code src="./demo/A2UI_v0.9/action-context-resolve.tsx">Action Context 解析</code>
 
 ## API
 
@@ -43,7 +44,48 @@ action 事件的数据结构。
 | --------- | ---------------------------------- | --------------------- | ------ | ---- |
 | name      | 事件名称                           | string                | -      | -    |
 | surfaceId | 触发该 action 的 surfaceId         | string                | -      | -    |
-| context   | 当前 surface 的完整 dataModel 快照 | Record\<string, any\> | -      | -    |
+| context   | 组件传递的上下文，已解析 path 引用 | Record\<string, any\> | -      | -    |
+
+### Action Context 中的 Path 引用解析
+
+当组件触发 action 时，X-Card 会自动解析 context 中的 path 引用为实际值。
+
+#### Path 引用格式
+
+在 action 配置中使用 `{ path: string }` 格式绑定 dataModel 中的值：
+
+```json
+{
+  "id": "submit-btn",
+  "component": "Button",
+  "action": {
+    "event": {
+      "name": "agent:send_context_text",
+      "context": {
+        "username": { "path": "/form/username", "label": "用户名" },
+        "email": { "path": "/form/email", "label": "邮箱" }
+      }
+    }
+  }
+}
+```
+
+#### 解析结果
+
+当用户点击按钮触发 action 时，`onAction` 回调收到的 context 会被自动解析：
+
+```json
+{
+  "username": { "value": "张三", "label": "用户名" },
+  "email": { "value": "test@example.com", "label": "邮箱" }
+}
+```
+
+**注意**：
+
+- 仅当 context 中的值本身是 `{ path: "xxx" }` 格式时才进行转换
+- 组件传递的实际值（如 `{ value: "实际值" }`）不会被错误转换
+- 保留其他属性（如 label），只将 path 替换为 value
 
 ### A2UICommand_v0_9
 
