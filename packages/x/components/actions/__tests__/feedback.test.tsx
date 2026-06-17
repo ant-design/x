@@ -53,4 +53,32 @@ describe('Actions.Feedback Component', () => {
     expect(mockOnChange).toHaveBeenCalledWith('default');
     expect(mockOnChange).toHaveBeenCalledTimes(2);
   });
+
+  it('should apply liked styles and classNames when value is like', () => {
+    const { container } = render(
+      <ActionsFeedback
+        value="like"
+        styles={{ like: { color: 'blue' }, liked: { color: 'pink' } }}
+        classNames={{ like: 'like-cls', liked: 'liked-cls' }}
+      />,
+    );
+    const likeItem = container.querySelector('.ant-actions-feedback-item-like')!;
+    expect(likeItem).toBeTruthy();
+    expect(likeItem.classList.contains('liked-cls')).toBe(true);
+    expect((likeItem as HTMLElement).style.color).toBe('pink');
+  });
+
+  it('should apply disliked styles and classNames when value is dislike', () => {
+    const { container } = render(
+      <ActionsFeedback
+        value="dislike"
+        styles={{ dislike: { color: 'gray' }, disliked: { color: 'red' } }}
+        classNames={{ dislike: 'dislike-cls', disliked: 'disliked-cls' }}
+      />,
+    );
+    const dislikeItem = container.querySelector('.ant-actions-feedback-item-dislike')!;
+    expect(dislikeItem).toBeTruthy();
+    expect(dislikeItem.classList.contains('disliked-cls')).toBe(true);
+    expect((dislikeItem as HTMLElement).style.color).toBe('red');
+  });
 });

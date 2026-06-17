@@ -376,4 +376,28 @@ describe('Conversations Component', () => {
       expect(onClick).toHaveBeenCalledTimes(0);
     });
   });
+
+  describe('mobile support', () => {
+    it('should apply mobile class to menu icon on mobile devices', () => {
+      jest.spyOn(require('@rc-component/util/lib/isMobile'), 'default').mockReturnValue(true);
+      const { container } = render(
+        <Conversations items={items} menu={menu} defaultActiveKey="demo1" />,
+      );
+      const menuIcon = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuIcon).toBeInTheDocument();
+      expect(menuIcon).toHaveClass('ant-conversations-menu-icon-mobile');
+      jest.restoreAllMocks();
+    });
+
+    it('should not apply mobile class to menu icon on desktop', () => {
+      jest.spyOn(require('@rc-component/util/lib/isMobile'), 'default').mockReturnValue(false);
+      const { container } = render(
+        <Conversations items={items} menu={menu} defaultActiveKey="demo1" />,
+      );
+      const menuIcon = container.querySelector('.ant-conversations-menu-icon');
+      expect(menuIcon).toBeInTheDocument();
+      expect(menuIcon).not.toHaveClass('ant-conversations-menu-icon-mobile');
+      jest.restoreAllMocks();
+    });
+  });
 });

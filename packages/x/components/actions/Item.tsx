@@ -1,6 +1,7 @@
 import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
+import useMobile from '../_util/hooks/use-mobile';
 import ActionsMenu from './ActionsMenu';
 import { ActionsContext } from './context';
 import type { ActionsItemProps } from './interface';
@@ -8,6 +9,7 @@ import type { ActionsItemProps } from './interface';
 const Item: React.FC<ActionsItemProps> = (props) => {
   const { item, onClick, dropdownProps = {} } = props;
   const { prefixCls, classNames = {}, styles = {} } = React.useContext(ActionsContext) || {};
+  const isMobile = useMobile();
 
   const id = React.useId();
   const itemKey = item?.key || id;
@@ -25,6 +27,8 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       <ActionsMenu key={itemKey} item={item} onClick={onClick} dropdownProps={dropdownProps} />
     );
   }
+
+  const iconElement = <div className={`${prefixCls}-icon`}>{item?.icon}</div>;
 
   return (
     <div
@@ -46,9 +50,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       }}
       key={itemKey}
     >
-      <Tooltip title={item.label}>
-        <div className={`${prefixCls}-icon`}>{item?.icon}</div>
-      </Tooltip>
+      {isMobile ? iconElement : <Tooltip title={item.label}>{iconElement}</Tooltip>}
     </div>
   );
 };

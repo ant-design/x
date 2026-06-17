@@ -3,6 +3,7 @@ import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
+import useMobile from '../_util/hooks/use-mobile';
 import { useLocale } from '../locale';
 import enUS from '../locale/en_US';
 import { useXProviderContext } from '../x-provider';
@@ -72,6 +73,8 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
 
   const [contextLocale] = useLocale('Actions', enUS.Actions);
 
+  const isMobile = useMobile();
+
   // ============================ Prefix ============================
 
   const { direction, getPrefixCls } = useXProviderContext();
@@ -97,53 +100,67 @@ const ActionsFeedback: React.FC<ActionsFeedbackProps> = (props) => {
 
   const onFeedBacKClick = () =>
     onChange?.(value === FEEDBACK_VALUE.dislike ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.dislike);
+  const likeIcon = value === FEEDBACK_VALUE.like ? <LikeFilled /> : <LikeOutlined />;
+  const likeNode = (
+    <span
+      onClick={() =>
+        onChange?.(value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like)
+      }
+      style={{ ...styles.like, ...(value === 'like' ? styles.liked : {}) }}
+      className={clsx(
+        `${feedbackCls}-item`,
+        `${prefixCls}-item`,
+        `${feedbackCls}-item-like`,
+        classNames.like,
+        {
+          [`${classNames.liked}`]: classNames.liked && value === 'like',
+          [`${feedbackCls}-item-like-active`]: value === 'like',
+        },
+      )}
+    >
+      {likeIcon}
+    </span>
+  );
+
+  const dislikeIcon = value === FEEDBACK_VALUE.dislike ? <DislikeFilled /> : <DislikeOutlined />;
+  const dislikeNode = (
+    <span
+      onClick={onFeedBacKClick}
+      style={{ ...styles.dislike, ...(value === 'dislike' ? styles.disliked : {}) }}
+      className={clsx(
+        `${feedbackCls}-item`,
+        `${prefixCls}-item`,
+        `${feedbackCls}-item-dislike`,
+        classNames.dislike,
+        {
+          [`${classNames.disliked}`]: classNames.disliked && value === 'dislike',
+          [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
+        },
+      )}
+    >
+      {dislikeIcon}
+    </span>
+  );
+
   return (
     <div {...domProps} className={mergedCls} style={{ ...style, ...styles.root }}>
-      {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) && (
-        <Tooltip key={`like_${value}`} title={contextLocale.feedbackLike}>
-          <span
-            onClick={() =>
-              onChange?.(
-                value === FEEDBACK_VALUE.like ? FEEDBACK_VALUE.default : FEEDBACK_VALUE.like,
-              )
-            }
-            style={{ ...styles.like, ...(value === 'like' ? styles.liked : {}) }}
-            className={clsx(
-              `${feedbackCls}-item`,
-              `${prefixCls}-item`,
-              `${feedbackCls}-item-like`,
-              classNames.like,
-              {
-                [`${classNames.liked}`]: classNames.liked && value === 'like',
-                [`${feedbackCls}-item-like-active`]: value === 'like',
-              },
-            )}
-          >
-            {value === FEEDBACK_VALUE.like ? <LikeFilled /> : <LikeOutlined />}
-          </span>
-        </Tooltip>
-      )}
+      {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.like].includes(value as FEEDBACK_VALUE) &&
+        (isMobile ? (
+          likeNode
+        ) : (
+          <Tooltip key={`like_${value}`} title={contextLocale.feedbackLike}>
+            {likeNode}
+          </Tooltip>
+        ))}
 
-      {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.dislike].includes(value as FEEDBACK_VALUE) && (
-        <Tooltip key={`dislike_${value}`} title={contextLocale.feedbackDislike}>
-          <span
-            onClick={onFeedBacKClick}
-            style={{ ...styles.dislike, ...(value === 'dislike' ? styles.disliked : {}) }}
-            className={clsx(
-              `${feedbackCls}-item`,
-              `${prefixCls}-item`,
-              `${feedbackCls}-item-dislike`,
-              classNames.dislike,
-              {
-                [`${classNames.disliked}`]: classNames.disliked && value === 'dislike',
-                [`${feedbackCls}-item-dislike-active`]: value === 'dislike',
-              },
-            )}
-          >
-            {value === FEEDBACK_VALUE.dislike ? <DislikeFilled /> : <DislikeOutlined />}
-          </span>
-        </Tooltip>
-      )}
+      {[FEEDBACK_VALUE.default, FEEDBACK_VALUE.dislike].includes(value as FEEDBACK_VALUE) &&
+        (isMobile ? (
+          dislikeNode
+        ) : (
+          <Tooltip key={`dislike_${value}`} title={contextLocale.feedbackDislike}>
+            {dislikeNode}
+          </Tooltip>
+        ))}
     </div>
   );
 };

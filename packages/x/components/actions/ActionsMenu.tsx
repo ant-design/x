@@ -2,6 +2,7 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { Dropdown, type MenuProps } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
+import useMobile from '../_util/hooks/use-mobile';
 import { ActionsContext } from './context';
 import type { ActionsItemProps, ItemType } from './interface';
 
@@ -25,8 +26,10 @@ export const findItem = (keyPath: string[], items: ItemType[]): ItemType | null 
 const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
   const { onClick: onMenuClick, item, dropdownProps = {} } = props;
   const { prefixCls, classNames = {}, styles = {} } = React.useContext(ActionsContext) || {};
+  const isMobile = useMobile();
 
-  const { subItems = [], triggerSubMenuAction = 'hover' } = item;
+  const { subItems = [], triggerSubMenuAction } = item || {};
+  const mergedTriggerSubMenuAction = triggerSubMenuAction ?? (isMobile ? 'click' : 'hover');
   const icon = item?.icon ?? <EllipsisOutlined />;
 
   const menuProps: MenuProps = {
@@ -48,7 +51,7 @@ const ActionsMenu: React.FC<ActionsItemProps> = (props) => {
   return (
     <Dropdown
       menu={menuProps}
-      trigger={[triggerSubMenuAction]}
+      trigger={[mergedTriggerSubMenuAction]}
       {...dropdownProps}
       className={clsx(`${prefixCls}-dropdown`, classNames.itemDropdown, dropdownProps?.className)}
       styles={{

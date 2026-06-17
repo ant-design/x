@@ -134,5 +134,27 @@ export default function useSpeech(
     }
   });
 
+  // Cleanup SpeechRecognition on component unmount
+  React.useEffect(() => {
+    return () => {
+      const recognition = recognitionRef.current;
+      if (recognition) {
+        // Nullify handlers first to prevent state updates on an unmounted component
+        // (stop() triggers onend, which would call setRecording(false))
+        recognition.onstart = null;
+        recognition.onend = null;
+        recognition.onresult = null;
+
+        try {
+          recognition.stop();
+        } catch (e) {
+          // Recognition might not be started
+        }
+
+        recognitionRef.current = null;
+      }
+    };
+  }, []);
+
   return [mergedAllowSpeech, triggerSpeech, recording] as const;
 }
