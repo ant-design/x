@@ -12,7 +12,7 @@ const CommonHelmet: React.FC = () => {
       const mergeSubTitle =
         meta.frontmatter.subtitle?.split('｜')?.length === 2
           ? meta.frontmatter.subtitle?.split('｜')?.[1]
-          : `${meta?.frontmatter?.subtitle || ''}${meta.frontmatter?.title || ''}`;
+          : [meta?.frontmatter?.subtitle, meta.frontmatter?.title].filter(Boolean).join(' ');
       helmetTitle = `${mergeSubTitle || ''} - Ant Design X`;
     }
     const helmetDescription = meta.frontmatter.description || '';
