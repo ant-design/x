@@ -16,6 +16,52 @@ tag: vVERSION
 
 ---
 
+## 2.8.1
+
+`2026-06-30`
+
+### @ant-design/x
+
+- 🆕 Added `useMobile` hook, providing an SSR-safe way to detect mobile devices. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+- 💄 Actions Feedback no longer renders Tooltip on mobile devices to avoid interaction interference. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+- 💄 Conversations now always shows the menu icon on mobile devices (no hover state on mobile). [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+- 🐛 Improved click responsiveness for Actions, Conversations and other components on mobile by adding `touch-action: manipulation` to eliminate the 300ms click delay. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+- 🐛 Fix Sources CarouselCard not syncing its carousel index when the controlled `activeKey` changes; the left/right buttons now jump precisely via `goTo` and edge-button no-ops are fixed. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+- 🐛 Fix Sender speech input (useSpeech) not cleaning up SpeechRecognition on unmount, which caused state updates on an unmounted component. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+- 🐛 Fix CodeHighlighter not calling `registerLanguage` after async language loading, which prevented syntax highlighting from working; also fix the code block background not stretching fully during horizontal scroll. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
+
+### Others
+
+- 📖 Improve site page title composition: separate subtitle and title with a space to avoid concatenated wording. [#1959](https://github.com/ant-design/x/pull/1959) by [Mickey](https://github.com/Mickey)
+
+## 2.8.0
+
+`2026-06-08`
+
+### @ant-design/x
+
+- 🆕 Folder component adds a right-click context menu. [#1919](https://github.com/ant-design/x/pull/1919) by [Mickey](https://github.com/Mickey)
+- 🐛 Fix FileCard.List scroll button state not refreshing when items update. [#1914](https://github.com/ant-design/x/pull/1914) by [Ryker_Feng](https://github.com/18062706139fcz)
+- 🐛 Fix Sender runtime-inserted slots being cleared when the slotConfig ref changes. [#1900](https://github.com/ant-design/x/pull/1900) by [pikanohup](https://github.com/hooraypikachu)
+- 🐛 Fix design token type coercion before arithmetic operations. [#1910](https://github.com/ant-design/x/pull/1910) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-markdown
+
+- 🆕 Added `disableDefaultStyles` prop to opt out of default tag styles. [#1909](https://github.com/ant-design/x/pull/1909) by [Div627](https://github.com/Div627)
+- 🐛 Fix incorrect parsing of newlines inside custom tags. [#1896](https://github.com/ant-design/x/pull/1896) by [ryker](https://github.com/2279549769)
+- 🐛 Fix layout jank when the initial streaming output is non-streaming. [#1917](https://github.com/ant-design/x/pull/1917) by [Waiter](https://github.com/Waiter)
+- 🐛 Fix DOMPurify erroring in SSR environments. [#1917](https://github.com/ant-design/x/pull/1917) by [Div627](https://github.com/Div627)
+- 🐛 Fix incomplete newline protection logic inside custom tags. [#1920](https://github.com/ant-design/x/pull/1920) by [18062706139fcz](https://github.com/18062706139fcz)
+
+### @ant-design/x-sdk
+
+- 📖 Fix Chat Provider caching issue in x-conversations demos by using useRef to keep the provider instance stable. [#1925](https://github.com/ant-design/x/pull/1925) by [Ryker_Feng](https://github.com/18062706139fcz)
+
+### Others
+
+- 📖 Fix outdated type name in the Prompts API documentation. [#1915](https://github.com/ant-design/x/pull/1915) by [Ryker_Feng](https://github.com/18062706139fcz)
+- 🛠 Pin dumi version to 2.4.28. [#1922](https://github.com/ant-design/x/pull/1922)
+
 ## 2.7.0
 
 `2026-04-30`

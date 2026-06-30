@@ -15,6 +15,24 @@ tag: vVERSION
 
 ---
 
+## 2.8.1
+
+`2026-06-30`
+
+### @ant-design/x
+
+- 🆕 新增 `useMobile` Hook,提供 SSR 安全的移动端设备检测能力。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 💄 Actions 的反馈(Feedback)在移动端不再展示 Tooltip,避免移动设备上的交互干扰。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 💄 Conversations 在移动端常驻显示菜单图标(移动端无 hover 态)。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 优化 Actions、Conversations 等组件在移动端的点击响应,通过 `touch-action: manipulation` 消除 300ms 点击延迟。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sources 的 CarouselCard 在受控 `activeKey` 切换时轮播索引不同步的问题,左右切换按钮改用 `goTo` 精确跳转并修复边界点击无效的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sender 语音输入(useSpeech)在组件卸载后未清理 SpeechRecognition,导致对已卸载组件进行状态更新的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 CodeHighlighter 异步加载语言后未调用 `registerLanguage` 导致语法高亮不生效的问题,并修复代码块横向滚动时背景色未撑满的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+
+### 其他
+
+- 📖 优化站点页面标题拼接逻辑,subtitle 与 title 之间以空格分隔,避免标题文案粘连。[#1959](https://github.com/ant-design/x/pull/1959) 由 [Mickey](https://github.com/Mickey) 提交
+
 ## 2.8.0
 
 `2026-06-08`
