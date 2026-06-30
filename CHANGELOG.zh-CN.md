@@ -29,6 +29,10 @@ tag: vVERSION
 - 🐛 修复 Sender 语音输入(useSpeech)在组件卸载后未清理 SpeechRecognition,导致对已卸载组件进行状态更新的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
 - 🐛 修复 CodeHighlighter 异步加载语言后未调用 `registerLanguage` 导致语法高亮不生效的问题,并修复代码块横向滚动时背景色未撑满的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
 
+### 其他
+
+- 📖 优化站点页面标题拼接逻辑,subtitle 与 title 之间以空格分隔,避免标题文案粘连。[#1959](https://github.com/ant-design/x/pull/1959) 由 [Mickey](https://github.com/Mickey) 提交
+
 ## 2.8.0
 
 `2026-06-08`

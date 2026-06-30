@@ -30,6 +30,10 @@ tag: vVERSION
 - 🐛 Fix Sender speech input (useSpeech) not cleaning up SpeechRecognition on unmount, which caused state updates on an unmounted component. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
 - 🐛 Fix CodeHighlighter not calling `registerLanguage` after async language loading, which prevented syntax highlighting from working; also fix the code block background not stretching fully during horizontal scroll. [#1945](https://github.com/ant-design/x/pull/1945) by [Mickey](https://github.com/Mickey)
 
+### Others
+
+- 📖 Improve site page title composition: separate subtitle and title with a space to avoid concatenated wording. [#1959](https://github.com/ant-design/x/pull/1959) by [Mickey](https://github.com/Mickey)
+
 ## 2.8.0
 
 `2026-06-08`
