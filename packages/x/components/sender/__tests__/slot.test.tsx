@@ -540,8 +540,8 @@ describe('Sender Slot Component', () => {
       );
       const dom = ref.current?.inputElement as HTMLElement;
       const skillDom = container.querySelector('.ant-sender-skill') as HTMLElement;
-      expect(ref.current).toBeDefined();
-      expect(skillDom).toBeDefined();
+      expect(ref.current).not.toBeNull();
+      expect(skillDom).toBeInTheDocument();
 
       const customSelectionMock = {
         rangeCount: 1,

@@ -80,7 +80,8 @@ interface SkillType {
     | boolean
     | {
         closeIcon?: React.ReactNode;
-        onClose?: React.MouseEventHandler<HTMLDivElement>;
+        // 点击关闭按钮或使用 Backspace 删除时触发
+        onClose?: (event: React.SyntheticEvent<HTMLDivElement>) => void;
         disabled?: boolean;
       };
 }
