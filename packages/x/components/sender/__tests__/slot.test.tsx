@@ -684,6 +684,157 @@ describe('Sender Slot Component', () => {
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
     });
+    it('should remove previous slot when invisible text nodes exist before cursor', () => {
+      const onChange = jest.fn();
+      const slotConfig: SlotConfigType[] = [
+        {
+          type: 'tag',
+          key: 'assistant1',
+          props: { label: '@Travel Planner1', value: 'travel1' },
+        },
+        {
+          type: 'tag',
+          key: 'assistant2',
+          props: { label: '@Travel Planner2', value: 'travel2' },
+        },
+      ];
+      const ref = createRef<SenderRef>();
+
+      render(<Sender ref={ref} slotConfig={slotConfig} onChange={onChange} />);
+
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(dom).toBeDefined();
+      onChange.mockClear();
+
+      dom.appendChild(document.createTextNode(''));
+      dom.appendChild(document.createTextNode('\u200B\uFEFF'));
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: dom.childNodes.length,
+        anchorNode: dom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+      const customRangeMock = createMockRange();
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+
+      expect(onChange).toHaveBeenCalled();
+      const lastChange = onChange.mock.calls[onChange.mock.calls.length - 1];
+      expect(lastChange[2].map((item: SlotConfigType) => item.key)).toEqual(['assistant1']);
+      expect(dom.querySelector('[data-slot-key="assistant2"]')).not.toBeInTheDocument();
+    });
+    it('should remove previous slot from text node cursor after invisible text nodes', () => {
+      const onChange = jest.fn();
+      const slotConfig: SlotConfigType[] = [
+        {
+          type: 'tag',
+          key: 'assistant1',
+          props: { label: '@Travel Planner1', value: 'travel1' },
+        },
+      ];
+      const ref = createRef<SenderRef>();
+
+      render(<Sender ref={ref} slotConfig={slotConfig} onChange={onChange} />);
+
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(dom).toBeDefined();
+      onChange.mockClear();
+
+      const invisibleTextNode = document.createTextNode('\u200B\uFEFF');
+      const cursorTextNode = document.createTextNode('cursor');
+      dom.appendChild(invisibleTextNode);
+      dom.appendChild(cursorTextNode);
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: cursorTextNode,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+      const customRangeMock = createMockRange();
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(dom.querySelector('[data-slot-key="assistant1"]')).not.toBeInTheDocument();
+    });
+    it('should keep previous slot when non-empty text exists before cursor', () => {
+      const onChange = jest.fn();
+      const slotConfig: SlotConfigType[] = [
+        {
+          type: 'tag',
+          key: 'assistant1',
+          props: { label: '@Travel Planner1', value: 'travel1' },
+        },
+      ];
+      const ref = createRef<SenderRef>();
+
+      render(<Sender ref={ref} slotConfig={slotConfig} onChange={onChange} />);
+
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(dom).toBeDefined();
+      onChange.mockClear();
+
+      dom.appendChild(document.createTextNode('hello'));
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: dom.childNodes.length,
+        anchorNode: dom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+      const customRangeMock = createMockRange();
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+
+      expect(onChange).not.toHaveBeenCalled();
+      expect(dom.querySelector('[data-slot-key="assistant1"]')).toBeInTheDocument();
+    });
+    it('should remove previous skill when empty text nodes exist before cursor', () => {
+      const onChange = jest.fn();
+      const ref = createRef<SenderRef>();
+
+      render(
+        <Sender
+          ref={ref}
+          slotConfig={[]}
+          skill={{
+            value: 'test-skill',
+            title: 'Test Skill',
+          }}
+          onChange={onChange}
+        />,
+      );
+
+      const dom = ref.current?.inputElement as HTMLElement;
+      expect(dom).toBeDefined();
+      expect(dom.querySelector('[data-skill-key="test-skill"]')).toBeInTheDocument();
+      onChange.mockClear();
+
+      dom.appendChild(document.createTextNode('\u200B'));
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: dom.childNodes.length,
+        anchorNode: dom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+      const customRangeMock = createMockRange();
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(dom.querySelector('[data-skill-key="test-skill"]')).not.toBeInTheDocument();
+    });
     it('should handle backspace key in content slot', () => {
       const onSubmit = jest.fn();
       const slotConfig = [contentSlotConfigWithValue];

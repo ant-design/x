@@ -511,22 +511,47 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
 
     // 处理退格键删除前一个元素
-    if (operationType === 'backspace' && focusOffset === 0) {
-      const previousSibling = anchorNode.previousSibling;
-      if (previousSibling) {
-        const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
-        if (nodeInfo) {
-          const { slotKey, skillKey } = nodeInfo;
-          if (slotKey) {
-            e.preventDefault();
-            removeSlot(slotKey, e as unknown as EventType);
-            return true;
-          }
-          if (skillKey) {
-            e.preventDefault();
-            removeSkill();
-            return true;
-          }
+    if (
+      operationType === 'backspace' &&
+      ((anchorNode === editableRef.current && focusOffset > 0) ||
+        (anchorNode !== editableRef.current && focusOffset === 0))
+    ) {
+      const isSlotOrSkill = (node: Node): node is HTMLElement => {
+        if (!(node instanceof HTMLElement)) return false;
+        const nodeInfo = getNodeInfo(node);
+        return !!(nodeInfo?.slotKey || nodeInfo?.skillKey);
+      };
+      const isEmptyTextNode = (node: Node) =>
+        node.nodeType === Node.TEXT_NODE && !node.textContent?.replace(/[\u200B\uFEFF]/g, '');
+
+      let previousNode: HTMLElement | null = null;
+      let currentNode: Node | null =
+        anchorNode === editableRef.current
+          ? editableRef.current.childNodes[focusOffset - 1] || null
+          : anchorNode.previousSibling;
+
+      while (currentNode) {
+        if (isSlotOrSkill(currentNode)) {
+          previousNode = currentNode;
+          break;
+        }
+        if (!isEmptyTextNode(currentNode)) {
+          break;
+        }
+        currentNode = currentNode.previousSibling;
+      }
+
+      if (previousNode) {
+        const { slotKey, skillKey } = getNodeInfo(previousNode) || {};
+        if (slotKey) {
+          e.preventDefault();
+          removeSlot(slotKey, e as unknown as EventType);
+          return true;
+        }
+        if (skillKey) {
+          e.preventDefault();
+          removeSkill();
+          return true;
         }
       }
     }
