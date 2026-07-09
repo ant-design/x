@@ -207,15 +207,21 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   stream[Symbol.asyncIterator] = async function* () {
     const reader = this.getReader();
 
-    while (true) {
-      const { done, value } = await reader.read();
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
 
-      if (done) break;
+        if (done) break;
 
-      if (!value) continue;
+        if (!value) continue;
 
-      // Transformed data through all transform pipes
-      yield value;
+        // Transformed data through all transform pipes
+        yield value;
+      }
+    } finally {
+      // Always release the lock so the stream can be re-acquired or cancelled,
+      // even when the consumer breaks/returns/throws out of the loop early.
+      reader.releaseLock();
     }
   };
 
