@@ -169,7 +169,13 @@ describe('XStream', () => {
     // After an early exit the internal reader's lock must be released so the
     // stream can be re-acquired (e.g. getReader/cancel) without throwing.
     expect(stream.locked).toBe(false);
-    // The stream should be cleanly cancellable after the early break.
-    await stream.cancel();
+
+    // The underlying stream should be cancelled, not just have its lock
+    // released — matching the default ReadableStream async iterator semantics
+    // so that any in-flight fetch stops buffering data.
+    const reader = stream.getReader();
+    const { done } = await reader.read();
+    expect(done).toBe(true);
+    reader.releaseLock();
   });
 });

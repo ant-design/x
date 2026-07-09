@@ -207,11 +207,16 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   stream[Symbol.asyncIterator] = async function* () {
     const reader = this.getReader();
 
+    let completed = false;
+
     try {
       while (true) {
         const { done, value } = await reader.read();
 
-        if (done) break;
+        if (done) {
+          completed = true;
+          break;
+        }
 
         if (!value) continue;
 
@@ -219,6 +224,12 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
         yield value;
       }
     } finally {
+      if (!completed) {
+        // Cancel the underlying stream on early exit (break/return/throw),
+        // matching the default ReadableStream async iterator semantics and
+        // stopping any in-flight fetch from continuing to buffer data.
+        reader.cancel().catch(() => {});
+      }
       // Always release the lock so the stream can be re-acquired or cancelled,
       // even when the consumer breaks/returns/throws out of the loop early.
       reader.releaseLock();
