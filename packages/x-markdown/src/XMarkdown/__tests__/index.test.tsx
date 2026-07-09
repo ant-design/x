@@ -772,8 +772,9 @@ describe('streaming', () => {
     );
 
     const paragraphs = container.querySelectorAll('p');
+    expect(paragraphs.length).toBeGreaterThan(0);
     const lastParagraph = paragraphs[paragraphs.length - 1];
-    const tailElement = lastParagraph.querySelector('.xmd-tail');
+    const tailElement = lastParagraph?.querySelector('.xmd-tail');
     expect(tailElement).toBeInTheDocument();
   });
 });
