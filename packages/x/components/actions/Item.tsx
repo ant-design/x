@@ -29,6 +29,14 @@ const Item: React.FC<ActionsItemProps> = (props) => {
   }
 
   const iconElement = <div className={`${prefixCls}-icon`}>{item?.icon}</div>;
+  const tooltipProps =
+    typeof item.tooltip === 'object' ? item.tooltip : { title: item.tooltip ?? item.label };
+  const mergedIconElement =
+    isMobile || item.tooltip === false ? (
+      iconElement
+    ) : (
+      <Tooltip {...tooltipProps}>{iconElement}</Tooltip>
+    );
 
   return (
     <div
@@ -50,7 +58,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       }}
       key={itemKey}
     >
-      {isMobile ? iconElement : <Tooltip title={item.label}>{iconElement}</Tooltip>}
+      {mergedIconElement}
     </div>
   );
 };
