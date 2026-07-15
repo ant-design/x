@@ -172,7 +172,7 @@ class Renderer {
     unclosedTags: Set<string> | undefined,
     cidRef: { current: number; tagIndexes: Record<string, number> },
   ) {
-    const { enableAnimation, animationConfig } = this.options.streaming || {};
+    const { enableAnimation, animationConfig, animateInsideComponents } = this.options.streaming || {};
     return (domNode: DOMNode) => {
       const key = `x-markdown-component-${cidRef.current++}`;
 
@@ -182,7 +182,7 @@ class Renderer {
       // Skip animation for text nodes inside custom components to preserve their internal structure
       const parentTagName = (domNode.parent as Element)?.name;
       const isParentCustomComponent = parentTagName && this.options.components?.[parentTagName];
-      const shouldReplaceText = enableAnimation && isValidTextNode && !isParentCustomComponent;
+      const shouldReplaceText = enableAnimation && isValidTextNode && (!isParentCustomComponent || animateInsideComponents);
       if (shouldReplaceText) {
         return React.createElement(AnimationText, { text: domNode.data, key, animationConfig });
       }

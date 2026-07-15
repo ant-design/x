@@ -2,6 +2,7 @@ import DOMPurify from 'dompurify';
 import React from 'react';
 import Renderer from '../core/Renderer';
 
+import AnimationText from '../AnimationText';
 // Mock React components for testing
 const MockComponent: React.FC<any> = (props) => {
   return React.createElement('div', props);
@@ -1513,6 +1514,154 @@ describe('Renderer', () => {
 
       // Verify that createElement was called (meaning the renderer processed the HTML)
       expect(createElementSpy).toHaveBeenCalled();
+
+      createElementSpy.mockRestore();
+    });
+  });
+
+  describe('animateInsideComponents', () => {
+    it('should skip AnimationText inside custom components by default', () => {
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+
+      const renderer = new Renderer({
+        components: { 'custom-wrapper': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          animationConfig: { fadeDuration: 100, easing: 'ease-in' },
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<custom-wrapper>text inside custom</custom-wrapper>';
+      renderer.processHtml(html);
+
+      // AnimationText should NOT be called for text inside custom components
+      const animationCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === AnimationText,
+      );
+      expect(animationCalls).toHaveLength(0);
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should use AnimationText inside custom components when animateInsideComponents is true', () => {
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+
+      const renderer = new Renderer({
+        components: { 'custom-wrapper': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          animationConfig: { fadeDuration: 100, easing: 'ease-in' },
+          animateInsideComponents: true,
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<custom-wrapper>text inside custom</custom-wrapper>';
+      renderer.processHtml(html);
+
+      // AnimationText SHOULD be called for text inside custom components
+      const animationCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === AnimationText,
+      );
+      expect(animationCalls).toHaveLength(1);
+      expect(animationCalls[0][1]).toEqual(
+        expect.objectContaining({
+          text: 'text inside custom',
+        }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should not affect text nodes outside custom components', () => {
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+
+      const renderer = new Renderer({
+        components: { 'custom-wrapper': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          animationConfig: { fadeDuration: 100, easing: 'ease-in' },
+          animateInsideComponents: true,
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      // Text both inside and outside custom components
+      const html = '<p>outer text</p><custom-wrapper>inner text</custom-wrapper>';
+      renderer.processHtml(html);
+
+      const animationCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === AnimationText,
+      );
+
+      // Both text nodes should be wrapped with AnimationText
+      expect(animationCalls).toHaveLength(2);
+      expect(animationCalls[0][1]).toEqual(
+        expect.objectContaining({ text: 'outer text' }),
+      );
+      expect(animationCalls[1][1]).toEqual(
+        expect.objectContaining({ text: 'inner text' }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should work with nested custom components', () => {
+      const OuterComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const InnerComponent: React.FC<any> = (props) => React.createElement('span', props);
+
+      const renderer = new Renderer({
+        components: {
+          'outer-comp': OuterComponent,
+          'inner-comp': InnerComponent,
+        },
+        streaming: {
+          enableAnimation: true,
+          animationConfig: { fadeDuration: 100, easing: 'ease-in' },
+          animateInsideComponents: true,
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<outer-comp><inner-comp>nested text</inner-comp></outer-comp>';
+      renderer.processHtml(html);
+
+      const animationCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === AnimationText,
+      );
+      expect(animationCalls).toHaveLength(1);
+      expect(animationCalls[0][1]).toEqual(
+        expect.objectContaining({ text: 'nested text' }),
+      );
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should not enable animation when enableAnimation is false even with animateInsideComponents', () => {
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+
+      const renderer = new Renderer({
+        components: { 'custom-wrapper': CustomComponent },
+        streaming: {
+          enableAnimation: false,
+          animateInsideComponents: true,
+        },
+      });
+
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const html = '<custom-wrapper>text inside custom</custom-wrapper>';
+      renderer.processHtml(html);
+
+      const animationCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0] === AnimationText,
+      );
+      expect(animationCalls).toHaveLength(0);
 
       createElementSpy.mockRestore();
     });
