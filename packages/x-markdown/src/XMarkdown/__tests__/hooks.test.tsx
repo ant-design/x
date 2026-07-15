@@ -1108,4 +1108,52 @@ describe('XMarkdown hooks', () => {
       expect(result.current).toBe('New content completely');
     });
   });
+
+  describe('useStreaming long single-line content (base64 images)', () => {
+    it('should stream a large base64 image without quadratic slowdown', () => {
+      const base64 = 'A'.repeat(300_000);
+      const full = `Here is an image:\n\n![chart](data:image/png;base64,${base64})\n\nDone.`;
+      const chunkSize = 1000;
+
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: '',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      const start = performance.now();
+      for (let end = chunkSize; end < full.length + chunkSize; end += chunkSize) {
+        act(() => {
+          rerender({
+            input: full.slice(0, end),
+            config: { streaming: { hasNextChunk: true } },
+          });
+        });
+      }
+      const elapsed = performance.now() - start;
+
+      expect(result.current).toBe(full);
+      expect(elapsed).toBeLessThan(3000);
+    }, 120_000);
+
+    it('should keep fence state correct when a code block follows long content', () => {
+      const base64 = 'B'.repeat(20_000);
+      const full = `![img](data:image/png;base64,${base64})\n\n\`\`\`js\nconst a = 1;\n`;
+
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: full.slice(0, 100),
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      act(() => {
+        rerender({ input: full, config: { streaming: { hasNextChunk: true } } });
+      });
+
+      // Inside an open fence every char is committed as-is (no token recognition)
+      expect(result.current).toBe(full);
+    });
+  });
 });
