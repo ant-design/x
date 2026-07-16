@@ -61,4 +61,22 @@ export interface CodeHighlighterProps
    * ```
    */
   prismLightMode?: boolean;
+  /**
+   * @desc 是否显示行号
+   * @descEN Whether to show line numbers
+   * @default false
+   */
+  showLineNumber?: boolean;
+  /**
+   * @desc 是否自动换行（长行换行）
+   * @descEN Whether to wrap long lines
+   * @default false
+   */
+  wrapLongLines?: boolean;
+  /**
+   * @desc 是否显示复制按钮（仅在默认 header 下生效）
+   * @descEN Whether to show copy button (only effective with default header)
+   * @default true
+   */
+  showCopyButton?: boolean;
 }
