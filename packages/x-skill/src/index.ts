@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import fs from 'fs';
-import ora from 'ora';
 import os from 'os';
 import path from 'path';
 import ProgressBar from 'progress';
@@ -9,6 +8,18 @@ import readline from 'readline';
 import SkillLoader from './getSkillRepo';
 import HelpManager from './help';
 import { emojis, getMessage, Language, LocaleMessages, messages } from './locale/index';
+
+type Ora = typeof import('ora').default;
+
+async function loadOra(): Promise<Ora> {
+  // Keep native dynamic import in the CJS build because ora is ESM-only.
+  const loader = new Function('specifier', 'return import(specifier)') as (
+    specifier: string,
+  ) => Promise<typeof import('ora')>;
+
+  const { default: ora } = await loader('ora');
+  return ora;
+}
 
 interface SkillConfig {
   targets: {
@@ -191,6 +202,7 @@ class SkillInstaller {
 
   async listVersions(): Promise<void> {
     try {
+      const ora = await loadOra();
       const spinner = ora(
         this.helpManager.colorize(getMessage('fetchingVersions', this.language), 'cyan'),
       ).start();
