@@ -1,9 +1,9 @@
 import { DownloadOutlined, ZoomInOutlined, ZoomOutOutlined } from '@ant-design/icons';
 import { Button, Segmented, Tooltip } from 'antd';
 import { clsx } from 'clsx';
-import throttle from 'lodash.throttle';
+import { debounce } from 'lodash';
 import mermaid, { type MermaidConfig } from 'mermaid';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import Actions from '../actions';
@@ -42,8 +42,6 @@ enum RenderType {
   Image = 'image',
 }
 
-let uuid = 0;
-
 const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const {
     prefixCls: customizePrefixCls,
@@ -64,7 +62,8 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const id = `mermaid-${uuid++}-${children?.length || 0}`;
+  const reactId = useId();
+  const id = `mermaid-${reactId.replace(/:/g, '')}`;
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
@@ -103,19 +102,22 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   }, [config]);
 
   // ============================ render mermaid ============================
-  const renderDiagram = throttle(async () => {
+  const renderDiagram = debounce(async () => {
     if (!children || !containerRef.current || renderType === RenderType.Code) return;
 
     try {
       const isValid = await mermaid.parse(children, { suppressErrors: true });
-      if (!isValid) throw new Error('Invalid Mermaid syntax');
+      if (!isValid) return; // 流式渲染过程中语法不完整时静默跳过，不报错
 
       const { svg } = await mermaid.render(id, children);
-      containerRef.current.innerHTML = svg;
+      // 确保渲染完成后容器仍然存在（防止异步过程中组件已卸载）
+      if (containerRef.current) {
+        containerRef.current.innerHTML = svg;
+      }
     } catch (error) {
       warning(false, 'Mermaid', `Render failed: ${error}`);
     }
-  }, 100);
+  }, 200);
 
   useEffect(() => {
     if (renderType === RenderType.Code && containerRef.current) {
@@ -124,6 +126,9 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     } else {
       renderDiagram();
     }
+    return () => {
+      renderDiagram.cancel();
+    };
   }, [children, renderType, config]);
 
   useEffect(() => {
