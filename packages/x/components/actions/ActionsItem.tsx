@@ -1,12 +1,12 @@
 import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import type { TooltipProps } from 'antd';
-import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useMobile from '../_util/hooks/use-mobile';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
+import { renderWithTooltip } from './tooltip';
 
 export enum ACTIONS_ITEM_STATUS {
   /**
@@ -144,13 +144,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
       {iconNode}
     </div>
   );
-  const tooltipProps = typeof tooltip === 'object' ? tooltip : { title: tooltip ?? label };
-
-  return isMobile || tooltip === false ? (
-    innerNode
-  ) : (
-    <Tooltip {...tooltipProps}>{innerNode}</Tooltip>
-  );
+  return renderWithTooltip(innerNode, tooltip, label, isMobile);
 };
 
 export default ActionsItem;

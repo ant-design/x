@@ -10,8 +10,14 @@ jest.mock('antd', () => {
 
   return {
     ...antd,
-    Tooltip: ({ children, title }: any) =>
-      title ? <span data-tooltip-title={title}>{children}</span> : <>{children}</>,
+    Tooltip: ({ children, placement, title }: any) =>
+      title ? (
+        <span data-tooltip-placement={placement} data-tooltip-title={title}>
+          {children}
+        </span>
+      ) : (
+        <>{children}</>
+      ),
   };
 });
 
@@ -210,6 +216,25 @@ describe('Actions.Item Component', () => {
     expect(getByText('🔧').closest('[data-tooltip-title="Custom Tooltip"]')).toBeInTheDocument();
   });
 
+  it('should support custom tooltip props', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'custom-tooltip-props',
+            label: 'Custom Action',
+            icon: <span>🔧</span>,
+            tooltip: { title: 'Custom Tooltip Props', placement: 'bottom' },
+          },
+        ]}
+      />,
+    );
+
+    const tooltip = getByText('🔧').closest('[data-tooltip-title="Custom Tooltip Props"]');
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip).toHaveAttribute('data-tooltip-placement', 'bottom');
+  });
+
   it('should disable tooltip when tooltip is false', () => {
     const { getByText } = render(
       <Actions
@@ -219,6 +244,22 @@ describe('Actions.Item Component', () => {
             label: 'Custom Action',
             icon: <span>🔧</span>,
             tooltip: false,
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🔧').closest('[data-tooltip-title]')).not.toBeInTheDocument();
+  });
+
+  it('should not render empty tooltip when label and tooltip are empty', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'empty-tooltip',
+            icon: <span>🔧</span>,
+            tooltip: null as any,
           },
         ]}
       />,
