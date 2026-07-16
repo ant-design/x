@@ -1,4 +1,4 @@
-import type { DropdownProps, MenuProps } from 'antd';
+import type { DropdownProps, MenuProps, TooltipProps } from 'antd';
 import type React from 'react';
 
 export type SemanticType = 'root' | 'item' | 'itemDropdown';
@@ -110,4 +110,9 @@ export interface ItemType {
    * @descEN Custom render action item content
    */
   actionRender?: ((item: ItemType) => React.ReactNode) | React.ReactNode;
+  /**
+   * @desc 自定义操作项的 Tooltip，设为 false 时不渲染 Tooltip
+   * @descEN Tooltip for the action item, set to false to disable Tooltip
+   */
+  tooltip?: string | TooltipProps | false;
 }
