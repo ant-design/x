@@ -10,15 +10,16 @@ import HelpManager from './help';
 import { emojis, getMessage, Language, LocaleMessages, messages } from './locale/index';
 
 type Ora = typeof import('ora').default;
+type OraSpinner = ReturnType<Ora>;
+
+let oraPromise: Promise<Ora> | undefined;
 
 async function loadOra(): Promise<Ora> {
-  // Keep native dynamic import in the CJS build because ora is ESM-only.
-  const loader = new Function('specifier', 'return import(specifier)') as (
-    specifier: string,
-  ) => Promise<typeof import('ora')>;
+  oraPromise ??= (
+    new Function('return import("ora")') as () => Promise<typeof import('ora')>
+  )().then(({ default: ora }) => ora);
 
-  const { default: ora } = await loader('ora');
-  return ora;
+  return oraPromise;
 }
 
 interface SkillConfig {
@@ -201,9 +202,11 @@ class SkillInstaller {
   }
 
   async listVersions(): Promise<void> {
+    let spinner: OraSpinner | undefined;
+
     try {
       const ora = await loadOra();
-      const spinner = ora(
+      spinner = ora(
         this.helpManager.colorize(getMessage('fetchingVersions', this.language), 'cyan'),
       ).start();
       const versions = await this.skillLoader.listVersions();
@@ -224,6 +227,7 @@ class SkillInstaller {
         console.log(`  ${this.helpManager.colorize(version, 'yellow')}${marker}`);
       });
     } catch (error) {
+      spinner?.stop();
       console.error(
         `${this.helpManager.colorize(getMessage('error', this.language), 'red')} ${(error as Error).message}`,
       );
