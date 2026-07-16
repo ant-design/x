@@ -1,5 +1,6 @@
 import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import VirtualList from '@rc-component/virtual-list';
 import { Divider } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
@@ -12,6 +13,7 @@ import { useXProviderContext } from '../x-provider';
 import type { CreationProps } from './Creation';
 import Creation from './Creation';
 import GroupTitle, { GroupTitleContext } from './GroupTitle';
+import type { GroupInfoType } from './hooks/useGroupable';
 import useGroupable from './hooks/useGroupable';
 import ConversationsItem, { type ConversationsItemProps } from './Item';
 import type { ConversationItemType, DividerItemType, GroupableProps, ItemType } from './interface';
@@ -97,6 +99,13 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @descEN  Config of the new chat button
    */
   creation?: CreationProps;
+
+  /**
+   * @desc 是否开启虚拟滚动，当数据量较大时（>100 条）建议开启以提升性能
+   * @defaultEN Whether to enable virtual scrolling
+   * @default false
+   */
+  virtual?: boolean;
 }
 
 type CompoundedComponent = typeof ForwardConversations & {
@@ -106,6 +115,18 @@ type CompoundedComponent = typeof ForwardConversations & {
 type ConversationsRef = {
   nativeElement: HTMLDivElement;
 };
+
+type FlatItem =
+  | {
+      type: 'group-title';
+      key: string;
+      groupInfo: GroupInfoType;
+    }
+  | {
+      type: 'item';
+      key: string;
+      conversationInfo: ItemType;
+    };
 const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsProps>(
   (props, ref) => {
     const {
@@ -123,6 +144,7 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
       className,
       style,
       creation,
+      virtual: virtualProp = false,
       ...restProps
     } = props;
 
@@ -134,6 +156,24 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
 
     // ============================= Refs =============================
     const containerRef = React.useRef<any>(null);
+
+    // ========================== Virtual Height =========================
+    const [virtualHeight, setVirtualHeight] = React.useState<number>(400);
+
+    React.useEffect(() => {
+      if (!virtualProp) return;
+      const updateHeight = () => {
+        if (containerRef.current) {
+          setVirtualHeight(containerRef.current.clientHeight);
+        }
+      };
+      updateHeight();
+      const observer = new ResizeObserver(updateHeight);
+      if (containerRef.current) {
+        observer.observe(containerRef.current);
+      }
+      return () => observer.disconnect();
+    }, [virtualProp]);
 
     useProxyImperativeHandle(ref, () => {
       return {
@@ -261,6 +301,29 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
       rootPrefixCls,
     );
 
+    // ====================== Virtual Flat Data =========================
+    const flatData = React.useMemo<FlatItem[]>(() => {
+      if (!virtualProp) return [];
+      const result: FlatItem[] = [];
+      groupList.forEach((groupInfo, groupIndex) => {
+        if (groupInfo.enableGroup) {
+          result.push({
+            type: 'group-title',
+            key: `__group__${groupInfo.name || groupIndex}`,
+            groupInfo,
+          });
+        }
+        groupInfo.data.forEach((conversationInfo) => {
+          result.push({
+            type: 'item',
+            key: (conversationInfo as ConversationItemType).key || `__item__${result.length}`,
+            conversationInfo,
+          });
+        });
+      });
+      return result;
+    }, [virtualProp, groupList]);
+
     // ============================ Render ============================
     return (
       <ul
@@ -286,35 +349,117 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
             {...creation}
           />
         )}
-        {groupList.map((groupInfo, groupIndex) => {
-          const itemNode = getItemNode(groupInfo.data);
-          return groupInfo.enableGroup ? (
-            <GroupTitleContext.Provider
-              key={groupInfo.name || `key-${groupIndex}`}
-              value={{
-                prefixCls,
-                groupInfo,
-                enableCollapse,
-                expandedKeys,
-                onItemExpand,
-                collapseMotion,
-              }}
+        {virtualProp ? (
+          <>
+            <style>{`
+            .${prefixCls} { overflow-y: hidden !important; padding: 0 !important; }
+            .${prefixCls} .rc-virtual-list-scrollbar { display: none !important; }
+            .${prefixCls} .rc-virtual-list-holder {
+              overflow-y: auto !important;
+              padding: 12px;
+              box-sizing: border-box;
+            }
+            .${prefixCls} .rc-virtual-list-holder-inner > .${prefixCls}-item {
+              margin-top: 4px;
+            }
+            .${prefixCls} .rc-virtual-list-holder-inner > .${prefixCls}-group + .${prefixCls}-item {
+              margin-top: 0;
+            }
+          `}</style>
+            <VirtualList<FlatItem>
+              data={flatData}
+              height={virtualHeight}
+              itemHeight={52}
+              itemKey={(item) => item.key}
+              virtual
+              component="ul"
+              className={clsx(`${prefixCls}-list`)}
+              style={{ padding: 0, margin: 0, listStyle: 'none' }}
             >
-              <GroupTitle className={clsx(contextConfig.classNames.group, classNames.group)}>
-                <ul
-                  className={clsx(`${prefixCls}-list`, {
-                    [`${prefixCls}-group-collapsible-list`]: groupInfo.collapsible,
-                  })}
-                  style={{ ...contextConfig.styles.group, ...styles.group }}
-                >
-                  {itemNode}
-                </ul>
-              </GroupTitle>
-            </GroupTitleContext.Provider>
-          ) : (
-            itemNode
-          );
-        })}
+              {(item) => {
+                if (item.type === 'group-title') {
+                  return (
+                    <GroupTitleContext.Provider
+                      value={{
+                        prefixCls,
+                        groupInfo: item.groupInfo,
+                        enableCollapse,
+                        expandedKeys,
+                        onItemExpand,
+                        collapseMotion,
+                      }}
+                    >
+                      <GroupTitle
+                        className={clsx(contextConfig.classNames.group, classNames.group)}
+                        virtual
+                      />
+                    </GroupTitleContext.Provider>
+                  );
+                }
+                // item type
+                const conversationInfo = item.conversationInfo;
+                if (conversationInfo.type === 'divider') {
+                  return (
+                    <Divider className={`${prefixCls}-divider`} dashed={conversationInfo.dashed} />
+                  );
+                }
+                const baseConversationInfo = conversationInfo as ConversationItemType;
+                const { label: _, disabled: __, icon: ___, ...restInfo } = baseConversationInfo;
+                return (
+                  <ConversationsItem
+                    {...restInfo}
+                    info={baseConversationInfo}
+                    prefixCls={prefixCls}
+                    direction={direction}
+                    className={clsx(
+                      classNames.item,
+                      contextConfig.classNames.item,
+                      baseConversationInfo.className,
+                    )}
+                    style={{
+                      ...contextConfig.styles.item,
+                      ...styles.item,
+                      ...baseConversationInfo.style,
+                    }}
+                    menu={typeof menu === 'function' ? menu(baseConversationInfo) : menu}
+                    active={mergedActiveKey === baseConversationInfo.key}
+                    onClick={onConversationItemClick}
+                  />
+                );
+              }}
+            </VirtualList>
+          </>
+        ) : (
+          groupList.map((groupInfo, groupIndex) => {
+            const itemNode = getItemNode(groupInfo.data);
+            return groupInfo.enableGroup ? (
+              <GroupTitleContext.Provider
+                key={groupInfo.name || `key-${groupIndex}`}
+                value={{
+                  prefixCls,
+                  groupInfo,
+                  enableCollapse,
+                  expandedKeys,
+                  onItemExpand,
+                  collapseMotion,
+                }}
+              >
+                <GroupTitle className={clsx(contextConfig.classNames.group, classNames.group)}>
+                  <ul
+                    className={clsx(`${prefixCls}-list`, {
+                      [`${prefixCls}-group-collapsible-list`]: groupInfo.collapsible,
+                    })}
+                    style={{ ...contextConfig.styles.group, ...styles.group }}
+                  >
+                    {itemNode}
+                  </ul>
+                </GroupTitle>
+              </GroupTitleContext.Provider>
+            ) : (
+              itemNode
+            );
+          })
+        )}
       </ul>
     );
   },
@@ -326,6 +471,7 @@ if (process.env.NODE_ENV !== 'production') {
   Conversations.displayName = 'Conversations';
 }
 
-export type { ItemType, ConversationItemType, DividerItemType };
+export type { ConversationItemType, DividerItemType, ItemType };
+
 Conversations.Creation = Creation;
 export default Conversations;
