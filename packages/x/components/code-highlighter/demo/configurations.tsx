@@ -17,7 +17,7 @@ console.log(result); // 55`;
   return (
     <div>
       <h3 style={{ marginBottom: 8 }}>Show Line Number</h3>
-      <CodeHighlighter lang="javascript" showLineNumber>
+      <CodeHighlighter lang="javascript" showLineNumbers>
         {code}
       </CodeHighlighter>
 
@@ -32,7 +32,7 @@ console.log(result); // 55`;
       </CodeHighlighter>
 
       <h3 style={{ margin: '8px 0' }}>All Combined</h3>
-      <CodeHighlighter lang="javascript" showLineNumber wrapLongLines showCopyButton={false}>
+      <CodeHighlighter lang="javascript" showLineNumbers wrapLongLines showCopyButton={false}>
         {code}
       </CodeHighlighter>
     </div>

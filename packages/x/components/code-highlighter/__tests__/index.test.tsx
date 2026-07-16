@@ -244,7 +244,7 @@ describe('CodeHighlighter', () => {
     const { container } = render(
       <CodeHighlighter
         lang="javascript"
-        highlightProps={{ showLineNumbers: true, startingLineNumber: 5 }}
+        highlightProps={{ showLineNumberss: true, startingLineNumber: 5 }}
       >
         {`console.log("test");`}
       </CodeHighlighter>,
@@ -512,10 +512,10 @@ describe('CodeHighlighter', () => {
     });
   });
 
-  describe('showLineNumber', () => {
-    it('should render line numbers when showLineNumber is true', async () => {
+  describe('showLineNumbers', () => {
+    it('should render line numbers when showLineNumbers is true', async () => {
       const { container } = render(
-        <CodeHighlighter lang="javascript" showLineNumber>
+        <CodeHighlighter lang="javascript" showLineNumbers>
           {`console.log("test");`}
         </CodeHighlighter>,
       );
@@ -540,9 +540,9 @@ describe('CodeHighlighter', () => {
       ).not.toBeInTheDocument();
     });
 
-    it('should not render line numbers when showLineNumber is false', async () => {
+    it('should not render line numbers when showLineNumbers is false', async () => {
       const { container } = render(
-        <CodeHighlighter lang="javascript" showLineNumber={false}>
+        <CodeHighlighter lang="javascript" showLineNumbers={false}>
           {`console.log("test");`}
         </CodeHighlighter>,
       );
@@ -647,11 +647,11 @@ describe('CodeHighlighter', () => {
   });
 
   describe('combined props', () => {
-    it('should work with showLineNumber, wrapLongLines, and showCopyButton together', async () => {
+    it('should work with showLineNumbers, wrapLongLines, and showCopyButton together', async () => {
       const { container } = render(
         <CodeHighlighter
           lang="javascript"
-          showLineNumber
+          showLineNumbers
           wrapLongLines
           showCopyButton={false}
         >

@@ -66,7 +66,7 @@ export interface CodeHighlighterProps
    * @descEN Whether to show line numbers
    * @default false
    */
-  showLineNumber?: boolean;
+  showLineNumbers?: boolean;
   /**
    * @desc 是否自动换行（长行换行）
    * @descEN Whether to wrap long lines
