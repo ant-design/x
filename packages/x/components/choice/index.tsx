@@ -5,6 +5,8 @@ import { clsx } from 'clsx';
 import React from 'react';
 import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useLocale } from '../locale';
+import enUS from '../locale/en_US';
 import { useXProviderContext } from '../x-provider';
 import { ChoiceContext } from './context';
 import useSelect from './hooks/use-select';
@@ -15,7 +17,7 @@ import useStyle from './style';
 const ForwardChoice = React.forwardRef<ChoiceRef, ChoiceProps>((props, ref) => {
   const {
     prefixCls: customizePrefixCls,
-    items,
+    items: rawItems,
     mode = 'single',
     layout = 'list',
     value,
@@ -42,6 +44,8 @@ const ForwardChoice = React.forwardRef<ChoiceRef, ChoiceProps>((props, ref) => {
     ...htmlProps
   } = props;
 
+  const items = rawItems || [];
+
   // ============================ PrefixCls ============================
   const { getPrefixCls, direction } = useXProviderContext();
   const prefixCls = getPrefixCls('choice', customizePrefixCls);
@@ -51,6 +55,9 @@ const ForwardChoice = React.forwardRef<ChoiceRef, ChoiceProps>((props, ref) => {
 
   // ============================ Style ============================
   const [hashId, cssVarCls] = useStyle(prefixCls);
+
+  // ============================ Locale ============================
+  const [locale] = useLocale('Choice', enUS.Choice);
 
   // ============================ Indicator =========================
   const indicator = customIndicator ?? (mode === 'single' ? 'radio' : 'check');
@@ -169,7 +176,7 @@ const ForwardChoice = React.forwardRef<ChoiceRef, ChoiceProps>((props, ref) => {
               }
             }}
           >
-            {confirmText || 'Confirm'}
+            {confirmText || locale.confirmText}
           </Button>
         )}
       </div>

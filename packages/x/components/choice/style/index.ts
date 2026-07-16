@@ -16,6 +16,11 @@ export interface ComponentToken {
    */
   itemHoverBg?: string;
   /**
+   * @desc 选项激活背景色
+   * @descEN Item active background color
+   */
+  itemActiveBg?: string;
+  /**
    * @desc 选项选中背景色
    * @descEN Item selected background color
    */
@@ -36,6 +41,16 @@ export interface ComponentToken {
    */
   itemSelectedBorderColor?: string;
   /**
+   * @desc 推荐选项边框色
+   * @descEN Recommended item border color
+   */
+  itemRecommendedBorderColor?: string;
+  /**
+   * @desc 禁用选项边框色
+   * @descEN Disabled item border color
+   */
+  itemDisabledBorderColor?: string;
+  /**
    * @desc 选项圆角
    * @descEN Item border radius
    */
@@ -50,18 +65,93 @@ export interface ComponentToken {
    * @descEN Item padding
    */
   itemPadding?: number;
+  /**
+   * @desc 标题字号
+   * @descEN Title font size
+   */
+  titleFontSize?: number;
+  /**
+   * @desc 标题行高
+   * @descEN Title line height
+   */
+  titleLineHeight?: number;
+  /**
+   * @desc 标签字号
+   * @descEN Label font size
+   */
+  labelFontSize?: number;
+  /**
+   * @desc 标签行高
+   * @descEN Label line height
+   */
+  labelLineHeight?: number;
+  /**
+   * @desc 描述字号
+   * @descEN Description font size
+   */
+  descFontSize?: number;
+  /**
+   * @desc 描述行高
+   * @descEN Description line height
+   */
+  descLineHeight?: number;
+  /**
+   * @desc 头部内边距
+   * @descEN Header padding
+   */
+  headerPadding?: number;
+  /**
+   * @desc 列表内边距
+   * @descEN List padding
+   */
+  listPadding?: number;
+  /**
+   * @desc 底部内边距
+   * @descEN Footer padding
+   */
+  footerPadding?: number;
+  /**
+   * @desc 整体圆角
+   * @descEN Container border radius
+   */
+  borderRadius?: number;
+  /**
+   * @desc 网格布局列数
+   * @descEN Grid columns
+   */
+  gridColumns?: number;
+  /**
+   * @desc 动画时长
+   * @descEN Motion duration
+   */
+  motionDuration?: string;
 }
 
 export interface ChoiceToken extends FullToken<'Choice'> {
   itemBg: string;
   itemHoverBg: string;
+  itemActiveBg: string;
   itemSelectedBg: string;
   itemSelectedBorderColor: string;
+  itemRecommendedBorderColor: string;
+  itemDisabledBorderColor: string;
   itemDisabledBg: string;
   itemBorderColor: string;
   itemBorderRadius: number;
   itemGap: number;
   itemPadding: number;
+  titleFontSize: number;
+  titleLineHeight: number;
+  labelFontSize: number;
+  labelLineHeight: number;
+  descFontSize: number;
+  descLineHeight: number;
+  headerPadding: number;
+  listPadding: number;
+  footerPadding: number;
+  borderRadius: number;
+  gridColumns: number;
+  motionDuration: string;
 }
 
 const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
@@ -82,6 +172,7 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
       // ======================== Header ========================
       [`${componentCls}-header`]: {
         marginBottom: token.paddingSM,
+        padding: unit(token.headerPadding),
       },
 
       [`${componentCls}-title`]: {
@@ -89,11 +180,14 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
         marginBlockEnd: token.paddingXXS,
         fontWeight: 'normal',
         color: token.colorTextHeading,
+        fontSize: unit(token.titleFontSize),
+        lineHeight: unit(token.titleLineHeight),
       },
 
       [`${componentCls}-description`]: {
         color: token.colorTextTertiary,
-        fontSize: token.fontSizeSM,
+        fontSize: unit(token.descFontSize),
+        lineHeight: unit(token.descLineHeight),
       },
 
       // ======================== List ========================
@@ -102,7 +196,7 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
         flexDirection: 'column',
         gap: unit(token.itemGap),
         listStyle: 'none',
-        padding: 0,
+        padding: unit(token.listPadding),
         margin: 0,
       },
 
@@ -110,14 +204,14 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
       // Grid layout
       [`${componentCls}-layout-grid`]: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateColumns: `repeat(${token.gridColumns}, 1fr)`,
         gap: unit(token.itemGap),
       },
 
       // Card layout
       [`${componentCls}-layout-card`]: {
         display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridTemplateColumns: `repeat(${token.gridColumns}, 1fr)`,
         gap: unit(token.itemGap),
       },
 
@@ -132,11 +226,15 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
         border: `${unit(token.lineWidth)} ${token.lineType} ${token.itemBorderColor}`,
         borderRadius: unit(token.itemBorderRadius),
         cursor: 'pointer',
-        transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        transition: `all ${token.motionDuration} ${token.motionEaseInOut}`,
         minHeight: token.controlHeight,
 
         '&:hover': {
           background: token.itemHoverBg,
+        },
+
+        '&:active': {
+          background: token.itemActiveBg,
         },
 
         // Selected state
@@ -149,15 +247,16 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
         [`&${componentCls}-item-disabled`]: {
           cursor: 'not-allowed',
           background: token.itemDisabledBg,
+          borderColor: token.itemDisabledBorderColor,
           opacity: 0.6,
           pointerEvents: 'none',
         },
 
         // Recommended - primary
         [`&${componentCls}-item-recommended-primary`]: {
-          borderColor: token.colorPrimary,
+          borderColor: token.itemRecommendedBorderColor,
           [`&${componentCls}-item-selected`]: {
-            borderColor: token.colorPrimary,
+            borderColor: token.itemSelectedBorderColor,
           },
         },
 
@@ -208,14 +307,14 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
       [`${componentCls}-item-label`]: {
         color: token.colorTextHeading,
         fontWeight: 500,
-        fontSize: token.fontSize,
-        lineHeight: token.lineHeight,
+        fontSize: unit(token.labelFontSize),
+        lineHeight: unit(token.labelLineHeight),
       },
 
       [`${componentCls}-item-desc`]: {
         color: token.colorTextTertiary,
-        fontSize: token.fontSizeSM,
-        lineHeight: token.lineHeight,
+        fontSize: unit(token.descFontSize),
+        lineHeight: unit(token.descLineHeight),
       },
 
       [`${componentCls}-item-extra`]: {
@@ -264,6 +363,7 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
         justifyContent: 'flex-end',
         gap: token.paddingSM,
         marginTop: token.paddingSM,
+        padding: unit(token.footerPadding),
       },
 
       [`${componentCls}-footer-count`]: {
@@ -305,13 +405,28 @@ const genChoiceStyle: GenerateStyle<ChoiceToken> = (token) => {
 export const prepareComponentToken: GetDefaultToken<'Choice'> = (token) => ({
   itemBg: token.colorBgContainer,
   itemHoverBg: token.colorFillTertiary,
+  itemActiveBg: token.colorFill,
   itemSelectedBg: token.colorPrimaryBg,
   itemSelectedBorderColor: token.colorPrimary,
+  itemRecommendedBorderColor: token.colorPrimary,
+  itemDisabledBorderColor: token.colorBorderSecondary,
   itemDisabledBg: token.colorBgContainerDisabled,
   itemBorderColor: token.colorBorderSecondary,
   itemBorderRadius: token.borderRadiusLG,
   itemGap: token.paddingXS,
   itemPadding: token.paddingSM,
+  titleFontSize: token.fontSizeLG,
+  titleLineHeight: token.lineHeightLG,
+  labelFontSize: token.fontSize,
+  labelLineHeight: token.lineHeight,
+  descFontSize: token.fontSizeSM,
+  descLineHeight: token.lineHeight,
+  headerPadding: 0,
+  listPadding: 0,
+  footerPadding: 0,
+  borderRadius: token.borderRadius,
+  gridColumns: 2,
+  motionDuration: token.motionDurationMid,
 });
 
 export default genStyleHooks(

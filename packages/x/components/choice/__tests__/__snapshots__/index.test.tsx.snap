@@ -6,17 +6,16 @@ exports[`choice rtl render component should be rendered correctly in RTL directi
 >
   <div
     class="ant-choice-list ant-choice-layout-list"
-    role="radiogroup"
+    data-role="radiogroup"
   >
     <div
       data-key="1"
     >
       <div
-        aria-checked="false"
-        aria-disabled="false"
-        aria-label="Option 1"
         class="ant-choice-item"
-        role="radio"
+        data-disabled="false"
+        data-role="radio"
+        data-selected="false"
         tabindex="0"
       >
         <span
@@ -55,11 +54,10 @@ exports[`choice rtl render component should be rendered correctly in RTL directi
       data-key="2"
     >
       <div
-        aria-checked="false"
-        aria-disabled="false"
-        aria-label="Option 2"
         class="ant-choice-item"
-        role="radio"
+        data-disabled="false"
+        data-role="radio"
+        data-selected="false"
         tabindex="0"
       >
         <span
@@ -98,11 +96,10 @@ exports[`choice rtl render component should be rendered correctly in RTL directi
       data-key="3"
     >
       <div
-        aria-checked="false"
-        aria-disabled="true"
-        aria-label="Option 3"
         class="ant-choice-item ant-choice-item-disabled"
-        role="radio"
+        data-disabled="true"
+        data-role="radio"
+        data-selected="false"
         tabindex="-1"
       >
         <span

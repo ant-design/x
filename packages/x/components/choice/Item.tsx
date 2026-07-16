@@ -1,5 +1,5 @@
 import { CheckCircleFilled } from '@ant-design/icons';
-import { Radio } from 'antd';
+import { Radio, Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import { ChoiceContext } from './context';
@@ -25,7 +25,6 @@ const ChoiceItem: React.FC<ChoiceItemProps> = ({ item, index }) => {
 
   const selected = isSelected(item.key);
   const disabled = groupDisabled || item.disabled;
-  const isNumber = indicator === 'number';
 
   const itemCls = clsx(`${prefixCls}-item`, classNames?.item, {
     [`${prefixCls}-item-selected`]: selected,
@@ -57,7 +56,7 @@ const ChoiceItem: React.FC<ChoiceItemProps> = ({ item, index }) => {
       );
     }
 
-    if (isNumber) {
+    if (indicator === 'number') {
       return (
         <span className={indicatorCls} style={styles?.indicator}>
           {selected ? (
@@ -72,7 +71,7 @@ const ChoiceItem: React.FC<ChoiceItemProps> = ({ item, index }) => {
     return null;
   };
 
-  return (
+  const itemNode = (
     <div
       className={itemCls}
       style={styles?.item}
@@ -124,12 +123,23 @@ const ChoiceItem: React.FC<ChoiceItemProps> = ({ item, index }) => {
         </div>
       )}
 
-      {/* Disabled reason */}
+      {/* Disabled reason (inline) */}
       {disabled && item.disabledReason && (
         <div className={`${prefixCls}-item-disabled-reason`}>{item.disabledReason}</div>
       )}
     </div>
   );
+
+  // Wrap with Tooltip for disabled reason on hover
+  if (disabled && item.disabledReason) {
+    return (
+      <Tooltip title={item.disabledReason} placement="top">
+        {itemNode}
+      </Tooltip>
+    );
+  }
+
+  return itemNode;
 };
 
 export default ChoiceItem;
