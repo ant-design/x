@@ -51,6 +51,12 @@ describe('Actions.Item', () => {
     expect(tooltip).toHaveAttribute('data-tooltip-placement', 'bottom');
   });
 
+  it('renders tooltip when tooltip title is 0', () => {
+    const { getByText } = render(<ActionsItem defaultIcon="default-icon" tooltip={{ title: 0 }} />);
+
+    expect(getByText('default-icon').closest('[data-tooltip-title="0"]')).toBeInTheDocument();
+  });
+
   it('disables tooltip when tooltip is false', () => {
     const { getByText } = render(
       <ActionsItem defaultIcon="default-icon" label="Default Tooltip" tooltip={false} />,

@@ -235,6 +235,22 @@ describe('Actions.Item Component', () => {
     expect(tooltip).toHaveAttribute('data-tooltip-placement', 'bottom');
   });
 
+  it('should render tooltip when tooltip title is 0', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'zero-tooltip',
+            icon: <span>🔧</span>,
+            tooltip: { title: 0 },
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🔧').closest('[data-tooltip-title="0"]')).toBeInTheDocument();
+  });
+
   it('should disable tooltip when tooltip is false', () => {
     const { getByText } = render(
       <Actions
