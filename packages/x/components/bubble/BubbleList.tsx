@@ -214,13 +214,27 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
     if (!virtualProp || !autoScroll) return;
     const prevLen = prevItemsLengthRef.current;
     prevItemsLengthRef.current = mergedItems.length;
-    // Only auto scroll when items are added (not removed)
+    // Auto scroll when items are added (not removed)
     if (mergedItems.length > prevLen && virtualListRef.current) {
       requestAnimationFrame(() => {
         virtualListRef.current?.scrollTo({ index: mergedItems.length - 1 });
       });
     }
   }, [mergedItems, virtualProp, autoScroll]);
+
+  // Auto scroll when content grows (e.g. streaming messages getting longer)
+  React.useEffect(() => {
+    if (!virtualProp || !autoScroll || !listRef.current) return;
+    const observer = new ResizeObserver(() => {
+      if (virtualListRef.current) {
+        requestAnimationFrame(() => {
+          virtualListRef.current?.scrollTo({ index: mergedItems.length - 1 });
+        });
+      }
+    });
+    observer.observe(listRef.current);
+    return () => observer.disconnect();
+  }, [virtualProp, autoScroll, mergedItems]);
 
   // ============================= Refs =============================
   useProxyImperativeHandle<HTMLDivElement, BubbleListRef>(ref, () => {
@@ -230,16 +244,18 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
       scrollTo: ({ key, top, behavior = 'smooth', block }) => {
         // Virtual mode: use VirtualList's scrollTo
         if (virtualProp && virtualListRef.current) {
+          // Map block to VirtualList's align option
+          const align = block === 'center' ? 'center' : block === 'end' ? 'end' : 'start';
           if (typeof top === 'number') {
             virtualListRef.current.scrollTo({ top, behavior });
           } else if (top === 'bottom') {
-            virtualListRef.current.scrollTo({ index: mergedItems.length - 1, behavior });
+            virtualListRef.current.scrollTo({ index: mergedItems.length - 1, align, behavior });
           } else if (top === 'top') {
             virtualListRef.current.scrollTo({ top: 0, behavior });
-          } else if (key) {
+          } else if (key != null) {
             const itemIndex = mergedItems.findIndex((item) => item.key === key);
             if (itemIndex >= 0) {
-              virtualListRef.current.scrollTo({ index: itemIndex, behavior, block });
+              virtualListRef.current.scrollTo({ index: itemIndex, align, behavior });
             }
           }
           return;
