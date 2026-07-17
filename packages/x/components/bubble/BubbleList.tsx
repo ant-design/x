@@ -225,6 +225,9 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
   // Auto scroll when content grows (e.g. streaming messages getting longer)
   React.useEffect(() => {
     if (!virtualProp || !autoScroll || !listRef.current) return;
+    // Observe the inner content container which grows with message content
+    const holderInner = listRef.current.querySelector('.rc-virtual-list-holder-inner');
+    const target = holderInner || listRef.current;
     const observer = new ResizeObserver(() => {
       if (virtualListRef.current) {
         requestAnimationFrame(() => {
@@ -232,7 +235,7 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
         });
       }
     });
-    observer.observe(listRef.current);
+    observer.observe(target);
     return () => observer.disconnect();
   }, [virtualProp, autoScroll, mergedItems]);
 
@@ -244,12 +247,23 @@ const BubbleList: React.ForwardRefRenderFunction<BubbleListRef, BubbleListProps>
       scrollTo: ({ key, top, behavior = 'smooth', block }) => {
         // Virtual mode: use VirtualList's scrollTo
         if (virtualProp && virtualListRef.current) {
-          // Map block to VirtualList's align option
-          const align = block === 'center' ? 'center' : block === 'end' ? 'end' : 'start';
+          // Map block to VirtualList's align option (only 'top' | 'bottom' | 'auto' supported)
+          const align =
+            block === 'center'
+              ? 'auto'
+              : block === 'end'
+                ? 'bottom'
+                : block === 'start'
+                  ? 'top'
+                  : undefined;
           if (typeof top === 'number') {
             virtualListRef.current.scrollTo({ top, behavior });
           } else if (top === 'bottom') {
-            virtualListRef.current.scrollTo({ index: mergedItems.length - 1, align, behavior });
+            virtualListRef.current.scrollTo({
+              index: mergedItems.length - 1,
+              align: align || 'bottom',
+              behavior,
+            });
           } else if (top === 'top') {
             virtualListRef.current.scrollTo({ top: 0, behavior });
           } else if (key != null) {
