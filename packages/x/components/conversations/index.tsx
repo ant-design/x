@@ -1,3 +1,4 @@
+import type { CSSMotionProps } from '@rc-component/motion';
 import { useControlledState } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import VirtualList from '@rc-component/virtual-list';
@@ -127,6 +128,37 @@ type FlatItem =
       key: string;
       conversationInfo: ItemType;
     };
+
+const VirtualGroupTitle = React.forwardRef<
+  HTMLLIElement,
+  {
+    prefixCls: string;
+    item: FlatItem & { type: 'group-title' };
+    enableCollapse: boolean;
+    expandedKeys: string[];
+    onItemExpand: ((curKey: string) => void) | undefined;
+    collapseMotion: CSSMotionProps;
+    className?: string;
+  }
+>((props, ref) => {
+  const { prefixCls, item, enableCollapse, expandedKeys, onItemExpand, collapseMotion, className } =
+    props;
+  return (
+    <GroupTitleContext.Provider
+      value={{
+        prefixCls,
+        groupInfo: item.groupInfo,
+        enableCollapse,
+        expandedKeys,
+        onItemExpand,
+        collapseMotion,
+      }}
+    >
+      <GroupTitle ref={ref} className={className} virtual />
+    </GroupTitleContext.Provider>
+  );
+});
+
 const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsProps>(
   (props, ref) => {
     const {
@@ -313,16 +345,21 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
             groupInfo,
           });
         }
-        groupInfo.data.forEach((conversationInfo) => {
-          result.push({
-            type: 'item',
-            key: (conversationInfo as ConversationItemType).key || `__item__${result.length}`,
-            conversationInfo,
+        const collapsed =
+          enableCollapse && groupInfo.collapsible && !expandedKeys.includes(groupInfo.name);
+
+        if (!collapsed) {
+          groupInfo.data.forEach((conversationInfo) => {
+            result.push({
+              type: 'item',
+              key: (conversationInfo as ConversationItemType).key || `__item__${result.length}`,
+              conversationInfo,
+            });
           });
-        });
+        }
       });
       return result;
-    }, [virtualProp, groupList]);
+    }, [virtualProp, groupList, enableCollapse, expandedKeys]);
 
     // ============================ Render ============================
     return (
@@ -379,21 +416,15 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
               {(item) => {
                 if (item.type === 'group-title') {
                   return (
-                    <GroupTitleContext.Provider
-                      value={{
-                        prefixCls,
-                        groupInfo: item.groupInfo,
-                        enableCollapse,
-                        expandedKeys,
-                        onItemExpand,
-                        collapseMotion,
-                      }}
-                    >
-                      <GroupTitle
-                        className={clsx(contextConfig.classNames.group, classNames.group)}
-                        virtual
-                      />
-                    </GroupTitleContext.Provider>
+                    <VirtualGroupTitle
+                      prefixCls={prefixCls}
+                      item={item}
+                      enableCollapse={enableCollapse}
+                      expandedKeys={expandedKeys}
+                      onItemExpand={onItemExpand}
+                      collapseMotion={collapseMotion}
+                      className={clsx(contextConfig.classNames.group, classNames.group)}
+                    />
                   );
                 }
                 // item type
