@@ -235,4 +235,63 @@ describe('ThoughtChain Component', () => {
     const contentEl = container.querySelector('.ant-thought-chain-node-content');
     expect(contentEl).toBeFalsy();
   });
+
+  it('should remove content from DOM when destroyOnHidden is true and collapsed', () => {
+    const { container } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'destroy-test',
+            title: 'Collapsible',
+            content: 'Destroyable content',
+            collapsible: true,
+            destroyOnHidden: true,
+          },
+        ]}
+        expandedKeys={[]}
+      />,
+    );
+
+    // Collapsed with destroyOnHidden=true, content node should not exist
+    expect(container.querySelector('.ant-thought-chain-node-content')).toBeFalsy();
+  });
+
+  it('should keep content in DOM when destroyOnHidden is false and collapsed', () => {
+    const { container, rerender } = render(
+      <ThoughtChain
+        items={[
+          {
+            key: 'keep-test',
+            title: 'Collapsible',
+            content: 'Kept content',
+            collapsible: true,
+            destroyOnHidden: false,
+          },
+        ]}
+        expandedKeys={['keep-test']}
+      />,
+    );
+
+    // Expanded, content should exist
+    expect(container.querySelector('.ant-thought-chain-node-content')).toBeTruthy();
+
+    // Collapse
+    rerender(
+      <ThoughtChain
+        items={[
+          {
+            key: 'keep-test',
+            title: 'Collapsible',
+            content: 'Kept content',
+            collapsible: true,
+            destroyOnHidden: false,
+          },
+        ]}
+        expandedKeys={[]}
+      />,
+    );
+
+    // Collapsed with destroyOnHidden=false, content node should still exist
+    expect(container.querySelector('.ant-thought-chain-node-content')).toBeTruthy();
+  });
 });
