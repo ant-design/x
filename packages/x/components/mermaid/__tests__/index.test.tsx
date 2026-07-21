@@ -899,7 +899,7 @@ describe('Mermaid Component', () => {
   });
 
   describe('Performance Tests', () => {
-    it('should throttle render calls', async () => {
+    it('should debounce render calls', async () => {
       const { rerender } = render(<Mermaid>{mermaidContent}</Mermaid>);
 
       // 快速连续改变内容
@@ -908,7 +908,7 @@ describe('Mermaid Component', () => {
       }
 
       await waitFor(() => {
-        // 由于节流，render调用次数应该少于内容变化次数
+        // 由于防抖，连续快速更新后最终只触发一次渲染
         expect(mockRender).toHaveBeenCalled();
       });
     });
@@ -1204,6 +1204,107 @@ describe('Mermaid Component', () => {
 
       const element = container.querySelector('.ant-mermaid');
       expect(element).toBeInTheDocument();
+    });
+  });
+
+  // Regression tests for issue #1947: Mermaid streaming render jitter
+  describe('Streaming Render Stability (issue #1947)', () => {
+    it('should keep stable id across re-renders', async () => {
+      const { rerender } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      const firstCallId = mockRender.mock.calls[0][0];
+
+      // Simulate streaming content change
+      rerender(<Mermaid>{`${mermaidContent}\n  B-->C;`}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledTimes(2);
+      });
+
+      const secondCallId = mockRender.mock.calls[1][0];
+
+      // id should be the same across re-renders
+      expect(secondCallId).toBe(firstCallId);
+    });
+
+    it('should not use uuid++ that changes every render', async () => {
+      const { rerender } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+
+      // Record id from first render
+      const ids: string[] = [mockRender.mock.calls[0][0]];
+
+      // Multiple re-renders simulating streaming
+      for (let i = 0; i < 5; i++) {
+        rerender(<Mermaid>{`${mermaidContent} ${i}`}</Mermaid>);
+        await waitFor(() => {
+          expect(mockRender).toHaveBeenCalled();
+        });
+        const lastCall = mockRender.mock.calls[mockRender.mock.calls.length - 1];
+        ids.push(lastCall[0]);
+      }
+
+      // All ids should be identical
+      const uniqueIds = new Set(ids);
+      expect(uniqueIds.size).toBe(1);
+    });
+
+    it('should have different ids for different component instances', async () => {
+      render(
+        <div>
+          <Mermaid key="1">{mermaidContent}</Mermaid>
+          <Mermaid key="2">{mermaidContent}</Mermaid>
+        </div>,
+      );
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalledTimes(2);
+      });
+
+      const id1 = mockRender.mock.calls[0][0];
+      const id2 = mockRender.mock.calls[1][0];
+
+      // Different instances should have different ids
+      expect(id1).not.toBe(id2);
+    });
+
+    it('should skip render when mermaid syntax is incomplete (streaming)', async () => {
+      // Simulate incomplete syntax during streaming
+      mockParse.mockResolvedValue(false);
+
+      const incompleteCode = 'graph TD; A--' + '>';
+      const { rerender } = render(<Mermaid>{incompleteCode}</Mermaid>);
+
+      // Wait for debounce
+      await waitFor(() => {
+        expect(mockParse).toHaveBeenCalled();
+      });
+
+      // mockRender should NOT be called because syntax is invalid
+      expect(mockRender).not.toHaveBeenCalled();
+
+      // Now syntax becomes complete
+      mockParse.mockResolvedValue(true);
+      const completeCode = 'graph TD; A--' + '>B;';
+      rerender(<Mermaid>{completeCode}</Mermaid>);
+
+      await waitFor(() => {
+        expect(mockRender).toHaveBeenCalled();
+      });
+    });
+
+    it('should cancel pending debounced render on unmount', async () => {
+      const { unmount } = render(<Mermaid>{mermaidContent}</Mermaid>);
+
+      // Unmount before debounce fires
+      expect(() => unmount()).not.toThrow();
     });
   });
 });
