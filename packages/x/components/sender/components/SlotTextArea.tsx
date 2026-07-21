@@ -54,6 +54,8 @@ type FocusOptions = SlotFocusOptions | InputFocusOptions;
 
 type SlotNode = Text | Document | HTMLSpanElement;
 
+const removeZeroWidthCharacters = (value: string) => value.replace(/[\u200B\uFEFF]/g, '');
+
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
     onChange,
@@ -343,7 +345,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     for (let i = 0; i < childNodes.length; i++) {
       const node = childNodes[i];
-      const textValue = getNodeTextValue(node);
+      const nodeTextValue = getNodeTextValue(node);
+      const textValue =
+        node.nodeType === Node.TEXT_NODE ? removeZeroWidthCharacters(nodeTextValue) : nodeTextValue;
       result[resultIndex++] = textValue;
 
       if (node.nodeType === Node.TEXT_NODE) {
@@ -510,11 +514,12 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
     }
 
-    // 处理退格键删除前一个元素
+    // 处理退格键删除前一个元素。非折叠选区应由浏览器删除选中文本，不能回溯删除 slot。
     if (
       operationType === 'backspace' &&
-      ((anchorNode === editableRef.current && focusOffset > 0) ||
-        (anchorNode !== editableRef.current && focusOffset === 0))
+      range?.collapsed &&
+      ((range.startContainer === editableRef.current && range.startOffset > 0) ||
+        (range.startContainer !== editableRef.current && range.startOffset === 0))
     ) {
       const isSlotOrSkill = (node: Node): node is HTMLElement => {
         if (!(node instanceof HTMLElement)) return false;
@@ -522,13 +527,13 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         return !!(nodeInfo?.slotKey || nodeInfo?.skillKey);
       };
       const isEmptyTextNode = (node: Node) =>
-        node.nodeType === Node.TEXT_NODE && !node.textContent?.replace(/[\u200B\uFEFF]/g, '');
+        node.nodeType === Node.TEXT_NODE && !removeZeroWidthCharacters(node.textContent || '');
 
       let previousNode: HTMLElement | null = null;
       let currentNode: Node | null =
-        anchorNode === editableRef.current
-          ? editableRef.current.childNodes[focusOffset - 1] || null
-          : anchorNode.previousSibling;
+        range.startContainer === editableRef.current
+          ? editableRef.current.childNodes[range.startOffset - 1] || null
+          : range.startContainer.previousSibling;
 
       while (currentNode) {
         if (isSlotOrSkill(currentNode)) {

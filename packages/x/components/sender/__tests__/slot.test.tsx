@@ -74,8 +74,8 @@ const errorTypeSlotConfig: any = {
 };
 
 interface MockRange {
-  startContainer: HTMLElement;
-  endContainer: HTMLElement;
+  startContainer: Node;
+  endContainer: Node;
   startOffset: number;
   endOffset: number;
   collapsed: boolean;
@@ -691,6 +691,48 @@ describe('Sender Slot Component', () => {
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
     });
+    it('should not remove a slot for a non-collapsed cross-node selection', () => {
+      const onChange = jest.fn();
+      const ref = createRef<SenderRef>();
+      render(
+        <Sender
+          ref={ref}
+          slotConfig={[tagSlotConfig, { type: 'text', value: 'ab' }]}
+          onChange={onChange}
+        />,
+      );
+
+      const dom = ref.current?.inputElement as HTMLElement;
+      const textNode = Array.from(dom.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent === 'ab',
+      );
+      expect(textNode).toBeTruthy();
+      onChange.mockClear();
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        anchorNode: dom,
+        anchorOffset: 1,
+        focusNode: textNode,
+        focusOffset: 1,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+      const customRangeMock = createMockRange({
+        startContainer: dom,
+        startOffset: 1,
+        endContainer: textNode as Node,
+        endOffset: 1,
+        collapsed: false,
+        toString: jest.fn(() => 'a'),
+      });
+
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+
+      expect(onChange).not.toHaveBeenCalled();
+      expect(dom.querySelector(`[data-slot-key="${tagSlotConfig.key}"]`)).toBeInTheDocument();
+    });
     it('should remove previous slot when invisible text nodes exist before cursor', () => {
       const onChange = jest.fn();
       const slotConfig: SlotConfigType[] = [
@@ -723,15 +765,27 @@ describe('Sender Slot Component', () => {
         removeAllRanges: jest.fn(),
         addRange: jest.fn(),
       };
-      const customRangeMock = createMockRange();
+      const customRangeMock = createMockRange({
+        startContainer: dom,
+        startOffset: dom.childNodes.length,
+        endContainer: dom,
+        endOffset: dom.childNodes.length,
+        collapsed: true,
+      });
 
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
 
       expect(onChange).toHaveBeenCalled();
       const lastChange = onChange.mock.calls[onChange.mock.calls.length - 1];
+      expect(lastChange[0]).not.toMatch(/[\u200B\uFEFF]/);
       expect(lastChange[2].map((item: SlotConfigType) => item.key)).toEqual(['assistant1']);
+      expect(lastChange[2].filter((item: SlotConfigType) => item.type === 'text')).toEqual([]);
       expect(dom.querySelector('[data-slot-key="assistant2"]')).not.toBeInTheDocument();
+
+      const currentValue = ref.current?.getValue();
+      expect(currentValue?.value).not.toMatch(/[\u200B\uFEFF]/);
+      expect(currentValue?.slotConfig.filter((item) => item.type === 'text')).toEqual([]);
     });
     it('should remove previous slot from text node cursor after invisible text nodes', () => {
       const onChange = jest.fn();
@@ -762,7 +816,13 @@ describe('Sender Slot Component', () => {
         removeAllRanges: jest.fn(),
         addRange: jest.fn(),
       };
-      const customRangeMock = createMockRange();
+      const customRangeMock = createMockRange({
+        startContainer: cursorTextNode,
+        startOffset: 0,
+        endContainer: cursorTextNode,
+        endOffset: 0,
+        collapsed: true,
+      });
 
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
@@ -796,7 +856,13 @@ describe('Sender Slot Component', () => {
         removeAllRanges: jest.fn(),
         addRange: jest.fn(),
       };
-      const customRangeMock = createMockRange();
+      const customRangeMock = createMockRange({
+        startContainer: dom,
+        startOffset: dom.childNodes.length,
+        endContainer: dom,
+        endOffset: dom.childNodes.length,
+        collapsed: true,
+      });
 
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
@@ -834,7 +900,13 @@ describe('Sender Slot Component', () => {
         removeAllRanges: jest.fn(),
         addRange: jest.fn(),
       };
-      const customRangeMock = createMockRange();
+      const customRangeMock = createMockRange({
+        startContainer: dom,
+        startOffset: dom.childNodes.length,
+        endContainer: dom,
+        endOffset: dom.childNodes.length,
+        collapsed: true,
+      });
 
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
