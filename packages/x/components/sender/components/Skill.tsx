@@ -6,7 +6,7 @@ import type { SkillType } from '../interface';
 
 interface ClosableConfig {
   closeIcon?: React.ReactNode;
-  onClose?: React.MouseEventHandler<HTMLDivElement>;
+  onClose?: (event: React.SyntheticEvent<HTMLDivElement>) => void;
   disabled?: boolean;
 }
 
