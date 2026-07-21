@@ -80,6 +80,12 @@ interface StreamingOption {
       string
     >
   >;
+  /**
+   * @description 是否在自定义组件内部也启用文字淡入动画
+   * @description Whether to enable text fade-in animation inside custom components
+   * @default false
+   */
+  animateInsideComponents?: boolean;
 }
 
 type StreamStatus = 'loading' | 'done';
