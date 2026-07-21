@@ -22,11 +22,17 @@ tag: vVERSION
 
 ### @ant-design/x
 
+- 🆕 Think and ThoughtChain add a `destroyOnHidden` prop to automatically destroy the DOM node when content is hidden. [#1985](https://github.com/ant-design/x/pull/1985) by [wryyyds7](https://github.com/wryyyds7)
 - 🐛 Fix Sender still showing the outer outline on focus in `borderless` mode. [#1963](https://github.com/ant-design/x/pull/1963) by [QDyanbing](https://github.com/QDyanbing)
+- 🐛 Fix Sender `content` type slots bypassing `formatResult`; all slot types (including `content`) now honor `formatResult` uniformly, with the DOM text used as the input value for `content` slots. [#1986](https://github.com/ant-design/x/pull/1986) by [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb)
 
 ### @ant-design/x-markdown
 
 - 🐛 Fix XMarkdown performing an O(N²) code-block scan during streaming that froze the page on long content. [#1972](https://github.com/ant-design/x/pull/1972) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-sdk
+
+- 🐛 Fix XStream not releasing the reader lock or canceling the underlying stream on early exit (loop break / incomplete read), avoiding resource leaks and dangling read requests. [#1970](https://github.com/ant-design/x/pull/1970) by [Mickey](https://github.com/Mickey)
 
 ### Others
 

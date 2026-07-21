@@ -21,11 +21,17 @@ tag: vVERSION
 
 ### @ant-design/x
 
+- 🆕 Think、ThoughtChain 新增 `destroyOnHidden` 属性,支持在内容隐藏时自动销毁 DOM 节点。[#1985](https://github.com/ant-design/x/pull/1985) 由 [wryyyds7](https://github.com/wryyyds7) 提交
 - 🐛 修复 Sender 在 `borderless` 模式下聚焦时仍显示外层 outline 的问题。[#1963](https://github.com/ant-design/x/pull/1963) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+- 🐛 修复 Sender `content` 类型词槽未走 `formatResult` 格式化的问题,现在所有词槽类型(含 `content`)统一生效,`content` 词槽以 DOM 文本作为输入值。[#1986](https://github.com/ant-design/x/pull/1986) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
 
 ### @ant-design/x-markdown
 
 - 🐛 修复 XMarkdown 流式渲染时对代码块进行 O(N²) 扫描,导致长内容下页面卡顿甚至冻结的问题。[#1972](https://github.com/ant-design/x/pull/1972) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-sdk
+
+- 🐛 修复 XStream 提前退出(loop 中断 / 读取未完成)时未释放 reader 锁、未取消底层 stream 的问题,避免资源泄露与悬挂的读取请求。[#1970](https://github.com/ant-design/x/pull/1970) 由 [Mickey](https://github.com/Mickey) 提交
 
 ### 其他
 
