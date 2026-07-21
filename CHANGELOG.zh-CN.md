@@ -15,6 +15,23 @@ tag: vVERSION
 
 ---
 
+## 2.9.0
+
+`2026-07-21`
+
+### @ant-design/x
+
+- 🐛 修复 Sender 在 `borderless` 模式下聚焦时仍显示外层 outline 的问题。[#1963](https://github.com/ant-design/x/pull/1963) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+
+### @ant-design/x-markdown
+
+- 🐛 修复 XMarkdown 流式渲染时对代码块进行 O(N²) 扫描,导致长内容下页面卡顿甚至冻结的问题。[#1972](https://github.com/ant-design/x/pull/1972) 由 [Div627](https://github.com/Div627) 提交
+
+### 其他
+
+- 📖 FAQ 文档新增为 Vue 用户推荐 Antdv Next X 的说明。[#1966](https://github.com/ant-design/x/pull/1966) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+- 🛠 站点组件总览(Component Overview)搜索框隐藏聚焦 outline。[#1987](https://github.com/ant-design/x/pull/1987) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+
 ## 2.8.1
 
 `2026-06-30`

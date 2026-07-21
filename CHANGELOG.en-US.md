@@ -16,6 +16,23 @@ tag: vVERSION
 
 ---
 
+## 2.9.0
+
+`2026-07-21`
+
+### @ant-design/x
+
+- 🐛 Fix Sender still showing the outer outline on focus in `borderless` mode. [#1963](https://github.com/ant-design/x/pull/1963) by [QDyanbing](https://github.com/QDyanbing)
+
+### @ant-design/x-markdown
+
+- 🐛 Fix XMarkdown performing an O(N²) code-block scan during streaming that froze the page on long content. [#1972](https://github.com/ant-design/x/pull/1972) by [Div627](https://github.com/Div627)
+
+### Others
+
+- 📖 Add a note in the FAQ recommending Antdv Next X for Vue users. [#1966](https://github.com/ant-design/x/pull/1966) by [QDyanbing](https://github.com/QDyanbing)
+- 🛠 Hide the focus outline on the Component Overview search box. [#1987](https://github.com/ant-design/x/pull/1987) by [QDyanbing](https://github.com/QDyanbing)
+
 ## 2.8.1
 
 `2026-06-30`
