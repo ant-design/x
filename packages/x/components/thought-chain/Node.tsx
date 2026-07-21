@@ -46,7 +46,18 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
 
   const { direction } = useXProviderContext();
 
-  const { collapsible, key = id, icon, blink, title, content, footer, status, description } = info;
+  const {
+    collapsible,
+    key = id,
+    icon,
+    blink,
+    title,
+    content,
+    footer,
+    status,
+    description,
+    destroyOnHidden = true,
+  } = info;
 
   // ============================ Style ============================
   const nodeCls = `${prefixCls}-node`;
@@ -101,7 +112,11 @@ const ThoughtChainNode: React.FC<ThoughtChainNodeProps> = (props) => {
         </div>
         {/* Content */}
         {content && (
-          <CSSMotion {...collapseMotion} visible={collapsible ? contentOpen : true}>
+          <CSSMotion
+            {...collapseMotion}
+            visible={collapsible ? contentOpen : true}
+            removeOnLeave={destroyOnHidden}
+          >
             {({ className: motionClassName, style }, motionRef) => (
               <div
                 className={clsx(`${nodeCls}-content`, motionClassName)}

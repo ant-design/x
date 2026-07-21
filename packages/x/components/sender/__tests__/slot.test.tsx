@@ -61,6 +61,13 @@ const customSlotConfig: SlotConfigType = {
   formatResult: (v: any) => `[${v}]`,
 };
 
+const contentSlotConfigWithFormat: SlotConfigType = {
+  type: 'content',
+  key: 'content_fmt',
+  props: { defaultValue: 'Content Value', placeholder: 'Enter content' },
+  formatResult: (v: any) => `[formatted:${v}]`,
+};
+
 const errorTypeSlotConfig: any = {
   type: 'error',
   key: 'error1',
@@ -822,6 +829,38 @@ describe('Sender Slot Component', () => {
           setData: jest.fn(),
         },
       });
+    });
+  });
+  describe('content slot formatResult', () => {
+    it('should apply formatResult to content slot value in getValue()', () => {
+      const ref = createRef<SenderRef>();
+      render(
+        <Sender
+          ref={ref}
+          slotConfig={[
+            contentSlotConfigWithFormat,
+            { type: 'text', value: ' ' },
+            {
+              type: 'input',
+              key: 'input_fmt',
+              props: { defaultValue: 'InputVal' },
+              formatResult: (v: any) => `[formatted:${v}]`,
+            },
+          ]}
+        />,
+      );
+      const fullValue = ref.current?.getValue();
+      // Both content and input slots should go through formatResult
+      expect(fullValue?.value).toContain('[formatted:Content Value]');
+      expect(fullValue?.value).toContain('[formatted:InputVal]');
+    });
+
+    it('should return raw value when content slot has no formatResult', () => {
+      const ref = createRef<SenderRef>();
+      render(<Sender ref={ref} slotConfig={[contentSlotConfigWithValue]} />);
+      const fullValue = ref.current?.getValue();
+      expect(fullValue?.value).toContain('Content Value');
+      expect(fullValue?.value).not.toContain('[formatted:');
     });
   });
 });

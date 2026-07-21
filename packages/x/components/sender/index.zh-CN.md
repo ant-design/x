@@ -21,6 +21,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/basic.tsx">基本用法</code>
 <code src="./demo/switch.tsx">功能开关</code>
 <code src="./demo/slot-filling.tsx">词槽模式</code>
+<code src="./demo/slot-format-result.tsx">词槽格式化</code>
 <code src="./demo/ref-action.tsx">实例方法</code>
 <code src="./demo/submitType.tsx">提交方式</code>
 <code src="./demo/speech.tsx">语音输入</code>
@@ -123,7 +124,7 @@ type ActionsComponents = {
 | --- | --- | --- | --- | --- |
 | type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | 唯一标识，type 为 text 时可省略 | string | - | - |
-| formatResult | 格式化最终结果 | (value: any) => string | - | 2.0.0 |
+| formatResult | 格式化最终结果，对所有词槽类型（含 `content`）生效 | (value: any) => string | - | 2.0.0 |
 
 ##### text 节点属性
 
