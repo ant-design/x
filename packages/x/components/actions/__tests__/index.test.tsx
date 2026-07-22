@@ -5,13 +5,15 @@ import { fireEvent, render } from '../../../tests/utils';
 import { findItem } from '../ActionsMenu';
 import Actions from '../index';
 
+jest.mock('../../_util/hooks/use-mobile', () => jest.fn(() => false));
+
 jest.mock('antd', () => {
   const antd = jest.requireActual('antd');
 
   return {
     ...antd,
     Tooltip: ({ children, placement, title }: any) =>
-      title ? (
+      title != null ? (
         <span data-tooltip-placement={placement} data-tooltip-title={title}>
           {children}
         </span>

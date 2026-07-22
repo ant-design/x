@@ -1,6 +1,9 @@
 import React from 'react';
 import { render } from '../../../tests/utils';
+import useMobile from '../../_util/hooks/use-mobile';
 import ActionsItem from '../ActionsItem';
+
+jest.mock('../../_util/hooks/use-mobile', () => jest.fn(() => false));
 
 jest.mock('antd', () => {
   const antd = jest.requireActual('antd');
@@ -8,7 +11,7 @@ jest.mock('antd', () => {
   return {
     ...antd,
     Tooltip: ({ children, placement, title }: any) =>
-      title ? (
+      title != null ? (
         <span data-tooltip-placement={placement} data-tooltip-title={title}>
           {children}
         </span>
@@ -63,6 +66,17 @@ describe('Actions.Item', () => {
     );
 
     expect(getByText('default-icon').closest('[data-tooltip-title]')).not.toBeInTheDocument();
+  });
+
+  it('does not render tooltip on mobile', () => {
+    (useMobile as jest.Mock).mockReturnValue(true);
+
+    const { getByText } = render(
+      <ActionsItem defaultIcon="default-icon" label="Default Tooltip" />,
+    );
+
+    expect(getByText('default-icon').closest('[data-tooltip-title]')).not.toBeInTheDocument();
+    (useMobile as jest.Mock).mockReturnValue(false);
   });
 
   it('does not render empty tooltip when title is empty', () => {
