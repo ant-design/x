@@ -543,7 +543,11 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         if (!isEmptyTextNode(currentNode)) {
           break;
         }
-        currentNode = currentNode.previousSibling;
+
+        // Remove editor-only zero-width placeholders before serializing the value.
+        const previousSibling = currentNode.previousSibling;
+        currentNode.remove();
+        currentNode = previousSibling;
       }
 
       if (previousNode) {

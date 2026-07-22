@@ -219,6 +219,20 @@ describe('Sender Slot Component', () => {
     fireEvent.click(customBtn);
     expect(customBtn.textContent).toBe('Custom Value Change');
   });
+  it('should keep an editable caret node after slot initialization', () => {
+    const ref = createRef<SenderRef>();
+    render(
+      <Sender
+        ref={ref}
+        slotConfig={[tagSlotConfig]}
+        skill={{ value: 'travel_skill', title: 'Travel Planner' }}
+      />,
+    );
+
+    const input = ref.current?.inputElement as HTMLElement;
+    expect(input.lastChild?.nodeType).toBe(Node.TEXT_NODE);
+    expect(input.lastChild?.textContent).toBe('');
+  });
   it('should expose ref methods correctly', () => {
     const ref = createRef<SenderRef>();
     const slotConfig = [
@@ -782,6 +796,7 @@ describe('Sender Slot Component', () => {
       expect(lastChange[2].map((item: SlotConfigType) => item.key)).toEqual(['assistant1']);
       expect(lastChange[2].filter((item: SlotConfigType) => item.type === 'text')).toEqual([]);
       expect(dom.querySelector('[data-slot-key="assistant2"]')).not.toBeInTheDocument();
+      expect(dom.textContent).not.toMatch(/[\u200B\uFEFF]/);
 
       const currentValue = ref.current?.getValue();
       expect(currentValue?.value).not.toMatch(/[\u200B\uFEFF]/);
