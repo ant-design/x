@@ -20,6 +20,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 <code src="./demo/basic.tsx">Basic Usage</code>
 <code src="./demo/switch.tsx">Feature Toggle</code>
 <code src="./demo/slot-filling.tsx">Slot Mode</code>
+<code src="./demo/slot-format-result.tsx">Slot Format Result</code>
 <code src="./demo/ref-action.tsx">Instance Methods</code>
 <code src="./demo/submitType.tsx">Submit Methods</code>
 <code src="./demo/speech.tsx">Voice Input</code>
@@ -120,7 +121,7 @@ type ActionsComponents = {
 | --- | --- | --- | --- | --- |
 | type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | Unique identifier, can be omitted when type is text | string | - | - |
-| formatResult | Format the final result | (value: any) => string | - | 2.0.0 |
+| formatResult | Format the final result, applies to all slot types (including `content`) | (value: any) => string | - | 2.0.0 |
 
 ##### text node properties
 
