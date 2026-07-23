@@ -256,7 +256,7 @@ const App: React.FC = () => {
         key: `${item.key}_${Date.now()}`,
         props: {
           label: (
-            <Flex gap="small">
+            <Flex style={{ display: 'inline-flex' }} gap="small">
               {icon}
               {label}
             </Flex>
