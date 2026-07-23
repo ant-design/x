@@ -10,14 +10,17 @@ jest.mock('antd', () => {
 
   return {
     ...antd,
-    Tooltip: ({ children, placement, title }: any) =>
-      title != null ? (
-        <span data-tooltip-placement={placement} data-tooltip-title={title}>
+    Tooltip: ({ children, placement, title, overlay }: any) => {
+      const content = title ?? overlay;
+
+      return content != null ? (
+        <span data-tooltip-placement={placement} data-tooltip-title={content}>
           {children}
         </span>
       ) : (
         <>{children}</>
-      ),
+      );
+    },
   };
 });
 
@@ -49,6 +52,21 @@ describe('Actions.Item', () => {
 
     const tooltip = getByText('default-icon').closest(
       '[data-tooltip-title="Custom Tooltip Props"]',
+    );
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip).toHaveAttribute('data-tooltip-placement', 'bottom');
+  });
+
+  it('supports custom tooltip overlay', () => {
+    const { getByText } = render(
+      <ActionsItem
+        defaultIcon="default-icon"
+        tooltip={{ overlay: 'Custom Tooltip Overlay', placement: 'bottom' }}
+      />,
+    );
+
+    const tooltip = getByText('default-icon').closest(
+      '[data-tooltip-title="Custom Tooltip Overlay"]',
     );
     expect(tooltip).toBeInTheDocument();
     expect(tooltip).toHaveAttribute('data-tooltip-placement', 'bottom');

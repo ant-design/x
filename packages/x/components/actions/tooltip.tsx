@@ -20,7 +20,7 @@ export function renderWithTooltip(
 
   const tooltipProps = isTooltipProps(tooltip) ? tooltip : { title: tooltip ?? label };
 
-  if (tooltipProps.title == null) {
+  if (tooltipProps.title == null && tooltipProps.overlay == null) {
     return node;
   }
 
