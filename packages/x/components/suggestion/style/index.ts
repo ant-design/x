@@ -14,6 +14,8 @@ const genSuggestionStyle: GenerateStyle<SuggestionToken> = (token) => {
     [componentCls]: {
       [`${antCls}-cascader-menus ${antCls}-cascader-menu`]: {
         height: 'auto',
+        maxHeight: '256px',
+        overflowY: 'auto',
       },
 
       [`${componentCls}-item`]: {
