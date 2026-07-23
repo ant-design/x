@@ -23,6 +23,7 @@ tag: 2.0.0
 <code src="./demo/simple.tsx">Simple ThoughtChain</code>
 <code src="./demo/collapsible.tsx" background="grey">Collapsible</code>
 <code src="./demo/controlled-collapsible" background="grey">Controlled Collapsible</code>
+<code src="./demo/destroyOnHidden.tsx" background="grey">Destroy On Hidden</code>
 <code src="./demo/customization.tsx" background="grey">Customization</code>
 <code src="./demo/nested.tsx" background="grey">Nested Usage</code>
 <code src="./demo/single-row.tsx" background="grey">Single Row</code>
@@ -58,6 +59,7 @@ Reference: [Common API](/docs/react/common-props)
 | title | Title of the thought node | React.ReactNode | - | - |
 | collapsible | Whether the thought node is collapsible | boolean | false | - |
 | blink | Blink mode | boolean | - | - |
+| destroyOnHidden | Whether to destroy content node when hidden | boolean | true | - |
 
 ### ThoughtChain.Item
 

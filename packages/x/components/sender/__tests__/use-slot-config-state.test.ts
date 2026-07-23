@@ -122,4 +122,64 @@ describe('useSlotConfigState', () => {
     rerender({ slotConfig: [] });
     expect(result.current[0].get('x')).toBeDefined();
   });
+
+  describe('getNodeTextValue – content type with formatResult', () => {
+    it('applies formatResult to content slot value', () => {
+      const contentConfig: SlotConfigType = {
+        type: 'content',
+        key: 'c1',
+        props: { defaultValue: 'hello' },
+        formatResult: (v: any) => `[${v}]`,
+      };
+      const { result } = renderHook(({ slotConfig }) => useSlotConfigState(slotConfig), {
+        initialProps: { slotConfig: [contentConfig] },
+      });
+
+      // Build a DOM element that mimics a content slot span
+      const span = document.createElement('span');
+      span.dataset.slotKey = 'c1';
+      span.innerText = 'hello';
+
+      const { getNodeTextValue } = result.current[1];
+      expect(getNodeTextValue(span)).toBe('[hello]');
+    });
+
+    it('returns raw textContent when content slot has no formatResult', () => {
+      const contentConfig: SlotConfigType = {
+        type: 'content',
+        key: 'c2',
+        props: { defaultValue: 'plain' },
+      };
+      const { result } = renderHook(({ slotConfig }) => useSlotConfigState(slotConfig), {
+        initialProps: { slotConfig: [contentConfig] },
+      });
+
+      const span = document.createElement('span');
+      span.dataset.slotKey = 'c2';
+      span.innerText = 'plain';
+
+      const { getNodeTextValue } = result.current[1];
+      expect(getNodeTextValue(span)).toBe('plain');
+    });
+
+    it('uses DOM textContent (not state) as the value for content type', () => {
+      const contentConfig: SlotConfigType = {
+        type: 'content',
+        key: 'c3',
+        props: { defaultValue: 'initial' },
+        formatResult: (v: any) => `<${v}>`,
+      };
+      const { result } = renderHook(({ slotConfig }) => useSlotConfigState(slotConfig), {
+        initialProps: { slotConfig: [contentConfig] },
+      });
+
+      // User edits the contenteditable area — DOM text differs from state
+      const span = document.createElement('span');
+      span.dataset.slotKey = 'c3';
+      span.innerText = 'user-edited';
+
+      const { getNodeTextValue } = result.current[1];
+      expect(getNodeTextValue(span)).toBe('<user-edited>');
+    });
+  });
 });
