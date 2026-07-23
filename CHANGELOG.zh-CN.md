@@ -24,6 +24,8 @@ tag: vVERSION
 - 🆕 Think、ThoughtChain 新增 `destroyOnHidden` 属性,支持在内容隐藏时自动销毁 DOM 节点。[#1985](https://github.com/ant-design/x/pull/1985) 由 [wryyyds7](https://github.com/wryyyds7) 提交
 - 🐛 修复 Sender 在 `borderless` 模式下聚焦时仍显示外层 outline 的问题。[#1963](https://github.com/ant-design/x/pull/1963) 由 [QDyanbing](https://github.com/QDyanbing) 提交
 - 🐛 修复 Sender `content` 类型词槽未走 `formatResult` 格式化的问题,现在所有词槽类型(含 `content`)统一生效,`content` 词槽以 DOM 文本作为输入值。[#1986](https://github.com/ant-design/x/pull/1986) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
+- 🐛 修复 Suggestion 选项过多时弹层无法滚动的问题,弹层在内容超出最大高度(256px)时支持内部滚动(`overflow-y: auto`)。[#1983](https://github.com/ant-design/x/pull/1983) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
+- 🐛 修复 Sender 在 `agent` 模式下 agent 标签(label)换行展示的问题,改为 inline 渲染。[#1990](https://github.com/ant-design/x/pull/1990) 由 [cc-hearts](https://github.com/cc-hearts) 提交
 
 ### @ant-design/x-markdown
 
@@ -31,11 +33,16 @@ tag: vVERSION
 
 ### @ant-design/x-sdk
 
-- 🐛 修复 XStream 提前退出(loop 中断 / 读取未完成)时未释放 reader 锁、未取消底层 stream 的问题,避免资源泄露与悬挂的读取请求。[#1970](https://github.com/ant-design/x/pull/1970) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 XStream 提前退出(loop 中断 / 读取未完成)时未释放 reader 锁、未取消底层 stream 的问题，避免资源泄露与悬挂的读取请求。[#1970](https://github.com/ant-design/x/pull/1970) 由 [Mickey](https://github.com/Mickey) 提交
+
+### @ant-design/x-skill
+
+- 🐛 修复 x-skill 中 ora spinner(loader) 在 CJS 环境下的加载问题,缓存 loader 实例并改为动态 `import`,避免重复加载与初始化报错。[#1980](https://github.com/ant-design/x/pull/1980) 由 [jay666mnj](https://github.com/jay666mnj) 提交
 
 ### 其他
 
 - 📖 FAQ 文档新增为 Vue 用户推荐 Antdv Next X 的说明。[#1966](https://github.com/ant-design/x/pull/1966) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+- 📖 统一中文站点下语义化 DOM 的标题文案。[#1877](https://github.com/ant-design/x/pull/1877) 由 [Rain120](https://github.com/Rain120) 提交
 - 🛠 站点组件总览(Component Overview)搜索框隐藏聚焦 outline。[#1987](https://github.com/ant-design/x/pull/1987) 由 [QDyanbing](https://github.com/QDyanbing) 提交
 
 ## 2.8.1

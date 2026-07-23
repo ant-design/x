@@ -25,6 +25,8 @@ tag: vVERSION
 - 🆕 Think and ThoughtChain add a `destroyOnHidden` prop to automatically destroy the DOM node when content is hidden. [#1985](https://github.com/ant-design/x/pull/1985) by [wryyyds7](https://github.com/wryyyds7)
 - 🐛 Fix Sender still showing the outer outline on focus in `borderless` mode. [#1963](https://github.com/ant-design/x/pull/1963) by [QDyanbing](https://github.com/QDyanbing)
 - 🐛 Fix Sender `content` type slots bypassing `formatResult`; all slot types (including `content`) now honor `formatResult` uniformly, with the DOM text used as the input value for `content` slots. [#1986](https://github.com/ant-design/x/pull/1986) by [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb)
+- 🐛 Fix Suggestion popup not scrolling when there are many options; the popup now scrolls internally (`overflow-y: auto`) once content exceeds the max height (256px). [#1983](https://github.com/ant-design/x/pull/1983) by [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb)
+- 🐛 Fix Sender agent tag label wrapping in `agent` mode; it now renders inline. [#1990](https://github.com/ant-design/x/pull/1990) by [cc-hearts](https://github.com/cc-hearts)
 
 ### @ant-design/x-markdown
 
@@ -34,9 +36,14 @@ tag: vVERSION
 
 - 🐛 Fix XStream not releasing the reader lock or canceling the underlying stream on early exit (loop break / incomplete read), avoiding resource leaks and dangling read requests. [#1970](https://github.com/ant-design/x/pull/1970) by [Mickey](https://github.com/Mickey)
 
+### @ant-design/x-skill
+
+- 🐛 Fix the x-skill ora spinner (loader) failing to load in CJS environments; the loader instance is now cached and loaded via dynamic `import`, avoiding duplicate loads and initialization errors. [#1980](https://github.com/ant-design/x/pull/1980) by [jay666mnj](https://github.com/jay666mnj)
+
 ### Others
 
 - 📖 Add a note in the FAQ recommending Antdv Next X for Vue users. [#1966](https://github.com/ant-design/x/pull/1966) by [QDyanbing](https://github.com/QDyanbing)
+- 📖 Unify the semantic DOM heading wording on the Chinese site. [#1877](https://github.com/ant-design/x/pull/1877) by [Rain120](https://github.com/Rain120)
 - 🛠 Hide the focus outline on the Component Overview search box. [#1987](https://github.com/ant-design/x/pull/1987) by [QDyanbing](https://github.com/QDyanbing)
 
 ## 2.8.1
