@@ -29,6 +29,13 @@ const contentSlotConfigWithValue: SlotConfigType = {
   props: { defaultValue: 'Content Value', placeholder: 'Enter content 2' },
 };
 
+const contentSlotConfigWithFormatResult: SlotConfigType = {
+  type: 'content',
+  key: 'content-format',
+  props: { defaultValue: 'Content Value', placeholder: 'Enter content' },
+  formatResult: (value: any) => `<${value}>`,
+};
+
 const selectSlotConfig: SlotConfigType = {
   type: 'select',
   key: 'select1',
@@ -280,6 +287,14 @@ describe('Sender Slot Component', () => {
     expect(clearedValue?.value).toBe('');
     expect(clearedValue?.slotConfig).toEqual([]);
     expect(clearedValue?.skill).toBe(undefined);
+  });
+  it('should apply formatResult for content slot value', () => {
+    const ref = createRef<SenderRef>();
+    render(<Sender slotConfig={[contentSlotConfigWithFormatResult]} ref={ref} />);
+
+    const fullValue = ref.current?.getValue();
+    expect(fullValue?.value).toBe('<Content Value>');
+    expect(fullValue?.slotConfig[0].value).toBe('<Content Value>');
   });
   describe('ref insert can be used', () => {
     it('should insert slots default selection range', () => {
