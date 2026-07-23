@@ -401,7 +401,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     slotDomMap?.current?.clear();
   };
 
-  const appendNodeList = (slotNodeList: HTMLElement[]) => {
+  const appendNodeList = (slotNodeList: SlotNode[]) => {
     slotNodeList.forEach((element) => {
       editableRef.current?.appendChild(element);
     });
@@ -473,7 +473,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const initRenderSlot = () => {
     if (slotConfig && slotConfig.length > 0 && editableRef.current) {
       initClear();
-      appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
+      appendNodeList([...getSlotListNode(slotConfig), document.createTextNode('')]);
     }
   };
 
@@ -530,7 +530,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
         node.nodeType === Node.TEXT_NODE && !removeZeroWidthCharacters(node.textContent || '');
 
       let previousNode: HTMLElement | null = null;
-      let currentNode: Node | null =
+      let currentNode: ChildNode | null =
         range.startContainer === editableRef.current
           ? editableRef.current.childNodes[range.startOffset - 1] || null
           : range.startContainer.previousSibling;
