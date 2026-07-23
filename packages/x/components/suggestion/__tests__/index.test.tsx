@@ -147,4 +147,23 @@ describe('Suggestion Component', () => {
       expect(onOpenChange).toHaveBeenCalledWith(false);
     });
   });
+
+  it('should support 20+ items with scroll', () => {
+    const items = Array.from({ length: 25 }, (_, i) => ({
+      label: `Option ${i + 1}`,
+      value: `option-${i + 1}`,
+    }));
+    const { container } = render(<MockSuggestion items={items} />);
+
+    fireEvent.keyDown(container.querySelector('input')!, { key: '/' });
+
+    // All 25 items should be rendered in DOM
+    for (let i = 1; i <= 25; i++) {
+      expect(screen.getByText(`Option ${i}`)).toBeInTheDocument();
+    }
+
+    // The cascader menu should exist for scroll support
+    const menu = document.querySelector('.ant-cascader-menu');
+    expect(menu).toBeTruthy();
+  });
 });
