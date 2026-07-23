@@ -145,6 +145,7 @@ const genSlotTextAreaStyle: GenerateStyle<SenderToken> = (token) => {
         justifyContent: 'center',
       },
       [slotTagCls]: {
+        display: 'inline-flex',
         background: token.colorBgSlot,
         border: `1px solid ${token.colorBorderSlot}`,
         outline: 'none',
