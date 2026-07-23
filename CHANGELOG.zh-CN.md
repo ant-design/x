@@ -21,7 +21,14 @@ tag: vVERSION
 
 ### @ant-design/x
 
+- 🆕 新增 `useMobile` Hook,提供 SSR 安全的移动端设备检测能力。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
 - 🆕 Think、ThoughtChain 新增 `destroyOnHidden` 属性,支持在内容隐藏时自动销毁 DOM 节点。[#1985](https://github.com/ant-design/x/pull/1985) 由 [wryyyds7](https://github.com/wryyyds7) 提交
+- 💄 Actions 的反馈(Feedback)在移动端不再展示 Tooltip,避免移动设备上的交互干扰。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 💄 Conversations 在移动端常驻显示菜单图标(移动端无 hover 态)。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 优化 Actions、Conversations 等组件在移动端的点击响应,通过 `touch-action: manipulation` 消除 300ms 点击延迟。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sources 的 CarouselCard 在受控 `activeKey` 切换时轮播索引不同步的问题,左右切换按钮改用 `goTo` 精确跳转并修复边界点击无效的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sender 语音输入(useSpeech)在组件卸载后未清理 SpeechRecognition,导致对已卸载组件进行状态更新的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 CodeHighlighter 异步加载语言后未调用 `registerLanguage` 导致语法高亮不生效的问题,并修复代码块横向滚动时背景色未撑满的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
 - 🐛 修复 Sender 在 `borderless` 模式下聚焦时仍显示外层 outline 的问题。[#1963](https://github.com/ant-design/x/pull/1963) 由 [QDyanbing](https://github.com/QDyanbing) 提交
 - 🐛 修复 Sender `content` 类型词槽未走 `formatResult` 格式化的问题,现在所有词槽类型(含 `content`)统一生效,`content` 词槽以 DOM 文本作为输入值。[#1986](https://github.com/ant-design/x/pull/1986) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
 - 🐛 修复 Suggestion 选项过多时弹层无法滚动的问题,弹层在内容超出最大高度(256px)时支持内部滚动(`overflow-y: auto`)。[#1983](https://github.com/ant-design/x/pull/1983) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
@@ -41,27 +48,10 @@ tag: vVERSION
 
 ### 其他
 
+- 📖 优化站点页面标题拼接逻辑,subtitle 与 title 之间以空格分隔,避免标题文案粘连。[#1959](https://github.com/ant-design/x/pull/1959) 由 [Mickey](https://github.com/Mickey) 提交
 - 📖 FAQ 文档新增为 Vue 用户推荐 Antdv Next X 的说明。[#1966](https://github.com/ant-design/x/pull/1966) 由 [QDyanbing](https://github.com/QDyanbing) 提交
 - 📖 统一中文站点下语义化 DOM 的标题文案。[#1877](https://github.com/ant-design/x/pull/1877) 由 [Rain120](https://github.com/Rain120) 提交
 - 🛠 站点组件总览(Component Overview)搜索框隐藏聚焦 outline。[#1987](https://github.com/ant-design/x/pull/1987) 由 [QDyanbing](https://github.com/QDyanbing) 提交
-
-## 2.8.1
-
-`2026-06-30`
-
-### @ant-design/x
-
-- 🆕 新增 `useMobile` Hook,提供 SSR 安全的移动端设备检测能力。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-- 💄 Actions 的反馈(Feedback)在移动端不再展示 Tooltip,避免移动设备上的交互干扰。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-- 💄 Conversations 在移动端常驻显示菜单图标(移动端无 hover 态)。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-- 🐛 优化 Actions、Conversations 等组件在移动端的点击响应,通过 `touch-action: manipulation` 消除 300ms 点击延迟。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-- 🐛 修复 Sources 的 CarouselCard 在受控 `activeKey` 切换时轮播索引不同步的问题,左右切换按钮改用 `goTo` 精确跳转并修复边界点击无效的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-- 🐛 修复 Sender 语音输入(useSpeech)在组件卸载后未清理 SpeechRecognition,导致对已卸载组件进行状态更新的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-- 🐛 修复 CodeHighlighter 异步加载语言后未调用 `registerLanguage` 导致语法高亮不生效的问题,并修复代码块横向滚动时背景色未撑满的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
-
-### 其他
-
-- 📖 优化站点页面标题拼接逻辑,subtitle 与 title 之间以空格分隔,避免标题文案粘连。[#1959](https://github.com/ant-design/x/pull/1959) 由 [Mickey](https://github.com/Mickey) 提交
 
 ## 2.8.0
 
