@@ -9,6 +9,7 @@ import { detectUnclosedComponentTags, getTagInstanceId } from './detectUnclosedC
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
+  componentsProps?: XMarkdownProps['componentsProps'];
   dompurifyConfig?: DOMPurifyConfig;
   streaming?: XMarkdownProps['streaming'];
 }
@@ -199,10 +200,11 @@ class Renderer {
         const props: ComponentProps = {
           domNode,
           streamStatus,
-          key,
           ...attribs,
           ...(attribs.disabled !== undefined && { disabled: true }),
           ...(attribs.checked !== undefined && { checked: true }),
+          ...this.options.componentsProps?.[name],
+          key,
         };
 
         // Handle class and className merging

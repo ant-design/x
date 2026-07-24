@@ -12,6 +12,7 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     streaming,
     config,
     components,
+    componentsProps,
     paragraphTag,
     content,
     children,
@@ -91,10 +92,11 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     () =>
       new Renderer({
         components: mergedComponents,
+        componentsProps,
         dompurifyConfig,
         streaming,
       }),
-    [mergedComponents, dompurifyConfig, streaming],
+    [mergedComponents, componentsProps, dompurifyConfig, streaming],
   );
 
   const htmlString = useMemo(() => {
