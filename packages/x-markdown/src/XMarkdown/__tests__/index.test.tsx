@@ -176,6 +176,97 @@ describe('XMarkdown', () => {
     expect((container.firstChild as HTMLElement)?.innerHTML).toBe(html);
   });
 
+  describe('componentsProps', () => {
+    it('passes extra props to the matching custom component', () => {
+      let receivedProps: ComponentProps | undefined;
+      const Chart: React.FC<ComponentProps> = (props) => {
+        receivedProps = props;
+        return <span>{String(props.theme)}</span>;
+      };
+      const onSelect = jest.fn();
+      const { container } = render(
+        <XMarkdown
+          content={'<custom-chart data-id="1"></custom-chart>'}
+          components={{ 'custom-chart': Chart }}
+          componentsProps={{ 'custom-chart': { theme: 'dark', onSelect } }}
+        />,
+      );
+
+      expect(container.querySelector('span')?.textContent).toBe('dark');
+      expect(receivedProps?.theme).toBe('dark');
+      expect(receivedProps?.onSelect).toBe(onSelect);
+      expect(receivedProps?.['data-id']).toBe('1');
+      expect(receivedProps?.streamStatus).toBe('done');
+    });
+
+    it('extra props take precedence over parsed HTML attributes', () => {
+      let receivedTitle: unknown;
+      const Widget: React.FC<ComponentProps> = (props) => {
+        receivedTitle = props.title;
+        return <span>widget</span>;
+      };
+      render(
+        <XMarkdown
+          content={'<my-widget title="from-html"></my-widget>'}
+          components={{ 'my-widget': Widget }}
+          componentsProps={{ 'my-widget': { title: 'from-props' } }}
+        />,
+      );
+
+      expect(receivedTitle).toBe('from-props');
+    });
+
+    it('does not leak props into other custom components', () => {
+      let otherProps: ComponentProps | undefined;
+      const Chart: React.FC<ComponentProps> = () => <span>chart</span>;
+      const Other: React.FC<ComponentProps> = (props) => {
+        otherProps = props;
+        return <span>other</span>;
+      };
+      render(
+        <XMarkdown
+          content={'<custom-chart></custom-chart><custom-other></custom-other>'}
+          components={{ 'custom-chart': Chart, 'custom-other': Other }}
+          componentsProps={{ 'custom-chart': { theme: 'dark' } }}
+        />,
+      );
+
+      expect(otherProps?.theme).toBeUndefined();
+    });
+
+    it('keeps the custom component mounted when componentsProps changes', () => {
+      let mountCount = 0;
+      const Widget: React.FC<ComponentProps> = ({ step }) => {
+        React.useEffect(() => {
+          mountCount += 1;
+        }, []);
+        return <span data-step={String(step)}>widget</span>;
+      };
+      const content = 'before <my-widget></my-widget> after';
+      const components = { 'my-widget': Widget };
+      const { container, rerender } = render(
+        <XMarkdown
+          content={content}
+          components={components}
+          componentsProps={{ 'my-widget': { step: 1 } }}
+        />,
+      );
+
+      expect(container.querySelector('[data-step="1"]')).toBeInTheDocument();
+
+      rerender(
+        <XMarkdown
+          content={content}
+          components={components}
+          componentsProps={{ 'my-widget': { step: 2 } }}
+        />,
+      );
+
+      expect(container.querySelector('[data-step="2"]')).toBeInTheDocument();
+      expect(mountCount).toBe(1);
+    });
+  });
+
   it('walkToken', () => {
     const walkTokens = (token: Token) => {
       if (token.type === 'heading') {
