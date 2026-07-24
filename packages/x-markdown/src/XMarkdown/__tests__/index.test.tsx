@@ -759,4 +759,22 @@ describe('streaming', () => {
     const tailElement = container.querySelector('.xmd-tail');
     expect(tailElement).not.toBeInTheDocument();
   });
+
+  it('should render tail on the last visible text when content ends with reference definition', () => {
+    // marked v16.2.0+ emits a standalone `def` token for reference definitions
+    // (e.g. `[foo]: https://x.com`). The tail should still be attached to the
+    // previous visible text token, not swallowed by the trailing `def` token.
+    const { container } = render(
+      <XMarkdown
+        content={'Visible paragraph.\n\n[foo]: https://x.com "foo"'}
+        streaming={{ hasNextChunk: true, tail: true }}
+      />,
+    );
+
+    const paragraphs = container.querySelectorAll('p');
+    expect(paragraphs.length).toBeGreaterThan(0);
+    const lastParagraph = paragraphs[paragraphs.length - 1];
+    const tailElement = lastParagraph?.querySelector('.xmd-tail');
+    expect(tailElement).toBeInTheDocument();
+  });
 });
