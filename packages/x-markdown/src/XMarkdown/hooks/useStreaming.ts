@@ -121,21 +121,26 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
       if (rest === '!') return true; // may still become an image "!["
       if (rest.startsWith('![')) return false; // image confirmed -> hand over
       if (rest.startsWith('[')) {
-        if (/^\[[ xX]\]/.test(rest)) return false; // task marker formed -> commit as text
-        return !/\]\(/.test(rest); // link confirmed once "](" appears -> hand over
+        // A GFM task marker is "[ ]/[x]/[X]" followed by whitespace; "[x](" is a link
+        // whose label is "x". Decide by what follows "]" — not by end-of-buffer, which
+        // during streaming would settle "[x]" before its "(" arrives.
+        if (/^\[[ xX]\]\s/.test(rest)) return false; // settled task marker -> commit as text
+        if (/\]\(/.test(rest)) return false; // link confirmed ("](" present) -> hand over
+        return true; // still ambiguous ("[", "[x]", "[label") -> keep pending
       }
       return false;
     },
     // When the list marker is immediately followed by another inline construct,
     // commit only the marker prefix and let the rest be re-recognized (handover).
+    // The prefix rule mirrors isStreamingValid (requires GFM's trailing whitespace).
     getCommitPrefix: (pending: string) => {
-      const listPrefix = pending.match(/^([-+*]\s{0,3})/)?.[1];
+      const listPrefix = pending.match(/^([-+*]\s{1,3})/)?.[1];
       if (!listPrefix) return null;
       const rest = pending.slice(listPrefix.length);
       if (rest.startsWith('`')) return listPrefix; // inline code
       if (rest.startsWith('![')) return listPrefix; // image
-      // link: only once clearly a link ("](" present) and not a GFM task marker
-      if (rest.startsWith('[') && /\]\(/.test(rest) && !/^\[[ xX]\]/.test(rest)) {
+      // link: "](" present and not a settled GFM task marker
+      if (rest.startsWith('[') && /\]\(/.test(rest) && !/^\[[ xX]\]\s/.test(rest)) {
         return listPrefix;
       }
       return null;

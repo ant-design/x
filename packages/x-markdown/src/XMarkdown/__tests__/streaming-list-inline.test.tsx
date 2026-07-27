@@ -46,10 +46,37 @@ describe('#1988 inline construct right after a list marker', () => {
   });
 
   describe('GFM task lists must NOT become link placeholders', () => {
-    it('empty task marker', () => expectOutput('- [ ]', '- [ ]'));
-    it('checked task marker', () => expectOutput('- [x]', '- [x]'));
-    it('uppercase checked marker', () => expectOutput('- [X]', '- [X]'));
-    it('task marker with text', () => expectOutput('- [ ] buy milk', '- [ ] buy milk'));
+    // A settled task marker is "[ ]/[x]/[X]" followed by whitespace, so these
+    // commit as plain list text rather than handing over as a link.
+    it('empty task marker with text', () => expectOutput('- [ ] buy milk', '- [ ] buy milk'));
+    it('checked task marker with text', () => expectOutput('- [x] done', '- [x] done'));
+    it('uppercase checked marker with text', () => expectOutput('- [X] done', '- [X] done'));
+    it('task marker followed by a trailing space', () => expectOutput('- [ ] ', '- [ ] '));
+
+    // A bare marker ("- [x]" with nothing after the "]") is ambiguous mid-stream:
+    // it may still become a task item ("- [x] text") or a link ("- [x](url)"), so
+    // it is held pending until the next char decides. This blank is transient and
+    // resolves once streaming completes (hasNextChunk is false -> raw input).
+    it('bare marker is held pending mid-stream', () => expectOutput('- [x]', ''));
+    it('bare marker renders once streaming completes', () => {
+      const done = {
+        streaming: { hasNextChunk: false as const },
+        components: withPlaceholders.components,
+      };
+      const { container } = render(<TestComponent input="- [x]" config={done} />);
+      expect(container.textContent).toBe('- [x]');
+    });
+  });
+
+  describe('#1988 single-char-label links after a marker (CodeRabbit)', () => {
+    // "[x](url)" is a link whose label happens to be "x" — it must NOT be swallowed
+    // by the task-marker rule. Verified for lower/upper/space labels.
+    it('checked-looking label is a link', () =>
+      expectOutput('- [x](htt', `- <incomplete-link data-raw="${raw('[x](htt')}" />`));
+    it('uppercase-looking label is a link', () =>
+      expectOutput('- [X](htt', `- <incomplete-link data-raw="${raw('[X](htt')}" />`));
+    it('space-looking label is a link', () =>
+      expectOutput('- [ ](htt', `- <incomplete-link data-raw="${raw('[ ](htt')}" />`));
   });
 
   describe('no regression', () => {
