@@ -111,13 +111,34 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
   [StreamCacheTokenType.List]: {
     tokenType: StreamCacheTokenType.List,
     isStartOfToken: (markdown: string) => /^[-+*]/.test(markdown),
-    isStreamingValid: (markdown: string) =>
-      STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown)),
-    // On backtick after list, commit only the prefix; treat the rest as inline code.
+    isStreamingValid: (markdown: string) => {
+      if (STREAM_INCOMPLETE_REGEX.list.some((re) => re.test(markdown))) return true;
+      // Keep the list token pending through an inline construct that starts right
+      // after the marker, so its own recognizer can take over once confirmed.
+      // GFM task markers ([ ]/[x]/[X]) never contain "](" and are committed as text.
+      const rest = markdown.match(/^[-+*]\s{1,3}([\s\S]*)$/)?.[1];
+      if (rest === undefined) return false;
+      if (rest === '!') return true; // may still become an image "!["
+      if (rest.startsWith('![')) return false; // image confirmed -> hand over
+      if (rest.startsWith('[')) {
+        if (/^\[[ xX]\]/.test(rest)) return false; // task marker formed -> commit as text
+        return !/\]\(/.test(rest); // link confirmed once "](" appears -> hand over
+      }
+      return false;
+    },
+    // When the list marker is immediately followed by another inline construct,
+    // commit only the marker prefix and let the rest be re-recognized (handover).
     getCommitPrefix: (pending: string) => {
       const listPrefix = pending.match(/^([-+*]\s{0,3})/)?.[1];
-      const rest = listPrefix ? pending.slice(listPrefix.length) : '';
-      return listPrefix && rest.startsWith('`') ? listPrefix : null;
+      if (!listPrefix) return null;
+      const rest = pending.slice(listPrefix.length);
+      if (rest.startsWith('`')) return listPrefix; // inline code
+      if (rest.startsWith('![')) return listPrefix; // image
+      // link: only once clearly a link ("](" present) and not a GFM task marker
+      if (rest.startsWith('[') && /\]\(/.test(rest) && !/^\[[ xX]\]/.test(rest)) {
+        return listPrefix;
+      }
+      return null;
     },
   },
   [StreamCacheTokenType.Table]: {
