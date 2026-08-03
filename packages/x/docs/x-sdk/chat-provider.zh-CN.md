@@ -15,6 +15,8 @@ tag: 2.0.0
 
 如果内置的 Chat Provider 不满足使用可以通过实现抽象类 `AbstractChatProvider` (仅包含三个抽象方法)，可以将不同的模型提供商、或者 Agentic 服务数据转换为统一的 `useXChat` 可消费的格式，从而实现不同模型、Agent之间的无缝接入和切换。
 
+如果接口需要保留推理、工具、审批、任务或 Artifact 等结构化生命周期，请实现独立的 [Agent Provider](/x-sdks/agent-provider-cn)。AgentProvider 不继承 `AbstractChatProvider`，但前端仍然通过同一个 `useXChat({ provider })` 使用。
+
 ## 使用示例
 
 `Chat Provider` 实例化需要传入一个 `XRequest` 调用，并且需要设置参数 `manual=true`，以便 `useXChat` 可以控制请求的发起。
