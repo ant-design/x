@@ -1441,7 +1441,6 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             </div>
             <span
               class="anticon"
-              color="rgba(0,0,0,.45)"
               role="img"
             >
               <svg
@@ -1557,7 +1556,6 @@ exports[`renders components/file-card/demo/image-loading.tsx extend context corr
             </div>
             <span
               class="anticon"
-              color="rgba(0,0,0,.45)"
               role="img"
             >
               <svg
