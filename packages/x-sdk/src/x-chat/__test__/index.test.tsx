@@ -1,5 +1,8 @@
 import React, { useImperativeHandle, useState } from 'react';
-import { fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../tests/utils';
+import { act, fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../tests/utils';
+import type { AgentEventFactory } from '../../agent';
+import { AGENT_EVENT_PROTOCOL, AGENT_EVENT_PROTOCOL_VERSION, getAgentEntityKey } from '../../agent';
+import type { AgentProvider } from '../../chat-providers';
 import { DefaultChatProvider } from '../../chat-providers';
 import XRequest from '../../x-request';
 import useXChat, { MessageStatus, SimpleType, XChatConfig } from '../index';
@@ -420,5 +423,95 @@ describe('useXChat', () => {
 
     // 验证队列消息被处理（由于会话切换，原会话的队列应该被清空）
     expect(hookResult.messages.length).toBe(1); // 新会话只有默认消息
+  });
+
+  it('runs an AgentProvider through the existing provider config', async () => {
+    const provider: AgentProvider<
+      string,
+      string,
+      string,
+      { events: AgentEventFactory; messageId: string }
+    > = {
+      id: 'fixture.agent-provider',
+      protocol: {
+        name: AGENT_EVENT_PROTOCOL,
+        version: AGENT_EVENT_PROTOCOL_VERSION,
+      },
+      capabilities: {
+        eventTypes: [
+          'run.started',
+          'message.started',
+          'message.delta',
+          'message.completed',
+          'run.completed',
+        ],
+        transports: ['async-iterable'],
+      },
+      transport: {
+        kind: 'async-iterable',
+        async *open(request) {
+          yield `${request} world`;
+        },
+      },
+      createContext({ events }) {
+        return { events, messageId: 'assistant' };
+      },
+      start(input, context) {
+        return [
+          context.events.create('run.started', { input }),
+          context.events.create('message.started', {
+            messageId: 'user',
+            role: 'user',
+            content: input,
+          }),
+          context.events.create('message.completed', { messageId: 'user' }),
+          context.events.create('message.started', {
+            messageId: context.messageId,
+            role: 'assistant',
+          }),
+        ];
+      },
+      prepareRequest(input) {
+        return input;
+      },
+      transformChunk(chunk, context) {
+        return [
+          context.events.create('message.delta', {
+            messageId: context.messageId,
+            delta: chunk,
+          }),
+        ];
+      },
+      flush(context) {
+        return [
+          context.events.create('message.completed', { messageId: context.messageId }),
+          context.events.create('run.completed', {}),
+        ];
+      },
+      transformError(error, context) {
+        return [
+          context.events.create('run.failed', {
+            error: { message: error instanceof Error ? error.message : String(error) },
+          }),
+        ];
+      },
+    };
+    const { result } = renderHook(() => useXChat({ provider }));
+
+    await act(async () => {
+      result.current?.onRequest('hello');
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    const runId = Object.keys(result.current!.agentState!.runs)[0];
+    expect(result.current?.messages.map(({ message }: any) => message.content)).toEqual([
+      'hello',
+      'hello world',
+    ]);
+    expect(
+      result.current?.agentState?.messages[getAgentEntityKey(runId, 'assistant')],
+    ).toMatchObject({ status: 'completed', content: 'hello world' });
+    expect(result.current?.isRequesting).toBe(false);
   });
 });

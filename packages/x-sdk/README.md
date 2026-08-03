@@ -108,6 +108,52 @@ export default () => {
 };
 ```
 
+## Experimental Agent Core
+
+The model-independent Agent Core separates Provider normalization from headless state. Models, Agent Runtimes, and private stream protocols implement the same Provider contract; state and UI consume only unified events.
+
+```ts
+import { experimentalAgent } from '@ant-design/x-sdk';
+
+const events = experimentalAgent.createAgentEventFactory({
+  sessionId: 'session-1',
+  runId: 'run-1',
+});
+const store = experimentalAgent.createAgentStore();
+
+store.batch([
+  events.create('run.started', {}),
+  events.create('message.started', {
+    messageId: 'message-1',
+    role: 'assistant',
+  }),
+  events.create('message.delta', {
+    messageId: 'message-1',
+    delta: 'Hello',
+  }),
+  events.create('message.completed', { messageId: 'message-1' }),
+  events.create('run.completed', {}),
+]);
+
+const messageKey = experimentalAgent.getAgentEntityKey('run-1', 'message-1');
+console.log(store.getSnapshot().messages[messageKey].content);
+```
+
+React applications use the same `useXChat` entry point for an AgentProvider. The Provider binds its Transport and declares its protocol; no `agent`, `mode`, or `transport` Hook configuration is required.
+
+```ts
+const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
+
+onRequest({ prompt: 'Analyze this report' });
+console.log(agentState.toolCalls);
+```
+
+`experimentalAgent` contains only the event protocol, Reducer, and Store. AgentProvider types and execution helpers belong to the existing top-level `chat-providers` exports. The internal React bridge remains part of `useXChat` and is not a separate Hook.
+
+These experimental APIs may change before reference Providers and the official Agent demo are complete.
+
+See the [Agent Provider guide](../x/docs/x-sdk/agent-provider.en-US.md) for the complete contract, lifecycle rules, and runnable local Runtime demo.
+
 ## 🌈 Enterprise-level LLM Components Out of the Box
 
 `@ant-design/x` provides a rich set of atomic components for different interaction stages based on the RICH interaction paradigm, helping you flexibly build your AI applications. See details [here](../x/README.md).

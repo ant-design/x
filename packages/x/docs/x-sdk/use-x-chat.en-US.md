@@ -20,6 +20,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <!-- prettier-ignore -->
 <code src="./demos/x-chat/openai.tsx">OpenAI Model Integration</code>
 <code src="./demos/x-chat/deepSeek.tsx">Thinking Model Integration</code>
+<code src="./demos/x-chat/agent-provider.tsx">Generic AgentProvider Integration</code>
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">Request Remote Historical Messages</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
@@ -41,6 +42,14 @@ type useXChat<
 > = (config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) => XChatConfigReturnType;
 ```
 
+AgentProvider uses the same Hook. The overload infers input, Chunk, and structured state types:
+
+```tsx | pure
+const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
+```
+
+See [Agent Provider](/x-sdks/agent-provider) for the complete contract and implementation guide.
+
 <!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
@@ -54,7 +63,7 @@ type useXChat<
 <!-- prettier-ignore -->
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| provider | Data provider used to convert data and requests of different structures into formats that useXChat can consume. The platform includes built-in `DefaultChatProvider` and `OpenAIChatProvider`, and you can also implement your own Provider by inheriting `AbstractChatProvider`. See: [Chat Provider Documentation](/x-sdks/chat-provider) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
+| provider | The only data entry. Use `AbstractChatProvider` for regular chat and `AgentProvider` for structured Agent streams. See [Chat Provider](/x-sdks/chat-provider) and [Agent Provider](/x-sdks/agent-provider) | AbstractChatProvider\<ChatMessage, Input, Output\> \| AgentProvider\<Input, Request, Chunk, Context\> | - | - |
 | conversationKey | Session unique identifier (globally unique), used to distinguish different sessions | string | Symbol('ConversationKey') | - |
 | defaultMessages | Default display messages | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
 | parser | Converts ChatMessage into ParsedMessage for consumption. When not set, ChatMessage is consumed directly. Supports converting one ChatMessage into multiple ParsedMessages | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
@@ -76,6 +85,15 @@ type useXChat<
 | setMessage | Directly modify a single message without triggering requests | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 | removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => boolean | - | - |
 | queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
+| agentState | Complete structured state in AgentProvider mode; `undefined` in regular ChatProvider mode | AgentState \| undefined | undefined | - |
+
+### AgentProvider Mode
+
+AgentProvider mode accepts only `provider`, `conversationKey`, `defaultMessages`, and `parser`. `requestPlaceholder` and `requestFallback` belong to regular ChatProvider. Requesting, failure, and cancellation state in an Agent run are driven by standard events.
+
+`messages` remains compatible with existing message components and contains `AgentMessageState`. Non-message data such as reasoning, tools, approvals, tasks, and artifacts is available from `agentState`.
+
+`setMessages`, `setMessage`, and `removeMessage` only affect the compatibility message layer and do not directly mutate `agentState`. In AgentProvider mode, `onReload` starts a new Run.
 
 #### MessageInfo
 
