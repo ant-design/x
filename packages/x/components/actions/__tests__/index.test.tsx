@@ -1,6 +1,6 @@
 import { ActionsProps } from '@ant-design/x';
 import React from 'react';
-import { fireEvent, render } from '../../../tests/utils';
+import { fireEvent, render, screen, waitFor } from '../../../tests/utils';
 
 import { findItem } from '../ActionsMenu';
 import Actions from '../index';
@@ -80,6 +80,55 @@ describe('Actions Component', () => {
   it('renders sub-menu items', () => {
     const { getByText } = render(<Actions items={items} onClick={mockOnClick} />);
     expect(getByText('icon1')).toBeInTheDocument();
+  });
+
+  it('renders item tooltip with label by default', async () => {
+    render(
+      <Actions items={[{ key: '1', label: 'Default Item Tooltip', icon: <span>icon1</span> }]} />,
+    );
+    const trigger = screen.getByText('icon1').parentElement!;
+    fireEvent.mouseEnter(trigger);
+    fireEvent.mouseMove(trigger);
+    await waitFor(() => {
+      expect(screen.getByText('Default Item Tooltip')).toBeInTheDocument();
+    });
+  });
+
+  it('uses a custom string tooltip on an item', async () => {
+    render(
+      <Actions
+        items={[{ key: '1', label: 'Label', tooltip: 'Custom Tooltip', icon: <span>icon1</span> }]}
+      />,
+    );
+    const trigger = screen.getByText('icon1').parentElement!;
+    fireEvent.mouseEnter(trigger);
+    fireEvent.mouseMove(trigger);
+    await waitFor(() => {
+      expect(screen.getByText('Custom Tooltip')).toBeInTheDocument();
+    });
+  });
+
+  it('renders no tooltip when item tooltip is false', () => {
+    const { container } = render(
+      <Actions items={[{ key: '1', label: 'Label', tooltip: false, icon: <span>icon1</span> }]} />,
+    );
+    expect(container.textContent).toContain('icon1');
+  });
+
+  it('merges TooltipProps on top of the default label tooltip', async () => {
+    render(
+      <Actions
+        items={[
+          { key: '1', label: 'Label', tooltip: { placement: 'bottom' }, icon: <span>icon1</span> },
+        ]}
+      />,
+    );
+    const trigger = screen.getByText('icon1').parentElement!;
+    fireEvent.mouseEnter(trigger);
+    fireEvent.mouseMove(trigger);
+    await waitFor(() => {
+      expect(screen.getByText('Label')).toBeInTheDocument();
+    });
   });
 });
 
