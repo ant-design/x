@@ -43,6 +43,19 @@ export interface xLocale {
     noService: string;
     loadFailed: string;
   };
+  ToolCall?: {
+    status: Record<
+      'pending' | 'streaming' | 'running' | 'completed' | 'failed' | 'cancelled',
+      string
+    >;
+    retry: string;
+    copyResult: string;
+    expand: string;
+    collapse: string;
+    arguments: string;
+    result: string;
+    error: string;
+  };
 }
 
 export type Locale = xLocale & antdLocale;

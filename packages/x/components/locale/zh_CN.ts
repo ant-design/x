@@ -35,6 +35,23 @@ const localeValues: Required<xLocale> = {
     noService: '未配置文件内容服务',
     loadFailed: '加载文件失败',
   },
+  ToolCall: {
+    status: {
+      pending: '等待执行',
+      streaming: '正在接收参数',
+      running: '正在执行',
+      completed: '已完成',
+      failed: '执行失败',
+      cancelled: '已取消',
+    },
+    retry: '重试',
+    copyResult: '复制结果',
+    expand: '展开详情',
+    collapse: '收起详情',
+    arguments: '参数',
+    result: '结果',
+    error: '错误',
+  },
 };
 
 export default localeValues;

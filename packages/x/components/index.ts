@@ -35,6 +35,15 @@ export type {
   ThoughtChainProps,
 } from './thought-chain';
 export { default as ThoughtChain } from './thought-chain';
+export type {
+  ToolCallError,
+  ToolCallItem,
+  ToolCallProps,
+  ToolCallRef,
+  ToolCallSemanticType,
+  ToolCallStatus,
+} from './tool-call';
+export { default as ToolCall } from './tool-call';
 export { default as version } from './version';
 export type { WelcomeProps } from './welcome';
 export { default as Welcome } from './welcome';
