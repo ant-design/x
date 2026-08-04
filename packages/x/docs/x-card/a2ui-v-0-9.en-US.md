@@ -4,6 +4,7 @@ title: A2UI v0.9
 ---
 
 <!-- prettier-ignore -->
+<code src="./demo/A2UI_v0.9/runtime-production.tsx">Production Runtime</code>
 <code src="./demo/A2UI_v0.9/basic.tsx">Basic</code>
 <code src="./demo/A2UI_v0.9/progressive.tsx">Progressive</code>
 <code src="./demo/A2UI_v0.9/streaming.tsx">Streaming</code>
