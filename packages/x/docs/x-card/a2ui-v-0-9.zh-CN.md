@@ -4,6 +4,7 @@ title: A2UI v0.9
 ---
 
 <!-- prettier-ignore -->
+<code src="./demo/A2UI_v0.9/runtime-production.tsx">生产级 Runtime</code>
 <code src="./demo/A2UI_v0.9/basic.tsx">基础</code>
 <code src="./demo/A2UI_v0.9/progressive.tsx">渐进式</code>
 <code src="./demo/A2UI_v0.9/streaming.tsx">流式渲染</code>
