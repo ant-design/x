@@ -4,6 +4,7 @@ title: A2UI v0.8
 ---
 
 <!-- prettier-ignore -->
+<code src="./demo/A2UI_v0.8/runtime-production.tsx">Production Runtime</code>
 <code src="./demo/A2UI_v0.8/basic.tsx">Basic</code>
 <code src="./demo/A2UI_v0.8/progressive.tsx">Progressive</code>
 <code src="./demo/A2UI_v0.8/streaming.tsx">Streaming</code>
@@ -12,6 +13,8 @@ title: A2UI v0.8
 <code src="./demo/A2UI_v0.8/filter-search.tsx">Filter Search</code>
 <code src="./demo/A2UI_v0.8/form-validation.tsx">Form Validation</code>
 <code src="./demo/A2UI_v0.8/action-context-resolve.tsx">Action Context Resolve</code>
+
+For protocol normalization, Catalog validation, atomic transactions, snapshots, and rollback in production, see [Surface Runtime](/x-cards/surface-runtime).
 
 ## API
 

@@ -14,6 +14,8 @@ title: A2UI v0.9
 <code src="./demo/A2UI_v0.9/form-validation.tsx">Form Validation</code>
 <code src="./demo/A2UI_v0.9/action-context-resolve.tsx">Action Context Resolve</code>
 
+For protocol normalization, Catalog validation, atomic transactions, snapshots, and rollback in production, see [Surface Runtime](/x-cards/surface-runtime).
+
 ## API
 
 Common props ref: [Common Props](/docs/react/common-props)

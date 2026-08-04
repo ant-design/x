@@ -83,29 +83,31 @@ sequenceDiagram
 
 ### 版本对比
 
-| 特性             | v0.8                                       | v0.9                          |
-| ---------------- | ------------------------------------------ | ----------------------------- |
-| **版本标识**     | 无显式 version 字段                        | 显式的 `version: 'v0.9'` 字段 |
-| **Surface 创建** | 隐式创建（首个 updateComponents 自动创建） | 显式 `createSurface` 命令     |
-| **数据模型更新** | 使用 `contents` 数组                       | 使用 `path` 和 `value` 字段   |
-| **组件定义**     | 较复杂的嵌套结构                           | 更简洁的扁平结构              |
-| **推荐程度**     | 已弃用，仅用于兼容                         | **推荐使用**                  |
+| 特性             | v0.8                                      | v0.9                          |
+| ---------------- | ----------------------------------------- | ----------------------------- |
+| **版本标识**     | 无显式 version 字段                       | 显式的 `version: 'v0.9'` 字段 |
+| **Surface 创建** | 隐式创建（首个 `surfaceUpdate` 自动创建） | 显式 `createSurface` 命令     |
+| **数据模型更新** | 使用 `contents` 数组                      | 使用 `path` 和 `value` 字段   |
+| **组件定义**     | 较复杂的嵌套结构                          | 更简洁的扁平结构              |
+| **推荐程度**     | 已弃用，仅用于兼容                        | **推荐使用**                  |
 
 ### v0.8 消息格式（已弃用）
 
-v0.8 使用隐式的 Surface 创建方式，当 Agent 发送第一个 `updateComponents` 时自动创建 Surface：
+v0.8 使用隐式的 Surface 创建方式，当 Agent 发送第一个 `surfaceUpdate` 时自动创建 Surface：
 
 ```typescript
-// v0.8 没有显式的 version 字段
+// v0.8 payload 没有显式的 version 字段
 {
-  updateComponents: {
+  surfaceUpdate: {
     surfaceId: 'booking',
-    catalogId: 'https://example.com/catalogs/booking/v1/catalog.json',
     components: [
       {
         id: 'root',
-        component: 'Column',
-        children: ['header', 'content']
+        component: {
+          Column: {
+            children: { explicitList: ['header', 'content'] }
+          }
+        }
       }
     ]
   }
@@ -116,15 +118,27 @@ v0.8 使用隐式的 Surface 创建方式，当 Agent 发送第一个 `updateCom
 
 ```typescript
 {
-  updateDataModel: {
+  dataModelUpdate: {
     surfaceId: 'booking',
     contents: [
       {
-        op: 'replace',
-        path: '/reservation/guests',
-        value: 3
+        key: 'reservation',
+        valueMap: [
+          { key: 'guests', valueString: '3' }
+        ]
       }
     ]
+  }
+}
+```
+
+组件定义和数据到达后，通过 `beginRendering` 指定根节点：
+
+```typescript
+{
+  beginRendering: {
+    surfaceId: 'booking',
+    root: 'root'
   }
 }
 ```
@@ -181,8 +195,8 @@ v0.9 引入显式的版本标识和 Surface 创建命令，使协议更加清晰
 所有消息添加 `version: 'v0.9'` 字段：
 
 ```typescript
-// v0.8
-{ updateComponents: { ... } }
+// v0.8 payload
+{ surfaceUpdate: { ... } }
 
 // v0.9
 { version: 'v0.9', updateComponents: { ... } }
@@ -190,11 +204,11 @@ v0.9 引入显式的版本标识和 Surface 创建命令，使协议更加清晰
 
 #### 2. 显式创建 Surface
 
-在发送 `updateComponents` 之前，先发送 `createSurface`：
+在发送 `updateComponents` 之前，先发送 `createSurface`。v0.8 适配器的 Catalog 在客户端创建时绑定，v0.9 则由命令显式声明：
 
 ```typescript
-// v0.8：隐式创建
-{ updateComponents: { surfaceId: 'booking', catalogId: '...', components: [...] } }
+// v0.8：surfaceUpdate 隐式创建
+{ surfaceUpdate: { surfaceId: 'booking', components: [...] } }
 
 // v0.9：显式创建
 [
@@ -210,10 +224,10 @@ v0.9 引入显式的版本标识和 Surface 创建命令，使协议更加清晰
 ```typescript
 // v0.8
 {
-  updateDataModel: {
+  dataModelUpdate: {
     surfaceId: 'booking',
     contents: [
-      { op: 'replace', path: '/guests', value: 3 }
+      { key: 'reservation', valueMap: [{ key: 'guests', valueString: '3' }] }
     ]
   }
 }
@@ -234,10 +248,10 @@ v0.9 引入显式的版本标识和 Surface 创建命令，使协议更加清晰
 v0.9 支持更新整个对象，减少消息数量：
 
 ```typescript
-// v0.8：需要多条消息
+// v0.8：valueMap 只承载字符串值
 [
-  { updateDataModel: { surfaceId: 'booking', contents: [{ op: 'add', path: '/date', value: '2025-12-16' }] } },
-  { updateDataModel: { surfaceId: 'booking', contents: [{ op: 'add', path: '/guests', value: 2 }] } }
+  { dataModelUpdate: { surfaceId: 'booking', contents: [{ key: 'date', valueString: '2025-12-16' }] } },
+  { dataModelUpdate: { surfaceId: 'booking', contents: [{ key: 'guests', valueString: '2' }] } }
 ]
 
 // v0.9：一条消息即可
@@ -262,17 +276,13 @@ import type { XAgentCommand_v0_8, XAgentCommand_v0_9 } from '@ant-design/x-card'
 const commands: (XAgentCommand_v0_8 | XAgentCommand_v0_9)[] = [
   // v0.8 消息
   {
-    updateComponents: {
-      /* ... */
-    },
+    surfaceUpdate: {/* ... */},
   },
 
   // v0.9 消息
   {
     version: 'v0.9',
-    createSurface: {
-      /* ... */
-    },
+    createSurface: {/* ... */},
   },
 ];
 
@@ -697,12 +707,8 @@ import type { XAgentCommand_v0_9, Catalog, ActionPayload } from '@ant-design/x-c
 const catalog: Catalog = {
   catalogId: 'my-app-catalog',
   components: {
-    Text: {
-      /* ... */
-    },
-    Button: {
-      /* ... */
-    },
+    Text: {/* ... */},
+    Button: {/* ... */},
   },
 };
 
@@ -722,9 +728,7 @@ const commands: XAgentCommand_v0_9[] = [
     version: 'v0.9',
     updateComponents: {
       surfaceId: 'booking',
-      components: [
-        /* ... */
-      ],
+      components: [/* ... */],
     },
   },
 ];
@@ -775,15 +779,9 @@ function App() {
 
    ```json
    {
-     "user": {
-       /* 用户相关 */
-     },
-     "cart": {
-       /* 购物车相关 */
-     },
-     "ui": {
-       /* UI 状态 */
-     }
+     "user": {/* 用户相关 */},
+     "cart": {/* 购物车相关 */},
+     "ui": {/* UI 状态 */}
    }
    ```
 

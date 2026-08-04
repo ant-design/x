@@ -83,8 +83,10 @@ const FormCard: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
       borderRadius: 8,
       border: '1px solid #e8e8e8',
       background: '#fff',
-      minWidth: 280,
+      width: '100%',
+      minWidth: 0,
       maxWidth: 360,
+      boxSizing: 'border-box',
     }}
   >
     {children}
