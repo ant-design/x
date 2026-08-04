@@ -114,6 +114,52 @@ export default () => {
 };
 ```
 
+## 实验性 Agent Core
+
+模型无关的 Agent Core 将 Provider 语义归一化与 Headless 状态分离。模型、Agent Runtime 和私有流协议都实现同一套 Provider 契约；状态与 UI 只消费统一事件。
+
+```ts
+import { experimentalAgent } from '@ant-design/x-sdk';
+
+const events = experimentalAgent.createAgentEventFactory({
+  sessionId: 'session-1',
+  runId: 'run-1',
+});
+const store = experimentalAgent.createAgentStore();
+
+store.batch([
+  events.create('run.started', {}),
+  events.create('message.started', {
+    messageId: 'message-1',
+    role: 'assistant',
+  }),
+  events.create('message.delta', {
+    messageId: 'message-1',
+    delta: '你好',
+  }),
+  events.create('message.completed', { messageId: 'message-1' }),
+  events.create('run.completed', {}),
+]);
+
+const messageKey = experimentalAgent.getAgentEntityKey('run-1', 'message-1');
+console.log(store.getSnapshot().messages[messageKey].content);
+```
+
+React 应用通过同一个 `useXChat` 接入 AgentProvider。Provider 内部绑定 Transport 并声明协议，不需要给 Hook 增加 `agent`、`mode` 或 `transport` 配置。
+
+```ts
+const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
+
+onRequest({ prompt: '分析这份报告' });
+console.log(agentState.toolCalls);
+```
+
+`experimentalAgent` 只包含事件协议、Reducer 和 Store；AgentProvider 类型与执行辅助能力归入现有 `chat-providers` 顶层导出。React 内部桥接仍属于 `useXChat`，不会形成第二个 Hook。
+
+在参考 Provider 和官方 Agent Demo 完成前，这些实验性 API 可能继续调整。
+
+完整契约、生命周期规则和可运行的本地 Runtime 示例请参阅 [Agent Provider 文档](../x/docs/x-sdk/agent-provider.zh-CN.md)。
+
 ## 🌈 开箱即用的大模型企业级组件
 
 `@ant-design/x` 基于 RICH 交互范式，在不同的交互阶段提供了大量的原子组件，帮助你灵活搭建你的 AI 应用，详情点击[这里](packages/x/README-zh_CN.md)。

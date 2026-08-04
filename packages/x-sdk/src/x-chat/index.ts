@@ -1,10 +1,13 @@
 import { useEvent } from '@rc-component/util';
 import React, { useEffect, useState } from 'react';
 import type { AnyObject } from '../_util/type';
-import { AbstractChatProvider } from '../chat-providers';
+import type { AgentMessageState, AgentState } from '../agent';
+import type { AgentProvider } from '../chat-providers';
+import { AbstractChatProvider, isAgentProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
+import { useAgentChatRuntime } from './agentRuntime';
 import { ConversationKey, useChatStore } from './store';
 
 export type SimpleType = string | number | boolean | object;
@@ -54,6 +57,35 @@ export interface XChatConfig<
   requestFallback?: ChatMessage | RequestFallbackFn<Input, MessageInfo<ChatMessage>, ChatMessage>;
 }
 
+export interface AgentXChatConfig<
+  Input,
+  Request,
+  Chunk,
+  Context = unknown,
+  ParsedMessage extends SimpleType = AgentMessageState,
+> {
+  provider: AgentProvider<Input, Request, Chunk, Context>;
+  conversationKey?: ConversationData['key'];
+  defaultMessages?:
+    | DefaultMessageInfo<AgentMessageState>[]
+    | ((info: {
+        conversationKey?: ConversationData['key'];
+      }) => Promise<DefaultMessageInfo<AgentMessageState>[]>)
+    | ((info?: {
+        conversationKey?: ConversationData['key'];
+      }) => DefaultMessageInfo<AgentMessageState>[]);
+  parser?: (message: AgentMessageState) => ParsedMessage | ParsedMessage[];
+}
+
+type InternalXChatConfig<
+  ChatMessage extends SimpleType,
+  ParsedMessage extends SimpleType,
+  Input,
+  Output,
+> = Omit<XChatConfig<ChatMessage, ParsedMessage, Input, Output>, 'provider'> & {
+  provider?: AbstractChatProvider<ChatMessage, Input, Output> | AgentProvider<Input, any, any, any>;
+};
+
 export interface MessageInfo<Message extends SimpleType> {
   id: number | string;
   message: Message;
@@ -84,12 +116,12 @@ function toArray<T>(item: T | T[]): T[] {
 const IsRequestingMap = new Map<ConversationKey, boolean>();
 const generateConversationKey = () => Symbol('ConversationKey');
 
-export default function useXChat<
+function useXChatInternal<
   ChatMessage extends SimpleType = string,
   ParsedMessage extends SimpleType = ChatMessage,
   Input = RequestParams<ChatMessage>,
   Output = SSEOutput,
->(config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) {
+>(config: InternalXChatConfig<ChatMessage, ParsedMessage, Input, Output>) {
   const {
     defaultMessages,
     requestFallback,
@@ -145,6 +177,15 @@ export default function useXChat<
     }));
   }, conversationKey);
 
+  const agentProvider = isAgentProvider(provider) ? provider : undefined;
+  const chatProvider = agentProvider
+    ? undefined
+    : (provider as AbstractChatProvider<ChatMessage, Input, Output> | undefined);
+  const agentRuntime = useAgentChatRuntime(agentProvider, conversationKey);
+  const effectiveMessages = agentProvider
+    ? [...messages, ...(agentRuntime.messages as unknown as MessageInfo<ChatMessage>[])]
+    : messages;
+
   const createMessage = (message: ChatMessage, status: MessageStatus, extraInfo?: AnyObject) => {
     const msg: MessageInfo<ChatMessage> = {
       id: `msg_${idRef.current}`,
@@ -163,7 +204,7 @@ export default function useXChat<
   const parsedMessages = React.useMemo(() => {
     const list: MessageInfo<ParsedMessage>[] = [];
 
-    messages.forEach((agentMsg) => {
+    effectiveMessages.forEach((agentMsg) => {
       const rawParsedMsg = parser ? parser(agentMsg.message) : agentMsg.message;
       const bubbleMsgs = toArray(rawParsedMsg as ParsedMessage);
 
@@ -182,16 +223,16 @@ export default function useXChat<
     });
 
     return list;
-  }, [messages]);
+  }, [effectiveMessages, parser]);
 
   // ============================ Request =============================
   const getFilteredMessages = (msgs: MessageInfo<ChatMessage>[]) =>
     msgs.filter((info) => info.status !== 'loading').map((info) => info.message);
 
-  provider?.injectGetMessages(() => {
+  chatProvider?.injectGetMessages(() => {
     return getFilteredMessages(getMessages());
   });
-  requestHandlerRef.current = provider?.request;
+  requestHandlerRef.current = chatProvider?.request;
   // For agent to use. Will filter out loading and error message
   const getRequestMessages = () => getFilteredMessages(getMessages());
 
@@ -203,12 +244,16 @@ export default function useXChat<
       extraInfo?: AnyObject;
     },
   ) => {
-    if (!provider) {
+    if (agentProvider) {
+      void agentRuntime.onRequest(requestParams);
+      return;
+    }
+    if (!chatProvider) {
       return;
     }
     const { updatingId, reload } = opts || {};
     let loadingMsgId: number | string | null | undefined = null;
-    const localMessage = provider.transformLocalMessage(requestParams);
+    const localMessage = chatProvider.transformLocalMessage(requestParams);
     const messages = (Array.isArray(localMessage) ? localMessage : [localMessage]).map((message) =>
       createMessage(message, 'local', opts?.extraInfo),
     );
@@ -283,7 +328,7 @@ export default function useXChat<
           msg = getMessages().find((info) => info.id === updatingId);
           if (msg) {
             msg.status = status;
-            msg.message = provider.transformMessage({ chunk, status, chunks, responseHeaders });
+            msg.message = chatProvider.transformMessage({ chunk, status, chunks, responseHeaders });
             setMessages((ori: MessageInfo<ChatMessage>[]) => {
               return [...ori];
             });
@@ -291,7 +336,7 @@ export default function useXChat<
           }
         } else {
           // Create if not exist
-          const transformData = provider.transformMessage({
+          const transformData = chatProvider.transformMessage({
             chunk,
             status,
             chunks,
@@ -311,7 +356,7 @@ export default function useXChat<
         setMessages((ori: MessageInfo<ChatMessage>[]) => {
           return ori.map((info: MessageInfo<ChatMessage>) => {
             if (info.id === updatingMsgId) {
-              const transformData = provider.transformMessage({
+              const transformData = chatProvider.transformMessage({
                 originMessage: info.message,
                 chunk,
                 chunks,
@@ -331,7 +376,7 @@ export default function useXChat<
       msg = getMessages().find((info) => info.id === updatingMsgId) || msg;
       return msg;
     };
-    provider.injectRequest({
+    chatProvider.injectRequest({
       onUpdate: (chunk: Output, headers: Headers) => {
         const msg = updateMessage('updating', chunk, [], headers);
         return msg;
@@ -395,7 +440,9 @@ export default function useXChat<
     });
     setIsRequesting(true);
     conversationKey && IsRequestingMap.set(conversationKey, true);
-    provider.request.run(provider.transformParams(requestParams, provider.request.options));
+    chatProvider.request.run(
+      chatProvider.transformParams(requestParams, chatProvider.request.options),
+    );
   };
 
   const onRequest = useEvent((requestParams: Partial<Input>, opts?: { extraInfo: AnyObject }) => {
@@ -412,6 +459,13 @@ export default function useXChat<
   ) => {
     if (!provider) {
       throw new Error('provider is required');
+    }
+    if (agentProvider) {
+      if (!effectiveMessages.some((info) => info.id === id)) {
+        throw new Error(`message [${id}] is not found`);
+      }
+      void agentRuntime.onRequest(requestParams);
+      return;
     }
     if (!id || !getMessages().find((info) => info.id === id)) {
       throw new Error(`message [${id}] is not found`);
@@ -461,7 +515,7 @@ export default function useXChat<
   return {
     onRequest,
     isDefaultMessagesRequesting,
-    messages,
+    messages: effectiveMessages,
     parsedMessages,
     setMessages,
     removeMessage,
@@ -470,10 +524,55 @@ export default function useXChat<
       if (!provider) {
         throw new Error('provider is required');
       }
-      requestHandlerRef.current?.abort();
+      if (agentProvider) {
+        agentRuntime.abort();
+      } else {
+        requestHandlerRef.current?.abort();
+      }
     },
-    isRequesting: conversationKey ? IsRequestingMap?.get(conversationKey) || false : isRequesting,
+    isRequesting: agentProvider
+      ? agentRuntime.isRequesting
+      : conversationKey
+        ? IsRequestingMap?.get(conversationKey) || false
+        : isRequesting,
+    agentState: agentProvider ? agentRuntime.agentState : undefined,
     onReload,
     queueRequest,
   } as const;
+}
+
+type XChatResult<
+  ChatMessage extends SimpleType,
+  ParsedMessage extends SimpleType,
+  Input,
+  Output,
+> = ReturnType<typeof useXChatInternal<ChatMessage, ParsedMessage, Input, Output>>;
+
+export default function useXChat<
+  Input,
+  Request,
+  Chunk,
+  Context = unknown,
+  ParsedMessage extends SimpleType = AgentMessageState,
+>(
+  config: AgentXChatConfig<Input, Request, Chunk, Context, ParsedMessage>,
+): Omit<XChatResult<AgentMessageState, ParsedMessage, Input, Chunk>, 'agentState'> & {
+  agentState: AgentState;
+};
+
+export default function useXChat<
+  ChatMessage extends SimpleType = string,
+  ParsedMessage extends SimpleType = ChatMessage,
+  Input = RequestParams<ChatMessage>,
+  Output = SSEOutput,
+>(
+  config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>,
+): Omit<XChatResult<ChatMessage, ParsedMessage, Input, Output>, 'agentState'> & {
+  agentState: undefined;
+};
+
+export default function useXChat(
+  config: InternalXChatConfig<any, any, any, any>,
+): XChatResult<any, any, any, any> {
+  return useXChatInternal(config);
 }

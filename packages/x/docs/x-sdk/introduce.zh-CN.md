@@ -11,6 +11,7 @@ title: 介绍
 - **统一数据流管理**：提供 `useXChat` Hook 管理会话数据，支持消息解析、状态管理和操作API
 - **强大的请求处理**：内置 `XRequest` API 支持流式响应、中间件、全局配置和手动控制
 - **多模型支持**：通过 `Chat Provider` 机制支持不同AI模型的无缝接入，内置DeepSeek、OpenAI兼容方案
+- **Agent Runtime 接入**：通过模型无关的 `AgentProvider` 将消息、推理、工具、审批、任务和 Artifact 归一化为统一事件
 - **多会话并存**：支持同时管理多个会话，每个会话独立数据流
 
 ## 安装

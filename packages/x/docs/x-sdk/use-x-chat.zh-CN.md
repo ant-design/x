@@ -20,6 +20,7 @@ tag: 2.0.0
 <!-- prettier-ignore -->
 <code src="./demos/x-chat/openai.tsx">OpenAI 模型接入</code>
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeek 思考模型接入</code>
+<code src="./demos/x-chat/agent-provider.tsx">通用 AgentProvider 接入</code>
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">请求远程历史消息</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
@@ -41,6 +42,14 @@ type useXChat<
 > = (config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>) => XChatConfigReturnType;
 ```
 
+AgentProvider 使用同一个 Hook，通过重载推导输入、Chunk 和结构化状态类型：
+
+```tsx | pure
+const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
+```
+
+完整契约和实现方式请参阅 [Agent Provider](/x-sdks/agent-provider-cn)。
+
 <!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
@@ -54,7 +63,7 @@ type useXChat<
 <!-- prettier-ignore -->
 | 属性 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| provider | 数据提供方，用于将不同结构的数据及请求转换为useXChat能消费的格式，平台内置了`DefaultChatProvider`和`OpenAIChatProvider`，你也可以通过继承`AbstractChatProvider`实现自己的Provider。详见：[Chat Provider文档](/x-sdks/chat-provider-cn) | AbstractChatProvider\<ChatMessage, Input, Output\> | - | - |
+| provider | 唯一数据入口。普通聊天使用 `AbstractChatProvider`；结构化 Agent 流使用 `AgentProvider`。详见：[Chat Provider](/x-sdks/chat-provider-cn)、[Agent Provider](/x-sdks/agent-provider-cn) | AbstractChatProvider\<ChatMessage, Input, Output\> \| AgentProvider\<Input, Request, Chunk, Context\> | - | - |
 | conversationKey | 会话唯一标识（全局唯一），用于区分不同的会话 | string | Symbol('ConversationKey') | - |
 | defaultMessages | 默认展示信息 | MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) =>  MessageInfo\<ChatMessage\>[] \| (info: { conversationKey?: string }) => Promise\<MessageInfo\<ChatMessage\>[]\> | - | - |
 | parser | 将 ChatMessage 转换成消费使用的 ParsedMessage，不设置时则直接消费 ChatMessage。支持将一条 ChatMessage 转换成多条 ParsedMessage | (message: ChatMessage) => BubbleMessage \| BubbleMessage[] | - | - |
@@ -76,6 +85,15 @@ type useXChat<
 | setMessage | 直接修改单条 message，不会触发请求 | (id: string \| number, info: Partial\<MessageInfo\<ChatMessage\>\>) => void | - | - |
 | removeMessage | 删除单条 message，不会触发请求 | (id: string \| number) => boolean | - | - |
 | queueRequest | 会将请求加入队列，等待 conversationKey 初始化完成后再发送 | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
+| agentState | AgentProvider 模式下的完整结构化状态；普通 ChatProvider 模式为 `undefined` | AgentState \| undefined | undefined | - |
+
+### AgentProvider 模式
+
+AgentProvider 模式只接受 `provider`、`conversationKey`、`defaultMessages` 和 `parser`。`requestPlaceholder` 与 `requestFallback` 只属于普通 ChatProvider；Agent 的请求中、失败和取消状态由标准事件驱动。
+
+`messages` 仍可供现有消息组件消费，实际消息为 `AgentMessageState`。推理、工具、审批、任务和 Artifact 等非消息数据保存在 `agentState` 中。
+
+`setMessages`、`setMessage` 和 `removeMessage` 只影响兼容消息层，不会直接修改 `agentState`。AgentProvider 模式下调用 `onReload` 会创建新 Run。
 
 #### MessageInfo
 

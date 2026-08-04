@@ -7,6 +7,12 @@ title: Introduction
 
 ## Features
 
+- **Conversation management**: Manage message parsing, state, and operations through `useXChat`.
+- **Request processing**: Use `XRequest` for streaming responses, middleware, global configuration, and manual control.
+- **Model integration**: Switch model services through the Chat Provider mechanism.
+- **Agent Runtime integration**: Normalize messages, reasoning, tools, approvals, tasks, and artifacts into unified events through a model-independent AgentProvider.
+- **Multiple conversations**: Isolate concurrent conversation data with independent keys.
+
 ## Installation
 
 ### Install using npm or yarn or pnpm or bun or utoo
