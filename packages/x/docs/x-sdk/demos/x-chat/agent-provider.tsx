@@ -1,22 +1,22 @@
-import { Bubble, Sender } from '@ant-design/x';
+import {
+  FileTextOutlined,
+  RobotOutlined,
+  SearchOutlined,
+  ThunderboltOutlined,
+} from '@ant-design/icons';
+import type { BubbleListProps, ThoughtChainItemType } from '@ant-design/x';
+import { Bubble, Prompts, Sender, ThoughtChain } from '@ant-design/x';
 import type {
+  AgentEntityStatus,
+  AgentMessageState,
   AgentProvider,
   AgentProviderCapabilities,
   AgentProviderContextOptions,
+  AgentState,
   AgentTransport,
 } from '@ant-design/x-sdk';
 import { useXChat } from '@ant-design/x-sdk';
-import {
-  Badge,
-  Descriptions,
-  Divider,
-  Empty,
-  Flex,
-  Grid,
-  Progress,
-  Segmented,
-  Typography,
-} from 'antd';
+import { Avatar, Badge, Divider, Flex, Grid, Progress, Segmented, Tag, Typography } from 'antd';
 import React from 'react';
 
 interface DemoInput {
@@ -28,10 +28,14 @@ interface DemoInput {
 type DemoChunk =
   | { type: 'reasoning.delta'; delta: string }
   | { type: 'reasoning.completed'; summary: string }
+  | { type: 'task.created'; title: string; description: string }
+  | { type: 'task.updated'; progress: number }
+  | { type: 'task.completed'; result: unknown }
   | { type: 'tool.requested'; name: string; arguments: string }
   | { type: 'tool.running' }
   | { type: 'tool.completed'; result: unknown }
-  | { type: 'message.started' }
+  | { type: 'artifact.created'; name: string; mediaType: string }
+  | { type: 'artifact.completed'; content: string }
   | { type: 'message.delta'; delta: string }
   | { type: 'message.completed' };
 
@@ -40,6 +44,8 @@ interface DemoContext {
   input?: DemoInput;
   reasoningOpen: boolean;
   toolOpen: boolean;
+  taskOpen: boolean;
+  artifactOpen: boolean;
   messageOpen: boolean;
 }
 
@@ -72,8 +78,18 @@ class DemoTransport implements AgentTransport<DemoInput, DemoChunk> {
       },
       {
         type: 'reasoning.completed',
-        summary: isCN ? '需要查询本地知识索引。' : 'The local knowledge index is required.',
+        summary: isCN
+          ? '已拆解目标，准备检索资料并生成摘要。'
+          : 'Plan ready: research and draft a summary.',
       },
+      {
+        type: 'task.created',
+        title: isCN ? '整理调研摘要' : 'Prepare research brief',
+        description: isCN
+          ? '检索资料、提炼要点并生成文档'
+          : 'Search, synthesize, and generate a document',
+      },
+      { type: 'task.updated', progress: 20 },
       {
         type: 'tool.requested',
         name: 'knowledge.search',
@@ -82,20 +98,32 @@ class DemoTransport implements AgentTransport<DemoInput, DemoChunk> {
       { type: 'tool.running' },
       {
         type: 'tool.completed',
-        result: { matches: 3, source: 'local-fixture' },
+        result: { matches: 6, source: 'local-fixture' },
       },
-      { type: 'message.started' },
+      { type: 'task.updated', progress: 72 },
+      {
+        type: 'artifact.created',
+        name: isCN ? '调研摘要.md' : 'research-brief.md',
+        mediaType: 'text/markdown',
+      },
+      {
+        type: 'artifact.completed',
+        content: isCN
+          ? '# 调研摘要\n\n已整理 3 条关键结论。'
+          : '# Research brief\n\nThree findings ready.',
+      },
+      { type: 'task.completed', result: { findings: 3 } },
       {
         type: 'message.delta',
         delta: isCN
-          ? '已完成通用 Agent Provider 调用。'
-          : 'The generic Agent Provider run is complete. ',
+          ? '调研已完成。我从本地知识库筛选了 6 条资料，'
+          : 'Research complete. I reviewed six local sources ',
       },
       {
         type: 'message.delta',
         delta: isCN
-          ? '同一套 useXChat 可以消费消息、推理和工具状态。'
-          : 'The same useXChat instance consumed messages, reasoning, and tool state.',
+          ? '提炼出 3 条关键结论，并生成了可继续编辑的调研摘要。'
+          : 'and distilled three findings into an editable research brief.',
       },
       { type: 'message.completed' },
     ];
@@ -135,6 +163,14 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
       'tool.completed',
       'tool.failed',
       'tool.cancelled',
+      'task.created',
+      'task.updated',
+      'task.completed',
+      'task.failed',
+      'task.cancelled',
+      'artifact.created',
+      'artifact.completed',
+      'artifact.failed',
     ],
     transports: ['demo.async-iterable'],
   };
@@ -145,6 +181,8 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
       events: options.events,
       reasoningOpen: false,
       toolOpen: false,
+      taskOpen: false,
+      artifactOpen: false,
       messageOpen: false,
     };
   }
@@ -152,6 +190,7 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
   start(input: DemoInput, context: DemoContext) {
     context.input = input;
     context.reasoningOpen = true;
+    context.messageOpen = true;
     return [
       context.events.create('run.started', { input }),
       context.events.create('message.started', {
@@ -160,6 +199,10 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
         content: input.prompt,
       }),
       context.events.create('message.completed', { messageId: 'user-message' }),
+      context.events.create('message.started', {
+        messageId: 'assistant-message',
+        role: 'assistant',
+      }),
       context.events.create('reasoning.started', { reasoningId: 'reasoning' }),
     ];
   }
@@ -181,6 +224,25 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
             summary: chunk.summary,
           }),
         ];
+      case 'task.created':
+        context.taskOpen = true;
+        return [
+          events.create('task.created', {
+            taskId: 'research-task',
+            title: chunk.title,
+            description: chunk.description,
+          }),
+        ];
+      case 'task.updated':
+        return [
+          events.create('task.updated', {
+            taskId: 'research-task',
+            progress: chunk.progress / 100,
+          }),
+        ];
+      case 'task.completed':
+        context.taskOpen = false;
+        return [events.create('task.completed', { taskId: 'research-task', result: chunk.result })];
       case 'tool.requested':
         context.toolOpen = true;
         return [
@@ -195,12 +257,22 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
       case 'tool.completed':
         context.toolOpen = false;
         return [events.create('tool.completed', { toolCallId: 'tool-call', result: chunk.result })];
-      case 'message.started':
-        context.messageOpen = true;
+      case 'artifact.created':
+        context.artifactOpen = true;
         return [
-          events.create('message.started', {
-            messageId: 'assistant-message',
-            role: 'assistant',
+          events.create('artifact.created', {
+            artifactId: 'research-brief',
+            name: chunk.name,
+            mediaType: chunk.mediaType,
+          }),
+        ];
+      case 'artifact.completed':
+        context.artifactOpen = false;
+        return [
+          events.create('artifact.completed', {
+            artifactId: 'research-brief',
+            content: chunk.content,
+            version: 1,
           }),
         ];
       case 'message.delta':
@@ -261,6 +333,27 @@ class DemoAgentProvider implements AgentProvider<DemoInput, DemoInput, DemoChunk
             }),
       );
     }
+    if (context.taskOpen) {
+      events.push(
+        isAbort
+          ? context.events.create('task.cancelled', {
+              taskId: 'research-task',
+              reason: 'Run cancelled',
+            })
+          : context.events.create('task.failed', {
+              taskId: 'research-task',
+              error: agentError,
+            }),
+      );
+    }
+    if (context.artifactOpen) {
+      events.push(
+        context.events.create('artifact.failed', {
+          artifactId: 'research-brief',
+          error: agentError,
+        }),
+      );
+    }
     if (context.messageOpen) {
       events.push(
         isAbort
@@ -300,6 +393,108 @@ const statusMap = {
   running: 'processing',
 } as const;
 
+const toThoughtStatus = (status: AgentEntityStatus): ThoughtChainItemType['status'] => {
+  if (status === 'completed') return 'success';
+  if (status === 'failed') return 'error';
+  if (status === 'cancelled') return 'abort';
+  return 'loading';
+};
+
+const getRunEntities = <T extends { runId: string }>(
+  entities: Readonly<Record<string, T>>,
+  runId: string,
+) => Object.values(entities).filter((entity) => entity.runId === runId);
+
+const AgentResponse = ({
+  agentState,
+  isCN,
+  message,
+}: {
+  agentState: AgentState;
+  isCN: boolean;
+  message: AgentMessageState;
+}) => {
+  const reasoning = getRunEntities(agentState.reasoning, message.runId).at(-1);
+  const tool = getRunEntities(agentState.toolCalls, message.runId).at(-1);
+  const task = getRunEntities(agentState.tasks, message.runId).at(-1);
+  const artifact = getRunEntities(agentState.artifacts, message.runId).at(-1);
+  const run = agentState.runs[message.runId];
+  const answer = contentToText(message.content);
+
+  const chainItems: ThoughtChainItemType[] = [
+    reasoning && {
+      key: 'reasoning',
+      title: isCN ? '分析任务' : 'Analyze request',
+      description: reasoning.summary || reasoning.content,
+      status: toThoughtStatus(reasoning.status),
+      icon: <ThunderboltOutlined />,
+    },
+    task && {
+      key: 'task',
+      title: task.title,
+      description: task.description,
+      status: toThoughtStatus(task.status),
+      content: (
+        <Progress
+          percent={task.status === 'completed' ? 100 : Math.round((task.progress ?? 0) * 100)}
+          showInfo={false}
+          size="small"
+          status={task.status === 'failed' ? 'exception' : undefined}
+        />
+      ),
+    },
+    tool && {
+      key: 'tool',
+      title: isCN ? '检索本地知识库' : 'Search local knowledge',
+      description: tool.name,
+      status: toThoughtStatus(tool.status),
+      icon: <SearchOutlined />,
+      collapsible: true,
+      content: (
+        <Typography.Text type="secondary">
+          {tool.status === 'completed'
+            ? isCN
+              ? '找到 6 条相关资料'
+              : 'Found six relevant sources'
+            : tool.arguments}
+        </Typography.Text>
+      ),
+    },
+    artifact && {
+      key: 'artifact',
+      title: isCN ? `生成 ${artifact.name}` : `Create ${artifact.name}`,
+      description: artifact.mediaType,
+      status: toThoughtStatus(artifact.status),
+      icon: <FileTextOutlined />,
+    },
+  ].filter(Boolean) as ThoughtChainItemType[];
+
+  return (
+    <Flex vertical gap={12} style={{ minWidth: 0 }}>
+      <Flex align="center" gap={8} wrap>
+        <Badge status={run ? statusMap[run.status] : 'processing'} />
+        <Typography.Text strong>Agent Runtime</Typography.Text>
+        <Tag variant="filled">{run?.status ?? 'running'}</Tag>
+      </Flex>
+      {chainItems.length > 0 && <ThoughtChain items={chainItems} line="solid" />}
+      {answer && (
+        <>
+          <Divider style={{ margin: 0 }} />
+          <Typography.Paragraph style={{ margin: 0 }}>{answer}</Typography.Paragraph>
+        </>
+      )}
+      {message.status === 'failed' && (
+        <Typography.Text type="danger">{message.error?.message}</Typography.Text>
+      )}
+      {message.status === 'cancelled' && (
+        <Typography.Text type="secondary">
+          {isCN ? '本次运行已取消。' : 'This run was cancelled.'}
+        </Typography.Text>
+      )}
+    </Flex>
+  );
+};
+
 const App = () => {
   const screens = Grid.useBreakpoint();
   const isCN = typeof location !== 'undefined' && location.pathname.endsWith('-cn');
@@ -308,82 +503,91 @@ const App = () => {
   const [provider] = React.useState(() => new DemoAgentProvider());
   const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
 
-  const runs = Object.values(agentState.runs);
-  const latestRun = runs[runs.length - 1];
-  const reasoning = Object.values(agentState.reasoning).at(-1);
-  const tool = Object.values(agentState.toolCalls).at(-1);
-  const progress = !tool
-    ? 0
-    : tool.status === 'completed'
-      ? 100
-      : tool.status === 'running'
-        ? 60
-        : 25;
+  const submit = (prompt: string) => {
+    if (!prompt.trim() || isRequesting) return;
+    onRequest({ prompt, locale: isCN ? 'zh-CN' : 'en-US', outcome });
+    setContent('');
+  };
 
-  return (
-    <Flex vertical gap="middle">
-      <div
-        style={{
-          display: 'grid',
-          gap: 24,
-          gridTemplateColumns: screens.md ? 'minmax(0, 1fr) minmax(260px, 320px)' : '1fr',
-        }}
-      >
-        <Flex vertical style={{ minWidth: 0 }}>
-          {messages.length ? (
-            <Bubble.List
-              autoScroll
-              style={{ height: 360 }}
-              items={messages.map(({ id, message, status }) => ({
-                key: id,
-                role: message.role === 'user' ? 'user' : 'ai',
-                placement: message.role === 'user' ? 'end' : 'start',
-                content: contentToText(message.content),
-                status,
-              }))}
-            />
+  const promptItems = [
+    {
+      key: 'research',
+      icon: <SearchOutlined />,
+      label: isCN ? '调研 Agent UI 的设计趋势' : 'Research Agent UI trends',
+      description: isCN ? '检索资料并生成摘要' : 'Search and create a brief',
+    },
+    {
+      key: 'compare',
+      icon: <FileTextOutlined />,
+      label: isCN ? '整理 Provider 方案对比' : 'Compare Provider approaches',
+      description: isCN ? '输出结构化结论' : 'Produce structured findings',
+    },
+  ];
+
+  const role: BubbleListProps['role'] = {
+    ai: {
+      placement: 'start',
+      avatar: screens.sm ? <Avatar icon={<RobotOutlined />} /> : undefined,
+      variant: 'filled',
+      style: { maxWidth: '100%' },
+      styles: {
+        content: {
+          maxWidth: screens.sm ? 680 : '100%',
+          width: screens.sm ? 'min(680px, 100%)' : '100%',
+        },
+      },
+    },
+    user: { placement: 'end' },
+  };
+
+  const bubbleItems: BubbleListProps['items'] = messages.length
+    ? messages.map(({ id, message, status }) => ({
+        key: id,
+        role: message.role === 'user' ? 'user' : 'ai',
+        content:
+          message.role === 'user' ? (
+            contentToText(message.content)
           ) : (
-            <Flex align="center" justify="center" style={{ height: 360 }}>
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description={isCN ? '暂无运行记录' : 'No runs yet'}
+            <AgentResponse agentState={agentState} isCN={isCN} message={message} />
+          ),
+        status,
+      }))
+    : [
+        {
+          key: 'welcome',
+          role: 'ai',
+          content: (
+            <Flex vertical gap={12}>
+              <div>
+                <Typography.Title level={5} style={{ margin: 0 }}>
+                  {isCN ? '你好，我是本地研究 Agent' : 'Hi, I am a local research agent'}
+                </Typography.Title>
+                <Typography.Text type="secondary">
+                  {isCN
+                    ? '选择一个任务，查看推理、工具、任务和产物如何在聊天中实时更新。'
+                    : 'Pick a task to see reasoning, tools, tasks, and artifacts update in chat.'}
+                </Typography.Text>
+              </div>
+              <Prompts
+                vertical
+                items={promptItems}
+                onItemClick={({ data }) => submit(String(data.label))}
+                styles={{ item: { borderRadius: 6 } }}
               />
             </Flex>
-          )}
-        </Flex>
+          ),
+        },
+      ];
 
-        <section aria-label={isCN ? '运行状态' : 'Run state'}>
-          <Typography.Title level={5} style={{ marginTop: 0 }}>
-            {isCN ? '运行状态' : 'Run state'}
-          </Typography.Title>
-          <Descriptions column={1} size="small">
-            <Descriptions.Item label={isCN ? '状态' : 'Status'}>
-              {latestRun ? (
-                <Badge status={statusMap[latestRun.status]} text={latestRun.status} />
-              ) : (
-                '-'
-              )}
-            </Descriptions.Item>
-            <Descriptions.Item label={isCN ? '推理摘要' : 'Reasoning'}>
-              {reasoning?.summary || reasoning?.content || '-'}
-            </Descriptions.Item>
-            <Descriptions.Item label={isCN ? '工具' : 'Tool'}>
-              {tool ? `${tool.name} · ${tool.status}` : '-'}
-            </Descriptions.Item>
-          </Descriptions>
-          <Progress
-            percent={progress}
-            size="small"
-            status={latestRun?.status === 'failed' ? 'exception' : undefined}
-          />
-          <Divider />
-          <Typography.Text type="secondary">
-            {isCN
-              ? `事件 ${Object.keys(agentState.processedEventIds).length} · 协议问题 ${agentState.issues.length}`
-              : `${Object.keys(agentState.processedEventIds).length} events · ${agentState.issues.length} protocol issues`}
-          </Typography.Text>
-        </section>
-      </div>
+  return (
+    <Flex vertical gap={12}>
+      <Bubble.List
+        autoScroll
+        role={role}
+        style={{ height: screens.sm ? 460 : 420 }}
+        styles={{ scroll: { paddingInline: screens.sm ? 4 : 0 } }}
+        items={bubbleItems}
+      />
 
       <Segmented
         block
@@ -401,11 +605,8 @@ const App = () => {
         onChange={setContent}
         onCancel={abort}
         placeholder={isCN ? '输入任务' : 'Enter a task'}
-        onSubmit={(prompt) => {
-          if (!prompt.trim()) return;
-          onRequest({ prompt, locale: isCN ? 'zh-CN' : 'en-US', outcome });
-          setContent('');
-        }}
+        styles={{ input: { border: 'none', boxShadow: 'none', outline: 'none' } }}
+        onSubmit={submit}
       />
     </Flex>
   );
