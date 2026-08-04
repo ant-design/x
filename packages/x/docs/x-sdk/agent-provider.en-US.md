@@ -8,7 +8,7 @@ subtitle: Agent Event Integration
 description: Adapt any model or Agent Runtime to a unified event stream.
 order: 2
 packageName: x-sdk
-tag: experimental
+tag: 2.9.0
 ---
 
 AgentProvider is a model- and Runtime-independent Agent integration contract. It converts SSE, WebSocket, local Runtimes, recorded fixtures, and other sources into unified Agent Events. The AgentStore inside `useXChat` reduces those events into messages and structured state.
