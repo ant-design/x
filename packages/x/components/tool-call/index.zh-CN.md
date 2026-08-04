@@ -12,13 +12,14 @@ tag: 2.1.0
 ## 何时使用
 
 - 在 Agent 对话或执行时间线中展示一次工具调用。
-- 需要统一呈现流式参数、执行结果、失败原因和重试入口时。
-- 组件只负责展示和传递重试意图；工具执行、权限控制与运行时状态由应用层负责。
+- 需要统一呈现流式参数、人工审批、实时耗时、执行结果、失败原因和重试入口时。
+- 组件负责展示状态并传递审批、取消和重试意图；真实工具执行、权限校验和持久化由应用层负责。
 
 ## 代码演示
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基础用法</code>
+<code src="./demo/approval.tsx">审批与执行</code>
 <code src="./demo/status.tsx">完整状态</code>
 <code src="./demo/controlled.tsx">受控展开</code>
 <code src="./demo/custom-render.tsx">自定义渲染</code>
@@ -37,6 +38,12 @@ tag: 2.1.0
 | onExpandedChange | 展开状态变化回调 | (expanded: boolean) => void | - |
 | retrying | 重试提交中，禁用重试按钮并显示加载态 | boolean | false |
 | onRetry | 重试意图回调 | (item: ToolCallItem) => void | - |
+| approval | 审批配置，支持受控与非受控状态 | [ToolCallApprovalConfig](#toolcallapprovalconfig) | - |
+| approvalRender | 自定义完整审批区域 | (approval, item, actions) => ReactNode | - |
+| duration | 耗时展示配置；设为 false 时隐藏 | boolean \| [ToolCallDurationConfig](#toolcalldurationconfig) | true |
+| cancelling | 取消请求加载态 | boolean | - |
+| onCancel | 执行中取消意图回调 | (item: ToolCallItem) => void \| Promise&lt;void&gt; | - |
+| cancelButtonProps | 取消按钮属性 | ButtonProps | - |
 | argumentsRender | 自定义参数渲染 | (item: ToolCallItem) => ReactNode | - |
 | resultRender | 自定义结果渲染 | (value: unknown, item: ToolCallItem) => ReactNode | - |
 | errorRender | 自定义错误渲染 | (error: ToolCallError, item: ToolCallItem) => ReactNode | - |
@@ -79,9 +86,41 @@ interface ToolCallError {
 }
 ```
 
+### ToolCallApprovalConfig
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| status | 审批状态，受控模式 | pending \| approved \| rejected | - |
+| defaultStatus | 默认审批状态，非受控模式 | pending \| approved \| rejected | pending |
+| title | 审批标题 | ReactNode | 需要审批 |
+| description | 风险或影响说明 | ReactNode | - |
+| risk | 风险级别 | low \| medium \| high | - |
+| approveText | 批准按钮文案 | ReactNode | 批准并执行 |
+| rejectText | 拒绝按钮文案 | ReactNode | 拒绝 |
+| approveButtonProps | 批准按钮属性 | ButtonProps | - |
+| rejectButtonProps | 拒绝按钮属性 | ButtonProps | - |
+| loading | 外部控制动作加载态 | boolean \| approve \| reject | - |
+| onStatusChange | 审批状态变化回调 | (status, item) => void | - |
+| onApprove | 批准回调；Promise 完成后提交状态变化 | (item) => void \| Promise&lt;void&gt; | - |
+| onReject | 拒绝回调；Promise 完成后提交状态变化 | (item) => void \| Promise&lt;void&gt; | - |
+
+未传入 `status` 时，组件会在审批回调成功后更新内部审批状态；传入 `status` 时，应用需要在 `onStatusChange` 中更新它。回调 Promise 被拒绝时保持待审批状态，允许再次操作。真实权限校验仍应在服务端完成。
+
+`approvalRender` 会收到审批配置、当前工具项以及 `{ status, loading, approve, reject }`，可用于实现修改参数后执行、审批原因、始终允许或多人审批等自定义流程。
+
+### ToolCallDurationConfig
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| value | 受控耗时，单位毫秒 | number | - |
+| refreshInterval | 运行中刷新间隔，最小 250ms | number | 1000 |
+| formatter | 自定义耗时渲染 | (milliseconds, item) => ReactNode | - |
+
+默认根据 `startedAt` 实时刷新运行耗时，并在存在 `completedAt` 时冻结。传入 `value` 后完全由应用控制显示值。
+
 `pending`、`streaming`、`running` 和 `failed` 默认展开；`completed` 和 `cancelled` 默认折叠。传入 `expanded` 后由调用方完全控制。
 
-默认重试按钮仅在 `status` 为 `failed`、`error.retryable` 为 `true` 且提供 `onRetry` 时显示。组件不会执行工具，也不会在点击重试后自行修改状态。
+默认重试按钮仅在 `status` 为 `failed`、`error.retryable` 为 `true` 且提供 `onRetry` 时显示。运行态在提供 `onCancel` 时显示取消入口。组件不会直接执行工具，应用应根据事件更新 `item`。
 
 完成态默认显示安全序列化后的结果摘要和复制按钮；展开后可查看完整的可展示结果。
 

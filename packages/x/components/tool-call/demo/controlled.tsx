@@ -22,7 +22,7 @@ const App: React.FC = () => {
   React.useEffect(() => setExpanded(mode === 'inspect'), [mode]);
 
   return (
-    <Space direction="vertical" size={16} style={{ width: '100%' }}>
+    <Space orientation="vertical" size={16} style={{ width: '100%' }}>
       <div
         style={{
           display: 'flex',

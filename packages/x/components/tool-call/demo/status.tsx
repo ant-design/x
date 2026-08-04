@@ -15,6 +15,8 @@ const statusData: Array<{
   { status: 'cancelled', name: 'sendNotification', description: 'Cancelled by the user' },
 ];
 
+const demoStartedAt = Date.now() - 3200;
+
 const makeItem = ({ status, name, description }: (typeof statusData)[number]): ToolCallItem => ({
   id: status,
   name,
@@ -30,6 +32,7 @@ const makeItem = ({ status, name, description }: (typeof statusData)[number]): T
         }
       : undefined,
   status,
+  startedAt: status === 'running' ? demoStartedAt : undefined,
 });
 
 const App: React.FC = () => {

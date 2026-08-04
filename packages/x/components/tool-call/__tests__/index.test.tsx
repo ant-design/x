@@ -1,7 +1,7 @@
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
-import { fireEvent, render, screen } from '../../../tests/utils';
+import { act, fireEvent, render, screen, waitFor } from '../../../tests/utils';
 import XProvider from '../../x-provider';
 import ToolCall from '../index';
 import type { ToolCallItem } from '../interface';
@@ -105,6 +105,130 @@ describe('ToolCall', () => {
     expect(screen.queryByRole('button', { name: 'Retry queryOrder' })).toBeNull();
   });
 
+  it('supports uncontrolled async approval and records the decision', async () => {
+    const onApprove = jest.fn().mockResolvedValue(undefined);
+    const onStatusChange = jest.fn();
+    render(
+      <ToolCall
+        item={{ ...baseItem, status: 'pending' }}
+        approval={{
+          description: 'This action writes production data.',
+          risk: 'high',
+          onApprove,
+          onReject: () => {},
+          onStatusChange,
+        }}
+      />,
+    );
+
+    expect(screen.getAllByText('Awaiting approval').length).toBeGreaterThan(0);
+    expect(screen.getByText('High risk')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Approve and run' }));
+    expect(onApprove).toHaveBeenCalledWith(expect.objectContaining({ id: 'tool-1' }));
+    await waitFor(() => expect(screen.getByText('Approved')).toBeTruthy());
+    expect(onStatusChange).toHaveBeenCalledWith(
+      'approved',
+      expect.objectContaining({ id: 'tool-1' }),
+    );
+  });
+
+  it('supports controlled approval and custom approval rendering', async () => {
+    const onStatusChange = jest.fn();
+    const { rerender } = render(
+      <ToolCall
+        item={{ ...baseItem, status: 'pending' }}
+        approval={{ status: 'pending', onApprove: () => {}, onStatusChange }}
+        approvalRender={(_, __, actions) => (
+          <button type="button" onClick={actions.approve}>
+            Custom approve
+          </button>
+        )}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Custom approve' }));
+    await waitFor(() => expect(onStatusChange).toHaveBeenCalledWith('approved', expect.anything()));
+    expect(screen.getByRole('button', { name: 'Custom approve' })).toBeTruthy();
+
+    rerender(
+      <ToolCall item={{ ...baseItem, status: 'running' }} approval={{ status: 'approved' }} />,
+    );
+    expect(screen.getByText('Approved')).toBeTruthy();
+  });
+
+  it('keeps approval pending when an async action fails', async () => {
+    const onStatusChange = jest.fn();
+    render(
+      <ToolCall
+        item={{ ...baseItem, status: 'pending' }}
+        approval={{
+          onApprove: () => Promise.reject(new Error('Approval service unavailable')),
+          onStatusChange,
+        }}
+      />,
+    );
+
+    const approveButton = screen.getByRole('button', { name: 'Approve and run' });
+    fireEvent.click(approveButton);
+    await waitFor(() => expect(approveButton).not.toBeDisabled());
+    expect(screen.getAllByText('Awaiting approval').length).toBeGreaterThan(0);
+    expect(onStatusChange).not.toHaveBeenCalled();
+  });
+
+  it('updates live duration, supports a controlled value and freezes completion time', () => {
+    jest.useFakeTimers();
+    jest.setSystemTime(5000);
+    const { rerender } = render(
+      <ToolCall item={{ ...baseItem, startedAt: 3000 }} duration={{ refreshInterval: 250 }} />,
+    );
+    expect(screen.getByLabelText('Elapsed time 2.0s')).toBeTruthy();
+
+    act(() => {
+      jest.setSystemTime(6250);
+      jest.advanceTimersByTime(250);
+    });
+    expect(screen.getByLabelText('Elapsed time 3.5s')).toBeTruthy();
+
+    rerender(
+      <ToolCall item={{ ...baseItem, status: 'completed', startedAt: 3000, completedAt: 4280 }} />,
+    );
+    expect(screen.getByLabelText('Elapsed time 1.3s')).toBeTruthy();
+
+    rerender(
+      <ToolCall
+        item={{ ...baseItem, status: 'completed', startedAt: 3000, completedAt: 68_500 }}
+      />,
+    );
+    expect(screen.getByLabelText('Elapsed time 1m 05s')).toBeTruthy();
+
+    rerender(
+      <ToolCall
+        item={baseItem}
+        duration={{ value: 9000, formatter: (value) => `${value / 1000} seconds` }}
+      />,
+    );
+    expect(screen.getByLabelText('Elapsed time 9 seconds')).toBeTruthy();
+    jest.useRealTimers();
+  });
+
+  it('emits cancellation intent and exposes its loading state', async () => {
+    let resolveCancel: () => void = () => {};
+    const onCancel = jest.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveCancel = resolve;
+        }),
+    );
+    render(<ToolCall item={baseItem} onCancel={onCancel} />);
+
+    const cancelButton = screen.getByRole('button', { name: 'Cancel execution queryOrder' });
+    fireEvent.click(cancelButton);
+    expect(onCancel).toHaveBeenCalledWith(baseItem);
+    expect(cancelButton).toBeDisabled();
+    act(() => resolveCancel());
+    await waitFor(() => expect(cancelButton).not.toBeDisabled());
+  });
+
   it('supports renderers, semantic styles, custom actions and ref', () => {
     const ref = React.createRef<{ nativeElement: HTMLDivElement }>();
     const { container } = render(
@@ -131,7 +255,7 @@ describe('ToolCall', () => {
     expect(screen.getByText('custom error')).toBeTruthy();
     expect(screen.getByText('Inspect')).toBeTruthy();
     expect(container.querySelector('.custom-name')).toBeTruthy();
-    expect(container.querySelector('.custom-tool-details')).toHaveStyle({ padding: 24 });
+    expect(container.querySelector('.custom-tool-details')).toHaveStyle({ padding: '24px' });
     expect(ref.current?.nativeElement).toBe(container.querySelector('.custom-tool'));
   });
 
@@ -148,8 +272,8 @@ describe('ToolCall', () => {
         <ToolCall item={baseItem} />
       </XProvider>,
     );
-    expect(container.querySelector('.provider-root')).toHaveStyle({ maxWidth: 640 });
+    expect(container.querySelector('.provider-root')).toHaveStyle({ maxWidth: '640px' });
     expect(container.querySelector('.provider-name')).toBeTruthy();
-    expect(container.querySelector('.ant-tool-call-details')).toHaveStyle({ padding: 12 });
+    expect(container.querySelector('.ant-tool-call-details')).toHaveStyle({ padding: '12px' });
   });
 });

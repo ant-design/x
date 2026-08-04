@@ -1,4 +1,9 @@
 export type {
+  ToolCallApprovalActions,
+  ToolCallApprovalConfig,
+  ToolCallApprovalRisk,
+  ToolCallApprovalStatus,
+  ToolCallDurationConfig,
   ToolCallError,
   ToolCallItem,
   ToolCallProps,

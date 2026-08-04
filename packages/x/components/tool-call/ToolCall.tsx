@@ -6,6 +6,7 @@ import {
   DownOutlined,
   LoadingOutlined,
   ReloadOutlined,
+  SafetyCertificateOutlined,
   StopOutlined,
 } from '@ant-design/icons';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
@@ -98,12 +99,22 @@ const renderArguments = (item: ToolCallItem): string => {
   return safeStringify(item.arguments);
 };
 
-const getDuration = (item: ToolCallItem): string | undefined => {
-  if (item.startedAt === undefined || item.completedAt === undefined) {
-    return undefined;
+const formatDuration = (duration: number): string => {
+  if (duration < 1000) {
+    return `${duration}ms`;
   }
-  const duration = Math.max(0, item.completedAt - item.startedAt);
-  return duration < 1000 ? `${duration}ms` : `${(duration / 1000).toFixed(1)}s`;
+  if (duration < 60_000) {
+    return `${(duration / 1000).toFixed(1)}s`;
+  }
+
+  const totalSeconds = Math.floor(duration / 1000);
+  const seconds = totalSeconds % 60;
+  const totalMinutes = Math.floor(totalSeconds / 60);
+  if (totalMinutes < 60) {
+    return `${totalMinutes}m ${String(seconds).padStart(2, '0')}s`;
+  }
+  const hours = Math.floor(totalMinutes / 60);
+  return `${hours}h ${String(totalMinutes % 60).padStart(2, '0')}m`;
 };
 
 const getResultSummary = (value: unknown): string => {
@@ -119,6 +130,12 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
     onExpandedChange,
     retrying = false,
     onRetry,
+    approval,
+    duration = true,
+    cancelling,
+    onCancel,
+    cancelButtonProps,
+    approvalRender,
     argumentsRender,
     resultRender,
     errorRender,
@@ -141,9 +158,44 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
   const [innerExpanded, setInnerExpanded] = React.useState(
     defaultExpanded ?? DEFAULT_EXPANDED[item.status],
   );
+  const [innerApprovalStatus, setInnerApprovalStatus] = React.useState(
+    approval?.defaultStatus ?? 'pending',
+  );
+  const [innerApprovalAction, setInnerApprovalAction] = React.useState<'approve' | 'reject' | null>(
+    null,
+  );
+  const [innerCancelling, setInnerCancelling] = React.useState(false);
+  const durationConfig = typeof duration === 'object' ? duration : undefined;
+  const durationVisible = duration !== false;
+  const durationRefreshInterval = Math.max(250, durationConfig?.refreshInterval ?? 1000);
+  const shouldTick =
+    durationVisible &&
+    durationConfig?.value === undefined &&
+    item.status === 'running' &&
+    item.startedAt !== undefined;
+  const [now, setNow] = React.useState(item.startedAt ?? 0);
   const mergedExpanded = controlledExpanded ?? innerExpanded;
+  const mergedApprovalStatus = approval?.status ?? innerApprovalStatus;
+  const approvalAction =
+    typeof approval?.loading === 'string'
+      ? approval.loading
+      : approval?.loading
+        ? (innerApprovalAction ?? 'approve')
+        : innerApprovalAction;
+  const mergedCancelling = cancelling ?? innerCancelling;
   const detailsId = `${prefixCls}-details-${React.useId().replace(/:/g, '')}`;
   const rootRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!shouldTick) {
+      return undefined;
+    }
+
+    const update = () => setNow(Date.now());
+    update();
+    const timer = window.setInterval(update, durationRefreshInterval);
+    return () => window.clearInterval(timer);
+  }, [durationRefreshInterval, item.startedAt, shouldTick]);
 
   useProxyImperativeHandle(ref, () => ({ nativeElement: rootRef.current! }));
 
@@ -160,8 +212,21 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
   const hasDetails = hasArguments || hasResult || hasError;
   const canRetry = item.status === 'failed' && item.error?.retryable === true && onRetry;
   const customActions = typeof actions === 'function' ? actions(item) : actions;
-  const duration = getDuration(item);
-  const statusLabel = locale.status[item.status];
+  const hasApproval = approval !== undefined;
+  const hasExpandableContent = hasDetails || hasApproval;
+  const elapsedTime = durationVisible
+    ? (durationConfig?.value ??
+      (item.startedAt === undefined
+        ? undefined
+        : Math.max(0, (item.completedAt ?? now) - item.startedAt)))
+    : undefined;
+  const durationLabel =
+    elapsedTime === undefined
+      ? undefined
+      : (durationConfig?.formatter?.(elapsedTime, item) ?? formatDuration(elapsedTime));
+  const awaitingApproval = hasApproval && mergedApprovalStatus === 'pending';
+  const statusLabel = awaitingApproval ? locale.awaitingApproval : locale.status[item.status];
+  const statusIcon = awaitingApproval ? <SafetyCertificateOutlined /> : STATUS_ICONS[item.status];
   const showResultSummary = item.status === 'completed' && hasResult && !mergedExpanded;
   const domProps = pickAttrs(restProps, { attr: true, aria: true, data: true });
 
@@ -171,6 +236,41 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
     ...contextConfig.styles[name],
     ...styles[name],
   });
+
+  const triggerApproval = async (action: 'approve' | 'reject') => {
+    const callback = action === 'approve' ? approval?.onApprove : approval?.onReject;
+    if (!approval || !callback || approvalAction) {
+      return;
+    }
+
+    setInnerApprovalAction(action);
+    try {
+      await callback(item);
+      const nextStatus = action === 'approve' ? 'approved' : 'rejected';
+      if (approval.status === undefined) {
+        setInnerApprovalStatus(nextStatus);
+      }
+      approval.onStatusChange?.(nextStatus, item);
+    } catch {
+      // A rejected action keeps the approval pending so the user can try again.
+    } finally {
+      setInnerApprovalAction(null);
+    }
+  };
+
+  const triggerCancel = async () => {
+    if (!onCancel || mergedCancelling) {
+      return;
+    }
+    setInnerCancelling(true);
+    try {
+      await onCancel(item);
+    } catch {
+      // Keep the running state when cancellation is rejected by the runtime.
+    } finally {
+      setInnerCancelling(false);
+    }
+  };
 
   const renderError = (error: ToolCallError) => {
     if (errorRender) {
@@ -203,7 +303,10 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
         classNames.root,
         hashId,
         cssVarCls,
-        { [`${prefixCls}-rtl`]: direction === 'rtl' },
+        {
+          [`${prefixCls}-approval-pending`]: awaitingApproval,
+          [`${prefixCls}-rtl`]: direction === 'rtl',
+        },
       )}
       style={{ ...contextConfig.style, ...contextConfig.styles.root, ...styles.root, ...style }}
     >
@@ -214,7 +317,7 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
           data-status={item.status}
         >
           <span className={`${prefixCls}-status-icon`} aria-hidden="true">
-            {STATUS_ICONS[item.status]}
+            {statusIcon}
           </span>
           <span className={`${prefixCls}-status-text`} aria-live="polite">
             {statusLabel}
@@ -229,13 +332,30 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
           </div>
           <div className={semanticClass('description')} style={semanticStyle('description')}>
             {item.description && <span>{item.description}</span>}
-            {item.description && <span aria-hidden="true"> · </span>}
+            {item.description && (
+              <span className={`${prefixCls}-separator`} aria-hidden="true">
+                ·
+              </span>
+            )}
             <span>{statusLabel}</span>
-            {duration && <span aria-hidden="true"> · {duration}</span>}
+            {durationLabel !== undefined && (
+              <span
+                className={`${prefixCls}-duration`}
+                role="timer"
+                aria-label={`${locale.duration} ${durationLabel}`}
+              >
+                <span aria-hidden="true">
+                  <span className={`${prefixCls}-separator`}>·</span>
+                  {durationLabel}
+                </span>
+              </span>
+            )}
             {showResultSummary && (
               <span className={`${prefixCls}-result-summary`}>
-                {' '}
-                · {locale.result}: {getResultSummary(item.result)}
+                <span className={`${prefixCls}-separator`} aria-hidden="true">
+                  ·
+                </span>
+                {`${locale.result}: ${getResultSummary(item.result)}`}
               </span>
             )}
           </div>
@@ -266,7 +386,21 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
               />
             </Tooltip>
           )}
-          {hasDetails && (
+          {item.status === 'running' && onCancel && (
+            <Tooltip title={locale.cancel}>
+              <Button
+                {...cancelButtonProps}
+                type={cancelButtonProps?.type ?? 'text'}
+                size={cancelButtonProps?.size ?? 'small'}
+                icon={cancelButtonProps?.icon ?? <StopOutlined />}
+                loading={mergedCancelling}
+                disabled={mergedCancelling || cancelButtonProps?.disabled}
+                aria-label={cancelButtonProps?.['aria-label'] ?? `${locale.cancel} ${item.name}`}
+                onClick={() => void triggerCancel()}
+              />
+            </Tooltip>
+          )}
+          {hasExpandableContent && (
             <Tooltip title={mergedExpanded ? locale.collapse : locale.expand}>
               <Button
                 type="text"
@@ -285,7 +419,7 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
         </div>
       </div>
 
-      {hasDetails && mergedExpanded && (
+      {hasExpandableContent && mergedExpanded && (
         <div id={detailsId} className={semanticClass('details')} style={semanticStyle('details')}>
           {hasArguments && (
             <section className={semanticClass('arguments')} style={semanticStyle('arguments')}>
@@ -294,6 +428,81 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
                 argumentsRender(item)
               ) : (
                 <pre className={`${prefixCls}-code`}>{renderArguments(item)}</pre>
+              )}
+            </section>
+          )}
+          {hasApproval && (
+            <section
+              className={semanticClass('approval')}
+              style={semanticStyle('approval')}
+              aria-label={locale.approval}
+            >
+              {approvalRender ? (
+                approvalRender(approval, item, {
+                  status: mergedApprovalStatus,
+                  loading: approvalAction,
+                  approve: () => void triggerApproval('approve'),
+                  reject: () => void triggerApproval('reject'),
+                })
+              ) : (
+                <>
+                  <div className={`${prefixCls}-approval-copy`}>
+                    <div className={`${prefixCls}-approval-heading`}>
+                      <SafetyCertificateOutlined aria-hidden="true" />
+                      <span>{approval.title ?? locale.approvalTitle}</span>
+                      {approval.risk && (
+                        <span className={`${prefixCls}-risk ${prefixCls}-risk-${approval.risk}`}>
+                          {locale.riskLevel[approval.risk]}
+                        </span>
+                      )}
+                    </div>
+                    {approval.description && (
+                      <div className={`${prefixCls}-approval-description`}>
+                        {approval.description}
+                      </div>
+                    )}
+                    {mergedApprovalStatus !== 'pending' && (
+                      <div className={`${prefixCls}-approval-decision`} aria-live="polite">
+                        {mergedApprovalStatus === 'approved'
+                          ? locale.approvalApproved
+                          : locale.approvalRejected}
+                      </div>
+                    )}
+                  </div>
+                  {mergedApprovalStatus === 'pending' &&
+                    (approval.onApprove || approval.onReject) && (
+                      <div className={`${prefixCls}-approval-actions`}>
+                        {approval.onReject && (
+                          <Button
+                            {...approval.rejectButtonProps}
+                            size={approval.rejectButtonProps?.size ?? 'small'}
+                            loading={approvalAction === 'reject'}
+                            disabled={
+                              Boolean(approvalAction) || approval.rejectButtonProps?.disabled
+                            }
+                            onClick={() => void triggerApproval('reject')}
+                          >
+                            {approval.rejectText ?? locale.reject}
+                          </Button>
+                        )}
+                        {approval.onApprove && (
+                          <Button
+                            {...approval.approveButtonProps}
+                            type={approval.approveButtonProps?.type ?? 'primary'}
+                            danger={approval.approveButtonProps?.danger ?? approval.risk === 'high'}
+                            size={approval.approveButtonProps?.size ?? 'small'}
+                            loading={approvalAction === 'approve'}
+                            disabled={
+                              Boolean(approvalAction) || approval.approveButtonProps?.disabled
+                            }
+                            onClick={() => void triggerApproval('approve')}
+                          >
+                            {approval.approveText ?? locale.approveAndRun}
+                          </Button>
+                        )}
+                      </div>
+                    )}
+                </>
               )}
             </section>
           )}

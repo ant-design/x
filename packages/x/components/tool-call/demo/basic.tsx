@@ -34,14 +34,24 @@ const App: React.FC = () => {
       arguments: undefined,
       argumentsText: '{\n  "city": "Hangzhou",\n  "days":',
       result: undefined,
+      startedAt: undefined,
+      completedAt: undefined,
       status: 'streaming',
     });
+    let startedAt = 0;
     timers.current = [
       window.setTimeout(() => {
-        setItem({ ...completedItem, result: undefined, status: 'running' });
+        startedAt = Date.now();
+        setItem({
+          ...completedItem,
+          result: undefined,
+          completedAt: undefined,
+          startedAt,
+          status: 'running',
+        });
       }, 900),
       window.setTimeout(() => {
-        setItem(completedItem);
+        setItem({ ...completedItem, startedAt, completedAt: Date.now() });
         setExpanded(false);
       }, 2100),
     ];

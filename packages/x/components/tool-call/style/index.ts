@@ -12,6 +12,7 @@ export interface ComponentToken {
   errorColor: string;
   successColor: string;
   runningColor: string;
+  approvalColor: string;
 }
 
 export interface ToolCallToken extends FullToken<'ToolCall'> {}
@@ -111,6 +112,14 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         color: token.colorTextSecondary,
       },
 
+      [`${componentCls}-separator`]: {
+        marginInline: token.marginXXS,
+      },
+
+      [`${componentCls}-duration`]: {
+        fontVariantNumeric: 'tabular-nums',
+      },
+
       [`${componentCls}-actions`]: {
         display: 'flex',
         alignItems: 'center',
@@ -138,6 +147,77 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 
       [`${componentCls}-arguments, ${componentCls}-result, ${componentCls}-error`]: {
         minWidth: 0,
+      },
+
+      [`${componentCls}-approval`]: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: token.padding,
+        minWidth: 0,
+        padding: `${unit(token.paddingSM)} ${unit(token.padding)}`,
+        background: token.colorWarningBg,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorWarningBorder}`,
+        borderRadius: token.borderRadius,
+      },
+
+      [`${componentCls}-approval-copy`]: {
+        minWidth: 0,
+      },
+
+      [`${componentCls}-approval-heading`]: {
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: token.marginXS,
+        color: token.colorText,
+        fontWeight: token.fontWeightStrong,
+        [`> ${token.iconCls}`]: {
+          color: token.approvalColor,
+        },
+      },
+
+      [`${componentCls}-approval-description`]: {
+        marginTop: token.marginXXS,
+        color: token.colorTextSecondary,
+        fontSize: token.fontSizeSM,
+        lineHeight: token.lineHeight,
+      },
+
+      [`${componentCls}-approval-decision`]: {
+        marginTop: token.marginXXS,
+        color: token.colorTextSecondary,
+        fontSize: token.fontSizeSM,
+        fontWeight: token.fontWeightStrong,
+      },
+
+      [`${componentCls}-approval-actions`]: {
+        display: 'flex',
+        flex: 'none',
+        alignItems: 'center',
+        gap: token.marginXS,
+      },
+
+      [`${componentCls}-risk`]: {
+        display: 'inline-flex',
+        alignItems: 'center',
+        minHeight: token.controlHeightXS,
+        paddingInline: token.paddingXS,
+        color: token.colorTextSecondary,
+        fontSize: token.fontSizeSM,
+        fontWeight: 'normal',
+        background: token.colorFillSecondary,
+        borderRadius: token.borderRadiusSM,
+      },
+
+      [`${componentCls}-risk-medium`]: {
+        color: token.colorWarningText,
+        background: token.colorWarningBg,
+      },
+
+      [`${componentCls}-risk-high`]: {
+        color: token.colorErrorText,
+        background: token.colorErrorBg,
       },
 
       [`${componentCls}-section-title`]: {
@@ -193,6 +273,9 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         {
           color: token.runningColor,
         },
+      [`&${componentCls}-approval-pending ${componentCls}-status`]: {
+        color: token.approvalColor,
+      },
       [`&${componentCls}-failed`]: {
         borderColor: token.colorErrorBorder,
         [`${componentCls}-status`]: { color: token.errorColor },
@@ -218,6 +301,17 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         [`${componentCls}-details`]: {
           padding: token.paddingSM,
         },
+        [`${componentCls}-approval`]: {
+          alignItems: 'stretch',
+          flexDirection: 'column',
+          padding: token.paddingSM,
+        },
+        [`${componentCls}-approval-actions`]: {
+          justifyContent: 'flex-end',
+          [`${token.antCls}-btn`]: {
+            minWidth: 88,
+          },
+        },
       },
     },
   };
@@ -232,6 +326,7 @@ export const prepareComponentToken: GetDefaultToken<'ToolCall'> = (token) => ({
   errorColor: token.colorError,
   successColor: token.colorSuccess,
   runningColor: token.colorPrimary,
+  approvalColor: token.colorWarning,
 });
 
 export default genStyleHooks<'ToolCall'>(

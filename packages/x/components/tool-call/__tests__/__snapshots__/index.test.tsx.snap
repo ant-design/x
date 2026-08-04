@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`ToolCall rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  aria-label="queryOrder"
+  class="ant-tool-call ant-tool-call-running css-var-root ant-tool-call-rtl"
+  role="group"
+>
+  <div
+    class="ant-tool-call-header"
+  >
+    <span
+      class="ant-tool-call-status"
+      data-status="running"
+    >
+      <span
+        aria-hidden="true"
+        class="ant-tool-call-status-icon"
+      >
+        <span
+          aria-label="loading"
+          class="anticon anticon-loading anticon-spin"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="loading"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="0 0 1024 1024"
+            width="1em"
+          >
+            <path
+              d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span
+        aria-live="polite"
+        class="ant-tool-call-status-text"
+      >
+        Running
+      </span>
+    </span>
+    <div
+      class="ant-tool-call-summary"
+    >
+      <div
+        class="ant-tool-call-name"
+      >
+        queryOrder
+      </div>
+      <div
+        class="ant-tool-call-description"
+      >
+        <span>
+          Query order details
+        </span>
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-separator"
+        >
+          ·
+        </span>
+        <span>
+          Running
+        </span>
+      </div>
+    </div>
+    <div
+      class="ant-tool-call-actions"
+    >
+      <button
+        aria-controls="ant-tool-call-details-_r_4_"
+        aria-expanded="true"
+        aria-label="Collapse details"
+        class="ant-btn css-var-root ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-btn-rtl ant-tool-call-expand ant-tool-call-expand-open"
+        type="button"
+      >
+        <span
+          class="ant-btn-icon"
+        >
+          <span
+            aria-label="down"
+            class="anticon anticon-down"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="down"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+              />
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="ant-tool-call-details"
+    id="ant-tool-call-details-_r_4_"
+  >
+    <section
+      class="ant-tool-call-arguments"
+    >
+      <div
+        class="ant-tool-call-section-title"
+      >
+        Arguments
+      </div>
+      <pre
+        class="ant-tool-call-code"
+      >
+        {
+  "orderId": "20260803001"
+}
+      </pre>
+    </section>
+  </div>
+</div>
+`;

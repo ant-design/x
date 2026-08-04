@@ -26,8 +26,8 @@ const App: React.FC = () => {
         argumentsRender={(current) => (
           <Space wrap>
             {Object.entries(current.arguments as Record<string, unknown>).map(([key, value]) => (
-              <Tag key={key} bordered={false} color="blue">
-                {key}: {String(value)}
+              <Tag key={key} variant="filled" color="blue">
+                {`${key}: ${String(value)}`}
               </Tag>
             ))}
           </Space>

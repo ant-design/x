@@ -36,4 +36,28 @@ describe('ToolCall accessibility', () => {
     expect(button).toHaveFocus();
     expect(button).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('exposes approval controls and risk without violations', async () => {
+    const { container } = render(
+      <ToolCall
+        item={{
+          id: 'tool-approval',
+          name: 'deployProduction',
+          arguments: { version: '2.0.0' },
+          status: 'pending',
+        }}
+        approval={{
+          description: 'Changes production traffic.',
+          risk: 'high',
+          onApprove: () => {},
+          onReject: () => {},
+        }}
+      />,
+    );
+    expect(screen.getByLabelText('Tool approval')).toBeTruthy();
+    expect(screen.getByText('High risk')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Approve and run' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Reject' })).toBeTruthy();
+    expect(await axe(container)).toHaveNoViolations();
+  });
 });
