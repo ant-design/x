@@ -69,6 +69,7 @@ export async function runAgentProvider<Input, Request, Chunk, Context>(
   } catch (error) {
     if (error instanceof AgentEventConsumerError) throw error.cause;
     if (error instanceof AgentProviderProtocolError) throw error;
+    if (controller.signal.aborted) return;
     provider.transformError(error, context).forEach(emit);
   } finally {
     externalSignal?.removeEventListener('abort', abort);

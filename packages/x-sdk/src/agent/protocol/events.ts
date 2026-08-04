@@ -87,6 +87,8 @@ export interface AgentEventPayloadMap {
     name: string;
     arguments?: string;
     index?: number;
+    attempt?: number;
+    retryOf?: string;
   };
   'tool.arguments_delta': {
     toolCallId: string;
@@ -113,6 +115,9 @@ export interface AgentEventPayloadMap {
     description?: string;
     risk?: 'low' | 'medium' | 'high' | (string & {});
     data?: unknown;
+    editable?: boolean;
+    expiresAt?: number;
+    version?: string | number;
   };
   'approval.resolved': {
     approvalId: string;
@@ -366,7 +371,10 @@ export function isAgentEvent(value: unknown): value is AgentEvent {
         hasId(payload, 'toolCallId') &&
         hasString(payload, 'name') &&
         hasOptionalString(payload, 'arguments') &&
-        (payload.index === undefined || Number.isInteger(payload.index))
+        (payload.index === undefined || Number.isInteger(payload.index)) &&
+        (payload.attempt === undefined ||
+          (Number.isInteger(payload.attempt) && (payload.attempt as number) >= 1)) &&
+        hasOptionalString(payload, 'retryOf')
       );
     case 'tool.arguments_delta':
       return hasId(payload, 'toolCallId') && typeof payload.delta === 'string';
@@ -382,7 +390,13 @@ export function isAgentEvent(value: unknown): value is AgentEvent {
         hasId(payload, 'approvalId') &&
         hasOptionalString(payload, 'toolCallId') &&
         hasOptionalString(payload, 'description') &&
-        hasOptionalString(payload, 'risk')
+        hasOptionalString(payload, 'risk') &&
+        (payload.editable === undefined || typeof payload.editable === 'boolean') &&
+        (payload.expiresAt === undefined ||
+          (typeof payload.expiresAt === 'number' && Number.isFinite(payload.expiresAt))) &&
+        (payload.version === undefined ||
+          typeof payload.version === 'string' ||
+          (typeof payload.version === 'number' && Number.isFinite(payload.version)))
       );
     case 'approval.resolved':
       return (
