@@ -28,6 +28,7 @@ Model / Agent Runtime / Fixture
 
 <!-- prettier-ignore -->
 <code src="./demos/x-chat/agent-provider.tsx">通用 AgentProvider</code>
+<code src="./demos/x-chat/agent-interaction.tsx">Agent 命令交互</code>
 
 ## 快速使用
 
@@ -64,23 +65,56 @@ interface AgentProvider<Input, Request, Chunk, Context = unknown> {
   transformChunk(chunk: Chunk, context: Context): readonly AgentEvent[];
   flush(context: Context): readonly AgentEvent[];
   transformError(error: unknown, context: Context): readonly AgentEvent[];
+  executeCommand?(command: AgentCommand, options: AgentCommandOptions): AsyncIterable<AgentEvent>;
 }
 ```
 
-| 成员             | 职责                                                        |
-| ---------------- | ----------------------------------------------------------- |
-| `id`             | Provider 唯一标识，只作为元信息，不参与能力判断             |
-| `protocol`       | 显式声明事件协议和版本，`useXChat` 通过它识别 AgentProvider |
-| `capabilities`   | 声明可能输出的事件类型和 Transport 类型                     |
-| `transport`      | 绑定请求执行方式，前端不单独配置                            |
-| `createContext`  | 创建单次 Run 的跨 Chunk 解析上下文                          |
-| `start`          | 产生 Run、用户消息或初始实体事件                            |
-| `prepareRequest` | 将 `onRequest` 输入转换为 Runtime 请求                      |
-| `transformChunk` | 将一个 Chunk 转换为零到多个标准事件                         |
-| `flush`          | 流结束时关闭剩余实体并产生 Run 终态                         |
-| `transformError` | 将异常或中断转换为失败/取消事件                             |
+| 成员             | 职责                                                          |
+| ---------------- | ------------------------------------------------------------- |
+| `id`             | Provider 唯一标识，只作为元信息，不参与能力判断               |
+| `protocol`       | 显式声明事件协议和版本，`useXChat` 通过它识别 AgentProvider   |
+| `capabilities`   | 声明可能输出的事件类型和 Transport 类型                       |
+| `transport`      | 绑定请求执行方式，前端不单独配置                              |
+| `createContext`  | 创建单次 Run 的跨 Chunk 解析上下文                            |
+| `start`          | 产生 Run、用户消息或初始实体事件                              |
+| `prepareRequest` | 将 `onRequest` 输入转换为 Runtime 请求                        |
+| `transformChunk` | 将一个 Chunk 转换为零到多个标准事件                           |
+| `flush`          | 流结束时关闭剩余实体并产生 Run 终态                           |
+| `transformError` | 将异常或中断转换为失败/取消事件                               |
+| `executeCommand` | 执行 UI 发起的审批、工具重试或 Run 取消命令，并返回标准事件流 |
 
 Provider 不负责 React 渲染、维护另一套消息状态、执行工具或根据模型名称猜测能力。
+
+## 命令交互
+
+Provider 通过 `capabilities.commands` 声明支持的命令，并通过 `executeCommand` 将命令交给 Runtime：
+
+```tsx | pure
+const capabilities = {
+  eventTypes: [
+    'approval.resolved',
+    'tool.requested',
+    'tool.running',
+    'tool.completed',
+    'run.cancelled',
+  ],
+  transports: ['company.sse'],
+  commands: ['approval.resolve', 'tool.retry', 'run.cancel'],
+};
+
+async function* executeCommand(command, { signal, initialSequence }) {
+  const events = createAgentEventFactory({
+    sessionId: command.sessionId,
+    runId: command.runId,
+    initialSequence,
+  });
+
+  const result = await runtime.execute(command, { signal });
+  yield events.create('approval.resolved', result);
+}
+```
+
+每个命令都包含 `commandId` 和 `idempotencyKey`。Provider 应将幂等键透传给服务端，并确保返回事件属于命令指定的 `sessionId` 和 `runId`，且 `sequence` 大于 `initialSequence`。命令成功表示 Provider 的命令事件流正常结束；实体是否完成仍由返回的 AgentEvent 决定。
 
 ## Transport
 
