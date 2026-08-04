@@ -1,4 +1,5 @@
-import { act, renderHook } from '../../../tests/utils';
+import React from 'react';
+import { act, render, renderHook } from '../../../tests/utils';
 import type {
   AgentCommand,
   AgentCommandType,
@@ -424,6 +425,212 @@ describe('useAgentChatRuntime', () => {
     expect(getLatestCommand(result)).toMatchObject({
       error: { code: 'protocol_error', retryable: false },
     });
+  });
+
+  it('continues queued commands after an earlier command fails', async () => {
+    const provider = createProvider({
+      start(input, { events }) {
+        return [
+          events.create('run.started', { input }),
+          events.create('approval.requested', { approvalId: 'approval-1' }),
+          events.create('tool.requested', { toolCallId: 'tool-1', name: 'search' }),
+          events.create('tool.failed', {
+            toolCallId: 'tool-1',
+            error: { message: 'timeout', retryable: true },
+          }),
+        ];
+      },
+      async *executeCommand(command, commandOptions) {
+        if (command.type === 'approval.resolve') throw new Error('approval failed');
+        const events = createCommandEvents(command, commandOptions);
+        yield events.create('tool.requested', {
+          toolCallId: 'tool-2',
+          name: 'search',
+          attempt: 2,
+          retryOf: 'tool-1',
+        });
+        yield events.create('tool.completed', { toolCallId: 'tool-2', result: 'ok' });
+      },
+    });
+    const conversationKey = 'agent-runtime-queue-after-error';
+    const { result } = renderHook(() => useXChat({ provider, conversationKey }));
+    const runId = await startRun(result);
+    let approval!: Promise<any>;
+    let retry!: Promise<any>;
+
+    act(() => {
+      approval = result.current!.agentActions.resolveApproval({
+        runId,
+        approvalId: 'approval-1',
+        decision: 'approved',
+      });
+      retry = result.current!.agentActions.retryTool({ runId, toolCallId: 'tool-1' });
+    });
+    let settled!: PromiseSettledResult<any>[];
+    await act(async () => {
+      settled = await Promise.allSettled([approval, retry]);
+    });
+
+    expect(settled.map(({ status }) => status)).toEqual(['rejected', 'fulfilled']);
+    expect(result.current!.agentState.toolCalls[getAgentEntityKey(runId, 'tool-2')]).toMatchObject({
+      status: 'completed',
+    });
+  });
+
+  it('aborts other queued commands when a command terminates the run', async () => {
+    const provider = createProvider({
+      start(input, { events }) {
+        return [
+          events.create('run.started', { input }),
+          events.create('approval.requested', { approvalId: 'approval-1' }),
+          events.create('tool.requested', { toolCallId: 'tool-1', name: 'search' }),
+          events.create('tool.failed', {
+            toolCallId: 'tool-1',
+            error: { message: 'timeout', retryable: true },
+          }),
+        ];
+      },
+      async *executeCommand(command, commandOptions) {
+        const events = createCommandEvents(command, commandOptions);
+        yield events.create('run.cancelled', { reason: 'runtime stopped' });
+      },
+    });
+    const conversationKey = 'agent-runtime-terminal-queue';
+    const { result } = renderHook(() => useXChat({ provider, conversationKey }));
+    const runId = await startRun(result);
+    let approval!: Promise<any>;
+    let retry!: Promise<any>;
+
+    act(() => {
+      approval = result.current!.agentActions.resolveApproval({
+        runId,
+        approvalId: 'approval-1',
+        decision: 'approved',
+      });
+      retry = result.current!.agentActions.retryTool({ runId, toolCallId: 'tool-1' });
+    });
+    let settled!: PromiseSettledResult<any>[];
+    await act(async () => {
+      settled = await Promise.allSettled([approval, retry]);
+    });
+
+    expect(settled[0].status).toBe('fulfilled');
+    expect(settled[1]).toMatchObject({
+      status: 'rejected',
+      reason: { code: 'invalid_command', message: expect.stringContaining('already cancelled') },
+    });
+  });
+
+  it('rejects command events overtaken by the active run stream', async () => {
+    let releaseTransport!: () => void;
+    const transportGate = new Promise<void>((resolve) => {
+      releaseTransport = resolve;
+    });
+    let releaseCommand!: () => void;
+    const commandGate = new Promise<void>((resolve) => {
+      releaseCommand = resolve;
+    });
+    const provider = createProvider({
+      start(input, { events }) {
+        return [
+          events.create('run.started', { input }),
+          events.create('approval.requested', { approvalId: 'approval-1' }),
+        ];
+      },
+      async *executeCommand(command, commandOptions) {
+        const events = createCommandEvents(command, commandOptions);
+        await commandGate;
+        yield events.create('approval.resolved', {
+          approvalId: 'approval-1',
+          decision: 'approved',
+        });
+      },
+    });
+    provider.transport.open = () => {
+      let emitted = false;
+      return {
+        [Symbol.asyncIterator]() {
+          return {
+            async next() {
+              if (emitted) return new Promise<IteratorResult<never>>(() => {});
+              emitted = true;
+              await transportGate;
+              return { done: false, value: undefined as never };
+            },
+          };
+        },
+      };
+    };
+    provider.transformChunk = (_chunk, context) => [
+      context.events.create('task.created', { taskId: 'task-1', title: 'Concurrent task' }),
+    ];
+    const conversationKey = 'agent-runtime-sequence-race';
+    const { result } = renderHook(() => useXChat({ provider, conversationKey }));
+    const runId = await startRun(result);
+    let action!: Promise<any>;
+    act(() => {
+      action = result.current!.agentActions.resolveApproval({
+        runId,
+        approvalId: 'approval-1',
+        decision: 'approved',
+      });
+    });
+    releaseTransport();
+    await flush();
+    releaseCommand();
+
+    let caught: unknown;
+    await act(async () => {
+      try {
+        await action;
+      } catch (error) {
+        caught = error;
+      }
+    });
+    expect(caught).toMatchObject({
+      code: 'protocol_error',
+      message: expect.stringContaining('must be greater than'),
+    });
+  });
+
+  it('interrupts active commands when the hook unmounts', async () => {
+    const provider = createProvider({
+      start(input, { events }) {
+        return [
+          events.create('run.started', { input }),
+          events.create('approval.requested', { approvalId: 'approval-1' }),
+        ];
+      },
+      async *executeCommand(_command, { signal }) {
+        yield await new Promise<AgentEvent>((_resolve, reject) => {
+          const abort = () => reject(new DOMException('Unmounted', 'AbortError'));
+          if (signal.aborted) abort();
+          else signal.addEventListener('abort', abort, { once: true });
+        });
+      },
+    });
+    const conversationKey = 'agent-runtime-unmount';
+    let current: any;
+    const Demo = () => {
+      current = useXChat({ provider, conversationKey });
+      return null;
+    };
+    const view = render(<Demo />);
+    act(() => current.onRequest('start'));
+    await flush();
+    const runId = Object.keys(current.agentState.runs)[0];
+    let action!: Promise<any>;
+    act(() => {
+      action = current.agentActions.resolveApproval({
+        runId,
+        approvalId: 'approval-1',
+        decision: 'approved',
+      });
+    });
+    const settled = action.catch((error) => error);
+    view.unmount();
+
+    await expect(settled).resolves.toMatchObject({ name: 'AbortError' });
   });
 
   it('guards runtime methods when no AgentProvider is configured', () => {

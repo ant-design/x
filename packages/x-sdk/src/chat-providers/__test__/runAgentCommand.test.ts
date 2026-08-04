@@ -128,7 +128,14 @@ describe('runAgentCommand', () => {
   it.each([
     ['invalid event', (event: AgentEvent) => ({ ...event, payload: {} })],
     ['wrong session', (event: AgentEvent) => ({ ...event, sessionId: 'other' })],
-    ['undeclared type', (event: AgentEvent) => ({ ...event, type: 'task.created' })],
+    [
+      'undeclared type',
+      (event: AgentEvent) => ({
+        ...event,
+        type: 'task.created',
+        payload: { taskId: 'task-1', title: 'Task' },
+      }),
+    ],
     ['old sequence', (event: AgentEvent) => ({ ...event, sequence: 2 })],
   ])('rejects %s from the provider', async (_name, mutate) => {
     const events = eventFactory();
@@ -205,6 +212,28 @@ describe('runAgentCommand', () => {
         signal: during.signal,
         initialSequence: -1,
         onEvent: () => during.abort('during'),
+      }),
+    ).rejects.toMatchObject({ name: 'AbortError' });
+
+    const after = new AbortController();
+    const afterProvider = createProvider();
+    afterProvider.executeCommand = () => ({
+      [Symbol.asyncIterator]() {
+        return {
+          async next() {
+            after.abort('after');
+            return { done: true, value: undefined };
+          },
+        };
+      },
+    });
+    await expect(
+      runAgentCommand({
+        provider: afterProvider,
+        command: commandFactory.create('run.cancel', {}),
+        signal: after.signal,
+        initialSequence: -1,
+        onEvent: () => {},
       }),
     ).rejects.toMatchObject({ name: 'AbortError' });
   });
