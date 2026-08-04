@@ -14,6 +14,8 @@ title: A2UI v0.9
 <code src="./demo/A2UI_v0.9/form-validation.tsx">表单验证</code>
 <code src="./demo/A2UI_v0.9/action-context-resolve.tsx">Action Context 解析</code>
 
+生产环境的协议归一化、Catalog 校验、原子事务、快照和回滚用法见 [Surface Runtime](/x-cards/surface-runtime-cn)。
+
 ## API
 
 通用属性参考：[通用属性](/docs/react/common-props)

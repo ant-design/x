@@ -501,12 +501,16 @@ const AccordionPanel: React.FC<AccordionPanelProps> = ({ panels, children }) => 
         <Text strong>{panel.title}</Text>
       </Space>
     ),
-    children: <Text style={{ fontSize: 13, whiteSpace: 'pre-wrap' }}>{panel.content}</Text>,
+    children: (
+      <Text style={{ fontSize: 13, whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>
+        {panel.content}
+      </Text>
+    ),
     style: { marginBottom: 8, borderRadius: 8 },
   }));
 
   return (
-    <div style={{ minWidth: 300 }}>
+    <div style={{ width: '100%', minWidth: 0 }}>
       <Collapse
         accordion
         items={items}
@@ -533,7 +537,9 @@ const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
         marginBlock: 16,
-        minWidth: 500,
+        width: '100%',
+        minWidth: 0,
+        boxSizing: 'border-box',
       }}
     >
       <Space vertical style={{ width: '100%' }} size={16}>

@@ -86,26 +86,28 @@ sequenceDiagram
 | Feature | v0.8 | v0.9 |
 | --- | --- | --- |
 | **Version field** | No explicit version field | Explicit `version: 'v0.9'` field |
-| **Surface creation** | Implicit (auto-created on first updateComponents) | Explicit `createSurface` command |
+| **Surface creation** | Implicit (auto-created on first `surfaceUpdate`) | Explicit `createSurface` command |
 | **Data model update** | Uses `contents` array | Uses `path` and `value` fields |
 | **Component definition** | More complex nested structure | Simpler flat structure |
 | **Recommendation** | Deprecated, compatibility only | **Recommended** |
 
 ### v0.8 Message Format (Deprecated)
 
-v0.8 uses implicit Surface creation — a Surface is automatically created when the Agent sends the first `updateComponents`:
+v0.8 uses implicit Surface creation — a Surface is automatically created when the Agent sends the first `surfaceUpdate`:
 
 ```typescript
-// v0.8 has no explicit version field
+// A v0.8 payload has no explicit version field
 {
-  updateComponents: {
+  surfaceUpdate: {
     surfaceId: 'booking',
-    catalogId: 'https://example.com/catalogs/booking/v1/catalog.json',
     components: [
       {
         id: 'root',
-        component: 'Column',
-        children: ['header', 'content']
+        component: {
+          Column: {
+            children: { explicitList: ['header', 'content'] }
+          }
+        }
       }
     ]
   }
@@ -116,15 +118,27 @@ v0.8 uses implicit Surface creation — a Surface is automatically created when 
 
 ```typescript
 {
-  updateDataModel: {
+  dataModelUpdate: {
     surfaceId: 'booking',
     contents: [
       {
-        op: 'replace',
-        path: '/reservation/guests',
-        value: 3
+        key: 'reservation',
+        valueMap: [
+          { key: 'guests', valueString: '3' }
+        ]
       }
     ]
+  }
+}
+```
+
+After components and data arrive, `beginRendering` selects the root node:
+
+```typescript
+{
+  beginRendering: {
+    surfaceId: 'booking',
+    root: 'root'
   }
 }
 ```
@@ -181,8 +195,8 @@ If you are using v0.8, follow these steps to migrate to v0.9:
 Add `version: 'v0.9'` to all messages:
 
 ```typescript
-// v0.8
-{ updateComponents: { ... } }
+// v0.8 payload
+{ surfaceUpdate: { ... } }
 
 // v0.9
 { version: 'v0.9', updateComponents: { ... } }
@@ -190,11 +204,11 @@ Add `version: 'v0.9'` to all messages:
 
 #### 2. Explicitly Create Surface
 
-Send `createSurface` before `updateComponents`:
+Send `createSurface` before `updateComponents`. A v0.8 adapter binds its Catalog on the client, while v0.9 declares it in the command:
 
 ```typescript
-// v0.8: implicit creation
-{ updateComponents: { surfaceId: 'booking', catalogId: '...', components: [...] } }
+// v0.8: surfaceUpdate creates implicitly
+{ surfaceUpdate: { surfaceId: 'booking', components: [...] } }
 
 // v0.9: explicit creation
 [
@@ -210,10 +224,10 @@ Replace the `contents` array with `path` + `value`:
 ```typescript
 // v0.8
 {
-  updateDataModel: {
+  dataModelUpdate: {
     surfaceId: 'booking',
     contents: [
-      { op: 'replace', path: '/guests', value: 3 }
+      { key: 'reservation', valueMap: [{ key: 'guests', valueString: '3' }] }
     ]
   }
 }
@@ -234,10 +248,10 @@ Replace the `contents` array with `path` + `value`:
 v0.9 supports updating entire objects, reducing message count:
 
 ```typescript
-// v0.8: multiple messages required
+// v0.8: valueMap only carries string values
 [
-  { updateDataModel: { surfaceId: 'booking', contents: [{ op: 'add', path: '/date', value: '2025-12-16' }] } },
-  { updateDataModel: { surfaceId: 'booking', contents: [{ op: 'add', path: '/guests', value: 2 }] } }
+  { dataModelUpdate: { surfaceId: 'booking', contents: [{ key: 'date', valueString: '2025-12-16' }] } },
+  { dataModelUpdate: { surfaceId: 'booking', contents: [{ key: 'guests', valueString: '2' }] } }
 ]
 
 // v0.9: one message is enough
@@ -262,17 +276,13 @@ import type { XAgentCommand_v0_8, XAgentCommand_v0_9 } from '@ant-design/x-card'
 const commands: (XAgentCommand_v0_8 | XAgentCommand_v0_9)[] = [
   // v0.8 message
   {
-    updateComponents: {
-      /* ... */
-    },
+    surfaceUpdate: {/* ... */},
   },
 
   // v0.9 message
   {
     version: 'v0.9',
-    createSurface: {
-      /* ... */
-    },
+    createSurface: {/* ... */},
   },
 ];
 
@@ -504,12 +514,8 @@ import type { XAgentCommand_v0_9, Catalog, ActionPayload } from '@ant-design/x-c
 const catalog: Catalog = {
   catalogId: 'my-app-catalog',
   components: {
-    Text: {
-      /* ... */
-    },
-    Button: {
-      /* ... */
-    },
+    Text: {/* ... */},
+    Button: {/* ... */},
   },
 };
 
@@ -521,9 +527,7 @@ const commands: XAgentCommand_v0_9[] = [
     version: 'v0.9',
     updateComponents: {
       surfaceId: 'booking',
-      components: [
-        /* ... */
-      ],
+      components: [/* ... */],
     },
   },
 ];

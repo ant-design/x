@@ -153,8 +153,9 @@ const LoadingProgress: React.FC<LoadingProgressProps> = ({
         borderRadius: 12,
         border: '1px solid #f0f0f0',
         marginBottom: 16,
-        minWidth: 320,
+        width: '100%',
         maxWidth: 480,
+        boxSizing: 'border-box',
       }}
     >
       <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'space-between' }}>
@@ -229,7 +230,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
       }}
       styles={{ body: { padding: '16px 20px' } }}
     >
-      <div style={{ display: 'flex', gap: 16 }}>
+      <div style={{ display: 'flex', gap: 12 }}>
         {/* Left icon */}
         <div
           style={{
@@ -249,16 +250,32 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
 
         {/* Right content */}
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 8,
+              marginBottom: 4,
+            }}
+          >
             <Typography.Text strong style={{ fontSize: 16 }}>
               {restaurant.name}
             </Typography.Text>
-            <Tag color="blue" style={{ margin: 0 }}>
+            <Tag color="blue" style={{ margin: 0, maxWidth: '100%', whiteSpace: 'normal' }}>
               {restaurant.cuisine}
             </Tag>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 8,
+              marginBottom: 6,
+            }}
+          >
             <Rate disabled defaultValue={restaurant.rating} style={{ fontSize: 12 }} />
             <Typography.Text style={{ fontSize: 13, color: '#faad14' }}>
               {restaurant.rating}
@@ -279,7 +296,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
             {restaurant.description}
           </Typography.Text>
 
-          <div style={{ display: 'flex', gap: 6 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
             {restaurant.tags.map((tag, i) => (
               <Tag
                 key={i}
@@ -289,6 +306,8 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, index = 0, 
                   background: '#f5f5f5',
                   border: 'none',
                   margin: 0,
+                  maxWidth: '100%',
+                  whiteSpace: 'normal',
                 }}
               >
                 {tag}
@@ -321,7 +340,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   return (
     <div
       style={{
-        minWidth: 320,
+        width: '100%',
         maxWidth: 480,
       }}
     >
@@ -374,8 +393,9 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
         marginBlock: 16,
-        minWidth: 320,
+        width: '100%',
         maxWidth: 520,
+        boxSizing: 'border-box',
       }}
     >
       {children}

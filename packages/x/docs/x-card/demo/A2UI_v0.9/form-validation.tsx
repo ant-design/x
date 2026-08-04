@@ -154,8 +154,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         padding: '24px',
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-        minWidth: 480,
+        width: '100%',
+        minWidth: 0,
         maxWidth: 600,
+        boxSizing: 'border-box',
       }}
     >
       <Steps current={currentStep} items={steps} style={{ marginBottom: 24 }} />
@@ -315,8 +317,10 @@ const SuccessCard: React.FC<SuccessCardProps> = ({ username, email, accountType 
         padding: '24px',
         background: 'linear-gradient(135deg, #f6ffed 0%, #fff 100%)',
         boxShadow: '0 2px 12px rgba(82,196,26,0.15)',
-        minWidth: 400,
+        width: '100%',
+        minWidth: 0,
         maxWidth: 500,
+        boxSizing: 'border-box',
       }}
     >
       <div style={{ textAlign: 'center', marginBottom: 24 }}>

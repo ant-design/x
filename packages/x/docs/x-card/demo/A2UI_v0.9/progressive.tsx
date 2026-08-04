@@ -187,14 +187,15 @@ const ProductContainer: React.FC<ProductContainerProps> = ({ children }) => {
         border: '1px solid #e8e8e8',
         padding: 20,
         background: '#fafafa',
-        minWidth: 320,
+        width: '100%',
         maxWidth: 720,
+        boxSizing: 'border-box',
       }}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
           gap: 16,
         }}
       >
@@ -226,8 +227,9 @@ const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
         borderRadius: 12,
         marginBlock: 16,
         border: '1px solid #e8e8e8',
-        minWidth: 320,
+        width: '100%',
         maxWidth: 720,
+        boxSizing: 'border-box',
       }}
     >
       <Space vertical style={{ width: '100%' }} size={12}>
