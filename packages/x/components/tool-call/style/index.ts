@@ -31,10 +31,12 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
       background: token.colorBgContainer,
       border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
       borderRadius: token.borderRadiusLG,
+      boxShadow: token.boxShadowTertiary,
       transition: `border-color ${token.motionDurationMid}, box-shadow ${token.motionDurationMid}`,
 
       '&:hover': {
         borderColor: token.colorBorder,
+        boxShadow: token.boxShadowSecondary,
       },
 
       [`${componentCls}-header`]: {
@@ -45,14 +47,13 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         minHeight: token.controlHeightLG,
         padding: `${unit(token.paddingSM)} ${unit(token.padding)}`,
         background: token.headerBg,
+        transition: `background-color ${token.motionDurationMid}`,
       },
 
       [`${componentCls}-status`]: {
-        alignSelf: 'start',
         display: 'inline-flex',
         alignItems: 'center',
-        gap: token.marginXXS,
-        minHeight: token.controlHeightSM,
+        justifyContent: 'center',
         color: token.colorTextSecondary,
       },
 
@@ -62,7 +63,10 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         justifyContent: 'center',
         width: token.statusSize,
         height: token.statusSize,
-        fontSize: token.statusSize,
+        fontSize: token.fontSize,
+        background: token.colorFillSecondary,
+        borderRadius: token.borderRadiusSM,
+        transition: `color ${token.motionDurationMid}, background-color ${token.motionDurationMid}`,
       },
 
       [`${componentCls}-status-text`]: {
@@ -126,6 +130,12 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         gap: token.actionGap,
         [`${token.antCls}-btn`]: {
           flex: 'none',
+          color: token.colorTextSecondary,
+          borderRadius: token.borderRadiusSM,
+          '&:hover': {
+            color: token.colorText,
+            background: token.colorFillSecondary,
+          },
         },
       },
 
@@ -157,7 +167,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         minWidth: 0,
         padding: `${unit(token.paddingSM)} ${unit(token.padding)}`,
         background: token.colorWarningBg,
-        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorWarningBorder}`,
+        borderInlineStart: `${unit(calc(token.lineWidth).mul(3).equal())} solid ${token.colorWarning}`,
         borderRadius: token.borderRadius,
       },
 
@@ -206,8 +216,8 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         color: token.colorTextSecondary,
         fontSize: token.fontSizeSM,
         fontWeight: 'normal',
-        background: token.colorFillSecondary,
-        borderRadius: token.borderRadiusSM,
+        background: token.colorFill,
+        borderRadius: token.borderRadiusXS,
       },
 
       [`${componentCls}-risk-medium`]: {
@@ -222,7 +232,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 
       [`${componentCls}-section-title`]: {
         marginBottom: token.marginXS,
-        color: token.colorTextSecondary,
+        color: token.colorTextDescription,
         fontSize: token.fontSizeSM,
         fontWeight: token.fontWeightStrong,
       },
@@ -240,15 +250,20 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         overflowWrap: 'normal',
         whiteSpace: 'pre-wrap',
         wordBreak: 'normal',
-        background: token.colorFillQuaternary,
-        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
-        borderRadius: token.borderRadius,
+        background: token.colorBgContainer,
+        border: 0,
+        borderRadius: token.borderRadiusSM,
       },
 
       [`${componentCls}-error`]: {
-        paddingInlineStart: token.paddingSM,
+        padding: token.paddingSM,
         color: token.errorColor,
-        borderInlineStart: `${unit(calc(token.lineWidth).mul(2).equal())} solid ${token.errorColor}`,
+        background: token.colorErrorBg,
+        borderInlineStart: `${unit(calc(token.lineWidth).mul(3).equal())} solid ${token.errorColor}`,
+        borderRadius: token.borderRadius,
+        [`${componentCls}-section-title`]: {
+          color: token.errorColor,
+        },
       },
 
       [`${componentCls}-error-message`]: {
@@ -268,20 +283,36 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 
       [`&${componentCls}-completed ${componentCls}-status`]: {
         color: token.successColor,
+        [`${componentCls}-status-icon`]: {
+          background: token.colorSuccessBg,
+        },
       },
       [`&${componentCls}-streaming ${componentCls}-status, &${componentCls}-running ${componentCls}-status`]:
         {
           color: token.runningColor,
+          [`${componentCls}-status-icon`]: {
+            background: token.colorPrimaryBg,
+          },
         },
       [`&${componentCls}-approval-pending ${componentCls}-status`]: {
         color: token.approvalColor,
+        [`${componentCls}-status-icon`]: {
+          background: token.colorWarningBg,
+        },
       },
       [`&${componentCls}-failed`]: {
-        borderColor: token.colorErrorBorder,
-        [`${componentCls}-status`]: { color: token.errorColor },
+        [`${componentCls}-status`]: {
+          color: token.errorColor,
+          [`${componentCls}-status-icon`]: {
+            background: token.colorErrorBg,
+          },
+        },
       },
       [`&${componentCls}-cancelled ${componentCls}-status`]: {
         color: token.colorTextQuaternary,
+        [`${componentCls}-status-icon`]: {
+          background: token.colorFillTertiary,
+        },
       },
 
       [`&${componentCls}-rtl`]: {
@@ -318,9 +349,9 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 };
 
 export const prepareComponentToken: GetDefaultToken<'ToolCall'> = (token) => ({
-  headerBg: token.colorFillQuaternary,
-  detailBg: token.colorBgContainer,
-  statusSize: token.fontSizeLG,
+  headerBg: token.colorBgContainer,
+  detailBg: token.colorFillQuaternary,
+  statusSize: token.controlHeightSM,
   actionGap: token.marginXXS,
   contentMaxHeight: 320,
   errorColor: token.colorError,
