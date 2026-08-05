@@ -50,9 +50,6 @@ const STATUS_ICONS: Record<ToolCallStatus, React.ReactNode> = {
 const MAX_CONTENT_LENGTH = 20_000;
 
 const valueType = (value: unknown): string => {
-  if (value === null) {
-    return 'null';
-  }
   if (Array.isArray(value)) {
     return `Array(${value.length})`;
   }

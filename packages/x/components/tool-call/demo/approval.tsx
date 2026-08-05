@@ -3,25 +3,57 @@ import type { ToolCallApprovalStatus, ToolCallItem } from '@ant-design/x';
 import { ToolCall } from '@ant-design/x';
 import { Button, Tag } from 'antd';
 import React from 'react';
+import useLocale from '../../../.dumi/hooks/useLocale';
 
-const initialItem: ToolCallItem = {
-  id: 'deploy-production',
-  name: 'deployProduction',
-  description: 'checkout-api · v2.18.0 · cn-hangzhou',
-  arguments: {
-    service: 'checkout-api',
-    version: 'v2.18.0',
-    strategy: 'canary',
-    traffic: '10% → 50% → 100%',
-    rollbackOnError: true,
+const locales = {
+  cn: {
+    title: '发布控制台',
+    subtitle: '生产环境部署',
+    reset: '重置流程',
+    approvalTitle: '需要生产环境权限',
+    approvalDescription: '此操作将调整线上流量，已启用健康检查和自动回滚。',
+    approve: '批准部署',
+    waiting: '等待有权限的操作人审批',
+    running: '审批已记录 · 正在发布',
+    completed: '部署完成 · 审计事件已记录',
+    stopped: '执行已停止 · 无待生效的生产变更',
   },
-  status: 'pending',
+  en: {
+    title: 'Release control',
+    subtitle: 'Production deployment',
+    reset: 'Reset workflow',
+    approvalTitle: 'Production access required',
+    approvalDescription:
+      'This action changes live traffic. Health checks and automatic rollback are enabled.',
+    approve: 'Approve deployment',
+    waiting: 'Waiting for an authorized operator',
+    running: 'Approval recorded · rollout in progress',
+    completed: 'Deployment completed · audit event recorded',
+    stopped: 'Execution stopped · no production changes pending',
+  },
 };
 
 const wait = (milliseconds: number) =>
   new Promise<void>((resolve) => window.setTimeout(resolve, milliseconds));
 
 const App: React.FC = () => {
+  const [locale] = useLocale(locales);
+  const initialItem = React.useMemo<ToolCallItem>(
+    () => ({
+      id: 'deploy-production',
+      name: 'deployProduction',
+      description: 'checkout-api · v2.18.0 · cn-hangzhou',
+      arguments: {
+        service: 'checkout-api',
+        version: 'v2.18.0',
+        strategy: 'canary',
+        traffic: '10% → 50% → 100%',
+        rollbackOnError: true,
+      },
+      status: 'pending',
+    }),
+    [],
+  );
   const [item, setItem] = React.useState<ToolCallItem>(initialItem);
   const [approvalStatus, setApprovalStatus] = React.useState<ToolCallApprovalStatus>('pending');
   const completionTimer = React.useRef<number | undefined>(undefined);
@@ -72,18 +104,13 @@ const App: React.FC = () => {
             <RocketOutlined />
           </span>
           <div>
-            <strong>Release control</strong>
-            <span>Production deployment</span>
+            <strong>{locale.title}</strong>
+            <span>{locale.subtitle}</span>
           </div>
         </div>
         <div className="approval-demo-meta">
           <Tag color="red">PROD</Tag>
-          <Button
-            type="text"
-            icon={<ReloadOutlined />}
-            aria-label="Reset workflow"
-            onClick={reset}
-          />
+          <Button type="text" icon={<ReloadOutlined />} aria-label={locale.reset} onClick={reset} />
         </div>
       </div>
 
@@ -93,11 +120,10 @@ const App: React.FC = () => {
         onCancel={cancel}
         approval={{
           status: approvalStatus,
-          title: 'Production access required',
-          description:
-            'This action changes live traffic. Health checks and automatic rollback are enabled.',
+          title: locale.approvalTitle,
+          description: locale.approvalDescription,
           risk: 'high',
-          approveText: 'Approve deployment',
+          approveText: locale.approve,
           onApprove: () => wait(650),
           onReject: () => wait(350),
           onStatusChange: handleApprovalChange,
@@ -108,12 +134,12 @@ const App: React.FC = () => {
         <span className={`approval-demo-dot approval-demo-dot-${item.status}`} />
         <span>
           {approvalStatus === 'pending'
-            ? 'Waiting for an authorized operator'
+            ? locale.waiting
             : item.status === 'running'
-              ? 'Approval recorded · rollout in progress'
+              ? locale.running
               : item.status === 'completed'
-                ? 'Deployment completed · audit event recorded'
-                : 'Execution stopped · no production changes pending'}
+                ? locale.completed
+                : locale.stopped}
         </span>
       </div>
 

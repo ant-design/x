@@ -1,3 +1,4 @@
+import copy from 'copy-to-clipboard';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
@@ -5,6 +6,8 @@ import { act, fireEvent, render, screen, waitFor } from '../../../tests/utils';
 import XProvider from '../../x-provider';
 import ToolCall from '../index';
 import type { ToolCallItem } from '../interface';
+
+jest.mock('copy-to-clipboard', () => jest.fn());
 
 const baseItem: ToolCallItem = {
   id: 'tool-1',
@@ -45,6 +48,30 @@ describe('ToolCall', () => {
     expect(screen.getByText('{"city":"Hang')).toBeTruthy();
   });
 
+  it('serializes primitive, missing and oversized values safely', () => {
+    const { rerender } = render(
+      <ToolCall item={{ ...baseItem, arguments: 'plain text' }} defaultExpanded />,
+    );
+    expect(screen.getByText('plain text')).toBeTruthy();
+
+    rerender(<ToolCall item={{ ...baseItem, arguments: 42 }} defaultExpanded />);
+    expect(screen.getByText('42')).toBeTruthy();
+
+    rerender(<ToolCall item={{ ...baseItem, arguments: false }} defaultExpanded />);
+    expect(screen.getByText('false')).toBeTruthy();
+
+    rerender(<ToolCall item={{ ...baseItem, arguments: null }} defaultExpanded />);
+    expect(screen.getByText('null')).toBeTruthy();
+
+    rerender(<ToolCall item={{ ...baseItem, arguments: Symbol('token') }} defaultExpanded />);
+    expect(screen.getByText('[Symbol]')).toBeTruthy();
+
+    rerender(
+      <ToolCall item={{ ...baseItem, arguments: new Array(10_001).fill('x') }} defaultExpanded />,
+    );
+    expect(screen.getByText(/^\[Array\(10001\), [\d,]+ characters\]$/)).toBeTruthy();
+  });
+
   it('falls back safely for circular and binary values', () => {
     const circular: Record<string, unknown> = {};
     circular.self = circular;
@@ -57,12 +84,19 @@ describe('ToolCall', () => {
       <ToolCall item={{ ...baseItem, arguments: new Uint8Array([1, 2, 3]) }} defaultExpanded />,
     );
     expect(screen.getByText('[Uint8Array data]')).toBeTruthy();
+
+    rerender(<ToolCall item={{ ...baseItem, arguments: new ArrayBuffer(4) }} defaultExpanded />);
+    expect(screen.getByText('[ArrayBuffer data]')).toBeTruthy();
+
+    rerender(<ToolCall item={{ ...baseItem, arguments: new Blob(['data']) }} defaultExpanded />);
+    expect(screen.getByText('[Object data]')).toBeTruthy();
   });
 
   it('supports uncontrolled expansion with status defaults', () => {
     render(<ToolCall item={{ ...baseItem, status: 'completed', result: { ok: true } }} />);
     expect(screen.getByText(/Result: \{ "ok": true \}/)).toBeTruthy();
-    expect(screen.getByRole('button', { name: 'Copy result queryOrder' })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Copy result queryOrder' }));
+    expect(copy).toHaveBeenCalledWith('{\n  "ok": true\n}');
     fireEvent.click(screen.getByRole('button', { name: 'Expand details' }));
     expect(screen.getByText(/"ok": true/)).toBeTruthy();
   });
@@ -156,6 +190,54 @@ describe('ToolCall', () => {
     expect(screen.getByText('Approved')).toBeTruthy();
   });
 
+  it('supports rejection and prevents repeated approval actions while loading', async () => {
+    let resolveApproval: () => void = () => {};
+    const onApprove = jest.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          resolveApproval = resolve;
+        }),
+    );
+    const onReject = jest.fn().mockResolvedValue(undefined);
+    const { rerender } = render(
+      <ToolCall
+        item={{ ...baseItem, status: 'pending' }}
+        approval={{ onApprove, onReject }}
+        approvalRender={(_, __, actions) => (
+          <>
+            <button type="button" onClick={actions.approve}>
+              Custom approve
+            </button>
+            <button type="button" onClick={actions.reject}>
+              Custom reject
+            </button>
+            <span>{actions.loading ?? 'idle'}</span>
+          </>
+        )}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Custom approve' }));
+    await waitFor(() => expect(screen.getByText('approve')).toBeTruthy());
+    fireEvent.click(screen.getByRole('button', { name: 'Custom approve' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Custom reject' }));
+    expect(onApprove).toHaveBeenCalledTimes(1);
+    expect(onReject).not.toHaveBeenCalled();
+    act(() => resolveApproval());
+    await waitFor(() => expect(screen.getByText('idle')).toBeTruthy());
+
+    rerender(
+      <ToolCall
+        key="reject"
+        item={{ ...baseItem, status: 'pending' }}
+        approval={{ defaultStatus: 'pending', onReject }}
+      />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Reject' }));
+    await waitFor(() => expect(screen.getByText('Rejected')).toBeTruthy());
+    expect(onReject).toHaveBeenCalledWith(expect.objectContaining({ id: 'tool-1' }));
+  });
+
   it('keeps approval pending when an async action fails', async () => {
     const onStatusChange = jest.fn();
     render(
@@ -203,6 +285,13 @@ describe('ToolCall', () => {
 
     rerender(
       <ToolCall
+        item={{ ...baseItem, status: 'completed', startedAt: 3000, completedAt: 3_663_000 }}
+      />,
+    );
+    expect(screen.getByLabelText('Elapsed time 1h 01m')).toBeTruthy();
+
+    rerender(
+      <ToolCall
         item={baseItem}
         duration={{ value: 9000, formatter: (value) => `${value / 1000} seconds` }}
       />,
@@ -227,6 +316,16 @@ describe('ToolCall', () => {
     expect(cancelButton).toBeDisabled();
     act(() => resolveCancel());
     await waitFor(() => expect(cancelButton).not.toBeDisabled());
+  });
+
+  it('restores cancellation controls when cancellation fails', async () => {
+    const onCancel = jest.fn().mockRejectedValue(new Error('Runtime refused cancellation'));
+    render(<ToolCall item={baseItem} onCancel={onCancel} />);
+
+    const cancelButton = screen.getByRole('button', { name: 'Cancel execution queryOrder' });
+    fireEvent.click(cancelButton);
+    await waitFor(() => expect(cancelButton).not.toBeDisabled());
+    expect(onCancel).toHaveBeenCalledWith(baseItem);
   });
 
   it('supports renderers, semantic styles, custom actions and ref', () => {

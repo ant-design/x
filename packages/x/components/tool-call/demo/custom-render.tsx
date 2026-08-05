@@ -3,6 +3,26 @@ import type { ToolCallItem } from '@ant-design/x';
 import { ToolCall } from '@ant-design/x';
 import { Button, message, Progress, Space, Tag, Tooltip, Typography } from 'antd';
 import React from 'react';
+import useLocale from '../../../.dumi/hooks/useLocale';
+
+const locales = {
+  cn: {
+    healthy: '预览环境运行正常',
+    latency: '平均延迟',
+    millisecond: '毫秒',
+    copyUrl: '复制预览地址',
+    openPreview: '打开预览',
+    copied: '预览地址已复制',
+  },
+  en: {
+    healthy: 'Preview is healthy',
+    latency: 'Average latency',
+    millisecond: 'ms',
+    copyUrl: 'Copy preview URL',
+    openPreview: 'Open preview',
+    copied: 'Preview URL copied',
+  },
+};
 
 const item: ToolCallItem = {
   id: 'deploy-1',
@@ -15,6 +35,7 @@ const item: ToolCallItem = {
 };
 
 const App: React.FC = () => {
+  const [locale] = useLocale(locales);
   const [messageApi, contextHolder] = message.useMessage();
 
   return (
@@ -37,9 +58,9 @@ const App: React.FC = () => {
           return (
             <div className="deploy-result">
               <div>
-                <Typography.Text strong>Preview is healthy</Typography.Text>
+                <Typography.Text strong>{locale.healthy}</Typography.Text>
                 <Typography.Text type="secondary">
-                  {result.latency} ms average latency
+                  {`${locale.latency} ${result.latency} ${locale.millisecond}`}
                 </Typography.Text>
               </div>
               <Progress percent={result.health} size="small" status="success" />
@@ -48,21 +69,21 @@ const App: React.FC = () => {
         }}
         actions={() => (
           <Space size={2}>
-            <Tooltip title="Copy preview URL">
+            <Tooltip title={locale.copyUrl}>
               <Button
                 type="text"
                 size="small"
                 icon={<CopyOutlined />}
-                aria-label="Copy preview URL"
-                onClick={() => messageApi.success('Preview URL copied')}
+                aria-label={locale.copyUrl}
+                onClick={() => messageApi.success(locale.copied)}
               />
             </Tooltip>
-            <Tooltip title="Open preview">
+            <Tooltip title={locale.openPreview}>
               <Button
                 type="text"
                 size="small"
                 icon={<ExportOutlined />}
-                aria-label="Open preview"
+                aria-label={locale.openPreview}
               />
             </Tooltip>
           </Space>

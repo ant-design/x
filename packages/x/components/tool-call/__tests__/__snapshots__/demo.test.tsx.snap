@@ -318,7 +318,9 @@ exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
       <strong>
         Travel assistant
       </strong>
-      <span>
+      <span
+        class="demo-connection-status"
+      >
         Connected · tools ready
       </span>
     </div>
@@ -540,13 +542,13 @@ exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
         .tool-call-basic-demo { max-width: 760px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; }
         .demo-command-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
         .demo-command-bar strong { display: block; color: #111827; font-size: 15px; }
-        .demo-command-bar span { display: block; margin-top: 2px; color: #22a06b; font-size: 12px; }
+        .demo-connection-status { display: block; margin-top: 2px; color: #22a06b; font-size: 12px; }
         .demo-agent-message { display: flex; align-items: flex-start; gap: 12px; }
         .demo-agent-mark { display: grid; flex: none; place-items: center; width: 32px; height: 32px; color: #fff; font-size: 11px; font-weight: 700; background: #1677ff; border-radius: 7px; }
         .demo-agent-content { min-width: 0; flex: 1; }
         .demo-agent-content p { margin: 5px 0 14px; color: #4b5563; line-height: 1.6; }
         .demo-agent-content .demo-answer { margin: 14px 0 0; color: #111827; }
-        @media (max-width: 480px) { .tool-call-basic-demo { padding: 12px; } .demo-command-bar { align-items: flex-start; } .demo-command-bar span { max-width: 140px; } }
+        @media (max-width: 480px) { .tool-call-basic-demo { padding: 12px; } .demo-command-bar { align-items: flex-start; } .demo-connection-status { max-width: 140px; } }
   </style>
 </div>
 `;
@@ -1112,9 +1114,7 @@ Array [
             <span
               class="ant-typography ant-typography-secondary css-var-_R_0_"
             >
-              82
-              <!-- -->
-               ms average latency
+              Average latency 82 ms
             </span>
           </div>
           <div

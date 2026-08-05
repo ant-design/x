@@ -2,20 +2,39 @@ import type { ToolCallItem } from '@ant-design/x';
 import { ToolCall } from '@ant-design/x';
 import { Segmented, Space, Switch, Typography } from 'antd';
 import React from 'react';
+import useLocale from '../../../.dumi/hooks/useLocale';
 
-const item: ToolCallItem = {
-  id: 'analytics-1',
-  name: 'runSalesAnalysis',
-  description: 'Quarterly revenue by product line',
-  arguments: {
-    period: { from: '2026-04-01', to: '2026-06-30' },
-    dimensions: ['productLine', 'region'],
+const locales = {
+  cn: {
+    description: '按产品线分析季度收入',
+    compact: '精简',
+    inspect: '检查',
+    details: '展开详情',
   },
-  result: { rows: 128, currency: 'CNY', generatedAt: '2026-08-04T10:20:00Z' },
-  status: 'completed',
+  en: {
+    description: 'Quarterly revenue by product line',
+    compact: 'Compact',
+    inspect: 'Inspect',
+    details: 'Details',
+  },
 };
 
 const App: React.FC = () => {
+  const [locale] = useLocale(locales);
+  const item = React.useMemo<ToolCallItem>(
+    () => ({
+      id: 'analytics-1',
+      name: 'runSalesAnalysis',
+      description: locale.description,
+      arguments: {
+        period: { from: '2026-04-01', to: '2026-06-30' },
+        dimensions: ['productLine', 'region'],
+      },
+      result: { rows: 128, currency: 'CNY', generatedAt: '2026-08-04T10:20:00Z' },
+      status: 'completed',
+    }),
+    [locale],
+  );
   const [mode, setMode] = React.useState<'compact' | 'inspect'>('inspect');
   const [expanded, setExpanded] = React.useState(true);
 
@@ -35,13 +54,13 @@ const App: React.FC = () => {
         <Segmented
           value={mode}
           options={[
-            { label: 'Compact', value: 'compact' },
-            { label: 'Inspect', value: 'inspect' },
+            { label: locale.compact, value: 'compact' },
+            { label: locale.inspect, value: 'inspect' },
           ]}
           onChange={setMode}
         />
         <Space>
-          <Typography.Text type="secondary">Details</Typography.Text>
+          <Typography.Text type="secondary">{locale.details}</Typography.Text>
           <Switch checked={expanded} onChange={setExpanded} />
         </Space>
       </div>

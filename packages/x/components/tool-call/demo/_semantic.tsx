@@ -33,7 +33,7 @@ const locales = {
 };
 
 const App: React.FC = () => {
-  const [locale] = useLocale(locales);
+  const [locale, localeType] = useLocale(locales);
   return (
     <SemanticPreview
       componentName="ToolCall"
@@ -44,10 +44,13 @@ const App: React.FC = () => {
         item={{
           id: 'semantic',
           name: 'queryOrder',
-          description: 'Order query',
+          description: localeType === 'cn' ? '订单查询' : 'Order query',
           status: 'failed',
           arguments: { orderId: '20260803001' },
-          error: { message: 'Service unavailable', retryable: true },
+          error: {
+            message: localeType === 'cn' ? '服务不可用' : 'Service unavailable',
+            retryable: true,
+          },
         }}
         onRetry={() => {}}
       />

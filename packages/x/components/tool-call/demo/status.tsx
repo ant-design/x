@@ -1,23 +1,45 @@
 import type { ToolCallItem, ToolCallStatus } from '@ant-design/x';
 import { ToolCall } from '@ant-design/x';
 import React from 'react';
+import useLocale from '../../../.dumi/hooks/useLocale';
 
-const statusData: Array<{
-  status: ToolCallStatus;
-  name: string;
-  description: string;
-}> = [
-  { status: 'pending', name: 'reserveInventory', description: 'Waiting for an execution slot' },
-  { status: 'streaming', name: 'searchCatalog', description: 'Receiving structured arguments' },
-  { status: 'running', name: 'calculateShipping', description: 'Calling logistics providers' },
-  { status: 'completed', name: 'queryOrder', description: 'Order #20260803001' },
-  { status: 'failed', name: 'createShipment', description: 'Provider request failed' },
-  { status: 'cancelled', name: 'sendNotification', description: 'Cancelled by the user' },
+const locales = {
+  cn: {
+    pending: '等待执行资源',
+    streaming: '正在接收结构化参数',
+    running: '正在调用物流服务',
+    completed: '订单 #20260803001',
+    failed: '服务商请求失败',
+    cancelled: '用户已取消',
+    error: '物流服务商未响应。',
+  },
+  en: {
+    pending: 'Waiting for an execution slot',
+    streaming: 'Receiving structured arguments',
+    running: 'Calling logistics providers',
+    completed: 'Order #20260803001',
+    failed: 'Provider request failed',
+    cancelled: 'Cancelled by the user',
+    error: 'The shipping provider did not respond.',
+  },
+};
+
+const statuses: Array<{ status: ToolCallStatus; name: string }> = [
+  { status: 'pending', name: 'reserveInventory' },
+  { status: 'streaming', name: 'searchCatalog' },
+  { status: 'running', name: 'calculateShipping' },
+  { status: 'completed', name: 'queryOrder' },
+  { status: 'failed', name: 'createShipment' },
+  { status: 'cancelled', name: 'sendNotification' },
 ];
 
 const demoStartedAt = Date.now() - 3200;
 
-const makeItem = ({ status, name, description }: (typeof statusData)[number]): ToolCallItem => ({
+const makeItem = (
+  { status, name }: (typeof statuses)[number],
+  description: string,
+  errorMessage: string,
+): ToolCallItem => ({
   id: status,
   name,
   description,
@@ -27,7 +49,7 @@ const makeItem = ({ status, name, description }: (typeof statusData)[number]): T
     status === 'failed'
       ? {
           code: 'PROVIDER_TIMEOUT',
-          message: 'The shipping provider did not respond.',
+          message: errorMessage,
           retryable: true,
         }
       : undefined,
@@ -36,14 +58,15 @@ const makeItem = ({ status, name, description }: (typeof statusData)[number]): T
 });
 
 const App: React.FC = () => {
+  const [locale] = useLocale(locales);
   const [retrying, setRetrying] = React.useState(false);
 
   return (
     <div className="tool-call-status-grid">
-      {statusData.map((entry) => (
+      {statuses.map((entry) => (
         <ToolCall
           key={entry.status}
-          item={makeItem(entry)}
+          item={makeItem(entry, locale[entry.status], locale.error)}
           retrying={entry.status === 'failed' && retrying}
           onRetry={() => {
             setRetrying(true);
