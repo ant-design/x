@@ -338,7 +338,7 @@ export function reduceAgentState(state: AgentState, event: AgentEvent): AgentSta
     case 'tool.requested': {
       const missingRun = requireRun(state, event);
       if (missingRun) return missingRun;
-      const { toolCallId, name, index, arguments: args = '' } = event.payload;
+      const { toolCallId, name, index, attempt = 1, retryOf, arguments: args = '' } = event.payload;
       const entityKey = getAgentEntityKey(event.runId, toolCallId);
       if (state.toolCalls[entityKey]) {
         return reject(
@@ -358,6 +358,8 @@ export function reduceAgentState(state: AgentState, event: AgentEvent): AgentSta
             name,
             arguments: args,
             index,
+            attempt,
+            retryOf,
             status: 'pending',
             createdAt: event.timestamp,
             updatedAt: event.timestamp,
@@ -426,7 +428,8 @@ export function reduceAgentState(state: AgentState, event: AgentEvent): AgentSta
     case 'approval.requested': {
       const missingRun = requireRun(state, event);
       if (missingRun) return missingRun;
-      const { approvalId, toolCallId, description, risk, data } = event.payload;
+      const { approvalId, toolCallId, description, risk, data, editable, expiresAt, version } =
+        event.payload;
       const entityKey = getAgentEntityKey(event.runId, approvalId);
       if (state.approvals[entityKey]) {
         return reject(state, event, 'duplicate_entity', `Approval "${approvalId}" already exists.`);
@@ -442,6 +445,9 @@ export function reduceAgentState(state: AgentState, event: AgentEvent): AgentSta
             description,
             risk,
             data,
+            editable,
+            expiresAt,
+            version,
             status: 'waiting',
             createdAt: event.timestamp,
             updatedAt: event.timestamp,

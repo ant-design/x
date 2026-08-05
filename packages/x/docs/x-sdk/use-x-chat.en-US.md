@@ -21,6 +21,7 @@ Manage conversation data through Agent and produce data for page rendering.
 <code src="./demos/x-chat/openai.tsx">OpenAI Model Integration</code>
 <code src="./demos/x-chat/deepSeek.tsx">Thinking Model Integration</code>
 <code src="./demos/x-chat/agent-provider.tsx">Generic AgentProvider Integration</code>
+<code src="./demos/x-chat/agent-interaction.tsx">Agent Command Interaction</code>
 <code src="./demos/x-chat/defaultMessages.tsx">Historical Messages Setup</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">Request Remote Historical Messages</code>
 <code src="./demos/x-chat/developer.tsx">System Prompt Setup</code>
@@ -45,7 +46,16 @@ type useXChat<
 AgentProvider uses the same Hook. The overload infers input, Chunk, and structured state types:
 
 ```tsx | pure
-const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
+const {
+  messages,
+  agentState,
+  agentActions,
+  commandStates,
+  latestCommandByAction,
+  onRequest,
+  abort,
+  isRequesting,
+} = useXChat({ provider });
 ```
 
 See [Agent Provider](/x-sdks/agent-provider) for the complete contract and implementation guide.
@@ -86,6 +96,9 @@ See [Agent Provider](/x-sdks/agent-provider) for the complete contract and imple
 | removeMessage | Deleting a single message will not trigger a request | (id: string \| number) => boolean | - | - |
 | queueRequest | Will add the request to a queue, waiting for the conversationKey to be initialized before sending | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
 | agentState | Complete structured state in AgentProvider mode; `undefined` in regular ChatProvider mode | AgentState \| undefined | undefined | - |
+| agentActions | Approval, tool retry, and Run cancellation operations in AgentProvider mode; `undefined` in regular ChatProvider mode | AgentActions \| undefined | undefined | - |
+| commandStates | Command submission state for the active Runs, keyed by `commandId` | Record\<string, AgentCommandState\> \| undefined | undefined | - |
+| latestCommandByAction | Maps an action key to its latest `commandId` for duplicate prevention and control state lookup | Record\<string, string\> \| undefined | undefined | - |
 
 ### AgentProvider Mode
 
@@ -94,6 +107,28 @@ AgentProvider mode accepts only `provider`, `conversationKey`, `defaultMessages`
 `messages` remains compatible with existing message components and contains `AgentMessageState`. Non-message data such as reasoning, tools, approvals, tasks, and artifacts is available from `agentState`.
 
 `setMessages`, `setMessage`, and `removeMessage` only affect the compatibility message layer and do not directly mutate `agentState`. In AgentProvider mode, `onReload` starts a new Run.
+
+#### Agent Actions
+
+After an AgentProvider declares command capabilities and implements `executeCommand`, the UI invokes operations through `agentActions`:
+
+```tsx | pure
+await agentActions.resolveApproval({
+  runId,
+  approvalId,
+  decision: 'approved',
+  expectedVersion: approval.version,
+});
+
+await agentActions.retryTool({ runId, toolCallId });
+await agentActions.cancelRun({ runId, reason: 'User cancelled' });
+```
+
+- `resolveApproval` only accepts a non-expired Approval in the `waiting` state.
+- `retryTool` only accepts a failed ToolCall with `error.retryable === true`.
+- `cancelRun` is a business command sent to the Runtime and waits for `run.cancelled`; `abort()` only interrupts the local Transport.
+- Commands for one Run execute serially. The SDK rejects duplicate in-flight actions and further actions after cancellation is submitted.
+- `commandStates` exposes `submitting`, `succeeded`, and `failed`, and is cleared after the Run reaches a terminal state.
 
 #### MessageInfo
 

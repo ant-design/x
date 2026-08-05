@@ -1,3 +1,4 @@
+import type { AgentCommand, AgentCommandType } from '../agent/command';
 import type {
   AgentEvent,
   AgentEventFactory,
@@ -10,7 +11,15 @@ export type AgentTransportKind = 'sse' | 'websocket' | 'async-iterable' | `${str
 export interface AgentProviderCapabilities {
   eventTypes: readonly AgentEventType[];
   transports: readonly AgentTransportKind[];
+  commands?: readonly AgentCommandType[];
+  resumable?: boolean;
   extensions?: Readonly<Record<`${string}.${string}`, unknown>>;
+}
+
+export interface AgentCommandOptions {
+  signal: AbortSignal;
+  initialSequence: number;
+  now?: () => number;
 }
 
 export interface AgentRunOptions {
@@ -41,6 +50,8 @@ export interface AgentProvider<Input, Request, Chunk, Context = unknown> {
   transformChunk(chunk: Chunk, context: Context): readonly AgentEvent[];
   flush(context: Context): readonly AgentEvent[];
   transformError(error: unknown, context: Context): readonly AgentEvent[];
+  classifyError?(error: unknown, context: Context): { retryable: boolean };
+  executeCommand?(command: AgentCommand, options: AgentCommandOptions): AsyncIterable<AgentEvent>;
 }
 
 export interface AgentTransport<Request, Chunk> {
@@ -52,6 +63,15 @@ export interface RunAgentProviderOptions<Input, Request, Chunk, Context> {
   provider: AgentProvider<Input, Request, Chunk, Context>;
   input: Input;
   run: AgentRunOptions;
+  onEvent: (event: AgentEvent) => void;
+}
+
+export interface RunAgentCommandOptions {
+  provider: AgentProvider<any, any, any, any>;
+  command: AgentCommand;
+  signal?: AbortSignal;
+  initialSequence: number;
+  now?: () => number;
   onEvent: (event: AgentEvent) => void;
 }
 
