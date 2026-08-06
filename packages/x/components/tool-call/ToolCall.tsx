@@ -26,6 +26,7 @@ import type {
   ToolCallRef,
   ToolCallSemanticType,
   ToolCallStatus,
+  ToolCallStatusIconType,
 } from './interface';
 import useStyle from './style';
 
@@ -122,6 +123,7 @@ const getResultSummary = (value: unknown): string => {
 const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
   const {
     item,
+    statusIcons,
     expanded: controlledExpanded,
     defaultExpanded,
     onExpandedChange,
@@ -223,7 +225,29 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
       : (durationConfig?.formatter?.(elapsedTime, item) ?? formatDuration(elapsedTime));
   const awaitingApproval = hasApproval && mergedApprovalStatus === 'pending';
   const statusLabel = awaitingApproval ? locale.awaitingApproval : locale.status[item.status];
-  const statusIcon = awaitingApproval ? <SafetyCertificateOutlined /> : STATUS_ICONS[item.status];
+  const statusIconType: ToolCallStatusIconType = awaitingApproval ? 'approval' : item.status;
+  const configuredStatusIcon = statusIcons?.[statusIconType];
+  const hasConfiguredStatusIcon = configuredStatusIcon !== undefined;
+  const useToolIcon =
+    !awaitingApproval &&
+    item.status === 'completed' &&
+    item.icon !== undefined &&
+    !hasConfiguredStatusIcon;
+  let statusIcon: React.ReactNode = awaitingApproval ? (
+    <SafetyCertificateOutlined />
+  ) : (
+    STATUS_ICONS[item.status]
+  );
+  if (useToolIcon) {
+    statusIcon = item.icon;
+  }
+  if (hasConfiguredStatusIcon) {
+    statusIcon =
+      typeof configuredStatusIcon === 'function'
+        ? configuredStatusIcon(item)
+        : configuredStatusIcon;
+  }
+  const showStatusIcon = statusIcon !== null && statusIcon !== undefined && statusIcon !== false;
   const showResultSummary = item.status === 'completed' && hasResult && !mergedExpanded;
   const domProps = pickAttrs(restProps, { attr: true, aria: true, data: true });
 
@@ -307,15 +331,27 @@ const ToolCall = React.forwardRef<ToolCallRef, ToolCallProps>((props, ref) => {
       )}
       style={{ ...contextConfig.style, ...contextConfig.styles.root, ...styles.root, ...style }}
     >
-      <div className={semanticClass('header')} style={semanticStyle('header')}>
+      <div
+        className={clsx(semanticClass('header'), {
+          [`${prefixCls}-header-no-icon`]: !showStatusIcon,
+        })}
+        style={semanticStyle('header')}
+      >
         <span
           className={semanticClass('status')}
           style={semanticStyle('status')}
           data-status={item.status}
         >
-          <span className={`${prefixCls}-status-icon`} aria-hidden="true">
-            {statusIcon}
-          </span>
+          {showStatusIcon && (
+            <span
+              className={clsx(`${prefixCls}-status-icon`, {
+                [`${prefixCls}-tool-icon`]: useToolIcon,
+              })}
+              aria-hidden="true"
+            >
+              {statusIcon}
+            </span>
+          )}
           <span className={`${prefixCls}-status-text`} aria-live="polite">
             {statusLabel}
           </span>

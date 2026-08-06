@@ -50,6 +50,14 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         transition: `background-color ${token.motionDurationMid}`,
       },
 
+      [`${componentCls}-header${componentCls}-header-no-icon`]: {
+        position: 'relative',
+        gridTemplateColumns: 'minmax(0, 1fr) auto',
+        [`${componentCls}-status`]: {
+          position: 'absolute',
+        },
+      },
+
       [`${componentCls}-status`]: {
         display: 'inline-flex',
         alignItems: 'center',
@@ -67,6 +75,18 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         background: token.colorFillSecondary,
         borderRadius: token.borderRadiusSM,
         transition: `color ${token.motionDurationMid}, background-color ${token.motionDurationMid}`,
+      },
+
+      [`${componentCls}-tool-icon`]: {
+        overflow: 'hidden',
+        color: token.colorTextSecondary,
+        background: token.colorFillSecondary,
+        '> img': {
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        },
       },
 
       [`${componentCls}-status-text`]: {
@@ -314,6 +334,10 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
           background: token.colorFillTertiary,
         },
       },
+      [`&${componentCls}-completed ${componentCls}-tool-icon`]: {
+        color: token.colorTextSecondary,
+        background: token.colorFillSecondary,
+      },
 
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
@@ -323,6 +347,9 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         [`${componentCls}-header`]: {
           gridTemplateColumns: 'auto minmax(0, 1fr)',
           paddingInline: token.paddingSM,
+        },
+        [`${componentCls}-header${componentCls}-header-no-icon`]: {
+          gridTemplateColumns: 'minmax(0, 1fr)',
         },
         [`${componentCls}-actions`]: {
           gridColumn: '1 / -1',

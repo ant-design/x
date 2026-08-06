@@ -34,6 +34,40 @@ describe('ToolCall', () => {
     expect(screen.getAllByText(label).length).toBeGreaterThan(0);
   });
 
+  it('uses the tool icon for completed calls and supports configurable status icons', () => {
+    const completedItem: ToolCallItem = {
+      ...baseItem,
+      status: 'completed',
+      icon: <span data-testid="tool-icon">W</span>,
+    };
+    const { container, rerender } = render(<ToolCall item={completedItem} />);
+
+    expect(screen.getByTestId('tool-icon')).toBeTruthy();
+    expect(container.querySelector('.ant-tool-call-tool-icon')).toBeTruthy();
+
+    rerender(
+      <ToolCall
+        item={{ ...completedItem, status: 'running' }}
+        statusIcons={{
+          running: (item) => <span data-testid="running-icon">{item.name}</span>,
+        }}
+      />,
+    );
+    expect(screen.queryByTestId('tool-icon')).toBeNull();
+    expect(screen.getByTestId('running-icon')).toHaveTextContent('queryOrder');
+
+    rerender(
+      <ToolCall
+        item={{ ...completedItem, status: 'pending' }}
+        approval={{}}
+        statusIcons={{ approval: null }}
+      />,
+    );
+    expect(container.querySelector('.ant-tool-call-status-icon')).toBeNull();
+    expect(container.querySelector('.ant-tool-call-header-no-icon')).toBeTruthy();
+    expect(screen.getAllByText('Awaiting approval').length).toBeGreaterThan(0);
+  });
+
   it('formats complete JSON and preserves streaming JSON', () => {
     const { rerender } = render(
       <ToolCall

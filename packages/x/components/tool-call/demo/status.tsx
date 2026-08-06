@@ -1,3 +1,4 @@
+import { HourglassOutlined, PauseCircleOutlined, ShoppingCartOutlined } from '@ant-design/icons';
 import type { ToolCallItem, ToolCallStatus } from '@ant-design/x';
 import { ToolCall } from '@ant-design/x';
 import React from 'react';
@@ -34,6 +35,10 @@ const statuses: Array<{ status: ToolCallStatus; name: string }> = [
 ];
 
 const demoStartedAt = Date.now() - 3200;
+const statusIcons = {
+  pending: <HourglassOutlined />,
+  cancelled: <PauseCircleOutlined />,
+};
 
 const makeItem = (
   { status, name }: (typeof statuses)[number],
@@ -42,6 +47,7 @@ const makeItem = (
 ): ToolCallItem => ({
   id: status,
   name,
+  icon: <ShoppingCartOutlined />,
   description,
   arguments: { region: 'CN-East', priority: 'normal' },
   result: status === 'completed' ? { status: 'paid', total: 369 } : undefined,
@@ -67,6 +73,7 @@ const App: React.FC = () => {
         <ToolCall
           key={entry.status}
           item={makeItem(entry, locale[entry.status], locale.error)}
+          statusIcons={statusIcons}
           retrying={entry.status === 'failed' && retrying}
           onRetry={() => {
             setRetrying(true);

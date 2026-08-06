@@ -33,6 +33,7 @@ tag: 2.9.0
 | 属性 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | item | 工具调用展示模型 | [ToolCallItem](#toolcallitem) | - |
+| statusIcons | 按执行状态覆盖图标，`approval` 表示等待审批；设为 `null` 时隐藏图标 | ToolCallStatusIcons | - |
 | expanded | 是否展开详情，受控模式 | boolean | - |
 | defaultExpanded | 默认是否展开；未设置时根据状态决定 | boolean | 见下文 |
 | onExpandedChange | 展开状态变化回调 | (expanded: boolean) => void | - |
@@ -64,9 +65,15 @@ type ToolCallStatus =
   | 'failed'
   | 'cancelled';
 
+type ToolCallStatusIconType = ToolCallStatus | 'approval';
+type ToolCallStatusIcons = Partial<
+  Record<ToolCallStatusIconType, React.ReactNode | ((item: ToolCallItem) => React.ReactNode)>
+>;
+
 interface ToolCallItem {
   id: React.Key;
   name: string;
+  icon?: React.ReactNode;
   description?: React.ReactNode;
   argumentsText?: string;
   arguments?: unknown;
@@ -85,6 +92,8 @@ interface ToolCallError {
   details?: unknown;
 }
 ```
+
+传入 `item.icon` 后，完成态优先展示工具自身图标，支持图片或任意 ReactNode；等待、参数接收、运行、失败、取消和审批状态仍使用状态图标。`statusIcons` 的优先级高于工具图标和内置图标，可按状态覆盖，或传入 `null` 隐藏对应图标。
 
 ### ToolCallApprovalConfig
 

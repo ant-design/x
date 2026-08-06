@@ -1,4 +1,4 @@
-import { ThunderboltOutlined } from '@ant-design/icons';
+import { CloudOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import type { ToolCallItem } from '@ant-design/x';
 import { ToolCall } from '@ant-design/x';
 import { Button } from 'antd';
@@ -32,6 +32,7 @@ const App: React.FC = () => {
     () => ({
       id: 'weather-1',
       name: 'getWeatherForecast',
+      icon: <CloudOutlined />,
       description: locale.description,
       arguments: { city: 'Hangzhou', days: 3, unit: 'celsius' },
       result: {

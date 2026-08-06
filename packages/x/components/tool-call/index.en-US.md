@@ -32,6 +32,7 @@ Common props ref: [Common props](/docs/react/common-props)
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | item | Tool call view model | [ToolCallItem](#toolcallitem) | - |
+| statusIcons | Override icons by execution status; `approval` represents awaiting approval; `null` hides the icon | ToolCallStatusIcons | - |
 | expanded | Whether details are expanded in controlled mode | boolean | - |
 | defaultExpanded | Initial expansion; derived from status when omitted | boolean | See below |
 | onExpandedChange | Called when expansion changes | (expanded: boolean) => void | - |
@@ -63,9 +64,15 @@ type ToolCallStatus =
   | 'failed'
   | 'cancelled';
 
+type ToolCallStatusIconType = ToolCallStatus | 'approval';
+type ToolCallStatusIcons = Partial<
+  Record<ToolCallStatusIconType, React.ReactNode | ((item: ToolCallItem) => React.ReactNode)>
+>;
+
 interface ToolCallItem {
   id: React.Key;
   name: string;
+  icon?: React.ReactNode;
   description?: React.ReactNode;
   argumentsText?: string;
   arguments?: unknown;
@@ -84,6 +91,8 @@ interface ToolCallError {
   details?: unknown;
 }
 ```
+
+When `item.icon` is provided, a completed call prefers the tool's own icon, which can be an image or any ReactNode. Pending, streaming, running, failed, cancelled, and approval states continue to use status icons. `statusIcons` takes precedence over tool and built-in icons; override individual states or pass `null` to hide an icon.
 
 ### ToolCallApprovalConfig
 

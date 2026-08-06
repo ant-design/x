@@ -9,6 +9,12 @@ export type ToolCallStatus =
   | 'failed'
   | 'cancelled';
 
+export type ToolCallStatusIconType = ToolCallStatus | 'approval';
+
+export type ToolCallStatusIcon = React.ReactNode | ((item: ToolCallItem) => React.ReactNode);
+
+export type ToolCallStatusIcons = Partial<Record<ToolCallStatusIconType, ToolCallStatusIcon>>;
+
 export interface ToolCallError {
   code?: string;
   message: string;
@@ -52,6 +58,7 @@ export interface ToolCallDurationConfig {
 export interface ToolCallItem {
   id: React.Key;
   name: string;
+  icon?: React.ReactNode;
   description?: React.ReactNode;
   argumentsText?: string;
   arguments?: unknown;
@@ -78,6 +85,7 @@ export type ToolCallSemanticType =
 
 export interface ToolCallProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   item: ToolCallItem;
+  statusIcons?: ToolCallStatusIcons;
   expanded?: boolean;
   defaultExpanded?: boolean;
   onExpandedChange?: (expanded: boolean) => void;

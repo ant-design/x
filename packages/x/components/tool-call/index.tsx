@@ -10,5 +10,8 @@ export type {
   ToolCallRef,
   ToolCallSemanticType,
   ToolCallStatus,
+  ToolCallStatusIcon,
+  ToolCallStatusIcons,
+  ToolCallStatusIconType,
 } from './interface';
 export { default } from './ToolCall';

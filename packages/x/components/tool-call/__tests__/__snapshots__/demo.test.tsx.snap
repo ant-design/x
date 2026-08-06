@@ -384,16 +384,16 @@ exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
           >
             <span
               aria-hidden="true"
-              class="ant-tool-call-status-icon"
+              class="ant-tool-call-status-icon ant-tool-call-tool-icon"
             >
               <span
-                aria-label="check-circle"
-                class="anticon anticon-check-circle"
+                aria-label="cloud"
+                class="anticon anticon-cloud"
                 role="img"
               >
                 <svg
                   aria-hidden="true"
-                  data-icon="check-circle"
+                  data-icon="cloud"
                   fill="currentColor"
                   focusable="false"
                   height="1em"
@@ -401,7 +401,7 @@ exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
                   width="1em"
                 >
                   <path
-                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+                    d="M811.4 418.7C765.6 297.9 648.9 212 512.2 212S258.8 297.8 213 418.6C127.3 441.1 64 519.1 64 612c0 110.5 89.5 200 199.9 200h496.2C870.5 812 960 722.5 960 612c0-92.7-63.1-170.7-148.6-193.3zm36.3 281a123.07 123.07 0 01-87.6 36.3H263.9c-33.1 0-64.2-12.9-87.6-36.3A123.3 123.3 0 01140 612c0-28 9.1-54.3 26.2-76.3a125.7 125.7 0 0166.1-43.7l37.9-9.9 13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0152.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9 15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5 37.8 10c54.3 14.5 92.1 63.8 92.1 120 0 33.1-12.9 64.3-36.3 87.7z"
                   />
                 </svg>
               </span>
@@ -1195,13 +1195,13 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
           class="ant-tool-call-status-icon"
         >
           <span
-            aria-label="clock-circle"
-            class="anticon anticon-clock-circle"
+            aria-label="hourglass"
+            class="anticon anticon-hourglass"
             role="img"
           >
             <svg
               aria-hidden="true"
-              data-icon="clock-circle"
+              data-icon="hourglass"
               fill="currentColor"
               focusable="false"
               height="1em"
@@ -1209,10 +1209,7 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
               width="1em"
             >
               <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-              />
-              <path
-                d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"
+                d="M742 318V184h86c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H196c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h86v134c0 81.5 42.4 153.2 106.4 194-64 40.8-106.4 112.5-106.4 194v134h-86c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h632c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-86V706c0-81.5-42.4-153.2-106.4-194 64-40.8 106.4-112.5 106.4-194zm-72 388v134H354V706c0-42.2 16.4-81.9 46.3-111.7C430.1 564.4 469.8 548 512 548s81.9 16.4 111.7 46.3C653.6 624.1 670 663.8 670 706zm0-388c0 42.2-16.4 81.9-46.3 111.7C593.9 459.6 554.2 476 512 476s-81.9-16.4-111.7-46.3A156.63 156.63 0 01354 318V184h316v134z"
               />
             </svg>
           </span>
@@ -1592,24 +1589,24 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
       >
         <span
           aria-hidden="true"
-          class="ant-tool-call-status-icon"
+          class="ant-tool-call-status-icon ant-tool-call-tool-icon"
         >
           <span
-            aria-label="check-circle"
-            class="anticon anticon-check-circle"
+            aria-label="shopping-cart"
+            class="anticon anticon-shopping-cart"
             role="img"
           >
             <svg
               aria-hidden="true"
-              data-icon="check-circle"
+              data-icon="shopping-cart"
               fill="currentColor"
               focusable="false"
               height="1em"
-              viewBox="64 64 896 896"
+              viewBox="0 0 1024 1024"
               width="1em"
             >
               <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+                d="M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 00-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 100 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 00-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 00-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6z"
               />
             </svg>
           </span>
@@ -1916,13 +1913,13 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
           class="ant-tool-call-status-icon"
         >
           <span
-            aria-label="stop"
-            class="anticon anticon-stop"
+            aria-label="pause-circle"
+            class="anticon anticon-pause-circle"
             role="img"
           >
             <svg
               aria-hidden="true"
-              data-icon="stop"
+              data-icon="pause-circle"
               fill="currentColor"
               focusable="false"
               height="1em"
@@ -1930,7 +1927,7 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
               width="1em"
             >
               <path
-                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm-88-532h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8zm224 0h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8z"
               />
             </svg>
           </span>
