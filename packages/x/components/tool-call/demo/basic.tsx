@@ -103,7 +103,7 @@ const App: React.FC = () => {
         </div>
       </div>
       <style>{`
-        .tool-call-basic-demo { max-width: 760px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; }
+        .tool-call-basic-demo { max-width: 760px; margin: 0 auto; }
         .demo-command-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
         .demo-command-bar strong { display: block; color: #111827; font-size: 15px; }
         .demo-connection-status { display: block; margin-top: 2px; color: #22a06b; font-size: 12px; }
@@ -112,7 +112,7 @@ const App: React.FC = () => {
         .demo-agent-content { min-width: 0; flex: 1; }
         .demo-agent-content p { margin: 5px 0 14px; color: #4b5563; line-height: 1.6; }
         .demo-agent-content .demo-answer { margin: 14px 0 0; color: #111827; }
-        @media (max-width: 480px) { .tool-call-basic-demo { padding: 12px; } .demo-command-bar { align-items: flex-start; } .demo-connection-status { max-width: 140px; } }
+        @media (max-width: 480px) { .demo-command-bar { align-items: flex-start; } .demo-connection-status { max-width: 140px; } }
       `}</style>
     </div>
   );

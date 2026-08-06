@@ -18,7 +18,7 @@ export interface ComponentToken {
 export interface ToolCallToken extends FullToken<'ToolCall'> {}
 
 const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
-  const { componentCls, calc } = token;
+  const { componentCls } = token;
 
   return {
     [componentCls]: {
@@ -30,22 +30,16 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
       lineHeight: token.lineHeight,
       background: token.colorBgContainer,
       border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
-      borderRadius: token.borderRadiusLG,
-      boxShadow: token.boxShadowTertiary,
-      transition: `border-color ${token.motionDurationMid}, box-shadow ${token.motionDurationMid}`,
-
-      '&:hover': {
-        borderColor: token.colorBorder,
-        boxShadow: token.boxShadowSecondary,
-      },
+      borderRadius: token.borderRadius,
+      transition: `border-color ${token.motionDurationMid}`,
 
       [`${componentCls}-header`]: {
         display: 'grid',
         gridTemplateColumns: 'auto minmax(0, 1fr) auto',
         alignItems: 'center',
-        gap: token.paddingSM,
+        gap: token.paddingXS,
         minHeight: token.controlHeightLG,
-        padding: `${unit(token.paddingSM)} ${unit(token.padding)}`,
+        padding: `${unit(token.paddingXS)} ${unit(token.paddingSM)}`,
         background: token.headerBg,
         transition: `background-color ${token.motionDurationMid}`,
       },
@@ -73,7 +67,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         height: token.statusSize,
         fontSize: token.fontSize,
         background: token.colorFillSecondary,
-        borderRadius: token.borderRadiusSM,
+        borderRadius: token.borderRadius,
         transition: `color ${token.motionDurationMid}, background-color ${token.motionDurationMid}`,
       },
 
@@ -150,8 +144,8 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         gap: token.actionGap,
         [`${token.antCls}-btn`]: {
           flex: 'none',
-          color: token.colorTextSecondary,
-          borderRadius: token.borderRadiusSM,
+          color: token.colorTextQuaternary,
+          borderRadius: token.borderRadius,
           '&:hover': {
             color: token.colorText,
             background: token.colorFillSecondary,
@@ -169,8 +163,8 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 
       [`${componentCls}-details`]: {
         display: 'grid',
-        gap: token.padding,
-        padding: token.padding,
+        gap: token.paddingSM,
+        padding: token.paddingSM,
         borderTop: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
         background: token.detailBg,
       },
@@ -183,11 +177,11 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: token.padding,
+        gap: token.paddingSM,
         minWidth: 0,
-        padding: `${unit(token.paddingSM)} ${unit(token.padding)}`,
+        padding: token.paddingSM,
         background: token.colorWarningBg,
-        borderInlineStart: `${unit(calc(token.lineWidth).mul(3).equal())} solid ${token.colorWarning}`,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorWarningBorder}`,
         borderRadius: token.borderRadius,
       },
 
@@ -251,7 +245,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
       },
 
       [`${componentCls}-section-title`]: {
-        marginBottom: token.marginXS,
+        marginBottom: token.marginXXS,
         color: token.colorTextDescription,
         fontSize: token.fontSizeSM,
         fontWeight: token.fontWeightStrong,
@@ -261,7 +255,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         boxSizing: 'border-box',
         maxHeight: token.contentMaxHeight,
         margin: 0,
-        padding: `${unit(token.paddingSM)} ${unit(token.padding)}`,
+        padding: `${unit(token.paddingXS)} ${unit(token.paddingSM)}`,
         overflow: 'auto',
         color: token.colorText,
         fontFamily: token.fontFamilyCode,
@@ -270,8 +264,8 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         overflowWrap: 'normal',
         whiteSpace: 'pre-wrap',
         wordBreak: 'normal',
-        background: token.colorBgContainer,
-        border: 0,
+        background: token.colorFillQuaternary,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorBorderSecondary}`,
         borderRadius: token.borderRadiusSM,
       },
 
@@ -279,7 +273,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         padding: token.paddingSM,
         color: token.errorColor,
         background: token.colorErrorBg,
-        borderInlineStart: `${unit(calc(token.lineWidth).mul(3).equal())} solid ${token.errorColor}`,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorErrorBorder}`,
         borderRadius: token.borderRadius,
         [`${componentCls}-section-title`]: {
           color: token.errorColor,
@@ -297,7 +291,8 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
         color: token.errorColor,
         fontFamily: token.fontFamilyCode,
         fontSize: token.fontSizeSM,
-        background: token.colorErrorBg,
+        background: token.colorBgContainer,
+        border: `${unit(token.lineWidth)} ${token.lineType} ${token.colorErrorBorder}`,
         borderRadius: token.borderRadiusSM,
       },
 
@@ -345,16 +340,7 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 
       [`@media (max-width: ${unit(token.screenXS)})`]: {
         [`${componentCls}-header`]: {
-          gridTemplateColumns: 'auto minmax(0, 1fr)',
           paddingInline: token.paddingSM,
-        },
-        [`${componentCls}-header${componentCls}-header-no-icon`]: {
-          gridTemplateColumns: 'minmax(0, 1fr)',
-        },
-        [`${componentCls}-actions`]: {
-          gridColumn: '1 / -1',
-          justifyContent: 'flex-end',
-          marginTop: unit(calc(token.marginXXS).mul(-1).equal()),
         },
         [`${componentCls}-details`]: {
           padding: token.paddingSM,
@@ -376,8 +362,8 @@ const genToolCallStyle: GenerateStyle<ToolCallToken> = (token) => {
 };
 
 export const prepareComponentToken: GetDefaultToken<'ToolCall'> = (token) => ({
-  headerBg: token.colorBgContainer,
-  detailBg: token.colorFillQuaternary,
+  headerBg: token.colorFillQuaternary,
+  detailBg: token.colorBgContainer,
   statusSize: token.controlHeightSM,
   actionGap: token.marginXXS,
   contentMaxHeight: 320,

@@ -73,6 +73,7 @@ const App: React.FC = () => {
         <ToolCall
           key={entry.status}
           item={makeItem(entry, locale[entry.status], locale.error)}
+          defaultExpanded={false}
           statusIcons={statusIcons}
           retrying={entry.status === 'failed' && retrying}
           onRetry={() => {

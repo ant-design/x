@@ -42,6 +42,7 @@ const App: React.FC = () => {
     () => ({
       id: 'deploy-production',
       name: 'deployProduction',
+      icon: <RocketOutlined />,
       description: 'checkout-api · v2.18.0 · cn-hangzhou',
       arguments: {
         service: 'checkout-api',
@@ -144,7 +145,7 @@ const App: React.FC = () => {
       </div>
 
       <style>{`
-        .tool-call-approval-demo { max-width: 820px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; box-shadow: 0 12px 36px rgba(17, 24, 39, 0.07); }
+        .tool-call-approval-demo { max-width: 820px; margin: 0 auto; }
         .approval-demo-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
         .approval-demo-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
         .approval-demo-icon { display: grid; flex: none; place-items: center; width: 34px; height: 34px; color: #fff; background: #111827; border-radius: 7px; }
@@ -157,7 +158,7 @@ const App: React.FC = () => {
         .approval-demo-dot-running { background: #1677ff; box-shadow: 0 0 0 4px #e6f4ff; }
         .approval-demo-dot-completed { background: #22a06b; }
         .approval-demo-dot-cancelled { background: #9ca3af; }
-        @media (max-width: 480px) { .tool-call-approval-demo { padding: 12px; } .approval-demo-toolbar { align-items: flex-start; } }
+        @media (max-width: 480px) { .approval-demo-toolbar { align-items: flex-start; } }
       `}</style>
     </div>
   );

@@ -289,7 +289,7 @@ exports[`renders components/tool-call/demo/approval.tsx correctly 1`] = `
     </span>
   </div>
   <style>
-        .tool-call-approval-demo { max-width: 820px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; box-shadow: 0 12px 36px rgba(17, 24, 39, 0.07); }
+        .tool-call-approval-demo { max-width: 820px; margin: 0 auto; }
         .approval-demo-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
         .approval-demo-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
         .approval-demo-icon { display: grid; flex: none; place-items: center; width: 34px; height: 34px; color: #fff; background: #111827; border-radius: 7px; }
@@ -302,7 +302,7 @@ exports[`renders components/tool-call/demo/approval.tsx correctly 1`] = `
         .approval-demo-dot-running { background: #1677ff; box-shadow: 0 0 0 4px #e6f4ff; }
         .approval-demo-dot-completed { background: #22a06b; }
         .approval-demo-dot-cancelled { background: #9ca3af; }
-        @media (max-width: 480px) { .tool-call-approval-demo { padding: 12px; } .approval-demo-toolbar { align-items: flex-start; } }
+        @media (max-width: 480px) { .approval-demo-toolbar { align-items: flex-start; } }
   </style>
 </div>
 `;
@@ -539,7 +539,7 @@ exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
     </div>
   </div>
   <style>
-        .tool-call-basic-demo { max-width: 760px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fff; }
+        .tool-call-basic-demo { max-width: 760px; margin: 0 auto; }
         .demo-command-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
         .demo-command-bar strong { display: block; color: #111827; font-size: 15px; }
         .demo-connection-status { display: block; margin-top: 2px; color: #22a06b; font-size: 12px; }
@@ -548,7 +548,7 @@ exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
         .demo-agent-content { min-width: 0; flex: 1; }
         .demo-agent-content p { margin: 5px 0 14px; color: #4b5563; line-height: 1.6; }
         .demo-agent-content .demo-answer { margin: 14px 0 0; color: #111827; }
-        @media (max-width: 480px) { .tool-call-basic-demo { padding: 12px; } .demo-command-bar { align-items: flex-start; } .demo-connection-status { max-width: 140px; } }
+        @media (max-width: 480px) { .demo-command-bar { align-items: flex-start; } .demo-connection-status { max-width: 140px; } }
   </style>
 </div>
 `;
@@ -1251,9 +1251,9 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
       >
         <button
           aria-controls="ant-tool-call-details-_R_1f_"
-          aria-expanded="true"
-          aria-label="Collapse details"
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
           type="button"
         >
           <span
@@ -1281,28 +1281,6 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
           </span>
         </button>
       </div>
-    </div>
-    <div
-      class="ant-tool-call-details"
-      id="ant-tool-call-details-_R_1f_"
-    >
-      <section
-        class="ant-tool-call-arguments"
-      >
-        <div
-          class="ant-tool-call-section-title"
-        >
-          Arguments
-        </div>
-        <pre
-          class="ant-tool-call-code"
-        >
-          {
-  "region": "CN-East",
-  "priority": "normal"
-}
-        </pre>
-      </section>
     </div>
   </div>
   <div
@@ -1378,9 +1356,9 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
       >
         <button
           aria-controls="ant-tool-call-details-_R_2f_"
-          aria-expanded="true"
-          aria-label="Collapse details"
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
           type="button"
         >
           <span
@@ -1408,28 +1386,6 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
           </span>
         </button>
       </div>
-    </div>
-    <div
-      class="ant-tool-call-details"
-      id="ant-tool-call-details-_R_2f_"
-    >
-      <section
-        class="ant-tool-call-arguments"
-      >
-        <div
-          class="ant-tool-call-section-title"
-        >
-          Arguments
-        </div>
-        <pre
-          class="ant-tool-call-code"
-        >
-          {
-  "region": "CN-East",
-  "priority": "normal"
-}
-        </pre>
-      </section>
     </div>
   </div>
   <div
@@ -1521,9 +1477,9 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
       >
         <button
           aria-controls="ant-tool-call-details-_R_3f_"
-          aria-expanded="true"
-          aria-label="Collapse details"
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
           type="button"
         >
           <span
@@ -1551,28 +1507,6 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
           </span>
         </button>
       </div>
-    </div>
-    <div
-      class="ant-tool-call-details"
-      id="ant-tool-call-details-_R_3f_"
-    >
-      <section
-        class="ant-tool-call-arguments"
-      >
-        <div
-          class="ant-tool-call-section-title"
-        >
-          Arguments
-        </div>
-        <pre
-          class="ant-tool-call-code"
-        >
-          {
-  "region": "CN-East",
-  "priority": "normal"
-}
-        </pre>
-      </section>
     </div>
   </div>
   <div
@@ -1823,9 +1757,9 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
         </button>
         <button
           aria-controls="ant-tool-call-details-_R_5f_"
-          aria-expanded="true"
-          aria-label="Collapse details"
-          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
           type="button"
         >
           <span
@@ -1853,47 +1787,6 @@ exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
           </span>
         </button>
       </div>
-    </div>
-    <div
-      class="ant-tool-call-details"
-      id="ant-tool-call-details-_R_5f_"
-    >
-      <section
-        class="ant-tool-call-arguments"
-      >
-        <div
-          class="ant-tool-call-section-title"
-        >
-          Arguments
-        </div>
-        <pre
-          class="ant-tool-call-code"
-        >
-          {
-  "region": "CN-East",
-  "priority": "normal"
-}
-        </pre>
-      </section>
-      <section
-        class="ant-tool-call-error"
-      >
-        <div
-          class="ant-tool-call-section-title"
-        >
-          Error
-        </div>
-        <div
-          class="ant-tool-call-error-message"
-        >
-          The shipping provider did not respond.
-        </div>
-        <div
-          class="ant-tool-call-error-code"
-        >
-          PROVIDER_TIMEOUT
-        </div>
-      </section>
     </div>
   </div>
   <div
