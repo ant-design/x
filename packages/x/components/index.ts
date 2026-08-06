@@ -27,6 +27,15 @@ export type { SourcesProps } from './sources';
 export { default as Sources } from './sources';
 export type { SuggestionProps } from './suggestion';
 export { default as Suggestion } from './suggestion';
+export type {
+  TaskError,
+  TaskItem,
+  TaskProps,
+  TaskRef,
+  TaskSemanticType,
+  TaskStatus,
+} from './task';
+export { default as Task } from './task';
 export type { ThinkProps } from './think';
 export { default as Think } from './think';
 export type {

@@ -16,6 +16,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     prompts,
     sender,
     suggestion,
+    task,
     thoughtChain,
     welcome,
     fileCard,
@@ -38,6 +39,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
       prompts,
       sender,
       suggestion,
+      task,
       thoughtChain,
       fileCard,
       think,
@@ -53,6 +55,7 @@ const XProvider: React.FC<XProviderProps> = (props) => {
     prompts,
     sender,
     suggestion,
+    task,
     thoughtChain,
     welcome,
     mermaid,
@@ -96,9 +99,8 @@ const XProvider: React.FC<XProviderProps> = (props) => {
   );
 };
 
-export { useXProviderContext, defaultPrefixCls };
-
 export type { XProviderProps };
+export { defaultPrefixCls, useXProviderContext };
 
 if (process.env.NODE_ENV !== 'production') {
   XProvider.displayName = 'XProvider';
