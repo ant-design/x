@@ -82,7 +82,7 @@ const App: React.FC = () => {
         />
       ))}
       <style>{`
-        .tool-call-status-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .tool-call-status-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 14px; }
         @media (max-width: 720px) { .tool-call-status-grid { grid-template-columns: 1fr; } }
       `}</style>
     </div>
