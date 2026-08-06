@@ -21,6 +21,7 @@ tag: 2.0.0
 <code src="./demos/x-chat/openai.tsx">OpenAI 模型接入</code>
 <code src="./demos/x-chat/deepSeek.tsx">DeepSeek 思考模型接入</code>
 <code src="./demos/x-chat/agent-provider.tsx">通用 AgentProvider 接入</code>
+<code src="./demos/x-chat/agent-interaction.tsx">Agent 命令交互</code>
 <code src="./demos/x-chat/defaultMessages.tsx">历史消息设置</code>
 <code src="./demos/x-chat/async-defaultMessages.tsx">请求远程历史消息</code>
 <code src="./demos/x-chat/developer.tsx">系统提示词设置</code>
@@ -45,7 +46,16 @@ type useXChat<
 AgentProvider 使用同一个 Hook，通过重载推导输入、Chunk 和结构化状态类型：
 
 ```tsx | pure
-const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ provider });
+const {
+  messages,
+  agentState,
+  agentActions,
+  commandStates,
+  latestCommandByAction,
+  onRequest,
+  abort,
+  isRequesting,
+} = useXChat({ provider });
 ```
 
 完整契约和实现方式请参阅 [Agent Provider](/x-sdks/agent-provider-cn)。
@@ -86,6 +96,9 @@ const { messages, agentState, onRequest, abort, isRequesting } = useXChat({ prov
 | removeMessage | 删除单条 message，不会触发请求 | (id: string \| number) => boolean | - | - |
 | queueRequest | 会将请求加入队列，等待 conversationKey 初始化完成后再发送 | (conversationKey: string \| symbol, requestParams: Partial\<Input\>, opts?: { extraInfo: AnyObject }) => void | - | - |
 | agentState | AgentProvider 模式下的完整结构化状态；普通 ChatProvider 模式为 `undefined` | AgentState \| undefined | undefined | - |
+| agentActions | AgentProvider 模式下的审批、工具重试和 Run 取消操作；普通 ChatProvider 模式为 `undefined` | AgentActions \| undefined | undefined | - |
+| commandStates | 按 `commandId` 保存当前 Run 的命令提交状态 | Record\<string, AgentCommandState\> \| undefined | undefined | - |
+| latestCommandByAction | 从动作键到最近一次 `commandId` 的映射，用于防重复提交和定位按钮状态 | Record\<string, string\> \| undefined | undefined | - |
 
 ### AgentProvider 模式
 
@@ -94,6 +107,28 @@ AgentProvider 模式只接受 `provider`、`conversationKey`、`defaultMessages`
 `messages` 仍可供现有消息组件消费，实际消息为 `AgentMessageState`。推理、工具、审批、任务和 Artifact 等非消息数据保存在 `agentState` 中。
 
 `setMessages`、`setMessage` 和 `removeMessage` 只影响兼容消息层，不会直接修改 `agentState`。AgentProvider 模式下调用 `onReload` 会创建新 Run。
+
+#### Agent Actions
+
+AgentProvider 声明对应命令能力并实现 `executeCommand` 后，UI 通过 `agentActions` 发起操作：
+
+```tsx | pure
+await agentActions.resolveApproval({
+  runId,
+  approvalId,
+  decision: 'approved',
+  expectedVersion: approval.version,
+});
+
+await agentActions.retryTool({ runId, toolCallId });
+await agentActions.cancelRun({ runId, reason: 'User cancelled' });
+```
+
+- `resolveApproval` 只接受处于 `waiting` 状态且未过期的 Approval。
+- `retryTool` 只接受 `error.retryable === true` 的失败 ToolCall。
+- `cancelRun` 是发给 Runtime 的业务命令，等待 Provider 返回 `run.cancelled`；`abort()` 只中断本地 Transport。
+- 同一 Run 的命令串行执行。相同动作提交中以及取消已提交后，SDK 会阻止重复操作。
+- `commandStates` 包含 `submitting`、`succeeded` 和 `failed`，Run 进入终态后会自动清理。
 
 #### MessageInfo
 

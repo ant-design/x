@@ -7,6 +7,8 @@ import { AbstractChatProvider, isAgentProvider } from '../chat-providers';
 import { ConversationData } from '../x-conversations';
 import { AbstractXRequestClass } from '../x-request';
 import type { SSEOutput } from '../x-stream';
+import type { AgentCommandState } from './agentCommandStore';
+import type { AgentActions } from './agentRuntime';
 import { useAgentChatRuntime } from './agentRuntime';
 import { ConversationKey, useChatStore } from './store';
 
@@ -536,6 +538,9 @@ function useXChatInternal<
         ? IsRequestingMap?.get(conversationKey) || false
         : isRequesting,
     agentState: agentProvider ? agentRuntime.agentState : undefined,
+    agentActions: agentProvider ? agentRuntime.agentActions : undefined,
+    commandStates: agentProvider ? agentRuntime.commandStates : undefined,
+    latestCommandByAction: agentProvider ? agentRuntime.latestCommandByAction : undefined,
     onReload,
     queueRequest,
   } as const;
@@ -556,8 +561,14 @@ export default function useXChat<
   ParsedMessage extends SimpleType = AgentMessageState,
 >(
   config: AgentXChatConfig<Input, Request, Chunk, Context, ParsedMessage>,
-): Omit<XChatResult<AgentMessageState, ParsedMessage, Input, Chunk>, 'agentState'> & {
+): Omit<
+  XChatResult<AgentMessageState, ParsedMessage, Input, Chunk>,
+  'agentState' | 'agentActions' | 'commandStates' | 'latestCommandByAction'
+> & {
   agentState: AgentState;
+  agentActions: AgentActions;
+  commandStates: Readonly<Record<string, AgentCommandState>>;
+  latestCommandByAction: Readonly<Record<string, string>>;
 };
 
 export default function useXChat<
@@ -567,8 +578,14 @@ export default function useXChat<
   Output = SSEOutput,
 >(
   config: XChatConfig<ChatMessage, ParsedMessage, Input, Output>,
-): Omit<XChatResult<ChatMessage, ParsedMessage, Input, Output>, 'agentState'> & {
+): Omit<
+  XChatResult<ChatMessage, ParsedMessage, Input, Output>,
+  'agentState' | 'agentActions' | 'commandStates' | 'latestCommandByAction'
+> & {
   agentState: undefined;
+  agentActions: undefined;
+  commandStates: undefined;
+  latestCommandByAction: undefined;
 };
 
 export default function useXChat(
@@ -576,3 +593,6 @@ export default function useXChat(
 ): XChatResult<any, any, any, any> {
   return useXChatInternal(config);
 }
+
+export type { AgentCommandError, AgentCommandState, AgentCommandStatus } from './agentCommandStore';
+export type { AgentActionResult, AgentActions, ResolveApprovalInput } from './agentRuntime';

@@ -28,6 +28,7 @@ The frontend entry remains `useXChat({ provider })`. There is no additional `use
 
 <!-- prettier-ignore -->
 <code src="./demos/x-chat/agent-provider.tsx">Generic AgentProvider</code>
+<code src="./demos/x-chat/agent-interaction.tsx">Agent Command Interaction</code>
 
 ## Quick Start
 
@@ -64,23 +65,56 @@ interface AgentProvider<Input, Request, Chunk, Context = unknown> {
   transformChunk(chunk: Chunk, context: Context): readonly AgentEvent[];
   flush(context: Context): readonly AgentEvent[];
   transformError(error: unknown, context: Context): readonly AgentEvent[];
+  executeCommand?(command: AgentCommand, options: AgentCommandOptions): AsyncIterable<AgentEvent>;
 }
 ```
 
-| Member           | Responsibility                                                             |
-| ---------------- | -------------------------------------------------------------------------- |
-| `id`             | Unique Provider metadata; it is never used for capability detection        |
-| `protocol`       | Explicit protocol declaration used by `useXChat` to identify AgentProvider |
-| `capabilities`   | Declares event and Transport types the Provider may use                    |
-| `transport`      | Binds request execution; the frontend does not configure it separately     |
-| `createContext`  | Creates per-Run parsing state shared across chunks                         |
-| `start`          | Emits the Run, user message, and initial entity events                     |
-| `prepareRequest` | Converts `onRequest` input into a Runtime request                          |
-| `transformChunk` | Converts one chunk into zero or more standard events                       |
-| `flush`          | Closes remaining entities and emits the terminal Run event                 |
-| `transformError` | Converts errors and interruptions into failure or cancellation events      |
+| Member | Responsibility |
+| --- | --- |
+| `id` | Unique Provider metadata; it is never used for capability detection |
+| `protocol` | Explicit protocol declaration used by `useXChat` to identify AgentProvider |
+| `capabilities` | Declares event and Transport types the Provider may use |
+| `transport` | Binds request execution; the frontend does not configure it separately |
+| `createContext` | Creates per-Run parsing state shared across chunks |
+| `start` | Emits the Run, user message, and initial entity events |
+| `prepareRequest` | Converts `onRequest` input into a Runtime request |
+| `transformChunk` | Converts one chunk into zero or more standard events |
+| `flush` | Closes remaining entities and emits the terminal Run event |
+| `transformError` | Converts errors and interruptions into failure or cancellation events |
+| `executeCommand` | Executes UI approval, tool retry, or Run cancellation commands and returns standard events |
 
 A Provider does not render React UI, maintain another message reducer, execute tools, or infer capabilities from a model name.
+
+## Command Interaction
+
+A Provider declares supported commands through `capabilities.commands` and sends each command to the Runtime through `executeCommand`:
+
+```tsx | pure
+const capabilities = {
+  eventTypes: [
+    'approval.resolved',
+    'tool.requested',
+    'tool.running',
+    'tool.completed',
+    'run.cancelled',
+  ],
+  transports: ['company.sse'],
+  commands: ['approval.resolve', 'tool.retry', 'run.cancel'],
+};
+
+async function* executeCommand(command, { signal, initialSequence }) {
+  const events = createAgentEventFactory({
+    sessionId: command.sessionId,
+    runId: command.runId,
+    initialSequence,
+  });
+
+  const result = await runtime.execute(command, { signal });
+  yield events.create('approval.resolved', result);
+}
+```
+
+Every command contains a `commandId` and `idempotencyKey`. Providers should forward the idempotency key to the server and ensure returned events belong to the command's `sessionId` and `runId`, with `sequence` greater than `initialSequence`. Command success means the Provider command event stream ended normally; entity completion is still determined by the returned AgentEvents.
 
 ## Transport
 

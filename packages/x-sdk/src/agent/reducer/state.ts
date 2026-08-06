@@ -71,6 +71,8 @@ export interface AgentToolCallState {
   name: string;
   arguments: string;
   index?: number;
+  attempt?: number;
+  retryOf?: string;
   result?: unknown;
   status: AgentEntityStatus;
   error?: AgentError;
@@ -88,6 +90,9 @@ export interface AgentApprovalState {
   description?: string;
   risk?: string;
   data?: unknown;
+  editable?: boolean;
+  expiresAt?: number;
+  version?: string | number;
   decision?: ApprovalDecision;
   status: AgentEntityStatus;
   createdAt: number;
