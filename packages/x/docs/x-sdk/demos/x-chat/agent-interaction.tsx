@@ -5,6 +5,8 @@ import {
   RedoOutlined,
   StopOutlined,
 } from '@ant-design/icons';
+import type { TaskStatus } from '@ant-design/x';
+import { Task } from '@ant-design/x';
 import type {
   AgentActionResult,
   AgentCommandOptions,
@@ -393,13 +395,18 @@ const App = () => {
       )}
 
       {task && (
-        <Flex gap={8} align="center" wrap>
-          <Typography.Text>{task.title}</Typography.Text>
-          <Tag color={statusColor[task.status]}>{task.status}</Tag>
-          <Typography.Text type="secondary">
-            {Math.round((task.progress ?? 0) * 100)}%
-          </Typography.Text>
-        </Flex>
+        <Task
+          item={{
+            id: task.id,
+            title: task.title,
+            description: task.description,
+            status: task.status as TaskStatus,
+            progress: task.progress,
+            result: task.result,
+            error: task.error,
+            reason: task.reason,
+          }}
+        />
       )}
 
       {run?.status === 'running' && (

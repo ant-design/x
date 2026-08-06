@@ -43,6 +43,14 @@ export interface xLocale {
     noService: string;
     loadFailed: string;
   };
+  Task?: {
+    status: Record<'pending' | 'running' | 'completed' | 'failed' | 'cancelled', string>;
+    expand: string;
+    collapse: string;
+    result: string;
+    error: string;
+    reason: string;
+  };
 }
 
 export type Locale = xLocale & antdLocale;

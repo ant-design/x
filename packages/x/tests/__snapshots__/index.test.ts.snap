@@ -15,6 +15,7 @@ exports[`antd dist files exports modules correctly 1`] = `
   "SenderSwitch",
   "Sources",
   "Suggestion",
+  "Task",
   "Think",
   "ThoughtChain",
   "Welcome",

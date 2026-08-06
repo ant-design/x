@@ -14,6 +14,7 @@ import type { PromptsProps } from '../prompts';
 import type { SenderProps } from '../sender';
 import type { SourcesProps } from '../sources';
 import type { SuggestionProps } from '../suggestion';
+import type { TaskProps } from '../task';
 import type { MappingAlgorithm, OverrideToken } from '../theme/interface';
 import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
@@ -40,6 +41,7 @@ export interface XComponentsConfig {
   prompts?: ComponentConfig<PromptsProps>;
   sender?: ComponentConfig<SenderProps>;
   suggestion?: ComponentConfig<SuggestionProps>;
+  task?: ComponentConfig<TaskProps>;
   thoughtChain?: ComponentConfig<ThoughtChainProps>;
   attachments?: ComponentConfig<AttachmentsProps>;
   welcome?: ComponentConfig<WelcomeProps>;
