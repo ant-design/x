@@ -6,7 +6,7 @@ group:
 title: ToolCall
 subtitle: 工具调用
 description: 展示 Agent 工具调用的参数、执行状态、结果与错误。
-tag: 2.1.0
+tag: 2.9.0
 ---
 
 ## 何时使用

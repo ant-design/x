@@ -5,7 +5,7 @@ group:
   order: 1
 title: ToolCall
 description: Display an Agent tool call's arguments, execution status, result, and error.
-tag: 2.1.0
+tag: 2.9.0
 ---
 
 ## When To Use
