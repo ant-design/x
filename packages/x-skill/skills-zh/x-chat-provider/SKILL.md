@@ -1,6 +1,6 @@
 ---
 name: x-chat-provider
-version: 2.8.1
+version: 2.9.0
 description: 专注于自定义 Chat Provider 的实现，帮助将任意流式接口适配为 Ant Design X 标准格式
 ---
 
@@ -343,9 +343,7 @@ const request = XRequest('https://your-api.com/chat', {
   // 或基于 URL 和响应头动态决定
   transformStream: (baseURL, responseHeaders) => {
     if (responseHeaders.get('x-stream-type') === 'ndjson') {
-      return new TransformStream({
-        /* ... */
-      });
+      return new TransformStream({/* ... */});
     }
     return undefined; // 使用默认 SSE 解析
   },

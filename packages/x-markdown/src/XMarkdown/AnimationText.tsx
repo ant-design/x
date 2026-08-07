@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { AnimationConfig } from './interface';
 
 export interface AnimationTextProps {
@@ -9,24 +9,25 @@ export interface AnimationTextProps {
 const AnimationText = React.memo<AnimationTextProps>((props) => {
   const { text, animationConfig } = props;
   const { fadeDuration = 200, easing = 'ease-in-out' } = animationConfig || {};
-  const [chunks, setChunks] = useState<string[]>([]);
   const prevTextRef = useRef('');
+  const chunksRef = useRef<string[]>([]);
+
+  const prevText = prevTextRef.current;
+  let chunks: string[];
+
+  if (text === prevText) {
+    chunks = chunksRef.current;
+  } else if (!(prevText && text.startsWith(prevText))) {
+    chunks = [text];
+  } else {
+    const newText = text.slice(prevText.length);
+    chunks = newText ? [...chunksRef.current, newText] : chunksRef.current;
+  }
 
   useEffect(() => {
-    if (text === prevTextRef.current) return;
-
-    if (!(prevTextRef.current && text.indexOf(prevTextRef.current) === 0)) {
-      setChunks([text]);
-      prevTextRef.current = text;
-      return;
-    }
-
-    const newText = text.slice(prevTextRef.current.length);
-    if (!newText) return;
-
-    setChunks((prev) => [...prev, newText]);
     prevTextRef.current = text;
-  }, [text]);
+    chunksRef.current = chunks;
+  }, [text, chunks]);
 
   const animationStyle = useMemo(
     () => ({

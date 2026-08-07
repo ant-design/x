@@ -1,6 +1,6 @@
 ---
 name: x-chat-provider
-version: 2.8.1
+version: 2.9.0
 description: Focus on implementing custom Chat Provider, helping to adapt any streaming interface to Ant Design X standard format
 ---
 
@@ -344,9 +344,7 @@ const request = XRequest('https://your-api.com/chat', {
   // Or decide dynamically based on URL and response headers
   transformStream: (baseURL, responseHeaders) => {
     if (responseHeaders.get('x-stream-type') === 'ndjson') {
-      return new TransformStream({
-        /* ... */
-      });
+      return new TransformStream({/* ... */});
     }
     return undefined; // Use default SSE parsing
   },
