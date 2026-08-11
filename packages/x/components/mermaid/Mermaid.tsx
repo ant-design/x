@@ -64,7 +64,12 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const id = `mermaid-${uuid++}-${children?.length || 0}`;
+  // 使用稳定的 id 避免流式渲染时因 id 变化导致 DOM 反复 mount/unmount 引起抖动
+  const idRef = useRef<string | null>(null);
+  if (idRef.current === null) {
+    idRef.current = `mermaid-${uuid++}`;
+  }
+  const id = idRef.current;
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
