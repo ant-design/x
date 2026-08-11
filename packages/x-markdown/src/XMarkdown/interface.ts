@@ -59,6 +59,12 @@ interface StreamingOption {
    */
   enableAnimation?: boolean;
   /**
+   * @description 是否在自定义组件内部也启用文字淡入动画；开启后 contentRender 自定义组件内的文字也会逐字输出
+   * @description Whether to also enable text fade-in animation inside custom components; when enabled, text inside custom components rendered via contentRender will also animate character by character
+   * @default false
+   */
+  animateInsideComponents?: boolean;
+  /**
    * @description 文字出现动画效果的配置
    * @description Configuration for text appearance animation effects
    */
