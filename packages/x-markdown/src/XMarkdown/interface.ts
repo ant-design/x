@@ -144,6 +144,13 @@ interface XMarkdownProps {
     [tagName: string]: React.ComponentType<ComponentProps> | keyof JSX.IntrinsicElements;
   };
   /**
+   * @description 按标签名向 `components` 中的自定义组件传递额外的 props，使组件引用保持稳定，避免内联函数导致的重复挂载
+   * @description Extra props passed to custom components in `components` by tag name, keeping component references stable and avoiding remounts caused by inline functions
+   */
+  componentsProps?: {
+    [tagName: string]: Record<string, unknown>;
+  };
+  /**
    * @description 流式渲染行为的配置
    * @description Configuration for streaming rendering behavior
    */
