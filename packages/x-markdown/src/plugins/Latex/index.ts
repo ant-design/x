@@ -3,8 +3,8 @@ import type { TokenizerAndRendererExtension } from 'marked';
 
 import 'katex/dist/katex.min.css';
 
-const inlineRuleNonStandard =
-  /^(?:\${1,2}([^$]{1,10000}?)\${1,2}|\\\(([\s\S]{1,10000}?)\\\)|\\\[((?:\\.|[^\\]){1,10000}?)\\\])/;
+const inlineDollarRule = /^(\${1,2})((?:\\.|[^\\$]){1,10000}?)\1/;
+const inlineRuleNonStandard = /^(?:\\\(([\s\S]{1,10000}?)\\\)|\\\[((?:\\.|[^\\]){1,10000}?)\\\])/;
 const blockRule =
   /^(\${1,2})\n([\s\S]{1,10000}?)\n\1(?:\s*(?:\n|$))|^\\\[((?:\\.|[^\\]){1,10000}?)\\\]/;
 
@@ -28,6 +28,14 @@ function replaceAlign(text: string) {
   return text ? text.replace(/\{align\*\}/g, '{aligned}') : text;
 }
 
+// Follow Pandoc's single-dollar delimiter rules to avoid parsing currency as math.
+function isValidInlineDollarMatch(match: RegExpMatchArray, src: string) {
+  const [, delimiter, text] = match;
+  if (delimiter === '$$') return true;
+
+  return !/^\s|\s$/.test(text) && !/^\d/.test(src.slice(match[0].length));
+}
+
 function createRenderer(options: KatexOptions, newlineAfter: boolean) {
   return (token: Token) =>
     katex.renderToString(token.text, {
@@ -49,15 +57,19 @@ function inlineKatex(renderer: Render, replaceAlignStart: boolean) {
       return indices.length > 0 ? Math.min(...indices) : undefined;
     },
     tokenizer(src: string) {
-      const match = src.match(inlineRuleNonStandard);
+      const dollarMatch = src.match(inlineDollarRule);
+      if (dollarMatch && !isValidInlineDollarMatch(dollarMatch, src)) return;
+
+      const nonStandardMatch = src.match(inlineRuleNonStandard);
+      const match = dollarMatch || nonStandardMatch;
       if (!match) return;
 
-      const rawText = match[1] || match[2] || match[3] || '';
+      const rawText = dollarMatch?.[2] || nonStandardMatch?.[1] || nonStandardMatch?.[2] || '';
       const text = replaceAlignStart ? replaceAlign(rawText.trim()) : rawText.trim();
 
       // 对于 \[...\] 语法，如果内容包含换行，标记为块级公式
       // 注意：换行检测必须在 trim 之前进行
-      const isBracketSyntax = match[3] !== undefined;
+      const isBracketSyntax = nonStandardMatch?.[2] !== undefined;
       const hasNewline = rawText.includes('\n');
 
       return {
