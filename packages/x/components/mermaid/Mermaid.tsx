@@ -98,6 +98,14 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
       securityLevel: 'strict',
       theme: 'default',
       fontFamily: 'monospace',
+      // `mermaid.render(id, text)` below is called without a container element, so mermaid
+      // mounts its temporary `div#d{id}` on `document.body`. With error rendering enabled
+      // (mermaid's default) a failed render draws the "Syntax error in text" bomb diagram
+      // into that element and *then* throws, so mermaid's own `removeTempElements()` never
+      // runs — leaving the error SVG behind in `document.body`, outside this component and
+      // outside any layout, once per failure. Suppressing it makes both failure branches
+      // clean up after themselves instead.
+      suppressErrorRendering: true,
       ...(config || {}),
     });
   }, [config]);
