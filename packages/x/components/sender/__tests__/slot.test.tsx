@@ -623,22 +623,36 @@ describe('Sender Slot Component', () => {
       });
       expect(onPasteFile).toHaveBeenCalledWith([mockFile]);
     });
-    it('should handle paste text events', () => {
+    it('should preserve multiline text when pasting in slot mode', () => {
       const onPaste = jest.fn();
-      document.execCommand = undefined as any;
+      document.execCommand = jest.fn(() => true);
       const slotConfig = [textSlotConfig];
       const { container } = render(<Sender slotConfig={slotConfig} onPaste={onPaste} />);
 
       const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+      const mockRange = createMockRange({
+        startContainer: inputArea,
+        endContainer: inputArea,
+        startOffset: inputArea.childNodes.length,
+        endOffset: inputArea.childNodes.length,
+        collapsed: true,
+      });
+      setupDOMMocks({}, mockRange);
 
       fireEvent.paste(inputArea, {
         clipboardData: {
-          getData: () => 'pasted text',
+          getData: () => '\nfirst line\r\nsecond line\nthird line\n',
           files: [],
         },
       });
 
       expect(onPaste).toHaveBeenCalled();
+      expect(document.execCommand).not.toHaveBeenCalled();
+      expect(mockRange.insertNode).toHaveBeenCalledTimes(1);
+
+      const insertedNode = mockRange.insertNode.mock.calls[0][0];
+      expect(insertedNode).toBeInstanceOf(Text);
+      expect(insertedNode.textContent).toBe('first line\nsecond line\nthird line');
     });
     it('should handle select all keyboard shortcut', () => {
       const onKeyDown = jest.fn();
