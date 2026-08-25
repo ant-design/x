@@ -158,6 +158,29 @@ describe('Conversations Component', () => {
     const element = container.querySelector('.ant-dropdown-open');
     expect(element).not.toBeInTheDocument();
   });
+
+  it('should only recompute affected items when active selection changes', () => {
+    const largeItems = Array.from({ length: 500 }, (_, index) => ({
+      key: `item-${index}`,
+      label: `Conversation ${index}`,
+    }));
+    const itemMenu = jest.fn(() => undefined);
+    const { getByText } = render(
+      <Conversations items={largeItems} menu={itemMenu} defaultActiveKey="item-0" />,
+    );
+
+    const initialMenuCalls = itemMenu.mock.calls.length;
+    expect(initialMenuCalls).toBeGreaterThanOrEqual(500);
+    fireEvent.click(getByText('Conversation 499'));
+
+    // React's development renderer may invoke each affected item more than once,
+    // but the work must stay constant instead of growing with all 500 items.
+    expect(itemMenu.mock.calls.length - initialMenuCalls).toBeLessThanOrEqual(8);
+    expect(getByText('Conversation 499').parentElement).toHaveClass(
+      'ant-conversations-item-active',
+    );
+  });
+
   describe('should handle menu trigger function', () => {
     it('render node', async () => {
       const { findAllByText, container } = render(

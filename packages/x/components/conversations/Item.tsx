@@ -9,20 +9,26 @@ import type { DirectionType } from '../_util/type';
 import type { ConversationsProps } from '.';
 import type { ConversationItemType } from './interface';
 
+export type ConversationsItemMenu = MenuProps & {
+  trigger?:
+    | React.ReactNode
+    | ((
+        conversation: ConversationItemType,
+        info: { originNode: React.ReactNode },
+      ) => React.ReactNode);
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+};
+
 export interface ConversationsItemProps
   extends Omit<React.HTMLAttributes<HTMLLIElement>, 'onClick'> {
   info: ConversationItemType;
   prefixCls?: string;
   direction?: DirectionType;
-  menu?: MenuProps & {
-    trigger?:
-      | React.ReactNode
-      | ((
-          conversation: ConversationItemType,
-          info: { originNode: React.ReactNode },
-        ) => React.ReactNode);
-    getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  };
+  menu?:
+    | ConversationsItemMenu
+    | ((value: ConversationItemType) => ConversationsItemMenu | undefined);
+  componentStyle?: React.CSSProperties;
+  semanticStyle?: React.CSSProperties;
   active?: boolean;
   onClick?: ConversationsProps['onActiveChange'];
 }
@@ -32,7 +38,19 @@ const stopPropagation: React.MouseEventHandler<HTMLSpanElement> = (e) => {
 };
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
-  const { prefixCls, info, className, direction, onClick, active, menu, ...restProps } = props;
+  const {
+    prefixCls,
+    info,
+    className,
+    style,
+    componentStyle,
+    semanticStyle,
+    direction,
+    onClick,
+    active,
+    menu,
+    ...restProps
+  } = props;
   const isMobile = useMobile();
 
   const domProps = pickAttrs(restProps, {
@@ -61,7 +79,8 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   // ============================ Menu ============================
 
-  const { trigger, ...dropdownMenu } = menu || {};
+  const mergedMenu = typeof menu === 'function' ? menu(info) : menu;
+  const { trigger, ...dropdownMenu } = mergedMenu || {};
 
   const getPopupContainer = dropdownMenu?.getPopupContainer;
 
@@ -88,11 +107,12 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       title={typeof info.label === 'object' ? undefined : `${info.label}`}
       {...domProps}
       className={mergedCls}
+      style={{ ...componentStyle, ...semanticStyle, ...style }}
       onClick={onInternalClick}
     >
       {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
       <Typography.Text className={`${prefixCls}-label`}>{info.label}</Typography.Text>
-      {!disabled && menu && (
+      {!disabled && mergedMenu && (
         <div onClick={stopPropagation}>
           <Dropdown
             menu={dropdownMenu}
@@ -109,4 +129,4 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   );
 };
 
-export default ConversationsItem;
+export default React.memo(ConversationsItem);

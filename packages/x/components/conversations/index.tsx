@@ -1,4 +1,4 @@
-import { useControlledState } from '@rc-component/util';
+import { useControlledState, useEvent } from '@rc-component/util';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Divider } from 'antd';
 import { clsx } from 'clsx';
@@ -13,7 +13,7 @@ import type { CreationProps } from './Creation';
 import Creation from './Creation';
 import GroupTitle, { GroupTitleContext } from './GroupTitle';
 import useGroupable from './hooks/useGroupable';
-import ConversationsItem, { type ConversationsItemProps } from './Item';
+import ConversationsItem, { type ConversationsItemMenu, type ConversationsItemProps } from './Item';
 import type { ConversationItemType, DividerItemType, GroupableProps, ItemType } from './interface';
 import useStyle from './style';
 
@@ -52,8 +52,8 @@ export interface ConversationsProps extends React.HTMLAttributes<HTMLUListElemen
    * @descEN Operation menu for conversations
    */
   menu?:
-    | ConversationsItemProps['menu']
-    | ((value: ConversationItemType) => ConversationsItemProps['menu']);
+    | ConversationsItemMenu
+    | ((value: ConversationItemType) => ConversationsItemMenu | undefined);
 
   /**
    * @desc 是否支持分组, 开启后默认按 {@link Conversation.group} 字段分组
@@ -117,8 +117,8 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
       defaultActiveKey,
       onActiveChange,
       menu,
-      styles = {},
-      classNames = {},
+      styles,
+      classNames,
       groupable,
       className,
       style,
@@ -166,7 +166,7 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
       contextConfig.className,
       contextConfig.classNames.root,
       className,
-      classNames.root,
+      classNames?.root,
       rootClassName,
       hashId,
       cssVarCls,
@@ -176,13 +176,13 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
     );
 
     // ============================ Events ============================
-    const onConversationItemClick: ConversationsItemProps['onClick'] = (key) => {
+    const onConversationItemClick: ConversationsItemProps['onClick'] = useEvent((key) => {
       setMergedActiveKey(key);
       onActiveChange?.(
         key,
         items?.find((item) => item.key === key),
       );
-    };
+    });
 
     // ============================ Short Key =========================
     const [_, shortcutKeysInfo, subscribe] = useShortcutKeys(
@@ -228,7 +228,14 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
           );
         }
         const baseConversationInfo = conversationInfo as ConversationItemType;
-        const { label: _, disabled: __, icon: ___, ...restInfo } = baseConversationInfo;
+        const {
+          label: _,
+          disabled: __,
+          icon: ___,
+          className: itemClassName,
+          style: itemStyle,
+          ...restInfo
+        } = baseConversationInfo;
         return (
           <ConversationsItem
             {...restInfo}
@@ -236,17 +243,11 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
             info={baseConversationInfo}
             prefixCls={prefixCls}
             direction={direction}
-            className={clsx(
-              classNames.item,
-              contextConfig.classNames.item,
-              baseConversationInfo.className,
-            )}
-            style={{
-              ...contextConfig.styles.item,
-              ...styles.item,
-              ...baseConversationInfo.style,
-            }}
-            menu={typeof menu === 'function' ? menu(baseConversationInfo) : menu}
+            className={clsx(classNames?.item, contextConfig.classNames.item, itemClassName)}
+            style={itemStyle}
+            componentStyle={contextConfig.styles.item}
+            semanticStyle={styles?.item}
+            menu={menu}
             active={mergedActiveKey === baseConversationInfo.key}
             onClick={onConversationItemClick}
           />
@@ -269,17 +270,17 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
           ...contextConfig.style,
           ...style,
           ...contextConfig.styles.root,
-          ...styles.root,
+          ...styles?.root,
         }}
         className={mergedCls}
         ref={containerRef}
       >
         {!!creation && (
           <Creation
-            className={clsx(contextConfig.classNames.creation, classNames.creation)}
+            className={clsx(contextConfig.classNames.creation, classNames?.creation)}
             style={{
               ...contextConfig.styles.creation,
-              ...styles.creation,
+              ...styles?.creation,
             }}
             shortcutKeyInfo={shortcutKeysInfo?.creation}
             prefixCls={`${prefixCls}-creation`}
@@ -300,12 +301,12 @@ const ForwardConversations = React.forwardRef<ConversationsRef, ConversationsPro
                 collapseMotion,
               }}
             >
-              <GroupTitle className={clsx(contextConfig.classNames.group, classNames.group)}>
+              <GroupTitle className={clsx(contextConfig.classNames.group, classNames?.group)}>
                 <ul
                   className={clsx(`${prefixCls}-list`, {
                     [`${prefixCls}-group-collapsible-list`]: groupInfo.collapsible,
                   })}
-                  style={{ ...contextConfig.styles.group, ...styles.group }}
+                  style={{ ...contextConfig.styles.group, ...styles?.group }}
                 >
                   {itemNode}
                 </ul>
@@ -326,6 +327,7 @@ if (process.env.NODE_ENV !== 'production') {
   Conversations.displayName = 'Conversations';
 }
 
-export type { ItemType, ConversationItemType, DividerItemType };
+export type { ConversationItemType, DividerItemType, ItemType };
+
 Conversations.Creation = Creation;
 export default Conversations;
