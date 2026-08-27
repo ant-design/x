@@ -59,6 +59,11 @@ const PLACEHOLDER_PREFIX = '\uE000X_MD_NL_';
 const PLACEHOLDER_SUFFIX = '\uE001';
 const PLACEHOLDER_REGEX = /\uE000X_MD_NL_\d+\uE001/g;
 
+// PUA sentinel between `**`/`__` and adjacent punctuation — relaxes marked's
+// strict CommonMark flanking rule for CJK bold. Stripped from the final HTML.
+const EMPH_BOUNDARY = '\uE002';
+const EMPH_BOUNDARY_REGEX = /\uE002/g;
+
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
 
@@ -300,6 +305,32 @@ class Parser {
   }
 
   /**
+   * Relax CommonMark's strong-emphasis flanking rule around punctuation so that
+   * CJK bold patterns like `写作**"加粗"**表示` render as `<strong>` instead of
+   * staying literal (mirrors what `remark-cjk-friendly` does for remark).
+   *
+   * Scope: fully fixes `**`. Fixes `__` when not directly inside a word run
+   * (marked's intraword rule for `_` cannot be bypassed by boundary insertion,
+   * so `写作__"加粗"__表示` stays literal — same behavior as before the fix,
+   * no regression; prefer `**` for CJK bold).
+   */
+  private relaxEmphasis(content: string): string {
+    // Match marked's own `((?!\*)punct)` exclusion — don't split `***` / `___`.
+    const punct = '(?:(?![*_])[\\p{P}\\p{S}])';
+    const delim = '(\\*\\*|__)';
+
+    let out = content.replace(
+      new RegExp(`${delim}(?=${punct})`, 'gu'),
+      `$1${EMPH_BOUNDARY}`,
+    );
+    out = out.replace(
+      new RegExp(`(${punct})${delim}`, 'gu'),
+      `$1${EMPH_BOUNDARY}$2`,
+    );
+    return out;
+  }
+
+  /**
    * Find the last non-empty token in the token tree (reverse search)
    */
   private findLastNonEmptyToken(tokens: Token[]): Token | null {
@@ -354,20 +385,30 @@ class Parser {
   }
 
   public parse(content: string, parseOptions?: ParseOptions) {
-    // Set tail injection flag
     this.injectTail = parseOptions?.injectTail ?? false;
 
-    // Protect custom tags if needed
+    // Relax strong-emphasis flanking around punctuation (CJK-friendly bold).
+    // Runs before custom-tag protection so inline markdown inside custom tags
+    // also benefits; sentinel is stripped after parse.
+    const relaxed = this.relaxEmphasis(content);
+
     if (this.options.protectCustomTagNewlines || this.options.disableCustomTagBlockMarkdown) {
       const { protected: protectedContent, placeholders } = this.protectCustomTags(
-        content,
+        relaxed,
         !!this.options.disableCustomTagBlockMarkdown,
       );
       const parsed = this.markdownInstance.parse(protectedContent) as string;
-      return this.restorePlaceholders(parsed, placeholders);
+      return this.stripEmphasisBoundary(this.restorePlaceholders(parsed, placeholders));
     }
 
-    return this.markdownInstance.parse(content) as string;
+    return this.stripEmphasisBoundary(this.markdownInstance.parse(relaxed) as string);
+  }
+
+  private stripEmphasisBoundary(html: string): string {
+    if (!html.includes(EMPH_BOUNDARY)) {
+      return html;
+    }
+    return html.replace(EMPH_BOUNDARY_REGEX, '');
   }
 }
 

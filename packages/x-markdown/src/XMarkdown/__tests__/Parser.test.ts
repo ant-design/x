@@ -232,4 +232,95 @@ describe('Parser', () => {
       expect(escapeHtml('test<script>', undefined)).toBe('test&lt;script&gt;');
     });
   });
+
+  // Regression for CJK-friendly strong emphasis (#2038). marked's CommonMark
+  // flanking rule keeps `**` literal when next to punctuation, which breaks
+  // common Chinese/Japanese output like 写作**"加粗"**表示.
+  describe('CJK-friendly strong emphasis', () => {
+    it('renders bold when ** is immediately followed by ASCII double quotes', () => {
+      const parser = new Parser();
+      const result = parser.parse('写作**"加粗"**表示');
+      expect(result).toContain('<strong>&quot;加粗&quot;</strong>');
+      expect(result).not.toContain('**');
+    });
+
+    it('renders bold when ** is immediately followed by fullwidth double quotes', () => {
+      const parser = new Parser();
+      const result = parser.parse('写作**“加粗”**表示');
+      expect(result).toContain('<strong>“加粗”</strong>');
+      expect(result).not.toContain('**');
+    });
+
+    it('renders bold when ** is immediately followed by fullwidth single quotes', () => {
+      const parser = new Parser();
+      const result = parser.parse('写作**‘加粗’**表示');
+      expect(result).toContain('<strong>‘加粗’</strong>');
+    });
+
+    it('renders bold when ** wraps a fullwidth-parenthesized term', () => {
+      const parser = new Parser();
+      const result = parser.parse('写作**（加粗）**表示');
+      expect(result).toContain('<strong>（加粗）</strong>');
+    });
+
+    it('renders bold when ** wraps an ASCII-parenthesized term', () => {
+      const parser = new Parser();
+      const result = parser.parse('写作**(加粗)**表示');
+      expect(result).toContain('<strong>(加粗)</strong>');
+    });
+
+    it('renders bold for Japanese and Korean adjacent to quotes', () => {
+      const parser = new Parser();
+      expect(parser.parse('これは**“太字”**です')).toContain('<strong>“太字”</strong>');
+      expect(parser.parse('이것은**“굵게”**입니다')).toContain('<strong>“굵게”</strong>');
+    });
+
+    it('keeps plain CJK bold working (no regression)', () => {
+      const parser = new Parser();
+      expect(parser.parse('这是**加粗**测试')).toContain('<strong>加粗</strong>');
+    });
+
+    it('keeps plain ASCII bold and intraword bold working (no regression)', () => {
+      const parser = new Parser();
+      expect(parser.parse('plain **bold** text')).toContain('<strong>bold</strong>');
+      expect(parser.parse('foo**bar**baz')).toContain('<strong>bar</strong>');
+    });
+
+    it('keeps nested em inside strong working (no regression)', () => {
+      const parser = new Parser();
+      expect(parser.parse('**bold *italic* inside**')).toContain('<strong>bold <em>italic</em> inside</strong>');
+    });
+
+    it('does not leak the boundary sentinel into the output', () => {
+      const parser = new Parser();
+      const result = parser.parse('写作**“加粗”**表示');
+      // PUA sentinel used internally must be stripped before returning.
+      expect(result).not.toMatch(/\uE000|\uE001|\uE002/);
+    });
+
+    it('keeps ** literal inside fenced code (no regression)', () => {
+      const parser = new Parser();
+      const result = parser.parse('```\n**not bold**\n```');
+      expect(result).not.toContain('<strong>');
+      expect(result).toContain('**not bold**');
+    });
+
+    it('keeps ** literal inside inline code (no regression)', () => {
+      const parser = new Parser();
+      const result = parser.parse('`src/**/*.ts`');
+      expect(result).not.toContain('<strong>');
+      expect(result).toContain('src/**/*.ts');
+    });
+
+    it('produces balanced <strong> across all streaming prefixes', () => {
+      const parser = new Parser();
+      const sentence = '写作**“加粗”**表示。';
+      for (let i = 1; i <= sentence.length; i++) {
+        const result = parser.parse(sentence.slice(0, i));
+        const open = (result.match(/<strong>/g) || []).length;
+        const close = (result.match(/<\/strong>/g) || []).length;
+        expect(open).toBe(close);
+      }
+    });
+  });
 });
