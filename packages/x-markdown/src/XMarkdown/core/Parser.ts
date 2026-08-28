@@ -63,6 +63,11 @@ const PLACEHOLDER_REGEX = /\uE000X_MD_NL_\d+\uE001/g;
 // strict CommonMark flanking rule for CJK bold. Stripped from the final HTML.
 const EMPH_BOUNDARY = '\uE002';
 const EMPH_BOUNDARY_REGEX = /\uE002/g;
+// Placeholder to protect user-supplied U+E002 before preprocessing so that
+// stripEmphasisBoundary only removes sentinels we inserted, never user content.
+const EMPH_USER_PLACEHOLDER_PREFIX = '\uE000X_MD_EB_';
+const EMPH_USER_PLACEHOLDER_SUFFIX = '\uE001';
+const EMPH_USER_PLACEHOLDER_REGEX = /\uE000X_MD_EB_\d+\uE001/g;
 
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
@@ -316,15 +321,19 @@ class Parser {
    */
   private relaxEmphasis(content: string): string {
     // Match marked's own `((?!\*)punct)` exclusion — don't split `***` / `___`.
+    // Negative lookbehind/lookahead prevent matching `**` inside `***` or `__`
+    // inside `___`, which would corrupt triple-emphasis delimiters.
+    const notDelim = '(?<![*_])';
+    const notDelimAfter = '(?![*_])';
     const punct = '(?:(?![*_])[\\p{P}\\p{S}])';
-    const delim = '(\\*\\*|__)';
+    const delim = `(\\*\\*|__)`;
 
     let out = content.replace(
-      new RegExp(`${delim}(?=${punct})`, 'gu'),
+      new RegExp(`${notDelim}${delim}(?=${punct})`, 'gu'),
       `$1${EMPH_BOUNDARY}`,
     );
     out = out.replace(
-      new RegExp(`(${punct})${delim}`, 'gu'),
+      new RegExp(`(${punct})${delim}${notDelimAfter}`, 'gu'),
       `$1${EMPH_BOUNDARY}$2`,
     );
     return out;
@@ -387,21 +396,51 @@ class Parser {
   public parse(content: string, parseOptions?: ParseOptions) {
     this.injectTail = parseOptions?.injectTail ?? false;
 
+    // Protect any user-supplied U+E002 before inserting our own sentinels,
+    // so stripEmphasisBoundary never removes user content.
+    const { protected: protectedInput, placeholders } = this.protectEmphasisBoundary(content);
     // Relax strong-emphasis flanking around punctuation (CJK-friendly bold).
     // Runs before custom-tag protection so inline markdown inside custom tags
     // also benefits; sentinel is stripped after parse.
-    const relaxed = this.relaxEmphasis(content);
+    const relaxed = this.relaxEmphasis(protectedInput);
 
     if (this.options.protectCustomTagNewlines || this.options.disableCustomTagBlockMarkdown) {
-      const { protected: protectedContent, placeholders } = this.protectCustomTags(
+      const { protected: protectedContent, placeholders: tagPlaceholders } = this.protectCustomTags(
         relaxed,
         !!this.options.disableCustomTagBlockMarkdown,
       );
       const parsed = this.markdownInstance.parse(protectedContent) as string;
-      return this.stripEmphasisBoundary(this.restorePlaceholders(parsed, placeholders));
+      return this.restoreEmphasisBoundary(
+        this.stripEmphasisBoundary(this.restorePlaceholders(parsed, tagPlaceholders)),
+        placeholders,
+      );
     }
 
-    return this.stripEmphasisBoundary(this.markdownInstance.parse(relaxed) as string);
+    return this.restoreEmphasisBoundary(
+      this.stripEmphasisBoundary(this.markdownInstance.parse(relaxed) as string),
+      placeholders,
+    );
+  }
+
+  private protectEmphasisBoundary(content: string): { protected: string; placeholders: Map<string, string> } {
+    if (!content.includes(EMPH_BOUNDARY)) {
+      return { protected: content, placeholders: new Map() };
+    }
+    const placeholders = new Map<string, string>();
+    let counter = 0;
+    const protectedContent = content.replace(EMPH_BOUNDARY_REGEX, (match) => {
+      const placeholder = `${EMPH_USER_PLACEHOLDER_PREFIX}${counter++}${EMPH_USER_PLACEHOLDER_SUFFIX}`;
+      placeholders.set(placeholder, match);
+      return placeholder;
+    });
+    return { protected: protectedContent, placeholders };
+  }
+
+  private restoreEmphasisBoundary(html: string, placeholders: Map<string, string>): string {
+    if (placeholders.size === 0) {
+      return html;
+    }
+    return html.replace(EMPH_USER_PLACEHOLDER_REGEX, (match) => placeholders.get(match) ?? match);
   }
 
   private stripEmphasisBoundary(html: string): string {

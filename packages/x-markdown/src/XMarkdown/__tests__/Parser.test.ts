@@ -240,7 +240,7 @@ describe('Parser', () => {
     it('renders bold when ** is immediately followed by ASCII double quotes', () => {
       const parser = new Parser();
       const result = parser.parse('写作**"加粗"**表示');
-      expect(result).toContain('<strong>&quot;加粗&quot;</strong>');
+      expect(result).toContain('<strong>"加粗"</strong>');
       expect(result).not.toContain('**');
     });
 
@@ -321,6 +321,40 @@ describe('Parser', () => {
         const close = (result.match(/<\/strong>/g) || []).length;
         expect(open).toBe(close);
       }
+    });
+
+    // Regression: user-supplied U+E002 in input must survive parsing — only
+    // sentinels inserted by relaxEmphasis should be stripped.
+    it('preserves user-supplied U+E002 characters in the output', () => {
+      const parser = new Parser();
+      const input = '普通文字\uE002中间有哨兵';
+      const result = parser.parse(input);
+      expect(result).toContain('\uE002');
+      // Content other than the sentinel must not be lost either.
+      expect(result).toContain('普通文字');
+      expect(result).toContain('中间有哨兵');
+    });
+
+    // Regression: triple-emphasis delimiters (*** / ___) must not be split —
+    // relaxEmphasis should not insert a sentinel inside them.
+    it('does not insert boundary inside triple *** delimiter', () => {
+      const parser = new Parser();
+      const result = parser.parse('***"加粗"***');
+      // marked should produce bold+italic, same as without preprocessing.
+      expect(result).toContain('<strong>');
+      expect(result).toContain('<em>');
+    });
+
+    it('does not insert boundary inside triple ___ delimiter', () => {
+      const parser = new Parser();
+      const result = parser.parse('___"加粗"___');
+      expect(result).toContain('<strong>');
+      expect(result).toContain('<em>');
+    });
+
+    it('keeps plain triple emphasis working (no regression)', () => {
+      const parser = new Parser();
+      expect(parser.parse('***bold***')).toContain('<em><strong>bold</strong></em>');
     });
   });
 });
