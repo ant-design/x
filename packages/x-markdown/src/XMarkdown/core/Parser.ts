@@ -428,8 +428,17 @@ class Parser {
     }
     const placeholders = new Map<string, string>();
     let counter = 0;
+    const nextPlaceholder = () => {
+      // Skip keys that already exist in the source, otherwise a pre-existing
+      // placeholder-shaped sequence would collide and get rewritten on restore.
+      let placeholder = `${EMPH_USER_PLACEHOLDER_PREFIX}${counter++}${EMPH_USER_PLACEHOLDER_SUFFIX}`;
+      while (content.includes(placeholder)) {
+        placeholder = `${EMPH_USER_PLACEHOLDER_PREFIX}${counter++}${EMPH_USER_PLACEHOLDER_SUFFIX}`;
+      }
+      return placeholder;
+    };
     const protectedContent = content.replace(EMPH_BOUNDARY_REGEX, (match) => {
-      const placeholder = `${EMPH_USER_PLACEHOLDER_PREFIX}${counter++}${EMPH_USER_PLACEHOLDER_SUFFIX}`;
+      const placeholder = nextPlaceholder();
       placeholders.set(placeholder, match);
       return placeholder;
     });

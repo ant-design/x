@@ -335,6 +335,25 @@ describe('Parser', () => {
       expect(result).toContain('中间有哨兵');
     });
 
+    // Regression: a pre-existing placeholder-shaped sequence in the source must
+    // not collide with generated placeholders (which start at counter 0).
+    it('does not collide with a pre-existing placeholder-shaped sequence', () => {
+      const parser = new Parser();
+      // \uE000X_MD_EB_0\uE001 is the exact shape of the first generated key.
+      const input = '\uE000X_MD_EB_0\uE001\uE002';
+      const result = parser.parse(input);
+      expect(result).toContain('\uE000X_MD_EB_0\uE001');
+      expect(result).toContain('\uE002');
+    });
+
+    it('does not collide when multiple U+E002 are protected', () => {
+      const parser = new Parser();
+      const input = 'a\uE000X_MD_EB_0\uE001b\uE002c\uE002d';
+      const result = parser.parse(input);
+      expect(result).toContain('a\uE000X_MD_EB_0\uE001b');
+      expect(result).toContain('c\uE002d');
+    });
+
     // Regression: triple-emphasis delimiters (*** / ___) must not be split —
     // relaxEmphasis should not insert a sentinel inside them.
     it('does not insert boundary inside triple *** delimiter', () => {
