@@ -27,6 +27,7 @@ Use this page to get a minimal setup for rendering LLM Markdown output.
 | content | Markdown content to render | `string` | - |
 | children | Markdown content (use either `content` or `children`) | `string` | - |
 | components | Map HTML nodes to custom React components | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>` | - |
+| componentsProps | Extra props passed to custom components in `components` by tag name, keeping component references stable and avoiding remounts caused by inline functions | `Record<string, Record<string, unknown>>` | - |
 | streaming | Streaming behavior config | `StreamingOption` | - |
 | config | Marked parse config, applied last and may override built-in renderers | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | rootClassName | Extra CSS class for the root element | `string` | - |

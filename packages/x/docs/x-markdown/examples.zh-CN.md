@@ -27,6 +27,7 @@ packageName: x-markdown
 | content | 需要渲染的 Markdown 内容 | `string` | - |
 | children | Markdown 内容（与 `content` 二选一） | `string` | - |
 | components | 将 HTML 节点映射为自定义 React 组件 | `Record<string, React.ComponentType<ComponentProps> \| keyof JSX.IntrinsicElements>` | - |
+| componentsProps | 按标签名向 `components` 中的自定义组件传递额外 props，保持组件引用稳定，避免内联函数导致的重复挂载 | `Record<string, Record<string, unknown>>` | - |
 | streaming | 流式渲染行为配置 | `StreamingOption` | - |
 | config | Marked 解析配置，后应用且可能覆盖内置 renderer | [`MarkedExtension`](https://marked.js.org/using_advanced#options) | `{ gfm: true }` |
 | rootClassName | 根元素的额外 CSS 类名 | `string` | - |
