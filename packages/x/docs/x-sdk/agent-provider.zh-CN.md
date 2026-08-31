@@ -8,7 +8,7 @@ subtitle: Agent 事件接入
 description: 将任意模型或 Agent Runtime 适配为统一事件流。
 order: 2
 packageName: x-sdk
-tag: 2.9.0
+tag: 2.10.0
 ---
 
 AgentProvider 是模型与 Runtime 无关的 Agent 接入契约。它将 SSE、WebSocket、本地 Runtime、录制数据等任意输入转换为统一的 Agent Event，由 `useXChat` 内部的 AgentStore 归约为消息和结构化状态。
