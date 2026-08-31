@@ -244,7 +244,7 @@ describe('CodeHighlighter', () => {
     const { container } = render(
       <CodeHighlighter
         lang="javascript"
-        highlightProps={{ showLineNumbers: true, startingLineNumber: 5 }}
+        highlightProps={{ showLineNumberss: true, startingLineNumber: 5 }}
       >
         {`console.log("test");`}
       </CodeHighlighter>,
@@ -509,6 +509,168 @@ describe('CodeHighlighter', () => {
       await waitFor(() => {
         expect(container.textContent).toContain('const x = 42;');
       });
+    });
+  });
+
+  describe('showLineNumbers', () => {
+    it('should render line numbers when showLineNumbers is true', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" showLineNumbers>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      // react-syntax-highlighter renders line numbers with class "react-syntax-highlighter-line-number"
+      expect(
+        container.querySelector('.react-syntax-highlighter-line-number'),
+      ).toBeInTheDocument();
+    });
+
+    it('should not render line numbers by default', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript">{`console.log("test");`}</CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      expect(
+        container.querySelector('.react-syntax-highlighter-line-number'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not render line numbers when showLineNumbers is false', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" showLineNumbers={false}>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      expect(
+        container.querySelector('.react-syntax-highlighter-line-number'),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  describe('wrapLongLines', () => {
+    it('should apply wrapLongLines style when enabled', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" wrapLongLines>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      // react-syntax-highlighter sets whiteSpace: 'pre-wrap' on the code element
+      const codeElement = container.querySelector('code');
+      expect(codeElement).toBeInTheDocument();
+      expect(codeElement?.style.whiteSpace).toBe('pre-wrap');
+    });
+
+    it('should not apply wrapLongLines style by default', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript">{`console.log("test");`}</CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      const codeElement = container.querySelector('code');
+      expect(codeElement).toBeInTheDocument();
+      expect(codeElement?.style.whiteSpace).not.toBe('pre-wrap');
+    });
+  });
+
+  describe('showCopyButton', () => {
+    it('should render copy button by default', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript">{`console.log("test");`}</CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.ant-codeHighlighter-header')).toBeInTheDocument();
+      });
+      // The default header should contain a copy button (Actions.Copy renders a button)
+      const buttons = container.querySelectorAll('.ant-codeHighlighter-header button');
+      expect(buttons.length).toBeGreaterThan(0);
+    });
+
+    it('should not render copy button when showCopyButton is false', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" showCopyButton={false}>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.ant-codeHighlighter-header')).toBeInTheDocument();
+      });
+      // Header should still show the language name
+      expect(container.querySelector('.ant-codeHighlighter-header')?.textContent).toContain(
+        'javascript',
+      );
+      // But no copy button (no buttons in header)
+      const buttons = container.querySelectorAll('.ant-codeHighlighter-header button');
+      expect(buttons.length).toBe(0);
+    });
+
+    it('should render copy button when showCopyButton is true', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" showCopyButton>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.ant-codeHighlighter-header')).toBeInTheDocument();
+      });
+      const buttons = container.querySelectorAll('.ant-codeHighlighter-header button');
+      expect(buttons.length).toBeGreaterThan(0);
+    });
+
+    it('should not affect custom header', async () => {
+      const { container } = render(
+        <CodeHighlighter
+          lang="javascript"
+          showCopyButton={false}
+          header={<div className="myCustomHeader">custom</div>}
+        >
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.myCustomHeader')).toBeInTheDocument();
+      });
+      // Custom header should be rendered as-is
+      expect(container.querySelector('.myCustomHeader')?.textContent).toContain('custom');
+    });
+  });
+
+  describe('combined props', () => {
+    it('should work with showLineNumbers, wrapLongLines, and showCopyButton together', async () => {
+      const { container } = render(
+        <CodeHighlighter
+          lang="javascript"
+          showLineNumbers
+          wrapLongLines
+          showCopyButton={false}
+        >
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      // Line numbers should be present
+      expect(
+        container.querySelector('.react-syntax-highlighter-line-number'),
+      ).toBeInTheDocument();
+      // Wrap should be applied
+      const codeElement = container.querySelector('code');
+      expect(codeElement?.style.whiteSpace).toBe('pre-wrap');
+      // No copy button
+      const buttons = container.querySelectorAll('.ant-codeHighlighter-header button');
+      expect(buttons.length).toBe(0);
     });
   });
 
