@@ -26,8 +26,8 @@ tag: vVERSION
 
 ### @ant-design/x-card
 
-- 🆕 Add a production-ready A2UI surface runtime with v0.8 and v0.9 adapters, catalog validation, deterministic state updates, JSON Pointer data binding, and action context resolution.
-- 📖 Add production runtime demos, API documentation, an updated package guide, and a generative UI architecture RFC.
+- 🆕 Add a production-ready A2UI surface runtime with v0.8 and v0.9 adapters, catalog validation, deterministic state updates, JSON Pointer data binding, and action context resolution by [Mickey](https://github.com/kimteayon).
+- 📖 Add production runtime demos, API documentation, an updated package guide, and a generative UI architecture RFC by [Mickey](https://github.com/kimteayon).
 
 ### @ant-design/x-markdown
 
@@ -37,8 +37,8 @@ tag: vVERSION
 
 ### @ant-design/x-sdk
 
-- 🆕 Add a model-independent Agent runtime with validated protocol events, deterministic state replay, selectors, store APIs, and an `AgentProvider` adapter. [#2006](https://github.com/ant-design/x/pull/2006) by [Mickey](https://github.com/cq0122)
-- 🆕 Add typed Agent interaction commands and integrate their lifecycle, cancellation, retry, and race handling with `useXChat`. [#2011](https://github.com/ant-design/x/pull/2011) by [Mickey](https://github.com/cq0122)
+- 🆕 Add a model-independent Agent runtime with validated protocol events, deterministic state replay, selectors, store APIs, and an `AgentProvider` adapter. [#2006](https://github.com/ant-design/x/pull/2006) by [Mickey](https://github.com/kimteayon)
+- 🆕 Add typed Agent interaction commands and integrate their lifecycle, cancellation, retry, and race handling with `useXChat`. [#2011](https://github.com/ant-design/x/pull/2011) by [Mickey](https://github.com/kimteayon)
 
 ### Others
 

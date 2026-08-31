@@ -25,8 +25,8 @@ tag: vVERSION
 
 ### @ant-design/x-card
 
-- 🆕 新增生产级 A2UI Surface Runtime，提供 v0.8 / v0.9 适配器、Catalog 校验、确定性状态更新、JSON Pointer 数据绑定和 Action 上下文解析。
-- 📖 新增生产运行时示例、API 文档、包使用指南及生成式 UI 架构 RFC。
+- 🆕 新增生产级 A2UI Surface Runtime，提供 v0.8 / v0.9 适配器、Catalog 校验、确定性状态更新、JSON Pointer 数据绑定和 Action 上下文解析，由 [Mickey](https://github.com/kimteayon) 提交。
+- 📖 新增生产运行时示例、API 文档、包使用指南及生成式 UI 架构 RFC，由 [Mickey](https://github.com/kimteayon) 提交。
 
 ### @ant-design/x-markdown
 
@@ -36,8 +36,8 @@ tag: vVERSION
 
 ### @ant-design/x-sdk
 
-- 🆕 新增与模型无关的 Agent Runtime，包含协议事件校验、确定性状态重放、Selector、Store API 和 `AgentProvider` 适配器。[#2006](https://github.com/ant-design/x/pull/2006) 由 [Mickey](https://github.com/cq0122) 提交
-- 🆕 新增类型安全的 Agent 交互命令，并将其生命周期、取消、重试和竞态处理集成到 `useXChat`。[#2011](https://github.com/ant-design/x/pull/2011) 由 [Mickey](https://github.com/cq0122) 提交
+- 🆕 新增与模型无关的 Agent Runtime，包含协议事件校验、确定性状态重放、Selector、Store API 和 `AgentProvider` 适配器。[#2006](https://github.com/ant-design/x/pull/2006) 由 [Mickey](https://github.com/kimteayon) 提交
+- 🆕 新增类型安全的 Agent 交互命令，并将其生命周期、取消、重试和竞态处理集成到 `useXChat`。[#2011](https://github.com/ant-design/x/pull/2011) 由 [Mickey](https://github.com/kimteayon) 提交
 
 ### 其他
 
