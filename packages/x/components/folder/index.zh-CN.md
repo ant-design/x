@@ -112,7 +112,7 @@ const newData = folderRef.current?.addNode(['src'], {
 | deleteNode | 不可变更新：删除目标节点，返回新的 treeData | (path: string[]) => FolderTreeData[] |
 | addNode | 不可变更新：在目标文件夹下新增子节点，返回新的 treeData | (parentPath: string[], node: FolderTreeData) => FolderTreeData[] |
 
-## 语义化 DOM
+## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 

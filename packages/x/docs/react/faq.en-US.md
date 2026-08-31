@@ -12,7 +12,7 @@ Here are the frequently asked questions about Ant Design X and antd that you sho
 
 Currently, Ant Design X only provides a React version. Ant Design X is an AI interaction component library specifically designed for the React framework, and there are currently no plans for a Vue version.
 
-If you are using the Vue tech stack, we recommend following our GitHub repository for the latest updates, or participating in open source contributions to help us support more frameworks.
+If you are using the Vue tech stack, we recommend checking out the community project [Antdv Next X](https://x.antdv-next.com/). You can also follow our GitHub repository for the latest updates, or participate in open source contributions to help us support more frameworks.
 
 ## How to adapt to mobile?
 

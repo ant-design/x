@@ -64,6 +64,11 @@ const genCodeHighlighterStyle: GenerateStyle<CodeHighlighterToken> = (
         "code[class*='language-'],pre[class*='language-']": {
           background: 'none',
         },
+        // Fix: ensure pre stretches to full width when horizontally scrolling
+        // so background color covers the entire scrollable area
+        pre: {
+          minWidth: '100%',
+        },
       },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',

@@ -25,7 +25,10 @@ const getAsyncHighlighter = (lang: string) => {
   if (!highlighterCache.has(lang)) {
     const LazyHighlighter = lazy(async () => {
       try {
-        await import(`react-syntax-highlighter/dist/esm/languages/prism/${lang}`);
+        const langModule = await import(
+          `react-syntax-highlighter/dist/esm/languages/prism/${lang}`
+        );
+        SyntaxHighlighter.registerLanguage(lang, langModule.default);
       } catch (error) {
         console.warn(`[CodeHighlighter] Failed to load language: ${lang}`, error);
       }

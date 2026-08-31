@@ -91,4 +91,34 @@ describe('Think Component', () => {
     expect(ref.current).not.toBeNull();
     // 如有公开方法可补充断言
   });
+
+  it('Think should remove content from DOM when destroyOnHidden is true and collapsed', async () => {
+    const { container } = render(
+      <Think title="test" destroyOnHidden defaultExpanded={false}>
+        content
+      </Think>,
+    );
+    // collapsed by default, content should not be in DOM
+    expect(container.querySelector('.ant-think-content')).toBeNull();
+    // expand
+    fireEvent.click(container.querySelector('.ant-think-status-wrapper')!);
+    await waitFakeTimer();
+    expect(container.querySelector('.ant-think-content')).toBeTruthy();
+  });
+
+  it('Think should keep content in DOM when destroyOnHidden is false and collapsed', async () => {
+    const { container } = render(
+      <Think title="test" destroyOnHidden={false} defaultExpanded={true}>
+        content
+      </Think>,
+    );
+    // expanded by default
+    expect(container.querySelector('.ant-think-content')).toBeTruthy();
+    // collapse
+    fireEvent.click(container.querySelector('.ant-think-status-wrapper')!);
+    await waitFakeTimer();
+    // content should still be in DOM with leavedClassName
+    expect(container.querySelector('.ant-think-content')).toBeTruthy();
+    expect(container.querySelector('.ant-think-content-hidden')).toBeTruthy();
+  });
 });

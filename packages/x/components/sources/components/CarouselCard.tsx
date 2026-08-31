@@ -18,20 +18,22 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
 
   const compCls = `${prefixCls}-carousel`;
 
-  const [slide, setSlide] = useState<number>(0);
+  // Derive the target slide index from activeKey
+  const activeSlideIndex = React.useMemo(
+    () => Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0),
+    [items, activeKey],
+  );
+
+  const [slide, setSlide] = useState<number>(activeSlideIndex);
 
   const carouselRef = useRef<React.ComponentRef<typeof Carousel>>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (carouselRef.current) {
-        const current = Math.max(0, items?.findIndex(({ key }) => key === activeKey) ?? 0);
-        setSlide(current);
-        carouselRef.current.goTo(current, false);
-      }
-    }, 0);
-    return () => clearTimeout(timer);
-  }, [activeKey, items, setSlide]);
+    setSlide(activeSlideIndex);
+    if (carouselRef.current) {
+      carouselRef.current.goTo(activeSlideIndex, false);
+    }
+  }, [activeSlideIndex]);
 
   const handleClick = (item: SourcesItem) => {
     item.url && window.open(item.url, '_blank', 'noopener,noreferrer');
@@ -46,7 +48,13 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             className={clsx(`${compCls}-btn`, `${compCls}-left-btn`, {
               [`${compCls}-btn-disabled`]: slide === 0,
             })}
-            onClick={() => carouselRef.current?.prev()}
+            onClick={() => {
+              if (slide > 0) {
+                const next = slide - 1;
+                setSlide(next);
+                carouselRef.current?.goTo(next, false);
+              }
+            }}
           >
             <LeftOutlined />
           </span>
@@ -54,7 +62,14 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
             className={clsx(`${compCls}-btn`, `${compCls}-right-btn`, {
               [`${compCls}-btn-disabled`]: slide === (items?.length || 1) - 1,
             })}
-            onClick={() => carouselRef.current?.next()}
+            onClick={() => {
+              const max = (items?.length || 1) - 1;
+              if (slide < max) {
+                const next = slide + 1;
+                setSlide(next);
+                carouselRef.current?.goTo(next, false);
+              }
+            }}
           >
             <RightOutlined />
           </span>
@@ -68,7 +83,6 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
         infinite={false}
         dots={false}
         afterChange={setSlide}
-        beforeChange={(_, nextSlide) => setSlide(nextSlide)}
       >
         {items?.map((item, index) => (
           <div

@@ -15,6 +15,72 @@ tag: vVERSION
 
 ---
 
+## 2.9.0
+
+`2026-07-23`
+
+### @ant-design/x
+
+- 🆕 新增 `useMobile` Hook,提供 SSR 安全的移动端设备检测能力。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🆕 Think、ThoughtChain 新增 `destroyOnHidden` 属性,支持在内容隐藏时自动销毁 DOM 节点。[#1985](https://github.com/ant-design/x/pull/1985) 由 [wryyyds7](https://github.com/wryyyds7) 提交
+- 💄 Actions 的反馈(Feedback)在移动端不再展示 Tooltip,避免移动设备上的交互干扰。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 💄 Conversations 在移动端常驻显示菜单图标(移动端无 hover 态)。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 优化 Actions、Conversations 等组件在移动端的点击响应,通过 `touch-action: manipulation` 消除 300ms 点击延迟。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sources 的 CarouselCard 在受控 `activeKey` 切换时轮播索引不同步的问题,左右切换按钮改用 `goTo` 精确跳转并修复边界点击无效的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sender 语音输入(useSpeech)在组件卸载后未清理 SpeechRecognition,导致对已卸载组件进行状态更新的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 CodeHighlighter 异步加载语言后未调用 `registerLanguage` 导致语法高亮不生效的问题,并修复代码块横向滚动时背景色未撑满的问题。[#1945](https://github.com/ant-design/x/pull/1945) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 Sender 在 `borderless` 模式下聚焦时仍显示外层 outline 的问题。[#1963](https://github.com/ant-design/x/pull/1963) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+- 🐛 修复 Sender `content` 类型词槽未走 `formatResult` 格式化的问题,现在所有词槽类型(含 `content`)统一生效,`content` 词槽以 DOM 文本作为输入值。[#1986](https://github.com/ant-design/x/pull/1986) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
+- 🐛 修复 Suggestion 选项过多时弹层无法滚动的问题,弹层在内容超出最大高度(256px)时支持内部滚动(`overflow-y: auto`)。[#1983](https://github.com/ant-design/x/pull/1983) 由 [wenzeyu8888-rgb](https://github.com/wenzeyu8888-rgb) 提交
+- 🐛 修复 Sender 在 `agent` 模式下 agent 标签(label)换行展示的问题,改为 inline 渲染。[#1990](https://github.com/ant-design/x/pull/1990) 由 [cc-hearts](https://github.com/cc-hearts) 提交
+
+### @ant-design/x-markdown
+
+- 🐛 修复 XMarkdown 流式渲染时对代码块进行 O(N²) 扫描,导致长内容下页面卡顿甚至冻结的问题。[#1972](https://github.com/ant-design/x/pull/1972) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-sdk
+
+- 🐛 修复 XStream 提前退出(loop 中断 / 读取未完成)时未释放 reader 锁、未取消底层 stream 的问题，避免资源泄露与悬挂的读取请求。[#1970](https://github.com/ant-design/x/pull/1970) 由 [Mickey](https://github.com/Mickey) 提交
+
+### @ant-design/x-skill
+
+- 🐛 修复 x-skill 中 ora spinner(loader) 在 CJS 环境下的加载问题,缓存 loader 实例并改为动态 `import`,避免重复加载与初始化报错。[#1980](https://github.com/ant-design/x/pull/1980) 由 [jay666mnj](https://github.com/jay666mnj) 提交
+
+### 其他
+
+- 📖 优化站点页面标题拼接逻辑,subtitle 与 title 之间以空格分隔,避免标题文案粘连。[#1959](https://github.com/ant-design/x/pull/1959) 由 [Mickey](https://github.com/Mickey) 提交
+- 📖 FAQ 文档新增为 Vue 用户推荐 Antdv Next X 的说明。[#1966](https://github.com/ant-design/x/pull/1966) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+- 📖 统一中文站点下语义化 DOM 的标题文案。[#1877](https://github.com/ant-design/x/pull/1877) 由 [Rain120](https://github.com/Rain120) 提交
+- 🛠 站点组件总览(Component Overview)搜索框隐藏聚焦 outline。[#1987](https://github.com/ant-design/x/pull/1987) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+
+## 2.8.0
+
+`2026-06-08`
+
+### @ant-design/x
+
+- 🆕 Folder 组件新增右键菜单功能。[#1919](https://github.com/ant-design/x/pull/1919) 由 [Mickey](https://github.com/Mickey) 提交
+- 🐛 修复 FileCard.List 在 items 更新时滚动按钮状态未刷新的问题。[#1914](https://github.com/ant-design/x/pull/1914) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+- 🐛 修复 Sender 组件在 slotConfig ref 变化时运行时插入的 slots 被清空的问题。[#1900](https://github.com/ant-design/x/pull/1900) 由 [pikanohup](https://github.com/hooraypikachu) 提交
+- 🐛 修复设计令牌（design token）算术运算前的类型转换问题。[#1910](https://github.com/ant-design/x/pull/1910) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 新增 `disableDefaultStyles` 属性，支持禁用默认标签样式。[#1909](https://github.com/ant-design/x/pull/1909) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复自定义标签内换行符被错误解析的问题。[#1896](https://github.com/ant-design/x/pull/1896) 由 [ryker](https://github.com/2279549769) 提交
+- 🐛 修复流式渲染初始非流式输出时的布局抖动问题。[#1917](https://github.com/ant-design/x/pull/1917) 由 [Waiter](https://github.com/Waiter) 提交
+- 🐛 修复 SSR 环境下 DOMPurify 报错的问题。[#1917](https://github.com/ant-design/x/pull/1917) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复自定义标签内换行保护逻辑不完整的问题。[#1920](https://github.com/ant-design/x/pull/1920) 由 [18062706139fcz](https://github.com/18062706139fcz) 提交
+
+### @ant-design/x-sdk
+
+- 📖 修复 x-conversations 示例中 Chat Provider 缓存问题，使用 useRef 保持 provider 实例稳定。[#1925](https://github.com/ant-design/x/pull/1925) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+
+### 其他
+
+- 📖 修复 Prompts API 文档中过时的类型名称。[#1915](https://github.com/ant-design/x/pull/1915) 由 [Ryker_Feng](https://github.com/18062706139fcz) 提交
+- 🛠 锁定 dumi 版本为 2.4.28。[#1922](https://github.com/ant-design/x/pull/1922)
+
 ## 2.7.0
 
 `2026-04-30`

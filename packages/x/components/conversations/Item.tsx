@@ -4,6 +4,7 @@ import type { MenuProps } from 'antd';
 import { Dropdown, Typography } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
+import useMobile from '../_util/hooks/use-mobile';
 import type { DirectionType } from '../_util/type';
 import type { ConversationsProps } from '.';
 import type { ConversationItemType } from './interface';
@@ -32,6 +33,7 @@ const stopPropagation: React.MouseEventHandler<HTMLSpanElement> = (e) => {
 
 const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   const { prefixCls, info, className, direction, onClick, active, menu, ...restProps } = props;
+  const isMobile = useMobile();
 
   const domProps = pickAttrs(restProps, {
     aria: true,
@@ -65,7 +67,12 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
 
   const renderMenuTrigger = (conversation: ConversationItemType) => {
     const originTriggerNode = (
-      <EllipsisOutlined onClick={stopPropagation} className={`${prefixCls}-menu-icon`} />
+      <EllipsisOutlined
+        onClick={stopPropagation}
+        className={clsx(`${prefixCls}-menu-icon`, {
+          [`${prefixCls}-menu-icon-mobile`]: isMobile,
+        })}
+      />
     );
     if (trigger) {
       return typeof trigger === 'function'

@@ -12,7 +12,7 @@ title: FAQ
 
 目前 Ant Design X 只提供 React 版本。Ant Design X 是专为 React 框架设计的 AI 交互组件库，暂时没有 Vue 版本的计划。
 
-如果你使用 Vue 技术栈，建议关注我们的 GitHub 仓库获取最新动态，或者参与到开源贡献中来帮助我们支持更多框架。
+如果你使用 Vue 技术栈，推荐关注社区项目 [Antdv Next X](https://x.antdv-next.com/)；也建议关注我们的 GitHub 仓库获取最新动态，或者参与到开源贡献中来帮助我们支持更多框架。
 
 ## 如何适配移动端？
 

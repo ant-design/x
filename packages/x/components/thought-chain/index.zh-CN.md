@@ -24,6 +24,7 @@ tag: 2.0.0
 <code src="./demo/simple.tsx">简洁思维链</code>
 <code src="./demo/collapsible.tsx" background="grey">可折叠的</code>
 <code src="./demo/controlled-collapsible" background="grey">受控的折叠</code>
+<code src="./demo/destroyOnHidden.tsx" background="grey">折叠时销毁内容</code>
 <code src="./demo/customization.tsx" background="grey">客制化</code>
 <code src="./demo/nested.tsx" background="grey">嵌套使用</code>
 <code src="./demo/single-row.tsx" background="grey">单行折叠</code>
@@ -59,6 +60,7 @@ tag: 2.0.0
 | title | 思维节点标题 | React.ReactNode | - | - |
 | collapsible | 思维节点是否可折叠 | boolean | false | - |
 | blink | 闪动效果 | boolean | - | - |
+| destroyOnHidden | 隐藏时是否销毁内容节点 | boolean | true | - |
 
 ### ThoughtChain.Item
 

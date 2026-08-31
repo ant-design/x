@@ -21,6 +21,7 @@ tag: 2.0.0
 <code src="./demo/basic.tsx">基础用法</code>
 <code src="./demo/status.tsx">设置状态</code>
 <code src="./demo/expand.tsx">是否展开</code>
+<code src="./demo/destroyOnHidden.tsx">折叠时销毁内容</code>
 
 ## API
 
@@ -40,6 +41,7 @@ tag: 2.0.0
 | expanded | 是否展开 | boolean | - | - |
 | onExpand | 展开事件 | (expand: boolean) => void | - | - |
 | blink | 闪动模式 | boolean | - | - |
+| destroyOnHidden | 隐藏时是否销毁内容节点 | boolean | true | - |
 
 ## Semantic DOM
 

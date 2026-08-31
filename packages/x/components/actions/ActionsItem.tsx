@@ -3,6 +3,7 @@ import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
+import useMobile from '../_util/hooks/use-mobile';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
 
@@ -91,6 +92,8 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     data: true,
   });
 
+  const isMobile = useMobile();
+
   // ============================ Prefix ============================
 
   const { direction, getPrefixCls } = useXProviderContext();
@@ -125,17 +128,17 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
 
   const iconNode = status && StatusIcon[status] ? StatusIcon[status] : defaultIcon;
 
-  return (
-    <Tooltip title={label}>
-      <div
-        {...domProps}
-        className={mergedCls}
-        style={{ ...style, ...styles.root, ...styles?.[status] }}
-      >
-        {iconNode}
-      </div>
-    </Tooltip>
+  const innerNode = (
+    <div
+      {...domProps}
+      className={mergedCls}
+      style={{ ...style, ...styles.root, ...styles?.[status] }}
+    >
+      {iconNode}
+    </div>
   );
+
+  return isMobile ? innerNode : <Tooltip title={label}>{innerNode}</Tooltip>;
 };
 
 export default ActionsItem;

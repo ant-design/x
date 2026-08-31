@@ -41,6 +41,12 @@ export interface ThinkProps extends Omit<React.HTMLAttributes<HTMLDivElement>, '
   expanded?: boolean;
   onExpand?: (expand: boolean) => void;
   blink?: boolean;
+  /**
+   * @desc 隐藏时是否销毁内容节点
+   * @descEN Whether to destroy content node when hidden
+   * @default true
+   */
+  destroyOnHidden?: boolean;
 }
 
 type ThinkRef = {
@@ -63,6 +69,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
     expanded,
     onExpand,
     blink,
+    destroyOnHidden = true,
     ...restProps
   } = props;
 
@@ -147,7 +154,7 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
         </div>
         <RightOutlined className={`${prefixCls}-status-down-icon`} rotate={isExpand ? 90 : 0} />
       </div>
-      <CSSMotion {...collapseMotion} visible={isExpand}>
+      <CSSMotion {...collapseMotion} visible={isExpand} removeOnLeave={destroyOnHidden}>
         {({ className: motionClassName, style }, motionRef) => (
           <div className={motionClassName || ''} ref={motionRef} style={style}>
             <div

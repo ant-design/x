@@ -49,8 +49,7 @@ type CustomContentType {
 
 ```typescript
 type BubbleSlot<ContentType> =
-  | React.ReactNode
-  | ((content: ContentType, info: InfoType) => React.ReactNode);
+  React.ReactNode | ((content: ContentType, info: InfoType) => React.ReactNode);
 ```
 
 #### EditableBubbleOption
@@ -939,8 +938,7 @@ type SignKeysType = {
   Shift: keyof KeyboardEvent;
 };
 type ShortcutKeys<CustomKey = number | 'number'> =
-  | [keyof SignKeysType, keyof SignKeysType, CustomKey]
-  | [keyof SignKeysType, CustomKey];
+  [keyof SignKeysType, keyof SignKeysType, CustomKey] | [keyof SignKeysType, CustomKey];
 ```
 
 ---
@@ -1078,7 +1076,7 @@ interface FileContentService {
 }
 ```
 
-## 语义化 DOM
+## Semantic DOM
 
 <code src="./demo/_semantic.tsx" simplify="true"></code>
 

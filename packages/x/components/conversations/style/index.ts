@@ -58,6 +58,8 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         fontSize: token.fontSize,
         cursor: 'pointer',
         display: 'flex',
+        // Eliminate 300ms click delay on mobile/touch devices
+        touchAction: 'manipulation',
         gap: token.paddingXS,
         marginBlockEnd: token.marginSM,
         lineHeight: token.lineHeight,
@@ -131,6 +133,8 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         borderRadius: token.borderRadiusLG,
         cursor: 'pointer',
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        // Eliminate 300ms click delay on mobile/touch devices
+        touchAction: 'manipulation',
         [`&:not(${componentCls}-item-disabled):hover`]: {
           backgroundColor: token.colorBgTextHover,
         },
@@ -169,6 +173,10 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
       [`${componentCls}-menu-icon`]: {
         opacity: 0,
         fontSize: token.fontSizeXL,
+        // On mobile/touch devices, always show the menu icon since hover is not available
+        [`&${componentCls}-menu-icon-mobile`]: {
+          opacity: 0.6,
+        },
       },
       [`${componentCls}-list`]: {
         display: 'flex',
@@ -196,6 +204,8 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         color: token.colorText,
         borderRadius: token.borderRadiusLG,
         transition: `all ${token.motionDurationMid} ${token.motionEaseInOut}`,
+        // Eliminate 300ms click delay on mobile/touch devices
+        touchAction: 'manipulation',
         '&:hover': {
           backgroundColor: token.colorBgTextHover,
         },

@@ -25,14 +25,12 @@ const marked = new Marked({ extensions: getLatex() });
 const MarkedRenderer: FC<MarkdownRendererProps> = (props) => (
   <div
     className="markdown-container"
-    // biome-ignore lint/security/noDangerouslySetInnerHtml: benchmark only
     dangerouslySetInnerHTML={{ __html: marked.parse(props.md) as string }}
   />
 );
 
 const MarkdownItRenderer: FC<MarkdownRendererProps> = (props) => {
   return (
-    // biome-ignore lint/security/noDangerouslySetInnerHtml: benchmark only
     <div className="markdown-container" dangerouslySetInnerHTML={{ __html: md.render(props.md) }} />
   );
 };
@@ -67,10 +65,10 @@ const StreamdownRenderer: FC<MarkdownRendererProps> = (props) => (
 const Empty = () => <div />;
 
 export {
-  MarkedRenderer,
-  MarkdownItRenderer,
-  ReactMarkdownRenderer,
-  XMarkdownRenderer,
-  StreamdownRenderer,
   Empty,
+  MarkdownItRenderer,
+  MarkedRenderer,
+  ReactMarkdownRenderer,
+  StreamdownRenderer,
+  XMarkdownRenderer,
 };

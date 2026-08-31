@@ -168,10 +168,13 @@ const useSlotConfigState = (
       if (infoNodeType === 'nbsp') {
         return ' ';
       }
-      if (!slotConfig || slotConfig.type === 'content') {
+      if (!slotConfig) {
         return textContent;
       }
-      const slotValue = stateRef.current[slotKey] ?? '';
+      // content 类型的值来自 DOM 文本（用户可在 contenteditable 区域直接编辑），
+      // 其他类型的值来自 state。
+      const slotValue =
+        slotConfig.type === 'content' ? textContent : (stateRef.current[slotKey] ?? '');
       return slotConfig.formatResult?.(slotValue) ?? slotValue;
     }
 

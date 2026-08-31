@@ -20,6 +20,7 @@ Used to show deep thinking process.
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/status.tsx">Status</code>
 <code src="./demo/expand.tsx">Expand</code>
+<code src="./demo/destroyOnHidden.tsx">Destroy On Hidden</code>
 
 ## API
 
@@ -39,6 +40,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | expanded | Expand state | boolean | - | - |
 | onExpand | Callback when expand changes | (expand: boolean) => void | - | - |
 | blink | Blink mode | boolean | - | - |
+| destroyOnHidden | Whether to destroy content node when hidden | boolean | true | - |
 
 ## Semantic DOM
 

@@ -143,7 +143,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
       lastTime = now;
 
       const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      setScale((prev) => Math.max(0.5, Math.min(3, prev + delta)));
+      setScale((prev) => Math.max(0.5, prev + delta));
     };
 
     container.addEventListener('wheel', wheelHandler, { passive: false });
@@ -206,12 +206,30 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
     const svgElement = containerRef.current?.querySelector('svg');
     if (!svgElement) return;
 
-    const svgString = new XMLSerializer().serializeToString(svgElement);
+    const exportSvg = svgElement.cloneNode(true) as SVGSVGElement;
+    exportSvg.style.removeProperty('transform');
+    exportSvg.style.removeProperty('transform-origin');
+    exportSvg.style.removeProperty('transition');
+    exportSvg.style.removeProperty('cursor');
+
+    const viewBox = svgElement.viewBox.baseVal;
+    let width = viewBox.width || svgElement.width.baseVal.value;
+    let height = viewBox.height || svgElement.height.baseVal.value;
+    if (!width || !height) {
+      const bounds = svgElement.getBoundingClientRect();
+      width ||= bounds.width / scale;
+      height ||= bounds.height / scale;
+    }
+    if (!width || !height) return;
+
+    exportSvg.setAttribute('width', `${width}`);
+    exportSvg.setAttribute('height', `${height}`);
+
+    const svgString = new XMLSerializer().serializeToString(exportSvg);
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const { width, height } = svgElement.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
 
     canvas.width = width * dpr;
@@ -232,7 +250,7 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   };
 
   const handleZoomIn = () => {
-    setScale((prev) => Math.min(prev + 0.2, 3));
+    setScale((prev) => prev + 0.2);
   };
 
   const handleZoomOut = () => {

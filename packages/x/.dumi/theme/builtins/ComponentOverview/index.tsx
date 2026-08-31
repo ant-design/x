@@ -47,6 +47,10 @@ const useStyle = createStyles(({ token, css }) => ({
     .anticon-search {
       color: ${token.colorTextDisabled};
     }
+    &:focus-visible,
+    &:has(input:focus-visible) {
+      outline: none !important;
+    }
   `,
   componentsOverviewContent: css`
     &:empty:after {

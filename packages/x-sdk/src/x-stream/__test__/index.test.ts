@@ -144,4 +144,38 @@ describe('XStream', () => {
       }),
     ).toBeInstanceOf(ReadableStream);
   });
+
+  it('releases the reader lock when the consumer breaks out early', async () => {
+    const textEncoder = new TextEncoder();
+    const stream = XStream({
+      readableStream: new ReadableStream({
+        async start(controller) {
+          let i = 0;
+          while (i < 5) {
+            controller.enqueue(textEncoder.encode(`data: ${i}\n\n`));
+            i += 1;
+          }
+          controller.close();
+        },
+      }),
+    });
+
+    // Consume one chunk then break out of the loop early.
+    for await (const value of stream) {
+      expect(value).toEqual({ data: '0' });
+      break;
+    }
+
+    // After an early exit the internal reader's lock must be released so the
+    // stream can be re-acquired (e.g. getReader/cancel) without throwing.
+    expect(stream.locked).toBe(false);
+
+    // The underlying stream should be cancelled, not just have its lock
+    // released — matching the default ReadableStream async iterator semantics
+    // so that any in-flight fetch stops buffering data.
+    const reader = stream.getReader();
+    const { done } = await reader.read();
+    expect(done).toBe(true);
+    reader.releaseLock();
+  });
 });
