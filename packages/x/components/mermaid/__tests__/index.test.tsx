@@ -491,7 +491,7 @@ describe('Mermaid Component', () => {
       const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
 
       await waitFor(() => {
-        expect(mockRender).toHaveBeenCalled();
+        expect(container.querySelector('.ant-mermaid-graph svg')).toBeInTheDocument();
       });
 
       // 验证组件渲染后包含 SVG 元素
@@ -509,10 +509,10 @@ describe('Mermaid Component', () => {
     });
 
     it('should update transform styles when scale changes', async () => {
-      render(<Mermaid>{mermaidContent}</Mermaid>);
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
 
       await waitFor(() => {
-        expect(mockRender).toHaveBeenCalled();
+        expect(container.querySelector('.ant-mermaid-graph svg')).toBeInTheDocument();
       });
 
       // 验证缩放功能正常工作
@@ -524,6 +524,16 @@ describe('Mermaid Component', () => {
 
       // 点击缩小按钮应该触发缩放
       expect(() => fireEvent.click(zoomOutButton)).not.toThrow();
+
+      // 放大不应被旧的 3 倍上限截断
+      for (let i = 0; i < 11; i++) {
+        fireEvent.click(zoomInButton);
+      }
+      await waitFor(() => {
+        const svg = container.querySelector('.ant-mermaid-graph svg') as SVGSVGElement | null;
+        const currentScale = Number(svg?.style.transform.match(/scale\(([^)]+)\)/)?.[1]);
+        expect(currentScale).toBeGreaterThan(3);
+      });
     });
 
     it('should update transform styles when position changes during drag', async () => {
@@ -697,10 +707,9 @@ describe('Mermaid Component', () => {
 
   describe('Download Functionality', () => {
     it('should handle download correctly', async () => {
-      // Mock DOM APIs
-      const mockSvgElement = {
-        getBoundingClientRect: jest.fn().mockReturnValue({ width: 200, height: 150 }),
-      };
+      mockRender.mockResolvedValueOnce({
+        svg: '<svg viewBox="0 0 640 480"><rect width="640" height="480" /></svg>',
+      });
 
       // Mock XMLSerializer
       const mockSerializeToString = jest.fn().mockReturnValue('<svg>test</svg>');
@@ -754,30 +763,35 @@ describe('Mermaid Component', () => {
       const originalDevicePixelRatio = window.devicePixelRatio;
       window.devicePixelRatio = 2;
 
-      // Mock containerRef and querySelector
-      const mockQuerySelector = jest.fn().mockReturnValue(mockSvgElement);
+      const { container } = render(<Mermaid>{mermaidContent}</Mermaid>);
 
-      render(<Mermaid>{mermaidContent}</Mermaid>);
-
-      // Override the containerRef to return our mock
-      const container = document.querySelector('.ant-mermaid-graph');
-      if (container) {
-        container.querySelector = mockQuerySelector;
-      }
+      await waitFor(() => {
+        expect(container.querySelector('.ant-mermaid-graph svg')).toBeInTheDocument();
+      });
+      const svgElement = container.querySelector('.ant-mermaid-graph svg') as SVGSVGElement;
+      svgElement.style.transform = 'scale(3) translate(20px, 10px)';
+      const getBoundingClientRectSpy = jest
+        .spyOn(svgElement, 'getBoundingClientRect')
+        .mockReturnValue({ width: 1920, height: 1440 } as DOMRect);
 
       const downloadButton = screen.getByLabelText('download');
       fireEvent.click(downloadButton);
 
       // Wait for async operations
       await waitFor(() => {
-        expect(mockQuerySelector).toHaveBeenCalledWith('svg');
-        expect(mockSerializeToString).toHaveBeenCalledWith(mockSvgElement);
-        expect(mockCanvas.width).toBe(400); // 200 * 2 (dpr)
-        expect(mockCanvas.height).toBe(300); // 150 * 2 (dpr)
+        expect(mockSerializeToString).toHaveBeenCalled();
+        const serializedSvg = mockSerializeToString.mock.calls[0][0] as SVGSVGElement;
+        expect(serializedSvg).not.toBe(svgElement);
+        expect(serializedSvg.style.transform).toBe('');
+        expect(serializedSvg.getAttribute('width')).toBe('640');
+        expect(serializedSvg.getAttribute('height')).toBe('480');
+        expect(getBoundingClientRectSpy).not.toHaveBeenCalled();
+        expect(mockCanvas.width).toBe(1280); // 640 * 2 (dpr)
+        expect(mockCanvas.height).toBe(960); // 480 * 2 (dpr)
         // @ts-ignore
-        expect(mockCanvas.style.width).toBe('200px');
+        expect(mockCanvas.style.width).toBe('640px');
         // @ts-ignore
-        expect(mockCanvas.style.height).toBe('150px');
+        expect(mockCanvas.style.height).toBe('480px');
 
         // Simulate image load
         if (mockImage.onload) {
@@ -785,7 +799,7 @@ describe('Mermaid Component', () => {
           mockImage.onload();
         }
 
-        expect(mockDrawImage).toHaveBeenCalledWith(mockImage, 0, 0, 200, 150);
+        expect(mockDrawImage).toHaveBeenCalledWith(mockImage, 0, 0, 640, 480);
         expect(mockToDataURL).toHaveBeenCalledWith('image/png', 1);
       });
 
