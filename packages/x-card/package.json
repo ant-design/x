@@ -1,14 +1,16 @@
 {
   "name": "@ant-design/x-card",
   "version": "2.8.0",
-  "description": "React card loader for dynamic content loading and management",
+  "description": "A2UI dynamic surfaces and production runtime for React",
   "keywords": [
     "A2UI",
-    "loader",
+    "agent UI",
+    "generative UI",
+    "runtime",
     "react",
     "ant-design"
   ],
-  "homepage": "https://x.ant.design/x-card",
+  "homepage": "https://x.ant.design/x-cards/introduce",
   "bugs": {
     "url": "https://github.com/ant-design/x/issues"
   },

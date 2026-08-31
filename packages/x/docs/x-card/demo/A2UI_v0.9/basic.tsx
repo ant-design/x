@@ -134,9 +134,10 @@ const BookForm: React.FC<BookFormProps> = ({ children }) => {
         padding: '20px 20px 16px',
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-        minWidth: 280,
+        width: '100%',
         marginBlock: 16,
         maxWidth: 400,
+        boxSizing: 'border-box',
       }}
     >
       <Space vertical style={{ width: '100%' }} size={12}>
@@ -261,7 +262,20 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
           📋 {description}
         </Typography.Text>
       )}
+      <style>{`
+        .x-card-coffee-list .ant-radio-wrapper {
+          width: 100%;
+          min-width: 0;
+          margin-inline-end: 0;
+        }
+
+        .x-card-coffee-list .ant-radio-label {
+          flex: 1;
+          min-width: 0;
+        }
+      `}</style>
       <Radio.Group
+        className="x-card-coffee-list"
         onChange={(e) => handleSelect(e.target.value)}
         style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}
         disabled={status === 'success'}
@@ -272,7 +286,8 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                width: 300,
+                flex: 1,
+                minWidth: 0,
                 gap: 12,
                 padding: '10px 12px',
                 borderRadius: 12,
@@ -308,7 +323,15 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
 
               {/* Text information */}
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: 6,
+                    marginBottom: 2,
+                  }}
+                >
                   <Typography.Text
                     strong
                     style={{ fontSize: 14, color: '#1a1a1a', lineHeight: '20px' }}
@@ -326,6 +349,8 @@ const CoffeeList: React.FC<CoffeeListProps> = ({ list, description, onAction, st
                         background: '#fff7e6',
                         border: '1px solid #ffd591',
                         margin: 0,
+                        maxWidth: '100%',
+                        whiteSpace: 'normal',
                       }}
                     >
                       {item.tag}
@@ -392,8 +417,9 @@ const CoffeeResultCard: React.FC<CoffeeResultCardProps> = ({
         overflow: 'hidden',
         background: 'linear-gradient(145deg, #3d1f0d 0%, #6b3520 50%, #8b5a2b 100%)',
         boxShadow: '0 8px 32px rgba(61,31,13,0.35)',
-        minWidth: 280,
+        width: '100%',
         maxWidth: 380,
+        boxSizing: 'border-box',
         position: 'relative',
       }}
     >

@@ -133,7 +133,11 @@ interface ColWrapperProps {
 
 const ColWrapper: React.FC<ColWrapperProps> = ({ span = 8, children }) => {
   const numSpan = typeof span === 'string' ? parseInt(span, 10) : span;
-  return <Col span={numSpan}>{children}</Col>;
+  return (
+    <Col xs={24} lg={numSpan}>
+      {children}
+    </Col>
+  );
 };
 
 // ─── ProductListCard Component ─────────────────────────────────────────────────────
@@ -170,7 +174,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
   return (
     <Card
       title={
-        <Space>
+        <Space wrap>
           <span style={{ fontSize: 18 }}>📦</span>
           <span>Product List</span>
           <Tag color="blue">{products.length} items</Tag>
@@ -195,14 +199,15 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
                 style={{
                   display: 'flex',
                   alignItems: 'center',
+                  flexWrap: 'wrap',
                   width: '100%',
-                  gap: 12,
+                  gap: 8,
                 }}
               >
                 <div
                   style={{
-                    width: 56,
-                    height: 56,
+                    width: 48,
+                    height: 48,
                     borderRadius: 12,
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     display: 'flex',
@@ -222,8 +227,16 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
                   </span>
                 </div>
 
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                <div style={{ flex: '1 1 120px', minWidth: 0 }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: 6,
+                      marginBottom: 4,
+                    }}
+                  >
                     <Text strong style={{ fontSize: 14 }} ellipsis>
                       {product.name}
                     </Text>
@@ -235,6 +248,8 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
                           lineHeight: '18px',
                           borderRadius: 6,
                           margin: 0,
+                          maxWidth: '100%',
+                          whiteSpace: 'normal',
                         }}
                         color="orange"
                       >
@@ -247,7 +262,7 @@ const ProductListCard: React.FC<ProductListCardProps> = ({
                   </Text>
                 </div>
 
-                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                <div style={{ textAlign: 'right', flexShrink: 0, marginLeft: 'auto' }}>
                   <Text strong style={{ fontSize: 15, color: '#1890ff', display: 'block' }}>
                     ¥{product.price.toLocaleString()}
                   </Text>
@@ -589,12 +604,15 @@ const MultiCardContainer: React.FC<MultiCardContainerProps> = ({ children }) => 
       style={{
         borderRadius: 16,
         border: '1.5px solid #e8e8e8',
-        padding: '24px',
+        padding: 'clamp(12px, 3vw, 24px)',
         background: '#fff',
         boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+        width: '100%',
+        minWidth: 0,
+        boxSizing: 'border-box',
       }}
     >
-      <Row gutter={16} align="stretch">
+      <Row gutter={[16, 16]} align="stretch">
         {children}
       </Row>
     </div>

@@ -262,14 +262,16 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           <Text strong style={{ display: 'block', marginBottom: 8 }}>
             Price Range: ¥{filters.priceRange[0]} - ¥{filters.priceRange[1]}
           </Text>
-          <Slider
-            range
-            min={0}
-            max={1500}
-            value={filters.priceRange}
-            onChange={(value) => handleFilterChange({ priceRange: value as [number, number] })}
-            marks={{ 0: '¥0', 500: '¥500', 1000: '¥1000', 1500: '¥1500' }}
-          />
+          <div style={{ paddingInline: 12, boxSizing: 'border-box' }}>
+            <Slider
+              range
+              min={0}
+              max={1500}
+              value={filters.priceRange}
+              onChange={(value) => handleFilterChange({ priceRange: value as [number, number] })}
+              marks={{ 0: '¥0', 500: '¥500', 1000: '¥1000', 1500: '¥1500' }}
+            />
+          </div>
         </div>
 
         {/* Rating Filter */}
@@ -434,12 +436,14 @@ const FilterContainer: React.FC<FilterContainerProps> = ({ children }) => {
         padding: '20px',
         background: '#fff',
         boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-        minWidth: 600,
+        width: '100%',
+        minWidth: 0,
+        boxSizing: 'border-box',
       }}
     >
-      <Row gutter={24}>
+      <Row gutter={[24, 24]}>
         {childArray.map((child, index) => (
-          <Col key={index} span={index === 0 ? 8 : 16}>
+          <Col key={index} xs={24} lg={index === 0 ? 8 : 16}>
             {child}
           </Col>
         ))}
