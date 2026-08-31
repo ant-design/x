@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 import React, { lazy, Suspense } from 'react';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import Actions from '../actions';
@@ -16,37 +16,8 @@ const customOneLight = {
   },
 };
 
-// Module-level cache for loaded language highlighters
-const highlighterCache = new Map<string, React.LazyExoticComponent<React.ComponentType<any>>>();
 // Full Prism highlighter (cached, loaded on demand)
 let FullPrismHighlighter: React.LazyExoticComponent<React.ComponentType<any>> | null = null;
-
-const getAsyncHighlighter = (lang: string) => {
-  if (!highlighterCache.has(lang)) {
-    const LazyHighlighter = lazy(async () => {
-      try {
-        const langModule = await import(
-          `react-syntax-highlighter/dist/esm/languages/prism/${lang}`
-        );
-        SyntaxHighlighter.registerLanguage(lang, langModule.default);
-      } catch (error) {
-        console.warn(`[CodeHighlighter] Failed to load language: ${lang}`, error);
-      }
-      return {
-        default: ({
-          children,
-          ...rest
-        }: { children: string } & CodeHighlighterProps['highlightProps']) => (
-          <SyntaxHighlighter language={lang} {...rest}>
-            {children}
-          </SyntaxHighlighter>
-        ),
-      };
-    });
-    highlighterCache.set(lang, LazyHighlighter);
-  }
-  return highlighterCache.get(lang)!;
-};
 
 const getFullPrismHighlighter = () => {
   if (!FullPrismHighlighter) {
@@ -81,13 +52,10 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   const contextConfig = useXComponentConfig('codeHighlighter');
 
   // Get the appropriate highlighter component
-  // - prismLightMode = true (default): Use PrismLight with async language loading
+  // - prismLightMode = true (default): Use PrismAsyncLight, which loads AND registers the
+  //   grammar for `lang` on demand through a statically analyzable loader map
   // - prismLightMode = false: Use full Prism (all languages included)
-  const Highlighter = prismLightMode
-    ? lang
-      ? getAsyncHighlighter(lang)
-      : SyntaxHighlighter
-    : getFullPrismHighlighter();
+  const Highlighter = prismLightMode ? SyntaxHighlighter : getFullPrismHighlighter();
 
   // ============================ Early Returns ============================
   if (!children) {

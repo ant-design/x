@@ -20,21 +20,6 @@ jest.mock('../../mermaid', () => ({
   default: () => <div data-testid="mock-mermaid">Mermaid Diagram</div>,
 }));
 
-// Mock react-syntax-highlighter
-jest.mock('react-syntax-highlighter/dist/esm/languages/prism/typescript', () => ({
-  __esModule: true,
-  default: () => null,
-}));
-
-// Mock a language that doesn't exist to test the catch block
-jest.mock(
-  'react-syntax-highlighter/dist/esm/languages/prism/nonexistent-lang',
-  () => {
-    throw new Error('Module not found');
-  },
-  { virtual: true },
-);
-
 // Spy on console.warn
 const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
@@ -480,26 +465,19 @@ describe('CodeHighlighter', () => {
   });
 
   describe('language loading error handling', () => {
-    it('should handle language import failure gracefully', async () => {
-      // Use a non-existent language that will fail to import
-      // This tests the catch block in getAsyncHighlighter (line 30)
+    it('should handle an unsupported language gracefully', async () => {
+      // PrismAsyncLight normalizes unsupported languages to `text` instead of throwing
       const { container } = render(
         <CodeHighlighter lang="nonexistent-lang">{`console.log("test");`}</CodeHighlighter>,
       );
 
-      // Should still render the code even if language import fails
+      // Should still render the code even if the language is not supported
       await waitFor(() => {
         expect(container.querySelector('pre')).toBeInTheDocument();
       });
-
-      // Should have logged a warning about the failed language import
-      expect(consoleWarnSpy).toHaveBeenCalledWith(
-        '[CodeHighlighter] Failed to load language: nonexistent-lang',
-        expect.any(Error),
-      );
     });
 
-    it('should render code fallback when language import fails', async () => {
+    it('should render code fallback when the language is unsupported', async () => {
       // Use a non-existent language
       const { container } = render(
         <CodeHighlighter lang="nonexistent-lang">{`const x = 42;`}</CodeHighlighter>,
