@@ -26,8 +26,8 @@ tag: vVERSION
 
 ### @ant-design/x-card
 
-- 🆕 Add a production-ready A2UI surface runtime with v0.8 and v0.9 adapters, catalog validation, deterministic state updates, JSON Pointer data binding, and action context resolution by [Mickey](https://github.com/kimteayon).
-- 📖 Add production runtime demos, API documentation, an updated package guide, and a generative UI architecture RFC by [Mickey](https://github.com/kimteayon).
+- 🆕 Add a production-ready A2UI surface runtime with v0.8 and v0.9 adapters, catalog validation, deterministic state updates, JSON Pointer data binding, and action context resolution. [#2040](https://github.com/ant-design/x/pull/2040) by [Mickey](https://github.com/kimteayon)
+- 📖 Add production runtime demos, API documentation, an updated package guide, and a generative UI architecture RFC. [#2040](https://github.com/ant-design/x/pull/2040) by [Mickey](https://github.com/kimteayon)
 
 ### @ant-design/x-markdown
 

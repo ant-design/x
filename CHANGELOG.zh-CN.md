@@ -25,8 +25,8 @@ tag: vVERSION
 
 ### @ant-design/x-card
 
-- 🆕 新增生产级 A2UI Surface Runtime，提供 v0.8 / v0.9 适配器、Catalog 校验、确定性状态更新、JSON Pointer 数据绑定和 Action 上下文解析，由 [Mickey](https://github.com/kimteayon) 提交。
-- 📖 新增生产运行时示例、API 文档、包使用指南及生成式 UI 架构 RFC，由 [Mickey](https://github.com/kimteayon) 提交。
+- 🆕 新增生产级 A2UI Surface Runtime，提供 v0.8 / v0.9 适配器、Catalog 校验、确定性状态更新、JSON Pointer 数据绑定和 Action 上下文解析。[#2040](https://github.com/ant-design/x/pull/2040) 由 [Mickey](https://github.com/kimteayon) 提交
+- 📖 新增生产运行时示例、API 文档、包使用指南及生成式 UI 架构 RFC。[#2040](https://github.com/ant-design/x/pull/2040) 由 [Mickey](https://github.com/kimteayon) 提交
 
 ### @ant-design/x-markdown
 
