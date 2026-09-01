@@ -17,6 +17,83 @@ describe('LaTeX Plugin', () => {
     expect(container).toMatchSnapshot();
   });
 
+  it.each([
+    'Downgrade Max ($100) to Pro ($20)',
+    '把 Max 5x（$100）降级到 Pro（$20）',
+    'The items cost $10, $20, and $30, respectively.',
+  ])('should not interpret currency amounts as LaTeX: %s', (content) => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{`**${content}**`}</XMarkdown>,
+    );
+
+    expect(container.querySelector('.katex')).not.toBeInTheDocument();
+    expect(container.querySelector('strong')).toHaveTextContent(content);
+    expect(warnSpy.mock.calls.flat().join(' ')).not.toContain('unicodeTextInMathMode');
+    warnSpy.mockRestore();
+  });
+
+  // An escaped `\$` inside a formula must not be treated as the closing delimiter.
+  it.each([
+    '$\\text{\\$100}$',
+    '$\\text{\\$x}$',
+  ])('should support escaped dollar signs inside formulas: %s', (content) => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{content}</XMarkdown>,
+    );
+
+    expect(container.querySelector('.katex')).toBeInTheDocument();
+    expect(container.querySelector('.katex-error')).not.toBeInTheDocument();
+  });
+
+  it('should still render formulas that start with a number', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{'$2x + 1$'}</XMarkdown>,
+    );
+
+    expect(container.querySelector('.katex')).toBeInTheDocument();
+  });
+
+  // Behavior change: `$ x $` used to render as math and no longer does. This is
+  // the Pandoc rule that makes currency detection possible at all.
+  it.each([
+    '$ x$',
+    '$x $',
+    '$ x $',
+    '$x$2',
+  ])('should follow single-dollar delimiter rules: %s', (content) => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{content}</XMarkdown>,
+    );
+
+    expect(container.querySelector('.katex')).not.toBeInTheDocument();
+    expect(container).toHaveTextContent(content);
+  });
+
+  // The spacing rules apply to `$...$` only; `$$...$$` is unambiguous and keeps
+  // rendering padded content exactly as before.
+  it.each([
+    '$$ x $$',
+    '$$ \\frac{a}{b} $$',
+  ])('should exempt $$ from the single-dollar spacing rules: %s', (content) => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{content}</XMarkdown>,
+    );
+
+    expect(container.querySelector('.katex')).toBeInTheDocument();
+  });
+
+  // Known limitation: the Pandoc rules are positional, not semantic. Prose that
+  // happens to satisfy them — nothing but non-space between the delimiters and a
+  // non-digit after the closing `$` — is still parsed as math.
+  it('does not catch currency that satisfies the Pandoc rules', () => {
+    const { container } = render(
+      <XMarkdown config={{ extensions: latexPlugin() }}>{'价格 $5和$X 的对比'}</XMarkdown>,
+    );
+
+    expect(container.querySelector('.katex')).toBeInTheDocument();
+  });
+
   it('should render inline LaTeX with $$\n..\n$$ syntax', () => {
     const { container } = render(
       <XMarkdown config={{ extensions: latexPlugin() }}>

@@ -9,6 +9,7 @@ import { detectUnclosedComponentTags, getTagInstanceId } from './detectUnclosedC
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
+  componentsProps?: XMarkdownProps['componentsProps'];
   dompurifyConfig?: DOMPurifyConfig;
   streaming?: XMarkdownProps['streaming'];
 }
@@ -197,12 +198,15 @@ class Renderer {
           ? 'loading'
           : 'done';
         const props: ComponentProps = {
-          domNode,
-          streamStatus,
-          key,
           ...attribs,
           ...(attribs.disabled !== undefined && { disabled: true }),
           ...(attribs.checked !== undefined && { checked: true }),
+          ...this.options.componentsProps?.[name],
+          // Internally computed props are applied last so that neither parsed HTML
+          // attributes nor componentsProps can shadow them.
+          domNode,
+          streamStatus,
+          key,
         };
 
         // Handle class and className merging
@@ -224,6 +228,10 @@ class Renderer {
           const lang = langFromData || langFromClass;
           if (lang) {
             props.lang = lang;
+          } else {
+            // No language metadata: inline code and unlabeled fences must not inherit a
+            // `lang` from the HTML attributes or componentsProps.
+            delete props.lang;
           }
         }
 
