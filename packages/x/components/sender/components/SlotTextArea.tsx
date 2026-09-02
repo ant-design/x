@@ -54,6 +54,8 @@ type FocusOptions = SlotFocusOptions | InputFocusOptions;
 
 type SlotNode = Text | Document | HTMLSpanElement;
 
+const removeZeroWidthCharacters = (value: string) => value.replace(/[\u200B\uFEFF]/g, '');
+
 const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const {
     onChange,
@@ -343,7 +345,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
 
     for (let i = 0; i < childNodes.length; i++) {
       const node = childNodes[i];
-      const textValue = getNodeTextValue(node);
+      const nodeTextValue = getNodeTextValue(node);
+      const textValue =
+        node.nodeType === Node.TEXT_NODE ? removeZeroWidthCharacters(nodeTextValue) : nodeTextValue;
       result[resultIndex++] = textValue;
 
       if (node.nodeType === Node.TEXT_NODE) {
@@ -397,7 +401,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     slotDomMap?.current?.clear();
   };
 
-  const appendNodeList = (slotNodeList: HTMLElement[]) => {
+  const appendNodeList = (slotNodeList: SlotNode[]) => {
     slotNodeList.forEach((element) => {
       editableRef.current?.appendChild(element);
     });
@@ -469,7 +473,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   const initRenderSlot = () => {
     if (slotConfig && slotConfig.length > 0 && editableRef.current) {
       initClear();
-      appendNodeList(getSlotListNode(slotConfig) as HTMLElement[]);
+      appendNodeList([...getSlotListNode(slotConfig), document.createTextNode('')]);
     }
   };
 
@@ -510,23 +514,53 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
     }
 
-    // 处理退格键删除前一个元素
-    if (operationType === 'backspace' && focusOffset === 0) {
-      const previousSibling = anchorNode.previousSibling;
-      if (previousSibling) {
-        const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
-        if (nodeInfo) {
-          const { slotKey, skillKey } = nodeInfo;
-          if (slotKey) {
-            e.preventDefault();
-            removeSlot(slotKey, e as unknown as EventType);
-            return true;
-          }
-          if (skillKey) {
-            e.preventDefault();
-            removeSkill();
-            return true;
-          }
+    // 处理退格键删除前一个元素。非折叠选区应由浏览器删除选中文本，不能回溯删除 slot。
+    if (
+      operationType === 'backspace' &&
+      range?.collapsed &&
+      ((range.startContainer === editableRef.current && range.startOffset > 0) ||
+        (range.startContainer !== editableRef.current && range.startOffset === 0))
+    ) {
+      const isSlotOrSkill = (node: Node): node is HTMLElement => {
+        if (!(node instanceof HTMLElement)) return false;
+        const nodeInfo = getNodeInfo(node);
+        return !!(nodeInfo?.slotKey || nodeInfo?.skillKey);
+      };
+      const isEmptyTextNode = (node: Node) =>
+        node.nodeType === Node.TEXT_NODE && !removeZeroWidthCharacters(node.textContent || '');
+
+      let previousNode: HTMLElement | null = null;
+      let currentNode: ChildNode | null =
+        range.startContainer === editableRef.current
+          ? editableRef.current.childNodes[range.startOffset - 1] || null
+          : range.startContainer.previousSibling;
+
+      while (currentNode) {
+        if (isSlotOrSkill(currentNode)) {
+          previousNode = currentNode;
+          break;
+        }
+        if (!isEmptyTextNode(currentNode)) {
+          break;
+        }
+
+        // Remove editor-only zero-width placeholders before serializing the value.
+        const previousSibling = currentNode.previousSibling;
+        currentNode.remove();
+        currentNode = previousSibling;
+      }
+
+      if (previousNode) {
+        const { slotKey, skillKey } = getNodeInfo(previousNode) || {};
+        if (slotKey) {
+          e.preventDefault();
+          removeSlot(slotKey, e as unknown as EventType);
+          return true;
+        }
+        if (skillKey) {
+          e.preventDefault();
+          removeSkill();
+          return true;
         }
       }
     }
