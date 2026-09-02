@@ -5,6 +5,24 @@ import { fireEvent, render } from '../../../tests/utils';
 import { findItem } from '../ActionsMenu';
 import Actions from '../index';
 
+jest.mock('../../_util/hooks/use-mobile', () => jest.fn(() => false));
+
+jest.mock('antd', () => {
+  const antd = jest.requireActual('antd');
+
+  return {
+    ...antd,
+    Tooltip: ({ children, placement, title }: any) =>
+      title != null ? (
+        <span data-tooltip-placement={placement} data-tooltip-title={title}>
+          {children}
+        </span>
+      ) : (
+        <>{children}</>
+      ),
+  };
+});
+
 describe('Actions Component', () => {
   const consoleSpy = jest.spyOn(console, 'log');
   const mockOnClick = jest.fn();
@@ -181,6 +199,91 @@ describe('Actions.Item Component', () => {
     );
 
     expect(customRender).toHaveBeenCalled();
+  });
+
+  it('should support custom tooltip', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'custom-tooltip',
+            label: 'Custom Action',
+            icon: <span>🔧</span>,
+            tooltip: 'Custom Tooltip',
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🔧').closest('[data-tooltip-title="Custom Tooltip"]')).toBeInTheDocument();
+  });
+
+  it('should support custom tooltip props', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'custom-tooltip-props',
+            label: 'Custom Action',
+            icon: <span>🔧</span>,
+            tooltip: { title: 'Custom Tooltip Props', placement: 'bottom' },
+          },
+        ]}
+      />,
+    );
+
+    const tooltip = getByText('🔧').closest('[data-tooltip-title="Custom Tooltip Props"]');
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip).toHaveAttribute('data-tooltip-placement', 'bottom');
+  });
+
+  it('should render tooltip when tooltip title is 0', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'zero-tooltip',
+            icon: <span>🔧</span>,
+            tooltip: { title: 0 },
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🔧').closest('[data-tooltip-title="0"]')).toBeInTheDocument();
+  });
+
+  it('should disable tooltip when tooltip is false', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'no-tooltip',
+            label: 'Custom Action',
+            icon: <span>🔧</span>,
+            tooltip: false,
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🔧').closest('[data-tooltip-title]')).not.toBeInTheDocument();
+  });
+
+  it('should not render empty tooltip when label and tooltip are empty', () => {
+    const { getByText } = render(
+      <Actions
+        items={[
+          {
+            key: 'empty-tooltip',
+            icon: <span>🔧</span>,
+            tooltip: null as any,
+          },
+        ]}
+      />,
+    );
+
+    expect(getByText('🔧').closest('[data-tooltip-title]')).not.toBeInTheDocument();
   });
 });
 
