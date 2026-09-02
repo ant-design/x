@@ -1,6 +1,6 @@
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import getValue from '@rc-component/util/lib/utils/get';
-import type { InputRef as AntdInputRef, InputRef } from 'antd';
+import type { InputRef } from 'antd';
 import { Input } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
@@ -23,6 +23,32 @@ export interface TextAreaRef {
   clear: () => void;
   getValue: () => { value: string; slotConfig: any[]; skill?: SkillType };
 }
+
+interface InnerInputRef {
+  focus: InputRef['focus'];
+  blur: InputRef['blur'];
+  input?: HTMLInputElement | null;
+  resizableTextArea?: {
+    textArea: HTMLTextAreaElement;
+  };
+  nativeElement: HTMLElement | null;
+}
+
+const getNativeInputElement = (
+  inputRef: InnerInputRef | null,
+): HTMLInputElement | HTMLTextAreaElement | null => {
+  const nativeElement = inputRef?.resizableTextArea?.textArea || inputRef?.input;
+  if (nativeElement) {
+    return nativeElement;
+  }
+
+  const fallbackElement = inputRef?.nativeElement;
+  if (fallbackElement?.tagName === 'INPUT' || fallbackElement?.tagName === 'TEXTAREA') {
+    return fallbackElement as HTMLInputElement | HTMLTextAreaElement;
+  }
+
+  return null;
+};
 
 const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   const {
@@ -47,17 +73,46 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     ...restProps
   } = React.useContext(SenderContext);
 
-  const inputRef = React.useRef<AntdInputRef>(null);
+  const inputRef = React.useRef<InnerInputRef>(null);
+  const restoreSelectionRef = React.useRef<{
+    start: number;
+    end: number;
+    direction?: 'forward' | 'backward' | 'none';
+  } | null>(null);
+
+  React.useLayoutEffect(() => {
+    const selection = restoreSelectionRef.current;
+    if (!selection) {
+      return;
+    }
+
+    const inputElement = getNativeInputElement(inputRef.current);
+    if (inputElement) {
+      inputElement.focus({ preventScroll: true });
+      inputElement.setSelectionRange(selection.start, selection.end, selection.direction);
+    }
+
+    const timer = window.setTimeout(() => {
+      if (restoreSelectionRef.current === selection) {
+        restoreSelectionRef.current = null;
+      }
+    });
+
+    return () => window.clearTimeout(timer);
+  });
 
   const insert: TextAreaRef['insert'] = (insertValue: string, positions = 'cursor') => {
-    const textArea = (inputRef.current as any)?.resizableTextArea?.textArea;
+    const textArea = getNativeInputElement(inputRef.current);
+    if (!textArea) {
+      return;
+    }
     // 获取当前文本内容
     const currentText = textArea.value;
     let startPos = currentText.length;
     let endPos = currentText.length;
     if (positions === 'cursor') {
-      startPos = textArea?.selectionStart;
-      endPos = textArea?.selectionEnd;
+      startPos = textArea.selectionStart ?? currentText.length;
+      endPos = textArea.selectionEnd ?? currentText.length;
     }
     if (positions === 'start') {
       startPos = 0;
@@ -73,6 +128,11 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     // 设置新的光标位置
     textArea.selectionStart = startPos + insertValue.length;
     textArea.selectionEnd = startPos + insertValue.length;
+    restoreSelectionRef.current = {
+      start: textArea.selectionStart,
+      end: textArea.selectionEnd,
+      direction: textArea.selectionDirection || undefined,
+    };
 
     // 重新聚焦到textarea
     textArea.focus();
@@ -90,9 +150,9 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
 
   React.useImperativeHandle(ref, () => {
     return {
-      nativeElement: (inputRef.current as any)?.resizableTextArea?.textArea as HTMLTextAreaElement,
-      focus: inputRef.current?.focus!,
-      blur: inputRef.current?.blur!,
+      nativeElement: getNativeInputElement(inputRef.current),
+      focus: (options) => inputRef.current?.focus?.(options),
+      blur: () => inputRef.current?.blur?.(),
       insert,
       clear,
       getValue,
@@ -160,10 +220,14 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   };
 
   const mergeOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onChange?.(
-      (event.target as HTMLTextAreaElement).value,
-      event as React.ChangeEvent<HTMLTextAreaElement>,
-    );
+    const target = event.target as HTMLInputElement | HTMLTextAreaElement;
+    restoreSelectionRef.current = {
+      start: target.selectionStart ?? target.value.length,
+      end: target.selectionEnd ?? target.value.length,
+      direction: target.selectionDirection || undefined,
+    };
+
+    onChange?.(target.value, event as React.ChangeEvent<HTMLTextAreaElement>);
   };
 
   return (

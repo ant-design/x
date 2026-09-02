@@ -1,7 +1,9 @@
+import { Input } from 'antd';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { act, fireEvent, render } from '../../../tests/utils';
+import type { SenderRef } from '../index';
 import Sender from '../index';
 
 const mockRecognition = {
@@ -206,6 +208,49 @@ describe('Sender Component', () => {
   it('readOnly', () => {
     const { container } = render(<Sender readOnly />);
     expect(container.querySelector('textarea')).toHaveAttribute('readonly');
+  });
+
+  it('keeps an inline custom controlled input focused and exposes its native element', () => {
+    const ref = React.createRef<SenderRef>();
+
+    const CustomSender = () => {
+      const [value, setValue] = React.useState('');
+      return (
+        <Sender
+          ref={ref}
+          value={value}
+          onChange={setValue}
+          components={{
+            input: ({ autoSize: _autoSize, ...inputProps }) => (
+              <Input
+                {...(inputProps as React.ComponentProps<typeof Input>)}
+                placeholder="Custom input"
+              />
+            ),
+          }}
+        />
+      );
+    };
+
+    const { getByPlaceholderText } = render(<CustomSender />);
+
+    let input = getByPlaceholderText('Custom input') as HTMLInputElement;
+    expect(ref.current?.inputElement).toBe(input);
+    input.focus();
+    fireEvent.change(input, { target: { value: 'a' } });
+
+    input = getByPlaceholderText('Custom input') as HTMLInputElement;
+    expect(input).toHaveFocus();
+    expect(input).toHaveValue('a');
+    expect(ref.current?.inputElement).toBe(input);
+
+    fireEvent.change(input, { target: { value: 'ab' } });
+    input = getByPlaceholderText('Custom input') as HTMLInputElement;
+    expect(input).toHaveFocus();
+    expect(input).toHaveValue('ab');
+
+    ref.current?.insert('c', 'end');
+    expect(getByPlaceholderText('Custom input')).toHaveValue('abc');
   });
   describe('footer', () => {
     it('footer width function', () => {
