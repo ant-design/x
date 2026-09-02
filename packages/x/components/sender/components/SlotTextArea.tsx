@@ -525,6 +525,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           if (skillKey) {
             e.preventDefault();
             removeSkill();
+            // Fire onClose callback to match click-close behavior (Skill.tsx)
+            const closableConfig = typeof skill?.closable === 'boolean' ? {} : skill?.closable;
+            closableConfig?.onClose?.(e as unknown as React.MouseEvent<HTMLDivElement>);
             return true;
           }
         }
