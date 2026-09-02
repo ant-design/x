@@ -121,7 +121,7 @@ type ActionsComponents = {
 | --- | --- | --- | --- | --- |
 | type | Node type, determines the rendering component type, required | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | Unique identifier, can be omitted when type is text | string | - | - |
-| formatResult | Format the final result, applies to all slot types (including `content`) | (value: any) => string | - | 2.0.0 |
+| formatResult | Format the final result. Applies to all slot types; for `content` slots, it receives the edited text content. | (value: any) => string | - | 2.0.0 |
 
 ##### text node properties
 
