@@ -7,7 +7,7 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 ## Code Examples
 
-<code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
+<code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code> <code src="./demo/streaming/multi-component-loading.tsx" description="Each custom component independently enters/exits loading state during streaming">Multi-Component Loading Isolation</code>
 
 ## API
 

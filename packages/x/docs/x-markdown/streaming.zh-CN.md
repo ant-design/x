@@ -7,7 +7,7 @@ order: 4
 
 ## 代码示例
 
-<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
+<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code> <code src="./demo/streaming/multi-component-loading.tsx" description="多个自定义组件各自独立 loading，不再同时进入 loading">多组件 Loading 隔离</code>
 
 ## API
 
