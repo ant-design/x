@@ -2,6 +2,24 @@ import { useEvent } from '@rc-component/util';
 import React from 'react';
 import type { SuggestionItem } from '.';
 
+const TEXT_INPUT_TYPES = new Set(['email', 'password', 'search', 'tel', 'text', 'url']);
+
+const isEditableTarget = (target: EventTarget | null) => {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  if (target instanceof HTMLInputElement) {
+    return TEXT_INPUT_TYPES.has(target.type) && !target.disabled && !target.readOnly;
+  }
+
+  if (target instanceof HTMLTextAreaElement) {
+    return !target.disabled && !target.readOnly;
+  }
+
+  return target.isContentEditable;
+};
+
 /**
  * Since Cascader not support ref active, we use `value` to mock the active item.
  */
@@ -58,6 +76,10 @@ export default function useActive(
   };
 
   const onKeyDown: React.KeyboardEventHandler = useEvent((e) => {
+    if (e.key === ' ' && !e.altKey && !e.ctrlKey && !e.metaKey && isEditableTarget(e.target)) {
+      e.stopPropagation();
+    }
+
     if (!open) {
       return;
     }
