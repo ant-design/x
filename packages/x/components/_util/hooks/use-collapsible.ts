@@ -73,14 +73,13 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {
-    setMergedExpandedKeys((preKeys) => {
-      const targetPreKeys = isThoughtChainUnControlled ? preKeys : customizeExpandedKeys;
-      const keys = targetPreKeys.includes(curKey)
-        ? targetPreKeys.filter((key) => key !== curKey)
-        : [...targetPreKeys, curKey];
-      customizeOnExpand?.(keys);
-      return keys;
-    });
+    const keys = mergedExpandedKeys.includes(curKey)
+      ? mergedExpandedKeys.filter((key) => key !== curKey)
+      : [...mergedExpandedKeys, curKey];
+
+    // Keep consumer callbacks outside state updaters, which React may invoke more than once.
+    setMergedExpandedKeys(keys);
+    customizeOnExpand?.(keys);
   };
 
   // ============================ Motion ============================
