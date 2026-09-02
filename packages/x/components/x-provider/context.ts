@@ -17,6 +17,7 @@ import type { SuggestionProps } from '../suggestion';
 import type { MappingAlgorithm, OverrideToken } from '../theme/interface';
 import type { ThinkProps } from '../think';
 import type { ThoughtChainProps } from '../thought-chain';
+import type { ToolCallProps } from '../tool-call';
 import type { WelcomeProps } from '../welcome';
 
 interface BaseComponentConfig {
@@ -41,6 +42,7 @@ export interface XComponentsConfig {
   sender?: ComponentConfig<SenderProps>;
   suggestion?: ComponentConfig<SuggestionProps>;
   thoughtChain?: ComponentConfig<ThoughtChainProps>;
+  toolCall?: ComponentConfig<ToolCallProps>;
   attachments?: ComponentConfig<AttachmentsProps>;
   welcome?: ComponentConfig<WelcomeProps>;
   actions?: ComponentConfig<ActionsProps>;

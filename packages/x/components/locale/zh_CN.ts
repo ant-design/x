@@ -35,6 +35,38 @@ const localeValues: Required<xLocale> = {
     noService: '未配置文件内容服务',
     loadFailed: '加载文件失败',
   },
+  ToolCall: {
+    status: {
+      pending: '等待执行',
+      streaming: '正在接收参数',
+      running: '正在执行',
+      completed: '已完成',
+      failed: '执行失败',
+      cancelled: '已取消',
+    },
+    retry: '重试',
+    cancel: '取消执行',
+    copyResult: '复制结果',
+    expand: '展开详情',
+    collapse: '收起详情',
+    arguments: '参数',
+    result: '结果',
+    error: '错误',
+    duration: '已用时间',
+    approval: '工具审批',
+    approvalTitle: '需要审批',
+    awaitingApproval: '等待审批',
+    approvalApproved: '已批准',
+    approvalRejected: '已拒绝',
+    approveAndRun: '批准并执行',
+    reject: '拒绝',
+    risk: '风险',
+    riskLevel: {
+      low: '低风险',
+      medium: '中风险',
+      high: '高风险',
+    },
+  },
 };
 
 export default localeValues;

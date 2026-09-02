@@ -12,6 +12,7 @@ import type { ComponentToken as SourcesComponentToken } from '../../sources/styl
 import type { ComponentToken as SuggestionComponentToken } from '../../suggestion/style';
 import type { ComponentToken as ThinkComponentToken } from '../../think/style';
 import type { ComponentToken as ThoughtChainComponentToken } from '../../thought-chain/style';
+import type { ComponentToken as ToolCallComponentToken } from '../../tool-call/style';
 import type { ComponentToken as WelcomeComponentToken } from '../../welcome/style';
 
 export interface ComponentTokenMap {
@@ -23,6 +24,7 @@ export interface ComponentTokenMap {
   Suggestion?: SuggestionComponentToken;
   Think?: ThinkComponentToken;
   ThoughtChain?: ThoughtChainComponentToken;
+  ToolCall?: ToolCallComponentToken;
   Welcome?: WelcomeComponentToken;
   Actions?: ActionsToken;
   FileCard?: FileCardComponentToken;

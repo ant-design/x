@@ -1,0 +1,1902 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`renders components/tool-call/demo/approval.tsx correctly 1`] = `
+<div
+  class="tool-call-approval-demo"
+>
+  <div
+    class="approval-demo-toolbar"
+  >
+    <div
+      class="approval-demo-title"
+    >
+      <span
+        class="approval-demo-icon"
+      >
+        <span
+          aria-label="rocket"
+          class="anticon anticon-rocket"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="rocket"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M864 736c0-111.6-65.4-208-160-252.9V317.3c0-15.1-5.3-29.7-15.1-41.2L536.5 95.4C530.1 87.8 521 84 512 84s-18.1 3.8-24.5 11.4L335.1 276.1a63.97 63.97 0 00-15.1 41.2v165.8C225.4 528 160 624.4 160 736h156.5c-2.3 7.2-3.5 15-3.5 23.8 0 22.1 7.6 43.7 21.4 60.8a97.2 97.2 0 0043.1 30.6c23.1 54 75.6 88.8 134.5 88.8 29.1 0 57.3-8.6 81.4-24.8 23.6-15.8 41.9-37.9 53-64a97 97 0 0043.1-30.5 97.52 97.52 0 0021.4-60.8c0-8.4-1.1-16.4-3.1-23.8H864zM762.3 621.4c9.4 14.6 17 30.3 22.5 46.6H700V558.7a211.6 211.6 0 0162.3 62.7zM388 483.1V318.8l124-147 124 147V668H388V483.1zM239.2 668c5.5-16.3 13.1-32 22.5-46.6 16.3-25.2 37.5-46.5 62.3-62.7V668h-84.8zm388.9 116.2c-5.2 3-11.2 4.2-17.1 3.4l-19.5-2.4-2.8 19.4c-5.4 37.9-38.4 66.5-76.7 66.5-38.3 0-71.3-28.6-76.7-66.5l-2.8-19.5-19.5 2.5a27.7 27.7 0 01-17.1-3.5c-8.7-5-14.1-14.3-14.1-24.4 0-10.6 5.9-19.4 14.6-23.8h231.3c8.8 4.5 14.6 13.3 14.6 23.8-.1 10.2-5.5 19.6-14.2 24.5zM464 400a48 48 0 1096 0 48 48 0 10-96 0z"
+            />
+          </svg>
+        </span>
+      </span>
+      <div>
+        <strong>
+          Release control
+        </strong>
+        <span>
+          Production deployment
+        </span>
+      </div>
+    </div>
+    <div
+      class="approval-demo-meta"
+    >
+      <span
+        class="ant-tag ant-tag-filled ant-tag-red css-var-_R_0_"
+      >
+        PROD
+      </span>
+      <button
+        aria-label="Reset workflow"
+        class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-icon-only"
+        type="button"
+      >
+        <span
+          class="ant-btn-icon"
+        >
+          <span
+            aria-label="reload"
+            class="anticon anticon-reload"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="reload"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0 335.8-115 394.6-276.1 1.5-4.2-.7-8.9-4.9-10.3l-56.7-19.5a8 8 0 00-10.1 4.8c-1.8 5-3.8 10-5.9 14.9-17.3 41-42.1 77.8-73.7 109.4A344.77 344.77 0 01655.9 829c-42.3 17.9-87.4 27-133.8 27-46.5 0-91.5-9.1-133.8-27A341.5 341.5 0 01279 755.2a342.16 342.16 0 01-73.7-109.4c-17.9-42.4-27-87.4-27-133.9s9.1-91.5 27-133.9c17.3-41 42.1-77.8 73.7-109.4 31.6-31.6 68.4-56.4 109.3-73.8 42.3-17.9 87.4-27 133.8-27 46.5 0 91.5 9.1 133.8 27a341.5 341.5 0 01109.3 73.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.6 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c-.1-6.6-7.8-10.3-13-6.2z"
+              />
+            </svg>
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+  <div
+    aria-label="deployProduction"
+    class="ant-tool-call ant-tool-call-pending css-var-_R_0_ ant-tool-call-approval-pending"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="pending"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="safety-certificate"
+            class="anticon anticon-safety-certificate"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="safety-certificate"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zm-405.8-201c-3-4.1-7.8-6.6-13-6.6H336c-6.5 0-10.3 7.4-6.5 12.7l126.4 174a16.1 16.1 0 0026 0l212.6-292.7c3.8-5.3 0-12.7-6.5-12.7h-55.2c-5.1 0-10 2.5-13 6.6L468.9 542.4l-64.7-89.1z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Awaiting approval
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          deployProduction
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            checkout-api · v2.18.0 · cn-hangzhou
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Awaiting approval
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-controls="ant-tool-call-details-_R_n_"
+          aria-expanded="true"
+          aria-label="Collapse details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="ant-tool-call-details"
+      id="ant-tool-call-details-_R_n_"
+    >
+      <section
+        class="ant-tool-call-arguments"
+      >
+        <div
+          class="ant-tool-call-section-title"
+        >
+          Arguments
+        </div>
+        <pre
+          class="ant-tool-call-code"
+        >
+          {
+  "service": "checkout-api",
+  "version": "v2.18.0",
+  "strategy": "canary",
+  "traffic": "10% → 50% → 100%",
+  "rollbackOnError": true
+}
+        </pre>
+      </section>
+      <section
+        aria-label="Tool approval"
+        class="ant-tool-call-approval"
+      >
+        <div
+          class="ant-tool-call-approval-copy"
+        >
+          <div
+            class="ant-tool-call-approval-heading"
+          >
+            <span
+              aria-hidden="true"
+              aria-label="safety-certificate"
+              class="anticon anticon-safety-certificate"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="safety-certificate"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M866.9 169.9L527.1 54.1C523 52.7 517.5 52 512 52s-11 .7-15.1 2.1L157.1 169.9c-8.3 2.8-15.1 12.4-15.1 21.2v482.4c0 8.8 5.7 20.4 12.6 25.9L499.3 968c3.5 2.7 8 4.1 12.6 4.1s9.2-1.4 12.6-4.1l344.7-268.6c6.9-5.4 12.6-17 12.6-25.9V191.1c.2-8.8-6.6-18.3-14.9-21.2zM810 654.3L512 886.5 214 654.3V226.7l298-101.6 298 101.6v427.6zm-405.8-201c-3-4.1-7.8-6.6-13-6.6H336c-6.5 0-10.3 7.4-6.5 12.7l126.4 174a16.1 16.1 0 0026 0l212.6-292.7c3.8-5.3 0-12.7-6.5-12.7h-55.2c-5.1 0-10 2.5-13 6.6L468.9 542.4l-64.7-89.1z"
+                />
+              </svg>
+            </span>
+            <span>
+              Production access required
+            </span>
+            <span
+              class="ant-tool-call-risk ant-tool-call-risk-high"
+            >
+              High risk
+            </span>
+          </div>
+          <div
+            class="ant-tool-call-approval-description"
+          >
+            This action changes live traffic. Health checks and automatic rollback are enabled.
+          </div>
+        </div>
+        <div
+          class="ant-tool-call-approval-actions"
+        >
+          <button
+            class="ant-btn css-var-_R_0_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined ant-btn-sm"
+            type="button"
+          >
+            <span>
+              Reject
+            </span>
+          </button>
+          <button
+            class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-dangerous ant-btn-color-dangerous ant-btn-variant-solid ant-btn-sm"
+            type="button"
+          >
+            <span>
+              Approve deployment
+            </span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div
+    aria-live="polite"
+    class="approval-demo-audit"
+  >
+    <span
+      class="approval-demo-dot approval-demo-dot-pending"
+    />
+    <span>
+      Waiting for an authorized operator
+    </span>
+  </div>
+  <style>
+        .tool-call-approval-demo { max-width: 820px; margin: 0 auto; }
+        .approval-demo-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
+        .approval-demo-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+        .approval-demo-icon { display: grid; flex: none; place-items: center; width: 34px; height: 34px; color: #fff; background: #111827; border-radius: 7px; }
+        .approval-demo-title strong, .approval-demo-title span { display: block; }
+        .approval-demo-title strong { color: #111827; font-size: 14px; }
+        .approval-demo-title span { margin-top: 1px; color: #6b7280; font-size: 12px; }
+        .approval-demo-meta { display: flex; align-items: center; gap: 4px; }
+        .approval-demo-audit { display: flex; align-items: center; gap: 8px; min-height: 20px; margin-top: 14px; color: #6b7280; font-size: 12px; }
+        .approval-demo-dot { width: 7px; height: 7px; background: #d1d5db; border-radius: 50%; }
+        .approval-demo-dot-running { background: #1677ff; box-shadow: 0 0 0 4px #e6f4ff; }
+        .approval-demo-dot-completed { background: #22a06b; }
+        .approval-demo-dot-cancelled { background: #9ca3af; }
+        @media (max-width: 480px) { .approval-demo-toolbar { align-items: flex-start; } }
+  </style>
+</div>
+`;
+
+exports[`renders components/tool-call/demo/basic.tsx correctly 1`] = `
+<div
+  class="tool-call-basic-demo"
+>
+  <div
+    class="demo-command-bar"
+  >
+    <div>
+      <strong>
+        Travel assistant
+      </strong>
+      <span
+        class="demo-connection-status"
+      >
+        Connected · tools ready
+      </span>
+    </div>
+    <button
+      class="ant-btn css-var-_R_0_ ant-btn-primary ant-btn-color-primary ant-btn-variant-solid"
+      type="button"
+    >
+      <span
+        class="ant-btn-icon"
+      >
+        <span
+          aria-label="thunderbolt"
+          class="anticon anticon-thunderbolt"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="thunderbolt"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M848 359.3H627.7L825.8 109c4.1-5.3.4-13-6.3-13H436c-2.8 0-5.5 1.5-6.9 4L170 547.5c-3.1 5.3.7 12 6.9 12h174.4l-89.4 357.6c-1.9 7.8 7.5 13.3 13.3 7.7L853.5 373c5.2-4.9 1.7-13.7-5.5-13.7zM378.2 732.5l60.3-241H281.1l189.6-327.4h224.6L487 427.4h211L378.2 732.5z"
+            />
+          </svg>
+        </span>
+      </span>
+      <span>
+        Run again
+      </span>
+    </button>
+  </div>
+  <div
+    class="demo-agent-message"
+  >
+    <span
+      class="demo-agent-mark"
+    >
+      AI
+    </span>
+    <div
+      class="demo-agent-content"
+    >
+      <p>
+        I’ll check the local forecast before planning the itinerary.
+      </p>
+      <div
+        aria-label="getWeatherForecast"
+        class="ant-tool-call ant-tool-call-completed css-var-_R_0_"
+        role="group"
+      >
+        <div
+          class="ant-tool-call-header"
+        >
+          <span
+            class="ant-tool-call-status"
+            data-status="completed"
+          >
+            <span
+              aria-hidden="true"
+              class="ant-tool-call-status-icon ant-tool-call-tool-icon"
+            >
+              <span
+                aria-label="cloud"
+                class="anticon anticon-cloud"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="cloud"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M811.4 418.7C765.6 297.9 648.9 212 512.2 212S258.8 297.8 213 418.6C127.3 441.1 64 519.1 64 612c0 110.5 89.5 200 199.9 200h496.2C870.5 812 960 722.5 960 612c0-92.7-63.1-170.7-148.6-193.3zm36.3 281a123.07 123.07 0 01-87.6 36.3H263.9c-33.1 0-64.2-12.9-87.6-36.3A123.3 123.3 0 01140 612c0-28 9.1-54.3 26.2-76.3a125.7 125.7 0 0166.1-43.7l37.9-9.9 13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0152.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9 15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5 37.8 10c54.3 14.5 92.1 63.8 92.1 120 0 33.1-12.9 64.3-36.3 87.7z"
+                  />
+                </svg>
+              </span>
+            </span>
+            <span
+              aria-live="polite"
+              class="ant-tool-call-status-text"
+            >
+              Completed
+            </span>
+          </span>
+          <div
+            class="ant-tool-call-summary"
+          >
+            <div
+              class="ant-tool-call-name"
+            >
+              getWeatherForecast
+            </div>
+            <div
+              class="ant-tool-call-description"
+            >
+              <span>
+                Hangzhou · next 3 days
+              </span>
+              <span
+                aria-hidden="true"
+                class="ant-tool-call-separator"
+              >
+                ·
+              </span>
+              <span>
+                Completed
+              </span>
+              <span
+                aria-label="Elapsed time 1.3s"
+                class="ant-tool-call-duration"
+                role="timer"
+              >
+                <span
+                  aria-hidden="true"
+                >
+                  <span
+                    class="ant-tool-call-separator"
+                  >
+                    ·
+                  </span>
+                  1.3s
+                </span>
+              </span>
+              <span
+                class="ant-tool-call-result-summary"
+              >
+                <span
+                  aria-hidden="true"
+                  class="ant-tool-call-separator"
+                >
+                  ·
+                </span>
+                Result: { "current": "27°C", "condition": "Partly cloudy", "forecast": [ "28 / 22°C",...
+              </span>
+            </div>
+          </div>
+          <div
+            class="ant-tool-call-actions"
+          >
+            <button
+              aria-label="Copy result getWeatherForecast"
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="copy"
+                  class="anticon anticon-copy"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="copy"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+            <button
+              aria-controls="ant-tool-call-details-_R_an_"
+              aria-expanded="false"
+              aria-label="Expand details"
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="down"
+                  class="anticon anticon-down"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="down"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p
+        class="demo-answer"
+      >
+        The next three days are warm with light cloud cover.
+      </p>
+    </div>
+  </div>
+  <style>
+        .tool-call-basic-demo { max-width: 760px; margin: 0 auto; }
+        .demo-command-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
+        .demo-command-bar strong { display: block; color: #111827; font-size: 15px; }
+        .demo-connection-status { display: block; margin-top: 2px; color: #22a06b; font-size: 12px; }
+        .demo-agent-message { display: flex; align-items: flex-start; gap: 12px; }
+        .demo-agent-mark { display: grid; flex: none; place-items: center; width: 32px; height: 32px; color: #fff; font-size: 11px; font-weight: 700; background: #1677ff; border-radius: 7px; }
+        .demo-agent-content { min-width: 0; flex: 1; }
+        .demo-agent-content p { margin: 5px 0 14px; color: #4b5563; line-height: 1.6; }
+        .demo-agent-content .demo-answer { margin: 14px 0 0; color: #111827; }
+        @media (max-width: 480px) { .demo-command-bar { align-items: flex-start; } .demo-connection-status { max-width: 140px; } }
+  </style>
+</div>
+`;
+
+exports[`renders components/tool-call/demo/controlled.tsx correctly 1`] = `
+<div
+  class="ant-space ant-space-vertical css-var-_R_0_"
+  style="column-gap:16px;row-gap:16px;width:100%"
+>
+  <div
+    class="ant-space-item"
+  >
+    <div
+      style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"
+    >
+      <div
+        aria-label="segmented control"
+        aria-orientation="horizontal"
+        class="ant-segmented css-var-_R_0_"
+        role="radiogroup"
+        tabindex="0"
+      >
+        <div
+          class="ant-segmented-group"
+        >
+          <label
+            class="ant-segmented-item"
+          >
+            <input
+              class="ant-segmented-item-input"
+              name="test-id"
+              type="radio"
+            />
+            <div
+              class="ant-segmented-item-label"
+              title="Compact"
+            >
+              Compact
+            </div>
+          </label>
+          <label
+            class="ant-segmented-item ant-segmented-item-selected"
+          >
+            <input
+              checked=""
+              class="ant-segmented-item-input"
+              name="test-id"
+              type="radio"
+            />
+            <div
+              class="ant-segmented-item-label"
+              title="Inspect"
+            >
+              Inspect
+            </div>
+          </label>
+        </div>
+      </div>
+      <div
+        class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_R_0_"
+      >
+        <div
+          class="ant-space-item"
+        >
+          <span
+            class="ant-typography ant-typography-secondary css-var-_R_0_"
+          >
+            Details
+          </span>
+        </div>
+        <div
+          class="ant-space-item"
+        >
+          <button
+            aria-checked="true"
+            class="ant-switch css-var-_R_0_ ant-switch-checked"
+            role="switch"
+            type="button"
+          >
+            <div
+              class="ant-switch-handle"
+            />
+            <span
+              class="ant-switch-inner"
+            >
+              <span
+                class="ant-switch-inner-checked"
+              />
+              <span
+                class="ant-switch-inner-unchecked"
+              />
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="ant-space-item"
+  >
+    <div
+      aria-label="runSalesAnalysis"
+      class="ant-tool-call ant-tool-call-completed css-var-_R_0_"
+      role="group"
+    >
+      <div
+        class="ant-tool-call-header"
+      >
+        <span
+          class="ant-tool-call-status"
+          data-status="completed"
+        >
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-status-icon"
+          >
+            <span
+              aria-label="check-circle"
+              class="anticon anticon-check-circle"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="check-circle"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+          <span
+            aria-live="polite"
+            class="ant-tool-call-status-text"
+          >
+            Completed
+          </span>
+        </span>
+        <div
+          class="ant-tool-call-summary"
+        >
+          <div
+            class="ant-tool-call-name"
+          >
+            runSalesAnalysis
+          </div>
+          <div
+            class="ant-tool-call-description"
+          >
+            <span>
+              Quarterly revenue by product line
+            </span>
+            <span
+              aria-hidden="true"
+              class="ant-tool-call-separator"
+            >
+              ·
+            </span>
+            <span>
+              Completed
+            </span>
+          </div>
+        </div>
+        <div
+          class="ant-tool-call-actions"
+        >
+          <button
+            aria-label="Copy result runSalesAnalysis"
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="copy"
+                class="anticon anticon-copy"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="copy"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+          <button
+            aria-controls="ant-tool-call-details-_R_1n_"
+            aria-expanded="true"
+            aria-label="Collapse details"
+            class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+            type="button"
+          >
+            <span
+              class="ant-btn-icon"
+            >
+              <span
+                aria-label="down"
+                class="anticon anticon-down"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  data-icon="down"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                  />
+                </svg>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-details"
+        id="ant-tool-call-details-_R_1n_"
+      >
+        <section
+          class="ant-tool-call-arguments"
+        >
+          <div
+            class="ant-tool-call-section-title"
+          >
+            Arguments
+          </div>
+          <pre
+            class="ant-tool-call-code"
+          >
+            {
+  "period": {
+    "from": "2026-04-01",
+    "to": "2026-06-30"
+  },
+  "dimensions": [
+    "productLine",
+    "region"
+  ]
+}
+          </pre>
+        </section>
+        <section
+          class="ant-tool-call-result"
+        >
+          <div
+            class="ant-tool-call-section-title"
+          >
+            Result
+          </div>
+          <pre
+            class="ant-tool-call-code"
+          >
+            {
+  "rows": 128,
+  "currency": "CNY",
+  "generatedAt": "2026-08-04T10:20:00Z"
+}
+          </pre>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/tool-call/demo/custom-render.tsx correctly 1`] = `
+Array [
+  <div
+    aria-label="deployPreview"
+    class="ant-tool-call ant-tool-call-completed css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="completed"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="check-circle"
+            class="anticon anticon-check-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="check-circle"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Completed
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          deployPreview
+          <span
+            class="ant-tool-call-attempt"
+          >
+            #
+            <!-- -->
+            2
+          </span>
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            x-components · preview/4281
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Completed
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <div
+          class="ant-space ant-space-horizontal ant-space-align-center css-var-_R_0_"
+          style="column-gap:2px;row-gap:2px"
+        >
+          <div
+            class="ant-space-item"
+          >
+            <button
+              aria-label="Copy preview URL"
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="copy"
+                  class="anticon anticon-copy"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="copy"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <button
+              aria-label="Open preview"
+              class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+              type="button"
+            >
+              <span
+                class="ant-btn-icon"
+              >
+                <span
+                  aria-label="export"
+                  class="anticon anticon-export"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="export"
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M880 912H144c-17.7 0-32-14.3-32-32V144c0-17.7 14.3-32 32-32h360c4.4 0 8 3.6 8 8v56c0 4.4-3.6 8-8 8H184v656h656V520c0-4.4 3.6-8 8-8h56c4.4 0 8 3.6 8 8v360c0 17.7-14.3 32-32 32zM770.87 199.13l-52.2-52.2a8.01 8.01 0 014.7-13.6l179.4-21c5.1-.6 9.5 3.7 8.9 8.9l-21 179.4c-.8 6.6-8.9 9.4-13.6 4.7l-52.4-52.4-256.2 256.2a8.03 8.03 0 01-11.3 0l-42.4-42.4a8.03 8.03 0 010-11.3l256.1-256.3z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <button
+          aria-label="Copy result deployPreview"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="copy"
+              class="anticon anticon-copy"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="copy"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+        <button
+          aria-controls="ant-tool-call-details-_R_n_"
+          aria-expanded="true"
+          aria-label="Collapse details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand ant-tool-call-expand-open"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      class="ant-tool-call-details"
+      id="ant-tool-call-details-_R_n_"
+    >
+      <section
+        class="ant-tool-call-arguments"
+      >
+        <div
+          class="ant-tool-call-section-title"
+        >
+          Arguments
+        </div>
+        <div
+          class="ant-space ant-space-horizontal ant-space-align-center ant-space-gap-row-small ant-space-gap-col-small css-var-_R_0_"
+          style="flex-wrap:wrap"
+        >
+          <div
+            class="ant-space-item"
+          >
+            <span
+              class="ant-tag ant-tag-filled ant-tag-blue css-var-_R_0_"
+            >
+              branch: feature/tool-call
+            </span>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <span
+              class="ant-tag ant-tag-filled ant-tag-blue css-var-_R_0_"
+            >
+              region: cn-hangzhou
+            </span>
+          </div>
+          <div
+            class="ant-space-item"
+          >
+            <span
+              class="ant-tag ant-tag-filled ant-tag-blue css-var-_R_0_"
+            >
+              checks: true
+            </span>
+          </div>
+        </div>
+      </section>
+      <section
+        class="ant-tool-call-result"
+      >
+        <div
+          class="ant-tool-call-section-title"
+        >
+          Result
+        </div>
+        <div
+          class="deploy-result"
+        >
+          <div>
+            <span
+              class="ant-typography css-var-_R_0_"
+            >
+              <strong>
+                Preview is healthy
+              </strong>
+            </span>
+            <span
+              class="ant-typography ant-typography-secondary css-var-_R_0_"
+            >
+              Average latency 82 ms
+            </span>
+          </div>
+          <div
+            aria-valuemax="100"
+            aria-valuemin="0"
+            aria-valuenow="100"
+            class="ant-progress ant-progress-status-success ant-progress-line ant-progress-line-align-end ant-progress-line-position-outer ant-progress-show-info ant-progress-small css-var-_R_0_"
+            role="progressbar"
+          >
+            <div
+              class="ant-progress-body"
+              style="width:100%"
+            >
+              <div
+                class="ant-progress-rail"
+                style="height:6px"
+              >
+                <div
+                  class="ant-progress-track"
+                  style="width:100%;height:6px"
+                />
+              </div>
+              <span
+                class="ant-progress-indicator ant-progress-indicator-end ant-progress-indicator-outer"
+              >
+                <span
+                  aria-label="check-circle"
+                  class="anticon anticon-check-circle"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="check-circle"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>,
+  <style>
+        .deploy-result { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(140px, 240px); align-items: center; gap: 24px; padding: 12px 16px; border: 1px solid #d9f7be; border-radius: 6px; background: #f6ffed; }
+        .deploy-result &gt; div:first-child { display: flex; flex-direction: column; gap: 3px; }
+        @media (max-width: 540px) { .deploy-result { grid-template-columns: 1fr; gap: 8px; } }
+  </style>,
+]
+`;
+
+exports[`renders components/tool-call/demo/status.tsx correctly 1`] = `
+<div
+  class="tool-call-status-grid"
+>
+  <div
+    aria-label="reserveInventory"
+    class="ant-tool-call ant-tool-call-pending css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="pending"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="hourglass"
+            class="anticon anticon-hourglass"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="hourglass"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M742 318V184h86c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H196c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h86v134c0 81.5 42.4 153.2 106.4 194-64 40.8-106.4 112.5-106.4 194v134h-86c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h632c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8h-86V706c0-81.5-42.4-153.2-106.4-194 64-40.8 106.4-112.5 106.4-194zm-72 388v134H354V706c0-42.2 16.4-81.9 46.3-111.7C430.1 564.4 469.8 548 512 548s81.9 16.4 111.7 46.3C653.6 624.1 670 663.8 670 706zm0-388c0 42.2-16.4 81.9-46.3 111.7C593.9 459.6 554.2 476 512 476s-81.9-16.4-111.7-46.3A156.63 156.63 0 01354 318V184h316v134z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Pending
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          reserveInventory
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            Waiting for an execution slot
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Pending
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-controls="ant-tool-call-details-_R_1f_"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label="searchCatalog"
+    class="ant-tool-call ant-tool-call-streaming css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="streaming"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="loading"
+            class="anticon anticon-loading anticon-spin"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="loading"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Receiving arguments
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          searchCatalog
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            Receiving structured arguments
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Receiving arguments
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-controls="ant-tool-call-details-_R_2f_"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label="calculateShipping"
+    class="ant-tool-call ant-tool-call-running css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="running"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="loading"
+            class="anticon anticon-loading anticon-spin"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="loading"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Running
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          calculateShipping
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            Calling logistics providers
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Running
+          </span>
+          <span
+            aria-label="Elapsed time 0ms"
+            class="ant-tool-call-duration"
+            role="timer"
+          >
+            <span
+              aria-hidden="true"
+            >
+              <span
+                class="ant-tool-call-separator"
+              >
+                ·
+              </span>
+              0ms
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-controls="ant-tool-call-details-_R_3f_"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label="queryOrder"
+    class="ant-tool-call ant-tool-call-completed css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="completed"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon ant-tool-call-tool-icon"
+        >
+          <span
+            aria-label="shopping-cart"
+            class="anticon anticon-shopping-cart"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="shopping-cart"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 00-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 100 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 00-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 00-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 00-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 01-31.6 31.6z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Completed
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          queryOrder
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            Order #20260803001
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Completed
+          </span>
+          <span
+            class="ant-tool-call-result-summary"
+          >
+            <span
+              aria-hidden="true"
+              class="ant-tool-call-separator"
+            >
+              ·
+            </span>
+            Result: { "status": "paid", "total": 369 }
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-label="Copy result queryOrder"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="copy"
+              class="anticon anticon-copy"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="copy"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+        <button
+          aria-controls="ant-tool-call-details-_R_4f_"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label="createShipment"
+    class="ant-tool-call ant-tool-call-failed css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="failed"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="close-circle"
+            class="anticon anticon-close-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="close-circle"
+              fill="currentColor"
+              fill-rule="evenodd"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Failed
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          createShipment
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            Provider request failed
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Failed
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-label="Retry createShipment"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="reload"
+              class="anticon anticon-reload"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="reload"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0 335.8-115 394.6-276.1 1.5-4.2-.7-8.9-4.9-10.3l-56.7-19.5a8 8 0 00-10.1 4.8c-1.8 5-3.8 10-5.9 14.9-17.3 41-42.1 77.8-73.7 109.4A344.77 344.77 0 01655.9 829c-42.3 17.9-87.4 27-133.8 27-46.5 0-91.5-9.1-133.8-27A341.5 341.5 0 01279 755.2a342.16 342.16 0 01-73.7-109.4c-17.9-42.4-27-87.4-27-133.9s9.1-91.5 27-133.9c17.3-41 42.1-77.8 73.7-109.4 31.6-31.6 68.4-56.4 109.3-73.8 42.3-17.9 87.4-27 133.8-27 46.5 0 91.5 9.1 133.8 27a341.5 341.5 0 01109.3 73.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.6 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c-.1-6.6-7.8-10.3-13-6.2z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+        <button
+          aria-controls="ant-tool-call-details-_R_5f_"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    aria-label="sendNotification"
+    class="ant-tool-call ant-tool-call-cancelled css-var-_R_0_"
+    role="group"
+  >
+    <div
+      class="ant-tool-call-header"
+    >
+      <span
+        class="ant-tool-call-status"
+        data-status="cancelled"
+      >
+        <span
+          aria-hidden="true"
+          class="ant-tool-call-status-icon"
+        >
+          <span
+            aria-label="pause-circle"
+            class="anticon anticon-pause-circle"
+            role="img"
+          >
+            <svg
+              aria-hidden="true"
+              data-icon="pause-circle"
+              fill="currentColor"
+              focusable="false"
+              height="1em"
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372zm-88-532h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8zm224 0h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8z"
+              />
+            </svg>
+          </span>
+        </span>
+        <span
+          aria-live="polite"
+          class="ant-tool-call-status-text"
+        >
+          Cancelled
+        </span>
+      </span>
+      <div
+        class="ant-tool-call-summary"
+      >
+        <div
+          class="ant-tool-call-name"
+        >
+          sendNotification
+        </div>
+        <div
+          class="ant-tool-call-description"
+        >
+          <span>
+            Cancelled by the user
+          </span>
+          <span
+            aria-hidden="true"
+            class="ant-tool-call-separator"
+          >
+            ·
+          </span>
+          <span>
+            Cancelled
+          </span>
+        </div>
+      </div>
+      <div
+        class="ant-tool-call-actions"
+      >
+        <button
+          aria-controls="ant-tool-call-details-_R_6f_"
+          aria-expanded="false"
+          aria-label="Expand details"
+          class="ant-btn css-var-_R_0_ ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only ant-tool-call-expand"
+          type="button"
+        >
+          <span
+            class="ant-btn-icon"
+          >
+            <span
+              aria-label="down"
+              class="anticon anticon-down"
+              role="img"
+            >
+              <svg
+                aria-hidden="true"
+                data-icon="down"
+                fill="currentColor"
+                focusable="false"
+                height="1em"
+                viewBox="64 64 896 896"
+                width="1em"
+              >
+                <path
+                  d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
+                />
+              </svg>
+            </span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <style>
+        .tool-call-status-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 14px; }
+        @media (max-width: 720px) { .tool-call-status-grid { grid-template-columns: 1fr; } }
+  </style>
+</div>
+`;

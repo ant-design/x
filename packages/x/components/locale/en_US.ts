@@ -35,6 +35,38 @@ const localeValues: Required<xLocale> = {
     noService: 'File content service not configured',
     loadFailed: 'Failed to load file',
   },
+  ToolCall: {
+    status: {
+      pending: 'Pending',
+      streaming: 'Receiving arguments',
+      running: 'Running',
+      completed: 'Completed',
+      failed: 'Failed',
+      cancelled: 'Cancelled',
+    },
+    retry: 'Retry',
+    cancel: 'Cancel execution',
+    copyResult: 'Copy result',
+    expand: 'Expand details',
+    collapse: 'Collapse details',
+    arguments: 'Arguments',
+    result: 'Result',
+    error: 'Error',
+    duration: 'Elapsed time',
+    approval: 'Tool approval',
+    approvalTitle: 'Approval required',
+    awaitingApproval: 'Awaiting approval',
+    approvalApproved: 'Approved',
+    approvalRejected: 'Rejected',
+    approveAndRun: 'Approve and run',
+    reject: 'Reject',
+    risk: 'Risk',
+    riskLevel: {
+      low: 'Low risk',
+      medium: 'Medium risk',
+      high: 'High risk',
+    },
+  },
 };
 
 export default localeValues;

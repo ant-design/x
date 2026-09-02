@@ -43,6 +43,30 @@ export interface xLocale {
     noService: string;
     loadFailed: string;
   };
+  ToolCall?: {
+    status: Record<
+      'pending' | 'streaming' | 'running' | 'completed' | 'failed' | 'cancelled',
+      string
+    >;
+    retry: string;
+    cancel: string;
+    copyResult: string;
+    expand: string;
+    collapse: string;
+    arguments: string;
+    result: string;
+    error: string;
+    duration: string;
+    approval: string;
+    approvalTitle: string;
+    awaitingApproval: string;
+    approvalApproved: string;
+    approvalRejected: string;
+    approveAndRun: string;
+    reject: string;
+    risk: string;
+    riskLevel: Record<'low' | 'medium' | 'high', string>;
+  };
 }
 
 export type Locale = xLocale & antdLocale;
