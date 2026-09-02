@@ -26,6 +26,8 @@ interface FenceState {
   lineFenceChar: string;
   lineFenceLen: number;
   lineFenceRunEnded: boolean;
+  /** Leading spaces consumed on the current line (CommonMark allows 0-3 before a fence) */
+  lineFenceIndent: number;
   /** Whether every char after the leading run is whitespace (closing fences allow only whitespace) */
   lineTailBlank: boolean;
 }
@@ -168,6 +170,7 @@ const getInitialFenceState = (): FenceState => ({
   lineFenceChar: '',
   lineFenceLen: 0,
   lineFenceRunEnded: false,
+  lineFenceIndent: 0,
   lineTailBlank: true,
 });
 
@@ -211,15 +214,26 @@ const feedFenceState = (fence: FenceState, char: string): void => {
     fence.lineFenceChar = '';
     fence.lineFenceLen = 0;
     fence.lineFenceRunEnded = false;
+    fence.lineFenceIndent = 0;
     fence.lineTailBlank = true;
     return;
   }
 
   if (!fence.lineFenceRunEnded) {
-    if (fence.lineFenceLen === 0 && (char === '`' || char === '~')) {
-      fence.lineFenceChar = char;
-      fence.lineFenceLen = 1;
-    } else if (fence.lineFenceLen > 0 && char === fence.lineFenceChar) {
+    if (fence.lineFenceLen === 0) {
+      // CommonMark allows 0-3 leading spaces before an opening or closing
+      // fence (e.g. a fence nested inside a list item). Consume them without
+      // ending the run; a 4th space or any non-fence character ends it.
+      if (char === ' ' && fence.lineFenceIndent < 3) {
+        fence.lineFenceIndent += 1;
+      } else if (char === '`' || char === '~') {
+        fence.lineFenceChar = char;
+        fence.lineFenceLen = 1;
+      } else {
+        fence.lineFenceRunEnded = true;
+        fence.lineTailBlank = fence.lineTailBlank && /\s/.test(char);
+      }
+    } else if (char === fence.lineFenceChar) {
       fence.lineFenceLen += 1;
     } else {
       fence.lineFenceRunEnded = true;

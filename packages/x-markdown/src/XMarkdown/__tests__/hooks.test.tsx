@@ -272,6 +272,37 @@ const fencedCodeTestCases = [
     output: '```typescript\ninterface Test {\n  name: string;\n}\n```\n\nThis is ',
     config: { streaming: { hasNextChunk: true } },
   },
+  {
+    title: 'fenced code block with 2-space indented opening and closing fence',
+    input: '  ```js\nconst a = [1,2];\n  ```',
+    output: '  ```js\nconst a = [1,2];\n  ```',
+  },
+  {
+    title: 'fenced code block with 3-space indented opening fence',
+    input: '   ```js\nconst a = [1,2];\n  ```',
+    output: '   ```js\nconst a = [1,2];\n  ```',
+  },
+  {
+    title: 'fenced code block with indented tilde fences',
+    input: '  ~~~json\n{"key": "value"}\n  ~~~',
+    output: '  ~~~json\n{"key": "value"}\n  ~~~',
+  },
+  {
+    title: 'fenced code block inside a list item',
+    input: '- item\n  ```js\nconst x = [1];\n  ```\n',
+    output: '- item\n  ```js\nconst x = [1];\n  ```\n',
+  },
+  {
+    title: 'indented fenced code block with trailing spaces after closing fence',
+    input: '  ```js\ncode\n  ```   ',
+    output: '  ```js\ncode\n  ```   ',
+    config: { streaming: { hasNextChunk: true } },
+  },
+  {
+    title: '4-space indent is indented code, not a fence',
+    input: '    ```js\ncode\n```',
+    output: '    ```js\ncode\n```',
+  },
 ];
 
 // 错误处理测试
