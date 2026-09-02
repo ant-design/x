@@ -23,6 +23,7 @@ CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场�
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基本</code>
 <code src="./demo/custom-header.tsx">自定义 Header</code>
+<code src="./demo/flexible-config.tsx">灵活配置</code>
 <code src="./demo/with-xmarkdown.tsx">配合 XMarkdown</code>
 
 ## API
@@ -37,6 +38,9 @@ CodeHighlighter 组件用于需要展示带有语法高亮的代码片段的场�
 | children | 代码内容 | `string` | - |
 | header | 头部内容，为 `false` 时不显示头部 | `React.ReactNode \| (() => React.ReactNode \| false) \| false` | - |
 | highlightProps | 代码高亮配置，透传给 react-syntax-highlighter | [`SyntaxHighlighterProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
+| showLineNumber | 是否显示行号 | `boolean` | `false` |
+| wrapLongLines | 是否自动换行 | `boolean` | `false` |
+| showCopyButton | 是否显示复制按钮，仅在默认 header 下生效 | `boolean` | `true` |
 | prismLightMode | 是否使用 Prism 轻量模式，根据 `lang` 自动按需加载语言支持以减少打包体积 | `boolean` | `true` |
 
 ### CodeHighlighterRef

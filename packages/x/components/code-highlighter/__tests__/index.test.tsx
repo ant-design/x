@@ -522,4 +522,82 @@ describe('CodeHighlighter', () => {
       process.env.NODE_ENV = originalEnv;
     });
   });
+
+  describe('flexible config', () => {
+    it('should show line numbers when showLineNumber is true', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" showLineNumber>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      expect(container.querySelector('.linenumber')).toBeInTheDocument();
+    });
+
+    it('should not show line numbers by default', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript">{`console.log("test");`}</CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('pre')).toBeInTheDocument();
+      });
+      expect(container.querySelector('.linenumber')).not.toBeInTheDocument();
+    });
+
+    it('should pass wrapLongLines to SyntaxHighlighter', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" wrapLongLines>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('code')).toBeInTheDocument();
+      });
+      // wrapLongLines sets whiteSpace: pre-wrap on the rendered code element
+      expect(container.querySelector('code')?.style.whiteSpace).toBe('pre-wrap');
+    });
+
+    it('should show copy button by default', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript">{`console.log("test");`}</CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.ant-codeHighlighter-header')).toBeInTheDocument();
+      });
+      expect(
+        container.querySelector('.ant-codeHighlighter-header .ant-actions-copy'),
+      ).toBeInTheDocument();
+    });
+
+    it('should hide copy button when showCopyButton is false', async () => {
+      const { container } = render(
+        <CodeHighlighter lang="javascript" showCopyButton={false}>
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.ant-codeHighlighter-header')).toBeInTheDocument();
+      });
+      expect(
+        container.querySelector('.ant-codeHighlighter-header .ant-actions-copy'),
+      ).not.toBeInTheDocument();
+    });
+
+    it('should not affect custom header when showCopyButton is false', async () => {
+      const { container } = render(
+        <CodeHighlighter
+          lang="javascript"
+          showCopyButton={false}
+          header={<div className="myCustomHeader">custom</div>}
+        >
+          {`console.log("test");`}
+        </CodeHighlighter>,
+      );
+      await waitFor(() => {
+        expect(container.querySelector('.myCustomHeader')).toBeInTheDocument();
+      });
+    });
+  });
 });
