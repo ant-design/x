@@ -253,4 +253,9 @@ export interface BubbleListProps extends Omit<React.HTMLAttributes<HTMLDivElemen
    * @description 数据类别基础配置项，优先级低，会被 items 配置覆盖。默认 ai、system、user、divider 四类，允许自定义类别
    */
   role?: RoleType;
+  /**
+   * @description 是否开启虚拟滚动，当数据量较大时（>100 条）建议开启以提升性能
+   * @default false
+   */
+  virtual?: boolean;
 }

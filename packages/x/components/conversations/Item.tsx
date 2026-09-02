@@ -31,7 +31,7 @@ const stopPropagation: React.MouseEventHandler<HTMLSpanElement> = (e) => {
   e.stopPropagation();
 };
 
-const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
+const ConversationsItem = React.forwardRef<HTMLLIElement, ConversationsItemProps>((props, ref) => {
   const { prefixCls, info, className, direction, onClick, active, menu, ...restProps } = props;
   const isMobile = useMobile();
 
@@ -85,6 +85,7 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
   // ============================ Render ============================
   return (
     <li
+      ref={ref}
       title={typeof info.label === 'object' ? undefined : `${info.label}`}
       {...domProps}
       className={mergedCls}
@@ -107,6 +108,10 @@ const ConversationsItem: React.FC<ConversationsItemProps> = (props) => {
       )}
     </li>
   );
-};
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  ConversationsItem.displayName = 'ConversationsItem';
+}
 
 export default ConversationsItem;

@@ -38,6 +38,7 @@ Often used in chat scenarios.
 <code src="./demo/list-scroll.tsx">Bubble List Ref</code>
 <code src="./demo/semantic-list-custom.tsx">Semantic Customization</code>
 <code src="./demo/list-extra.tsx">List extra</code>
+<code src="./demo/virtual-list.tsx">Virtual Scroll</code>
 
 ## API
 
@@ -156,6 +157,7 @@ In [this example](#bubble-demo-stream), you can try to force the streaming flag 
 | items | Bubble data list, `key` and `role` required. When used with X SDK [`useXChat`](/x-sdks/use-x-chat), you can pass `status` to help Bubble manage configuration | (BubbleProps & { key: string \| number, role: string , status: MessageStatus, extraInfo?: AnyObject })[] | - | - |
 | autoScroll | Auto-scroll | boolean | `true` | - |
 | role | Role default configuration | [RoleType](#roletype) | - | - |
+| virtual | Enable virtual scrolling, recommended when data volume is large (>100 items) | boolean | `false` | - |
 
 #### MessageStatus
 

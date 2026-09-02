@@ -30,6 +30,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAA
 <code src="./demo/shortcutKeys.tsx" background="grey">Shortcut key Operation</code>
 
 <code src="./demo/infinite-load.tsx" background="grey">Scrolling loaded</code>
+<code src="./demo/virtual-list.tsx" background="grey">Virtual Scroll</code>
 
 ## API
 
@@ -47,6 +48,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | groupable | If grouping is supported, it defaults to the `Conversation.group` field | boolean \| GroupableProps | - | - |
 | shortcutKeys | Shortcut key operations | { creation?: ShortcutKeys<number>; items?:ShortcutKeys<'number'> \| ShortcutKeys<number>[];} | - | 2.0.0 |
 | creation | New conversation configuration | CreationProps | - | 2.0.0 |
+| virtual | Enable virtual scrolling, recommended when data volume is large (>100 items) | boolean | `false` | - |
 | styles | Semantic structure styles | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
 | classNames | Semantic structure class names | classNames?: { creation?: string; item?:string;} | - | - |
 | rootClassName | Root node className | string | - | - |
