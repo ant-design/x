@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`choice rtl render component should be rendered correctly in RTL direction 1`] = `
+<div
+  class="ant-choice css-var-root ant-choice-rtl"
+>
+  <div
+    class="ant-choice-list ant-choice-layout-list"
+    data-role="radiogroup"
+  >
+    <div
+      data-key="1"
+    >
+      <div
+        class="ant-choice-item"
+        data-disabled="false"
+        data-role="radio"
+        data-selected="false"
+        tabindex="0"
+      >
+        <span
+          class="ant-choice-indicator"
+        >
+          <label
+            class="ant-radio-wrapper ant-radio-wrapper-rtl css-var-root ant-radio-css-var"
+          >
+            <span
+              class="ant-radio ant-wave-target"
+            >
+              <input
+                class="ant-radio-input"
+                type="radio"
+              />
+            </span>
+          </label>
+        </span>
+        <div
+          class="ant-choice-item-content"
+        >
+          <div
+            class="ant-choice-item-label"
+          >
+            Option 1
+          </div>
+          <div
+            class="ant-choice-item-desc"
+          >
+            Description 1
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      data-key="2"
+    >
+      <div
+        class="ant-choice-item"
+        data-disabled="false"
+        data-role="radio"
+        data-selected="false"
+        tabindex="0"
+      >
+        <span
+          class="ant-choice-indicator"
+        >
+          <label
+            class="ant-radio-wrapper ant-radio-wrapper-rtl css-var-root ant-radio-css-var"
+          >
+            <span
+              class="ant-radio ant-wave-target"
+            >
+              <input
+                class="ant-radio-input"
+                type="radio"
+              />
+            </span>
+          </label>
+        </span>
+        <div
+          class="ant-choice-item-content"
+        >
+          <div
+            class="ant-choice-item-label"
+          >
+            Option 2
+          </div>
+          <div
+            class="ant-choice-item-desc"
+          >
+            Description 2
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      data-key="3"
+    >
+      <div
+        class="ant-choice-item ant-choice-item-disabled"
+        data-disabled="true"
+        data-role="radio"
+        data-selected="false"
+        tabindex="-1"
+      >
+        <span
+          class="ant-choice-indicator"
+        >
+          <label
+            class="ant-radio-wrapper ant-radio-wrapper-disabled ant-radio-wrapper-rtl css-var-root ant-radio-css-var"
+          >
+            <span
+              class="ant-radio ant-wave-target ant-radio-disabled"
+            >
+              <input
+                class="ant-radio-input"
+                disabled=""
+                type="radio"
+              />
+            </span>
+          </label>
+        </span>
+        <div
+          class="ant-choice-item-content"
+        >
+          <div
+            class="ant-choice-item-label"
+          >
+            Option 3
+          </div>
+          <div
+            class="ant-choice-item-desc"
+          >
+            Description 3
+          </div>
+        </div>
+        <div
+          class="ant-choice-item-disabled-reason"
+        >
+          Not available
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

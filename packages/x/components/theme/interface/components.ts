@@ -1,6 +1,7 @@
 import type { ComponentToken as ActionsToken } from '../../actions/style';
 import type { ComponentToken as AttachmentsToken } from '../../attachments/style';
 import type { ComponentToken as BubbleComponentToken } from '../../bubble/style';
+import type { ComponentToken as ChoiceComponentToken } from '../../choice/style';
 import type { ComponentToken as CodeHighlighterComponentToken } from '../../code-highlighter/style';
 import type { ComponentToken as ConversationsComponentToken } from '../../conversations/style';
 import type { ComponentToken as FileCardComponentToken } from '../../file-card/style';
@@ -17,6 +18,7 @@ import type { ComponentToken as WelcomeComponentToken } from '../../welcome/styl
 export interface ComponentTokenMap {
   Attachments?: AttachmentsToken;
   Bubble?: BubbleComponentToken;
+  Choice?: ChoiceComponentToken;
   Conversations?: ConversationsComponentToken;
   Prompts?: PromptsComponentToken;
   Sender?: SenderComponentToken;

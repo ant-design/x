@@ -4,6 +4,7 @@ import type { AnyObject, ShortcutKeys } from '../_util/type';
 import type { ActionsProps } from '../actions/interface';
 import type { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
+import type { ChoiceProps } from '../choice/interface';
 import type { CodeHighlighterProps } from '../code-highlighter';
 import type { ConversationsProps } from '../conversations';
 import type { FileCardProps } from '../file-card';
@@ -36,6 +37,7 @@ type ComponentConfig<
 
 export interface XComponentsConfig {
   bubble?: ComponentConfig<BubbleProps>;
+  choice?: ComponentConfig<ChoiceProps>;
   conversations?: ComponentConfig<ConversationsProps, keyof XComponentConfig>;
   prompts?: ComponentConfig<PromptsProps>;
   sender?: ComponentConfig<SenderProps>;
