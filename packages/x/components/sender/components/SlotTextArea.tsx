@@ -646,15 +646,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return;
     }
     if (text) {
-      let success = false;
       const cleanedText = getCleanedText(text);
-      try {
-        success = document.execCommand('insertText', false, cleanedText);
-      } catch (err) {
-        warning(false, 'Sender', `insertText command failed: ${err}`);
-      }
-
-      if (!success) {
+      if (cleanedText) {
         insert([{ type: 'text', value: cleanedText }]);
       }
     }
