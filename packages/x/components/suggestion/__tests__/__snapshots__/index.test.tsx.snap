@@ -3,5 +3,9 @@
 exports[`Suggestion Component rtl render component should be rendered correctly in RTL direction 1`] = `
 <div
   class="ant-suggestion ant-suggestion-content css-var-root"
-/>
+>
+  <div
+    style="display: contents;"
+  />
+</div>
 `;
