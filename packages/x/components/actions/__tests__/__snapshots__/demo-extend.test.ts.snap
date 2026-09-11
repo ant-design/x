@@ -825,7 +825,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         <li
           aria-describedby="test-id"
           class="ant-dropdown-menu-item"
-          data-menu-id="rc-menu-uuid-share"
+          data-menu-id="rc-menu-uuid-test-id-share"
           role="menuitem"
           tabindex="-1"
         >
@@ -875,7 +875,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         <li
           aria-describedby="test-id"
           class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-          data-menu-id="rc-menu-uuid-import"
+          data-menu-id="rc-menu-uuid-test-id-import"
           role="menuitem"
           tabindex="-1"
         >
@@ -906,7 +906,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         <li
           aria-describedby="test-id"
           class="ant-dropdown-menu-item ant-dropdown-menu-item-danger"
-          data-menu-id="rc-menu-uuid-delete"
+          data-menu-id="rc-menu-uuid-test-id-delete"
           role="menuitem"
           tabindex="-1"
         >

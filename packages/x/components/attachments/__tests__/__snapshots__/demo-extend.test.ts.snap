@@ -2680,7 +2680,7 @@ exports[`renders components/attachments/demo/select-files.tsx extend context cor
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                  data-menu-id="rc-menu-uuid-image"
+                  data-menu-id="rc-menu-uuid-test-id-image"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -2736,7 +2736,7 @@ exports[`renders components/attachments/demo/select-files.tsx extend context cor
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                  data-menu-id="rc-menu-uuid-docs"
+                  data-menu-id="rc-menu-uuid-test-id-docs"
                   role="menuitem"
                   tabindex="-1"
                 >
