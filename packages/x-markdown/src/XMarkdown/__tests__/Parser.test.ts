@@ -21,6 +21,35 @@ describe('Parser', () => {
     );
   });
 
+  describe('CJK autolinks', () => {
+    it('should stop a bare URL at CJK punctuation', () => {
+      const parser = new Parser();
+      const result = parser.parse('**百度**（http://www.baidu.c），接着后面的内容');
+
+      expect(result).toBe(
+        '<p><strong>百度</strong>（<a href="http://www.baidu.c">http://www.baidu.c</a>），接着后面的内容</p>\n',
+      );
+    });
+
+    it('should preserve balanced CJK parentheses inside a bare URL', () => {
+      const parser = new Parser();
+      const result = parser.parse('https://example.com/路径（详情），继续');
+
+      expect(result).toBe(
+        '<p><a href="https://example.com/%E8%B7%AF%E5%BE%84%EF%BC%88%E8%AF%A6%E6%83%85%EF%BC%89">https://example.com/路径（详情）</a>，继续</p>\n',
+      );
+    });
+
+    it('should not change explicit markdown links with CJK punctuation in the destination', () => {
+      const parser = new Parser();
+      const result = parser.parse('[示例](https://example.com/路径，详情)');
+
+      expect(result).toBe(
+        '<p><a href="https://example.com/%E8%B7%AF%E5%BE%84%EF%BC%8C%E8%AF%A6%E6%83%85">示例</a></p>\n',
+      );
+    });
+  });
+
   describe('openLinksInNewTab', () => {
     it('should add target="_blank" and rel="noopener noreferrer" to links when openLinksInNewTab is true', () => {
       const parser = new Parser({ openLinksInNewTab: true });
