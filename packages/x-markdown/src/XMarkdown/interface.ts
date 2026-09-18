@@ -80,6 +80,12 @@ interface StreamingOption {
       string
     >
   >;
+  /**
+   * @description 是否为自定义组件内的文本节点启用打字机动画效果，配合 contentRender 使用时可实现自定义渲染的逐字输出
+   * @description Whether to enable typewriter animation for text nodes inside custom components, enabling character-by-character output when used with contentRender
+   * @default false
+   */
+  enableAnimationForCustomComponents?: boolean;
 }
 
 type StreamStatus = 'loading' | 'done';

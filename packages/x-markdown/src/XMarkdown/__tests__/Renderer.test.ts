@@ -1516,6 +1516,58 @@ describe('Renderer', () => {
 
       createElementSpy.mockRestore();
     });
+
+    it('should apply animation to text nodes inside custom components when enableAnimationForCustomComponents is true', () => {
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const renderer = new Renderer({
+        components: { 'content-render': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          enableAnimationForCustomComponents: true,
+          animationConfig: {
+            fadeDuration: 150,
+            easing: 'ease-out',
+          },
+        },
+      });
+
+      const html = '<content-render>Hello World</content-render>';
+      renderer.processHtml(html);
+
+      // Verify that AnimationText was used for text inside custom component
+      const animationTextCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0]?.displayName === 'AnimationText' || call[0]?.name === 'AnimationText',
+      );
+      expect(animationTextCalls.length).toBeGreaterThan(0);
+
+      createElementSpy.mockRestore();
+    });
+
+    it('should NOT apply animation to text nodes inside custom components when enableAnimationForCustomComponents is false', () => {
+      const createElementSpy = jest.spyOn(React, 'createElement');
+
+      const CustomComponent: React.FC<any> = (props) => React.createElement('div', props);
+      const renderer = new Renderer({
+        components: { 'content-render': CustomComponent },
+        streaming: {
+          enableAnimation: true,
+          enableAnimationForCustomComponents: false,
+        },
+      });
+
+      const html = '<content-render>Hello World</content-render>';
+      renderer.processHtml(html);
+
+      // Verify that AnimationText was NOT used for text inside custom component
+      const animationTextCalls = createElementSpy.mock.calls.filter(
+        (call) => call[0]?.displayName === 'AnimationText' || call[0]?.name === 'AnimationText',
+      );
+      expect(animationTextCalls.length).toBe(0);
+
+      createElementSpy.mockRestore();
+    });
   });
 
   describe('SSR / no DOM safety', () => {
