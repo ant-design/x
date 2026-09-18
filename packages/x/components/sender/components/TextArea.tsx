@@ -30,6 +30,8 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
     onChange,
     onKeyUp,
     onKeyDown,
+    onCompositionStart,
+    onCompositionEnd,
     onPaste,
     onPasteFile,
     disabled,
@@ -102,12 +104,14 @@ const TextArea = React.forwardRef<TextAreaRef>((_, ref) => {
   // ============================ Submit ============================
   const isCompositionRef = React.useRef(false);
 
-  const onInternalCompositionStart = () => {
+  const onInternalCompositionStart: React.CompositionEventHandler<HTMLTextAreaElement> = (e) => {
     isCompositionRef.current = true;
+    onCompositionStart?.(e);
   };
 
-  const onInternalCompositionEnd = () => {
+  const onInternalCompositionEnd: React.CompositionEventHandler<HTMLTextAreaElement> = (e) => {
     isCompositionRef.current = false;
+    onCompositionEnd?.(e);
   };
 
   const onInternalKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {

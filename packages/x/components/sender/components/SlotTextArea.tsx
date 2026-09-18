@@ -59,6 +59,8 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onChange,
     onKeyUp,
     onKeyDown,
+    onCompositionStart,
+    onCompositionEnd,
     onPaste,
     onPasteFile,
     disabled,
@@ -569,13 +571,15 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
   };
 
   // ============================ Events =============================
-  const onInternalCompositionStart = () => {
+  const onInternalCompositionStart: React.CompositionEventHandler<HTMLDivElement> = (e) => {
     isCompositionRef.current = true;
+    onCompositionStart?.(e);
   };
 
-  const onInternalCompositionEnd = () => {
+  const onInternalCompositionEnd: React.CompositionEventHandler<HTMLDivElement> = (e) => {
     isCompositionRef.current = false;
     keyLockRef.current = false;
+    onCompositionEnd?.(e);
   };
 
   const onInternalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
