@@ -159,4 +159,48 @@ describe('AnimationText Component', () => {
     render(<AnimationText text="test" />);
     expect(screen.getByText('test')).toBeInTheDocument();
   });
+
+  describe('splitBy', () => {
+    const typeOut = (text: string, animationConfig?: React.ComponentProps<typeof AnimationText>['animationConfig']) => {
+      const { container, rerender } = render(<AnimationText text="" animationConfig={animationConfig} />);
+      const spanTexts: string[][] = [];
+      for (let i = 1; i <= text.length; i++) {
+        act(() => {
+          rerender(<AnimationText text={text.slice(0, i)} animationConfig={animationConfig} />);
+        });
+        spanTexts.push(Array.from(container.querySelectorAll('span'), (span) => span.textContent ?? ''));
+      }
+      return spanTexts;
+    };
+
+    it('creates one fade-in node per arriving chunk by default', () => {
+      const spans = typeOut('Hi. Yo');
+      expect(spans[spans.length - 1]).toEqual(['H', 'i', '.', ' ', 'Y', 'o']);
+    });
+
+    it("merges arriving text into the current sentence with splitBy: 'sentence'", () => {
+      const spans = typeOut('Hi. Yo', { splitBy: 'sentence' });
+      expect(spans).toEqual([
+        ['H'],
+        ['Hi'],
+        ['Hi.'],
+        ['Hi.', ' '],
+        ['Hi.', ' Y'],
+        ['Hi.', ' Yo'],
+      ]);
+    });
+
+    it('splits a multi-sentence chunk without moving text that is already shown', () => {
+      const config = { splitBy: 'sentence' as const, delimiters: ['.'] };
+      const { container, rerender } = render(<AnimationText text="Fir" animationConfig={config} />);
+      act(() => {
+        rerender(<AnimationText text="First. Second. Thi" animationConfig={config} />);
+      });
+      expect(Array.from(container.querySelectorAll('span'), (s) => s.textContent)).toEqual([
+        'First.',
+        ' Second.',
+        ' Thi',
+      ]);
+    });
+  });
 });

@@ -2,7 +2,7 @@ import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { Parser, Renderer } from './core';
 import DebugPanel from './DebugPanel';
-import { useStreamingCore } from './hooks';
+import { useStreamingCore, useTypewriter } from './hooks';
 import { XMarkdownProps } from './interface';
 import Section from './Section';
 import { resolveTailContent } from './utils/tail';
@@ -46,10 +46,14 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const mergedCls = clsx('x-markdown', disableStyleCls, rootClassName, className);
 
   // ============================ Streaming ============================
-  const { output, sections } = useStreamingCore(content || children || '', {
-    streaming,
-    components,
-  });
+  // The typewriter runs first so that what reaches the streaming cache is
+  // always a prefix of the previous value.
+  const pacedContent = useTypewriter(
+    content || children || '',
+    streaming?.typewriter,
+    !!streaming?.hasNextChunk,
+  );
+  const { output, sections } = useStreamingCore(pacedContent, { streaming, components });
 
   // ============================ Merge components with xmd-tail ============================
   const mergedComponents = useMemo(() => {

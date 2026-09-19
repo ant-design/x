@@ -16,6 +16,51 @@ export interface AnimationConfig {
    * @default 'ease-in-out'
    */
   easing?: string;
+  /**
+   * @description 淡入的单位。`chunk` 每次新到的文本单独淡入；`sentence` 把新到的文本并入当前句子，到分隔符才开始下一个淡入单元。与 `typewriter` 同时使用时应选 `sentence`，否则每帧放出的几个字都会各自成为一个淡入节点
+   * @description Unit of the fade-in. `chunk` fades in each newly arrived piece of text on its own; `sentence` appends new text to the current sentence and starts a new fade-in unit only after a delimiter. Use `sentence` together with `typewriter`, otherwise every few characters revealed per frame become their own fade-in node
+   * @default 'chunk'
+   */
+  splitBy?: 'chunk' | 'sentence';
+  /**
+   * @description `splitBy` 为 `sentence` 时的句子分隔符
+   * @description Sentence delimiters used when `splitBy` is `sentence`
+   * @default ['。', '！', '？', '.', '!', '?', '\n']
+   */
+  delimiters?: string[];
+}
+
+export interface TypewriterConfig {
+  /**
+   * @description 放出文本的单位。`char` 逐字放出；`sentence` 攒到分隔符再一起放出（围栏代码和行内代码里的分隔符不算，换行总是分隔符）
+   * @description Unit in which text is revealed. `char` reveals character by character; `sentence` reveals up to the next delimiter at once (delimiters inside fenced or inline code do not count, a newline always does)
+   * @default 'char'
+   */
+  unit?: 'char' | 'sentence';
+  /**
+   * @description 句子分隔符
+   * @description Sentence delimiters
+   * @default ['。', '！', '？', '.', '!', '?', '\n']
+   */
+  delimiters?: string[];
+  /**
+   * @description 最低放出速度（字/秒）。速度会随 chunk 到达节奏自适应，这是下限
+   * @description Minimum reveal speed in characters per second. The speed adapts to the chunk cadence; this is the floor
+   * @default 24
+   */
+  minCps?: number;
+  /**
+   * @description 最高放出速度（字/秒）
+   * @description Maximum reveal speed in characters per second
+   * @default 3000
+   */
+  maxCps?: number;
+  /**
+   * @description `unit` 为 `char` 时，放出一个分隔符后停顿的毫秒数
+   * @description With `unit: 'char'`, how many milliseconds to pause after revealing a delimiter
+   * @default 0
+   */
+  pauseMs?: number;
 }
 
 export enum StreamCacheTokenType {
@@ -92,6 +137,12 @@ interface StreamingOption {
    * @default 'placeholder'
    */
   incompleteMarkdown?: 'placeholder' | 'complete';
+  /**
+   * @description 打字机效果：新到的内容不是整块出现，而是按 chunk 到达的节奏匀速放出。放出的永远是 `content` 的前缀，`hasNextChunk` 变为 false 时立即放完。传对象可配置单位、速度和分隔符
+   * @description Typewriter effect: newly arrived content is revealed at a steady pace that follows the chunk cadence instead of appearing in blocks. What is shown is always a prefix of `content`; everything is revealed at once when `hasNextChunk` becomes false. Pass an object to configure the unit, speed and delimiters
+   * @default false
+   */
+  typewriter?: boolean | TypewriterConfig;
 }
 
 type StreamStatus = 'loading' | 'done';
@@ -251,3 +302,4 @@ export type {
   Tokens,
   XMarkdownProps,
 };
+export type { TypewriterConfig as TypewriterOption };
