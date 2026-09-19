@@ -1259,6 +1259,23 @@ describe('XMarkdown hooks', () => {
     });
   });
 
+  describe('useStreaming indented fences', () => {
+    it('treats a fence indented by up to three spaces as code', () => {
+      // Inside a fence nothing is held back, so an incomplete link streams
+      // through as-is; a four-space indent is indented code, not a fence, and
+      // the link on the next line is recognised again.
+      const config = { streaming: { hasNextChunk: true } };
+      const fenced = renderHook(() => useStreaming('  ```\n[link](https://x', config));
+      expect(fenced.result.current).toBe('  ```\n[link](https://x');
+      const closed = renderHook(() =>
+        useStreaming('   ~~~\ncode\n   ~~~\n[link](https://x', config),
+      );
+      expect(closed.result.current).toBe('   ~~~\ncode\n   ~~~\n');
+      const notAFence = renderHook(() => useStreaming('    ```\n[link](https://x', config));
+      expect(notAFence.result.current).toBe('    ```\n');
+    });
+  });
+
   describe("useStreaming incompleteMarkdown: 'complete'", () => {
     const streamWith = (
       text: string,

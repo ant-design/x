@@ -139,9 +139,31 @@ const corpora: Record<string, string> = {
       '| - | - |',
       `| ${i} | ${i * 2} |`,
       `| ${i + 1} | ${i * 2 + 1} |`,
+      // GFM: a line without pipes right after the rows is still a row.
+      `row without pipes ${i}`,
       '',
     ].join('\n'),
   ).join(''),
+
+  indentedFences: [
+    '# A',
+    '',
+    ' ```',
+    '# inside a fence indented by one space',
+    ' ```',
+    '',
+    '## B',
+    '',
+    '   ~~~',
+    '',
+    '# inside a fence indented by three spaces',
+    '',
+    '   ~~~',
+    '',
+    '## C',
+    '',
+    'end',
+  ].join('\n'),
 
   htmlBlocks: [
     '# A',
@@ -327,9 +349,13 @@ describe('streaming.incremental', () => {
       expect(sectionsFor('# A\n\n<div>\n\n## B\n\n</div>\n\n')).toHaveLength(2);
     });
 
-    it('does not split on # lines inside fenced code', () => {
+    it('does not split on # lines inside fenced code, indented fences included', () => {
       expect(sectionsFor('# A\n\n```\n\n# fenced\n\n```\n\n')).toBeNull();
       expect(sectionsFor('# A\n\n~~~\n\n# fenced\n\n~~~\n\n')).toBeNull();
+      expect(sectionsFor('# A\n\n ```\n# fenced\n ```\n\n')).toBeNull();
+      expect(sectionsFor('# A\n\n   ```\n\n# fenced\n\n   ```\n\n')).toBeNull();
+      // Four spaces is indented code, not a fence: the `#` line after it is a heading.
+      expect(sectionsFor('# A\n\n    ```\n\n# heading\n\n')).toHaveLength(2);
     });
 
     it('does not split on # lines inside <pre>, <script>, comments and $$ math', () => {
@@ -380,23 +406,19 @@ describe('streaming.incremental', () => {
       ]);
     });
 
-    it('exposes a boundary held inside the pending table once the table commits', () => {
-      // The table token stays pending until its blank line, and a heading
-      // right after the last row is part of that pending text. The boundary
-      // is recorded immediately but only used once the table has committed.
-      const { result, rerender } = renderHook(
-        ({ input }: { input: string }) =>
-          useStreamingCore(input, { streaming: { hasNextChunk: true, incremental: noMin } }),
-        { initialProps: { input: '' } },
-      );
-      act(() => {
-        rerender({ input: '# A\n\n| a |\n| - |\n| 1 |\n## B\n' });
-      });
-      expect(result.current.sections).toBeNull();
-      act(() => {
-        rerender({ input: '# A\n\n| a |\n| - |\n| 1 |\n## B\n\npara\n\n' });
-      });
-      expect(result.current.sections).toEqual(['# A\n\n| a |\n| - |\n| 1 |\n', '## B\n\npara\n\n']);
+    it('ends the pending table at a heading so the boundary is usable at once', () => {
+      // GFM breaks a table at a blank line or at the start of another block.
+      // The table token follows: a heading line right after the rows commits
+      // the table, so the boundary before the heading is usable immediately.
+      expect(sectionsFor('# A\n\n| a |\n| - |\n| 1 |\n## B\n')).toEqual([
+        '# A\n\n| a |\n| - |\n| 1 |\n',
+        '## B\n',
+      ]);
+      // A line without pipes is still a row (GFM), not the end of the table.
+      expect(sectionsFor('# A\n\n| a |\n| - |\n| 1 |\nrow\n## B\n')).toEqual([
+        '# A\n\n| a |\n| - |\n| 1 |\nrow\n',
+        '## B\n',
+      ]);
     });
 
     it('is off unless incremental is set, and off for a non-streaming render', () => {

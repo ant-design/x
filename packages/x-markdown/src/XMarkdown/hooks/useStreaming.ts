@@ -57,6 +57,8 @@ interface FenceState {
   inFenced: boolean;
   fenceChar: string;
   fenceLen: number;
+  /** Spaces before the fence run of the current line; a fence may be indented up to 3 */
+  lineIndent: number;
   /** Leading `/~ run of the current (incomplete) line */
   lineFenceChar: string;
   lineFenceLen: number;
@@ -77,8 +79,15 @@ interface TableState {
   newlines: number;
   /** Whether the previous character was '\n' (used to detect the '\n\n' terminator) */
   lastWasNewline: boolean;
-  /** pending contains a blank line, i.e. the table block already ended */
-  hasBlankLine: boolean;
+  /**
+   * pending contains a blank line or a heading line after the delimiter row,
+   * i.e. the table block already ended. GFM breaks a table at an empty line
+   * or at the start of another block structure; a heading is the structure
+   * that matters for section boundaries, so it is the one tracked here.
+   */
+  ended: boolean;
+  /** First characters of the current line, enough to recognise a heading */
+  linePrefix: string;
   /** pending's first line — the header row */
   firstLine: string;
   /** pending's second line — the delimiter row; may still be growing */
@@ -108,6 +117,8 @@ interface Recognizer {
 }
 
 /* ------------ Constants ------------ */
+// Column-0 ATX heading line (`# ` … `###### `, or a bare `#`).
+const HEADING_LINE = /^#{1,6}(?:[ \t]|$)/;
 // Validates whether a token is still incomplete in the streaming context.
 // Returns true if the token is syntactically incomplete; false if it is complete or invalid.
 const STREAM_INCOMPLETE_REGEX = {
@@ -145,7 +156,7 @@ const isTableShapeValid = (header: string, separator: string) => {
  * terminated, which is where a long table spends all of its characters.
  */
 const isTableInComplete = (table: TableState) => {
-  if (table.hasBlankLine) return false;
+  if (table.ended) return false;
   // Only the header row so far: still incomplete by definition.
   if (table.newlines === 0) return true;
   if (table.shape !== null) return table.shape;
@@ -237,6 +248,7 @@ const getInitialFenceState = (): FenceState => ({
   inFenced: false,
   fenceChar: '',
   fenceLen: 0,
+  lineIndent: 0,
   lineFenceChar: '',
   lineFenceLen: 0,
   lineFenceRunEnded: false,
@@ -246,7 +258,8 @@ const getInitialFenceState = (): FenceState => ({
 const getInitialTableState = (): TableState => ({
   newlines: 0,
   lastWasNewline: false,
-  hasBlankLine: false,
+  ended: false,
+  linePrefix: '',
   firstLine: '',
   secondLine: '',
   shape: null,
@@ -255,18 +268,26 @@ const getInitialTableState = (): TableState => ({
 const resetTableState = (table: TableState): void => {
   table.newlines = 0;
   table.lastWasNewline = false;
-  table.hasBlankLine = false;
+  table.ended = false;
+  table.linePrefix = '';
   table.firstLine = '';
   table.secondLine = '';
   table.shape = null;
 };
 
+// Long enough for `###### ` plus one character.
+const TABLE_LINE_PREFIX_CHARS = 8;
+
 /** Advance the table state by one appended character. O(1). */
 const feedTableState = (table: TableState, char: string): void => {
   if (char === '\n') {
-    if (table.lastWasNewline) table.hasBlankLine = true;
+    if (table.lastWasNewline) table.ended = true;
+    // A heading after the delimiter row starts a new block, which ends the
+    // table just like a blank line does (GFM); marked stops the rows there.
+    if (table.newlines >= 2 && HEADING_LINE.test(table.linePrefix)) table.ended = true;
     table.lastWasNewline = true;
     table.newlines += 1;
+    table.linePrefix = '';
     // The delimiter row is terminated: its verdict can no longer change, so
     // freeze it and stop re-deriving it for every remaining character.
     if (table.newlines === 2) {
@@ -275,6 +296,7 @@ const feedTableState = (table: TableState, char: string): void => {
     return;
   }
   table.lastWasNewline = false;
+  if (table.linePrefix.length < TABLE_LINE_PREFIX_CHARS) table.linePrefix += char;
   if (table.newlines === 0) {
     table.firstLine += char;
   } else if (table.newlines === 1) {
@@ -311,10 +333,9 @@ const getInitialCache = (): StreamCache => ({
 /** Sections shorter than this are merged into the next one. */
 export const DEFAULT_MIN_SECTION_CHARS = 200;
 
-// Column-0 ATX heading. Indented (1–3 spaces) headings are deliberately not
-// split on: the fence tracker only follows column-0 fences, so a column-0
-// heading is the only line start that cannot be the body of an indented fence.
-const HEADING_LINE = /^#{1,6}(?:[ \t]|$)/;
+// Section boundaries are placed before column-0 ATX headings only (see
+// HEADING_LINE above). CommonMark also allows a heading to be indented by
+// one to three spaces; those are rare in generated text and simply not split on.
 // Link reference definition or footnote definition. Either can be referenced
 // from any other block of the document, so once one is seen the document is
 // no longer splittable.
@@ -471,6 +492,7 @@ const feedFenceState = (fence: FenceState, char: string): void => {
         fence.fenceLen = 0;
       }
     }
+    fence.lineIndent = 0;
     fence.lineFenceChar = '';
     fence.lineFenceLen = 0;
     fence.lineFenceRunEnded = false;
@@ -479,7 +501,11 @@ const feedFenceState = (fence: FenceState, char: string): void => {
   }
 
   if (!fence.lineFenceRunEnded) {
-    if (fence.lineFenceLen === 0 && (char === '`' || char === '~')) {
+    if (fence.lineFenceLen === 0 && char === ' ' && fence.lineIndent < 3) {
+      // CommonMark allows an opening or closing fence to be indented by up to
+      // three spaces; four would make the line indented code instead.
+      fence.lineIndent += 1;
+    } else if (fence.lineFenceLen === 0 && (char === '`' || char === '~')) {
       fence.lineFenceChar = char;
       fence.lineFenceLen = 1;
     } else if (fence.lineFenceLen > 0 && char === fence.lineFenceChar) {
