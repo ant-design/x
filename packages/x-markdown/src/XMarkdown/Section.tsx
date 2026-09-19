@@ -22,7 +22,7 @@ export interface SectionProps {
  */
 const Section = React.memo<SectionProps>(({ content, parser, renderer, injectTail }) => {
   const html = useMemo(() => parser.parse(content, { injectTail }), [content, parser, injectTail]);
-  const node = useMemo(() => (html ? renderer.render(html) : null), [html, renderer]);
+  const node = useMemo(() => renderer.render(html), [html, renderer]);
   return <>{node}</>;
 });
 

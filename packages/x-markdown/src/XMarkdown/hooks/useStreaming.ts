@@ -620,8 +620,12 @@ const resolveMinSectionChars = (incremental: StreamingOption['incremental']): nu
  * section boundaries the renderer can memoise on. `useStreaming` is the
  * public string-only view of this hook.
  */
+// Stable default so that omitting `components` does not invalidate the memo
+// chain (handleIncompleteMarkdown → processStreaming → output) on every render.
+const EMPTY_COMPONENTS: NonNullable<XMarkdownProps['components']> = {};
+
 const useStreamingCore = (input: string, config?: StreamingConfig): StreamingResult => {
-  const { streaming, components = {} } = config || {};
+  const { streaming, components = EMPTY_COMPONENTS } = config || {};
   const {
     hasNextChunk: enableCache = false,
     incompleteMarkdownComponentMap,

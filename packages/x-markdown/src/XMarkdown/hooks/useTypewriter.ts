@@ -82,7 +82,10 @@ const scanBoundaries = (scan: BoundaryScan, text: string, delimiters: Set<string
       scan.lineFenceLen = 0;
       scan.atLineStart = true;
       scan.inInlineCode = false;
-      if (delimiters.has('\n')) scan.boundaries.push(i + 1);
+      // A line end is always a boundary, code included: revealing code line
+      // by line is the natural typewriter rhythm, and a paragraph break is a
+      // sentence boundary whatever `delimiters` says.
+      scan.boundaries.push(i + 1);
       continue;
     }
     if (scan.atLineStart) {
@@ -265,6 +268,13 @@ const useTypewriter = (
       return;
     }
 
+    if (!input.startsWith(previous)) {
+      // The shown prefix survived but the not-yet-shown tail was rewritten:
+      // boundaries and code state scanned over the old tail are stale.
+      scanRef.current = initialScan();
+      cursorRef.current = Math.min(cursorRef.current, input.length);
+    }
+
     if (input.length > previous.length) {
       const now = performance.now();
       const previousChunkAt = lastChunkAtRef.current;
@@ -277,10 +287,6 @@ const useTypewriter = (
         );
       }
       lastChunkAtRef.current = now;
-    }
-    if (input.length < displayLengthRef.current) {
-      cursorRef.current = input.length;
-      commit(input.length);
     }
     schedule();
   }, [input, enabled, commit, schedule, stop]);

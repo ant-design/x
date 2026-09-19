@@ -164,23 +164,38 @@ const corpora: Record<string, string> = {
   ].join('\n'),
 };
 
-const renderBoth = (streamingExtra: Partial<StreamingOption> = {}) => {
-  const whole = render(<XMarkdown content="" streaming={{ hasNextChunk: true, ...streamingExtra }} />);
+const renderBoth = (
+  streamingExtra: Partial<StreamingOption> = {},
+  components?: XMarkdownProps['components'],
+) => {
+  const whole = render(
+    <XMarkdown
+      content=""
+      streaming={{ hasNextChunk: true, ...streamingExtra }}
+      components={components}
+    />,
+  );
   const sectioned = render(
     <XMarkdown
       content=""
       streaming={{ hasNextChunk: true, incremental: noMin, ...streamingExtra }}
+      components={components}
     />,
   );
   const update = (content: string, hasNextChunk: boolean) => {
     act(() => {
       whole.rerender(
-        <XMarkdown content={content} streaming={{ hasNextChunk, ...streamingExtra }} />,
+        <XMarkdown
+          content={content}
+          streaming={{ hasNextChunk, ...streamingExtra }}
+          components={components}
+        />,
       );
       sectioned.rerender(
         <XMarkdown
           content={content}
           streaming={{ hasNextChunk, incremental: noMin, ...streamingExtra }}
+          components={components}
         />,
       );
     });
@@ -258,7 +273,7 @@ describe('streaming.incremental', () => {
         ),
         h2: ({ children }: ComponentProps) => <h2 data-custom="1">{children}</h2>,
       };
-      const { update } = renderBoth({ tail: true, components } as never);
+      const { update } = renderBoth({ tail: true }, components);
       for (let i = 1; i <= text.length; i += 3) {
         const { whole, sectioned } = update(text.slice(0, i), true);
         expect(sectioned).toBe(whole);

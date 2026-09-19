@@ -144,16 +144,19 @@ describe('useTypewriter', () => {
         rerender({ input: text, typewriter: config, active: true });
       });
       const outputs = drain(result);
-      expect(outputs).toEqual([
-        '',
-        'Run `a.b.c` now.',
-        'Run `a.b.c` now.\n```\nx.y();\nz.w();\n```\nDone.',
-        text,
-      ]);
+      expect(outputs[outputs.length - 1]).toBe(text);
+      // Every intermediate reveal stops at a sentence end or a line end,
+      // never at a `.` that sits inside inline or fenced code.
+      for (const output of outputs.slice(1, -1)) {
+        expect(output.endsWith('.') || output.endsWith('\n')).toBe(true);
+        expect(['`a.', '`a.b.', '\nx.', '\nz.', '`d.'].some((s) => output.endsWith(s))).toBe(false);
+      }
+      // The first sentence is revealed on its own (with or without its line end).
+      expect(outputs.some((o) => o === 'Run `a.b.c` now.' || o === 'Run `a.b.c` now.\n')).toBe(true);
     });
 
-    it('treats a newline as a boundary even inside code', () => {
-      const config: TypewriterOption = { unit: 'sentence', delimiters: ['.', '\n'] };
+    it('treats a newline as a boundary even inside code and even if not listed as a delimiter', () => {
+      const config: TypewriterOption = { unit: 'sentence', delimiters: ['.'] };
       const { result, rerender } = setup({ input: '', typewriter: config, active: true });
       const text = '```\nx.y();\nz.w();\n```\n';
       act(() => {
@@ -162,6 +165,39 @@ describe('useTypewriter', () => {
       const outputs = drain(result);
       expect(outputs).toEqual(['', '```\n', '```\nx.y();\n', '```\nx.y();\nz.w();\n', text]);
     });
+  });
+
+  it('treats one or two backticks at a line start as inline code, not a fence', () => {
+    const config: TypewriterOption = { unit: 'sentence', delimiters: ['.'] };
+    const { result, rerender } = setup({ input: '', typewriter: config, active: true });
+    const text = '`a.b` first. second.';
+    act(() => {
+      rerender({ input: text, typewriter: config, active: true });
+    });
+    const outputs = drain(result);
+    for (const output of outputs.slice(1, -1)) {
+      expect(output.endsWith('`a.')).toBe(false);
+    }
+    expect(outputs).toContain('`a.b` first.');
+    expect(outputs[outputs.length - 1]).toBe(text);
+  });
+
+  it('rescans boundaries when the not-yet-shown tail is rewritten', () => {
+    const config: TypewriterOption = { unit: 'sentence', delimiters: ['.'] };
+    const { result, rerender } = setup({ input: 'A. B.', typewriter: config, active: true });
+    expect(result.current).toBe('A. B.');
+    // An unfinished fence arrives and is scanned (but not yet shown)…
+    act(() => {
+      rerender({ input: 'A. B. ```\nx.y', typewriter: config, active: true });
+    });
+    // …then the caller rewrites that tail while the shown prefix survives.
+    act(() => {
+      rerender({ input: 'A. B. done. And a longer tail after it', typewriter: config, active: true });
+    });
+    const outputs = drain(result);
+    // Stale "inside a fence" state would have hidden the boundary after "done.".
+    expect(outputs).toContain('A. B. done.');
+    expect(outputs[outputs.length - 1]).toBe('A. B. done. And a longer tail after it');
   });
 
   it('pauses after a delimiter in char mode when pauseMs is set', () => {

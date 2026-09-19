@@ -137,8 +137,10 @@ const Code = React.memo(
   (props: ComponentProps) => <CodeHighlighter lang={props.lang}>{String(props.children)}</CodeHighlighter>,
   arePropsEqualIgnoringDomNode,
 );
+// 在组件外部固定：行内字面量每次渲染都是新对象
+const components = { code: Code };
 
-<XMarkdown content={content} streaming={isStreaming} components={{ code: Code }} />;
+<XMarkdown content={content} streaming={isStreaming} components={components} />;
 ```
 
 对 `children` 是元素数组的容器型组件（如 `table`）它不起作用，这类组件由 `incremental` 覆盖。`components`、`config`、`streaming` 等对象请在组件外部固定或用 `useMemo` 缓存，行内字面量会让每次渲染都重建解析器。

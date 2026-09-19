@@ -137,8 +137,10 @@ const Code = React.memo(
   (props: ComponentProps) => <CodeHighlighter lang={props.lang}>{String(props.children)}</CodeHighlighter>,
   arePropsEqualIgnoringDomNode,
 );
+// Kept outside the component: an inline literal is a new object on every render
+const components = { code: Code };
 
-<XMarkdown content={content} streaming={isStreaming} components={{ code: Code }} />;
+<XMarkdown content={content} streaming={isStreaming} components={components} />;
 ```
 
 It does not help container components whose `children` is an array of elements (such as `table`); those are covered by `incremental`. Keep `components`, `config`, `streaming` and similar objects outside the component or in `useMemo`; inline literals rebuild the parser on every render.

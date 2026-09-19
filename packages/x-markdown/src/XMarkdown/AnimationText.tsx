@@ -65,14 +65,12 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
   } else if (!(prevText && text.startsWith(prevText))) {
     chunks = [text];
   } else {
+    // text !== prevText and text starts with prevText, so newText is non-empty.
     const newText = text.slice(prevText.length);
-    if (!newText) {
-      chunks = chunksRef.current;
-    } else if (splitBy === 'sentence') {
-      chunks = appendBySentence(chunksRef.current, newText, delimiters);
-    } else {
-      chunks = [...chunksRef.current, newText];
-    }
+    chunks =
+      splitBy === 'sentence'
+        ? appendBySentence(chunksRef.current, newText, delimiters)
+        : [...chunksRef.current, newText];
   }
 
   useEffect(() => {
