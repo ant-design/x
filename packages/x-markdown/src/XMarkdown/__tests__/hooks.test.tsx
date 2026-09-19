@@ -1,5 +1,6 @@
 import { act, render, renderHook } from '@testing-library/react';
 import React from 'react';
+import XMarkdownProbe from '../../index';
 import { useStreaming } from '../hooks';
 import type { XMarkdownProps } from '../interface';
 
@@ -1255,6 +1256,95 @@ describe('XMarkdown hooks', () => {
       });
 
       expect(result.current).toBe(full);
+    });
+  });
+
+  describe("useStreaming incompleteMarkdown: 'complete'", () => {
+    const streamWith = (
+      text: string,
+      streaming: NonNullable<XMarkdownProps['streaming']>,
+      components?: XMarkdownProps['components'],
+    ) => {
+      const outputs: string[] = [];
+      const { result, rerender } = renderHook(
+        ({ input }: { input: string }) =>
+          useStreaming(input, { streaming: { hasNextChunk: true, ...streaming }, components }),
+        { initialProps: { input: '' } },
+      );
+      for (let i = 1; i <= text.length; i++) {
+        act(() => {
+          rerender({ input: text.slice(0, i) });
+        });
+        outputs.push(result.current);
+      }
+      return { outputs, at: (prefix: string) => outputs[prefix.length - 1] };
+    };
+    const complete = (text: string, components?: XMarkdownProps['components']) =>
+      streamWith(text, { incompleteMarkdown: 'complete' }, components);
+
+    it('closes emphasis that is still open, keeping trailing whitespace outside', () => {
+      const { at } = complete('see **bold and more** end');
+      expect(at('see **bold')).toBe('see **bold**');
+      expect(at('see **bold and ')).toBe('see **bold and** ');
+      expect(at('see **bold and more**')).toBe('see **bold and more**');
+      expect(at('see **')).toBe('see ');
+      expect(complete('a *em').at('a *em')).toBe('a *em*');
+      expect(complete('a ___x').at('a ___x')).toBe('a ___x___');
+    });
+
+    it('closes inline code that is still open', () => {
+      const { at } = complete('run `npm i` now');
+      expect(at('run `npm')).toBe('run `npm`');
+      expect(at('run `')).toBe('run ');
+      expect(at('run `npm i`')).toBe('run `npm i`');
+    });
+
+    it('shows the text of a link that is still open', () => {
+      const { at } = complete('see [docs](https://x.ant.design) now');
+      expect(at('see [do')).toBe('see do');
+      expect(at('see [docs](https://x')).toBe('see docs');
+      expect(at('see [')).toBe('see ');
+      expect(at('see [docs](https://x.ant.design)')).toBe('see [docs](https://x.ant.design)');
+    });
+
+    it('completes emphasis inside a list item that is still open', () => {
+      const { at } = complete('- **bo');
+      expect(at('- ')).toBe('');
+      expect(at('- **bo')).toBe('- **bo**');
+    });
+
+    it('still holds back images, html and single-row tables', () => {
+      expect(complete('![alt](https://x').at('![alt](https://x')).toBe('');
+      expect(complete('<div class="a').at('<div class="a')).toBe('');
+      expect(complete('| a | b |').at('| a | b |')).toBe('');
+      // …while a table with a terminated delimiter row flows through as before.
+      expect(complete('| a |\n| - |\n| 1 ').at('| a |\n| - |\n| 1 ')).toBe('| a |\n| - |\n| 1 ');
+    });
+
+    it('lets an explicit incompleteMarkdownComponentMap entry win over completion', () => {
+      const components = { 'my-emphasis': () => null };
+      const { at } = streamWith(
+        'see **bold',
+        { incompleteMarkdown: 'complete', incompleteMarkdownComponentMap: { emphasis: 'my-emphasis' } },
+        components,
+      );
+      expect(at('see **bold')).toBe('see <my-emphasis data-raw="**bold" />');
+      // A token without an entry is still completed.
+      expect(complete('run `npm', components).at('run `npm')).toBe('run `npm`');
+    });
+
+    it('leaves placeholder mode untouched by default', () => {
+      expect(streamWith('see **bold', {}).at('see **bold')).toBe('see ');
+      expect(streamWith('see **bold', { incompleteMarkdown: 'placeholder' }).at('see **bold')).toBe(
+        'see ',
+      );
+    });
+
+    it('renders the completed token', () => {
+      const { container } = render(
+        <XMarkdownProbe content="a **b" streaming={{ hasNextChunk: true, incompleteMarkdown: 'complete' }} />,
+      );
+      expect(container.innerHTML).toContain('<strong>b</strong>');
     });
   });
 

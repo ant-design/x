@@ -495,6 +495,62 @@ const feedFenceState = (fence: FenceState, char: string): void => {
 // An opening fence takes effect as soon as it appears, even on the partial last line.
 const isInCodeBlock = (fence: FenceState): boolean => fence.inFenced || fence.lineFenceLen >= 3;
 
+/* ------------ Completion of the pending token ------------ */
+
+const EMPHASIS_MARKER = /^(\*{1,3}|_{1,3})/;
+const INLINE_CODE_MARKER = /^`+/;
+const LIST_PREFIX = /^([-+*]\s{0,3})([\s\S]*)$/;
+const TRAILING_WHITESPACE = /\s+$/;
+
+/**
+ * Close an emphasis run that is still open. The closing delimiter has to be
+ * right-flanking (not preceded by whitespace), so trailing whitespace is moved
+ * after it: `**bold and ` → `**bold and** `.
+ */
+const completeEmphasis = (pending: string): string | undefined => {
+  const marker = pending.match(EMPHASIS_MARKER)?.[0] ?? '';
+  const body = pending.slice(marker.length);
+  const trimmed = body.replace(TRAILING_WHITESPACE, '');
+  if (!trimmed) return undefined;
+  return `${marker}${trimmed}${marker}${body.slice(trimmed.length)}`;
+};
+
+/**
+ * Render the pending token as finished text instead of a placeholder, for the
+ * `incompleteMarkdown: 'complete'` mode. Works on the pending token only, so
+ * it costs O(pending) and never touches the committed text or the cache.
+ * Returns undefined to keep the token hidden, exactly like placeholder mode.
+ */
+const completePending = (token: StreamCacheTokenType, pending: string): string | undefined => {
+  switch (token) {
+    case StreamCacheTokenType.Emphasis:
+      return completeEmphasis(pending);
+    case StreamCacheTokenType.InlineCode: {
+      const marker = pending.match(INLINE_CODE_MARKER)?.[0] ?? '';
+      return pending.length > marker.length ? `${pending}${marker}` : undefined;
+    }
+    case StreamCacheTokenType.Link: {
+      // `[text](https://x` and `[tex` both show their text; the link itself
+      // appears once the token completes.
+      const close = pending.indexOf(']');
+      const text = close === -1 ? pending.slice(1) : pending.slice(1, close);
+      return text || undefined;
+    }
+    case StreamCacheTokenType.List: {
+      // `- **bo` → `- **bo**`; a bare marker stays hidden.
+      const match = pending.match(LIST_PREFIX);
+      if (!match) return undefined;
+      const [, prefix, rest] = match;
+      if (!rest) return undefined;
+      const completed = EMPHASIS_MARKER.test(rest) ? completeEmphasis(rest) : rest;
+      return completed ? `${prefix}${completed}` : undefined;
+    }
+    default:
+      // image, html, table: nothing sensible can be shown before they finish.
+      return undefined;
+  }
+};
+
 const sanitizeForURIComponent = (input: string): string => {
   let result = '';
   for (let i = 0; i < input.length; i++) {
@@ -568,6 +624,7 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
   const {
     hasNextChunk: enableCache = false,
     incompleteMarkdownComponentMap,
+    incompleteMarkdown = 'placeholder',
     incremental,
   } = streaming || {};
   const minSectionChars = resolveMinSectionChars(incremental);
@@ -603,6 +660,13 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
       }
 
       const componentMap = incompleteMarkdownComponentMap || {};
+      // An explicit placeholder component for this token always wins over
+      // completion, so existing incompleteMarkdownComponentMap setups are
+      // unaffected by `incompleteMarkdown: 'complete'`.
+      if (incompleteMarkdown === 'complete' && !componentMap[token]) {
+        return completePending(token, pending);
+      }
+
       const componentName = componentMap[token] || `incomplete-${token}`;
       const encodedPending = safeEncodeURIComponent(pending);
 
@@ -610,7 +674,7 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
         ? `<${componentName} data-raw="${encodedPending}" />`
         : undefined;
     },
-    [incompleteMarkdownComponentMap, components],
+    [incompleteMarkdownComponentMap, incompleteMarkdown, components],
   );
 
   /**

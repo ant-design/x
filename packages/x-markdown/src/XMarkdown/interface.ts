@@ -86,6 +86,12 @@ interface StreamingOption {
       string
     >
   >;
+  /**
+   * @description 尚未写完的 Markdown 语法如何显示。`placeholder`：扣住不显示，或显示 `incompleteMarkdownComponentMap` 指定的占位组件；`complete`：把写到一半的强调、行内代码、链接文字、列表项当作已写完的文本立刻显示（`**加粗中` 显示为加粗，`[链接文字](https://` 先显示文字），图片、HTML、表格仍按 `placeholder` 处理。对某个语法显式配置了 `incompleteMarkdownComponentMap` 时以占位组件为准。
+   * @description How markdown syntax that has not finished streaming is shown. `placeholder`: hold it back, or show the placeholder component from `incompleteMarkdownComponentMap`; `complete`: show half-written emphasis, inline code, link text and list items as finished text right away (`**bold so far` renders bold, `[link text](https://` shows its text), while images, HTML and tables still follow `placeholder`. A token with an explicit `incompleteMarkdownComponentMap` entry always uses its placeholder.
+   * @default 'placeholder'
+   */
+  incompleteMarkdown?: 'placeholder' | 'complete';
 }
 
 type StreamStatus = 'loading' | 'done';
