@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { StreamCacheTokenType, XMarkdownProps } from '../interface';
 
 /* ------------ Type ------------ */
@@ -363,9 +363,6 @@ const useStreaming = (
 ) => {
   const { streaming, components = {} } = config || {};
   const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
-  const [streamingOutput, setStreamingOutput] = useState('');
-  // Non-streaming: seed output with full input so the first paint renders complete content and avoids layout jitter.
-  const output = enableCache ? streamingOutput : typeof input === 'string' ? input : '';
   const cacheRef = useRef<StreamCache>(getInitialCache());
 
   const handleIncompleteMarkdown = useCallback(
@@ -400,12 +397,18 @@ const useStreaming = (
     [incompleteMarkdownComponentMap, components],
   );
 
+  /**
+   * Advance the cache to `text` and return the streaming output. Runs during
+   * render (not in an effect) so a chunk is painted in the same render it
+   * arrives in instead of one render later. It is idempotent: re-running it
+   * for the same `text` finds an empty chunk and only re-derives the output,
+   * which is what makes it safe under StrictMode's double render.
+   */
   const processStreaming = useCallback(
-    (text: string): void => {
+    (text: string): string => {
       if (!text) {
-        setStreamingOutput('');
         cacheRef.current = getInitialCache();
-        return;
+        return '';
       }
 
       const expectedPrefix = cacheRef.current.completeMarkdown + cacheRef.current.pending;
@@ -416,7 +419,6 @@ const useStreaming = (
 
       const cache = cacheRef.current;
       const chunk = text.slice(cache.processedLength);
-      if (!chunk) return;
 
       cache.processedLength += chunk.length;
       for (const char of chunk) {
@@ -445,22 +447,25 @@ const useStreaming = (
       }
 
       const incompletePlaceholder = handleIncompleteMarkdown(cache);
-      setStreamingOutput(cache.completeMarkdown + (incompletePlaceholder || ''));
+      return cache.completeMarkdown + (incompletePlaceholder || '');
     },
     [handleIncompleteMarkdown],
   );
 
-  useEffect(() => {
-    if (typeof input !== 'string') {
-      console.error(`X-Markdown: input must be string, not ${typeof input}.`);
-      setStreamingOutput('');
-      return;
-    }
+  const isStringInput = typeof input === 'string';
 
-    if (enableCache) {
-      processStreaming(input);
+  useEffect(() => {
+    if (!isStringInput) {
+      console.error(`X-Markdown: input must be string, not ${typeof input}.`);
     }
-  }, [input, enableCache, processStreaming]);
+  }, [input, isStringInput]);
+
+  // Non-streaming: pass the full input through so the first paint renders complete content and avoids layout jitter.
+  const output = useMemo(() => {
+    if (!isStringInput) return '';
+    if (!enableCache) return input;
+    return processStreaming(input);
+  }, [input, isStringInput, enableCache, processStreaming]);
 
   return output;
 };

@@ -1257,4 +1257,56 @@ describe('XMarkdown hooks', () => {
       expect(result.current).toBe(full);
     });
   });
+
+  describe('useStreaming synchronous output', () => {
+    const streamingConfig = { streaming: { hasNextChunk: true } };
+
+    it('should expose the processed output in the same render the chunk arrives in', () => {
+      // Recording every render (not just the settled value) proves there is no
+      // intermediate frame that still shows the previous chunk.
+      const frames: string[] = [];
+      const Probe = ({ input }: { input: string }) => {
+        frames.push(useStreaming(input, streamingConfig));
+        return null;
+      };
+
+      const { rerender } = render(<Probe input="Hello" />);
+      act(() => {
+        rerender(<Probe input="Hello [link](https://x" />);
+      });
+      act(() => {
+        rerender(<Probe input="Hello [link](https://x.ant.design)" />);
+      });
+
+      expect(frames).toEqual(['Hello', 'Hello ', 'Hello [link](https://x.ant.design)']);
+    });
+
+    it('should produce the same output under StrictMode double rendering', () => {
+      const text = 'a **bold** `code` [l](https://x) | h |\n| - |\n| c |\n\nend';
+
+      const collect = (strict: boolean) => {
+        const outputs: string[] = [];
+        const Probe = ({ input }: { input: string }) => {
+          outputs.push(useStreaming(input, streamingConfig));
+          return null;
+        };
+        const wrap = (node: React.ReactElement) =>
+          strict ? <React.StrictMode>{node}</React.StrictMode> : node;
+        const { rerender } = render(wrap(<Probe input="" />));
+        for (let i = 1; i <= text.length; i++) {
+          act(() => {
+            rerender(wrap(<Probe input={text.slice(0, i)} />));
+          });
+        }
+        // Under StrictMode each commit renders twice; only the last value per
+        // commit is observable, and it must match the non-strict run.
+        return outputs;
+      };
+
+      const plain = collect(false);
+      const strict = collect(true);
+      expect(new Set(strict)).toEqual(new Set(plain));
+      expect(strict[strict.length - 1]).toBe(plain[plain.length - 1]);
+    });
+  });
 });
