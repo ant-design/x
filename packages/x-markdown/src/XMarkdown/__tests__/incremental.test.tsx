@@ -2,7 +2,7 @@ import { act, render, renderHook } from '@testing-library/react';
 import React, { useEffect } from 'react';
 import XMarkdown from '../../index';
 import { useStreamingCore } from '../hooks';
-import type { ComponentProps, XMarkdownProps } from '../interface';
+import type { ComponentProps, StreamingOption, XMarkdownProps } from '../interface';
 
 /**
  * `streaming.incremental` must never change what ends up on the page: at every
@@ -164,7 +164,7 @@ const corpora: Record<string, string> = {
   ].join('\n'),
 };
 
-const renderBoth = (streamingExtra: Partial<NonNullable<XMarkdownProps['streaming']>> = {}) => {
+const renderBoth = (streamingExtra: Partial<StreamingOption> = {}) => {
   const whole = render(<XMarkdown content="" streaming={{ hasNextChunk: true, ...streamingExtra }} />);
   const sectioned = render(
     <XMarkdown
@@ -271,7 +271,7 @@ describe('streaming.incremental', () => {
   describe('boundary guards', () => {
     const sectionsFor = (
       text: string,
-      streaming: NonNullable<XMarkdownProps['streaming']> = {},
+      streaming: StreamingOption = {},
       components?: XMarkdownProps['components'],
     ) => {
       const { result, rerender } = renderHook(

@@ -2,7 +2,7 @@ import { act, render, renderHook } from '@testing-library/react';
 import React from 'react';
 import XMarkdownProbe from '../../index';
 import { useStreaming } from '../hooks';
-import type { XMarkdownProps } from '../interface';
+import type { StreamingOption, XMarkdownProps } from '../interface';
 
 // 流处理功能测试 - 基础测试用例
 const streamingTestCases = [
@@ -1262,7 +1262,7 @@ describe('XMarkdown hooks', () => {
   describe("useStreaming incompleteMarkdown: 'complete'", () => {
     const streamWith = (
       text: string,
-      streaming: NonNullable<XMarkdownProps['streaming']>,
+      streaming: StreamingOption,
       components?: XMarkdownProps['components'],
     ) => {
       const outputs: string[] = [];

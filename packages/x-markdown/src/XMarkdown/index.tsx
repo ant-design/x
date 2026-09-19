@@ -5,12 +5,13 @@ import DebugPanel from './DebugPanel';
 import { useStreamingCore, useTypewriter } from './hooks';
 import { XMarkdownProps } from './interface';
 import Section from './Section';
+import { resolveStreaming } from './utils/streaming';
 import { resolveTailContent } from './utils/tail';
 import './index.css';
 
 const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const {
-    streaming,
+    streaming: streamingProp,
     config,
     components,
     componentsProps,
@@ -28,6 +29,9 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     debug,
     disableDefaultStyles,
   } = props;
+  // `streaming={true|false}` expands to a frozen preset object, so downstream
+  // memos keyed on `streaming` stay stable across renders.
+  const streaming = resolveStreaming(streamingProp);
   const tailContent = useMemo(() => resolveTailContent(streaming?.tail), [streaming?.tail]);
   const TailComponent = typeof streaming?.tail === 'object' ? streaming.tail.component : undefined;
   const shouldShowTail = !!streaming?.hasNextChunk && tailContent;

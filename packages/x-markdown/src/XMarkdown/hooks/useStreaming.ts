@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { detectUnclosedComponentTags } from '../core/detectUnclosedComponentTags';
 import { StreamCacheTokenType, StreamingOption, XMarkdownProps } from '../interface';
+import { resolveStreaming } from '../utils/streaming';
 
 /* ------------ Type ------------ */
 
@@ -626,7 +627,7 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
     incompleteMarkdownComponentMap,
     incompleteMarkdown = 'placeholder',
     incremental,
-  } = streaming || {};
+  } = resolveStreaming(streaming) || {};
   const minSectionChars = resolveMinSectionChars(incremental);
   const trackSections = !!incremental;
   const cacheRef = useRef<StreamCache>(getInitialCache());
