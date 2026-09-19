@@ -1156,4 +1156,73 @@ describe('XMarkdown hooks', () => {
       expect(result.current).toBe(full);
     });
   });
+
+  describe('useStreaming incremental table state', () => {
+    const streamCharByChar = (text: string) => {
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: '',
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      for (let i = 1; i <= text.length; i++) {
+        act(() => {
+          rerender({
+            input: text.slice(0, i),
+            config: { streaming: { hasNextChunk: i < text.length } },
+          });
+        });
+      }
+
+      return result;
+    };
+
+    it('should release the table token on the terminating blank line', () => {
+      const text = '| H1 | H2 |\n| --- | --- |\n| a | b |\n\nnext paragraph';
+      expect(streamCharByChar(text).current).toBe(text);
+    });
+
+    it('should recognize a second table after the first one ended', () => {
+      const text =
+        '| H1 | H2 |\n| --- | --- |\n| a | b |\n\n| H3 | H4 |\n| --- | --- |\n| c | d |';
+      expect(streamCharByChar(text).current).toBe(text);
+    });
+
+    it('should not treat a pipe table inside a fenced code block as a table token', () => {
+      const text = '```\n| H1 | H2 |\n| --- | --- |\n| a | b |\n```\n';
+      expect(streamCharByChar(text).current).toBe(text);
+    });
+
+    it('should keep the frozen delimiter verdict for rows containing pipes and dashes', () => {
+      const text = '| H1 | H2 |\n| --- | --- |\n| a-b | c---d |\n| --- | --- |\n\n';
+      expect(streamCharByChar(text).current).toBe(text);
+    });
+
+    it('should commit a malformed delimiter row as plain text', () => {
+      const text = '| H1 | H2 |\n| xx | yy |\n';
+      expect(streamCharByChar(text).current).toBe(text);
+    });
+
+    it('should stay linear on a long table', () => {
+      // The table token is held until its terminating blank line, so a full
+      // re-scan of the pending buffer per character would be O(N²) here — the
+      // same trap the fenced-code-block state already avoids.
+      const rows = Array.from({ length: 2000 }, (_, i) => `| key${i} | value${i} |`).join('\n');
+      const full = `| H1 | H2 |\n| --- | --- |\n${rows}\n\ntail`;
+
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: full.slice(0, 100),
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      act(() => {
+        rerender({ input: full, config: { streaming: { hasNextChunk: true } } });
+      });
+
+      expect(result.current).toBe(full);
+    });
+  });
 });

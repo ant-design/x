@@ -9,6 +9,7 @@ export interface StreamCache {
   processedLength: number;
   completeMarkdown: string;
   fence: FenceState;
+  table: TableState;
 }
 
 /**
@@ -31,6 +32,32 @@ interface FenceState {
 }
 
 /**
+ * Incremental table-shape state over `pending`, updated in O(1) per character —
+ * the same trick FenceState already uses. The table recognizer used to re-scan
+ * the whole pending buffer on every character (`includes('\n\n')` plus
+ * `split('\n')`), and a table stays pending until its terminating blank line,
+ * so a long table cost O(N²) in total.
+ */
+interface TableState {
+  /** Number of '\n' seen in pending */
+  newlines: number;
+  /** Whether the previous character was '\n' (used to detect the '\n\n' terminator) */
+  lastWasNewline: boolean;
+  /** pending contains a blank line, i.e. the table block already ended */
+  hasBlankLine: boolean;
+  /** pending's first line — the header row */
+  firstLine: string;
+  /** pending's second line — the delimiter row; may still be growing */
+  secondLine: string;
+  /**
+   * Memoized header/delimiter verdict. Stays null while the delimiter row is
+   * still being streamed (the verdict can change as it grows) and is frozen
+   * once that row is terminated, after which it never changes again.
+   */
+  shape: boolean | null;
+}
+
+/**
  * When a token is about to be committed, if a non-empty string is returned,
  * only that prefix is committed and the rest of the pending content is left
  * for subsequent recognition (used for handover scenarios like list followed by `).
@@ -39,7 +66,7 @@ interface FenceState {
 interface Recognizer {
   tokenType: StreamCacheTokenType;
   isStartOfToken: (markdown: string) => boolean;
-  isStreamingValid: (markdown: string) => boolean;
+  isStreamingValid: (markdown: string, cache: StreamCache) => boolean;
   /** Optional: prefix for partial commit, useful for extending handover logic
    * when the current token ends and is immediately followed by the start symbol
    * of the next token */
@@ -59,13 +86,8 @@ const STREAM_INCOMPLETE_REGEX = {
   'inline-code': [/^`[^`\r\n]{0,300}$/],
 } as const;
 
-const isTableInComplete = (markdown: string) => {
-  if (markdown.includes('\n\n')) return false;
-
-  const lines = markdown.split('\n');
-  if (lines.length <= 1) return true;
-
-  const [header, separator] = lines;
+/** Header + delimiter row shape check. Cost is bounded by those two rows, not by pending. */
+const isTableShapeValid = (header: string, separator: string) => {
   const trimmedHeader = header.trim();
   if (!/^\|.*\|$/.test(trimmedHeader)) return false;
 
@@ -81,6 +103,19 @@ const isTableInComplete = (markdown: string) => {
       ? col === ':' || separatorRegex.test(col)
       : separatorRegex.test(col),
   );
+};
+
+/**
+ * Same verdict as scanning the whole pending buffer, but read off the
+ * incrementally maintained state instead — O(1) once the delimiter row is
+ * terminated, which is where a long table spends all of its characters.
+ */
+const isTableInComplete = (table: TableState) => {
+  if (table.hasBlankLine) return false;
+  // Only the header row so far: still incomplete by definition.
+  if (table.newlines === 0) return true;
+  if (table.shape !== null) return table.shape;
+  return isTableShapeValid(table.firstLine, table.secondLine);
 };
 
 const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
@@ -123,7 +158,7 @@ const tokenRecognizerMap: Partial<Record<StreamCacheTokenType, Recognizer>> = {
   [StreamCacheTokenType.Table]: {
     tokenType: StreamCacheTokenType.Table,
     isStartOfToken: (markdown: string) => markdown.startsWith('|'),
-    isStreamingValid: isTableInComplete,
+    isStreamingValid: (_markdown: string, cache: StreamCache) => isTableInComplete(cache.table),
   },
   [StreamCacheTokenType.InlineCode]: {
     tokenType: StreamCacheTokenType.InlineCode,
@@ -143,11 +178,14 @@ const recognize = (cache: StreamCache, tokenType: StreamCacheTokenType): void =>
     return;
   }
 
-  if (token === tokenType && !recognizer.isStreamingValid(pending)) {
+  if (token === tokenType && !recognizer.isStreamingValid(pending, cache)) {
     const prefix = recognizer.getCommitPrefix?.(pending);
     if (prefix) {
       cache.completeMarkdown += prefix;
       cache.pending = pending.slice(prefix.length);
+      // pending was rewritten rather than appended to, so the incremental state
+      // has to be rebuilt from it — a one-off cost over a single token's text.
+      rebuildTableState(cache.table, cache.pending);
       cache.token = StreamCacheTokenType.Text;
       return;
     }
@@ -171,12 +209,58 @@ const getInitialFenceState = (): FenceState => ({
   lineTailBlank: true,
 });
 
+const getInitialTableState = (): TableState => ({
+  newlines: 0,
+  lastWasNewline: false,
+  hasBlankLine: false,
+  firstLine: '',
+  secondLine: '',
+  shape: null,
+});
+
+const resetTableState = (table: TableState): void => {
+  table.newlines = 0;
+  table.lastWasNewline = false;
+  table.hasBlankLine = false;
+  table.firstLine = '';
+  table.secondLine = '';
+  table.shape = null;
+};
+
+/** Advance the table state by one appended character. O(1). */
+const feedTableState = (table: TableState, char: string): void => {
+  if (char === '\n') {
+    if (table.lastWasNewline) table.hasBlankLine = true;
+    table.lastWasNewline = true;
+    table.newlines += 1;
+    // The delimiter row is terminated: its verdict can no longer change, so
+    // freeze it and stop re-deriving it for every remaining character.
+    if (table.newlines === 2) {
+      table.shape = isTableShapeValid(table.firstLine, table.secondLine);
+    }
+    return;
+  }
+  table.lastWasNewline = false;
+  if (table.newlines === 0) {
+    table.firstLine += char;
+  } else if (table.newlines === 1) {
+    table.secondLine += char;
+  }
+};
+
+/** Rebuild from scratch. Only used when pending is replaced instead of appended to. */
+const rebuildTableState = (table: TableState, pending: string): void => {
+  resetTableState(table);
+  for (const char of pending) feedTableState(table, char);
+};
+
 const getInitialCache = (): StreamCache => ({
   pending: '',
   token: StreamCacheTokenType.Text,
   processedLength: 0,
   completeMarkdown: '',
   fence: getInitialFenceState(),
+  table: getInitialTableState(),
 });
 
 const commitCache = (cache: StreamCache): void => {
@@ -184,6 +268,7 @@ const commitCache = (cache: StreamCache): void => {
     cache.completeMarkdown += cache.pending;
     cache.pending = '';
   }
+  resetTableState(cache.table);
   cache.token = StreamCacheTokenType.Text;
 };
 
@@ -300,7 +385,7 @@ const useStreaming = (
        * | column1 | column2 |\n| -- | --|\n
        *                                   ^
        */
-      if (token === StreamCacheTokenType.Table && pending.split('\n').length > 2) {
+      if (token === StreamCacheTokenType.Table && cache.table.newlines > 1) {
         return pending;
       }
 
@@ -337,6 +422,7 @@ const useStreaming = (
       for (const char of chunk) {
         cache.pending += char;
         feedFenceState(cache.fence, char);
+        feedTableState(cache.table, char);
         if (isInCodeBlock(cache.fence)) {
           commitCache(cache);
           continue;
