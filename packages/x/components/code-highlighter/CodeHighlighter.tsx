@@ -59,7 +59,31 @@ const getFullPrismHighlighter = () => {
   return FullPrismHighlighter;
 };
 
-const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((props, ref) => {
+/**
+ * Shallow props comparison that ignores `domNode`. When CodeHighlighter is
+ * used as an XMarkdown `code` component, every parse passes a fresh
+ * `domNode`; everything it actually renders from (`children`, `lang`,
+ * `header`, styles, …) is compared as `React.memo` would.
+ */
+const arePropsEqual = (
+  prevProps: Readonly<CodeHighlighterProps>,
+  nextProps: Readonly<CodeHighlighterProps>,
+): boolean => {
+  const prev = prevProps as unknown as Record<string, unknown>;
+  const next = nextProps as unknown as Record<string, unknown>;
+  const prevKeys = Object.keys(prev);
+  const nextKeys = Object.keys(next);
+  if (prevKeys.length !== nextKeys.length) return false;
+  for (const key of prevKeys) {
+    if (key === 'domNode') continue;
+    if (!Object.prototype.hasOwnProperty.call(next, key) || !Object.is(prev[key], next[key])) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const InternalCodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((props, ref) => {
   const {
     lang,
     children,
@@ -189,7 +213,12 @@ const CodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighterProps>((
   );
 });
 
+// Memoised so that, while markdown streams in, a code block whose text has
+// not changed is not re-tokenised on every chunk of the surrounding document.
+const CodeHighlighter = React.memo(InternalCodeHighlighter, arePropsEqual);
+
 if (process.env.NODE_ENV !== 'production') {
+  InternalCodeHighlighter.displayName = 'CodeHighlighter';
   CodeHighlighter.displayName = 'CodeHighlighter';
 }
 
