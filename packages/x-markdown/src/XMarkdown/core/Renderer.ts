@@ -15,6 +15,24 @@ interface RendererOptions {
 }
 
 /**
+ * Upper bound on remembered custom-component subtrees. A streamed answer only
+ * ever grows, so the cache holds one entry per custom component already on
+ * screen; the cap only matters for pathological documents.
+ */
+const SUBTREE_CACHE_LIMIT = 2000;
+
+/**
+ * A reused subtree is not walked again, so the id counters it would have
+ * advanced have to be replayed — otherwise every later node shifts by the
+ * number of skipped nodes, its key changes, and the cache misses from there on.
+ */
+interface CachedSubtree {
+  element: React.ReactElement;
+  cidDelta: number;
+  tagIndexDeltas: Record<string, number>;
+}
+
+/**
  * Fix for DOMPurify 3.x in environments (e.g., happy-dom) where the cached
  * Node.prototype getters return incorrect values for elements created in a
  * different document context (the template content owner document).
@@ -169,9 +187,19 @@ class Renderer {
     };
   }
 
+  /**
+   * Custom-component subtrees keyed by the exact HTML slice they were built
+   * from. Returning the *same* React element for unchanged HTML lets React bail
+   * out of that subtree entirely, which is what keeps an already-rendered code
+   * block from being re-highlighted on every streamed chunk.
+   */
+  private subtreeCache = new Map<string, CachedSubtree>();
+
   private createReplaceElement(
     unclosedTags: Set<string> | undefined,
     cidRef: { current: number; tagIndexes: Record<string, number> },
+    sourceHtml: string,
+    cacheable: boolean,
   ) {
     const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
@@ -197,6 +225,39 @@ class Renderer {
         const streamStatus = unclosedTags?.has(getTagInstanceId(name, cidRef.tagIndexes[name]))
           ? 'loading'
           : 'done';
+
+        // Identical HTML at the same position produces an identical element, so
+        // hand back the one already built and let React skip the whole subtree.
+        // `key` and `streamStatus` are part of the identity because both are
+        // derived from position and from the unclosed-tag scan, not from the
+        // slice alone.
+        //
+        // The slice alone is not enough while a custom tag is still unclosed:
+        // sanitization auto-closes it, so "outer open, inner open" and "outer
+        // open, inner closed" sanitize to the very same slice with the very
+        // same status on the outer element, while their descendants differ.
+        // `cacheable` is false for the whole render in that case.
+        const { startIndex, endIndex } = domNode as unknown as {
+          startIndex: number | null;
+          endIndex: number | null;
+        };
+        const cacheKey =
+          !cacheable || startIndex === null || endIndex === null
+            ? null
+            : `${key} ${streamStatus} ${sourceHtml.slice(startIndex, endIndex + 1)}`;
+        if (cacheKey !== null) {
+          const cached = this.subtreeCache.get(cacheKey);
+          if (cached) {
+            cidRef.current += cached.cidDelta;
+            for (const tag of Object.keys(cached.tagIndexDeltas)) {
+              cidRef.tagIndexes[tag] = (cidRef.tagIndexes[tag] ?? 0) + cached.tagIndexDeltas[tag];
+            }
+            return cached.element;
+          }
+        }
+        const cidBefore = cidRef.current;
+        const tagIndexesBefore = { ...cidRef.tagIndexes };
+
         const props: ComponentProps = {
           ...attribs,
           ...(attribs.disabled !== undefined && { disabled: true }),
@@ -236,10 +297,30 @@ class Renderer {
         }
 
         if (children) {
-          props.children = this.processChildren(children as DOMNode[], unclosedTags, cidRef);
+          props.children = this.processChildren(
+            children as DOMNode[],
+            unclosedTags,
+            cidRef,
+            sourceHtml,
+            cacheable,
+          );
         }
 
-        return React.createElement(renderElement, props);
+        const element = React.createElement(renderElement, props);
+        if (cacheKey !== null) {
+          if (this.subtreeCache.size >= SUBTREE_CACHE_LIMIT) this.subtreeCache.clear();
+          const tagIndexDeltas: Record<string, number> = {};
+          for (const tag of Object.keys(cidRef.tagIndexes)) {
+            const delta = cidRef.tagIndexes[tag] - (tagIndexesBefore[tag] ?? 0);
+            if (delta !== 0) tagIndexDeltas[tag] = delta;
+          }
+          this.subtreeCache.set(cacheKey, {
+            element,
+            cidDelta: cidRef.current - cidBefore,
+            tagIndexDeltas,
+          });
+        }
+        return element;
       }
     };
   }
@@ -248,9 +329,11 @@ class Renderer {
     children: DOMNode[],
     unclosedTags: Set<string> | undefined,
     cidRef: { current: number; tagIndexes: Record<string, number> },
+    sourceHtml: string,
+    cacheable: boolean,
   ): ReactNode {
     return domToReact(children as DOMNode[], {
-      replace: this.createReplaceElement(unclosedTags, cidRef),
+      replace: this.createReplaceElement(unclosedTags, cidRef, sourceHtml, cacheable),
     });
   }
 
@@ -264,6 +347,9 @@ class Renderer {
 
     const unclosedTags = this.detectUnclosedTags(htmlString);
     const cidRef = { current: 0, tagIndexes: {} };
+    // Subtree reuse is only sound once every custom tag in the document is
+    // closed; see the note in createReplaceElement.
+    const cacheable = !unclosedTags || unclosedTags.size === 0;
 
     // Get a DOMPurify instance that works correctly in environments where
     // Node.prototype getters are broken for template content elements.
@@ -274,7 +360,10 @@ class Renderer {
     const cleanHtml = purify.sanitize(htmlString, purifyConfig);
 
     return parseHtml(cleanHtml, {
-      replace: this.createReplaceElement(unclosedTags, cidRef),
+      // Start/end indices let a custom-component subtree be identified by the
+      // exact HTML it came from, which is what the subtree cache keys on.
+      htmlparser2: { withStartIndices: true, withEndIndices: true },
+      replace: this.createReplaceElement(unclosedTags, cidRef, cleanHtml, cacheable),
     });
   }
 

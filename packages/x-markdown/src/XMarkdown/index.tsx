@@ -88,15 +88,31 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     ],
   );
 
+  // The renderer only reads these two fields out of `streaming`, so depending on
+  // the whole object would throw the instance — and with it its subtree cache —
+  // away on every chunk, since `hasNextChunk` forces callers to pass a fresh
+  // object while the answer is still streaming.
+  const rendererStreaming = useMemo(
+    () => ({
+      enableAnimation: streaming?.enableAnimation,
+      animationConfig: streaming?.animationConfig,
+    }),
+    [
+      streaming?.enableAnimation,
+      streaming?.animationConfig?.fadeDuration,
+      streaming?.animationConfig?.easing,
+    ],
+  );
+
   const renderer = useMemo(
     () =>
       new Renderer({
         components: mergedComponents,
         componentsProps,
         dompurifyConfig,
-        streaming,
+        streaming: rendererStreaming,
       }),
-    [mergedComponents, componentsProps, dompurifyConfig, streaming],
+    [mergedComponents, componentsProps, dompurifyConfig, rendererStreaming],
   );
 
   const htmlString = useMemo(() => {

@@ -1,5 +1,6 @@
 import DOMPurify from 'dompurify';
 import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import Renderer from '../core/Renderer';
 
 // Mock React components for testing
@@ -1533,5 +1534,90 @@ describe('Renderer', () => {
         (DOMPurify as any).sanitize = originalSanitize;
       }
     });
+  });
+});
+
+describe('Renderer subtree reuse', () => {
+  const codeHtml = (body: string) => `<pre><code class="language-ts">${body}</code></pre>`;
+  const asArray = (tree: any) => (Array.isArray(tree) ? tree : [tree]);
+  /** The <code> element inside the <pre> wrapper — the part a consumer highlights. */
+  const codeElements = (tree: any) =>
+    asArray(tree)
+      .filter((node: any) => node?.props?.children?.key)
+      .map((node: any) => node.props.children);
+
+  it('returns the very same element for unchanged custom-component HTML', () => {
+    const renderer = new Renderer({ components: { code: MockComponent } });
+    const html = `${codeHtml('const a = 1;')}<p>tail</p>`;
+
+    const first = codeElements(renderer.render(html));
+    const second = codeElements(renderer.render(`${html}<p>more</p>`));
+
+    expect(second[0]).toBe(first[0]);
+  });
+
+  it('rebuilds the element when the custom-component HTML changes', () => {
+    const renderer = new Renderer({ components: { code: MockComponent } });
+
+    const first = codeElements(renderer.render(`${codeHtml('const a = 1;')}<p>x</p>`));
+    const second = codeElements(renderer.render(`${codeHtml('const a = 2;')}<p>x</p>`));
+
+    expect(second[0]).not.toBe(first[0]);
+    expect(first[0]).toBeDefined();
+  });
+
+  it('keeps keys stable for components following a reused subtree', () => {
+    const renderer = new Renderer({ components: { code: MockComponent } });
+    const html = `${codeHtml('a')}${codeHtml('b')}${codeHtml('c')}`;
+
+    const warm = codeElements(renderer.render(html)).map((node: any) => node.key);
+    const again = codeElements(renderer.render(html)).map((node: any) => node.key);
+
+    // Reusing a subtree skips its nodes, so the id counters are replayed —
+    // without that every later component shifts and its key changes.
+    expect(again).toEqual(warm);
+    expect(new Set(warm).size).toBe(warm.length);
+  });
+
+  it('produces the same markup whether or not the cache was warmed', () => {
+    const html = `${codeHtml('a')}<p>text</p>${codeHtml('b')}`;
+
+    const cold = new Renderer({ components: { code: MockComponent } }).render(html);
+    const warmRenderer = new Renderer({ components: { code: MockComponent } });
+    warmRenderer.render(`${codeHtml('a')}<p>text</p>`);
+    const warm = warmRenderer.render(html);
+
+    expect(renderToStaticMarkup(warm as React.ReactElement)).toBe(
+      renderToStaticMarkup(cold as React.ReactElement),
+    );
+  });
+
+  it('does not reuse a subtree whose descendants were still unclosed', () => {
+    // Sanitization auto-closes an unclosed tag, so "outer open, inner open" and
+    // "outer open, inner closed" reach the renderer as the very same slice with
+    // the very same status on the outer element -- only their descendants
+    // differ. Reusing across that boundary left the inner component stuck on
+    // `loading` after it had actually closed.
+    const renderer = new Renderer({ components: { 'custom-box': MockComponent } });
+
+    // Step N: both tags still open -- sanitization closes both.
+    renderer.render('<p><custom-box><custom-box>nested</p>');
+    // Step N+1: the inner one has closed -- sanitization closes only the outer,
+    // producing byte-identical HTML to step N.
+    const later = renderer.render('<p><custom-box><custom-box>nested</custom-box></p>');
+
+    const outer = asArray(later)[0].props.children;
+    const inner = outer.props.children;
+    expect(outer.props.streamStatus).toBe('loading');
+    expect(inner.props.streamStatus).toBe('done');
+  });
+
+  it('keeps rendering correctly once the cache limit forces a reset', () => {
+    const renderer = new Renderer({ components: { code: MockComponent } });
+    const limit = 2000;
+    let html = '';
+    for (let i = 0; i <= limit; i++) html += codeHtml(`v${i}`);
+
+    expect(codeElements(renderer.render(html))).toHaveLength(limit + 1);
   });
 });
