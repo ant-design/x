@@ -2,8 +2,9 @@ import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { Parser, Renderer } from './core';
 import DebugPanel from './DebugPanel';
-import { useStreaming } from './hooks';
+import { useStreamingCore } from './hooks';
 import { XMarkdownProps } from './interface';
+import Section from './Section';
 import { resolveTailContent } from './utils/tail';
 import './index.css';
 
@@ -45,7 +46,10 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const mergedCls = clsx('x-markdown', disableStyleCls, rootClassName, className);
 
   // ============================ Streaming ============================
-  const output = useStreaming(content || children || '', { streaming, components });
+  const { output, sections } = useStreamingCore(content || children || '', {
+    streaming,
+    components,
+  });
 
   // ============================ Merge components with xmd-tail ============================
   const mergedComponents = useMemo(() => {
@@ -100,12 +104,12 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   );
 
   const htmlString = useMemo(() => {
-    if (!output) {
+    if (!output || sections) {
       return '';
     }
 
     return parser.parse(output, { injectTail: !!shouldShowTail });
-  }, [output, parser, shouldShowTail]);
+  }, [output, sections, parser, shouldShowTail]);
 
   const renderedContent = useMemo(
     () => (htmlString ? renderer.render(htmlString) : null),
@@ -116,10 +120,25 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     return null;
   }
 
+  // Sections are rendered as siblings inside the same root element, so the
+  // DOM is identical to the whole-document render; only the React tree differs.
+  const sectionedContent = sections
+    ? sections.map((section, index) => (
+        <Section
+          // Sections are positional: section N is stable once section N+1 exists.
+          key={index}
+          content={section}
+          parser={parser}
+          renderer={renderer}
+          injectTail={!!shouldShowTail && index === sections.length - 1}
+        />
+      ))
+    : null;
+
   return (
     <>
       <div className={mergedCls} style={style}>
-        {renderedContent}
+        {sectionedContent ?? renderedContent}
       </div>
       {debug ? <DebugPanel /> : null}
     </>

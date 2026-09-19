@@ -1,3 +1,4 @@
-import useStreaming from './useStreaming';
+import useStreaming, { useStreamingCore } from './useStreaming';
 
-export { useStreaming };
+export type { StreamingConfig, StreamingResult } from './useStreaming';
+export { useStreaming, useStreamingCore };

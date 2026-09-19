@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { StreamCacheTokenType, XMarkdownProps } from '../interface';
+import { detectUnclosedComponentTags } from '../core/detectUnclosedComponentTags';
+import { StreamCacheTokenType, StreamingOption, XMarkdownProps } from '../interface';
 
 /* ------------ Type ------------ */
 
@@ -10,6 +11,38 @@ export interface StreamCache {
   completeMarkdown: string;
   fence: FenceState;
   table: TableState;
+  sections: SectionState;
+}
+
+/**
+ * Incremental section-boundary state for `streaming.incremental`. A section
+ * boundary is an offset (into the input) where a new top-level block starts
+ * and everything before it can be parsed on its own with the same result as
+ * parsing the whole document. Only column-0 ATX headings preceded by a blank
+ * line qualify; see `trackSectionBoundary` for the constructs that veto one.
+ */
+interface SectionState {
+  /** Offsets where a new section starts. The first section implicitly starts at 0. */
+  offsets: number[];
+  /** Offset of the first character of the line currently being streamed */
+  lineStart: number;
+  /**
+   * Inside an HTML block of CommonMark type 3–7, which ends at the next blank
+   * line. A `#` line inside it is HTML text, not a heading.
+   */
+  inHtmlBlock: boolean;
+  /**
+   * Set once a construct that can be referenced from another section has been
+   * seen (link reference / footnote definitions). Splitting is disabled for the
+   * rest of the stream and any offsets recorded so far are discarded.
+   */
+  noSplit: boolean;
+  /**
+   * An open block whose body may contain blank lines and heading-looking lines
+   * (`<pre>`, `<script>`, `<style>`, `<textarea>`, HTML comments, `$$` math,
+   * `\[` math). No boundary is recorded until it closes.
+   */
+  rawBlock: { close: string; exact: boolean } | null;
 }
 
 /**
@@ -254,6 +287,14 @@ const rebuildTableState = (table: TableState, pending: string): void => {
   for (const char of pending) feedTableState(table, char);
 };
 
+const getInitialSectionState = (): SectionState => ({
+  offsets: [],
+  lineStart: 0,
+  inHtmlBlock: false,
+  noSplit: false,
+  rawBlock: null,
+});
+
 const getInitialCache = (): StreamCache => ({
   pending: '',
   token: StreamCacheTokenType.Text,
@@ -261,7 +302,143 @@ const getInitialCache = (): StreamCache => ({
   completeMarkdown: '',
   fence: getInitialFenceState(),
   table: getInitialTableState(),
+  sections: getInitialSectionState(),
 });
+
+/* ------------ Sections ------------ */
+
+/** Sections shorter than this are merged into the next one. */
+export const DEFAULT_MIN_SECTION_CHARS = 200;
+
+// Column-0 ATX heading. Indented (1–3 spaces) headings are deliberately not
+// split on: the fence tracker only follows column-0 fences, so a column-0
+// heading is the only line start that cannot be the body of an indented fence.
+const HEADING_LINE = /^#{1,6}(?:[ \t]|$)/;
+// Link reference definition or footnote definition. Either can be referenced
+// from any other block of the document, so once one is seen the document is
+// no longer splittable.
+const DEFINITION_LINE = /^ {0,3}\[[^\]]*\]:/;
+// HTML blocks of CommonMark type 1 (end only at their closing tag) and type 2
+// (comments), plus the Latex plugin's block delimiters. All of them may
+// contain blank lines followed by a `#` line that is *not* a heading.
+const RAW_HTML_BLOCK_OPEN = /^ {0,3}<(pre|script|style|textarea)(?=[\s>]|$)/i;
+const HTML_COMMENT_OPEN = /^ {0,3}<!--/;
+const MATH_DOLLAR_LINE = /^(\${1,2})\s*$/;
+const MATH_BRACKET_OPEN = /^\\\[/;
+// Any other HTML block start (CommonMark types 3–7): a tag, closing tag,
+// declaration or processing instruction at the start of a line. Such a block
+// runs to the next blank line; treating every `<x` line this way is slightly
+// conservative (type 7 cannot interrupt a paragraph) but never wrong.
+const HTML_BLOCK_OPEN = /^ {0,3}<(?:[a-zA-Z]|\/[a-zA-Z]|!|\?)/;
+
+const detectRawBlockOpen = (line: string): SectionState['rawBlock'] => {
+  const html = line.match(RAW_HTML_BLOCK_OPEN);
+  if (html) {
+    const close = `</${html[1].toLowerCase()}`;
+    return line.toLowerCase().includes(close) ? null : { close, exact: false };
+  }
+  if (HTML_COMMENT_OPEN.test(line)) {
+    return line.includes('-->') ? null : { close: '-->', exact: false };
+  }
+  const dollar = line.match(MATH_DOLLAR_LINE);
+  if (dollar) return { close: dollar[1], exact: true };
+  if (MATH_BRACKET_OPEN.test(line)) {
+    return line.includes('\\]') ? null : { close: '\\]', exact: false };
+  }
+  return null;
+};
+
+const closesRawBlock = (line: string, rawBlock: NonNullable<SectionState['rawBlock']>): boolean =>
+  rawBlock.exact ? line.trim() === rawBlock.close : line.toLowerCase().includes(rawBlock.close);
+
+/**
+ * Called once per completed line (right after its '\n' has been fed to the
+ * fence state). Decides whether the line that just ended starts a new section.
+ * O(line) per line, so O(N) over the whole stream.
+ */
+const trackSectionBoundary = (
+  cache: StreamCache,
+  text: string,
+  newlineIndex: number,
+  componentNames: string[],
+  minSectionChars: number,
+): void => {
+  const state = cache.sections;
+  const lineStart = state.lineStart;
+  const line = text.slice(lineStart, newlineIndex);
+  const blank = line.trim() === '';
+  state.lineStart = newlineIndex + 1;
+
+  if (state.noSplit) return;
+  if (state.rawBlock) {
+    if (closesRawBlock(line, state.rawBlock)) state.rawBlock = null;
+    return;
+  }
+  if (state.inHtmlBlock) {
+    if (blank) state.inHtmlBlock = false;
+    return;
+  }
+  // The fence state has already consumed this line's '\n': for a body line of
+  // a fence it is still open, for the opening line it has just opened, and for
+  // the closing line it has just closed. Neither an opening nor a closing
+  // fence line can match the patterns below, so checking after the feed is safe.
+  if (cache.fence.inFenced) return;
+
+  const rawBlock = detectRawBlockOpen(line);
+  if (rawBlock) {
+    state.rawBlock = rawBlock;
+    return;
+  }
+  if (HTML_BLOCK_OPEN.test(line)) {
+    state.inHtmlBlock = true;
+    return;
+  }
+  if (DEFINITION_LINE.test(line)) {
+    state.noSplit = true;
+    state.offsets = [];
+    return;
+  }
+  // An ATX heading can interrupt a paragraph, a list, a blockquote and a GFM
+  // table, so outside the constructs tracked above a column-0 heading line
+  // always starts a new block — no blank line before it is required.
+  if (!HEADING_LINE.test(line)) return;
+
+  const sectionStart = state.offsets.length ? state.offsets[state.offsets.length - 1] : 0;
+  // A boundary at the very start of the document (or of the current section)
+  // would only produce an empty section.
+  if (lineStart <= sectionStart || lineStart - sectionStart < minSectionChars) return;
+  // A custom component opened in this section and closed in a later one would
+  // be reported as unclosed (and auto-closed by DOMPurify) if the section were
+  // parsed on its own.
+  if (
+    componentNames.length > 0 &&
+    detectUnclosedComponentTags(text.slice(sectionStart, lineStart), componentNames).size > 0
+  ) {
+    return;
+  }
+  state.offsets.push(lineStart);
+};
+
+/**
+ * Slice `output` at the recorded boundaries. A boundary past `limit` falls
+ * inside the pending token — a heading right after a table row is held in the
+ * table's pending text until the table's terminating blank line — and is left
+ * for a later chunk.
+ */
+const buildSections = (cache: StreamCache, output: string, limit: number): string[] | null => {
+  const { offsets } = cache.sections;
+  if (cache.sections.noSplit || offsets.length === 0) return null;
+  const sections: string[] = [];
+  let start = 0;
+  for (const offset of offsets) {
+    if (offset > limit) break;
+    sections.push(output.slice(start, offset));
+    start = offset;
+  }
+  if (sections.length === 0) return null;
+  sections.push(output.slice(start));
+  return sections;
+};
 
 const commitCache = (cache: StreamCache): void => {
   if (cache.pending) {
@@ -357,13 +534,52 @@ const safeEncodeURIComponent = (str: string): string => {
 };
 
 /* ------------ Main Hook ------------ */
-const useStreaming = (
-  input: string,
-  config?: { streaming: XMarkdownProps['streaming']; components?: XMarkdownProps['components'] },
-) => {
+
+export interface StreamingConfig {
+  streaming: XMarkdownProps['streaming'];
+  components?: XMarkdownProps['components'];
+}
+
+export interface StreamingResult {
+  /** The markdown to parse: committed text plus the placeholder for the pending token */
+  output: string;
+  /**
+   * `output` split at section boundaries when `streaming.incremental` is on
+   * and at least one boundary exists; `null` means render `output` as a whole.
+   * Joining the sections always gives back `output`.
+   */
+  sections: string[] | null;
+}
+
+const EMPTY_RESULT: StreamingResult = { output: '', sections: null };
+
+const resolveMinSectionChars = (incremental: StreamingOption['incremental']): number =>
+  typeof incremental === 'object' && typeof incremental.minSectionChars === 'number'
+    ? incremental.minSectionChars
+    : DEFAULT_MIN_SECTION_CHARS;
+
+/**
+ * Streaming state machine plus, when `streaming.incremental` is on, the
+ * section boundaries the renderer can memoise on. `useStreaming` is the
+ * public string-only view of this hook.
+ */
+const useStreamingCore = (input: string, config?: StreamingConfig): StreamingResult => {
   const { streaming, components = {} } = config || {};
-  const { hasNextChunk: enableCache = false, incompleteMarkdownComponentMap } = streaming || {};
+  const {
+    hasNextChunk: enableCache = false,
+    incompleteMarkdownComponentMap,
+    incremental,
+  } = streaming || {};
+  const minSectionChars = resolveMinSectionChars(incremental);
+  const trackSections = !!incremental;
   const cacheRef = useRef<StreamCache>(getInitialCache());
+  // Only the names matter for the boundary guard; keep the array identity
+  // stable across renders so processStreaming is not rebuilt per chunk.
+  const componentNamesKey = Object.keys(components).join(' ');
+  const componentNames = useMemo(
+    () => (componentNamesKey ? componentNamesKey.split(' ') : []),
+    [componentNamesKey],
+  );
 
   const handleIncompleteMarkdown = useCallback(
     (cache: StreamCache): string | undefined => {
@@ -420,11 +636,18 @@ const useStreaming = (
       const cache = cacheRef.current;
       const chunk = text.slice(cache.processedLength);
 
+      // Absolute offset of `char` in `text`; advanced by the UTF-16 length of
+      // each code point because the loop iterates code points.
+      let offset = cache.processedLength;
       cache.processedLength += chunk.length;
       for (const char of chunk) {
         cache.pending += char;
         feedFenceState(cache.fence, char);
         feedTableState(cache.table, char);
+        if (trackSections && char === '\n') {
+          trackSectionBoundary(cache, text, offset, componentNames, minSectionChars);
+        }
+        offset += char.length;
         if (isInCodeBlock(cache.fence)) {
           commitCache(cache);
           continue;
@@ -449,7 +672,7 @@ const useStreaming = (
       const incompletePlaceholder = handleIncompleteMarkdown(cache);
       return cache.completeMarkdown + (incompletePlaceholder || '');
     },
-    [handleIncompleteMarkdown],
+    [handleIncompleteMarkdown, trackSections, componentNames, minSectionChars],
   );
 
   const isStringInput = typeof input === 'string';
@@ -460,14 +683,42 @@ const useStreaming = (
     }
   }, [input, isStringInput]);
 
-  // Non-streaming: pass the full input through so the first paint renders complete content and avoids layout jitter.
-  const output = useMemo(() => {
-    if (!isStringInput) return '';
-    if (!enableCache) return input;
-    return processStreaming(input);
-  }, [input, isStringInput, enableCache, processStreaming]);
+  return useMemo<StreamingResult>(() => {
+    if (!isStringInput) return EMPTY_RESULT;
 
-  return output;
+    if (!enableCache) {
+      const cache = cacheRef.current;
+      const continuesStream =
+        trackSections &&
+        cache.processedLength > 0 &&
+        input.startsWith(cache.completeMarkdown + cache.pending);
+      if (continuesStream) {
+        // The stream just ended (or the caller re-rendered after it ended).
+        // Keep the sections so already-mounted custom components are not
+        // remounted; only the last section re-parses. The output is the raw
+        // input: nothing is pending any more.
+        processStreaming(input);
+        return { output: input, sections: buildSections(cache, input, input.length) };
+      }
+      // Non-streaming: pass the full input through so the first paint renders
+      // complete content and avoids layout jitter.
+      cacheRef.current = getInitialCache();
+      return { output: input, sections: null };
+    }
+
+    const output = processStreaming(input);
+    const cache = cacheRef.current;
+    return {
+      output,
+      sections: trackSections
+        ? buildSections(cache, output, cache.completeMarkdown.length)
+        : null,
+    };
+  }, [input, isStringInput, enableCache, trackSections, processStreaming]);
 };
 
+const useStreaming = (input: string, config?: StreamingConfig): string =>
+  useStreamingCore(input, config).output;
+
+export { useStreamingCore };
 export default useStreaming;
