@@ -1158,50 +1158,82 @@ describe('XMarkdown hooks', () => {
   });
 
   describe('useStreaming incremental table state', () => {
-    const streamCharByChar = (text: string) => {
-      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
-        initialProps: {
-          input: '',
-          config: { streaming: { hasNextChunk: true } },
-        },
-      });
+    /** Feed one character at a time, staying in streaming mode, and keep every output. */
+    const stream = (text: string) => {
+      const outputs: string[] = [];
+      const { result, rerender } = renderHook(
+        ({ input }: { input: string }) => useStreaming(input, { streaming: { hasNextChunk: true } }),
+        { initialProps: { input: '' } },
+      );
 
       for (let i = 1; i <= text.length; i++) {
         act(() => {
-          rerender({
-            input: text.slice(0, i),
-            config: { streaming: { hasNextChunk: i < text.length } },
-          });
+          rerender({ input: text.slice(0, i) });
         });
+        outputs.push(result.current);
       }
 
-      return result;
+      // Indexed by prefix so each assertion names the state it pins.
+      return { outputs, at: (prefix: string) => outputs[prefix.length - 1] };
     };
 
-    it('should release the table token on the terminating blank line', () => {
+    it('should hold a table back until its delimiter row is terminated', () => {
       const text = '| H1 | H2 |\n| --- | --- |\n| a | b |\n\nnext paragraph';
-      expect(streamCharByChar(text).current).toBe(text);
+      const { outputs, at } = stream(text);
+
+      // Header only, and header plus an unterminated delimiter row, are both
+      // still incomplete, so nothing is emitted yet.
+      expect(at('| H1 | H2 |')).toBe('');
+      expect(at('| H1 | H2 |\n| --- | --- |')).toBe('');
+      // Once the delimiter row ends the table has more than two lines and is
+      // emitted as-is rather than replaced by a placeholder.
+      expect(at('| H1 | H2 |\n| --- | --- |\n')).toBe('| H1 | H2 |\n| --- | --- |\n');
+      // The blank line releases the token; the paragraph after it streams normally.
+      expect(outputs[outputs.length - 1]).toBe(text);
     });
 
-    it('should recognize a second table after the first one ended', () => {
+    it('should start a fresh table after the previous one ended', () => {
       const text =
         '| H1 | H2 |\n| --- | --- |\n| a | b |\n\n| H3 | H4 |\n| --- | --- |\n| c | d |';
-      expect(streamCharByChar(text).current).toBe(text);
+      const { outputs, at } = stream(text);
+      const firstTable = '| H1 | H2 |\n| --- | --- |\n| a | b |\n\n';
+
+      // The second table's header is held back on its own, which only works if
+      // the state was reset when the first table committed.
+      expect(at(`${firstTable}| H3 | H4 |`)).toBe(firstTable);
+      expect(outputs[outputs.length - 1]).toBe(text);
     });
 
-    it('should not treat a pipe table inside a fenced code block as a table token', () => {
+    it('should not treat a pipe table inside a fenced code block as a table', () => {
       const text = '```\n| H1 | H2 |\n| --- | --- |\n| a | b |\n```\n';
-      expect(streamCharByChar(text).current).toBe(text);
+      const { outputs, at } = stream(text);
+
+      // Inside a fence every character is committed as-is, so nothing is held back.
+      expect(at('```\n| H1 | H2 |')).toBe('```\n| H1 | H2 |');
+      expect(outputs[outputs.length - 1]).toBe(text);
     });
 
-    it('should keep the frozen delimiter verdict for rows containing pipes and dashes', () => {
+    it('should keep the delimiter verdict frozen once that row is terminated', () => {
       const text = '| H1 | H2 |\n| --- | --- |\n| a-b | c---d |\n| --- | --- |\n\n';
-      expect(streamCharByChar(text).current).toBe(text);
+      const { outputs, at } = stream(text);
+      const upToSecondDelimiter = '| H1 | H2 |\n| --- | --- |\n| a-b | c---d |\n| --- | --- |';
+
+      // A later row full of pipes and dashes must not re-open the verdict.
+      expect(at(upToSecondDelimiter)).toBe(upToSecondDelimiter);
+      expect(outputs[outputs.length - 1]).toBe(text);
     });
 
-    it('should commit a malformed delimiter row as plain text', () => {
+    it('should commit immediately once the delimiter row is known to be invalid', () => {
       const text = '| H1 | H2 |\n| xx | yy |\n';
-      expect(streamCharByChar(text).current).toBe(text);
+      const { outputs, at } = stream(text);
+
+      expect(at('| H1 | H2 |')).toBe('');
+      // `| x` cannot be a delimiter row, so the table token is given up and the
+      // text flows through from that character on.
+      expect(at('| H1 | H2 |\n| x')).toBe('| H1 | H2 |\n| x');
+      // The trailing `| yy |` opens a new pending table, so it is still held
+      // back while the stream is open.
+      expect(outputs[outputs.length - 1]).toBe('| H1 | H2 |\n| xx ');
     });
 
     it('should stay linear on a long table', () => {
