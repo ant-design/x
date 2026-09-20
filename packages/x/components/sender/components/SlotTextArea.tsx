@@ -493,6 +493,42 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       return false;
     }
 
+    // Chromium keeps a block wrapper after deleting the leading <br> of a line that starts
+    // with a non-editable slot. Merge that line explicitly so Backspace removes the newline.
+    if (
+      operationType === 'backspace' &&
+      range?.collapsed &&
+      focusOffset === 0 &&
+      anchorNode.nodeType === Node.ELEMENT_NODE
+    ) {
+      const editableDom = editableRef.current;
+      const line = anchorNode as HTMLElement;
+      const lineBreak = line.firstChild;
+      const firstContentNode = lineBreak?.nextSibling;
+      const firstContentInfo =
+        firstContentNode?.nodeType === Node.ELEMENT_NODE
+          ? getNodeInfo(firstContentNode as HTMLElement)
+          : null;
+
+      if (
+        line.parentElement === editableDom &&
+        line.previousSibling &&
+        lineBreak?.nodeName === 'BR' &&
+        firstContentInfo?.slotKey
+      ) {
+        const lineIndex = Array.from(editableDom.childNodes).indexOf(line);
+        e.preventDefault();
+        lineBreak.remove();
+        while (line.firstChild) {
+          editableDom.insertBefore(line.firstChild, line);
+        }
+        line.remove();
+        setCursorPosition(editableDom, editableDom, lineIndex);
+        triggerValueChange(e as unknown as EventType);
+        return true;
+      }
+    }
+
     // 处理文本节点中的slot删除
     if (anchorNode.nodeType === Node.TEXT_NODE && range) {
       const parentElement = anchorNode.parentNode as HTMLElement;
