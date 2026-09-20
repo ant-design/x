@@ -143,6 +143,14 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
   // =========================== Children ===========================
   const childNode = children?.({ onTrigger, onKeyDown, open: mergedOpen });
 
+  // Cascader root will `preventDefault` space key when `showSearch` is false,
+  // block propagation to make sure space can be typed in children.
+  const onSpaceKeyDown: React.KeyboardEventHandler = (e) => {
+    if (e.key === ' ') {
+      e.stopPropagation();
+    }
+  };
+
   // ============================ Render ============================
   const onInternalOpenChange = (nextOpen: boolean) => {
     if (!nextOpen) {
@@ -202,7 +210,9 @@ function Suggestion<T = any>(props: SuggestionProps<T>) {
           ...styles.content,
         }}
       >
-        {childNode}
+        <div style={{ display: 'contents' }} onKeyDown={onSpaceKeyDown}>
+          {childNode}
+        </div>
       </div>
     </Cascader>
   );

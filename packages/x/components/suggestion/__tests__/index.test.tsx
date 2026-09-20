@@ -148,6 +148,20 @@ describe('Suggestion Component', () => {
     });
   });
 
+  it('space key should not be prevented', () => {
+    const items = [{ label: 'Suggestion 1', value: 'suggestion1' }];
+    const { container } = render(<MockSuggestion items={items} />);
+
+    const input = container.querySelector('input')!;
+
+    // fireEvent returns false when event.defaultPrevented
+    expect(fireEvent.keyDown(input, { key: ' ' })).toBe(true);
+
+    fireEvent.keyDown(input, { key: '/' });
+    expect(screen.getByText('Suggestion 1')).toBeInTheDocument();
+    expect(fireEvent.keyDown(input, { key: ' ' })).toBe(true);
+  });
+
   it('should support 20+ items with scroll', () => {
     const items = Array.from({ length: 25 }, (_, i) => ({
       label: `Option ${i + 1}`,
