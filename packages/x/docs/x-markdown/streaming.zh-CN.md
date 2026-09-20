@@ -7,7 +7,7 @@ order: 4
 
 ## 代码示例
 
-<code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
+<code src="./demo/streaming/preset.tsx" description="streaming={isStreaming} 一个布尔值打开切段增量渲染、未完成语法补全、打字机和尾部光标；右上角统计自定义 code 组件的渲染次数，对比关闭 incremental 的差别">开箱即用</code> <code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
 
 ## 开箱即用
 

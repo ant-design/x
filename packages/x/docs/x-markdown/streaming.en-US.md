@@ -7,7 +7,7 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 ## Code Examples
 
-<code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
+<code src="./demo/streaming/preset.tsx" description="streaming={isStreaming}: one boolean switches on incremental sections, completion of unfinished syntax, the typewriter and the tail cursor; the counter top-left shows how often the custom code component rendered — toggle incremental off to compare">Out of the box</code> <code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
 
 ## Out of the box
 
