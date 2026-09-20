@@ -37,7 +37,7 @@ const text = `# Streaming preset\n\n${Array.from({ length: 8 }, (_, i) => sectio
 // right one types.
 const PACES = { fast: 60, normal: 250, slow: 600 } as const;
 type Pace = keyof typeof PACES;
-const CHUNK = 90;
+const CHUNK = 30;
 
 interface PaneStats {
   /** Renders of the custom `code` component */
@@ -47,7 +47,7 @@ interface PaneStats {
 }
 
 interface PaneProps {
-  title: string;
+  title?: string;
   content: string;
   streaming?: XMarkdownProps['streaming'];
   className: string;
@@ -69,15 +69,11 @@ const Pane: React.FC<PaneProps> = ({ title, content, streaming, className, stats
   // live in a memo (or outside the component) rather than inline.
   const components = React.useMemo(
     () => ({
-      code: ({ children, lang, block }: ComponentProps) => {
+      // Block code already arrives wrapped in <pre> by the parser; the
+      // component only replaces the <code> element.
+      code: ({ children }: ComponentProps) => {
         statsRef.current.codeRenders += 1;
-        return block ? (
-          <pre className={`language-${lang ?? ''}`}>
-            <code>{children}</code>
-          </pre>
-        ) : (
-          <code>{children}</code>
-        );
+        return <code>{children}</code>;
       },
     }),
     [statsRef],
@@ -95,9 +91,13 @@ const Pane: React.FC<PaneProps> = ({ title, content, streaming, className, stats
   return (
     <Flex vertical style={{ flex: 1, minWidth: 0 }} gap={6}>
       <Flex align="center" justify="space-between" gap={8}>
-        <Text code style={{ fontSize: 12 }}>
-          {title}
-        </Text>
+        {title ? (
+          <Text code style={{ fontSize: 12 }}>
+            {title}
+          </Text>
+        ) : (
+          <span />
+        )}
         <Tag style={{ marginInlineEnd: 0, whiteSpace: 'nowrap' }} title={`${stats.codeRenders} code renders in ${stats.commits} commits`}>
           code renders / commit: {perCommit(stats)}
         </Tag>
@@ -105,9 +105,15 @@ const Pane: React.FC<PaneProps> = ({ title, content, streaming, className, stats
       <div
         ref={ref}
         className={className}
-        style={{ height: 380, overflow: 'auto', padding: '0 12px', border: '1px solid rgba(128,128,128,0.25)', borderRadius: 8 }}
+        style={{
+          height: 360,
+          overflow: 'auto',
+          padding: '0 12px 32px',
+          border: '1px solid rgba(128,128,128,0.25)',
+          borderRadius: 8,
+        }}
       >
-        <React.Profiler id={title} onRender={onCommit}>
+        <React.Profiler id={title ?? 'plain'} onRender={onCommit}>
           <XMarkdown streaming={streaming} components={components}>
             {content}
           </XMarkdown>
@@ -145,7 +151,7 @@ const App = () => {
   const content = text.slice(0, index);
 
   return (
-    <Flex vertical gap={12}>
+    <Flex vertical gap={12} style={{ maxWidth: 960, margin: '0 auto' }}>
       <Flex align="center" justify="space-between" wrap gap={8}>
         <Tag color={isStreaming ? 'processing' : 'default'}>
           {isStreaming ? `streaming · ${Math.ceil(index / CHUNK)} chunks` : 'done'}
@@ -179,15 +185,9 @@ const App = () => {
       </Flex>
 
       <Flex gap={12}>
+        <Pane content={content} className={className} statsRef={leftRef} stats={leftStats} />
         <Pane
-          title="<XMarkdown content={content} />"
-          content={content}
-          className={className}
-          statsRef={leftRef}
-          stats={leftStats}
-        />
-        <Pane
-          title="<XMarkdown content={content} streaming={isStreaming} />"
+          title="streaming={isStreaming}"
           content={content}
           streaming={isStreaming}
           className={className}
