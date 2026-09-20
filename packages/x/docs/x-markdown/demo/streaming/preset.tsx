@@ -40,10 +40,12 @@ const CHUNK = 30;
 // CodeHighlighter draws its own container. Two things would paint a second
 // box inside it: the highlighter's own <pre> background (turned off through
 // its props) and the x-markdown theme's `pre code` rule, which does not
-// recognise CodeHighlighter's inner <code> and gives it a background and
-// padding too. The rule below overrides that for this demo's panes only.
+// recognise CodeHighlighter's inner <code> and gives it an !important
+// background and padding too. The rule below overrides that for this
+// demo's panes only; it needs three classes to outrank the theme's
+// `.x-markdown-light pre code:not([class$=…] pre code)` selector.
 const DEMO_CLASS = 'xmd-streaming-preset-demo';
-const demoStyle = `.${DEMO_CLASS} pre code { background: transparent !important; padding: 0 !important; margin: 0 !important; }`;
+const demoStyle = `.${DEMO_CLASS} .ant-codeHighlighter .ant-codeHighlighter-code pre code { background: transparent !important; padding: 0 !important; margin: 0 !important; }`;
 const highlightProps = { customStyle: { background: 'transparent', margin: 0 } };
 
 // Block code goes through CodeHighlighter (it is memoised, so a finished
