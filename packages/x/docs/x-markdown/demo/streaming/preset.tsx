@@ -1,8 +1,6 @@
-import { SettingOutlined } from '@ant-design/icons';
-import { Bubble } from '@ant-design/x';
 import XMarkdown from '@ant-design/x-markdown';
-import type { ComponentProps, StreamingOption } from '@ant-design/x-markdown';
-import { Button, Flex, Popover, Space, Switch, Tag, Typography, theme } from 'antd';
+import type { ComponentProps, XMarkdownProps } from '@ant-design/x-markdown';
+import { Button, Flex, Segmented, Space, Tag, Typography, theme } from 'antd';
 import React from 'react';
 import '@ant-design/x-markdown/themes/light.css';
 import '@ant-design/x-markdown/themes/dark.css';
@@ -15,8 +13,8 @@ const section = (i: number) =>
   [
     `## ${i + 1}. Section ${i + 1}`,
     '',
-    `This paragraph has **bold**, *emphasis*, \`inline code\` and a [link](https://x.ant.design). ` +
-      'It keeps going for a while so the typewriter has something to pace.',
+    `This paragraph has **bold text that takes a moment to finish**, *emphasis*, \`inline code\` ` +
+      'and a [link to the docs](https://x.ant.design). It keeps going for a while so the typewriter has something to pace.',
     '',
     '```ts',
     `export function step${i}(a: number, b: number): number {`,
@@ -32,50 +30,48 @@ const section = (i: number) =>
     '',
   ].join('\n');
 
-const text = `# Streaming preset\n\n${Array.from({ length: 12 }, (_, i) => section(i)).join('')}`;
+const text = `# Streaming preset\n\n${Array.from({ length: 8 }, (_, i) => section(i)).join('')}`;
 
-const CHUNK = 40;
-const INTERVAL_MS = 40;
+// Models deliver text in bursts. A bigger chunk on a longer interval makes
+// the difference between the two panes obvious: the left one jumps, the
+// right one types.
+const PACES = { fast: 60, normal: 250, slow: 600 } as const;
+type Pace = keyof typeof PACES;
+const CHUNK = 90;
 
-interface ToggleItemProps {
-  label: string;
-  checked: boolean;
-  disabled?: boolean;
-  onChange: (checked: boolean) => void;
+interface PaneStats {
+  /** Renders of the custom `code` component */
+  codeRenders: number;
+  /** React commits of the XMarkdown subtree */
+  commits: number;
 }
 
-const ToggleItem: React.FC<ToggleItemProps> = ({ label, checked, disabled, onChange }) => (
-  <Flex align="center" justify="space-between" gap={16} style={{ minWidth: 220 }}>
-    <Text style={{ fontSize: 12, margin: 0, whiteSpace: 'nowrap' }}>{label}</Text>
-    <Switch size="small" checked={checked} disabled={disabled} onChange={onChange} />
-  </Flex>
-);
+interface PaneProps {
+  title: string;
+  hint: string;
+  content: string;
+  streaming: XMarkdownProps['streaming'];
+  className: string;
+  statsRef: React.MutableRefObject<PaneStats>;
+  stats: PaneStats;
+}
 
-const App = () => {
-  const [usePreset, setUsePreset] = React.useState(true);
-  const [incremental, setIncremental] = React.useState(true);
-  const [complete, setComplete] = React.useState(true);
-  const [typewriter, setTypewriter] = React.useState(true);
-  const [sentence, setSentence] = React.useState(false);
-  const [tail, setTail] = React.useState(true);
+// What matters is the work per update, not the number of updates: the
+// typewriter pane commits once per animation frame, the other once per
+// chunk. "code renders per commit" is how much of the document each update
+// re-renders — the whole document on the left, only the last section on the right.
+const perCommit = ({ codeRenders, commits }: PaneStats) =>
+  commits ? (codeRenders / commits).toFixed(1) : '0';
 
-  const [index, setIndex] = React.useState(0);
-  const [isStreaming, setIsStreaming] = React.useState(true);
-  const { theme: antdTheme } = theme.useToken();
-  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
-  const contentRef = React.useRef<HTMLDivElement>(null);
-
-  // How many times the custom `code` component rendered since the last run.
-  // With `incremental` on, finished sections are skipped and this stays small.
-  const codeRendersRef = React.useRef(0);
-  const [codeRenders, setCodeRenders] = React.useState(0);
+const Pane: React.FC<PaneProps> = ({ title, hint, content, streaming, className, statsRef, stats }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
 
   // Custom components must keep a stable identity across renders, so they
   // live in a memo (or outside the component) rather than inline.
   const components = React.useMemo(
     () => ({
       code: ({ children, lang, block }: ComponentProps) => {
-        codeRendersRef.current += 1;
+        statsRef.current.codeRenders += 1;
         return block ? (
           <pre className={`language-${lang ?? ''}`}>
             <code>{children}</code>
@@ -85,8 +81,59 @@ const App = () => {
         );
       },
     }),
-    [],
+    [statsRef],
   );
+
+  React.useEffect(() => {
+    const el = ref.current;
+    if (el && el.scrollHeight > el.clientHeight) el.scrollTop = el.scrollHeight;
+  });
+
+  const onCommit = React.useCallback(() => {
+    statsRef.current.commits += 1;
+  }, [statsRef]);
+
+  return (
+    <Flex vertical style={{ flex: 1, minWidth: 0 }} gap={6}>
+      <Flex align="center" justify="space-between" gap={8}>
+        <Space size={4} direction="vertical" style={{ minWidth: 0 }}>
+          <Text code style={{ fontSize: 12 }}>
+            {title}
+          </Text>
+          <Text type="secondary" style={{ fontSize: 12 }}>
+            {hint}
+          </Text>
+        </Space>
+        <Tag style={{ marginInlineEnd: 0, whiteSpace: 'nowrap' }} title={`${stats.codeRenders} code renders in ${stats.commits} commits`}>
+          code renders / commit: {perCommit(stats)}
+        </Tag>
+      </Flex>
+      <div
+        ref={ref}
+        className={className}
+        style={{ height: 380, overflow: 'auto', padding: '0 12px', border: '1px solid rgba(128,128,128,0.25)', borderRadius: 8 }}
+      >
+        <React.Profiler id={title} onRender={onCommit}>
+          <XMarkdown streaming={streaming} components={components}>
+            {content}
+          </XMarkdown>
+        </React.Profiler>
+      </div>
+    </Flex>
+  );
+};
+
+const App = () => {
+  const [pace, setPace] = React.useState<Pace>('normal');
+  const [index, setIndex] = React.useState(0);
+  const [isStreaming, setIsStreaming] = React.useState(true);
+  const emptyStats = (): PaneStats => ({ codeRenders: 0, commits: 0 });
+  const [leftStats, setLeftStats] = React.useState<PaneStats>(emptyStats);
+  const [rightStats, setRightStats] = React.useState<PaneStats>(emptyStats);
+  const leftRef = React.useRef<PaneStats>(emptyStats());
+  const rightRef = React.useRef<PaneStats>(emptyStats());
+  const { theme: antdTheme } = theme.useToken();
+  const className = antdTheme.id === 0 ? 'x-markdown-light' : 'x-markdown-dark';
 
   React.useEffect(() => {
     if (index >= text.length) {
@@ -95,63 +142,46 @@ const App = () => {
     }
     const timer = setTimeout(() => {
       setIndex(Math.min(index + CHUNK, text.length));
-      setCodeRenders(codeRendersRef.current);
-    }, INTERVAL_MS);
+      setLeftStats({ ...leftRef.current });
+      setRightStats({ ...rightRef.current });
+    }, PACES[pace]);
     return () => clearTimeout(timer);
-  }, [index]);
+  }, [index, pace]);
 
-  React.useEffect(() => {
-    const el = contentRef.current;
-    if (el && index > 0 && index < text.length && el.scrollHeight > el.clientHeight) {
-      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
-    }
-  }, [index]);
-
-  const manual = React.useMemo<StreamingOption>(
-    () => ({
-      hasNextChunk: isStreaming,
-      incremental,
-      incompleteMarkdown: complete ? 'complete' : 'placeholder',
-      typewriter: typewriter ? { unit: sentence ? 'sentence' : 'char' } : false,
-      tail,
-    }),
-    [isStreaming, incremental, complete, typewriter, sentence, tail],
-  );
-
-  // The whole preset is `streaming={isStreaming}`; the object form is the
-  // same thing with each option spelled out.
-  const streaming = usePreset ? isStreaming : manual;
-
-  const configContent = (
-    <Flex vertical gap={10}>
-      <ToggleItem label="Preset: streaming={isStreaming}" checked={usePreset} onChange={setUsePreset} />
-      <ToggleItem label="incremental" checked={usePreset || incremental} disabled={usePreset} onChange={setIncremental} />
-      <ToggleItem label="incompleteMarkdown: 'complete'" checked={usePreset || complete} disabled={usePreset} onChange={setComplete} />
-      <ToggleItem label="typewriter" checked={usePreset || typewriter} disabled={usePreset} onChange={setTypewriter} />
-      <ToggleItem label="typewriter unit: sentence" checked={!usePreset && sentence} disabled={usePreset || !typewriter} onChange={setSentence} />
-      <ToggleItem label="tail" checked={usePreset || tail} disabled={usePreset} onChange={setTail} />
-    </Flex>
-  );
+  const content = text.slice(0, index);
+  // Left: what every caller has today — the object form with just hasNextChunk.
+  const legacy = React.useMemo(() => ({ hasNextChunk: isStreaming }), [isStreaming]);
 
   return (
-    <div style={{ height: 480, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      <Space align="center" style={{ display: 'flex', justifyContent: 'space-between', flexShrink: 0, marginBottom: 8 }} wrap>
-        <Space size={4}>
-          <Tag>{isStreaming ? `streaming ${Math.ceil(index / CHUNK)} chunks` : 'done'}</Tag>
-          <Tag color={incremental || usePreset ? 'green' : 'default'}>code renders: {codeRenders}</Tag>
+    <Flex vertical gap={12}>
+      <Flex align="center" justify="space-between" wrap gap={8}>
+        <Space>
+          <Tag color={isStreaming ? 'processing' : 'default'}>
+            {isStreaming ? `streaming · ${Math.ceil(index / CHUNK)} chunks` : 'done'}
+          </Tag>
+          <Text type="secondary" style={{ fontSize: 12 }}>
+            {CHUNK} chars per chunk
+          </Text>
         </Space>
         <Space>
-          <Popover trigger="click" placement="bottomRight" content={<div style={{ padding: 4 }}>{configContent}</div>}>
-            <Button size="small" icon={<SettingOutlined />}>
-              Config
-            </Button>
-          </Popover>
+          <Segmented<Pace>
+            size="small"
+            value={pace}
+            onChange={setPace}
+            options={[
+              { label: 'fast 60ms', value: 'fast' },
+              { label: 'normal 250ms', value: 'normal' },
+              { label: 'slow 600ms', value: 'slow' },
+            ]}
+          />
           <Button
             type="primary"
             size="small"
             onClick={() => {
-              codeRendersRef.current = 0;
-              setCodeRenders(0);
+              leftRef.current = emptyStats();
+              rightRef.current = emptyStats();
+              setLeftStats(emptyStats());
+              setRightStats(emptyStats());
               setIndex(0);
               setIsStreaming(true);
             }}
@@ -159,23 +189,29 @@ const App = () => {
             Run Stream
           </Button>
         </Space>
-      </Space>
+      </Flex>
 
-      <Flex vertical style={{ flex: 1, minHeight: 0, overflow: 'auto' }} ref={contentRef}>
-        <Bubble
-          style={{ width: '100%' }}
-          styles={{ body: { width: '100%' } }}
-          variant="borderless"
-          content={text.slice(0, index)}
+      <Flex gap={12}>
+        <Pane
+          title="streaming={{ hasNextChunk }}"
+          hint="Before: text lands in blocks, half-written bold is held back, the whole document re-renders per chunk"
+          content={content}
+          streaming={legacy}
           className={className}
-          contentRender={(content) => (
-            <XMarkdown streaming={streaming} components={components}>
-              {content}
-            </XMarkdown>
-          )}
+          statsRef={leftRef}
+          stats={leftStats}
+        />
+        <Pane
+          title="streaming={isStreaming}"
+          hint="Preset: typewriter pacing, bold shows while still open, tail cursor, only the last section re-renders"
+          content={content}
+          streaming={isStreaming}
+          className={className}
+          statsRef={rightRef}
+          stats={rightStats}
         />
       </Flex>
-    </div>
+    </Flex>
   );
 };
 

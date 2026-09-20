@@ -7,27 +7,13 @@ order: 4
 
 ## 代码示例
 
-<code src="./demo/streaming/preset.tsx" description="streaming={isStreaming} 一个布尔值打开切段增量渲染、未完成语法补全、打字机和尾部光标；右上角统计自定义 code 组件的渲染次数，对比关闭 incremental 的差别">开箱即用</code> <code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
-
-## 开箱即用
-
-`streaming` 直接传布尔值就是完整的流式预设，值本身就是「还有没有后续内容」：
-
-```tsx
-<XMarkdown content={content} streaming={isStreaming} />
-```
-
-| 值 | 效果 |
-| --- | --- |
-| `true` | 流式进行中。等同 `hasNextChunk: true`，并打开 `incremental`、`incompleteMarkdown: 'complete'`、`typewriter`、`tail` |
-| `false` | 流已结束。按最终内容渲染，已挂载的自定义组件不重新挂载 |
-| 不传 | 非流式渲染，和以前一样 |
-
-需要逐项控制时传对象，对象形式的行为和默认值都没有变化。
+<code src="./demo/streaming/preset.tsx" description="同一段内容、同一节奏，左边是原有写法 streaming={{ hasNextChunk }}，右边是 streaming={isStreaming} 预设：打字机匀速放出、写一半的加粗直接显示、尾部光标，以及每个 chunk 只重渲染最后一段（看两边 code 渲染次数）。用 slow 档最容易看出差别">流式预设对比</code> <code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
 
 ## API
 
 ### streaming
+
+`streaming` 接受布尔值或对象。传布尔值即预设：`true` 表示流式进行中，等同 `hasNextChunk: true` 并打开 `incremental`、`incompleteMarkdown: 'complete'`、`typewriter`、`tail`；`false` 表示流已结束，按最终内容渲染。把应用里现成的 `isStreaming` 直接传进来即可：`<XMarkdown content={content} streaming={isStreaming} />`。传对象则逐项控制，对象形式的行为和默认值没有变化。
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
