@@ -1,4 +1,5 @@
-import { act, renderHook } from '@testing-library/react';
+import { act, render, renderHook } from '@testing-library/react';
+import React from 'react';
 import { useTypewriter } from '../hooks';
 import type { TypewriterOption } from '../interface';
 
@@ -44,6 +45,35 @@ describe('useTypewriter', () => {
   });
   afterEach(() => {
     jest.useRealTimers();
+  });
+
+  it('costs no extra render per chunk while disabled, and shows everything present when enabled later', () => {
+    let renders = 0;
+    const Probe = ({ input, active }: { input: string; active: boolean }) => {
+      renders += 1;
+      return <span>{useTypewriter(input, true, active)}</span>;
+    };
+    const { rerender, container } = render(<Probe input="a" active={false} />);
+    for (const input of ['ab', 'abc', 'abcd']) {
+      act(() => {
+        rerender(<Probe input={input} active={false} />);
+      });
+    }
+    // One render per rerender: the disabled hook must not schedule state updates.
+    expect(renders).toBe(4);
+    expect(container.textContent).toBe('abcd');
+
+    // Switching on later shows what is present at that moment at once…
+    act(() => {
+      rerender(<Probe input="abcd efgh" active />);
+    });
+    expect(container.textContent).toBe('abcd efgh');
+    // …and only types out what arrives afterwards.
+    act(() => {
+      rerender(<Probe input="abcd efgh and a longer sentence follows here" active />);
+    });
+    frame({ current: null });
+    expect(container.textContent.length).toBeLessThan('abcd efgh and a longer sentence follows here'.length);
   });
 
   it('passes the input through when disabled or inactive', () => {

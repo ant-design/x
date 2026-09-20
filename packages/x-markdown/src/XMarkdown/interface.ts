@@ -98,11 +98,11 @@ interface StreamingOption {
    */
   hasNextChunk?: boolean;
   /**
-   * @description 流式期间按标题把正文切成若干段，只有正在增长的最后一段随每个 chunk 重新解析、消毒和渲染，前面的段直接复用。只在顶格的 ATX 标题（`# ` ～ `###### `）前切分；围栏代码、HTML 块（`<div>`、`<pre>`、`<script>`、注释等）、`$$` 公式内的 `#` 行不算标题。出现链接引用定义或脚注定义、或自定义组件标签跨越切点时不切分。传对象可调整合并阈值：短于 `minSectionChars` 的段并入下一段。流结束（`hasNextChunk` 变为 false）后各段保持不变，已挂载的自定义组件不会重新挂载。
-   * @description Splits the document into sections at headings while streaming so that only the last, still-growing section is re-parsed, sanitized and rendered per chunk; earlier sections are reused as-is. A boundary is only placed before a column-0 ATX heading (`# ` to `###### `); `#` lines inside fenced code, HTML blocks (`<div>`, `<pre>`, `<script>`, comments, …) and `$$` math are not headings. Splitting is disabled when a link reference or footnote definition appears, or when a custom component tag spans the boundary. Pass an object to tune merging: sections shorter than `minSectionChars` are merged into the next one. Sections are kept once the stream ends (`hasNextChunk` becomes false), so mounted custom components are not remounted.
+   * @description 流式期间按标题把正文切成若干段，只有正在增长的最后一段随每个 chunk 重新解析、消毒和渲染，前面的段直接复用。只在顶格的 ATX 标题（`# ` ～ `###### `）前切分；围栏代码、HTML 块（`<div>`、`<pre>`、`<script>`、注释等）、`$$` 公式内的 `#` 行不算标题。出现链接引用定义或脚注定义、或自定义组件标签跨越切点时不切分。传对象可调整：短于 `minSectionChars` 的段并入下一段；`keepSectionsOnEnd`（默认 true）表示流结束（`hasNextChunk` 变为 false）后各段保持不变、已挂载的自定义组件不重新挂载，设为 false 则流结束时回到整篇一次性渲染，用了带全局状态的 marked 扩展（如标题 id 去重）时应关掉。
+   * @description Splits the document into sections at headings while streaming so that only the last, still-growing section is re-parsed, sanitized and rendered per chunk; earlier sections are reused as-is. A boundary is only placed before a column-0 ATX heading (`# ` to `###### `); `#` lines inside fenced code, HTML blocks (`<div>`, `<pre>`, `<script>`, comments, …) and `$$` math are not headings. Splitting is disabled when a link reference or footnote definition appears, or when a custom component tag spans the boundary. Pass an object to tune it: sections shorter than `minSectionChars` are merged into the next one; `keepSectionsOnEnd` (default true) keeps the sections once the stream ends (`hasNextChunk` becomes false) so mounted custom components are not remounted, while false re-renders the whole document at once when the stream ends — turn it off when using marked extensions with document-wide state (e.g. heading id de-duplication).
    * @default false
    */
-  incremental?: boolean | { minSectionChars?: number };
+  incremental?: boolean | { minSectionChars?: number; keepSectionsOnEnd?: boolean };
   /**
    * @description 为块级元素（p、li、h1、h2、h3、h4）启用文字淡入动画
    * @description Enables text fade-in animation for block elements (p, li, h1, h2, h3, h4)

@@ -166,6 +166,8 @@ const useTypewriter = (
   const pauseUntilRef = useRef(0);
   const scanRef = useRef<BoundaryScan>(initialScan());
 
+  const wasEnabledRef = useRef(enabled);
+
   inputRef.current = input;
   enabledRef.current = enabled;
 
@@ -249,7 +251,18 @@ const useTypewriter = (
     prevInputRef.current = input;
 
     if (!enabled) {
+      // Off: touch no state, so the hook costs no extra render per chunk —
+      // the memo below passes the input straight through.
       stop();
+      wasEnabledRef.current = false;
+      return;
+    }
+
+    if (!wasEnabledRef.current) {
+      // Just switched on: everything present now is shown at once, as at
+      // mount; only text arriving from here on is typed out.
+      wasEnabledRef.current = true;
+      scanRef.current = initialScan();
       cursorRef.current = input.length;
       commit(input.length);
       lastChunkAtRef.current = null;

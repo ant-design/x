@@ -406,19 +406,24 @@ describe('streaming.incremental', () => {
       ]);
     });
 
-    it('ends the pending table at a heading so the boundary is usable at once', () => {
-      // GFM breaks a table at a blank line or at the start of another block.
-      // The table token follows: a heading line right after the rows commits
-      // the table, so the boundary before the heading is usable immediately.
-      expect(sectionsFor('# A\n\n| a |\n| - |\n| 1 |\n## B\n')).toEqual([
-        '# A\n\n| a |\n| - |\n| 1 |\n',
-        '## B\n',
-      ]);
-      // A line without pipes is still a row (GFM), not the end of the table.
-      expect(sectionsFor('# A\n\n| a |\n| - |\n| 1 |\nrow\n## B\n')).toEqual([
-        '# A\n\n| a |\n| - |\n| 1 |\nrow\n',
-        '## B\n',
-      ]);
+    it('exposes a boundary held inside the pending table once the table commits', () => {
+      // The table token stays pending until its blank line (unchanged
+      // behaviour), and a heading right after the last row is part of that
+      // pending text. The boundary is recorded immediately but only used once
+      // the table has committed.
+      const { result, rerender } = renderHook(
+        ({ input }: { input: string }) =>
+          useStreamingCore(input, { streaming: { hasNextChunk: true, incremental: noMin } }),
+        { initialProps: { input: '' } },
+      );
+      act(() => {
+        rerender({ input: '# A\n\n| a |\n| - |\n| 1 |\n## B\n' });
+      });
+      expect(result.current.sections).toBeNull();
+      act(() => {
+        rerender({ input: '# A\n\n| a |\n| - |\n| 1 |\n## B\n\npara\n\n' });
+      });
+      expect(result.current.sections).toEqual(['# A\n\n| a |\n| - |\n| 1 |\n', '## B\n\npara\n\n']);
     });
 
     it('is off unless incremental is set, and off for a non-streaming render', () => {
@@ -480,6 +485,28 @@ describe('streaming.incremental', () => {
       expect(sectioned['const s0 = 0;\n']).toBeLessThan(6);
       const total = (r: Record<string, number>) => Object.values(r).reduce((a, b) => a + b, 0);
       expect(total(sectioned) * 3).toBeLessThan(total(whole));
+    });
+
+    it('re-renders the whole document at the end with keepSectionsOnEnd: false', () => {
+      const streaming = { hasNextChunk: true, incremental: { ...noMin, keepSectionsOnEnd: false } };
+      const { result, rerender } = renderHook(
+        ({ input, hasNextChunk }: { input: string; hasNextChunk: boolean }) =>
+          useStreamingCore(input, { streaming: { ...streaming, hasNextChunk } }),
+        { initialProps: { input: doc, hasNextChunk: true } },
+      );
+      expect(result.current.sections).toHaveLength(6);
+      act(() => {
+        rerender({ input: doc, hasNextChunk: false });
+      });
+      expect(result.current).toEqual({ output: doc, sections: null });
+
+      const { container, rerender: rerenderView } = render(
+        <XMarkdown content={doc} streaming={streaming} />,
+      );
+      act(() => {
+        rerenderView(<XMarkdown content={doc} streaming={{ ...streaming, hasNextChunk: false }} />);
+      });
+      expect(container.innerHTML).toBe(render(<XMarkdown content={doc} />).container.innerHTML);
     });
 
     it('keeps sections after the stream ends so custom components are not remounted', () => {

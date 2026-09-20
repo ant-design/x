@@ -32,7 +32,7 @@ order: 4
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | hasNextChunk | 是否还有后续 chunk | `boolean` | `false` |
-| incremental | 按标题切段，每个 chunk 只重新解析、渲染正在增长的最后一段。传对象可设置 `minSectionChars`（短于该长度的段并入下一段） | `boolean \| { minSectionChars?: number }` | `false` |
+| incremental | 按标题切段，每个 chunk 只重新解析、渲染正在增长的最后一段。传对象可设置 `minSectionChars`（短于该长度的段并入下一段）和 `keepSectionsOnEnd`（默认 `true`：流结束后各段保持不变、已挂载的自定义组件不重新挂载；`false`：流结束时回到整篇一次性渲染，用了带全局状态的 marked 扩展时请关掉） | `boolean \| { minSectionChars?: number; keepSectionsOnEnd?: boolean }` | `false` |
 | incompleteMarkdown | 未写完的语法如何显示：`placeholder` 扣住或显示占位组件；`complete` 把写到一半的强调、行内代码、链接文字、列表项当作完整文本立刻显示 | `'placeholder' \| 'complete'` | `'placeholder'` |
 | incompleteMarkdownComponentMap | 未完成语法的组件映射，对某个语法显式配置后以占位组件为准 | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
 | typewriter | 打字机效果：新到的内容按 chunk 节奏匀速放出，而不是整块出现 | `boolean \| TypewriterConfig` | `false` |

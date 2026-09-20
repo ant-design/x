@@ -32,7 +32,7 @@ Pass an object for per-option control; the object form's behaviour and defaults 
 | Parameter | Description | Type | Default |
 | --- | --- | --- | --- |
 | hasNextChunk | Whether more chunks are coming | `boolean` | `false` |
-| incremental | Split the document at headings so each chunk only re-parses and re-renders the last, still-growing section. Pass an object to set `minSectionChars` (shorter sections merge into the next one) | `boolean \| { minSectionChars?: number }` | `false` |
+| incremental | Split the document at headings so each chunk only re-parses and re-renders the last, still-growing section. Pass an object to set `minSectionChars` (shorter sections merge into the next one) and `keepSectionsOnEnd` (default `true`: sections are kept once the stream ends and mounted custom components are not remounted; `false`: the whole document is re-rendered at once when the stream ends — turn it off when using marked extensions with document-wide state) | `boolean \| { minSectionChars?: number; keepSectionsOnEnd?: boolean }` | `false` |
 | incompleteMarkdown | How unfinished syntax is shown: `placeholder` holds it back or shows the placeholder component; `complete` shows half-written emphasis, inline code, link text and list items as finished text right away | `'placeholder' \| 'complete'` | `'placeholder'` |
 | incompleteMarkdownComponentMap | Component mapping for incomplete syntax; an explicit entry always wins over `complete` | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
 | typewriter | Typewriter effect: arriving content is revealed at a steady pace that follows the chunk cadence instead of appearing in blocks | `boolean \| TypewriterConfig` | `false` |

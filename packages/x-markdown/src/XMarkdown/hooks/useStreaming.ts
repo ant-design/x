@@ -79,15 +79,8 @@ interface TableState {
   newlines: number;
   /** Whether the previous character was '\n' (used to detect the '\n\n' terminator) */
   lastWasNewline: boolean;
-  /**
-   * pending contains a blank line or a heading line after the delimiter row,
-   * i.e. the table block already ended. GFM breaks a table at an empty line
-   * or at the start of another block structure; a heading is the structure
-   * that matters for section boundaries, so it is the one tracked here.
-   */
-  ended: boolean;
-  /** First characters of the current line, enough to recognise a heading */
-  linePrefix: string;
+  /** pending contains a blank line, i.e. the table block already ended */
+  hasBlankLine: boolean;
   /** pending's first line — the header row */
   firstLine: string;
   /** pending's second line — the delimiter row; may still be growing */
@@ -156,7 +149,7 @@ const isTableShapeValid = (header: string, separator: string) => {
  * terminated, which is where a long table spends all of its characters.
  */
 const isTableInComplete = (table: TableState) => {
-  if (table.ended) return false;
+  if (table.hasBlankLine) return false;
   // Only the header row so far: still incomplete by definition.
   if (table.newlines === 0) return true;
   if (table.shape !== null) return table.shape;
@@ -258,8 +251,7 @@ const getInitialFenceState = (): FenceState => ({
 const getInitialTableState = (): TableState => ({
   newlines: 0,
   lastWasNewline: false,
-  ended: false,
-  linePrefix: '',
+  hasBlankLine: false,
   firstLine: '',
   secondLine: '',
   shape: null,
@@ -268,26 +260,18 @@ const getInitialTableState = (): TableState => ({
 const resetTableState = (table: TableState): void => {
   table.newlines = 0;
   table.lastWasNewline = false;
-  table.ended = false;
-  table.linePrefix = '';
+  table.hasBlankLine = false;
   table.firstLine = '';
   table.secondLine = '';
   table.shape = null;
 };
 
-// Long enough for `###### ` plus one character.
-const TABLE_LINE_PREFIX_CHARS = 8;
-
 /** Advance the table state by one appended character. O(1). */
 const feedTableState = (table: TableState, char: string): void => {
   if (char === '\n') {
-    if (table.lastWasNewline) table.ended = true;
-    // A heading after the delimiter row starts a new block, which ends the
-    // table just like a blank line does (GFM); marked stops the rows there.
-    if (table.newlines >= 2 && HEADING_LINE.test(table.linePrefix)) table.ended = true;
+    if (table.lastWasNewline) table.hasBlankLine = true;
     table.lastWasNewline = true;
     table.newlines += 1;
-    table.linePrefix = '';
     // The delimiter row is terminated: its verdict can no longer change, so
     // freeze it and stop re-deriving it for every remaining character.
     if (table.newlines === 2) {
@@ -296,7 +280,6 @@ const feedTableState = (table: TableState, char: string): void => {
     return;
   }
   table.lastWasNewline = false;
-  if (table.linePrefix.length < TABLE_LINE_PREFIX_CHARS) table.linePrefix += char;
   if (table.newlines === 0) {
     table.firstLine += char;
   } else if (table.newlines === 1) {
@@ -641,6 +624,9 @@ const resolveMinSectionChars = (incremental: StreamingOption['incremental']): nu
     ? incremental.minSectionChars
     : DEFAULT_MIN_SECTION_CHARS;
 
+const resolveKeepSectionsOnEnd = (incremental: StreamingOption['incremental']): boolean =>
+  typeof incremental === 'object' ? incremental.keepSectionsOnEnd !== false : true;
+
 /**
  * Streaming state machine plus, when `streaming.incremental` is on, the
  * section boundaries the renderer can memoise on. `useStreaming` is the
@@ -659,6 +645,7 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
     incremental,
   } = resolveStreaming(streaming) || {};
   const minSectionChars = resolveMinSectionChars(incremental);
+  const keepSectionsOnEnd = resolveKeepSectionsOnEnd(incremental);
   const trackSections = !!incremental;
   const cacheRef = useRef<StreamCache>(getInitialCache());
   // Only the names matter for the boundary guard; keep the array identity
@@ -785,6 +772,7 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
       const cache = cacheRef.current;
       const continuesStream =
         trackSections &&
+        keepSectionsOnEnd &&
         cache.processedLength > 0 &&
         input.startsWith(cache.completeMarkdown + cache.pending);
       if (continuesStream) {
@@ -795,8 +783,8 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
         processStreaming(input);
         return { output: input, sections: buildSections(cache, input, input.length) };
       }
-      // Non-streaming: pass the full input through so the first paint renders
-      // complete content and avoids layout jitter.
+      // Non-streaming (or keepSectionsOnEnd: false): render the whole input
+      // at once, exactly as a non-streaming render would.
       cacheRef.current = getInitialCache();
       return { output: input, sections: null };
     }
@@ -809,7 +797,7 @@ const useStreamingCore = (input: string, config?: StreamingConfig): StreamingRes
         ? buildSections(cache, output, cache.completeMarkdown.length)
         : null,
     };
-  }, [input, isStringInput, enableCache, trackSections, processStreaming]);
+  }, [input, isStringInput, enableCache, trackSections, keepSectionsOnEnd, processStreaming]);
 };
 
 const useStreaming = (input: string, config?: StreamingConfig): string =>
