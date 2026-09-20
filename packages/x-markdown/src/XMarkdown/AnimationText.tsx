@@ -7,6 +7,7 @@ export interface AnimationTextProps {
 }
 
 const DEFAULT_DELIMITERS = ['。', '！', '？', '.', '!', '?', '\n'];
+const DEFAULT_MAX_SENTENCE_CHARS = 120;
 
 const endsWithDelimiter = (chunk: string, delimiters: string[]): boolean =>
   chunk.length > 0 && delimiters.includes(chunk[chunk.length - 1]);
@@ -17,10 +18,17 @@ const endsWithDelimiter = (chunk: string, delimiters: string[]): boolean =>
  * new chunk starts only after a delimiter. Text that is already on screen is
  * never moved to another chunk, so nothing that has faded in fades in again.
  */
-const appendBySentence = (chunks: string[], newText: string, delimiters: string[]): string[] => {
+const appendBySentence = (
+  chunks: string[],
+  newText: string,
+  delimiters: string[],
+  maxChars: number,
+): string[] => {
   const next = chunks.slice();
   let rest = newText;
-  if (next.length > 0 && !endsWithDelimiter(next[next.length - 1], delimiters)) {
+  const last = next[next.length - 1];
+  // Keep merging into the open sentence unless it is already at the cap.
+  if (next.length > 0 && !endsWithDelimiter(last, delimiters) && last.length < maxChars) {
     let cut = -1;
     for (let i = 0; i < rest.length; i++) {
       if (delimiters.includes(rest[i])) {
@@ -53,6 +61,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
     easing = 'ease-in-out',
     splitBy = 'chunk',
     delimiters = DEFAULT_DELIMITERS,
+    maxSentenceChars = DEFAULT_MAX_SENTENCE_CHARS,
   } = animationConfig || {};
   const prevTextRef = useRef('');
   const chunksRef = useRef<string[]>([]);
@@ -69,7 +78,7 @@ const AnimationText = React.memo<AnimationTextProps>((props) => {
     const newText = text.slice(prevText.length);
     chunks =
       splitBy === 'sentence'
-        ? appendBySentence(chunksRef.current, newText, delimiters)
+        ? appendBySentence(chunksRef.current, newText, delimiters, maxSentenceChars)
         : [...chunksRef.current, newText];
   }
 

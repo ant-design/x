@@ -197,6 +197,26 @@ describe('useTypewriter', () => {
     });
   });
 
+  it('falls back to character reveal after maxSentenceChars without a delimiter', () => {
+    const config: TypewriterOption = { unit: 'sentence', delimiters: ['.'], maxSentenceChars: 40 };
+    const { result, rerender } = setup({ input: '', typewriter: config, active: true });
+    // No '.' anywhere in the run (a '.' in a URL is a delimiter like any other).
+    const longRun = 'https://example-com/a-very-long-path-without-any-punctuation-' + 'x'.repeat(120);
+    const text = `${longRun} and then a sentence. done`;
+    act(() => {
+      rerender({ input: text, typewriter: config, active: true });
+    });
+    const outputs = drain(result);
+    // Something shows before the delimiter arrives (not just '' and the whole run)…
+    const beforeDelimiter = outputs.filter((o) => o.length > 0 && o.length < longRun.length);
+    expect(beforeDelimiter.length).toBeGreaterThan(3);
+    // …and none of it before the cap was reached.
+    expect(beforeDelimiter.every((o) => o.length > 40)).toBe(true);
+    // Once a delimiter shows up, sentence mode takes over again.
+    expect(outputs).toContain(`${longRun} and then a sentence.`);
+    expect(outputs[outputs.length - 1]).toBe(text);
+  });
+
   it('treats one or two backticks at a line start as inline code, not a fence', () => {
     const config: TypewriterOption = { unit: 'sentence', delimiters: ['.'] };
     const { result, rerender } = setup({ input: '', typewriter: config, active: true });

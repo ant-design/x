@@ -51,6 +51,7 @@ order: 4
 | minCps | 最低速度（字/秒），速度随 chunk 到达节奏自适应 | `number` | `24` |
 | maxCps | 最高速度（字/秒） | `number` | `3000` |
 | pauseMs | `unit` 为 `char` 时放出分隔符后的停顿（毫秒） | `number` | `0` |
+| maxSentenceChars | `unit` 为 `sentence` 时，自上一个分隔符起最多攒多少个字符；超过后退回逐字放出直到下一个分隔符，防止长 URL、单行 JSON 长时间不显示 | `number` | `120` |
 
 > 放出的永远是 `content` 的前缀；`hasNextChunk` 变为 `false` 时立即放完。
 
@@ -69,6 +70,7 @@ order: 4
 | easing | 缓动函数 | `string` | `'ease-in-out'` |
 | splitBy | 淡入单位。`chunk` 每次新到的文本单独淡入；`sentence` 并入当前句子，到分隔符才开始下一个淡入单元。与 `typewriter` 同时使用时选 `sentence` | `'chunk' \| 'sentence'` | `'chunk'` |
 | delimiters | `splitBy` 为 `sentence` 时的分隔符 | `string[]` | `['。', '！', '？', '.', '!', '?', '\n']` |
+| maxSentenceChars | `splitBy` 为 `sentence` 时一个淡入单元最多容纳的字符数，超过后新到的文本另起一个单元 | `number` | `120` |
 
 > 尾部默认显示 `▋`。可通过 `content` 自定义字符，或通过 `component` 传入自定义 React 组件实现动画、延迟显示等效果。
 >

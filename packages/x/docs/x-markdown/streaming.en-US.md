@@ -51,6 +51,7 @@ Pass an object for per-option control; the object form's behaviour and defaults 
 | minCps | Minimum speed in characters per second; the speed adapts to the chunk cadence | `number` | `24` |
 | maxCps | Maximum speed in characters per second | `number` | `3000` |
 | pauseMs | With `unit: 'char'`, pause after revealing a delimiter (ms) | `number` | `0` |
+| maxSentenceChars | With `unit: 'sentence'`, the longest run since the previous delimiter that is held back; beyond it text is revealed character by character until the next delimiter, so a long URL or one-line JSON blob does not stay invisible | `number` | `120` |
 
 > What is shown is always a prefix of `content`; everything is revealed at once when `hasNextChunk` becomes `false`.
 
@@ -69,6 +70,7 @@ Pass an object for per-option control; the object form's behaviour and defaults 
 | easing | CSS easing function | `string` | `'ease-in-out'` |
 | splitBy | Fade-in unit. `chunk` fades in each arriving piece of text on its own; `sentence` joins it to the current sentence and starts a new unit only after a delimiter. Use `sentence` together with `typewriter` | `'chunk' \| 'sentence'` | `'chunk'` |
 | delimiters | Delimiters used when `splitBy` is `sentence` | `string[]` | `['。', '！', '？', '.', '!', '?', '\n']` |
+| maxSentenceChars | With `splitBy: 'sentence'`, the most characters one fade-in unit holds; text arriving beyond it starts a new unit | `number` | `120` |
 
 > The tail displays `▋` by default. You can customize the character via `content`, or pass a custom React component via `component` for animations, delayed display, and other effects.
 >

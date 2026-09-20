@@ -14,6 +14,9 @@ import type { TypewriterConfig } from '../interface';
 const DEFAULT_MIN_CPS = 24;
 const DEFAULT_MAX_CPS = 3000;
 const DEFAULT_DELIMITERS = ['。', '！', '？', '.', '!', '?', '\n'];
+// Longest run without a delimiter that sentence mode will hold back before
+// falling back to character-by-character reveal.
+const DEFAULT_MAX_SENTENCE_CHARS = 120;
 // Interval between chunks is tracked as an exponential moving average and
 // used as the horizon over which the current backlog should be drained.
 const DEFAULT_CHUNK_INTERVAL_MS = 140;
@@ -137,6 +140,7 @@ const resolveConfig = (typewriter: boolean | TypewriterConfig | undefined) => {
     minCps: config.minCps ?? DEFAULT_MIN_CPS,
     maxCps: config.maxCps ?? DEFAULT_MAX_CPS,
     pauseMs: config.pauseMs ?? 0,
+    maxSentenceChars: config.maxSentenceChars ?? DEFAULT_MAX_SENTENCE_CHARS,
   };
 };
 
@@ -149,7 +153,8 @@ const useTypewriter = (
   active: boolean,
 ): string => {
   const enabled = !!typewriter && active && canAnimate();
-  const { unit, delimiters, minCps, maxCps, pauseMs } = resolveConfig(typewriter);
+  const { unit, delimiters, minCps, maxCps, pauseMs, maxSentenceChars } =
+    resolveConfig(typewriter);
   const delimiterSet = useMemo(() => new Set(delimiters), [delimiters]);
 
   // Everything already present when the hook mounts is shown at once; only
@@ -209,9 +214,22 @@ const useTypewriter = (
         let next: number;
         if (unit === 'sentence') {
           scanBoundaries(scanRef.current, text, delimiterSet);
+          const { boundaries } = scanRef.current;
+          const shown = displayLengthRef.current;
           const cursor = Math.floor(cursorRef.current);
-          next =
-            cursor >= target ? target : Math.max(displayLengthRef.current, floorToBoundary(scanRef.current.boundaries, cursor));
+          const boundary = floorToBoundary(boundaries, cursor);
+          if (cursor >= target) {
+            next = target;
+          } else if (boundary > shown) {
+            next = boundary;
+          } else if (cursor - floorToBoundary(boundaries, shown) > maxSentenceChars) {
+            // No delimiter for a long stretch (a URL, a one-line JSON blob…):
+            // fall back to revealing character by character until one shows up,
+            // instead of showing nothing until the whole run has arrived.
+            next = Math.min(target, alignToCodePoint(text, Math.max(shown + 1, cursor)));
+          } else {
+            next = shown;
+          }
         } else {
           next = Math.max(displayLengthRef.current + 1, Math.floor(cursorRef.current));
           next = Math.min(target, alignToCodePoint(text, next));
@@ -235,7 +253,7 @@ const useTypewriter = (
         stop();
       }
     },
-    [commit, delimiterSet, maxCps, minCps, pauseMs, stop, unit],
+    [commit, delimiterSet, maxCps, maxSentenceChars, minCps, pauseMs, stop, unit],
   );
 
   const schedule = useCallback(() => {

@@ -190,6 +190,12 @@ describe('AnimationText Component', () => {
       ]);
     });
 
+    it('starts a new fade-in unit once a sentence exceeds maxSentenceChars', () => {
+      const config = { splitBy: 'sentence' as const, delimiters: ['.'], maxSentenceChars: 5 };
+      const spans = typeOut('abcdefgh.', config);
+      expect(spans[spans.length - 1]).toEqual(['abcde', 'fgh.']);
+    });
+
     it('splits a multi-sentence chunk without moving text that is already shown', () => {
       const config = { splitBy: 'sentence' as const, delimiters: ['.'] };
       const { container, rerender } = render(<AnimationText text="Fir" animationConfig={config} />);

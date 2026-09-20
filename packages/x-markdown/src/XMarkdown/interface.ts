@@ -28,6 +28,12 @@ export interface AnimationConfig {
    * @default ['。', '！', '？', '.', '!', '?', '\n']
    */
   delimiters?: string[];
+  /**
+   * @description `splitBy` 为 `sentence` 时一个淡入单元最多容纳的字符数，超过后新到的文本另起一个单元
+   * @description With `splitBy: 'sentence'`, the most characters one fade-in unit holds; text arriving beyond it starts a new unit
+   * @default 120
+   */
+  maxSentenceChars?: number;
 }
 
 export interface TypewriterConfig {
@@ -61,6 +67,12 @@ export interface TypewriterConfig {
    * @default 0
    */
   pauseMs?: number;
+  /**
+   * @description `unit` 为 `sentence` 时，自上一个分隔符起最多攒多少个字符；超过后退回逐字放出，直到下一个分隔符出现。防止长 URL、单行 JSON 这类没有标点的内容长时间不显示
+   * @description With `unit: 'sentence'`, the longest run since the previous delimiter that is held back; beyond it text is revealed character by character until the next delimiter appears. Prevents a long URL or a one-line JSON blob from staying invisible
+   * @default 120
+   */
+  maxSentenceChars?: number;
 }
 
 export enum StreamCacheTokenType {
