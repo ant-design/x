@@ -37,8 +37,13 @@ const PACES = { fast: 60, normal: 250, slow: 600 } as const;
 type Pace = keyof typeof PACES;
 const CHUNK = 30;
 
-// CodeHighlighter draws its own container; drop the highlighter's inner
-// background so the block is a single box. Scoped to this demo via props.
+// CodeHighlighter draws its own container. Two things would paint a second
+// box inside it: the highlighter's own <pre> background (turned off through
+// its props) and the x-markdown theme's `pre code` rule, which does not
+// recognise CodeHighlighter's inner <code> and gives it a background and
+// padding too. The rule below overrides that for this demo's panes only.
+const DEMO_CLASS = 'xmd-streaming-preset-demo';
+const demoStyle = `.${DEMO_CLASS} pre code { background: transparent !important; padding: 0 !important; margin: 0 !important; }`;
 const highlightProps = { customStyle: { background: 'transparent', margin: 0 } };
 
 // Block code goes through CodeHighlighter (it is memoised, so a finished
@@ -77,7 +82,7 @@ const Pane: React.FC<PaneProps> = ({ content, streaming, className }) => {
     >
       <div
         ref={ref}
-        className={className}
+        className={`${DEMO_CLASS} ${className}`}
         style={{ height: 400, overflow: 'auto', padding: '0 4px 32px' }}
       >
         <XMarkdown streaming={streaming} components={components}>
@@ -108,7 +113,8 @@ const App = () => {
 
   // Same width and card chrome as the other demos on this page.
   return (
-    <Flex vertical gap={16} style={{ maxWidth: 960, margin: '0 auto' }}>
+    <Flex vertical gap={16} style={{ maxWidth: 1200, margin: '0 auto' }}>
+      <style>{demoStyle}</style>
       <Flex align="center" justify="space-between" wrap gap={8}>
         <Tag color={isStreaming ? 'processing' : 'default'}>
           {isStreaming ? `streaming · ${Math.ceil(index / CHUNK)} chunks` : 'done'}
