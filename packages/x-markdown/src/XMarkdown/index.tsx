@@ -2,14 +2,16 @@ import { clsx } from 'clsx';
 import React, { useMemo } from 'react';
 import { Parser, Renderer } from './core';
 import DebugPanel from './DebugPanel';
-import { useStreaming } from './hooks';
+import { useStreamingCore, useTypewriter } from './hooks';
 import { XMarkdownProps } from './interface';
+import Section from './Section';
+import { resolveStreaming } from './utils/streaming';
 import { resolveTailContent } from './utils/tail';
 import './index.css';
 
 const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const {
-    streaming,
+    streaming: streamingProp,
     config,
     components,
     componentsProps,
@@ -27,6 +29,9 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     debug,
     disableDefaultStyles,
   } = props;
+  // `streaming={true|false}` expands to a frozen preset object, so downstream
+  // memos keyed on `streaming` stay stable across renders.
+  const streaming = resolveStreaming(streamingProp);
   const tailContent = useMemo(() => resolveTailContent(streaming?.tail), [streaming?.tail]);
   const TailComponent = typeof streaming?.tail === 'object' ? streaming.tail.component : undefined;
   const shouldShowTail = !!streaming?.hasNextChunk && tailContent;
@@ -45,7 +50,14 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
   const mergedCls = clsx('x-markdown', disableStyleCls, rootClassName, className);
 
   // ============================ Streaming ============================
-  const output = useStreaming(content || children || '', { streaming, components });
+  // The typewriter runs first so that what reaches the streaming cache is
+  // always a prefix of the previous value.
+  const pacedContent = useTypewriter(
+    content || children || '',
+    streaming?.typewriter,
+    !!streaming?.hasNextChunk,
+  );
+  const { output, sections } = useStreamingCore(pacedContent, { streaming, components });
 
   // ============================ Merge components with xmd-tail ============================
   const mergedComponents = useMemo(() => {
@@ -88,24 +100,30 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     ],
   );
 
+  // The renderer only reads enableAnimation and animationConfig from
+  // `streaming`, so depend on those rather than on the object: an inline
+  // `streaming={{ hasNextChunk }}` literal (the documented usage) must not
+  // rebuild the renderer — and with it every memoised section — per render.
+  const enableAnimation = streaming?.enableAnimation;
+  const animationConfig = streaming?.animationConfig;
   const renderer = useMemo(
     () =>
       new Renderer({
         components: mergedComponents,
         componentsProps,
         dompurifyConfig,
-        streaming,
+        streaming: { enableAnimation, animationConfig },
       }),
-    [mergedComponents, componentsProps, dompurifyConfig, streaming],
+    [mergedComponents, componentsProps, dompurifyConfig, enableAnimation, animationConfig],
   );
 
   const htmlString = useMemo(() => {
-    if (!output) {
+    if (!output || sections) {
       return '';
     }
 
     return parser.parse(output, { injectTail: !!shouldShowTail });
-  }, [output, parser, shouldShowTail]);
+  }, [output, sections, parser, shouldShowTail]);
 
   const renderedContent = useMemo(
     () => (htmlString ? renderer.render(htmlString) : null),
@@ -116,10 +134,25 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     return null;
   }
 
+  // Sections are rendered as siblings inside the same root element, so the
+  // DOM is identical to the whole-document render; only the React tree differs.
+  const sectionedContent = sections
+    ? sections.map((section, index) => (
+        <Section
+          // Sections are positional: section N is stable once section N+1 exists.
+          key={index}
+          content={section}
+          parser={parser}
+          renderer={renderer}
+          injectTail={!!shouldShowTail && index === sections.length - 1}
+        />
+      ))
+    : null;
+
   return (
     <>
       <div className={mergedCls} style={style}>
-        {renderedContent}
+        {sectionedContent ?? renderedContent}
       </div>
       {debug ? <DebugPanel /> : null}
     </>
