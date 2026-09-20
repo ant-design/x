@@ -38,6 +38,8 @@ const genFolderStyle: GenerateStyle<FolderToken> = (token) => {
         '&:before': {
           width: '10px',
           height: '10px',
+          top: '50%',
+          transform: 'translateY(-50%)',
         },
       },
       [`${antCls}-tree-node-content-wrapper`]: {
