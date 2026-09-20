@@ -1,4 +1,4 @@
-import { Marked, Renderer, Token, Tokens } from 'marked';
+import { Marked, Renderer, Token, Tokenizer, Tokens } from 'marked';
 import { XMarkdownProps } from '../interface';
 
 type ParserOptions = {
@@ -58,6 +58,10 @@ const TAIL_MARKER = Symbol('tailMarker');
 const PLACEHOLDER_PREFIX = '\uE000X_MD_NL_';
 const PLACEHOLDER_SUFFIX = '\uE001';
 const PLACEHOLDER_REGEX = /\uE000X_MD_NL_\d+\uE001/g;
+const CJK_AUTOLINK_BOUNDARY = /[），。！？；：、]/u;
+const CJK_PAREN_OPEN = '（';
+const CJK_PAREN_CLOSE = '）';
+const DEFAULT_URL_TOKENIZER = Tokenizer.prototype.url;
 
 // Type for tokens that can be marked for tail injection
 type MarkableToken = Token & { [TAIL_MARKER]?: boolean };
@@ -71,6 +75,7 @@ class Parser {
     this.options = options;
     this.markdownInstance = new Marked();
 
+    this.configureCjkAutolinks();
     this.configureLinkRenderer();
     this.configureParagraphRenderer();
     this.configureCodeRenderer();
@@ -88,6 +93,49 @@ class Parser {
         html(this: Renderer, token: Tokens.HTML | Tokens.Tag) {
           const { raw = '', text = '' } = token;
           return escapeHtml(raw || text, true);
+        },
+      },
+    });
+  }
+
+  private configureCjkAutolinks() {
+    this.markdownInstance.use({
+      tokenizer: {
+        url(src) {
+          const token = DEFAULT_URL_TOKENIZER.call(this, src);
+          if (!token) {
+            return false;
+          }
+
+          let boundaryIndex = -1;
+          let openParens = 0;
+          let characterIndex = 0;
+          for (const character of token.raw) {
+            if (character === CJK_PAREN_OPEN) {
+              openParens += 1;
+            } else if (character === CJK_PAREN_CLOSE && openParens > 0) {
+              openParens -= 1;
+            } else if (CJK_AUTOLINK_BOUNDARY.test(character)) {
+              boundaryIndex = characterIndex;
+              break;
+            }
+            characterIndex += character.length;
+          }
+
+          if (boundaryIndex < 0) {
+            return false;
+          }
+
+          const raw = token.raw.slice(0, boundaryIndex);
+          const removedLength = token.raw.length - raw.length;
+          const href = token.href.slice(0, token.href.length - removedLength);
+          return {
+            ...token,
+            raw,
+            text: raw,
+            href,
+            tokens: [{ type: 'text', raw, text: raw }],
+          };
         },
       },
     });
