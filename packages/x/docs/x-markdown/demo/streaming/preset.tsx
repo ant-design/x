@@ -107,13 +107,16 @@ const App = () => {
     }
   }, [index]);
 
-  const manual: StreamingOption = {
-    hasNextChunk: isStreaming,
-    incremental,
-    incompleteMarkdown: complete ? 'complete' : 'placeholder',
-    typewriter: typewriter ? { unit: sentence ? 'sentence' : 'char' } : false,
-    tail,
-  };
+  const manual = React.useMemo<StreamingOption>(
+    () => ({
+      hasNextChunk: isStreaming,
+      incremental,
+      incompleteMarkdown: complete ? 'complete' : 'placeholder',
+      typewriter: typewriter ? { unit: sentence ? 'sentence' : 'char' } : false,
+      tail,
+    }),
+    [isStreaming, incremental, complete, typewriter, sentence, tail],
+  );
 
   // The whole preset is `streaming={isStreaming}`; the object form is the
   // same thing with each option spelled out.

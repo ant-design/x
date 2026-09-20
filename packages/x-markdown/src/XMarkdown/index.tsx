@@ -100,15 +100,21 @@ const XMarkdown: React.FC<XMarkdownProps> = React.memo((props) => {
     ],
   );
 
+  // The renderer only reads enableAnimation and animationConfig from
+  // `streaming`, so depend on those rather than on the object: an inline
+  // `streaming={{ hasNextChunk }}` literal (the documented usage) must not
+  // rebuild the renderer — and with it every memoised section — per render.
+  const enableAnimation = streaming?.enableAnimation;
+  const animationConfig = streaming?.animationConfig;
   const renderer = useMemo(
     () =>
       new Renderer({
         components: mergedComponents,
         componentsProps,
         dompurifyConfig,
-        streaming,
+        streaming: { enableAnimation, animationConfig },
       }),
-    [mergedComponents, componentsProps, dompurifyConfig, streaming],
+    [mergedComponents, componentsProps, dompurifyConfig, enableAnimation, animationConfig],
   );
 
   const htmlString = useMemo(() => {
