@@ -23,6 +23,7 @@ The Actions component is used for quickly configuring required action buttons or
 <code src="./demo/preset.tsx">Preset Templates</code>
 <code src="./demo/variant.tsx">Using Variants</code>
 <code src="./demo/fadeIn.tsx">Fade In Effect</code>
+<code src="./demo/tooltip.tsx">Tooltip</code>
 
 ## API
 
@@ -45,6 +46,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | key | Unique identifier for custom action | string | - | - |
 | label | Display label for custom action | string | - | - |
+| tooltip | Custom tooltip for the action item. | string \| TooltipProps \| false | - | - |
 | icon | Icon for custom action | ReactNode | - | - |
 | onItemClick | Callback function when custom action button is clicked | (info: [ItemType](#itemtype)) => void | - | - |
 | danger | Syntactic sugar, sets danger icon | boolean | false | - |
