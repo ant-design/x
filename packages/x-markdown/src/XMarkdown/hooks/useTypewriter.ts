@@ -36,6 +36,111 @@ const isHighSurrogate = (text: string, index: number): boolean => {
 const alignToCodePoint = (text: string, length: number): number =>
   length > 0 && length < text.length && isHighSurrogate(text, length - 1) ? length + 1 : length;
 
+const ZWJ = 0x200d;
+const isVariationSelector = (cp: number) => cp === 0xfe0e || cp === 0xfe0f;
+const isSkinTone = (cp: number) => cp >= 0x1f3fb && cp <= 0x1f3ff;
+const isCombiningMark = (cp: number) =>
+  (cp >= 0x0300 && cp <= 0x036f) || (cp >= 0x1ab0 && cp <= 0x1aff) || (cp >= 0x20d0 && cp <= 0x20ff);
+const isRegionalIndicator = (cp: number) => cp >= 0x1f1e6 && cp <= 0x1f1ff;
+const isTagCharacter = (cp: number) => cp >= 0xe0020 && cp <= 0xe007f;
+const KEYCAP = 0x20e3;
+
+/** Code point starting at `index`, and the index right after it. */
+const codePointAt = (text: string, index: number): [number, number] => {
+  const cp = text.codePointAt(index) as number;
+  return [cp, index + (cp > 0xffff ? 2 : 1)];
+};
+
+const codePointBefore = (text: string, index: number): [number, number] => {
+  const start = index >= 2 && isHighSurrogate(text, index - 2) ? index - 2 : index - 1;
+  return [text.codePointAt(start) as number, start];
+};
+
+// Exported for tests only.
+// Grapheme-cluster alignment without Intl.Segmenter: extend past anything
+// that continues the cluster that ends at `length` — a zero-width joiner and
+// the code point it joins (👨‍👩‍👧), variation selectors (❤️), skin tones (👍🏽),
+// combining marks, keycaps (1️⃣), flag tag sequences, and the second half of a
+// regional-indicator pair (🇨🇳). Conservative: it only ever moves forward.
+export const alignToClusterFallback = (text: string, length: number): number => {
+  let end = alignToCodePoint(text, length);
+  // Count regional indicators ending at `end` so pairs are kept together.
+  let indicators = 0;
+  for (let i = end; i > 0; ) {
+    const [cp, start] = codePointBefore(text, i);
+    if (!isRegionalIndicator(cp)) break;
+    indicators += 1;
+    i = start;
+  }
+  for (;;) {
+    if (end >= text.length) return text.length;
+    const [prev] = codePointBefore(text, end);
+    const [next, after] = codePointAt(text, end);
+    if (
+      next === ZWJ ||
+      prev === ZWJ ||
+      isVariationSelector(next) ||
+      isSkinTone(next) ||
+      isCombiningMark(next) ||
+      next === KEYCAP ||
+      isTagCharacter(next)
+    ) {
+      end = after;
+      continue;
+    }
+    if (isRegionalIndicator(next) && isRegionalIndicator(prev) && indicators % 2 === 1) {
+      end = after;
+      indicators += 1;
+      continue;
+    }
+    return end;
+  }
+};
+
+// Intl.Segmenter is not in this package's TS lib target; type the subset used.
+interface GraphemeSegmenter {
+  segment(input: string): Iterable<{ segment: string; index: number }>;
+}
+type IntlWithSegmenter = typeof Intl & {
+  Segmenter?: new (
+    locales?: string | string[],
+    options?: { granularity: 'grapheme' | 'word' | 'sentence' },
+  ) => GraphemeSegmenter;
+};
+
+let segmenter: GraphemeSegmenter | null | undefined;
+const getSegmenter = (): GraphemeSegmenter | null => {
+  if (segmenter === undefined) {
+    const Segmenter = typeof Intl !== 'undefined' ? (Intl as IntlWithSegmenter).Segmenter : undefined;
+    segmenter =
+      typeof Segmenter === 'function' ? new Segmenter(undefined, { granularity: 'grapheme' }) : null;
+  }
+  return segmenter;
+};
+
+// Clusters are short; segmenting a small window around the cut is enough.
+const CLUSTER_WINDOW = 32;
+
+/**
+ * Never cut inside a user-perceived character: a cut is moved forward to the
+ * next grapheme-cluster boundary so an emoji, a flag or an accented letter
+ * is never shown half-built (or as a replacement glyph) for a frame.
+ */
+export const alignToGrapheme = (text: string, length: number): number => {
+  if (length <= 0 || length >= text.length) return length;
+  const seg = getSegmenter();
+  if (!seg) return alignToClusterFallback(text, length);
+  const start = Math.max(0, alignToCodePoint(text, length - CLUSTER_WINDOW));
+  const windowEnd = Math.min(text.length, alignToCodePoint(text, length + CLUSTER_WINDOW));
+  for (const { index, segment } of seg.segment(text.slice(start, windowEnd))) {
+    const clusterStart = start + index;
+    const clusterEnd = clusterStart + segment.length;
+    if (clusterStart >= length) return clusterStart;
+    if (clusterEnd >= length) return clusterEnd;
+  }
+  return windowEnd;
+};
+
 interface BoundaryScan {
   /** Number of characters of the input already scanned */
   scanned: number;
@@ -226,13 +331,13 @@ const useTypewriter = (
             // No delimiter for a long stretch (a URL, a one-line JSON blob…):
             // fall back to revealing character by character until one shows up,
             // instead of showing nothing until the whole run has arrived.
-            next = Math.min(target, alignToCodePoint(text, Math.max(shown + 1, cursor)));
+            next = Math.min(target, alignToGrapheme(text, Math.max(shown + 1, cursor)));
           } else {
             next = shown;
           }
         } else {
           next = Math.max(displayLengthRef.current + 1, Math.floor(cursorRef.current));
-          next = Math.min(target, alignToCodePoint(text, next));
+          next = Math.min(target, alignToGrapheme(text, next));
           if (pauseMs > 0 && next > displayLengthRef.current) {
             // Hold briefly after a delimiter, but never inside code.
             scanBoundaries(scanRef.current, text, delimiterSet);
@@ -264,6 +369,7 @@ const useTypewriter = (
   }, [tick]);
 
   const prevInputRef = useRef(input);
+  
   useEffect(() => {
     const previous = prevInputRef.current;
     prevInputRef.current = input;

@@ -1,6 +1,7 @@
 import { act, render, renderHook } from '@testing-library/react';
 import React from 'react';
 import { useTypewriter } from '../hooks';
+import { alignToClusterFallback, alignToGrapheme } from '../hooks/useTypewriter';
 import type { TypewriterOption } from '../interface';
 
 type Props = { input: string; typewriter?: boolean | TypewriterOption; active: boolean };
@@ -132,18 +133,65 @@ describe('useTypewriter', () => {
     expect(result.current).toBe('a completely different answer');
   });
 
-  it('never cuts a surrogate pair in half', () => {
-    const { result, rerender } = setup({ input: '', typewriter: true, active: true });
-    const text = '😀😁😂🤣😃😄😅😆😉😊😋😎😍😘🥰😗😙😚☺️🙂🤗🤩🤔🤨😐😑😶🙄😏😣😥😮🤐😯😪😫🥱😴😌😛';
-    act(() => {
-      rerender({ input: text, typewriter: true, active: true });
-    });
-    for (const output of drain(result)) {
-      if (output.length === 0) continue;
-      const last = output.charCodeAt(output.length - 1);
-      expect(last >= 0xd800 && last <= 0xdbff).toBe(false);
+  describe('never cuts inside an emoji or another grapheme cluster', () => {
+    // Surrogate pairs, ZWJ families, flags (regional-indicator pairs), skin
+    // tones, variation selectors, keycaps and combining accents, mixed with
+    // plain text so cuts land everywhere.
+    const text =
+      '😀 family 👨‍👩‍👧‍👦 flags 🇨🇳🇯🇵 tone 👍🏽 heart ❤️ key 1️⃣ accent é (é) ' +
+      '🧑‍💻🧑🏿‍🚀 end 😀😁😂🤣😃😄😅😆😉😊😋😎😍😘🥰😗😙😚☺️🙂🤗🤩🤔🤨😐😑😶🙄😏😣😥😮🤐😯😪😫🥱😴😌😛';
+    // Intl.Segmenter is not in the package's TS lib target, but Node has it.
+    type SegmenterCtor = new (
+      locales?: string,
+      options?: { granularity: 'grapheme' },
+    ) => { segment(input: string): Iterable<{ segment: string }> };
+    const intl = Intl as typeof Intl & { Segmenter?: SegmenterCtor };
+    const boundaries = new Set<number>([0]);
+    let pos = 0;
+    for (const { segment } of new (intl.Segmenter as SegmenterCtor)(undefined, {
+      granularity: 'grapheme',
+    }).segment(text)) {
+      pos += segment.length;
+      boundaries.add(pos);
     }
-    expect(result.current).toBe(text);
+
+    const check = () => {
+      const { result, rerender } = setup({ input: '', typewriter: true, active: true });
+      act(() => {
+        rerender({ input: text, typewriter: true, active: true });
+      });
+      const outputs = drain(result);
+      for (const output of outputs) {
+        expect(text.startsWith(output)).toBe(true);
+        expect(boundaries.has(output.length)).toBe(true);
+      }
+      expect(outputs.length).toBeGreaterThan(5);
+      expect(result.current).toBe(text);
+    };
+
+    it('with Intl.Segmenter', () => {
+      check();
+    });
+
+    // Exhaustive: every possible cut position must be moved forward to a
+    // cluster boundary, by the Intl.Segmenter path and by the fallback used
+    // where Intl.Segmenter is missing.
+    it('alignToGrapheme (Intl.Segmenter) lands on a boundary for every cut', () => {
+      for (let len = 0; len <= text.length; len++) {
+        const aligned = alignToGrapheme(text, len);
+        expect(aligned).toBeGreaterThanOrEqual(len);
+        expect(boundaries.has(aligned)).toBe(true);
+      }
+    });
+
+    it('alignToClusterFallback lands on a boundary for every cut', () => {
+      const wrong: string[] = [];
+      for (let len = 0; len <= text.length; len++) {
+        const aligned = alignToClusterFallback(text, len);
+        if (aligned < len || !boundaries.has(aligned)) wrong.push(`${len}→${aligned} …${text.slice(Math.max(0, aligned - 6), aligned)}|`);
+      }
+      expect(wrong).toEqual([]);
+    });
   });
 
   describe("unit: 'sentence'", () => {

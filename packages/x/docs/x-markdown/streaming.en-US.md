@@ -39,7 +39,7 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 | pauseMs | With `unit: 'char'`, pause after revealing a delimiter (ms) | `number` | `0` |
 | maxSentenceChars | With `unit: 'sentence'`, the longest run since the previous delimiter that is held back; beyond it text is revealed character by character until the next delimiter, so a long URL or one-line JSON blob does not stay invisible | `number` | `120` |
 
-> What is shown is always a prefix of `content`; everything is revealed at once when `hasNextChunk` becomes `false`.
+> What is shown is always a prefix of `content`, and a cut never lands inside an emoji (including multi-code-point sequences such as 👨‍👩‍👧‍👦, 🇨🇳, 👍🏽, ❤️) or an accented character; everything is revealed at once when `hasNextChunk` becomes `false`.
 
 ### TailConfig
 

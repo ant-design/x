@@ -39,7 +39,7 @@ order: 4
 | pauseMs | `unit` 为 `char` 时放出分隔符后的停顿（毫秒） | `number` | `0` |
 | maxSentenceChars | `unit` 为 `sentence` 时，自上一个分隔符起最多攒多少个字符；超过后退回逐字放出直到下一个分隔符，防止长 URL、单行 JSON 长时间不显示 | `number` | `120` |
 
-> 放出的永远是 `content` 的前缀；`hasNextChunk` 变为 `false` 时立即放完。
+> 放出的永远是 `content` 的前缀，且不会切在一个 emoji（含 👨‍👩‍👧‍👦、🇨🇳、👍🏽、❤️ 这类多码点序列）或带变音符号的字符中间；`hasNextChunk` 变为 `false` 时立即放完。
 
 ### TailConfig
 
