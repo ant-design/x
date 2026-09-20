@@ -63,6 +63,8 @@ Common props ref：[Common props](/docs/react/common-props)
 | onPaste | Callback for pasting | React.ClipboardEventHandler<`HTMLElement`> | - | - |
 | onPasteFile | Callback for pasting files | (files: FileList) => void | - | - |
 | onKeyDown | Callback for keyboard press | (event: React.KeyboardEvent) => void \| false | - | - |
+| onCompositionStart | Callback when text composition starts | React.CompositionEventHandler<`HTMLTextAreaElement \| HTMLDivElement`> | - | - |
+| onCompositionEnd | Callback when text composition ends | React.CompositionEventHandler<`HTMLTextAreaElement \| HTMLDivElement`> | - | - |
 | onFocus | Callback for getting focus | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
 | onBlur | Callback for losing focus | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
 | placeholder | Placeholder of the input box | string | - | - |
