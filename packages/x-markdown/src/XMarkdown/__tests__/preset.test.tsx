@@ -4,13 +4,14 @@ import XMarkdown, { arePropsEqualIgnoringDomNode, useStreaming } from '../../ind
 import type { ComponentProps } from '../interface';
 
 describe('streaming boolean preset', () => {
-  it('streaming={true} streams with completion, sections and a tail', () => {
+  it('streaming={true} streams with completion and sections, without a tail cursor', () => {
     const { container } = render(<XMarkdown content="a **b" streaming />);
     // incompleteMarkdown: 'complete' → the open emphasis renders as bold…
     expect(container.querySelector('strong')?.textContent).toContain('b');
-    // …and the tail cursor is on (injected after the last text token, so it
-    // sits inside the bold run here).
-    expect(container.querySelector('.xmd-tail')?.textContent).toBe('▋');
+    // …and the tail cursor stays a per-app choice (object form, `tail: true`).
+    expect(container.querySelector('.xmd-tail')).toBeNull();
+    const withTail = render(<XMarkdown content="a **b" streaming={{ hasNextChunk: true, tail: true }} />);
+    expect(withTail.container.querySelector('.xmd-tail')?.textContent).toBe('▋');
   });
 
   it('streaming={false} renders the final content at once, like no streaming at all', () => {

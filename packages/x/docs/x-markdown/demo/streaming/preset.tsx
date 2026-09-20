@@ -48,9 +48,8 @@ interface PaneStats {
 
 interface PaneProps {
   title: string;
-  hint: string;
   content: string;
-  streaming: XMarkdownProps['streaming'];
+  streaming?: XMarkdownProps['streaming'];
   className: string;
   statsRef: React.MutableRefObject<PaneStats>;
   stats: PaneStats;
@@ -63,7 +62,7 @@ interface PaneProps {
 const perCommit = ({ codeRenders, commits }: PaneStats) =>
   commits ? (codeRenders / commits).toFixed(1) : '0';
 
-const Pane: React.FC<PaneProps> = ({ title, hint, content, streaming, className, statsRef, stats }) => {
+const Pane: React.FC<PaneProps> = ({ title, content, streaming, className, statsRef, stats }) => {
   const ref = React.useRef<HTMLDivElement>(null);
 
   // Custom components must keep a stable identity across renders, so they
@@ -96,14 +95,9 @@ const Pane: React.FC<PaneProps> = ({ title, hint, content, streaming, className,
   return (
     <Flex vertical style={{ flex: 1, minWidth: 0 }} gap={6}>
       <Flex align="center" justify="space-between" gap={8}>
-        <Space size={4} direction="vertical" style={{ minWidth: 0 }}>
-          <Text code style={{ fontSize: 12 }}>
-            {title}
-          </Text>
-          <Text type="secondary" style={{ fontSize: 12 }}>
-            {hint}
-          </Text>
-        </Space>
+        <Text code style={{ fontSize: 12 }}>
+          {title}
+        </Text>
         <Tag style={{ marginInlineEnd: 0, whiteSpace: 'nowrap' }} title={`${stats.codeRenders} code renders in ${stats.commits} commits`}>
           code renders / commit: {perCommit(stats)}
         </Tag>
@@ -149,20 +143,13 @@ const App = () => {
   }, [index, pace]);
 
   const content = text.slice(0, index);
-  // Left: what every caller has today — the object form with just hasNextChunk.
-  const legacy = React.useMemo(() => ({ hasNextChunk: isStreaming }), [isStreaming]);
 
   return (
     <Flex vertical gap={12}>
       <Flex align="center" justify="space-between" wrap gap={8}>
-        <Space>
-          <Tag color={isStreaming ? 'processing' : 'default'}>
-            {isStreaming ? `streaming · ${Math.ceil(index / CHUNK)} chunks` : 'done'}
-          </Tag>
-          <Text type="secondary" style={{ fontSize: 12 }}>
-            {CHUNK} chars per chunk
-          </Text>
-        </Space>
+        <Tag color={isStreaming ? 'processing' : 'default'}>
+          {isStreaming ? `streaming · ${Math.ceil(index / CHUNK)} chunks` : 'done'}
+        </Tag>
         <Space>
           <Segmented<Pace>
             size="small"
@@ -193,17 +180,14 @@ const App = () => {
 
       <Flex gap={12}>
         <Pane
-          title="streaming={{ hasNextChunk }}"
-          hint="Before: text lands in blocks, half-written bold is held back, the whole document re-renders per chunk"
+          title="<XMarkdown content={content} />"
           content={content}
-          streaming={legacy}
           className={className}
           statsRef={leftRef}
           stats={leftStats}
         />
         <Pane
-          title="streaming={isStreaming}"
-          hint="Preset: typewriter pacing, bold shows while still open, tail cursor, only the last section re-renders"
+          title="<XMarkdown content={content} streaming={isStreaming} />"
           content={content}
           streaming={isStreaming}
           className={className}

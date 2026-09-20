@@ -10,7 +10,8 @@ const PRESET: Omit<StreamingOption, 'hasNextChunk'> = {
   incremental: true,
   incompleteMarkdown: 'complete',
   typewriter: true,
-  tail: true,
+  // No tail cursor: it is a visual choice for the app to make (`tail: true`
+  // in the object form), not part of "streams well by default".
 };
 
 // Frozen module-level objects so the resolved option keeps a stable identity

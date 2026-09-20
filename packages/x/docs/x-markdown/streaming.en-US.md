@@ -7,13 +7,13 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 ## Code Examples
 
-<code src="./demo/streaming/preset.tsx" description="Same content, same cadence: the left pane is today's streaming={{ hasNextChunk }}, the right pane is the streaming={isStreaming} preset — typewriter pacing, half-written bold shown right away, tail cursor, and only the last section re-rendered per chunk (compare the code render counters). The slow pace makes the difference easiest to see">Streaming preset, side by side</code> <code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
+<code src="./demo/streaming/preset.tsx" description="Left: no streaming handling. Right: streaming={isStreaming}. Use the slow pace to see the difference">Streaming preset, side by side</code> <code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
 
 ## API
 
 ### streaming
 
-`streaming` accepts a boolean or an object. A boolean is the preset: `true` means streaming is in progress — the same as `hasNextChunk: true` with `incremental`, `incompleteMarkdown: 'complete'`, `typewriter` and `tail` switched on; `false` means the stream has ended and the final content is rendered. Pass the `isStreaming` flag your app already has: `<XMarkdown content={content} streaming={isStreaming} />`. Pass an object for per-option control; the object form's behaviour and defaults are unchanged.
+`streaming` accepts a boolean or an object. A boolean is the preset: `true` means streaming is in progress — the same as `hasNextChunk: true` with `incremental`, `incompleteMarkdown: 'complete'` and `typewriter` switched on; `false` means the stream has ended and the final content is rendered. Pass the `isStreaming` flag your app already has: `<XMarkdown content={content} streaming={isStreaming} />`. Pass an object for per-option control; the object form's behaviour and defaults are unchanged.
 
 | Parameter | Description | Type | Default |
 | --- | --- | --- | --- |

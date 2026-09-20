@@ -226,8 +226,8 @@ interface XMarkdownProps {
     [tagName: string]: Record<string, unknown>;
   };
   /**
-   * @description 流式渲染行为的配置。传布尔值即开启预设：`true` 表示还有后续内容（等同 `hasNextChunk: true`）并打开 `incremental`、`incompleteMarkdown: 'complete'`、`typewriter`、`tail`；`false` 表示流已结束，按最终内容一次性渲染。传对象则逐项配置
-   * @description Configuration for streaming rendering behavior. A boolean enables the preset: `true` means more content is coming (same as `hasNextChunk: true`) with `incremental`, `incompleteMarkdown: 'complete'`, `typewriter` and `tail` switched on; `false` means the stream has ended and the final content is rendered at once. Pass an object to configure each option
+   * @description 流式渲染行为的配置。传布尔值即开启预设：`true` 表示还有后续内容（等同 `hasNextChunk: true`）并打开 `incremental`、`incompleteMarkdown: 'complete'`、`typewriter`；`false` 表示流已结束，按最终内容一次性渲染。传对象则逐项配置
+   * @description Configuration for streaming rendering behavior. A boolean enables the preset: `true` means more content is coming (same as `hasNextChunk: true`) with `incremental`, `incompleteMarkdown: 'complete'` and `typewriter` switched on; `false` means the stream has ended and the final content is rendered at once. Pass an object to configure each option
    */
   streaming?: boolean | StreamingOption;
   /**

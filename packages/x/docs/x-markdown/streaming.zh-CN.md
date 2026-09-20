@@ -7,13 +7,13 @@ order: 4
 
 ## 代码示例
 
-<code src="./demo/streaming/preset.tsx" description="同一段内容、同一节奏，左边是原有写法 streaming={{ hasNextChunk }}，右边是 streaming={isStreaming} 预设：打字机匀速放出、写一半的加粗直接显示、尾部光标，以及每个 chunk 只重渲染最后一段（看两边 code 渲染次数）。用 slow 档最容易看出差别">流式预设对比</code> <code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
+<code src="./demo/streaming/preset.tsx" description="左边不做流式处理，右边 streaming={isStreaming}。用 slow 档看差别">流式预设对比</code> <code src="./demo/streaming/format.tsx" description="不完整语法修复与占位">语法处理</code> <code src="./demo/streaming/animation.tsx">渲染控制</code>
 
 ## API
 
 ### streaming
 
-`streaming` 接受布尔值或对象。传布尔值即预设：`true` 表示流式进行中，等同 `hasNextChunk: true` 并打开 `incremental`、`incompleteMarkdown: 'complete'`、`typewriter`、`tail`；`false` 表示流已结束，按最终内容渲染。把应用里现成的 `isStreaming` 直接传进来即可：`<XMarkdown content={content} streaming={isStreaming} />`。传对象则逐项控制，对象形式的行为和默认值没有变化。
+`streaming` 接受布尔值或对象。传布尔值即预设：`true` 表示流式进行中，等同 `hasNextChunk: true` 并打开 `incremental`、`incompleteMarkdown: 'complete'`、`typewriter`；`false` 表示流已结束，按最终内容渲染。把应用里现成的 `isStreaming` 直接传进来即可：`<XMarkdown content={content} streaming={isStreaming} />`。传对象则逐项控制，对象形式的行为和默认值没有变化。
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
