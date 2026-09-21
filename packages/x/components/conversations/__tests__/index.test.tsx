@@ -186,6 +186,46 @@ describe('Conversations Component', () => {
       const { getByText } = render(<Conversations items={items} groupable />);
       expect(getByText('pinned')).toBeInTheDocument();
     });
+
+    it('should not update parent state while rendering in controlled collapsible mode', () => {
+      const onExpand = jest.fn();
+      const App = () => {
+        const [expandedKeys, setExpandedKeys] = React.useState<string[]>(['pinned']);
+
+        return (
+          <Conversations
+            items={items}
+            groupable={{
+              collapsible: true,
+              expandedKeys,
+              onExpand: (keys) => {
+                setExpandedKeys(keys);
+                onExpand(keys);
+              },
+            }}
+          />
+        );
+      };
+
+      const { getByText } = render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>,
+      );
+
+      fireEvent.click(getByText('pinned'));
+
+      expect(
+        jest
+          .mocked(console.error)
+          .mock.calls.some((args) =>
+            args.join(' ').includes('while rendering a different component'),
+          ),
+      ).toBeFalsy();
+      expect(onExpand).toHaveBeenCalledTimes(1);
+      expect(onExpand).toHaveBeenCalledWith([]);
+    });
+
     it('should use custom group title component', () => {
       const { getByText } = render(
         <Conversations items={items} groupable={{ label: (group) => <div>{group}</div> }} />,
