@@ -35,6 +35,12 @@ const localeValues: Required<xLocale> = {
     noService: '未配置文件内容服务',
     loadFailed: '加载文件失败',
   },
+  Choice: {
+    confirmText: '确认',
+    recommended: '推荐',
+    maxSelected: '已选 {count}/{max} 项',
+    disabledHint: '暂不可用',
+  },
 };
 
 export default localeValues;
