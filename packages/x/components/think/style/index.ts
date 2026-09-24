@@ -68,6 +68,9 @@ const genThinkStyle: GenerateStyle<ThinkToken> = (token) => {
         paddingInlineStart: paddingSM,
         borderInlineStart: `${calc(lineWidth).mul(2).equal()} solid ${colorBorder}`,
       },
+      [`${componentCls}-content-hidden`]: {
+        display: 'none',
+      },
       [`&${componentCls}-rtl`]: {
         direction: 'rtl',
       },
