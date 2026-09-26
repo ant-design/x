@@ -23,6 +23,7 @@ The Actions component is used for quickly configuring required action buttons or
 <code src="./demo/preset.tsx">Preset Templates</code>
 <code src="./demo/variant.tsx">Using Variants</code>
 <code src="./demo/fadeIn.tsx">Fade In Effect</code>
+<code src="./demo/tooltip.tsx">Custom Tooltip</code>
 
 ## API
 
@@ -51,6 +52,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | subItems | Sub action items | Omit<ItemType, 'subItems' \| 'triggerSubMenuAction' \| 'actionRender'>[] | - | - |
 | triggerSubMenuAction | Action to trigger the sub-menu | `hover` \| `click` | `hover` | - |
 | actionRender | Custom render action item content | (item: [ItemType](#itemtype)) => ReactNode | - | - |
+| tooltip | Tooltip for the action item, set to false to disable Tooltip | string \| TooltipProps \| false | - | - |
 
 ### Actions.Feedback
 
@@ -80,6 +82,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | label | Display label for custom action | string | - | 2.0.0 |
 | defaultIcon | Default status icon | ReactNode | - | 2.0.0 |
 | runningIcon | Running status icon | ReactNode | - | 2.0.0 |
+| tooltip | Tooltip for the action item, set to false to disable Tooltip | string \| TooltipProps \| false | - | - |
 
 ## Semantic DOM
 
