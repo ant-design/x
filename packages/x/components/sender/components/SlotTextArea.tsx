@@ -525,6 +525,10 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
           if (skillKey) {
             e.preventDefault();
             removeSkill();
+            // 与点击关闭行为保持一致，删除后补发 closable.onClose
+            if (skill?.closable && typeof skill.closable === 'object') {
+              skill.closable.onClose?.(e);
+            }
             return true;
           }
         }
