@@ -9,6 +9,7 @@ import type { GroupInfoType } from './hooks/useGroupable';
 export interface GroupTitleProps {
   children?: React.ReactNode;
   className?: string;
+  virtual?: boolean;
 }
 interface GroupTitleContextType {
   prefixCls?: GetProp<ConfigProviderProps, 'prefixCls'>;
@@ -20,56 +21,64 @@ interface GroupTitleContextType {
 }
 export const GroupTitleContext = React.createContext<GroupTitleContextType>(null!);
 
-const GroupTitle: React.FC<GroupTitleProps> = ({ className, children }) => {
-  const { prefixCls, groupInfo, enableCollapse, expandedKeys, onItemExpand, collapseMotion } =
-    React.useContext(GroupTitleContext) || {};
-  const { label, name, collapsible } = groupInfo || {};
+const GroupTitle = React.forwardRef<HTMLLIElement, GroupTitleProps>(
+  ({ className, children, virtual }, ref) => {
+    const { prefixCls, groupInfo, enableCollapse, expandedKeys, onItemExpand, collapseMotion } =
+      React.useContext(GroupTitleContext) || {};
+    const { label, name, collapsible } = groupInfo || {};
 
-  const labelNode =
-    typeof label === 'function'
-      ? label(name, {
-          groupInfo,
-        })
-      : label || name;
+    const labelNode =
+      typeof label === 'function'
+        ? label(name, {
+            groupInfo,
+          })
+        : label || name;
 
-  const mergeCollapsible = collapsible && enableCollapse;
-  const expandFun = () => {
-    if (mergeCollapsible) {
-      onItemExpand?.(groupInfo.name);
-    }
-  };
+    const mergeCollapsible = collapsible && enableCollapse;
+    const expandFun = () => {
+      if (mergeCollapsible) {
+        onItemExpand?.(groupInfo.name);
+      }
+    };
 
-  const groupOpen = mergeCollapsible && !!expandedKeys?.includes?.(name);
+    const groupOpen = mergeCollapsible && !!expandedKeys?.includes?.(name);
 
-  return (
-    <li className={className}>
-      <div
-        className={clsx(`${prefixCls}-group-title`, {
-          [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
-        })}
-        onClick={expandFun}
-      >
-        {labelNode && <div className={clsx(`${prefixCls}-group-label`)}>{labelNode}</div>}
-        {mergeCollapsible && (
-          <div
-            className={clsx(
-              `${prefixCls}-group-collapse-trigger `,
-              `${prefixCls}-group-collapse-trigger-${groupOpen ? 'open' : 'close'}`,
+    return (
+      <li ref={ref} className={className}>
+        <div
+          className={clsx(`${prefixCls}-group-title`, {
+            [`${prefixCls}-group-title-collapsible`]: mergeCollapsible,
+          })}
+          onClick={expandFun}
+        >
+          {labelNode && <div className={clsx(`${prefixCls}-group-label`)}>{labelNode}</div>}
+          {mergeCollapsible && (
+            <div
+              className={clsx(
+                `${prefixCls}-group-collapse-trigger `,
+                `${prefixCls}-group-collapse-trigger-${groupOpen ? 'open' : 'close'}`,
+              )}
+            >
+              <RightOutlined />
+            </div>
+          )}
+        </div>
+        {!virtual && (
+          <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
+            {({ className: motionClassName, style }, motionRef) => (
+              <div className={clsx(motionClassName)} ref={motionRef} style={style}>
+                {children}
+              </div>
             )}
-          >
-            <RightOutlined />
-          </div>
+          </CSSMotion>
         )}
-      </div>
-      <CSSMotion {...collapseMotion} visible={mergeCollapsible ? groupOpen : true}>
-        {({ className: motionClassName, style }, motionRef) => (
-          <div className={clsx(motionClassName)} ref={motionRef} style={style}>
-            {children}
-          </div>
-        )}
-      </CSSMotion>
-    </li>
-  );
-};
+      </li>
+    );
+  },
+);
+
+if (process.env.NODE_ENV !== 'production') {
+  GroupTitle.displayName = 'GroupTitle';
+}
 
 export default GroupTitle;

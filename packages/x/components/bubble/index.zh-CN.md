@@ -27,9 +27,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 <code src="./demo/loading.tsx">加载中</code> 
 <code src="./demo/animation.tsx">动画</code> 
 <code src="./demo/stream.tsx">流式传输</code> 
-<code src="./demo/custom-content.tsx">自定义渲染内容</code> 
-<code src="./demo/markdown.tsx">渲染markdown内容</code> 
-<code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code> 
+<code src="./demo/custom-content.tsx">自定义渲染内容</code>
+<code src="./demo/markdown.tsx">渲染markdown内容</code>
+<code src="./demo/gpt-vis.tsx">使用 GPT-Vis 渲染图表</code>
 <code src="./demo/editable.tsx">可编辑气泡</code>
 
 ## 列表演示
@@ -39,6 +39,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*uaGhTY1-LL0AAA
 <code src="./demo/list-scroll.tsx">滚动条控制</code>
 <code src="./demo/semantic-list-custom.tsx">语义化自定义</code>
 <code src="./demo/list-extra.tsx">列表扩展参数</code>
+<code src="./demo/virtual-list.tsx">虚拟滚动</code>
 
 ## API
 
@@ -157,6 +158,7 @@ interface BubbleAnimationOption {
 | items | 气泡数据列表，`key`，`role` 必填。`styles`、`classNames` 会覆盖 Bubble.List 对应配置。当结合X SDK [`useXChat`](/x-sdks/use-x-chat-cn) 使用时可传入`status` 帮助 Bubble 对配置进行管理 | (([BubbleProps](#bubble) & [DividerBubbleProps](#bubbledivider)) & { key: string \| number, role: string , status: MessageStatus, extraInfo?: AnyObject})[] | - | - |
 | autoScroll | 是否自动滚动 | boolean | `true` | - |
 | role | 气泡角色默认配置 | [RoleType](#roletype) | - | - |
+| virtual | 是否开启虚拟滚动，数据量较大时（>100 条）建议开启 | boolean | `false` | - |
 
 #### MessageStatus
 
