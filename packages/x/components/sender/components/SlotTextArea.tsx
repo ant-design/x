@@ -61,6 +61,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     onKeyDown,
     onPaste,
     onPasteFile,
+    pasteFilter,
     disabled,
     readOnly,
     submitType = 'enter',
@@ -647,7 +648,7 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
     }
     if (text) {
       let success = false;
-      const cleanedText = getCleanedText(text);
+      const cleanedText = pasteFilter ? pasteFilter(text) : getCleanedText(text);
       try {
         success = document.execCommand('insertText', false, cleanedText);
       } catch (err) {

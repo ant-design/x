@@ -640,6 +640,54 @@ describe('Sender Slot Component', () => {
 
       expect(onPaste).toHaveBeenCalled();
     });
+    it('should call pasteFilter with the raw pasted text and use its result', () => {
+      document.execCommand = jest.fn();
+      // pasteFilter replaces the default getCleanedText: it receives the raw
+      // pasted text (line breaks intact) and its return value is what's inserted.
+      const pasteFilter = jest.fn((text: string) => `<<${text}>>`);
+      const slotConfig = [textSlotConfig];
+      const { container } = render(<Sender slotConfig={slotConfig} pasteFilter={pasteFilter} />);
+
+      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+      fireEvent.paste(inputArea, {
+        clipboardData: {
+          // multi-line raw text: newlines are NOT stripped before pasteFilter.
+          getData: () => 'pasted\nmultiline\n',
+          files: [],
+        },
+      });
+
+      expect(pasteFilter).toHaveBeenCalledTimes(1);
+      // Input to pasteFilter is the raw pasted text, with newlines preserved.
+      expect(pasteFilter.mock.calls[0][0]).toBe('pasted\nmultiline\n');
+      // The filter's return value is what gets inserted.
+      expect(document.execCommand).toHaveBeenCalledWith(
+        'insertText',
+        false,
+        '<<pasted\nmultiline\n>>',
+      );
+    });
+    it('should apply pasteFilter that preserves line breaks', () => {
+      document.execCommand = jest.fn();
+      // Returning the text as-is keeps the original line breaks in the
+      // inserted content, which the default getCleanedText would have stripped.
+      const pasteFilter = jest.fn((text: string) => text);
+      const slotConfig = [textSlotConfig];
+      const { container } = render(<Sender slotConfig={slotConfig} pasteFilter={pasteFilter} />);
+
+      const inputArea = container.querySelector('[role="textbox"]') as HTMLElement;
+
+      fireEvent.paste(inputArea, {
+        clipboardData: {
+          getData: () => 'a\nb\nc',
+          files: [],
+        },
+      });
+
+      expect(pasteFilter).toHaveBeenCalledTimes(1);
+      expect(document.execCommand).toHaveBeenCalledWith('insertText', false, 'a\nb\nc');
+    });
     it('should handle select all keyboard shortcut', () => {
       const onKeyDown = jest.fn();
       const onSubmit = jest.fn();
