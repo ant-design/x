@@ -1,4 +1,4 @@
-import type { DropdownProps, MenuProps } from 'antd';
+import type { DropdownProps, MenuProps, TooltipProps } from 'antd';
 import type React from 'react';
 
 export type SemanticType = 'root' | 'item' | 'itemDropdown';
@@ -79,6 +79,11 @@ export interface ItemType {
    * @descEN Display label for the custom action.
    */
   label?: string;
+  /**
+   * @desc 自定义操作的 Tooltip，设置为 false 时禁用
+   * @descEN Custom tooltip for the action, set to false to disable it.
+   */
+  tooltip?: string | TooltipProps | false;
   /**
    * @desc 自定义操作的图标
    * @descEN Icon for the custom action.

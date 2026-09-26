@@ -1,11 +1,12 @@
 import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
-import { Tooltip } from 'antd';
+import type { TooltipProps } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useMobile from '../_util/hooks/use-mobile';
 import { useXProviderContext } from '../x-provider';
 import useStyle from './style';
+import { renderWithTooltip } from './tooltip';
 
 export enum ACTIONS_ITEM_STATUS {
   /**
@@ -44,6 +45,11 @@ export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivEleme
    */
   label?: string;
   /**
+   * @desc 自定义操作的 Tooltip，设置为 false 时禁用
+   * @descEN Custom tooltip for the action, set to false to disable it.
+   */
+  tooltip?: string | TooltipProps | false;
+  /**
    * @desc 执行中图标
    * @descEN running icon
    */
@@ -77,6 +83,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     defaultIcon,
     runningIcon,
     label,
+    tooltip,
     className,
     classNames = {},
     styles = {},
@@ -137,8 +144,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
       {iconNode}
     </div>
   );
-
-  return isMobile ? innerNode : <Tooltip title={label}>{innerNode}</Tooltip>;
+  return renderWithTooltip(innerNode, tooltip, label, isMobile);
 };
 
 export default ActionsItem;
