@@ -158,7 +158,7 @@
     "chalk": "^5.4.1",
     "cheerio": "^1.0.0",
     "cli-progress": "^3.12.0",
-    "copy-to-clipboard": "^3.3.3",
+    "copy-to-clipboard": "^4.0.2",
     "cross-env": "^10.1.0",
     "cross-fetch": "^4.0.0",
     "crypto": "^1.0.1",
