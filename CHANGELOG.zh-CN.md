@@ -15,6 +15,24 @@ tag: vVERSION
 
 ---
 
+## 2.10.0
+
+`2026-08-31`
+
+### @ant-design/x
+
+- 🐛 修复 Mermaid 大图缩放上限为 3 倍，以及 PNG 导出受当前平移和缩放状态影响的问题；现在会按完整原始图表导出。[#2035](https://github.com/ant-design/x/pull/2035) 由 [advance-hub](https://github.com/advance-hub) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 新增 `componentsProps`，无需包装函数即可向自定义组件稳定传递按标签配置的属性，同时保护内部计算的渲染属性。[#1993](https://github.com/ant-design/x/pull/1993) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 避免将货币金额误解析为 LaTeX，并支持行内公式中的转义美元符号。[#1997](https://github.com/ant-design/x/pull/1997) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 消除流式 `AnimationText` 更新中一次不必要的额外渲染。[#1998](https://github.com/ant-design/x/pull/1998) 由 [cactuser-Lu](https://github.com/cactuser-Lu) 提交
+
+### 其他
+
+- 🐛 修复 Token 颜色预览浮层的定位与交互问题。[#1994](https://github.com/ant-design/x/pull/1994) 由 [cc-hearts](https://github.com/cc-hearts) 提交
+
 ## 2.9.0
 
 `2026-07-23`

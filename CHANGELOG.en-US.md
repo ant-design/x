@@ -16,6 +16,24 @@ tag: vVERSION
 
 ---
 
+## 2.10.0
+
+`2026-08-31`
+
+### @ant-design/x
+
+- 🐛 Fix Mermaid diagrams being capped at 3x zoom and PNG exports being affected by the current pan and zoom state; exports now use the complete original diagram. [#2035](https://github.com/ant-design/x/pull/2035) by [advance-hub](https://github.com/advance-hub)
+
+### @ant-design/x-markdown
+
+- 🆕 Add `componentsProps` for passing stable, tag-specific props to custom components without wrapper functions, while protecting internally computed rendering props. [#1993](https://github.com/ant-design/x/pull/1993) by [Div627](https://github.com/Div627)
+- 🐛 Avoid parsing currency as LaTeX while supporting escaped dollar signs inside inline formulas. [#1997](https://github.com/ant-design/x/pull/1997) by [Div627](https://github.com/Div627)
+- 🐛 Remove an unnecessary extra render from streaming `AnimationText` updates. [#1998](https://github.com/ant-design/x/pull/1998) by [cactuser-Lu](https://github.com/cactuser-Lu)
+
+### Others
+
+- 🐛 Fix the token color preview popover positioning and interaction behavior. [#1994](https://github.com/ant-design/x/pull/1994) by [cc-hearts](https://github.com/cc-hearts)
+
 ## 2.9.0
 
 `2026-07-23`
