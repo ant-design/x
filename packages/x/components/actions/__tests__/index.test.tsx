@@ -1,6 +1,6 @@
 import { ActionsProps } from '@ant-design/x';
 import React from 'react';
-import { fireEvent, render } from '../../../tests/utils';
+import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
 
 import { findItem } from '../ActionsMenu';
 import Actions from '../index';
@@ -80,6 +80,102 @@ describe('Actions Component', () => {
   it('renders sub-menu items', () => {
     const { getByText } = render(<Actions items={items} onClick={mockOnClick} />);
     expect(getByText('icon1')).toBeInTheDocument();
+  });
+});
+
+describe('Actions tooltip', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
+  it('renders default tooltip with label', async () => {
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: '1',
+            label: 'Action 1',
+            icon: <span>icon1</span>,
+          },
+        ]}
+      />,
+    );
+    const trigger = container.querySelector('.ant-actions-icon')!;
+    fireEvent.mouseEnter(trigger);
+    await waitFakeTimer();
+    const tooltip = document.querySelector('.ant-tooltip');
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip?.textContent).toBe('Action 1');
+  });
+
+  it('renders custom tooltip string', async () => {
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: '1',
+            label: 'Action 1',
+            icon: <span>icon1</span>,
+            tooltip: 'Custom Tooltip Text',
+          },
+        ]}
+      />,
+    );
+    const trigger = container.querySelector('.ant-actions-icon')!;
+    fireEvent.mouseEnter(trigger);
+    await waitFakeTimer();
+    const tooltip = document.querySelector('.ant-tooltip');
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip?.textContent).toBe('Custom Tooltip Text');
+  });
+
+  it('renders custom tooltip props', async () => {
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: '1',
+            label: 'Action 1',
+            icon: <span>icon1</span>,
+            tooltip: {
+              title: 'Custom Title',
+              placement: 'bottom',
+              color: 'blue',
+            },
+          },
+        ]}
+      />,
+    );
+    const trigger = container.querySelector('.ant-actions-icon')!;
+    fireEvent.mouseEnter(trigger);
+    await waitFakeTimer();
+    const tooltip = document.querySelector('.ant-tooltip');
+    expect(tooltip).toBeInTheDocument();
+    expect(tooltip?.textContent).toBe('Custom Title');
+  });
+
+  it('does not render tooltip when tooltip is false', async () => {
+    const { container } = render(
+      <Actions
+        items={[
+          {
+            key: '1',
+            label: 'Action 1',
+            icon: <span>icon1</span>,
+            tooltip: false,
+          },
+        ]}
+      />,
+    );
+    const trigger = container.querySelector('.ant-actions-icon')!;
+    fireEvent.mouseEnter(trigger);
+    await waitFakeTimer();
+    const tooltip = document.querySelector('.ant-tooltip');
+    expect(tooltip).not.toBeInTheDocument();
   });
 });
 
