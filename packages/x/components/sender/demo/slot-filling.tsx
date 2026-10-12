@@ -10,6 +10,7 @@ const otherSlotConfig: SlotConfig = [
     type: 'content',
     key: 'location',
     props: { defaultValue: 'Beijing', placeholder: '[Please enter the location]' },
+    formatResult: (value: any) => `destination ${value} `,
   },
   { type: 'text', value: 'by' },
   {
