@@ -691,6 +691,55 @@ describe('Sender Slot Component', () => {
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
     });
+    it('should remove a newline immediately before a slot', () => {
+      const onChange = jest.fn();
+      const ref = createRef<SenderRef>();
+      const { container } = render(
+        <Sender
+          ref={ref}
+          submitType="shiftEnter"
+          slotConfig={[
+            { type: 'text', value: 'Text before slot' },
+            tagSlotConfig,
+            { type: 'text', value: ' text after slot' },
+          ]}
+          onChange={onChange}
+        />,
+      );
+      const dom = ref.current?.inputElement as HTMLElement;
+      const slotDom = container.querySelector('[data-slot-key="tag1"]') as HTMLElement;
+      const trailingText = Array.from(dom.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent === ' text after slot',
+      ) as Text;
+      const nextLine = document.createElement('div');
+
+      nextLine.append(document.createElement('br'), slotDom, trailingText);
+      dom.append(nextLine);
+      onChange.mockClear();
+
+      setupDOMMocks(
+        {
+          rangeCount: 1,
+          focusOffset: 0,
+          anchorNode: nextLine,
+          anchorOffset: 0,
+          focusNode: nextLine,
+          isCollapsed: true,
+        },
+        {
+          startContainer: nextLine,
+          endContainer: nextLine,
+          startOffset: 0,
+          endOffset: 0,
+          collapsed: true,
+        },
+      );
+
+      expect(fireEvent.keyDown(dom, { key: 'Backspace' })).toBe(false);
+      expect(nextLine).not.toBeInTheDocument();
+      expect(slotDom.parentElement).toBe(dom);
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
     it('should handle backspace key in content slot', () => {
       const onSubmit = jest.fn();
       const slotConfig = [contentSlotConfigWithValue];
