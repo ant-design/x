@@ -140,6 +140,8 @@ export interface SenderProps
   ) => void;
   onCancel?: VoidFunction;
   onKeyDown?: (event: React.KeyboardEvent) => void | false;
+  onCompositionStart?: React.CompositionEventHandler<HTMLTextAreaElement | HTMLDivElement>;
+  onCompositionEnd?: React.CompositionEventHandler<HTMLTextAreaElement | HTMLDivElement>;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
   onPasteFile?: (files: FileList) => void;
   components?: SenderComponents;

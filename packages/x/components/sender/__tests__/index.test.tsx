@@ -179,6 +179,37 @@ describe('Sender Component', () => {
     });
   });
 
+  it('should expose composition events without changing submit behavior', () => {
+    const onCompositionStart = jest.fn();
+    const onCompositionEnd = jest.fn();
+    const onSubmit = jest.fn();
+    const { container } = render(
+      <Sender
+        value="bamboo"
+        onCompositionStart={onCompositionStart}
+        onCompositionEnd={onCompositionEnd}
+        onSubmit={onSubmit}
+      />,
+    );
+    const textarea = container.querySelector('textarea')!;
+
+    fireEvent.compositionStart(textarea, { data: 'ban' });
+    expect(onCompositionStart).toHaveBeenCalledTimes(1);
+    expect(onCompositionStart.mock.calls[0][0].type).toBe('compositionstart');
+    expect(onCompositionStart.mock.calls[0][0].target).toBe(textarea);
+
+    fireEvent.keyDown(textarea, { key: 'Enter' });
+    expect(onSubmit).not.toHaveBeenCalled();
+
+    fireEvent.compositionEnd(textarea, { data: '竹' });
+    expect(onCompositionEnd).toHaveBeenCalledTimes(1);
+    expect(onCompositionEnd.mock.calls[0][0].type).toBe('compositionend');
+    expect(onCompositionEnd.mock.calls[0][0].target).toBe(textarea);
+
+    fireEvent.keyDown(textarea, { key: 'Enter' });
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+
   it('Sender.Header not can be focus', () => {
     const { container } = render(
       <Sender
