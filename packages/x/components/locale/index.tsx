@@ -43,6 +43,12 @@ export interface xLocale {
     noService: string;
     loadFailed: string;
   };
+  Choice?: {
+    confirmText: string;
+    recommended: string;
+    maxSelected: string;
+    disabledHint: string;
+  };
 }
 
 export type Locale = xLocale & antdLocale;

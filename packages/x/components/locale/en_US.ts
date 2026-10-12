@@ -35,6 +35,12 @@ const localeValues: Required<xLocale> = {
     noService: 'File content service not configured',
     loadFailed: 'Failed to load file',
   },
+  Choice: {
+    confirmText: 'Confirm',
+    recommended: 'Recommended',
+    maxSelected: '{count}/{max} selected',
+    disabledHint: 'Unavailable',
+  },
 };
 
 export default localeValues;
