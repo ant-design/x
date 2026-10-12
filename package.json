@@ -35,7 +35,7 @@
     "@madccc/duplicate-package-checker-webpack-plugin": "^1.0.0",
     "@size-limit/file": "^12.0.0",
     "@testing-library/react": "^16.3.0",
-    "antd": "^6.1.1",
+    "antd": "^6.6.4",
     "circular-dependency-plugin": "^5.2.2",
     "dekko": "^0.2.1",
     "encoding": "^0.1.13",

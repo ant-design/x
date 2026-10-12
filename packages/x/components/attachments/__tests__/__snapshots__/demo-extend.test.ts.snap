@@ -229,7 +229,7 @@ exports[`renders components/attachments/demo/overflow.tsx extend context correct
         class="ant-segmented-group"
       >
         <label
-          class="ant-segmented-item ant-segmented-item-selected"
+          class="ant-segmented-item ant-segmented-item-selected ant-segmented-item-selected-text"
         >
           <input
             checked=""

@@ -2,6 +2,7 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import XProvider from '../../x-provider';
 import CodeHighlighter from '../index';
+import type { CodeHighlighterProps } from '../interface';
 
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
@@ -178,6 +179,27 @@ describe('CodeHighlighter', () => {
       expect(container.firstChild).toBeInTheDocument();
     });
     expect(container.querySelector('.ant-codeHighlighter-header')).toBeNull();
+  });
+
+  it('does not re-render when props are unchanged (ignoring domNode)', async () => {
+    // `header` is called during render, so a stable header function counts renders.
+    const header = jest.fn(() => null);
+    // A fresh `domNode` per render is what XMarkdown passes to `code` components.
+    const props = (): CodeHighlighterProps =>
+      ({ lang: 'javascript', header, children: 'const a = 1;', domNode: {} }) as CodeHighlighterProps;
+    const { rerender, container } = render(<CodeHighlighter {...props()} />);
+    await waitFor(() => {
+      expect(container.querySelector('pre')).toBeInTheDocument();
+    });
+    const renders = header.mock.calls.length;
+    expect(renders).toBeGreaterThan(0);
+
+    rerender(<CodeHighlighter {...props()} />);
+    rerender(<CodeHighlighter {...props()} />);
+    expect(header.mock.calls.length).toBe(renders);
+
+    rerender(<CodeHighlighter {...props()} children="const a = 2;" />);
+    expect(header.mock.calls.length).toBeGreaterThan(renders);
   });
 
   it('render normal code with no children', () => {

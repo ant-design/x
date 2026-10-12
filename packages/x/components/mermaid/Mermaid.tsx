@@ -3,7 +3,7 @@ import { Button, Segmented, Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import throttle from 'lodash.throttle';
 import mermaid, { type MermaidConfig } from 'mermaid';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import warning from '../_util/warning';
 import Actions from '../actions';
@@ -64,7 +64,10 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  const id = `mermaid-${uuid++}-${children?.length || 0}`;
+  // 始终保存下一次（可能被节流延后的）渲染要使用的入参
+  const latestRef = useRef({ children, renderType });
+  // 每发起一次渲染自增，用于丢弃已过期的渲染结果
+  const requestRef = useRef(0);
 
   // ============================ locale ============================
   const [contextLocale] = useLocale('Mermaid', locale_EN.Mermaid);
@@ -103,28 +106,58 @@ const Mermaid: React.FC<MermaidProps> = React.memo((props) => {
   }, [config]);
 
   // ============================ render mermaid ============================
-  const renderDiagram = throttle(async () => {
-    if (!children || !containerRef.current || renderType === RenderType.Code) return;
+  // 节流函数只创建一次，否则每次渲染都会新建实例，节流实际上不会生效。
+  // 最新的入参通过 latestRef 读取。
+  const renderDiagram = useMemo(
+    () =>
+      throttle(async () => {
+        const { children: code, renderType: type } = latestRef.current;
+        if (!code || !containerRef.current || type === RenderType.Code) return;
 
-    try {
-      const isValid = await mermaid.parse(children, { suppressErrors: true });
-      if (!isValid) throw new Error('Invalid Mermaid syntax');
+        requestRef.current += 1;
+        const requestId = requestRef.current;
+        // 每次渲染都使用独立的 id：mermaid 通过 `[id="..."]` 在整个 document 中查找
+        // 渲染目标，复用 id 会让它画进我们已经插入的 SVG 里，返回的却是空图，导致图表空白。
+        uuid += 1;
+        const id = `mermaid-${uuid}`;
 
-      const { svg } = await mermaid.render(id, children);
-      containerRef.current.innerHTML = svg;
-    } catch (error) {
-      warning(false, 'Mermaid', `Render failed: ${error}`);
-    }
-  }, 100);
+        try {
+          const isValid = await mermaid.parse(code, { suppressErrors: true });
+          if (!isValid) throw new Error('Invalid Mermaid syntax');
+
+          const { svg } = await mermaid.render(id, code);
+          // 丢弃已被新请求取代的结果，避免旧内容覆盖最新图表
+          if (requestId !== requestRef.current || !containerRef.current) return;
+          containerRef.current.innerHTML = svg;
+        } catch (error) {
+          warning(false, 'Mermaid', `Render failed: ${error}`);
+        }
+      }, 100),
+    [],
+  );
 
   useEffect(() => {
-    if (renderType === RenderType.Code && containerRef.current) {
+    latestRef.current = { children, renderType };
+
+    if (renderType === RenderType.Code) {
       // 清理图表内容，避免在代码视图下出现渲染错误
-      containerRef.current.innerHTML = '';
+      renderDiagram.cancel();
+      requestRef.current += 1;
+      if (containerRef.current) {
+        containerRef.current.innerHTML = '';
+      }
     } else {
       renderDiagram();
     }
-  }, [children, renderType, config]);
+  }, [children, renderType, config, renderDiagram]);
+
+  useEffect(
+    () => () => {
+      renderDiagram.cancel();
+      requestRef.current += 1;
+    },
+    [renderDiagram],
+  );
 
   useEffect(() => {
     const container = containerRef.current;

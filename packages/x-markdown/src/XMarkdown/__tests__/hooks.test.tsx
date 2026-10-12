@@ -1,7 +1,8 @@
 import { act, render, renderHook } from '@testing-library/react';
 import React from 'react';
+import XMarkdownProbe from '../../index';
 import { useStreaming } from '../hooks';
-import type { XMarkdownProps } from '../interface';
+import type { StreamingOption, XMarkdownProps } from '../interface';
 
 // 流处理功能测试 - 基础测试用例
 const streamingTestCases = [
@@ -1154,6 +1155,265 @@ describe('XMarkdown hooks', () => {
 
       // Inside an open fence every char is committed as-is (no token recognition)
       expect(result.current).toBe(full);
+    });
+  });
+
+  describe('useStreaming incremental table state', () => {
+    /** Feed one character at a time, staying in streaming mode, and keep every output. */
+    const stream = (text: string) => {
+      const outputs: string[] = [];
+      const { result, rerender } = renderHook(
+        ({ input }: { input: string }) => useStreaming(input, { streaming: { hasNextChunk: true } }),
+        { initialProps: { input: '' } },
+      );
+
+      for (let i = 1; i <= text.length; i++) {
+        act(() => {
+          rerender({ input: text.slice(0, i) });
+        });
+        outputs.push(result.current);
+      }
+
+      // Indexed by prefix so each assertion names the state it pins.
+      return { outputs, at: (prefix: string) => outputs[prefix.length - 1] };
+    };
+
+    it('should hold a table back until its delimiter row is terminated', () => {
+      const text = '| H1 | H2 |\n| --- | --- |\n| a | b |\n\nnext paragraph';
+      const { outputs, at } = stream(text);
+
+      // Header only, and header plus an unterminated delimiter row, are both
+      // still incomplete, so nothing is emitted yet.
+      expect(at('| H1 | H2 |')).toBe('');
+      expect(at('| H1 | H2 |\n| --- | --- |')).toBe('');
+      // Once the delimiter row ends the table has more than two lines and is
+      // emitted as-is rather than replaced by a placeholder.
+      expect(at('| H1 | H2 |\n| --- | --- |\n')).toBe('| H1 | H2 |\n| --- | --- |\n');
+      // The blank line releases the token; the paragraph after it streams normally.
+      expect(outputs[outputs.length - 1]).toBe(text);
+    });
+
+    it('should start a fresh table after the previous one ended', () => {
+      const text =
+        '| H1 | H2 |\n| --- | --- |\n| a | b |\n\n| H3 | H4 |\n| --- | --- |\n| c | d |';
+      const { outputs, at } = stream(text);
+      const firstTable = '| H1 | H2 |\n| --- | --- |\n| a | b |\n\n';
+
+      // The second table's header is held back on its own, which only works if
+      // the state was reset when the first table committed.
+      expect(at(`${firstTable}| H3 | H4 |`)).toBe(firstTable);
+      expect(outputs[outputs.length - 1]).toBe(text);
+    });
+
+    it('should not treat a pipe table inside a fenced code block as a table', () => {
+      const text = '```\n| H1 | H2 |\n| --- | --- |\n| a | b |\n```\n';
+      const { outputs, at } = stream(text);
+
+      // Inside a fence every character is committed as-is, so nothing is held back.
+      expect(at('```\n| H1 | H2 |')).toBe('```\n| H1 | H2 |');
+      expect(outputs[outputs.length - 1]).toBe(text);
+    });
+
+    it('should keep the delimiter verdict frozen once that row is terminated', () => {
+      const text = '| H1 | H2 |\n| --- | --- |\n| a-b | c---d |\n| --- | --- |\n\n';
+      const { outputs, at } = stream(text);
+      const upToSecondDelimiter = '| H1 | H2 |\n| --- | --- |\n| a-b | c---d |\n| --- | --- |';
+
+      // A later row full of pipes and dashes must not re-open the verdict.
+      expect(at(upToSecondDelimiter)).toBe(upToSecondDelimiter);
+      expect(outputs[outputs.length - 1]).toBe(text);
+    });
+
+    it('should commit immediately once the delimiter row is known to be invalid', () => {
+      const text = '| H1 | H2 |\n| xx | yy |\n';
+      const { outputs, at } = stream(text);
+
+      expect(at('| H1 | H2 |')).toBe('');
+      // `| x` cannot be a delimiter row, so the table token is given up and the
+      // text flows through from that character on.
+      expect(at('| H1 | H2 |\n| x')).toBe('| H1 | H2 |\n| x');
+      // The trailing `| yy |` opens a new pending table, so it is still held
+      // back while the stream is open.
+      expect(outputs[outputs.length - 1]).toBe('| H1 | H2 |\n| xx ');
+    });
+
+    it('should stay linear on a long table', () => {
+      // The table token is held until its terminating blank line, so a full
+      // re-scan of the pending buffer per character would be O(N²) here — the
+      // same trap the fenced-code-block state already avoids.
+      const rows = Array.from({ length: 2000 }, (_, i) => `| key${i} | value${i} |`).join('\n');
+      const full = `| H1 | H2 |\n| --- | --- |\n${rows}\n\ntail`;
+
+      const { result, rerender } = renderHook(({ input, config }) => useStreaming(input, config), {
+        initialProps: {
+          input: full.slice(0, 100),
+          config: { streaming: { hasNextChunk: true } },
+        },
+      });
+
+      act(() => {
+        rerender({ input: full, config: { streaming: { hasNextChunk: true } } });
+      });
+
+      expect(result.current).toBe(full);
+    });
+  });
+
+  describe('useStreaming indented fences', () => {
+    it('treats a fence indented by up to three spaces as code', () => {
+      // Inside a fence nothing is held back, so an incomplete link streams
+      // through as-is; a four-space indent is indented code, not a fence, and
+      // the link on the next line is recognised again.
+      const config = { streaming: { hasNextChunk: true } };
+      const fenced = renderHook(() => useStreaming('  ```\n[link](https://x', config));
+      expect(fenced.result.current).toBe('  ```\n[link](https://x');
+      const closed = renderHook(() =>
+        useStreaming('   ~~~\ncode\n   ~~~\n[link](https://x', config),
+      );
+      expect(closed.result.current).toBe('   ~~~\ncode\n   ~~~\n');
+      const notAFence = renderHook(() => useStreaming('    ```\n[link](https://x', config));
+      expect(notAFence.result.current).toBe('    ```\n');
+    });
+  });
+
+  describe("useStreaming incompleteMarkdown: 'complete'", () => {
+    const streamWith = (
+      text: string,
+      streaming: StreamingOption,
+      components?: XMarkdownProps['components'],
+    ) => {
+      const outputs: string[] = [];
+      const { result, rerender } = renderHook(
+        ({ input }: { input: string }) =>
+          useStreaming(input, { streaming: { hasNextChunk: true, ...streaming }, components }),
+        { initialProps: { input: '' } },
+      );
+      for (let i = 1; i <= text.length; i++) {
+        act(() => {
+          rerender({ input: text.slice(0, i) });
+        });
+        outputs.push(result.current);
+      }
+      return { outputs, at: (prefix: string) => outputs[prefix.length - 1] };
+    };
+    const complete = (text: string, components?: XMarkdownProps['components']) =>
+      streamWith(text, { incompleteMarkdown: 'complete' }, components);
+
+    it('closes emphasis that is still open, keeping trailing whitespace outside', () => {
+      const { at } = complete('see **bold and more** end');
+      expect(at('see **bold')).toBe('see **bold**');
+      expect(at('see **bold and ')).toBe('see **bold and** ');
+      expect(at('see **bold and more**')).toBe('see **bold and more**');
+      expect(at('see **')).toBe('see ');
+      expect(complete('a *em').at('a *em')).toBe('a *em*');
+      expect(complete('a ___x').at('a ___x')).toBe('a ___x___');
+    });
+
+    it('closes inline code that is still open', () => {
+      const { at } = complete('run `npm i` now');
+      expect(at('run `npm')).toBe('run `npm`');
+      expect(at('run `')).toBe('run ');
+      expect(at('run `npm i`')).toBe('run `npm i`');
+    });
+
+    it('shows the text of a link that is still open', () => {
+      const { at } = complete('see [docs](https://x.ant.design) now');
+      expect(at('see [do')).toBe('see do');
+      expect(at('see [docs](https://x')).toBe('see docs');
+      expect(at('see [')).toBe('see ');
+      expect(at('see [docs](https://x.ant.design)')).toBe('see [docs](https://x.ant.design)');
+    });
+
+    it('completes emphasis inside a list item that is still open', () => {
+      const { at } = complete('- **bo');
+      expect(at('- ')).toBe('');
+      expect(at('- **bo')).toBe('- **bo**');
+    });
+
+    it('still holds back images, html and single-row tables', () => {
+      expect(complete('![alt](https://x').at('![alt](https://x')).toBe('');
+      expect(complete('<div class="a').at('<div class="a')).toBe('');
+      expect(complete('| a | b |').at('| a | b |')).toBe('');
+      // …while a table with a terminated delimiter row flows through as before.
+      expect(complete('| a |\n| - |\n| 1 ').at('| a |\n| - |\n| 1 ')).toBe('| a |\n| - |\n| 1 ');
+    });
+
+    it('lets an explicit incompleteMarkdownComponentMap entry win over completion', () => {
+      const components = { 'my-emphasis': () => null };
+      const { at } = streamWith(
+        'see **bold',
+        { incompleteMarkdown: 'complete', incompleteMarkdownComponentMap: { emphasis: 'my-emphasis' } },
+        components,
+      );
+      expect(at('see **bold')).toBe('see <my-emphasis data-raw="**bold" />');
+      // A token without an entry is still completed.
+      expect(complete('run `npm', components).at('run `npm')).toBe('run `npm`');
+    });
+
+    it('leaves placeholder mode untouched by default', () => {
+      expect(streamWith('see **bold', {}).at('see **bold')).toBe('see ');
+      expect(streamWith('see **bold', { incompleteMarkdown: 'placeholder' }).at('see **bold')).toBe(
+        'see ',
+      );
+    });
+
+    it('renders the completed token', () => {
+      const { container } = render(
+        <XMarkdownProbe content="a **b" streaming={{ hasNextChunk: true, incompleteMarkdown: 'complete' }} />,
+      );
+      expect(container.innerHTML).toContain('<strong>b</strong>');
+    });
+  });
+
+  describe('useStreaming synchronous output', () => {
+    const streamingConfig = { streaming: { hasNextChunk: true } };
+
+    it('should expose the processed output in the same render the chunk arrives in', () => {
+      // Recording every render (not just the settled value) proves there is no
+      // intermediate frame that still shows the previous chunk.
+      const frames: string[] = [];
+      const Probe = ({ input }: { input: string }) => {
+        frames.push(useStreaming(input, streamingConfig));
+        return null;
+      };
+
+      const { rerender } = render(<Probe input="Hello" />);
+      act(() => {
+        rerender(<Probe input="Hello [link](https://x" />);
+      });
+      act(() => {
+        rerender(<Probe input="Hello [link](https://x.ant.design)" />);
+      });
+
+      expect(frames).toEqual(['Hello', 'Hello ', 'Hello [link](https://x.ant.design)']);
+    });
+
+    it('should produce the same output under StrictMode double rendering', () => {
+      const text = 'a **bold** `code` [l](https://x) | h |\n| - |\n| c |\n\nend';
+
+      const collect = (strict: boolean) => {
+        const outputs: string[] = [];
+        const Probe = ({ input }: { input: string }) => {
+          outputs.push(useStreaming(input, streamingConfig));
+          return null;
+        };
+        const wrap = (node: React.ReactElement) =>
+          strict ? <React.StrictMode>{node}</React.StrictMode> : node;
+        const { rerender } = render(wrap(<Probe input="" />));
+        for (let i = 1; i <= text.length; i++) {
+          act(() => {
+            rerender(wrap(<Probe input={text.slice(0, i)} />));
+          });
+        }
+        // Under StrictMode each commit renders twice; only the last value per
+        // commit is observable, and it must match the non-strict run.
+        return outputs;
+      };
+
+      const plain = collect(false);
+      const strict = collect(true);
+      expect(new Set(strict)).toEqual(new Set(plain));
+      expect(strict[strict.length - 1]).toBe(plain[plain.length - 1]);
     });
   });
 });
