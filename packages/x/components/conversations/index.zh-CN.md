@@ -31,6 +31,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAA
 <code src="./demo/shortcutKeys.tsx" background="grey">快捷键操作</code>
 
 <code src="./demo/infinite-load.tsx" background="grey">滚动加载</code>
+<code src="./demo/virtual-list.tsx" background="grey">虚拟滚动</code>
 
 ## API
 
@@ -48,6 +49,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*qwdtSKWXeikAAA
 | groupable | 是否支持分组, 开启后默认按 `Conversation.group` 字段分组 | boolean \| GroupableProps | - | - |
 | shortcutKeys | 快捷键操作 | { creation?: ShortcutKeys\<number\>; items?:ShortcutKeys\<'number'\> \| ShortcutKeys\<number\>[];} | - | 2.0.0 |
 | creation | 新会话操作配置 | CreationProps | - | 2.0.0 |
+| virtual | 是否开启虚拟滚动，数据量较大时（>100 条）建议开启 | boolean | `false` | - |
 | styles | 语义化结构 style | styles?: {creation?: React.CSSProperties;item?: React.CSSProperties;} | - | - |
 | classNames | 语义化结构 className | classNames?: { creation?: string; item?:string;} | - | - |
 | rootClassName | 根节点类名 | string | - | - |
