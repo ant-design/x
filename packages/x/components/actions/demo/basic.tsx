@@ -1,9 +1,9 @@
-import { EditOutlined, RedoOutlined } from '@ant-design/icons';
+import { CopyOutlined, EditOutlined, RedoOutlined } from '@ant-design/icons';
 import { Actions, ActionsProps } from '@ant-design/x';
 import { message } from 'antd';
 import React from 'react';
 
-const actionItems = [
+const actionItems: ActionsProps['items'] = [
   {
     key: 'retry',
     icon: <RedoOutlined />,
@@ -13,6 +13,16 @@ const actionItems = [
     key: 'edit',
     icon: <EditOutlined />,
     label: 'Edit',
+    tooltip: {
+      title: 'Edit message',
+      placement: 'bottom',
+    },
+  },
+  {
+    key: 'copy',
+    icon: <CopyOutlined />,
+    label: 'Copy',
+    tooltip: false,
   },
 ];
 
