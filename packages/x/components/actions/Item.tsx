@@ -30,6 +30,18 @@ const Item: React.FC<ActionsItemProps> = (props) => {
 
   const iconElement = <div className={`${prefixCls}-icon`}>{item?.icon}</div>;
 
+  // Resolve tooltip config:
+  // - `false`: no Tooltip rendered
+  // - `string`/`number`: used as the tooltip title
+  // - `TooltipProps` object: merged on top of the default `title={label}`
+  // - `undefined`: default `title={label}`
+  const tooltipProps =
+    item.tooltip === false
+      ? null
+      : typeof item.tooltip === 'string' || typeof item.tooltip === 'number'
+        ? { title: item.tooltip }
+        : { title: item.label, ...(item.tooltip || {}) };
+
   return (
     <div
       className={clsx(`${prefixCls}-item`, classNames.item, {
@@ -50,7 +62,11 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       }}
       key={itemKey}
     >
-      {isMobile ? iconElement : <Tooltip title={item.label}>{iconElement}</Tooltip>}
+      {isMobile || tooltipProps === null ? (
+        iconElement
+      ) : (
+        <Tooltip {...tooltipProps}>{iconElement}</Tooltip>
+      )}
     </div>
   );
 };
