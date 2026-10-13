@@ -462,6 +462,7 @@ export class XRequestClass<
     if ((chunk as JSONOutPut)?.success === false) {
       const error = new Error((chunk as JSONOutPut).message || 'System error');
       error.name = (chunk as JSONOutPut).name || 'SystemError';
+      this.finishRequest();
       callbacks?.onError?.(error, chunk, response.headers);
     } else {
       callbacks?.onUpdate?.(chunk, response.headers);
