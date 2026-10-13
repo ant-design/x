@@ -66,8 +66,11 @@ export default class DeepSeekChatProvider<
         : originMessage?.content.text || '';
     if (!originMessageContent && currentThink) {
       // 仅匹配最多前两个换行符，避免性能问题
-      content = `\n\n<think>\n\n${currentThink?.replace?.(/^\n{0,2}/, '')}`;
-    } else if (
+      originMessageContent = `\n\n<think>\n\n${currentThink?.replace?.(/^\n{0,2}/, '')}`;
+    } else {
+      originMessageContent += currentThink;
+    }
+    if (
       originMessageContent.includes('<think>') &&
       !originMessageContent.includes('</think>') &&
       currentContent
@@ -76,7 +79,7 @@ export default class DeepSeekChatProvider<
       // 仅匹配最多结尾的两个空白字符和换行符
       content = `${originMessageContent?.replace?.(/[\s\n]{0,2}$/, '')}\n\n</think>\n\n${currentContent}`;
     } else {
-      content = `${originMessageContent || ''}${currentThink}${currentContent}`;
+      content = `${originMessageContent || ''}${currentContent}`;
     }
 
     return {
