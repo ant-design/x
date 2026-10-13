@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
+import Sender, { type SenderProps } from '../../sender';
 import Suggestion, { type SuggestionProps } from '../index';
 
 describe('Suggestion Component', () => {
@@ -82,6 +83,42 @@ describe('Suggestion Component', () => {
     onOpenChange.mockReset();
     fireEvent.keyDown(container.querySelector('input')!, { key: 'Delete' });
     expect(onOpenChange).toHaveBeenCalledWith(false);
+  });
+
+  it('should not prevent Space input whether the popup is closed or open', () => {
+    const items = [{ label: 'Suggestion 1', value: 'suggestion1' }];
+    const { container } = render(<MockSuggestion items={items} />);
+    const input = container.querySelector('input')!;
+
+    expect(fireEvent.keyDown(input, { key: ' ' })).toBe(true);
+
+    fireEvent.keyDown(input, { key: '/' });
+    expect(screen.getByText('Suggestion 1')).toBeInTheDocument();
+    expect(fireEvent.keyDown(input, { key: ' ' })).toBe(true);
+  });
+
+  it.each<[name: string, senderProps: SenderProps, targetSelector: string]>([
+    ['textarea', {}, 'textarea'],
+    [
+      'input slot',
+      { slotConfig: [{ type: 'input', key: 'input' }] },
+      'input[data-slot-input="input"]',
+    ],
+    [
+      'contenteditable slot',
+      { slotConfig: [{ type: 'content', key: 'content' }] },
+      '[data-slot-key="content"][contenteditable="true"]',
+    ],
+  ])('should preserve Space input in a Sender %s', (_, senderProps, targetSelector) => {
+    const items = [{ label: 'Suggestion 1', value: 'suggestion1' }];
+    const { container } = render(
+      <Suggestion items={items} open>
+        {({ onKeyDown }) => <Sender {...senderProps} onKeyDown={onKeyDown} />}
+      </Suggestion>,
+    );
+    const target = container.querySelector<HTMLElement>(targetSelector)!;
+
+    expect(fireEvent.keyDown(target, { key: ' ' })).toBe(true);
   });
 
   it('open controlled', () => {
