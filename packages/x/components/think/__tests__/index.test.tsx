@@ -119,6 +119,8 @@ describe('Think Component', () => {
     await waitFakeTimer();
     // content should still be in DOM with leavedClassName
     expect(container.querySelector('.ant-think-content')).toBeTruthy();
-    expect(container.querySelector('.ant-think-content-hidden')).toBeTruthy();
+    const hiddenContent = container.querySelector('.ant-think-content-hidden');
+    expect(hiddenContent).toBeTruthy();
+    expect(window.getComputedStyle(hiddenContent!).display).toBe('none');
   });
 });
