@@ -142,6 +142,14 @@ export interface SenderProps
   onKeyDown?: (event: React.KeyboardEvent) => void | false;
   onPaste?: React.ClipboardEventHandler<HTMLElement>;
   onPasteFile?: (files: FileList) => void;
+  /**
+   * Custom paste text filter. When provided, it replaces the default
+   * `getCleanedText` cleaning (which strips line breaks) and receives the raw
+   * pasted text. Should return the final text to insert. Useful to preserve
+   * formatting (e.g. line breaks); e.g. `pasteFilter={(text) => text}` keeps
+   * the original text as-is. Slot mode only.
+   */
+  pasteFilter?: (text: string) => string;
   components?: SenderComponents;
   classNames?: Partial<Record<SemanticType, string>>;
   styles?: Partial<Record<SemanticType, React.CSSProperties>>;
