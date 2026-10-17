@@ -174,9 +174,9 @@ const genThoughtChainStyle: GenerateStyle<ThoughtChainToken, CSSObject> = (token
           borderInlineStart: `${unit(token.lineWidth)} dashed ${token.colorFillContent}`,
         },
       },
-      [`${componentCls}-node-icon-dotted‌`]: {
+      [`${componentCls}-node-icon-dotted`]: {
         '&:after': {
-          borderInlineStart: `${unit(token.lineWidth)} dotted‌ ${token.colorFillContent}`,
+          borderInlineStart: `${unit(token.lineWidth)} dotted ${token.colorFillContent}`,
         },
       },
       [`${componentCls}-node-index-icon`]: {
