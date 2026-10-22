@@ -124,7 +124,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Campus"
+                data-menu-id="rc-menu-uuid-test-id-Campus"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -155,7 +155,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Travel"
+                data-menu-id="rc-menu-uuid-test-id-Travel"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -186,7 +186,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Reading"
+                data-menu-id="rc-menu-uuid-test-id-Reading"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -380,7 +380,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-deep_search"
+                data-menu-id="rc-menu-uuid-test-id-deep_search"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -430,7 +430,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-ai_code"
+                data-menu-id="rc-menu-uuid-test-id-ai_code"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -480,7 +480,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
-                data-menu-id="rc-menu-uuid-ai_writing"
+                data-menu-id="rc-menu-uuid-test-id-ai_writing"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -583,7 +583,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-file_image"
+                data-menu-id="rc-menu-uuid-test-id-file_image"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -829,7 +829,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-校园"
+                data-menu-id="rc-menu-uuid-test-id-校园"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -860,7 +860,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-旅行"
+                data-menu-id="rc-menu-uuid-test-id-旅行"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -891,7 +891,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-阅读"
+                data-menu-id="rc-menu-uuid-test-id-阅读"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1087,7 +1087,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-deep_search"
+                data-menu-id="rc-menu-uuid-test-id-deep_search"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1137,7 +1137,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-ai_code"
+                data-menu-id="rc-menu-uuid-test-id-ai_code"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1187,7 +1187,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
-                data-menu-id="rc-menu-uuid-ai_writing"
+                data-menu-id="rc-menu-uuid-test-id-ai_writing"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1290,7 +1290,7 @@ exports[`renders components/sender/demo/agent.tsx extend context correctly 1`] =
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item"
-                data-menu-id="rc-menu-uuid-file_image"
+                data-menu-id="rc-menu-uuid-test-id-file_image"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1847,7 +1847,7 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx extend context cor
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-AI"
+                data-menu-id="rc-menu-uuid-test-id-AI"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1878,7 +1878,7 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx extend context cor
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Technology"
+                data-menu-id="rc-menu-uuid-test-id-Technology"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -1909,7 +1909,7 @@ exports[`renders components/sender/demo/disable-ctrl-slot.tsx extend context cor
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Entertainment"
+                data-menu-id="rc-menu-uuid-test-id-Entertainment"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3434,7 +3434,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-airplane"
+                data-menu-id="rc-menu-uuid-test-id-airplane"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3465,7 +3465,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-high-speed rail"
+                data-menu-id="rc-menu-uuid-test-id-high-speed rail"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3496,7 +3496,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-cruise ship"
+                data-menu-id="rc-menu-uuid-test-id-cruise ship"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3538,7 +3538,7 @@ exports[`renders components/sender/demo/slot-filling.tsx extend context correctl
           data-slot-key="priceRange"
         >
           <div
-            style="width: 200px; display: inline-block; align-items: center;"
+            style="width: 200px; padding-inline: 20px; display: inline-block; align-items: center;"
           >
             <div
               class="ant-slider css-var-_r_1t_ ant-slider-horizontal"
@@ -3807,7 +3807,7 @@ exports[`renders components/sender/demo/slot-format-result.tsx extend context co
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-English"
+                data-menu-id="rc-menu-uuid-test-id-English"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3838,7 +3838,7 @@ exports[`renders components/sender/demo/slot-format-result.tsx extend context co
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Chinese"
+                data-menu-id="rc-menu-uuid-test-id-Chinese"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3869,7 +3869,7 @@ exports[`renders components/sender/demo/slot-format-result.tsx extend context co
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Japanese"
+                data-menu-id="rc-menu-uuid-test-id-Japanese"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3956,7 +3956,7 @@ exports[`renders components/sender/demo/slot-format-result.tsx extend context co
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-English"
+                data-menu-id="rc-menu-uuid-test-id-English"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -3987,7 +3987,7 @@ exports[`renders components/sender/demo/slot-format-result.tsx extend context co
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-selected ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Chinese"
+                data-menu-id="rc-menu-uuid-test-id-Chinese"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -4018,7 +4018,7 @@ exports[`renders components/sender/demo/slot-format-result.tsx extend context co
               <li
                 aria-describedby="test-id"
                 class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                data-menu-id="rc-menu-uuid-Japanese"
+                data-menu-id="rc-menu-uuid-test-id-Japanese"
                 role="menuitem"
                 tabindex="-1"
               >
@@ -4181,7 +4181,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                  data-menu-id="rc-menu-uuid-AI"
+                  data-menu-id="rc-menu-uuid-test-id-AI"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -4212,7 +4212,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                  data-menu-id="rc-menu-uuid-Technology"
+                  data-menu-id="rc-menu-uuid-test-id-Technology"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -4243,7 +4243,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child"
-                  data-menu-id="rc-menu-uuid-Entertainment"
+                  data-menu-id="rc-menu-uuid-test-id-Entertainment"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -4416,7 +4416,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item ant-dropdown-menu-item-selected"
-                  data-menu-id="rc-menu-uuid-deep_search"
+                  data-menu-id="rc-menu-uuid-test-id-deep_search"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -4466,7 +4466,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item"
-                  data-menu-id="rc-menu-uuid-ai_code"
+                  data-menu-id="rc-menu-uuid-test-id-ai_code"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -4516,7 +4516,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item"
-                  data-menu-id="rc-menu-uuid-ai_writing"
+                  data-menu-id="rc-menu-uuid-test-id-ai_writing"
                   role="menuitem"
                   tabindex="-1"
                 >
@@ -4619,7 +4619,7 @@ exports[`renders components/sender/demo/slot-with-suggestion.tsx extend context 
                 <li
                   aria-describedby="test-id"
                   class="ant-dropdown-menu-item"
-                  data-menu-id="rc-menu-uuid-file_image"
+                  data-menu-id="rc-menu-uuid-test-id-file_image"
                   role="menuitem"
                   tabindex="-1"
                 >

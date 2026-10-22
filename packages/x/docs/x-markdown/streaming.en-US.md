@@ -7,19 +7,39 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 ## Code Examples
 
-<code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
+<code src="./demo/streaming/preset.tsx" description="Left: no streaming handling. Right: streaming={isStreaming}. Use the slow pace to see the difference">Streaming preset, side by side</code> <code src="./demo/streaming/format.tsx" description="Incomplete syntax recovery and placeholders">Syntax Processing</code> <code src="./demo/streaming/animation.tsx" description="Fade-in, tail cursor, and debug switches (slower stream pace for observation)">Rendering Controls</code>
 
 ## API
 
 ### streaming
 
+`streaming` accepts a boolean or an object. A boolean is the preset: `true` means streaming is in progress — the same as `hasNextChunk: true` with `incremental`, `incompleteMarkdown: 'complete'` and `typewriter` switched on; `false` means the stream has ended and the final content is rendered. Pass the `isStreaming` flag your app already has: `<XMarkdown content={content} streaming={isStreaming} />`. Pass an object for per-option control; the object form's behaviour and defaults are unchanged.
+
 | Parameter | Description | Type | Default |
 | --- | --- | --- | --- |
 | hasNextChunk | Whether more chunks are coming | `boolean` | `false` |
-| incompleteMarkdownComponentMap | Component mapping for incomplete syntax | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
+| incremental | Split the document at headings so each chunk only re-parses and re-renders the last, still-growing section. Pass an object to set `minSectionChars` (shorter sections merge into the next one) and `keepSectionsOnEnd` (default `true`: sections are kept once the stream ends and mounted custom components are not remounted; `false`: the whole document is re-rendered at once when the stream ends — turn it off when using marked extensions with document-wide state) | `boolean \| { minSectionChars?: number; keepSectionsOnEnd?: boolean }` | `false` |
+| incompleteMarkdown | How unfinished syntax is shown: `placeholder` holds it back or shows the placeholder component; `complete` shows half-written emphasis, inline code, link text and list items as finished text right away | `'placeholder' \| 'complete'` | `'placeholder'` |
+| incompleteMarkdownComponentMap | Component mapping for incomplete syntax; an explicit entry always wins over `complete` | `Partial<Record<Exclude<StreamCacheTokenType, 'text'>, string>>` | `{}` |
+| typewriter | Typewriter effect: arriving content is revealed at a steady pace that follows the chunk cadence instead of appearing in blocks | `boolean \| TypewriterConfig` | `false` |
 | enableAnimation | Enable fade-in animation | `boolean` | `false` |
 | animationConfig | Animation config | `AnimationConfig` | `{ fadeDuration: 200, easing: 'ease-in-out' }` |
 | tail | Enable tail indicator | `boolean \| TailConfig` | `false` |
+
+> `incremental` only splits before a column-0 ATX heading; `#` lines inside fenced code, HTML blocks (`<div>`, `<pre>`, `<script>`, comments, …) and `$$` math are not headings. Splitting is disabled once a link reference or footnote definition appears, or while a custom component tag spans the boundary. Sections render inside the same root element, so the DOM is identical to a whole-document render.
+
+### TypewriterConfig
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| unit | Reveal unit. `char` reveals character by character; `sentence` reveals up to the next delimiter at once (delimiters inside fenced or inline code do not count, a newline always does) | `'char' \| 'sentence'` | `'char'` |
+| delimiters | Sentence delimiters | `string[]` | `['。', '！', '？', '.', '!', '?', '\n']` |
+| minCps | Minimum speed in characters per second; the speed adapts to the chunk cadence | `number` | `24` |
+| maxCps | Maximum speed in characters per second | `number` | `3000` |
+| pauseMs | With `unit: 'char'`, pause after revealing a delimiter (ms) | `number` | `0` |
+| maxSentenceChars | With `unit: 'sentence'`, the longest run since the previous delimiter that is held back; beyond it text is revealed character by character until the next delimiter, so a long URL or one-line JSON blob does not stay invisible | `number` | `120` |
+
+> What is shown is always a prefix of `content`, and a cut never lands inside an emoji (including multi-code-point sequences such as 👨‍👩‍👧‍👦, 🇨🇳, 👍🏽, ❤️) or an accented character; everything is revealed at once when `hasNextChunk` becomes `false`.
 
 ### TailConfig
 
@@ -30,10 +50,13 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 
 ### AnimationConfig
 
-| Property     | Description         | Type     | Default         |
-| ------------ | ------------------- | -------- | --------------- |
-| fadeDuration | Duration in ms      | `number` | `200`           |
-| easing       | CSS easing function | `string` | `'ease-in-out'` |
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| fadeDuration | Duration in ms | `number` | `200` |
+| easing | CSS easing function | `string` | `'ease-in-out'` |
+| splitBy | Fade-in unit. `chunk` fades in each arriving piece of text on its own; `sentence` joins it to the current sentence and starts a new unit only after a delimiter. Use `sentence` together with `typewriter` | `'chunk' \| 'sentence'` | `'chunk'` |
+| delimiters | Delimiters used when `splitBy` is `sentence` | `string[]` | `['。', '！', '？', '.', '!', '?', '\n']` |
+| maxSentenceChars | With `splitBy: 'sentence'`, the most characters one fade-in unit holds; text arriving beyond it starts a new unit | `number` | `120` |
 
 > The tail displays `▋` by default. You can customize the character via `content`, or pass a custom React component via `component` for animations, delayed display, and other effects.
 >
@@ -91,8 +114,27 @@ Handle **LLM streamed Markdown** output: syntax completion and caching, animatio
 />
 ```
 
+## Re-rendering of custom components
+
+Every parse hands custom components a fresh `domNode`, so a plain `React.memo` never finds its props equal while streaming: a code highlighter re-highlights on every chunk even when what it shows has not changed. Use `arePropsEqualIgnoringDomNode` as the comparator; it ignores `domNode` and shallow-compares the remaining props:
+
+```tsx
+import XMarkdown, { arePropsEqualIgnoringDomNode, type ComponentProps } from '@ant-design/x-markdown';
+
+const Code = React.memo(
+  (props: ComponentProps) => <CodeHighlighter lang={props.lang}>{String(props.children)}</CodeHighlighter>,
+  arePropsEqualIgnoringDomNode,
+);
+// Kept outside the component: an inline literal is a new object on every render
+const components = { code: Code };
+
+<XMarkdown content={content} streaming={isStreaming} components={components} />;
+```
+
+It does not help container components whose `children` is an array of elements (such as `table`); those are covered by `incremental`. Keep `components`, `config`, `streaming` and similar objects outside the component or in `useMemo`; inline literals rebuild the parser on every render.
+
 ## FAQ
 
 ### Can `hasNextChunk` always be `true`?
 
-No. Set it to `false` for the last chunk so placeholders can be flushed into final rendered content.
+No. Set it to `false` for the last chunk so placeholders can be flushed into final rendered content. With the boolean form, pass your `isStreaming` flag straight to `streaming` and this happens automatically.

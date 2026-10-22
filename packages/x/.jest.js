@@ -32,6 +32,7 @@ const compileModules = [
   'is-alphanumerical',
   'is-alphabetical',
   'decode-named-character-reference',
+  'marked',
 ];
 
 const resolve = (p) => require.resolve(`@ant-design/tools/lib/jest/${p}`);

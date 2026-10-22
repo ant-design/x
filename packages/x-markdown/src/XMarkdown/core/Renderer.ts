@@ -4,14 +4,15 @@ import type { DOMNode, Element } from 'html-react-parser';
 import parseHtml, { domToReact } from 'html-react-parser';
 import React, { ReactNode } from 'react';
 import AnimationText from '../AnimationText';
-import type { ComponentProps, XMarkdownProps } from '../interface';
+import type { ComponentProps, StreamingOption, XMarkdownProps } from '../interface';
 import { detectUnclosedComponentTags, getTagInstanceId } from './detectUnclosedComponentTags';
 
 interface RendererOptions {
   components?: XMarkdownProps['components'];
   componentsProps?: XMarkdownProps['componentsProps'];
   dompurifyConfig?: DOMPurifyConfig;
-  streaming?: XMarkdownProps['streaming'];
+  /** Already resolved: XMarkdown expands the boolean form before constructing the renderer */
+  streaming?: StreamingOption;
 }
 
 /**
@@ -175,7 +176,11 @@ class Renderer {
   ) {
     const { enableAnimation, animationConfig } = this.options.streaming || {};
     return (domNode: DOMNode) => {
-      const key = `x-markdown-component-${cidRef.current++}`;
+      // The tail is the one node that comes and goes between renders. Giving
+      // it a fixed key instead of a slot in the running counter keeps every
+      // later key stable, so nothing remounts when the stream ends.
+      const isTail = 'name' in domNode && (domNode as Element).name === 'xmd-tail';
+      const key = isTail ? 'x-markdown-tail' : `x-markdown-component-${cidRef.current++}`;
 
       // Check if it's a text node with data
       const isValidTextNode =

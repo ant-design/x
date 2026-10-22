@@ -836,7 +836,6 @@ Array [
         >
           <div
             class="ant-select-placeholder"
-            style="visibility: visible;"
           >
             可任意输入 / 与 # 多次获取建议
           </div>
