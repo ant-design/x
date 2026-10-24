@@ -495,13 +495,15 @@ describe('Sender Slot Component', () => {
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
     });
-    it('should handle skill removal via keyboard', () => {
+    it('should delete the preceding skill for a collapsed caret', () => {
+      const onChange = jest.fn();
       const ref = createRef<SenderRef>();
       const { container } = render(
         <Sender
           ref={ref}
-          slotConfig={[]}
+          slotConfig={[textSlotConfig]}
           placeholder="Sender placeholder"
+          onChange={onChange}
           skill={{
             value: 'test-skill',
             title: 'Test Skill',
@@ -510,25 +512,42 @@ describe('Sender Slot Component', () => {
       );
       const dom = ref.current?.inputElement as HTMLElement;
       const skillDom = container.querySelector('.ant-sender-skill') as HTMLElement;
-      expect(ref.current).toBeDefined();
-      expect(skillDom).toBeDefined();
+      const textDom = Array.from(dom.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent === textSlotConfig.value,
+      );
+      expect(textDom?.previousSibling).toBe(skillDom);
+      expect(skillDom).toBeInTheDocument();
+      onChange.mockClear();
 
-      const customSelectionMock = {
-        rangeCount: 1,
-        focusOffset: 0,
-        anchorNode: dom,
-        removeAllRanges: jest.fn(),
-        addRange: jest.fn(),
-      };
+      setupDOMMocks(
+        {
+          anchorNode: textDom,
+          anchorOffset: 0,
+          focusNode: textDom,
+          focusOffset: 0,
+          isCollapsed: true,
+        },
+        {
+          startContainer: textDom as HTMLElement,
+          endContainer: textDom as HTMLElement,
+          collapsed: true,
+        },
+      );
 
-      Object.defineProperty(dom, 'previousSibling', {
-        value: skillDom,
-        configurable: true,
+      expect(fireEvent.keyDown(dom, { key: 'Backspace' })).toBe(false);
+      expect(skillDom).not.toBeInTheDocument();
+      expect(ref.current?.getValue()).toEqual({
+        value: textSlotConfig.value,
+        slotConfig: [textSlotConfig],
+        skill: undefined,
       });
-
-      const customRangeMock = createMockRange();
-      setupDOMMocks(customSelectionMock, customRangeMock);
-      fireEvent.keyDown(dom, { key: 'Backspace' });
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        textSlotConfig.value,
+        undefined,
+        [textSlotConfig],
+        undefined,
+      );
     });
     it('should handle skill removal and addition', () => {
       const { rerender, container } = render(
@@ -656,40 +675,50 @@ describe('Sender Slot Component', () => {
       fireEvent.keyDown(dom, { key: 'Enter' });
       expect(onSubmit).toHaveBeenCalled();
     });
-    it('should handle backspace key deletion', () => {
-      const onSubmit = jest.fn();
-      const slotConfig = [contentSlotConfigWithValue, textSlotConfig];
+    it('should delete the preceding slot for a collapsed caret', () => {
+      const onChange = jest.fn();
       const ref = createRef<SenderRef>();
-      const { getByText } = render(
-        <Sender ref={ref} slotConfig={slotConfig} onSubmit={onSubmit} />,
+      const { container } = render(
+        <Sender ref={ref} slotConfig={[tagSlotConfig, textSlotConfig]} onChange={onChange} />,
       );
       const dom = ref.current?.inputElement as HTMLElement;
-      expect(ref.current).toBeDefined();
-      expect(dom).toBeDefined();
-      const contentDom = getByText('Content Value');
-      const textDom = getByText('Text Value') as HTMLElement;
-      expect(textDom).toBeTruthy();
+      const slotDom = container.querySelector('[data-slot-key="tag1"]') as HTMLElement;
+      const textDom = Array.from(dom.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent === textSlotConfig.value,
+      );
+      expect(textDom?.previousSibling).toBe(slotDom);
+      expect(slotDom).toBeInTheDocument();
+      onChange.mockClear();
 
-      Object.defineProperty(textDom, 'previousSibling', {
-        value: contentDom,
-        configurable: true,
+      setupDOMMocks(
+        {
+          anchorNode: textDom,
+          anchorOffset: 0,
+          focusNode: textDom,
+          focusOffset: 0,
+          isCollapsed: true,
+        },
+        {
+          startContainer: textDom as HTMLElement,
+          endContainer: textDom as HTMLElement,
+          collapsed: true,
+        },
+      );
+
+      expect(fireEvent.keyDown(dom, { key: 'Backspace' })).toBe(false);
+      expect(slotDom).not.toBeInTheDocument();
+      expect(ref.current?.getValue()).toEqual({
+        value: textSlotConfig.value,
+        slotConfig: [textSlotConfig],
+        skill: undefined,
       });
-
-      const customSelectionMock = {
-        rangeCount: 1,
-        focusOffset: 0,
-        anchorNode: textDom,
-        removeAllRanges: jest.fn(),
-        addRange: jest.fn(),
-      };
-
-      const customRangeMock = createMockRange({
-        startOffset: 5,
-        endOffset: 10,
-      });
-
-      setupDOMMocks(customSelectionMock, customRangeMock);
-      fireEvent.keyDown(dom, { key: 'Backspace' });
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        textSlotConfig.value,
+        expect.objectContaining({ type: 'keydown', key: 'Backspace' }),
+        [textSlotConfig],
+        undefined,
+      );
     });
     it('should preserve a slot while deleting a non-collapsed text selection', () => {
       const onChange = jest.fn();
