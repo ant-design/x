@@ -484,7 +484,7 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
   const getCleanedText = useCallback((ori: string) => {
     return ori
       .replace(/\u200B/g, '') // 移除零宽空格
-      .replace(/\n/g, '')
+      .replace(/\r\n?/g, '\n')
       .replace(/^\n+|\n+$/g, ''); // 移除开头和结尾的换行
   }, []);
 
@@ -528,4 +528,4 @@ const useCursor = (options?: UseCursorOptions): UseCursorReturn => {
 };
 
 export default useCursor;
-export type { CursorPosition, UseCursorReturn, UseCursorOptions };
+export type { CursorPosition, UseCursorOptions, UseCursorReturn };
