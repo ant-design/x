@@ -740,6 +740,54 @@ describe('Sender Slot Component', () => {
       expect(slotDom.parentElement).toBe(dom);
       expect(onChange).toHaveBeenCalledTimes(1);
     });
+    it.each(['ordinary text', ''])(
+      'should leave Backspace on non-slot lines containing %p to the browser',
+      (text) => {
+        const onChange = jest.fn();
+        const ref = createRef<SenderRef>();
+        const { container } = render(
+          <Sender
+            ref={ref}
+            submitType="shiftEnter"
+            slotConfig={[tagSlotConfig, { type: 'text', value: 'Text before newline' }]}
+            onChange={onChange}
+          />,
+        );
+        const dom = ref.current?.inputElement as HTMLElement;
+        const slotDom = container.querySelector('[data-slot-key="tag1"]') as HTMLElement;
+        const nextLine = document.createElement('div');
+        const lineBreak = document.createElement('br');
+        nextLine.append(lineBreak);
+        if (text) nextLine.append(document.createTextNode(text));
+        dom.append(nextLine);
+        const originalHTML = dom.innerHTML;
+        onChange.mockClear();
+
+        setupDOMMocks(
+          {
+            rangeCount: 1,
+            anchorNode: nextLine,
+            anchorOffset: 0,
+            focusNode: nextLine,
+            focusOffset: 0,
+            isCollapsed: true,
+          },
+          {
+            startContainer: nextLine,
+            endContainer: nextLine,
+            startOffset: 0,
+            endOffset: 0,
+            collapsed: true,
+          },
+        );
+
+        expect(fireEvent.keyDown(dom, { key: 'Backspace' })).toBe(true);
+        expect(dom.innerHTML).toBe(originalHTML);
+        expect(nextLine.firstChild).toBe(lineBreak);
+        expect(slotDom).toBeInTheDocument();
+        expect(onChange).not.toHaveBeenCalled();
+      },
+    );
     it('should handle backspace key in content slot', () => {
       const onSubmit = jest.fn();
       const slotConfig = [contentSlotConfigWithValue];
