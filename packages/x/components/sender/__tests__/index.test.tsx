@@ -252,6 +252,120 @@ describe('Sender Component', () => {
     ref.current?.insert('c', 'end');
     expect(getByPlaceholderText('Custom input')).toHaveValue('abc');
   });
+
+  it.each(['input', 'textarea'] as const)(
+    'supports a custom %s exposing its nativeElement',
+    (tag) => {
+      const ref = React.createRef<SenderRef>();
+      const CustomInput = React.forwardRef<
+        React.ComponentRef<typeof Input.TextArea>,
+        React.ComponentProps<typeof Input.TextArea>
+      >(({ autoSize: _autoSize, ...inputProps }, forwardedRef) => {
+        const nativeRef = React.useRef<HTMLInputElement | HTMLTextAreaElement>(null);
+        React.useImperativeHandle(forwardedRef, () => ({
+          nativeElement: nativeRef.current,
+          focus: (options) => nativeRef.current?.focus(options),
+          blur: () => nativeRef.current?.blur(),
+        }));
+        return React.createElement(tag, { ...inputProps, ref: nativeRef });
+      });
+
+      const { getByPlaceholderText } = render(
+        <Sender
+          ref={ref}
+          defaultValue="abcd"
+          placeholder="Native element"
+          components={{ input: CustomInput }}
+        />,
+      );
+      const input = getByPlaceholderText('Native element') as
+        | HTMLInputElement
+        | HTMLTextAreaElement;
+
+      expect(ref.current?.inputElement).toBe(input);
+      act(() => ref.current?.focus());
+      expect(input).toHaveFocus();
+      input.setSelectionRange(1, 3, 'backward');
+      act(() => ref.current?.insert('X'));
+      expect(input).toHaveValue('aXd');
+      expect(input.selectionStart).toBe(2);
+      expect(input.selectionEnd).toBe(2);
+
+      act(() => ref.current?.blur());
+      expect(input).not.toHaveFocus();
+    },
+  );
+
+  it('keeps a custom input editable when it does not expose an imperative ref', () => {
+    const ref = React.createRef<SenderRef>();
+    const onChange = jest.fn();
+    const CustomInput = React.forwardRef<
+      React.ComponentRef<typeof Input.TextArea>,
+      React.ComponentProps<typeof Input.TextArea>
+    >(({ autoSize: _autoSize, value, ...inputProps }, _ref) => (
+      <textarea {...inputProps} value={value === undefined ? undefined : String(value)} />
+    ));
+    const { getByPlaceholderText } = render(
+      <Sender
+        ref={ref}
+        defaultValue="editable"
+        placeholder="Without ref"
+        components={{ input: CustomInput }}
+        onChange={onChange}
+      />,
+    );
+    const input = getByPlaceholderText('Without ref');
+
+    expect(ref.current?.inputElement).toBeUndefined();
+    act(() => ref.current?.insert('ignored'));
+    expect(input).toHaveValue('editable');
+    expect(onChange).not.toHaveBeenCalled();
+
+    fireEvent.change(input, { target: { value: 'typed' } });
+    expect(input).toHaveValue('typed');
+    expect(onChange).toHaveBeenCalledWith('typed', expect.anything(), [], undefined);
+  });
+
+  it('expires saved selection so a later render preserves focus outside Sender', () => {
+    jest.useFakeTimers();
+    try {
+      const CustomSender = () => {
+        const [value, setValue] = React.useState('');
+        return (
+          <>
+            <Sender
+              value={value}
+              onChange={setValue}
+              components={{
+                input: ({ autoSize: _autoSize, ...inputProps }) => (
+                  <Input
+                    {...(inputProps as React.ComponentProps<typeof Input>)}
+                    placeholder="Custom input"
+                  />
+                ),
+              }}
+            />
+            <button type="button">Outside Sender</button>
+          </>
+        );
+      };
+      const { getByPlaceholderText, getByText, rerender } = render(<CustomSender />);
+      const input = getByPlaceholderText('Custom input');
+      input.focus();
+      fireEvent.change(input, { target: { value: 'a' } });
+      expect(getByPlaceholderText('Custom input')).toHaveFocus();
+
+      act(() => jest.advanceTimersByTime(0));
+      const button = getByText('Outside Sender');
+      button.focus();
+      rerender(<CustomSender />);
+      expect(button).toHaveFocus();
+      expect(getByPlaceholderText('Custom input')).toHaveValue('a');
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   describe('footer', () => {
     it('footer width function', () => {
       const onSubmit = jest.fn();
