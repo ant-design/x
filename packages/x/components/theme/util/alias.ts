@@ -166,6 +166,8 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
     screenXXLMin: screenXXL,
 
     boxShadowPopoverArrow: '2px 2px 5px rgba(0, 0, 0, 0.05)',
+    dropShadowPopover:
+      'drop-shadow(0 6px 16px rgba(0, 0, 0, 0.08)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12)) drop-shadow(0 9px 28px rgba(0, 0, 0, 0.05))',
     boxShadowCard: `
       0 1px 2px -2px ${new FastColor('rgba(0, 0, 0, 0.16)').toRgbString()},
       0 3px 6px 0 ${new FastColor('rgba(0, 0, 0, 0.12)').toRgbString()},
