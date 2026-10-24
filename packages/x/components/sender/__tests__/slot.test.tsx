@@ -530,6 +530,46 @@ describe('Sender Slot Component', () => {
       setupDOMMocks(customSelectionMock, customRangeMock);
       fireEvent.keyDown(dom, { key: 'Backspace' });
     });
+    it('should trigger closable.onClose when removing skill via Backspace', () => {
+      const onClose = jest.fn();
+      const ref = createRef<SenderRef>();
+      const { container } = render(
+        <Sender
+          ref={ref}
+          slotConfig={[]}
+          placeholder="Sender placeholder"
+          skill={{
+            value: 'test-skill',
+            title: 'Test Skill',
+            closable: { onClose },
+          }}
+        />,
+      );
+      const dom = ref.current?.inputElement as HTMLElement;
+      const skillDom = container.querySelector('.ant-sender-skill') as HTMLElement;
+      expect(ref.current).not.toBeNull();
+      expect(skillDom).toBeInTheDocument();
+
+      const customSelectionMock = {
+        rangeCount: 1,
+        focusOffset: 0,
+        anchorNode: dom,
+        removeAllRanges: jest.fn(),
+        addRange: jest.fn(),
+      };
+
+      Object.defineProperty(dom, 'previousSibling', {
+        value: skillDom,
+        configurable: true,
+      });
+
+      const customRangeMock = createMockRange();
+      setupDOMMocks(customSelectionMock, customRangeMock);
+      fireEvent.keyDown(dom, { key: 'Backspace' });
+
+      expect(onClose).toHaveBeenCalledTimes(1);
+      expect(container.querySelector('.ant-sender-skill')).not.toBeInTheDocument();
+    });
     it('should handle skill removal and addition', () => {
       const { rerender, container } = render(
         <Sender
