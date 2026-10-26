@@ -2,6 +2,7 @@ import fs from 'fs';
 import https from 'https';
 import os from 'os';
 import path from 'path';
+import { copyDirectory, ensureDirectory, safeChildPath, validateEntryName } from './safePath';
 
 interface SkillLoaderOptions {
   githubOwner?: string;
@@ -52,144 +53,107 @@ class SkillLoader {
   constructor(options: SkillLoaderOptions = {}) {
     this.githubOwner = options.githubOwner || 'ant-design';
     this.githubRepo = options.githubRepo || 'x';
-    this.tempDir = options.tempDir || path.join(os.tmpdir(), 'x-skill-temp');
+    this.tempDir = options.tempDir || fs.mkdtempSync(path.join(os.tmpdir(), 'x-skill-temp-'));
   }
 
-  async makeRequest(url: string, options: { headers?: Record<string, string> } = {}): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const requestOptions = {
-        headers: {
-          'User-Agent': 'X-Skill-Loader',
-          Accept: 'application/vnd.github.v3+json',
-          ...options.headers,
-        } as Record<string, string>,
-        timeout: 60000, // 60秒超时
-      };
-
-      // 添加GitHub token支持
-      const githubToken = process.env.GITHUB_TOKEN;
-      if (githubToken) {
-        requestOptions.headers = {
-          ...requestOptions.headers,
-          Authorization: `token ${githubToken}`,
-        };
-      }
-
-      const req = https
-        .get(url, requestOptions, (res) => {
-          let data = '';
-          res.on('data', (chunk) => (data += chunk));
-          res.on('end', () => {
-            if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-              try {
-                resolve(JSON.parse(data));
-              } catch (_e) {
-                reject(new Error('Failed to parse JSON response'));
-              }
-            } else if (res.statusCode === 302 || res.statusCode === 301) {
-              // Follow redirect
-              const redirectOptions = { ...requestOptions };
-              const redirectReq = https
-                .get(res.headers.location!, redirectOptions, (res2) => {
-                  let data2 = '';
-                  res2.on('data', (chunk) => (data2 += chunk));
-                  res2.on('end', () => {
-                    if (res2.statusCode && res2.statusCode >= 200 && res2.statusCode < 300) {
-                      try {
-                        resolve(JSON.parse(data2));
-                      } catch (_e) {
-                        reject(new Error('Failed to parse JSON response'));
-                      }
-                    } else {
-                      reject(new Error(`HTTP ${res2.statusCode}: ${res2.statusMessage}`));
-                    }
-                  });
-                })
-                .on('error', reject);
-
-              // 设置重定向请求的超时
-              redirectReq.setTimeout(60000, () => {
-                redirectReq.destroy();
-                reject(new Error('Request timeout after 60 seconds'));
-              });
-            } else {
-              if (res.statusCode === 403) {
-                reject(
-                  new Error(
-                    `GitHub API access denied: ${res.statusMessage}. Please use classic personal access token instead of fine-grained token`,
-                  ),
-                );
-              } else {
-                reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
-              }
-            }
-          });
-        })
-        .on('error', reject);
-
-      // 设置超时
-      req.setTimeout(60000, () => {
-        req.destroy();
-        reject(new Error('Request timeout after 60 seconds'));
-      });
-    });
+  async makeRequest(
+    url: string,
+    options: { headers?: Record<string, string>; signal?: AbortSignal } = {},
+  ): Promise<any> {
+    const headers: Record<string, string> = {
+      'User-Agent': 'X-Skill-Loader',
+      Accept: 'application/vnd.github.v3+json',
+      ...options.headers,
+    };
+    if (process.env.GITHUB_TOKEN) headers.Authorization = `token ${process.env.GITHUB_TOKEN}`;
+    const data = await this.requestText(url, 'api', headers, options.signal);
+    try {
+      return JSON.parse(data);
+    } catch {
+      throw new Error('Failed to parse JSON response');
+    }
   }
 
-  async downloadFile(url: string): Promise<string> {
+  async downloadFile(url: string, signal?: AbortSignal): Promise<string> {
+    return this.requestText(url, 'download', {}, signal);
+  }
+
+  private async requestText(
+    url: string,
+    kind: 'api' | 'download',
+    headers: Record<string, string>,
+    signal?: AbortSignal,
+    redirects = 0,
+  ): Promise<string> {
+    const parsed = new URL(url);
+    const hosts =
+      kind === 'api' ? ['api.github.com'] : ['api.github.com', 'raw.githubusercontent.com'];
+    if (
+      parsed.protocol !== 'https:' ||
+      !hosts.includes(parsed.hostname) ||
+      parsed.username ||
+      parsed.password ||
+      (parsed.port && parsed.port !== '443')
+    ) {
+      throw new Error(`Untrusted GitHub URL: ${url}`);
+    }
+    signal?.throwIfAborted();
     return new Promise((resolve, reject) => {
       const request = https
-        .get(url, (res) => {
-          // 检查状态码
-          if (res.statusCode! < 200 || res.statusCode! >= 300) {
-            reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
-            return;
-          }
-
-          if (res.statusCode === 302 || res.statusCode === 301) {
-            // Follow redirect
-            if (!res.headers.location) {
-              reject(new Error('Redirect location not provided'));
+        .get(parsed.href, { headers, signal }, (res) => {
+          res.on('error', reject);
+          if ([301, 302, 303, 307, 308].includes(res.statusCode!)) {
+            res.resume();
+            if (!res.headers.location || redirects >= 5) {
+              reject(new Error('Invalid or excessive GitHub redirects'));
               return;
             }
-
-            const redirectRequest = https
-              .get(res.headers.location, (res2) => {
-                // 检查重定向后的状态码
-                if (res2.statusCode! < 200 || res2.statusCode! >= 300) {
-                  reject(new Error(`HTTP ${res2.statusCode}: ${res2.statusMessage}`));
-                  return;
-                }
-
-                let data = '';
-                res2.on('data', (chunk) => (data += chunk));
-                res2.on('end', () => resolve(data));
-              })
-              .on('error', reject);
-
-            // 设置重定向请求的超时
-            redirectRequest.setTimeout(30000, () => {
-              redirectRequest.destroy();
-              reject(new Error('Redirect request timeout after 30 seconds'));
-            });
-
+            // Never carry credentials into a redirected request, even on the same host.
+            const redirectHeaders = Object.fromEntries(
+              Object.entries(headers).filter(
+                ([key]) =>
+                  !['authorization', 'proxy-authorization', 'cookie'].includes(key.toLowerCase()),
+              ),
+            );
+            try {
+              resolve(
+                this.requestText(
+                  new URL(res.headers.location, parsed).href,
+                  kind,
+                  redirectHeaders,
+                  signal,
+                  redirects + 1,
+                ),
+              );
+            } catch (error) {
+              reject(error);
+            }
             return;
           }
-
+          if (!res.statusCode || res.statusCode < 200 || res.statusCode >= 300) {
+            res.resume();
+            reject(
+              new Error(
+                kind === 'api' && res.statusCode === 403
+                  ? 'GitHub API rate limit exceeded or access forbidden (HTTP 403). Check permissions or set GITHUB_TOKEN to raise the limit.'
+                  : `HTTP ${res.statusCode}: ${res.statusMessage}`,
+              ),
+            );
+            return;
+          }
           let data = '';
+          res.setEncoding('utf8');
           res.on('data', (chunk) => (data += chunk));
           res.on('end', () => resolve(data));
         })
         .on('error', reject);
-
-      // 设置请求超时
       request.setTimeout(30000, () => {
-        request.destroy();
-        reject(new Error('Request timeout after 30 seconds'));
+        request.destroy(new Error('Request timeout after 30 seconds'));
       });
     });
   }
 
-  async downloadDirectory(url: string, destPath: string): Promise<void> {
+  async downloadDirectory(url: string, destPath: string, signal?: AbortSignal): Promise<void> {
     let apiUrl: string;
 
     const urlObj = new URL(url);
@@ -209,20 +173,22 @@ class SkillLoader {
       throw new Error('Unsupported URL format');
     }
 
-    const contents = (await this.makeRequest(apiUrl)) as GitHubContent[];
+    ensureDirectory(destPath);
+    const contents = (await this.makeRequest(apiUrl, { signal })) as GitHubContent[];
+    signal?.throwIfAborted();
 
     for (const item of contents) {
-      // 使用path.basename()清理文件名，防止路径遍历攻击
-      const safeName = path.basename(item.name);
+      const itemPath = safeChildPath(destPath, item.name);
 
       if (item.type === 'file') {
-        const fileContent = await this.downloadFile(item.download_url!);
-        const filePath = path.join(destPath, safeName);
-        fs.writeFileSync(filePath, fileContent);
+        const fileContent = await this.downloadFile(item.download_url!, signal);
+        signal?.throwIfAborted();
+        fs.writeFileSync(itemPath, fileContent, { flag: 'wx' });
       } else if (item.type === 'dir') {
-        const subDirPath = path.join(destPath, safeName);
-        fs.mkdirSync(subDirPath, { recursive: true });
-        await this.downloadDirectory(item.url!, subDirPath);
+        ensureDirectory(itemPath);
+        await this.downloadDirectory(item.url!, itemPath, signal);
+      } else {
+        throw new Error(`Unsupported GitHub entry type: ${item.type}`);
       }
     }
   }
@@ -232,8 +198,9 @@ class SkillLoader {
     version = 'latest',
     language = 'en',
   ): Promise<string> {
-    fs.mkdirSync(this.tempDir, { recursive: true });
-    const skillTempDir = path.join(this.tempDir, skillName);
+    validateEntryName(skillName);
+    ensureDirectory(this.tempDir);
+    const skillTempDir = safeChildPath(this.tempDir, skillName);
 
     // 安装前清理同名技能文件夹
     if (fs.existsSync(skillTempDir)) {
@@ -245,19 +212,17 @@ class SkillLoader {
       // 1. 先从GitHub下载，设置60秒超时
       const tag = version === 'latest' ? await this.getLatestTag() : version;
       const basePath = language === 'zh' ? 'packages/x-skill/skills-zh' : 'packages/x-skill/skills';
-      const apiUrl = `https://api.github.com/repos/${this.githubOwner}/${this.githubRepo}/contents/${basePath}/${skillName}?ref=${tag}`;
+      const apiUrl = `https://api.github.com/repos/${this.githubOwner}/${this.githubRepo}/contents/${basePath}/${skillName}?ref=${encodeURIComponent(tag)}`;
 
-      // 使用Promise.race实现超时控制
-      const downloadPromise = this.downloadDirectory(apiUrl, skillTempDir);
-      let timeoutId: NodeJS.Timeout;
-      const timeoutPromise = new Promise<never>((_, reject) => {
-        timeoutId = setTimeout(() => reject(new Error('Download timeout: 60s')), 60000);
-      });
-
+      const controller = new AbortController();
+      const timeoutId = setTimeout(
+        () => controller.abort(new Error('Download timeout: 60s')),
+        60000,
+      );
       try {
-        await Promise.race([downloadPromise, timeoutPromise]);
+        await this.downloadDirectory(apiUrl, skillTempDir, controller.signal);
       } finally {
-        clearTimeout(timeoutId!);
+        clearTimeout(timeoutId);
       }
       return skillTempDir;
     } catch (error) {
@@ -269,10 +234,10 @@ class SkillLoader {
       console.log(`Installing local skill: ${skillName}`);
 
       const packageDir = path.join(__dirname, '..');
-      const skillsDir =
-        language === 'zh'
-          ? path.join(packageDir, 'skills-zh', skillName)
-          : path.join(packageDir, 'skills', skillName);
+      const skillsDir = safeChildPath(
+        path.join(packageDir, language === 'zh' ? 'skills-zh' : 'skills'),
+        skillName,
+      );
 
       if (!fs.existsSync(skillsDir)) {
         throw new Error(`Local skill directory not found: ${skillsDir}`);
@@ -371,7 +336,7 @@ class SkillLoader {
       const basePath = language === 'zh' ? 'packages/x-skill/skills-zh' : 'packages/x-skill/skills';
 
       // 使用Promise.race实现列表获取超时控制
-      const apiUrl = `https://api.github.com/repos/${this.githubOwner}/${this.githubRepo}/contents/${basePath}?ref=${tag}`;
+      const apiUrl = `https://api.github.com/repos/${this.githubOwner}/${this.githubRepo}/contents/${basePath}?ref=${encodeURIComponent(tag)}`;
       const listPromise = this.makeRequest(apiUrl) as Promise<GitHubContent[]>;
       let timeoutId: NodeJS.Timeout;
       const timeoutPromise = new Promise<never>((_, reject) => {
@@ -424,7 +389,7 @@ class SkillLoader {
       .map((dirent) => dirent.name);
 
     return skillDirs.map((skillName) => {
-      const skillPath = path.join(skillsDir, skillName);
+      const skillPath = safeChildPath(skillsDir, skillName);
       return {
         name: skillName,
         path: skillPath,
@@ -435,33 +400,11 @@ class SkillLoader {
   }
 
   private copyDirectorySync(src: string, dest: string): void {
-    // 防止递归嵌套：检查目标路径是否是源路径的子目录
-    const srcResolved = path.resolve(src);
-    const destResolved = path.resolve(dest);
-
-    if (destResolved.startsWith(srcResolved) && destResolved !== srcResolved) {
-      throw new Error(`Cannot copy directory into itself: ${src} -> ${dest}`);
-    }
-
-    // 清理目标目录并创建新目录
+    safeChildPath(path.dirname(dest), path.basename(dest));
     if (fs.existsSync(dest)) {
       fs.rmSync(dest, { recursive: true, force: true });
     }
-    fs.mkdirSync(dest, { recursive: true });
-
-    const items = fs.readdirSync(src, { withFileTypes: true });
-    for (const item of items) {
-      // 使用path.basename()清理文件名，防止路径遍历攻击
-      const safeName = path.basename(item.name);
-      const srcPath = path.join(src, safeName);
-      const destPath = path.join(dest, safeName);
-
-      if (item.isDirectory()) {
-        this.copyDirectorySync(srcPath, destPath);
-      } else {
-        fs.copyFileSync(srcPath, destPath);
-      }
-    }
+    copyDirectory(src, dest);
   }
 
   async listVersions(): Promise<string[]> {
