@@ -8,6 +8,7 @@ import readline from 'readline';
 import SkillLoader from './getSkillRepo';
 import HelpManager from './help';
 import { emojis, getMessage, Language, LocaleMessages, messages } from './locale/index';
+import { copyDirectory, ensureDirectory, safeChildPath, validateEntryName } from './safePath';
 
 type Ora = typeof import('ora').default;
 type OraSpinner = ReturnType<Ora>;
@@ -67,10 +68,8 @@ class SkillInstaller {
     this.skillLoader = new SkillLoader({
       githubOwner: 'ant-design',
       githubRepo: 'x',
-      tempDir: path.join(os.tmpdir(), 'x-skill-temp'),
     });
-    this.cacheDir = path.join(os.tmpdir(), 'x-skill-cache');
-    fs.mkdirSync(this.cacheDir, { recursive: true });
+    this.cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'x-skill-cache-'));
 
     this.helpManager = new HelpManager();
 
@@ -170,7 +169,7 @@ class SkillInstaller {
   }
 
   getCache(key: string): any {
-    const cacheFile = path.join(this.cacheDir, `${key}.json`);
+    const cacheFile = safeChildPath(this.cacheDir, `${Buffer.from(key).toString('hex')}.json`);
     if (!fs.existsSync(cacheFile)) {
       return null;
     }
@@ -185,7 +184,7 @@ class SkillInstaller {
   }
 
   setCache(key: string, data: any, ttlSeconds = 3600): void {
-    const cacheFile = path.join(this.cacheDir, `${key}.json`);
+    const cacheFile = safeChildPath(this.cacheDir, `${Buffer.from(key).toString('hex')}.json`);
     const cacheData = {
       data,
       expires: Date.now() + ttlSeconds * 1000,
@@ -195,7 +194,7 @@ class SkillInstaller {
   }
 
   clearCache(key: string): void {
-    const cacheFile = path.join(this.cacheDir, `${key}.json`);
+    const cacheFile = safeChildPath(this.cacheDir, `${Buffer.from(key).toString('hex')}.json`);
     if (fs.existsSync(cacheFile)) {
       fs.unlinkSync(cacheFile);
     }
@@ -604,18 +603,19 @@ class SkillInstaller {
   async installSkills(skillNames: string[], software: string, isGlobal: boolean): Promise<void> {
     const targetConfig = this.skillConfig.targets[software];
     const targetPath = isGlobal ? targetConfig.paths.global : targetConfig.paths.project;
-    const fullTargetPath = isGlobal
-      ? path.join(os.homedir(), targetPath)
-      : path.join(process.cwd(), targetPath);
-
-    fs.mkdirSync(fullTargetPath, { recursive: true });
+    let fullTargetPath = fs.realpathSync(isGlobal ? os.homedir() : process.cwd());
+    for (const segment of targetPath.split(/[\\/]/)) {
+      fullTargetPath = safeChildPath(fullTargetPath, segment);
+      ensureDirectory(fullTargetPath);
+    }
 
     for (const skillName of skillNames) {
+      validateEntryName(skillName);
       const skill = this.skills.find((s) => s.name === skillName);
       if (!skill) continue;
 
       const sourcePath = skill.path;
-      const destPath = path.join(fullTargetPath, skillName);
+      const destPath = safeChildPath(fullTargetPath, skillName);
 
       if (fs.existsSync(destPath)) {
         fs.rmSync(destPath, { recursive: true, force: true });
@@ -626,19 +626,7 @@ class SkillInstaller {
   }
 
   copyDirectory(src: string, dest: string): void {
-    fs.mkdirSync(dest, { recursive: true });
-
-    const entries = fs.readdirSync(src, { withFileTypes: true });
-    for (const entry of entries) {
-      const srcPath = path.join(src, entry.name);
-      const destPath = path.join(dest, entry.name);
-
-      if (entry.isDirectory()) {
-        this.copyDirectory(srcPath, destPath);
-      } else {
-        fs.copyFileSync(srcPath, destPath);
-      }
-    }
+    copyDirectory(src, dest);
   }
 }
 
@@ -646,5 +634,7 @@ class SkillInstaller {
 export { SkillInstaller };
 
 // 直接运行时执行
-const installer = new SkillInstaller();
-installer.run().catch(console.error);
+if (require.main === module) {
+  const installer = new SkillInstaller();
+  installer.run().catch(console.error);
+}
