@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from 'crypto';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
@@ -168,8 +169,13 @@ class SkillInstaller {
     return messages.zh;
   }
 
+  private cacheFilePath(key: string): string {
+    const digest = createHash('sha256').update(key).digest('hex');
+    return safeChildPath(this.cacheDir, `${digest}.json`);
+  }
+
   getCache(key: string): any {
-    const cacheFile = safeChildPath(this.cacheDir, `${Buffer.from(key).toString('hex')}.json`);
+    const cacheFile = this.cacheFilePath(key);
     if (!fs.existsSync(cacheFile)) {
       return null;
     }
@@ -184,7 +190,7 @@ class SkillInstaller {
   }
 
   setCache(key: string, data: any, ttlSeconds = 3600): void {
-    const cacheFile = safeChildPath(this.cacheDir, `${Buffer.from(key).toString('hex')}.json`);
+    const cacheFile = this.cacheFilePath(key);
     const cacheData = {
       data,
       expires: Date.now() + ttlSeconds * 1000,
@@ -194,7 +200,7 @@ class SkillInstaller {
   }
 
   clearCache(key: string): void {
-    const cacheFile = safeChildPath(this.cacheDir, `${Buffer.from(key).toString('hex')}.json`);
+    const cacheFile = this.cacheFilePath(key);
     if (fs.existsSync(cacheFile)) {
       fs.unlinkSync(cacheFile);
     }

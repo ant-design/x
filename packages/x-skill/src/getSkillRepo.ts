@@ -132,7 +132,13 @@ class SkillLoader {
           }
           if (!res.statusCode || res.statusCode < 200 || res.statusCode >= 300) {
             res.resume();
-            reject(new Error(`HTTP ${res.statusCode}: ${res.statusMessage}`));
+            reject(
+              new Error(
+                kind === 'api' && res.statusCode === 403
+                  ? 'GitHub API rate limit exceeded or access forbidden (HTTP 403). Check permissions or set GITHUB_TOKEN to raise the limit.'
+                  : `HTTP ${res.statusCode}: ${res.statusMessage}`,
+              ),
+            );
             return;
           }
           let data = '';

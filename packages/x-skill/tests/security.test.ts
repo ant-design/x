@@ -156,6 +156,25 @@ test('remote refs cannot escape the cache directory', (t) => {
   assert.deepEqual(fs.readdirSync(root), []);
 });
 
+test('long remote tags retain the requested skills without falling back on cache writes', async (t) => {
+  const root = fixture(t);
+  const installer = Object.create(SkillInstaller.prototype);
+  const tag = `v1.0.0-${'a'.repeat(180)}`;
+  const skills = [{ name: 'use-x-chat', version: tag, path: root }];
+  installer.cacheDir = root;
+  installer.args = { tag };
+  installer.language = 'en';
+  installer.helpManager = { colorize: (value: string) => value };
+  installer.skillLoader = { loadSkills: async () => skills };
+  t.mock.method(installer, 'loadLocalSkills', () => assert.fail('must preserve remote skills'));
+  await installer.loadSkills();
+  assert.deepEqual(installer.skills, skills);
+  assert.deepEqual(installer.getCache(`skills_${tag}`), skills);
+  assert.match(fs.readdirSync(root)[0], /^[a-f0-9]{64}\.json$/);
+  installer.clearCache(`skills_${tag}`);
+  assert.deepEqual(fs.readdirSync(root), []);
+});
+
 test('rejects symlink sources, destinations, and installation ancestors', async (t) => {
   const root = fixture(t);
   const source = path.join(root, 'source');
@@ -210,6 +229,7 @@ test('an aborted download cannot write late data into a fallback directory', asy
 
 interface Reply {
   status?: number;
+  statusMessage?: string;
   location?: string;
   body?: string;
 }
@@ -237,6 +257,7 @@ function mockNetwork(t: TestContext, replies: Reply[]) {
       queueMicrotask(() => {
         const response = Object.assign(new PassThrough(), {
           statusCode: reply.status ?? 200,
+          statusMessage: reply.statusMessage,
           headers: { location: reply.location },
         });
         callback(response);
@@ -247,6 +268,19 @@ function mockNetwork(t: TestContext, replies: Reply[]) {
   );
   return calls;
 }
+
+test('API 403 responses retain rate limit guidance while other HTTP errors stay unchanged', async (t) => {
+  const root = fixture(t);
+  const loader = new SkillLoader({ tempDir: root });
+  mockNetwork(t, [
+    { status: 403, statusMessage: 'Forbidden' },
+    { status: 404, statusMessage: 'Not Found' },
+    { status: 403, statusMessage: 'Forbidden' },
+  ]);
+  await assert.rejects(loader.makeRequest(apiUrl), /rate limit.*GITHUB_TOKEN/);
+  await assert.rejects(loader.makeRequest(apiUrl), { message: 'HTTP 404: Not Found' });
+  await assert.rejects(loader.downloadFile(rawUrl), { message: 'HTTP 403: Forbidden' });
+});
 
 test('rejects untrusted hosts, protocols, credentials, and ports before making a request', async (t) => {
   const root = fixture(t);
