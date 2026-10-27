@@ -41,7 +41,7 @@ tag: 2.0.0
 | defaultExpandedKeys | 初始化展开的节点 | string[] | - | - |
 | expandedKeys | 当前展开的节点 | string[] | - | - |
 | onExpand | 展开节点变化回调 | (expandedKeys: string[]) => void; | - | - |
-| line | 线条样式，为`false` 时不展示线条 | boolean \| 'solid' \| 'dashed' \| 'dotted‌' | 'solid' | - |
+| line | 线条样式，为`false` 时不展示线条 | boolean \| 'solid' \| 'dashed' \| 'dotted' | 'solid' | - |
 | classNames | 语义化结构的类名 | Record<'root'\|'item' \| 'itemIcon'\|'itemHeader' \| 'itemContent' \| 'itemFooter', string> | - | - |
 | prefixCls | 自定义前缀 | string | - | - |
 | styles | 语义化结构的样式 | Record<'root'\|'item' \|'itemIcon'\| 'itemHeader' \| 'itemContent' \| 'itemFooter', React.CSSProperties> | - | - |
