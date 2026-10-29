@@ -21,6 +21,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
+- 🐛 修复 Prompts 可点击提示项的键盘可访问性，支持 Tab 聚焦及 Enter、空格键触发，并正确处理禁用状态。[#2070](https://github.com/ant-design/x/pull/2070) 由 [SOMWHY](https://github.com/SOMWHY) 提交
 - 🐛 修复 Mermaid 首次渲染时图表空白及并发更新时旧结果覆盖新图表的问题。[#2056](https://github.com/ant-design/x/pull/2056) 由 [Div627](https://github.com/Div627) 提交
 - 🐛 修复 Mermaid 大图无法超过 3 倍缩放及缩放、拖动后 PNG 导出不完整的问题，导出尺寸不再受当前缩放状态影响。[#2035](https://github.com/ant-design/x/pull/2035) 由 [advance](https://github.com/advance-hub) 提交
 - 🐛 修复 Folder 展开按钮的悬停背景色与容器不一致的问题。[#2050](https://github.com/ant-design/x/pull/2050) 由 [QDyanbing](https://github.com/QDyanbing) 提交
@@ -37,6 +38,10 @@ tag: vVERSION
 - ⚡️ 优化 AnimationText 的渲染阶段计算，减少额外渲染及动画抖动。[#1998](https://github.com/ant-design/x/pull/1998) 由 [LeiZhang](https://github.com/cactuser-Lu) 提交
 - 🐛 修复正文中的美元金额被误识别为 LaTeX 公式的问题。单美元行内公式遵循 Pandoc 定界符规则，`$ x $` 和 `$x$2` 不再渲染为公式；保留双美元公式行为，并支持公式内的转义美元符号。[#1997](https://github.com/ant-design/x/pull/1997) 由 [Div627](https://github.com/Div627) 提交
 - 📦 将 `marked` 依赖从 15.x 升级到 16.x，减少与 Mermaid 同时使用时的重复打包。[#1969](https://github.com/ant-design/x/pull/1969) 由 [Waiter](https://github.com/waiter) 提交
+
+### @ant-design/x-sdk
+
+- 🐛 修复 XRequest 在 JSON 响应返回 `success: false` 后 `isRequesting` 仍为 `true` 的问题，在触发错误回调前结束当前请求，并避免旧请求的业务错误清除新请求的进行中状态。[#2066](https://github.com/ant-design/x/pull/2066) 由 [dvd233](https://github.com/dvd233) 提交
 
 ### @ant-design/x-skill
 
