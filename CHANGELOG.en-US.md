@@ -22,6 +22,7 @@ tag: vVERSION
 
 ### @ant-design/x
 
+- 🐛 Fix keyboard accessibility for clickable Prompts items, supporting Tab focus and activation with Enter or Space while respecting the disabled state. [#2070](https://github.com/ant-design/x/pull/2070) by [SOMWHY](https://github.com/SOMWHY)
 - 🐛 Fix Mermaid rendering a blank graph on first render and stale results overwriting newer diagrams during concurrent updates. [#2056](https://github.com/ant-design/x/pull/2056) by [Div627](https://github.com/Div627)
 - 🐛 Fix Mermaid diagrams being limited to 3x zoom and PNG exports being clipped after zooming or dragging; export dimensions are now independent of the current zoom state. [#2035](https://github.com/ant-design/x/pull/2035) by [advance](https://github.com/advance-hub)
 - 🐛 Fix the Folder switcher's hover background not matching its container. [#2050](https://github.com/ant-design/x/pull/2050) by [QDyanbing](https://github.com/QDyanbing)
@@ -38,6 +39,10 @@ tag: vVERSION
 - ⚡️ Optimize AnimationText computation during rendering to reduce extra renders and animation jitter. [#1998](https://github.com/ant-design/x/pull/1998) by [LeiZhang](https://github.com/cactuser-Lu)
 - 🐛 Fix currency amounts in prose being interpreted as LaTeX formulas. Single-dollar inline math now follows Pandoc delimiter rules, so `$ x $` and `$x$2` no longer render as math; double-dollar behavior is preserved, and escaped dollar signs inside formulas are supported. [#1997](https://github.com/ant-design/x/pull/1997) by [Div627](https://github.com/Div627)
 - 📦 Upgrade `marked` from 15.x to 16.x to reduce duplicate bundling when used alongside Mermaid. [#1969](https://github.com/ant-design/x/pull/1969) by [Waiter](https://github.com/waiter)
+
+### @ant-design/x-sdk
+
+- 🐛 Fix XRequest leaving `isRequesting` set to `true` after a JSON response with `success: false`; finish the current request before its error callback without letting an older business error clear a newer request's active state. [#2066](https://github.com/ant-design/x/pull/2066) by [dvd233](https://github.com/dvd233)
 
 ### @ant-design/x-skill
 

@@ -15,8 +15,9 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
     <div
       class="ant-prompts-list"
     >
-      <div
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -56,9 +57,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             Got any sparks for a new project?
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -101,9 +103,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             Help me understand the background of this topic.
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -143,9 +146,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             How can I work faster and better?
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -185,9 +189,10 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             Why do not ants get sick? Because they have tiny ant-bodies!
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -227,7 +232,7 @@ exports[`renders components/prompts/demo/basic.tsx extend context correctly 1`] 
             How to solve common issues? Share some tips!
           </p>
         </div>
-      </div>
+      </button>
     </div>
   </div>
 </div>
@@ -393,8 +398,9 @@ exports[`renders components/prompts/demo/fadeIn.tsx extend context correctly 1`]
     <div
       class="ant-prompts-list"
     >
-      <div
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -434,9 +440,10 @@ exports[`renders components/prompts/demo/fadeIn.tsx extend context correctly 1`]
             Got any sparks for a new project?
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -479,9 +486,10 @@ exports[`renders components/prompts/demo/fadeIn.tsx extend context correctly 1`]
             Help me understand the background of this topic.
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -521,9 +529,10 @@ exports[`renders components/prompts/demo/fadeIn.tsx extend context correctly 1`]
             How can I work faster and better?
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -563,9 +572,10 @@ exports[`renders components/prompts/demo/fadeIn.tsx extend context correctly 1`]
             Why do not ants get sick? Because they have tiny ant-bodies!
           </p>
         </div>
-      </div>
-      <div
+      </button>
+      <button
         class="ant-prompts-item"
+        type="button"
       >
         <div
           class="ant-prompts-icon"
@@ -605,7 +615,7 @@ exports[`renders components/prompts/demo/fadeIn.tsx extend context correctly 1`]
             How to solve common issues? Share some tips!
           </p>
         </div>
-      </div>
+      </button>
     </div>
   </div>
 </div>
@@ -1377,9 +1387,10 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 <div
                   class="ant-prompts-list ant-prompts-list-vertical"
                 >
-                  <div
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-content"
@@ -1390,10 +1401,11 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         What's new in X?
                       </p>
                     </div>
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-content"
@@ -1404,10 +1416,11 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         What's AGI?
                       </p>
                     </div>
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-content"
@@ -1418,7 +1431,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         Where is the doc?
                       </p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -1480,9 +1493,10 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 <div
                   class="ant-prompts-list ant-prompts-list-vertical"
                 >
-                  <div
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-icon"
@@ -1516,10 +1530,11 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         Know the well
                       </p>
                     </div>
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-icon"
@@ -1553,10 +1568,11 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         Set the AI role
                       </p>
                     </div>
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-icon"
@@ -1596,7 +1612,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         Express the feeling
                       </p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -1658,9 +1674,10 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                 <div
                   class="ant-prompts-list ant-prompts-list-vertical"
                 >
-                  <div
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-content"
@@ -1676,10 +1693,11 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         Install Ant Design X
                       </p>
                     </div>
-                  </div>
-                  <div
+                  </button>
+                  <button
                     class="ant-prompts-item"
                     style="background: rgba(255, 255, 255, 0.45); border: 1px solid #FFF;"
+                    type="button"
                   >
                     <div
                       class="ant-prompts-content"
@@ -1695,7 +1713,7 @@ exports[`renders components/prompts/demo/nest.tsx extend context correctly 1`] =
                         Play on the web without installing
                       </p>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>
