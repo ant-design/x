@@ -16,6 +16,38 @@ tag: vVERSION
 
 ---
 
+## 2.10.0
+
+`2026-10-29`
+
+### @ant-design/x
+
+- 🐛 Fix Mermaid rendering a blank graph on first render and stale results overwriting newer diagrams during concurrent updates. [#2056](https://github.com/ant-design/x/pull/2056) by [Div627](https://github.com/Div627)
+- 🐛 Fix Mermaid diagrams being limited to 3x zoom and PNG exports being clipped after zooming or dragging; export dimensions are now independent of the current zoom state. [#2035](https://github.com/ant-design/x/pull/2035) by [advance](https://github.com/advance-hub)
+- 🐛 Fix the Folder switcher's hover background not matching its container. [#2050](https://github.com/ant-design/x/pull/2050) by [QDyanbing](https://github.com/QDyanbing)
+- ⚡️ Memoize CodeHighlighter to avoid repeating syntax highlighting for unchanged code blocks during streaming updates. [#2061](https://github.com/ant-design/x/pull/2061) by [Div627](https://github.com/Div627)
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown now accepts a boolean `streaming` preset: `streaming={isStreaming}` enables incremental rendering, completion of unfinished syntax, and a typewriter effect. [#2061](https://github.com/ant-design/x/pull/2061) by [Div627](https://github.com/Div627)
+- 🆕 Add `streaming.incremental` to split content at headings and only re-parse and render the growing section; use `keepSectionsOnEnd` to control whether sections are preserved when streaming ends. [#2061](https://github.com/ant-design/x/pull/2061) by [Div627](https://github.com/Div627)
+- 🆕 Add `streaming.incompleteMarkdown: 'complete'` to immediately display unfinished emphasis, inline code, link text, and list items. [#2061](https://github.com/ant-design/x/pull/2061) by [Div627](https://github.com/Div627)
+- 🆕 Add `streaming.typewriter` and `animationConfig.splitBy` for character- or sentence-based typewriter effects and sentence-based fade-in animations, with correct handling of emoji and combining characters. [#2061](https://github.com/ant-design/x/pull/2061) by [Div627](https://github.com/Div627)
+- 🆕 Add `componentsProps` to pass extra props to custom components by tag name, avoiding remounts caused by inline component functions. [#1993](https://github.com/ant-design/x/pull/1993) by [Div627](https://github.com/Div627)
+- ⚡️ Optimize streaming content computation and table recognition, and export `arePropsEqualIgnoringDomNode` to help custom components avoid redundant renders with `React.memo`. [#2061](https://github.com/ant-design/x/pull/2061) by [Div627](https://github.com/Div627)
+- ⚡️ Optimize AnimationText computation during rendering to reduce extra renders and animation jitter. [#1998](https://github.com/ant-design/x/pull/1998) by [LeiZhang](https://github.com/cactuser-Lu)
+- 🐛 Fix currency amounts in prose being interpreted as LaTeX formulas. Single-dollar inline math now follows Pandoc delimiter rules, so `$ x $` and `$x$2` no longer render as math; double-dollar behavior is preserved, and escaped dollar signs inside formulas are supported. [#1997](https://github.com/ant-design/x/pull/1997) by [Div627](https://github.com/Div627)
+- 📦 Upgrade `marked` from 15.x to 16.x to reduce duplicate bundling when used alongside Mermaid. [#1969](https://github.com/ant-design/x/pull/1969) by [Waiter](https://github.com/waiter)
+
+### @ant-design/x-skill
+
+- 🐛 Fix path traversal risks during skill installation by validating remote names and target paths before deletion, download, and installation; reject symbolic links and unsupported file types, and isolate temporary and cache directories for each invocation. [#2071](https://github.com/ant-design/x/pull/2071) by [kimteayon](https://github.com/kimteayon)
+- 🐛 Fix untrusted download URLs and credential leaks through redirects by allowing only trusted GitHub HTTPS download hosts, limiting redirect chains, and stripping authorization and cookie headers on redirects. [#2071](https://github.com/ant-design/x/pull/2071) by [kimteayon](https://github.com/kimteayon)
+
+### Others
+
+- 📖 Fix the site's theme token color preview popover. [#1994](https://github.com/ant-design/x/pull/1994)
+
 ## 2.9.0
 
 `2026-07-23`

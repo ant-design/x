@@ -15,6 +15,38 @@ tag: vVERSION
 
 ---
 
+## 2.10.0
+
+`2026-10-29`
+
+### @ant-design/x
+
+- 🐛 修复 Mermaid 首次渲染时图表空白及并发更新时旧结果覆盖新图表的问题。[#2056](https://github.com/ant-design/x/pull/2056) 由 [Div627](https://github.com/Div627) 提交
+- 🐛 修复 Mermaid 大图无法超过 3 倍缩放及缩放、拖动后 PNG 导出不完整的问题，导出尺寸不再受当前缩放状态影响。[#2035](https://github.com/ant-design/x/pull/2035) 由 [advance](https://github.com/advance-hub) 提交
+- 🐛 修复 Folder 展开按钮的悬停背景色与容器不一致的问题。[#2050](https://github.com/ant-design/x/pull/2050) 由 [QDyanbing](https://github.com/QDyanbing) 提交
+- ⚡️ 优化 CodeHighlighter 的组件缓存，避免流式更新时对内容未变化的代码块重复进行语法高亮。[#2061](https://github.com/ant-design/x/pull/2061) 由 [Div627](https://github.com/Div627) 提交
+
+### @ant-design/x-markdown
+
+- 🆕 XMarkdown 的 `streaming` 支持布尔预设，通过 `streaming={isStreaming}` 开启增量渲染、未完成语法补全与打字机效果。[#2061](https://github.com/ant-design/x/pull/2061) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 新增 `streaming.incremental`，按标题分段，仅重新解析和渲染正在增长的段落；支持通过 `keepSectionsOnEnd` 配置流结束后是否保留分段。[#2061](https://github.com/ant-design/x/pull/2061) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 新增 `streaming.incompleteMarkdown: 'complete'`，支持即时显示尚未闭合的强调、行内代码、链接文字及列表项。[#2061](https://github.com/ant-design/x/pull/2061) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 新增 `streaming.typewriter` 和 `animationConfig.splitBy`，支持逐字或逐句打字机效果及按句淡入，并正确处理 Emoji 和组合字符。[#2061](https://github.com/ant-design/x/pull/2061) 由 [Div627](https://github.com/Div627) 提交
+- 🆕 新增 `componentsProps`，支持按标签名向自定义组件传递额外属性，避免内联组件导致的重复挂载。[#1993](https://github.com/ant-design/x/pull/1993) 由 [Div627](https://github.com/Div627) 提交
+- ⚡️ 优化流式内容计算及表格识别性能，并导出 `arePropsEqualIgnoringDomNode`，便于自定义组件通过 `React.memo` 减少重复渲染。[#2061](https://github.com/ant-design/x/pull/2061) 由 [Div627](https://github.com/Div627) 提交
+- ⚡️ 优化 AnimationText 的渲染阶段计算，减少额外渲染及动画抖动。[#1998](https://github.com/ant-design/x/pull/1998) 由 [LeiZhang](https://github.com/cactuser-Lu) 提交
+- 🐛 修复正文中的美元金额被误识别为 LaTeX 公式的问题。单美元行内公式遵循 Pandoc 定界符规则，`$ x $` 和 `$x$2` 不再渲染为公式；保留双美元公式行为，并支持公式内的转义美元符号。[#1997](https://github.com/ant-design/x/pull/1997) 由 [Div627](https://github.com/Div627) 提交
+- 📦 将 `marked` 依赖从 15.x 升级到 16.x，减少与 Mermaid 同时使用时的重复打包。[#1969](https://github.com/ant-design/x/pull/1969) 由 [Waiter](https://github.com/waiter) 提交
+
+### @ant-design/x-skill
+
+- 🐛 修复技能安装中的路径穿越风险，在删除、下载和安装前校验远端名称及目标路径，拒绝符号链接与不支持的文件类型，并隔离每次调用的临时目录及缓存目录。[#2071](https://github.com/ant-design/x/pull/2071) 由 [kimteayon](https://github.com/kimteayon) 提交
+- 🐛 修复不可信下载地址及重定向凭据泄露风险，仅允许受信任的 GitHub HTTPS 下载地址，限制重定向次数，并在重定向时移除认证和 Cookie 信息。[#2071](https://github.com/ant-design/x/pull/2071) 由 [kimteayon](https://github.com/kimteayon) 提交
+
+### 其他
+
+- 📖 修复站点主题令牌颜色预览浮层的显示问题。[#1994](https://github.com/ant-design/x/pull/1994)
+
 ## 2.9.0
 
 `2026-07-23`
