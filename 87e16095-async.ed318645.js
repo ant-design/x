@@ -1,0 +1,1 @@
+(("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]=("undefined"!=typeof globalThis?globalThis:self)["makoChunk_@ant-design/x"]||[]).push([["87e16095"],{"87e16095":function(e,n,t){e.exports=function(e){return{name:"Plain text",aliases:["text","txt"],disableAutodetect:!0};};}}]);
