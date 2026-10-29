@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
@@ -83,11 +84,32 @@ describe('prompts', () => {
     });
   });
 
-  it('should call onItemClick when a button is clicked', () => {
-    const { getByText } = render(<Prompts {...mockProps} />);
-    const button = getByText(/label 1/i);
+  it('should render interactive leaf items as accessible buttons', () => {
+    const handleClick = jest.fn();
+    const { getByRole } = render(<Prompts items={mockData} onItemClick={handleClick} />);
+
+    expect(getByRole('button', { name: /label 1 description 1/i })).toBeInTheDocument();
+    expect(getByRole('button', { name: /label 2 description 2/i })).toBeDisabled();
+  });
+
+  it('should call onItemClick once for mouse and keyboard activation', async () => {
+    const handleClick = jest.fn();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const { getByRole } = render(<Prompts items={mockData} onItemClick={handleClick} />);
+    const button = getByRole('button', { name: /label 1 description 1/i });
+
     fireEvent.click(button);
-    expect(mockProps.onItemClick).toHaveBeenCalledWith({ data: mockData[0] });
+    expect(handleClick).toHaveBeenCalledTimes(1);
+    expect(handleClick).toHaveBeenLastCalledWith({ data: mockData[0] });
+
+    button.focus();
+    await user.keyboard('{Enter}');
+    expect(handleClick).toHaveBeenCalledTimes(2);
+    expect(handleClick).toHaveBeenLastCalledWith({ data: mockData[0] });
+
+    await user.keyboard('[Space]');
+    expect(handleClick).toHaveBeenCalledTimes(3);
+    expect(handleClick).toHaveBeenLastCalledWith({ data: mockData[0] });
   });
 
   it('should disable buttons correctly', () => {
@@ -127,9 +149,17 @@ describe('prompts', () => {
     expect(container.querySelector('.ant-prompts-nested')).toBeTruthy();
   });
 
-  it('should not trigger onItemClick for nested parent items', () => {
+  it('should not expose static or nested parent items as buttons', () => {
     const handleClick = jest.fn();
-    const { getByText } = render(<Prompts items={nestedData} onItemClick={handleClick} />);
+    const { getByRole, queryByRole, getByText } = render(
+      <Prompts
+        items={nestedData}
+        onItemClick={handleClick}
+      />,
+    );
+
+    expect(getByRole('button', { name: /child 1 child description 1/i })).toBeInTheDocument();
+    expect(queryByRole('button', { name: /parent label parent description/i })).toBeNull();
 
     fireEvent.click(getByText('Parent Label'));
     expect(handleClick).not.toHaveBeenCalled();
@@ -137,9 +167,9 @@ describe('prompts', () => {
 
   it('should trigger onItemClick for nested child items', () => {
     const handleClick = jest.fn();
-    const { getByText } = render(<Prompts items={nestedData} onItemClick={handleClick} />);
+    const { getByRole } = render(<Prompts items={nestedData} onItemClick={handleClick} />);
 
-    fireEvent.click(getByText('Child 1'));
+    fireEvent.click(getByRole('button', { name: /child 1 child description 1/i }));
     expect(handleClick).toHaveBeenCalledWith({
       data: nestedData[0].children[0],
     });
@@ -188,12 +218,22 @@ describe('prompts', () => {
     expect(container.querySelector('.custom-title')).toBeTruthy();
   });
 
-  it('should not trigger onItemClick for disabled items', () => {
+  it('should not trigger onItemClick for disabled items', async () => {
     const handleClick = jest.fn();
-    const { getByText } = render(<Prompts items={mockData} onItemClick={handleClick} />);
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const { getByRole } = render(<Prompts items={mockData} onItemClick={handleClick} />);
+    const button = getByRole('button', { name: /label 2 description 2/i });
 
-    fireEvent.click(getByText('Label 2'));
+    fireEvent.click(button);
+    await user.keyboard('{Enter}');
+    await user.keyboard('{Space}');
     expect(handleClick).not.toHaveBeenCalled();
+  });
+
+  it('should not render any buttons without an onItemClick callback', () => {
+    const { queryAllByRole } = render(<Prompts items={mockData} />);
+
+    expect(queryAllByRole('button')).toHaveLength(0);
   });
 
   it('should combine vertical and wrap props correctly', () => {

@@ -217,9 +217,11 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
             <div className={mergedListCls} style={{ ...contextConfig.styles.list, ...styles.list }}>
               {items?.map((info, index) => {
                 const isNest = info.children && info.children.length > 0;
+                const isInteractive = !isNest && !!onItemClick;
+                const ItemComponent = isInteractive ? 'button' : 'div';
 
                 return (
-                  <div
+                  <ItemComponent
                     key={info.key || `key_${index}`}
                     style={{ ...contextConfig.styles.item, ...styles.item }}
                     className={clsx(
@@ -231,11 +233,13 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
                         [`${prefixCls}-item-has-nest`]: isNest,
                       },
                     )}
-                    onClick={() => {
-                      if (!isNest && !info.disabled && onItemClick) {
-                        onItemClick({ data: info });
-                      }
-                    }}
+                    {...(isInteractive
+                      ? {
+                          type: 'button' as const,
+                          disabled: info.disabled,
+                          onClick: () => onItemClick({ data: info }),
+                        }
+                      : {})}
                   >
                     {/* Icon */}
                     {info.icon && <div className={`${prefixCls}-icon`}>{info.icon}</div>}
@@ -274,7 +278,7 @@ const ForwardPrompts = React.forwardRef<ActionsRef, PromptsProps>((props, ref) =
                         />
                       )}
                     </div>
-                  </div>
+                  </ItemComponent>
                 );
               })}
             </div>
