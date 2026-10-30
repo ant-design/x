@@ -270,6 +270,70 @@ describe('useActive', () => {
       const [activePaths] = result.current;
       expect(activePaths).toEqual([]);
     });
+
+    const dispatchSpace = (
+      target: HTMLElement,
+      options: { open?: boolean; altKey?: boolean; ctrlKey?: boolean; metaKey?: boolean } = {},
+    ) => {
+      const items: SuggestionItem[] = [{ label: 'Item 1', value: 'item1' }];
+      const stopPropagation = jest.fn();
+      const preventDefault = jest.fn();
+      const { open = true, ...modifiers } = options;
+      const { result } = renderHook(() => useActive(items, open, false, jest.fn()));
+
+      act(() =>
+        result.current[1]({
+          key: ' ',
+          target,
+          stopPropagation,
+          preventDefault,
+          ...modifiers,
+        } as any),
+      );
+
+      return { preventDefault, stopPropagation };
+    };
+
+    it.each([true, false])(
+      'should stop plain Space propagation from an editable target when open is %s',
+      (open) => {
+        const { preventDefault, stopPropagation } = dispatchSpace(
+          document.createElement('textarea'),
+          { open },
+        );
+
+        expect(stopPropagation).toHaveBeenCalledTimes(1);
+        expect(preventDefault).not.toHaveBeenCalled();
+      },
+    );
+
+    it('should stop plain Space propagation from a contenteditable target', () => {
+      const target = document.createElement('div');
+      Object.defineProperty(target, 'isContentEditable', { value: true });
+
+      expect(dispatchSpace(target).stopPropagation).toHaveBeenCalledTimes(1);
+    });
+
+    it.each([
+      ['Alt', { altKey: true }],
+      ['Control', { ctrlKey: true }],
+      ['Meta', { metaKey: true }],
+    ])('should not stop %s+Space propagation', (_, modifiers) => {
+      expect(
+        dispatchSpace(document.createElement('textarea'), modifiers).stopPropagation,
+      ).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      ['button', document.createElement('button')],
+      ['button input', Object.assign(document.createElement('input'), { type: 'button' })],
+      ['checkbox input', Object.assign(document.createElement('input'), { type: 'checkbox' })],
+      ['number input', Object.assign(document.createElement('input'), { type: 'number' })],
+      ['readonly input', Object.assign(document.createElement('input'), { readOnly: true })],
+      ['disabled textarea', Object.assign(document.createElement('textarea'), { disabled: true })],
+    ])('should not stop Space propagation from a %s', (_, target) => {
+      expect(dispatchSpace(target).stopPropagation).not.toHaveBeenCalled();
+    });
   });
 
   describe('RTL mode', () => {
