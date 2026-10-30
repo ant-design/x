@@ -65,6 +65,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*cOfrS4fVkOMAAA
 | onPaste | 粘贴回调 | React.ClipboardEventHandler<`HTMLElement`> | - | - |
 | onPasteFile | 黏贴文件的回调 | (files: FileList) => void | - | - |
 | onKeyDown | 键盘按下回调 | (event: React.KeyboardEvent) => void \| false | - | - |
+| onCompositionStart | 文本组字开始时的回调 | React.CompositionEventHandler<`HTMLTextAreaElement \| HTMLDivElement`> | - | - |
+| onCompositionEnd | 文本组字结束时的回调 | React.CompositionEventHandler<`HTMLTextAreaElement \| HTMLDivElement`> | - | - |
 | onFocus | 获取焦点回调 | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
 | onBlur | 失去焦点回调 | React.FocusEventHandler<`HTMLTextAreaElement`> | - | - |
 | placeholder | 输入框占位符 | string | - | - |

@@ -585,28 +585,38 @@ describe('Sender Slot Component', () => {
       expect(onKeyUp).toHaveBeenCalled();
       expect(onKeyDown).toHaveBeenCalled();
     });
-    it('should handle onCompositionEnd event', () => {
+    it('should expose composition events without changing submit behavior', () => {
       const slotConfig = [textSlotConfig];
       const ref = createRef<SenderRef>();
-      render(<Sender ref={ref} slotConfig={slotConfig} />);
-      // Directly trigger compositionend event on the DOM element
-      const compositionEvent = new CompositionEvent('compositionend', {
-        data: '测试文本',
-        bubbles: true,
-        cancelable: true,
-      });
+      const onCompositionStart = jest.fn();
+      const onCompositionEnd = jest.fn();
+      const onSubmit = jest.fn();
+      render(
+        <Sender
+          ref={ref}
+          slotConfig={slotConfig}
+          onCompositionStart={onCompositionStart}
+          onCompositionEnd={onCompositionEnd}
+          onSubmit={onSubmit}
+        />,
+      );
+      const inputElement = ref.current?.inputElement as HTMLDivElement;
 
-      ref.current?.inputElement?.dispatchEvent(compositionEvent);
+      fireEvent.compositionStart(inputElement, { data: 'ban' });
+      expect(onCompositionStart).toHaveBeenCalledTimes(1);
+      expect(onCompositionStart.mock.calls[0][0].type).toBe('compositionstart');
+      expect(onCompositionStart.mock.calls[0][0].target).toBe(inputElement);
 
-      const compositionStartEvent = new CompositionEvent('compositionstart', {
-        data: '测试文本',
-        bubbles: true,
-        cancelable: true,
-      });
+      fireEvent.keyDown(inputElement, { key: 'Enter' });
+      expect(onSubmit).not.toHaveBeenCalled();
 
-      ref.current?.inputElement?.dispatchEvent(compositionStartEvent);
-      // The event should be handled without errors
-      expect(ref.current?.inputElement).toBeInTheDocument();
+      fireEvent.compositionEnd(inputElement, { data: '竹' });
+      expect(onCompositionEnd).toHaveBeenCalledTimes(1);
+      expect(onCompositionEnd.mock.calls[0][0].type).toBe('compositionend');
+      expect(onCompositionEnd.mock.calls[0][0].target).toBe(inputElement);
+
+      fireEvent.keyDown(inputElement, { key: 'Enter' });
+      expect(onSubmit).toHaveBeenCalledTimes(1);
     });
     it('should handle paste events', () => {
       const onPasteFile = jest.fn();
