@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
+import CarouselCard from '../components/CarouselCard';
 import Sources from '../index';
 
 // 模拟 Carousel 组件
@@ -202,6 +203,13 @@ describe('Sources Component', () => {
       '.ant-sources-carousel-item-description',
     );
     expect(description).toHaveTextContent('A long citation snippet');
+
+    // The Popover overlay is not part of the server render, so assert the
+    // clamp on the carousel card that inline mode puts in it.
+    const html = renderToStaticMarkup(
+      <CarouselCard prefixCls="ant-sources" items={descItems} descriptionLines={1} />,
+    );
+    expect(html).toMatch(/-webkit-line-clamp:\s*1/);
   });
 
   it('Sources should support children instead of items', () => {
