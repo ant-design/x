@@ -187,6 +187,13 @@ describe('Sources Component', () => {
     expect(html).toMatch(/-webkit-line-clamp:\s*2/);
   });
 
+  it('Sources should fall back to the default when descriptionLines is below 1', () => {
+    const html = renderToStaticMarkup(
+      <Sources title="Test" items={descItems} descriptionLines={0} />,
+    );
+    expect(html).toMatch(/-webkit-line-clamp:\s*3/);
+  });
+
   it('Sources should respect descriptionLines in inline mode', () => {
     const { container } = render(
       <Sources title="Test" items={descItems} inline descriptionLines={1} />,

@@ -43,7 +43,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | inline | Inline mode | boolean | false | - |
 | activeKey | Active key in inline mode | React.Key | - | - |
 | popoverOverlayWidth | Popover overlay width | number \| string | 300 | - |
-| descriptionLines | Maximum number of lines of the source description, the rest is ellipsized | number | 3 | - |
+| descriptionLines | Maximum number of lines of the source description, the rest is ellipsized; values below 1 use the default | number | 3 | - |
 
 ```typescript
 interface SourcesItem {

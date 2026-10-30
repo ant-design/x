@@ -76,6 +76,7 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
         WebkitBoxOrient: 'vertical',
         WebkitLineClamp: 3,
         textOverflow: 'ellipsis',
+        whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
       },
       [`${componentCls}-link`]: {
