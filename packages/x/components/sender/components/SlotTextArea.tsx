@@ -510,8 +510,9 @@ const SlotTextArea = React.forwardRef<SlotTextAreaRef>((_, ref) => {
       }
     }
 
-    // 处理退格键删除前一个元素
-    if (operationType === 'backspace' && focusOffset === 0) {
+    // Only remove the preceding slot for a collapsed caret. When text is selected,
+    // the browser must handle the selection first, even if its focus edge touches a slot.
+    if (operationType === 'backspace' && range?.collapsed && focusOffset === 0) {
       const previousSibling = anchorNode.previousSibling;
       if (previousSibling) {
         const nodeInfo = getNodeInfo(previousSibling as HTMLElement);
