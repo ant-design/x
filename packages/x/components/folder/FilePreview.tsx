@@ -1,7 +1,7 @@
 import { Empty, Flex, Spin } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import ActionsCopy from '../actions/ActionsCopy';
