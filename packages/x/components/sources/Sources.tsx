@@ -41,7 +41,20 @@ export interface SourcesProps
   expanded?: boolean;
   onExpand?: (expand: boolean) => void;
   defaultExpanded?: boolean;
+  /**
+   * @desc 来源描述最多展示的行数，超出部分省略；小于 1 时按默认值处理
+   * @descEN Maximum number of lines of the source description, the rest is ellipsized; values below 1 fall back to the default
+   * @default 3
+   */
+  descriptionLines?: number;
 }
+
+const defaultDescriptionLines = 3;
+
+const resolveDescriptionLines = (lines?: number): number =>
+  typeof lines === 'number' && Number.isFinite(lines) && lines >= 1
+    ? Math.floor(lines)
+    : defaultDescriptionLines;
 
 type SourcesRef = {
   nativeElement: HTMLElement;
@@ -65,6 +78,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     activeKey,
     items,
     popoverOverlayWidth = 300,
+    descriptionLines,
     ...restProps
   } = props;
 
@@ -115,6 +129,8 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
     leavedClassName: `${prefixCls}-content-hidden`,
   };
 
+  const descriptionLineClamp = resolveDescriptionLines(descriptionLines);
+
   const ContentNode = items ? (
     <ul className={`${prefixCls}-list`}>
       {items.map((item, index) => (
@@ -132,6 +148,14 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
             {item.icon && <span className={`${prefixCls}-link-icon`}>{item.icon}</span>}
             <span className={`${prefixCls}-link-title`}>{item.title}</span>
           </a>
+          {item.description && (
+            <div
+              className={`${prefixCls}-list-item-description`}
+              style={{ WebkitLineClamp: descriptionLineClamp }}
+            >
+              {item.description}
+            </div>
+          )}
         </li>
       ))}
     </ul>
@@ -161,6 +185,7 @@ const Sources: React.ForwardRefRenderFunction<SourcesRef, SourcesProps> = (props
               prefixCls={prefixCls}
               items={items}
               onClick={props.onClick}
+              descriptionLines={descriptionLineClamp}
             />
           }
           open={inline ? undefined : false}

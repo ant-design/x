@@ -1,8 +1,10 @@
 import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import mountTest from '../../../tests/shared/mountTest';
 import rtlTest from '../../../tests/shared/rtlTest';
 import { fireEvent, render, waitFakeTimer } from '../../../tests/utils';
+import CarouselCard from '../components/CarouselCard';
 import Sources from '../index';
 
 // 模拟 Carousel 组件
@@ -53,6 +55,15 @@ jest.mock('antd', () => {
 
   return Object.assign({}, actualAntd, { Carousel: MockCarousel });
 });
+
+const descItems = [
+  {
+    key: 'desc',
+    title: 'Test Title',
+    url: 'https://test.com',
+    description: 'A long citation snippet',
+  },
+];
 
 const items = [
   {
@@ -156,6 +167,49 @@ describe('Sources Component', () => {
 
     const link = container.querySelector<HTMLAnchorElement>('.ant-sources-link');
     expect(link).toHaveAttribute('href', 'https://test.com');
+
+    const description = container.querySelector<HTMLDivElement>(
+      '.ant-sources-list-item-description',
+    );
+    expect(description).toHaveTextContent('Test description');
+  });
+
+  it('Sources should clamp the description to the default 3 lines', () => {
+    // happy-dom drops `-webkit-line-clamp` from inline styles, so assert on the
+    // server-rendered markup, which keeps the style declaration.
+    const html = renderToStaticMarkup(<Sources title="Test" items={descItems} />);
+    expect(html).toMatch(/-webkit-line-clamp:\s*3/);
+  });
+
+  it('Sources should respect descriptionLines in list mode', () => {
+    const html = renderToStaticMarkup(
+      <Sources title="Test" items={descItems} descriptionLines={2} />,
+    );
+    expect(html).toMatch(/-webkit-line-clamp:\s*2/);
+  });
+
+  it('Sources should fall back to the default when descriptionLines is below 1', () => {
+    const html = renderToStaticMarkup(
+      <Sources title="Test" items={descItems} descriptionLines={0} />,
+    );
+    expect(html).toMatch(/-webkit-line-clamp:\s*3/);
+  });
+
+  it('Sources should respect descriptionLines in inline mode', () => {
+    const { container } = render(
+      <Sources title="Test" items={descItems} inline descriptionLines={1} />,
+    );
+    const description = container.querySelector<HTMLDivElement>(
+      '.ant-sources-carousel-item-description',
+    );
+    expect(description).toHaveTextContent('A long citation snippet');
+
+    // The Popover overlay is not part of the server render, so assert the
+    // clamp on the carousel card that inline mode puts in it.
+    const html = renderToStaticMarkup(
+      <CarouselCard prefixCls="ant-sources" items={descItems} descriptionLines={1} />,
+    );
+    expect(html).toMatch(/-webkit-line-clamp:\s*1/);
   });
 
   it('Sources should support children instead of items', () => {

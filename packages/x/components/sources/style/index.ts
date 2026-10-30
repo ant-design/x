@@ -65,6 +65,20 @@ const genSourcesStyle: GenerateStyle<SourcesToken> = (token) => {
       [`${componentCls}-list-item`]: {
         marginBottom: marginXS,
       },
+      [`${componentCls}-list-item-description`]: {
+        color: colorTextSecondary,
+        fontSize: fontSizeSM,
+        lineHeight,
+        marginTop: marginXXS,
+        opacity: 0.8,
+        display: '-webkit-box',
+        overflow: 'hidden',
+        WebkitBoxOrient: 'vertical',
+        WebkitLineClamp: 3,
+        textOverflow: 'ellipsis',
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-word',
+      },
       [`${componentCls}-link`]: {
         color: colorText,
         display: 'flex',
