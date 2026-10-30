@@ -19,6 +19,7 @@ tag: 2.0.0
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">基础用法</code>
+<code src="./demo/description.tsx">描述信息</code>
 <code src="./demo/icon.tsx">使用图标</code>
 <code src="./demo/expand.tsx">展开</code>
 <code src="./demo/inline.tsx">行内模式</code>
@@ -43,6 +44,7 @@ tag: 2.0.0
 | inline | 行内模式 | boolean | false | - |
 | activeKey | 行内模式，激活的 key | React.Key | - | - |
 | popoverOverlayWidth | 弹出层宽度 | number \| string | 300 | - |
+| descriptionLines | 来源描述最多展示的行数，超出部分省略 | number | 3 | - |
 
 ```typescript
 interface SourcesItem {

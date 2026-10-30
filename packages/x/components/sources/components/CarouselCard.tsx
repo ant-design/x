@@ -11,10 +11,11 @@ export interface CarouselCardProps {
   className?: string;
   style?: React.CSSProperties;
   onClick?: (item: SourcesItem) => void;
+  descriptionLines?: number;
 }
 
 const CarouselCard: React.FC<CarouselCardProps> = (props) => {
-  const { prefixCls, items, activeKey, className, style } = props;
+  const { prefixCls, items, activeKey, className, style, descriptionLines } = props;
 
   const compCls = `${prefixCls}-carousel`;
 
@@ -95,7 +96,12 @@ const CarouselCard: React.FC<CarouselCardProps> = (props) => {
               <span className={`${compCls}-item-title`}>{item.title}</span>
             </div>
             {item.description && (
-              <div className={`${compCls}-item-description`}>{item.description}</div>
+              <div
+                className={`${compCls}-item-description`}
+                style={descriptionLines ? { WebkitLineClamp: descriptionLines } : undefined}
+              >
+                {item.description}
+              </div>
             )}
           </div>
         ))}

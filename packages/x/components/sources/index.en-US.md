@@ -18,6 +18,7 @@ tag: 2.0.0
 
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
+<code src="./demo/description.tsx">Description</code>
 <code src="./demo/icon.tsx">Icon</code>
 <code src="./demo/expand.tsx">Expand</code>
 <code src="./demo/inline.tsx">Inline</code>
@@ -42,6 +43,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | inline | Inline mode | boolean | false | - |
 | activeKey | Active key in inline mode | React.Key | - | - |
 | popoverOverlayWidth | Popover overlay width | number \| string | 300 | - |
+| descriptionLines | Maximum number of lines of the source description, the rest is ellipsized | number | 3 | - |
 
 ```typescript
 interface SourcesItem {
