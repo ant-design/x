@@ -95,6 +95,9 @@ const InternalCodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighter
     style = {},
     highlightProps,
     prismLightMode = true,
+    showLineNumbers = false,
+    wrapLongLines = false,
+    showCopyButton = true,
     ...restProps
   } = props;
 
@@ -165,7 +168,7 @@ const InternalCodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighter
           >
             {lang}
           </span>
-          <Actions.Copy text={children} />
+          {showCopyButton && <Actions.Copy text={children.replace(/\n$/, '')} />}
         </div>
       );
     }
@@ -184,6 +187,8 @@ const InternalCodeHighlighter = React.forwardRef<HTMLDivElement, CodeHighlighter
     <Highlighter
       language={lang}
       wrapLines={true}
+      showLineNumbers={showLineNumbers}
+      wrapLongLines={wrapLongLines}
       style={customOneLight}
       codeTagProps={{ style: { background: 'transparent' } }}
       {...highlightProps}

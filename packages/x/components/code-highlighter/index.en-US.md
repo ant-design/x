@@ -22,6 +22,7 @@ The CodeHighlighter component is used in scenarios where you need to display cod
 <!-- prettier-ignore -->
 <code src="./demo/basic.tsx">Basic</code>
 <code src="./demo/custom-header.tsx">Custom Header</code>
+<code src="./demo/configurations.tsx">Configurations</code>
 <code src="./demo/with-xmarkdown.tsx">With XMarkdown</code>
 
 ## API
@@ -39,6 +40,9 @@ For common properties, refer to: [Common Properties](/docs/react/common-props).
 | classNames | Style class names | `string` | - |
 | highlightProps | Code highlighting configuration | [`highlightProps`](https://github.com/react-syntax-highlighter/react-syntax-highlighter?tab=readme-ov-file#props) | - |
 | prismLightMode | Whether to use Prism light mode to automatically load language support based on lang prop for smaller bundle size | `boolean` | `true` |
+| showLineNumbers | Whether to show line numbers | `boolean` | `false` |
+| wrapLongLines | Whether to wrap long lines | `boolean` | `false` |
+| showCopyButton | Whether to show copy button (only effective with default header) | `boolean` | `true` |
 
 ### CodeHighlighterRef
 
