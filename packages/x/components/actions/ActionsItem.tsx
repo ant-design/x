@@ -1,6 +1,6 @@
 import { CloseCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
-import { Tooltip } from 'antd';
+import { Tooltip, type TooltipProps } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useMobile from '../_util/hooks/use-mobile';
@@ -44,6 +44,12 @@ export interface ActionsItemProps extends Omit<React.HTMLAttributes<HTMLDivEleme
    */
   label?: string;
   /**
+   * @desc 操作项的 Tooltip，设为 `false` 时不渲染 Tooltip
+   * @descEN Tooltip of the action item, set to `false` to disable the Tooltip
+   * @default label
+   */
+  tooltip?: string | TooltipProps | false;
+  /**
    * @desc 执行中图标
    * @descEN running icon
    */
@@ -77,6 +83,7 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     defaultIcon,
     runningIcon,
     label,
+    tooltip,
     className,
     classNames = {},
     styles = {},
@@ -138,7 +145,23 @@ const ActionsItem: React.FC<ActionsItemProps> = (props) => {
     </div>
   );
 
-  return isMobile ? innerNode : <Tooltip title={label}>{innerNode}</Tooltip>;
+  // Resolve tooltip config:
+  // - `false`: no Tooltip rendered
+  // - `string`/`number`: used as the tooltip title
+  // - `TooltipProps` object: merged on top of the default `title={label}`
+  // - `undefined`: default `title={label}`
+  const tooltipProps =
+    tooltip === false
+      ? null
+      : typeof tooltip === 'string' || typeof tooltip === 'number'
+        ? { title: tooltip }
+        : { title: label, ...(tooltip || {}) };
+
+  return isMobile || tooltipProps === null ? (
+    innerNode
+  ) : (
+    <Tooltip {...tooltipProps}>{innerNode}</Tooltip>
+  );
 };
 
 export default ActionsItem;

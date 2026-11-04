@@ -23,6 +23,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 <code src="./demo/sub.tsx">更多菜单项</code>
 <code src="./demo/preset.tsx">预设模板</code>
 <code src="./demo/variant.tsx">使用变体</code>
+<code src="./demo/custom-tooltip.tsx">自定义 Tooltip</code>
 <code src="./demo/fadeIn.tsx">渐入效果</code>
 
 ## API
@@ -46,6 +47,7 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 | --- | --- | --- | --- | --- |
 | key | 自定义操作的唯一标识 | string | - | - |
 | label | 自定义操作的显示标签 | string | - | - |
+| tooltip | 操作项的 Tooltip，设为 `false` 时不渲染 Tooltip | string \| TooltipProps \| false | label | - |
 | icon | 自定义操作的图标 | ReactNode | - | - |
 | onItemClick | 点击自定义操作按钮时的回调函数 | (info: [ItemType](#itemtype)) => void | - | - |
 | danger | 语法糖，设置危险icon | boolean | false | - |
@@ -75,12 +77,13 @@ Actions 组件用于快速配置一些 AI 场景下所需要的操作按钮/功�
 
 ### Actions.Item
 
-| 属性        | 说明                 | 类型                                     | 默认值  | 版本  |
-| ----------- | -------------------- | ---------------------------------------- | ------- | ----- |
-| status      | 状态                 | 'loading'\|'error'\|'running'\|'default' | default | 2.0.0 |
-| label       | 自定义操作的显示标签 | string                                   | -       | 2.0.0 |
-| defaultIcon | 默认状态图标         | React.ReactNode                          | -       | 2.0.0 |
-| runningIcon | 执行状态图标         | React.ReactNode                          | -       | 2.0.0 |
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| status | 状态 | 'loading'\|'error'\|'running'\|'default' | default | 2.0.0 |
+| label | 自定义操作的显示标签 | string | - | 2.0.0 |
+| tooltip | 操作项的 Tooltip，设为 `false` 时不渲染 Tooltip | string \| TooltipProps \| false | label | - |
+| defaultIcon | 默认状态图标 | React.ReactNode | - | 2.0.0 |
+| runningIcon | 执行状态图标 | React.ReactNode | - | 2.0.0 |
 
 ## Semantic DOM
 
