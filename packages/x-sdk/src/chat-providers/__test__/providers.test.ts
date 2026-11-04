@@ -955,7 +955,8 @@ describe('DeepSeekChatProvider test', () => {
       });
       expect(result).toEqual({
         role: 'assistant',
-        content: '\n\n<think>\n\nLet me think about this',
+        content:
+          '\n\n<think status="done">\n\nLet me think about this\n\n</think>\n\nThe answer is',
       });
     });
 
@@ -989,7 +990,8 @@ describe('DeepSeekChatProvider test', () => {
       });
       expect(result).toEqual({
         role: 'assistant',
-        content: '\n\n<think>\n\nStep by step analysis',
+        content:
+          '\n\n<think status="done">\n\nStep by step analysis\n\n</think>\n\nFinal conclusion',
       });
     });
 
@@ -1147,7 +1149,7 @@ describe('DeepSeekChatProvider test', () => {
       });
       expect(result).toEqual({
         role: 'assistant',
-        content: '\n\n<think>\n\nDeep reasoning',
+        content: '\n\n<think status="done">\n\nDeep reasoning\n\n</think>\n\nAnswer',
       });
     });
 
@@ -1168,7 +1170,9 @@ describe('DeepSeekChatProvider test', () => {
         status: 'loading',
         responseHeaders: jsonHeaders,
       });
-      expect(result.content).toBe('\n\n<think>\n\nInitial analysis');
+      expect(result.content).toBe(
+        '\n\n<think status="done">\n\nInitial analysis\n\n</think>\n\nresult',
+      );
     });
 
     it('should handle complete think workflow', () => {
