@@ -114,7 +114,7 @@ function splitPart(partSeparator = DEFAULT_PART_SEPARATOR, kvSeparator = DEFAULT
         if (!isValidString(key)) return acc;
 
         // Extract the value from the line after the separator
-        const value = line.slice(separatorIndex + 1).trim();
+        const value = line.slice(separatorIndex + kvSeparator.length).trim();
 
         return { ...acc, [key]: value };
       }, {});
