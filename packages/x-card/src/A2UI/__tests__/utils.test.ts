@@ -107,6 +107,42 @@ describe('setValueByPath', () => {
     expect((result as any).a.b.c).toBe(99);
     expect((result as any).a.b.d).toBe(2);
   });
+
+  it('should preserve arrays and sibling entries without mutating the previous model', () => {
+    const obj = {
+      rows: [
+        { id: 'first', cells: [{ value: 1 }, { value: 2 }] },
+        { id: 'second', cells: [{ value: 3 }] },
+      ],
+    };
+    const result = setValueByPath(obj, '/rows/0/cells/0/value', 10);
+
+    expect(Array.isArray(result.rows)).toBe(true);
+    expect(Array.isArray(result.rows[0].cells)).toBe(true);
+    expect(result.rows.find((row: { id: string }) => row.id === 'first').cells[0].value).toBe(10);
+    expect(result.rows).not.toBe(obj.rows);
+    expect(result.rows[0]).not.toBe(obj.rows[0]);
+    expect(result.rows[0].cells).not.toBe(obj.rows[0].cells);
+    expect(result.rows[0].cells[0]).not.toBe(obj.rows[0].cells[0]);
+    expect(result.rows[0].cells[1]).toBe(obj.rows[0].cells[1]);
+    expect(result.rows[1]).toBe(obj.rows[1]);
+    expect(obj.rows[0].cells[0].value).toBe(1);
+  });
+
+  it('should create missing array containers for indexed paths', () => {
+    const result = setValueByPath({}, '/rows/0/cells/0/value', 10);
+
+    expect(result.rows).toEqual([{ cells: [{ value: 10 }] }]);
+  });
+
+  it('should preserve existing objects with numeric keys', () => {
+    const obj = { rows: { '0': { value: 1 }, '1': { value: 2 } } };
+    const result = setValueByPath(obj, '/rows/0/value', 10);
+
+    expect(Array.isArray(result.rows)).toBe(false);
+    expect(result.rows).toEqual({ '0': { value: 10 }, '1': { value: 2 } });
+    expect(obj.rows['0'].value).toBe(1);
+  });
 });
 
 describe('isPathValue', () => {

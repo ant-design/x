@@ -409,4 +409,26 @@ describe('applyDataModelUpdateV09', () => {
     const result = applyDataModelUpdateV09(prev, '/items', [1, 2, 3]);
     expect((result as any).items).toEqual([1, 2, 3]);
   });
+
+  it('should keep indexed streaming updates as arrays for bindings and actions', () => {
+    const prev = {
+      rows: [
+        { id: 'first', value: 1 },
+        { id: 'second', value: 2 },
+      ],
+    };
+    const result = applyDataModelUpdateV09(prev, '/rows/0/value', 10);
+    const props = resolvePropsV09({ rows: { path: '/rows' } }, result);
+    const context = resolveActionContextV09(
+      { event: { context: { rows: { path: '/rows' } } } },
+      result,
+    );
+
+    expect(props.rows).toEqual([
+      { id: 'first', value: 10 },
+      { id: 'second', value: 2 },
+    ]);
+    expect(context?.rows).toEqual(props.rows);
+    expect(prev.rows[0].value).toBe(1);
+  });
 });

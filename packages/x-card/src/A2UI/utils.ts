@@ -19,7 +19,15 @@ export function setValueByPath(
   const next = { ...obj };
   let cur: Record<string, any> = next;
   for (let i = 0; i < parts.length - 1; i++) {
-    cur[parts[i]] = cur[parts[i]] ? { ...cur[parts[i]] } : {};
+    const current = cur[parts[i]];
+    // Preserve array containers and sibling entries when updating an indexed path.
+    cur[parts[i]] = Array.isArray(current)
+      ? [...current]
+      : current
+        ? { ...current }
+        : /^(0|[1-9]\d*)$/.test(parts[i + 1])
+          ? []
+          : {};
     cur = cur[parts[i]];
   }
   cur[parts[parts.length - 1]] = value;
