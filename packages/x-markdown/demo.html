@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XMarkdown animateInsideComponents Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a2e; color: #e0e0e0; padding: 40px; }
+  h1 { color: #fff; margin-bottom: 10px; font-size: 24px; }
+  .subtitle { color: #888; margin-bottom: 30px; font-size: 14px; }
+  .demo-container { display: flex; gap: 20px; flex-wrap: wrap; }
+  .demo-box { flex: 1; min-width: 400px; background: #16213e; border-radius: 12px; padding: 24px; border: 1px solid #2a2a4a; }
+  .demo-box h2 { font-size: 16px; margin-bottom: 8px; color: #fff; }
+  .demo-box .badge { display: inline-block; padding: 2px 10px; border-radius: 10px; font-size: 12px; margin-left: 8px; }
+  .badge.off { background: #4a1a1a; color: #ff6b6b; }
+  .badge.on { background: #1a4a1a; color: #6bff6b; }
+  .demo-box .desc { color: #888; font-size: 13px; margin-bottom: 16px; }
+  .output { background: #0f0f23; border-radius: 8px; padding: 20px; min-height: 120px; font-size: 16px; line-height: 1.8; border: 1px solid #2a2a4a; }
+  .output .text-chunk { animation: fadeIn 0.3s ease-in-out forwards; opacity: 0; display: inline; }
+  .custom-tag { color: #4fc3f7; background: rgba(79, 195, 247, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(79, 195, 247, 0.3); display: inline; }
+  .no-anim .custom-tag .text-chunk { animation: none; opacity: 1; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  .controls { margin-top: 30px; display: flex; gap: 12px; }
+  button { padding: 10px 24px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+  button:hover { transform: translateY(-1px); }
+  .btn-play { background: #4fc3f7; color: #000; }
+  .btn-reset { background: #333; color: #fff; }
+  .legend { margin-top: 20px; color: #888; font-size: 13px; line-height: 1.8; }
+  .legend span { display: inline-block; margin-right: 16px; }
+  .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .legend .dot.animated { background: #6bff6b; }
+  .legend .dot.static { background: #ff6b6b; }
+</style>
+</head>
+<body>
+
+<h1>🎬 XMarkdown — animateInsideComponents 效果演示</h1>
+<p class="subtitle">模拟 Markdown 流式渲染 + 打字机动画。自定义标签 &lt;answer&gt; 内的文字能否有动画，取决于开关。</p>
+
+<div class="demo-container">
+  <!-- Demo 1: animateInsideComponents = false (默认) -->
+  <div class="demo-box">
+    <h2>❌ 默认行为 <span class="badge off">animateInsideComponents: false</span></h2>
+    <p class="desc">
+      自定义组件 <code>&lt;answer&gt;</code> 内部的文字 <strong>没有</strong> 打字机动画，直接显示。
+    </p>
+    <div class="output no-anim" id="output-off"></div>
+    <p style="margin-top:12px;color:#888;font-size:12px;">
+      ⬆️ 注意 "42" 和 "北京" 直接显示，没有淡入效果
+    </p>
+  </div>
+
+  <!-- Demo 2: animateInsideComponents = true -->
+  <div class="demo-box">
+    <h2>✅ 新功能 <span class="badge on">animateInsideComponents: true</span></h2>
+    <p class="desc">
+      自定义组件 <code>&lt;answer&gt;</code> 内部的文字 <strong>也有</strong> 打字机动画，逐字淡入。
+    </p>
+    <div class="output" id="output-on"></div>
+    <p style="margin-top:12px;color:#888;font-size:12px;">
+      ⬆️ "42" 和 "北京" 也有绿色闪烁的淡入动画
+    </p>
+  </div>
+</div>
+
+<div class="legend">
+  <span><span class="dot animated"></span> 绿色闪动 = 有动画 (AnimationText)</span>
+  <span><span class="dot static"></span> 无效果 = 无动画 (静态文本)</span>
+  <br>
+  粉色边框 = 自定义标签 &lt;answer&gt; 内部文字
+</div>
+
+<div class="controls">
+  <button class="btn-play" onclick="playAnimation()">▶ 播放动画</button>
+  <button class="btn-reset" onclick="resetAll()">↺ 重置</button>
+</div>
+
+<script>
+// Simulated markdown text with a custom component <answer>
+// Equivalent to Markdown: 答案是 <answer>42</answer>，首都是 <answer>北京</answer>。
+const segments = [
+  { text: '答案是 ', insideCustom: false },
+  { text: '42', insideCustom: true },
+  { text: '，首都是 ', insideCustom: false },
+  { text: '北京', insideCustom: true },
+  { text: '。', insideCustom: false },
+];
+
+function renderSegment(text, insideCustom, animate) {
+  const wrapper = document.createElement('span');
+
+  if (insideCustom) {
+    wrapper.className = 'custom-tag';
+  }
+
+  // Simulate AnimationText component: split into individual chars with fade-in
+  if (animate) {
+    for (let i = 0; i < text.length; i++) {
+      const chunk = document.createElement('span');
+      chunk.className = 'text-chunk';
+      chunk.textContent = text[i];
+      chunk.style.animationDelay = '0s';
+      wrapper.appendChild(chunk);
+    }
+  } else if (insideCustom) {
+    // NO animation inside custom component — just plain text
+    const span = document.createElement('span');
+    span.className = 'text-chunk';
+    span.style.animation = 'none';
+    span.style.opacity = '1';
+    span.textContent = text;
+    wrapper.appendChild(span);
+  } else {
+    // Outside custom component — always animated
+    for (let i = 0; i < text.length; i++) {
+      const chunk = document.createElement('span');
+      chunk.className = 'text-chunk';
+      chunk.textContent = text[i];
+      wrapper.appendChild(chunk);
+    }
+  }
+
+  return wrapper;
+}
+
+function flashElement(el, color) {
+  const origBg = el.style.background;
+  el.style.background = color;
+  el.style.borderRadius = '3px';
+  el.style.transition = 'background 0.3s';
+  setTimeout(() => { el.style.background = origBg; }, 500);
+}
+
+let animationTimer = null;
+
+async function playAnimation() {
+  resetAll();
+
+  const outputOn = document.getElementById('output-on');
+  const outputOff = document.getElementById('output-off');
+
+  let delay = 0;
+  const charDelay = 80; // ms per character
+
+  for (const seg of segments) {
+    // ON side: animate everything (including inside custom)
+    const onEl = renderSegment(seg.text, seg.insideCustom, true);
+    setTimeout(() => {
+      outputOn.appendChild(onEl);
+      // Flash green for animated segments
+      Array.from(onEl.querySelectorAll('.text-chunk')).forEach((ch, i) => {
+        setTimeout(() => flashElement(ch, 'rgba(107, 255, 107, 0.3)'), i * charDelay);
+      });
+    }, delay);
+
+    // OFF side: skip animation inside custom components
+    const offEl = renderSegment(seg.text, seg.insideCustom, false);
+    setTimeout(() => {
+      outputOff.appendChild(offEl);
+      // Flash red for non-animated segments inside custom
+      if (seg.insideCustom) {
+        const inner = offEl.querySelector('.text-chunk');
+        if (inner) flashElement(inner, 'rgba(255, 107, 107, 0.3)');
+      } else {
+        Array.from(offEl.querySelectorAll('.text-chunk')).forEach((ch, i) => {
+          setTimeout(() => flashElement(ch, 'rgba(107, 255, 107, 0.3)'), i * charDelay);
+        });
+      }
+    }, delay);
+
+    delay += seg.text.length * charDelay + 200;
+  }
+}
+
+function resetAll() {
+  if (animationTimer) clearTimeout(animationTimer);
+  document.getElementById('output-on').innerHTML = '';
+  document.getElementById('output-off').innerHTML = '';
+}
+
+// Auto-play on load
+setTimeout(playAnimation, 500);
+</script>
+
+</body>
+</html>
