@@ -36,6 +36,24 @@ export interface CodeHighlighterProps
    */
   highlightProps?: Partial<SyntaxHighlighterProps>;
   /**
+   * @desc 是否显示行号
+   * @descEN Whether to show line numbers
+   * @default false
+   */
+  showLineNumber?: boolean;
+  /**
+   * @desc 是否自动换行
+   * @descEN Whether to wrap long lines
+   * @default false
+   */
+  wrapLongLines?: boolean;
+  /**
+   * @desc 是否显示复制按钮，仅在默认 header 下生效
+   * @descEN Whether to show the copy button, only works with the default header
+   * @default true
+   */
+  showCopyButton?: boolean;
+  /**
    * @desc 语义化结构 className
    * @descEN Semantic structure class names
    */
