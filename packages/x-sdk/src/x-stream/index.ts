@@ -30,12 +30,20 @@ const isValidString = (str: string) => (str ?? '').trim() !== '';
  *
  * `
  */
-function splitStream(streamSeparator = DEFAULT_STREAM_SEPARATOR) {
+function splitStream(streamSeparator = DEFAULT_STREAM_SEPARATOR, normalizeLineEndings = false) {
   // Buffer to store incomplete data chunks between transformations
   let buffer = '';
+  let skipLeadingLF = false;
 
   return new TransformStream<string, string>({
     transform(streamChunk, controller) {
+      if (normalizeLineEndings && streamChunk) {
+        // A CRLF pair may be split across chunks. Empty decoder output must not reset this state.
+        const chunk =
+          skipLeadingLF && streamChunk.startsWith('\n') ? streamChunk.slice(1) : streamChunk;
+        skipLeadingLF = streamChunk.endsWith('\r');
+        streamChunk = chunk.replace(/\r\n?/g, '\n');
+      }
       buffer += streamChunk;
 
       // Split the buffer based on the separator
@@ -185,6 +193,9 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
 
   // Default encoding is `utf-8`
   const decoderStream = createDecoderStream();
+  const normalizeLineEndings =
+    (streamSeparator ?? DEFAULT_STREAM_SEPARATOR) === DEFAULT_STREAM_SEPARATOR &&
+    (partSeparator ?? DEFAULT_PART_SEPARATOR) === DEFAULT_PART_SEPARATOR;
 
   const stream = (
     transformStream
@@ -199,7 +210,7 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
          */
         readableStream
           .pipeThrough(decoderStream as TransformStream<Uint8Array, string>)
-          .pipeThrough(splitStream(streamSeparator))
+          .pipeThrough(splitStream(streamSeparator, normalizeLineEndings))
           .pipeThrough(splitPart(partSeparator, kvSeparator))
   ) as XReadableStream<Output>;
 
