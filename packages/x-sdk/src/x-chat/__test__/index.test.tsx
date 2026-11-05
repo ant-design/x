@@ -2,7 +2,7 @@ import React, { useImperativeHandle, useState } from 'react';
 import { fireEvent, render, renderHook, sleep, waitFakeTimer } from '../../../tests/utils';
 import { DefaultChatProvider } from '../../chat-providers';
 import XRequest from '../../x-request';
-import useXChat, { MessageStatus, SimpleType, XChatConfig } from '../index';
+import useXChat, { MessageInfo, MessageStatus, SimpleType, XChatConfig } from '../index';
 import { chatMessagesStoreHelper } from '../store';
 
 interface ChatInput {
@@ -75,6 +75,37 @@ describe('useXChat', () => {
     }
     return expect.objectContaining(obj);
   }
+
+  it('updates memoized message rows when setMessage changes their content', async () => {
+    const MessageRow = React.memo(({ info }: { info: MessageInfo<string> }) => (
+      <div>{info.message}</div>
+    ));
+    const Chat = () => {
+      const { messages, setMessage } = useXChat<string>({
+        defaultMessages: [{ id: 'answer', message: 'before' }],
+      });
+      return (
+        <>
+          {messages.map((info) => (
+            <MessageRow key={info.id} info={info} />
+          ))}
+          <button type="button" onClick={() => setMessage('answer', { message: 'after' })}>
+            Update
+          </button>
+        </>
+      );
+    };
+
+    const { getByText, queryByText } = render(<Chat />);
+    await waitFakeTimer();
+    expect(getByText('before')).toBeTruthy();
+
+    fireEvent.click(getByText('Update'));
+    await waitFakeTimer();
+
+    expect(queryByText('before')).toBeNull();
+    expect(getByText('after')).toBeTruthy();
+  });
 
   it('defaultMessages', async () => {
     const provider = new DefaultChatProvider<SimpleType, any, any>({
@@ -267,6 +298,7 @@ describe('useXChat', () => {
     await sleep(100);
     result.current?.setMessage('default_0', { message: 'Hello2', extraInfo: { feedback: 'like' } });
     result.current?.setMessage('default_1', { message: 'Hello3' });
+    await waitFakeTimer();
     expect(result.current?.messages.length).toBe(1);
     expect(result.current?.messages[0].message).toEqual('Hello2');
   });

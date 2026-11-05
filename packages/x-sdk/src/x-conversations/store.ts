@@ -74,8 +74,9 @@ export class ConversationStore {
   setConversation = (key: ConversationData['key'], conversation: ConversationData) => {
     const exist = this.getConversation(key);
     if (exist) {
-      Object.assign(exist, conversation);
-      this.setConversations([...this.conversations]);
+      this.setConversations(
+        this.conversations.map((item) => (item === exist ? { ...item, ...conversation } : item)),
+      );
       return true;
     }
     return false;
@@ -84,8 +85,9 @@ export class ConversationStore {
   removeConversation = (key: ConversationData['key']) => {
     const index = this.conversations.findIndex((item) => item.key === key);
     if (index !== -1) {
-      this.conversations.splice(index, 1);
-      this.setConversations([...this.conversations]);
+      const conversations = [...this.conversations];
+      conversations.splice(index, 1);
+      this.setConversations(conversations);
       return true;
     }
     return false;

@@ -14,6 +14,69 @@ describe('ChatMessagesStore', () => {
     jest.useRealTimers();
   });
 
+  describe('message snapshots', () => {
+    it.each(['object', 'updater'])(
+      'keeps earlier messages unchanged on %s updates',
+      (updateType) => {
+        const first = { id: '1', message: 'before' };
+        const second = { id: '2', message: 'unchanged' };
+        store.setMessages([first, second]);
+        const previousSnapshot = store.getSnapshot();
+        const update = jest.fn((message: typeof first) => ({
+          message: `${message.message} after`,
+        }));
+
+        expect(
+          store.setMessage('1', updateType === 'updater' ? update : { message: 'before after' }),
+        ).toBe(true);
+
+        expect(previousSnapshot.messages).toEqual([first, second]);
+        expect(first.message).toBe('before');
+        expect(store.getMessage('1')).toEqual({ id: '1', message: 'before after' });
+        expect(store.getMessage('1')).not.toBe(first);
+        expect(store.getMessage('2')).toBe(second);
+        if (updateType === 'updater') {
+          expect(update).toHaveBeenCalledTimes(1);
+          expect(update).toHaveBeenCalledWith(first);
+        }
+      },
+    );
+
+    it('updates frozen messages without changing caller-owned data', () => {
+      const message = Object.freeze({ id: '1', message: 'before' });
+      store.setMessages([message]);
+
+      expect(store.setMessage('1', { message: 'after' })).toBe(true);
+      expect(message.message).toBe('before');
+      expect(store.getMessage('1')).toEqual({ id: '1', message: 'after' });
+    });
+
+    it('keeps the previous array unchanged when removing a message', () => {
+      const first = { id: '1', message: 'first' };
+      const second = { id: '2', message: 'second' };
+      const messages = [first, second];
+      store.setMessages(messages);
+      const previousSnapshot = store.getSnapshot();
+      Object.freeze(messages);
+
+      expect(store.removeMessage('1')).toBe(true);
+      expect(previousSnapshot.messages).toEqual([first, second]);
+      expect(store.getMessages()).toEqual([second]);
+      expect(store.getMessage('2')).toBe(second);
+    });
+
+    it('does not replace the snapshot for unknown message IDs', () => {
+      store.setMessages([{ id: '1', message: 'first' }]);
+      const previousSnapshot = store.getSnapshot();
+      const update = jest.fn();
+
+      expect(store.setMessage('missing', update)).toBe(false);
+      expect(store.removeMessage('missing')).toBe(false);
+      expect(update).not.toHaveBeenCalled();
+      expect(store.getSnapshot()).toBe(previousSnapshot);
+    });
+  });
+
   describe('destroy method', () => {
     it('should clear throttle timer when destroy is called', () => {
       // 设置一些消息来触发throttle逻辑
