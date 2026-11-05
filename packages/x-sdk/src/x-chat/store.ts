@@ -148,8 +148,11 @@ export class ChatMessagesStore<T extends { id: number | string }> {
     const originMessage = this.getMessage(id);
     if (originMessage) {
       const mergeMessage = typeof message === 'function' ? message(originMessage) : message;
-      Object.assign(originMessage, mergeMessage);
-      this.setMessages([...this.snapshotResult.messages]);
+      this.setMessages(
+        this.snapshotResult.messages.map((item) =>
+          item === originMessage ? { ...item, ...mergeMessage } : item,
+        ),
+      );
       return true;
     }
     return false;
@@ -158,8 +161,9 @@ export class ChatMessagesStore<T extends { id: number | string }> {
   removeMessage = (id: string | number) => {
     const index = this.getMessages().findIndex((item) => item.id === id);
     if (index !== -1) {
-      this.snapshotResult.messages.splice(index, 1);
-      this.setMessages([...this.getMessages()]);
+      const messages = [...this.getMessages()];
+      messages.splice(index, 1);
+      this.setMessages(messages);
       return true;
     }
     return false;

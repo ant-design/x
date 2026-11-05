@@ -1,5 +1,5 @@
 import React, { useImperativeHandle } from 'react';
-import { render, sleep } from '../../../tests/utils';
+import { fireEvent, render, sleep } from '../../../tests/utils';
 import useXConversations, { ConversationData } from '../index';
 import { conversationStoreHelper } from '../store';
 
@@ -57,6 +57,36 @@ describe('useXConversations tests', () => {
     });
 
   const Demo = createDemo();
+
+  it('updates memoized conversation rows when setConversation changes their label', () => {
+    const ConversationRow = React.memo(({ info }: { info: ConversationData }) => (
+      <div>{info.label}</div>
+    ));
+    const Conversations = () => {
+      const { conversations, setConversation } = useXConversations({
+        defaultConversations: [{ key: 'chat', label: 'before' }],
+      });
+      return (
+        <>
+          {conversations.map((info) => (
+            <ConversationRow key={info.key} info={info} />
+          ))}
+          <button
+            type="button"
+            onClick={() => setConversation('chat', { key: 'chat', label: 'after' })}
+          >
+            Update
+          </button>
+        </>
+      );
+    };
+    const { getByText, queryByText } = render(<Conversations />);
+
+    expect(getByText('before')).toBeTruthy();
+    fireEvent.click(getByText('Update'));
+    expect(queryByText('before')).toBeNull();
+    expect(getByText('after')).toBeTruthy();
+  });
 
   it('should init with defaultConversations', async () => {
     const list: ConversationData[] = [
