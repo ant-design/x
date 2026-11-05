@@ -20,14 +20,12 @@ export function setValueByPath(
   let cur: Record<string, any> = next;
   for (let i = 0; i < parts.length - 1; i++) {
     const current = cur[parts[i]];
-    // Preserve array containers and sibling entries when updating an indexed path.
+    // Copy populated properties without filling holes or iterating over sparse array length.
     cur[parts[i]] = Array.isArray(current)
-      ? [...current]
+      ? Object.assign([], current, { length: current.length })
       : current
         ? { ...current }
-        : /^(0|[1-9]\d*)$/.test(parts[i + 1])
-          ? []
-          : {};
+        : {};
     cur = cur[parts[i]];
   }
   cur[parts[parts.length - 1]] = value;

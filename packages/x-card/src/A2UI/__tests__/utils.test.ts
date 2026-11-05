@@ -129,10 +129,62 @@ describe('setValueByPath', () => {
     expect(obj.rows[0].cells[0].value).toBe(1);
   });
 
-  it('should create missing array containers for indexed paths', () => {
+  it('should keep the existing object semantics for missing indexed paths', () => {
     const result = setValueByPath({}, '/rows/0/cells/0/value', 10);
 
-    expect(result.rows).toEqual([{ cells: [{ value: 10 }] }]);
+    expect(result.rows).toEqual({ '0': { cells: { '0': { value: 10 } } } });
+  });
+
+  it('should preserve holes when updating sparse arrays out of order', () => {
+    const rows: { value: number }[] = [];
+    rows[2] = { value: 1 };
+    const updated = setValueByPath({ rows }, '/rows/2/value', 2);
+    const result = setValueByPath(updated, '/rows/0/value', 3);
+
+    expect(updated.rows.length).toBe(3);
+    expect(0 in updated.rows).toBe(false);
+    expect(1 in updated.rows).toBe(false);
+    expect(updated.rows.map((row: { value: number }) => row.value)[2]).toBe(2);
+    expect(result.rows[0].value).toBe(3);
+    expect(1 in result.rows).toBe(false);
+    expect(rows[2].value).toBe(1);
+    expect(0 in rows).toBe(false);
+  });
+
+  it.each(['1000000000', '4294967295', '9007199254740992'])(
+    'should not infer an array from a missing numeric path segment %s',
+    (key) => {
+      const initial = setValueByPath({}, `/rows/${key}/value`, 1);
+      const result = setValueByPath(initial, '/rows/0/value', 2);
+
+      expect(Array.isArray(initial.rows)).toBe(false);
+      expect(result.rows[key].value).toBe(1);
+      expect(JSON.parse(JSON.stringify(result)).rows[key].value).toBe(1);
+      expect(result.rows['0'].value).toBe(2);
+    },
+  );
+
+  it('should copy large sparse arrays using populated properties', () => {
+    const rows: { value: number }[] = [];
+    rows.length = 1000000000;
+    rows[2] = { value: 1 };
+    const result = setValueByPath({ rows }, '/rows/2/value', 2);
+
+    expect(result.rows.length).toBe(rows.length);
+    expect(Object.keys(result.rows)).toEqual(['2']);
+    expect(result.rows[2].value).toBe(2);
+    expect(rows[2].value).toBe(1);
+  });
+
+  it('should preserve trailing holes and non-index array properties', () => {
+    const rows = Object.assign([{ value: 1 }], { length: 3, '4294967295': 'metadata' });
+    const result = setValueByPath({ rows }, '/rows/0/value', 2);
+
+    expect(result.rows.length).toBe(3);
+    expect(1 in result.rows).toBe(false);
+    expect(2 in result.rows).toBe(false);
+    expect(result.rows['4294967295']).toBe('metadata');
+    expect(rows[0].value).toBe(1);
   });
 
   it('should preserve existing objects with numeric keys', () => {
