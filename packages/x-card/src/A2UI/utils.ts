@@ -19,7 +19,13 @@ export function setValueByPath(
   const next = { ...obj };
   let cur: Record<string, any> = next;
   for (let i = 0; i < parts.length - 1; i++) {
-    cur[parts[i]] = cur[parts[i]] ? { ...cur[parts[i]] } : {};
+    const current = cur[parts[i]];
+    // Copy populated properties without filling holes or iterating over sparse array length.
+    cur[parts[i]] = Array.isArray(current)
+      ? Object.assign([], current, { length: current.length })
+      : current
+        ? { ...current }
+        : {};
     cur = cur[parts[i]];
   }
   cur[parts[parts.length - 1]] = value;
