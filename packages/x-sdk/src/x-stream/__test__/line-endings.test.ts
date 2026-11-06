@@ -111,6 +111,27 @@ describe('XStream line endings', () => {
     ).toEqual([{ event: 'delta', data: 'first' }, { data: 'second' }]);
   });
 
+  it.each([false, true])(
+    'preserves carriage returns with only a custom key-value separator (fragmented: %s)',
+    async (fragmented) => {
+      const text = 'data=first\rsecond\n\ndata=last\n\n';
+      expect(await readEvents(fragmented ? [...text] : [text], { kvSeparator: '=' })).toEqual([
+        { data: 'first\rsecond' },
+        { data: 'last' },
+      ]);
+    },
+  );
+
+  it('normalizes line endings with explicitly configured default separators', async () => {
+    expect(
+      await readEvents(['data: first\r\n\r\ndata: second\r\r'], {
+        streamSeparator: '\n\n',
+        partSeparator: '\n',
+        kvSeparator: ':',
+      }),
+    ).toEqual([{ data: 'first' }, { data: 'second' }]);
+  });
+
   it('passes original line endings to a custom transformer', async () => {
     const text = 'data: first\r\n\r\ndata: second\r\r';
     const chunks: string[] = [];

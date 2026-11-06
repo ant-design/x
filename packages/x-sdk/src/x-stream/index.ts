@@ -195,7 +195,8 @@ function XStream<Output = SSEOutput>(options: XStreamOptions<Output>) {
   const decoderStream = createDecoderStream();
   const normalizeLineEndings =
     (streamSeparator ?? DEFAULT_STREAM_SEPARATOR) === DEFAULT_STREAM_SEPARATOR &&
-    (partSeparator ?? DEFAULT_PART_SEPARATOR) === DEFAULT_PART_SEPARATOR;
+    (partSeparator ?? DEFAULT_PART_SEPARATOR) === DEFAULT_PART_SEPARATOR &&
+    (kvSeparator ?? DEFAULT_KV_SEPARATOR) === DEFAULT_KV_SEPARATOR;
 
   const stream = (
     transformStream
