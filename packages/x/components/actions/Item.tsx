@@ -1,10 +1,10 @@
-import { Tooltip } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useMobile from '../_util/hooks/use-mobile';
 import ActionsMenu from './ActionsMenu';
 import { ActionsContext } from './context';
 import type { ActionsItemProps } from './interface';
+import { renderWithTooltip } from './tooltip';
 
 const Item: React.FC<ActionsItemProps> = (props) => {
   const { item, onClick, dropdownProps = {} } = props;
@@ -29,6 +29,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
   }
 
   const iconElement = <div className={`${prefixCls}-icon`}>{item?.icon}</div>;
+  const mergedIconElement = renderWithTooltip(iconElement, item.tooltip, item.label, isMobile);
 
   return (
     <div
@@ -50,7 +51,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       }}
       key={itemKey}
     >
-      {isMobile ? iconElement : <Tooltip title={item.label}>{iconElement}</Tooltip>}
+      {mergedIconElement}
     </div>
   );
 };

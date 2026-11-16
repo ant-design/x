@@ -45,6 +45,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | key | Unique identifier for custom action | string | - | - |
 | label | Display label for custom action | string | - | - |
+| tooltip | Custom tooltip for the action. Set to `false` to disable it | string \| TooltipProps \| false | `label` | - |
 | icon | Icon for custom action | ReactNode | - | - |
 | onItemClick | Callback function when custom action button is clicked | (info: [ItemType](#itemtype)) => void | - | - |
 | danger | Syntactic sugar, sets danger icon | boolean | false | - |
@@ -78,6 +79,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | --- | --- | --- | --- | --- |
 | status | Status | 'loading'\|'error'\|'running'\|'default' | default | 2.0.0 |
 | label | Display label for custom action | string | - | 2.0.0 |
+| tooltip | Custom tooltip for the action. Set to `false` to disable it | string \| TooltipProps \| false | `label` | - |
 | defaultIcon | Default status icon | ReactNode | - | 2.0.0 |
 | runningIcon | Running status icon | ReactNode | - | 2.0.0 |
 
