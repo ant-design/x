@@ -35,7 +35,7 @@ tag: 2.0.0
 | styles | 样式 style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | children | 内容 | React.ReactNode | - | - |
 | title | 状态文本 | React.ReactNode | - | - |
-| icon | 状态图标 | React.ReactNode | - | - |
+| icon | 状态图标。设为 `false` 可在非加载状态下隐藏图标 | React.ReactNode | - | - |
 | loading | 加载中 | boolean \| React.ReactNode | false | - |
 | defaultExpanded | 默认是否展开 | boolean | true | - |
 | expanded | 是否展开 | boolean | - | - |
