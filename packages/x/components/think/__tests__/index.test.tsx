@@ -68,6 +68,17 @@ describe('Think Component', () => {
     expect(element).toBeTruthy();
   });
 
+  it('only renders the icon container while loading when icon is false', () => {
+    const { container, getByText, rerender } = render(<Think icon={false} loading />);
+    expect(container.querySelector('.ant-think-status-icon .anticon-loading')).toBeTruthy();
+
+    rerender(<Think icon={false} loading={<span>Loading</span>} />);
+    expect(getByText('Loading').parentElement).toHaveClass('ant-think-status-icon');
+
+    rerender(<Think icon={false} />);
+    expect(container.querySelector('.ant-think-status-icon')).toBeNull();
+  });
+
   it('Think support expand', async () => {
     const { container } = render(
       <Think title={'thinking'} defaultExpanded={false}>

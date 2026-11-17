@@ -34,7 +34,7 @@ Common props ref：[Common props](/docs/react/common-props)
 | styles | DOM style | [Record<SemanticDOM, CSSProperties>](#semantic-dom) | - | - |
 | children | Think Content | React.ReactNode | - | - |
 | title | Text of status | React.ReactNode | - | - |
-| icon | Show icon | React.ReactNode | - | - |
+| icon | Status icon. Set to `false` to hide it when idle. | React.ReactNode | - | - |
 | loading | Loading | boolean \| React.ReactNode | false | - |
 | defaultExpanded | Default Expand state | boolean | true | - |
 | expanded | Expand state | boolean | - | - |

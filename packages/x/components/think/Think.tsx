@@ -142,9 +142,11 @@ const Think = React.forwardRef<ThinkRef, ThinkProps>((props, ref) => {
         onClick={() => handleExpand(!isExpand)}
         style={styles.status}
       >
-        <div className={`${prefixCls}-status-icon`}>
-          <StatusIcon loading={loading} icon={icon} />
-        </div>
+        {(icon !== false || Boolean(loading)) && (
+          <div className={`${prefixCls}-status-icon`}>
+            <StatusIcon loading={loading} icon={icon} />
+          </div>
+        )}
         <div
           className={clsx(`${prefixCls}-status-text`, {
             [`${prefixCls}-motion-blink`]: blink,
