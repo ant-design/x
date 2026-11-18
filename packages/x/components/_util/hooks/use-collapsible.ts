@@ -73,14 +73,14 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {
-    setMergedExpandedKeys((preKeys) => {
-      const targetPreKeys = isThoughtChainUnControlled ? preKeys : customizeExpandedKeys;
-      const keys = targetPreKeys.includes(curKey)
-        ? targetPreKeys.filter((key) => key !== curKey)
-        : [...targetPreKeys, curKey];
-      customizeOnExpand?.(keys);
-      return keys;
-    });
+    const targetPreKeys = isThoughtChainUnControlled ? mergedExpandedKeys : customizeExpandedKeys;
+    const keys = targetPreKeys.includes(curKey)
+      ? targetPreKeys.filter((key) => key !== curKey)
+      : [...targetPreKeys, curKey];
+    setMergedExpandedKeys(keys);
+    // Fire outside of the state updater. Updater functions run during render,
+    // which would trigger user callbacks in the render phase (#2045).
+    customizeOnExpand?.(keys);
   };
 
   // ============================ Motion ============================
