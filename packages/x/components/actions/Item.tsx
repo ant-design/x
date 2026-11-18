@@ -1,4 +1,4 @@
-import { Tooltip } from 'antd';
+import { Tooltip, type TooltipProps } from 'antd';
 import { clsx } from 'clsx';
 import React from 'react';
 import useMobile from '../_util/hooks/use-mobile';
@@ -30,6 +30,17 @@ const Item: React.FC<ActionsItemProps> = (props) => {
 
   const iconElement = <div className={`${prefixCls}-icon`}>{item?.icon}</div>;
 
+  // ============================ Tooltip ============================
+  const tooltipConfig = item.tooltip;
+  const tooltipEnabled = tooltipConfig !== false;
+  const tooltipProps: TooltipProps =
+    typeof tooltipConfig === 'string'
+      ? { title: tooltipConfig }
+      : (tooltipConfig as TooltipProps) || { title: item.label };
+
+  const wrappedIcon =
+    isMobile || !tooltipEnabled ? iconElement : <Tooltip {...tooltipProps}>{iconElement}</Tooltip>;
+
   return (
     <div
       className={clsx(`${prefixCls}-item`, classNames.item, {
@@ -50,7 +61,7 @@ const Item: React.FC<ActionsItemProps> = (props) => {
       }}
       key={itemKey}
     >
-      {isMobile ? iconElement : <Tooltip title={item.label}>{iconElement}</Tooltip>}
+      {wrappedIcon}
     </div>
   );
 };

@@ -2,7 +2,7 @@
 
 exports[`renders components/actions/demo/basic.tsx extend context correctly 1`] = `
 <div
-  class="ant-actions css-var-_r_21_"
+  class="ant-actions css-var-_r_29_"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
@@ -35,7 +35,7 @@ exports[`renders components/actions/demo/basic.tsx extend context correctly 1`] 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_21_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_29_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -83,7 +83,7 @@ exports[`renders components/actions/demo/basic.tsx extend context correctly 1`] 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_21_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_29_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -111,14 +111,14 @@ exports[`renders components/actions/demo/basic.tsx extend context correctly 2`] 
 
 exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`] = `
 <div
-  class="ant-flex css-var-_r_1p_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
+  class="ant-flex css-var-_r_21_ ant-flex-align-stretch ant-flex-gap-middle ant-flex-vertical"
 >
   <div
-    class="ant-flex css-var-_r_1p_ ant-flex-align-center ant-flex-gap-middle"
+    class="ant-flex css-var-_r_21_ ant-flex-align-center ant-flex-gap-middle"
   >
     <button
       aria-checked="true"
-      class="ant-switch css-var-_r_1p_ ant-switch-checked"
+      class="ant-switch css-var-_r_21_ ant-switch-checked"
       role="switch"
       style="align-self: flex-end;"
       type="button"
@@ -142,7 +142,7 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`]
       </span>
     </button>
     <button
-      class="ant-btn css-var-_r_1p_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
+      class="ant-btn css-var-_r_21_ ant-btn-default ant-btn-color-default ant-btn-variant-outlined"
       style="align-self: flex-end;"
       type="button"
     >
@@ -152,13 +152,13 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`]
     </button>
   </div>
   <div
-    class="ant-actions css-var-_r_1p_"
+    class="ant-actions css-var-_r_21_"
   >
     <div
       class="ant-actions-list ant-actions-variant-borderless ant-x-fade-left-appear ant-x-fade-left-appear-start ant-x-fade-left"
     >
       <ul
-        class="ant-pagination css-var-_r_1p_ ant-pagination-simple"
+        class="ant-pagination css-var-_r_21_ ant-pagination-simple"
       >
         <li
           aria-disabled="true"
@@ -269,7 +269,7 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`]
           </span>
         </div>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1p_ ant-tooltip-placement-top"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_21_ ant-tooltip-placement-top"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -290,7 +290,7 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`]
         </div>
       </div>
       <span
-        class="ant-actions-copy ant-actions ant-actions-item css-var-_r_1p_ css-var-_r_1p_"
+        class="ant-actions-copy ant-actions ant-actions-item css-var-_r_21_ css-var-_r_21_"
       >
         <span
           class="ant-actions-copy-actions"
@@ -322,7 +322,7 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 1`]
             </span>
           </button>
           <div
-            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1p_ ant-tooltip-placement-top"
+            class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_21_ ant-tooltip-placement-top"
             style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
           >
             <div
@@ -352,13 +352,13 @@ exports[`renders components/actions/demo/fadeIn.tsx extend context correctly 2`]
 
 exports[`renders components/actions/demo/preset.tsx extend context correctly 1`] = `
 <div
-  class="ant-actions css-var-_r_19_"
+  class="ant-actions css-var-_r_1h_"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
   >
     <ul
-      class="ant-pagination css-var-_r_19_ ant-pagination-simple"
+      class="ant-pagination css-var-_r_1h_ ant-pagination-simple"
     >
       <li
         aria-disabled="true"
@@ -442,7 +442,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </li>
     </ul>
     <div
-      class="ant-actions ant-actions-feedback css-var-_r_19_ ant-actions-list"
+      class="ant-actions ant-actions-feedback css-var-_r_1h_ ant-actions-list"
     >
       <span
         aria-describedby="test-id"
@@ -469,7 +469,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
         </span>
       </span>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_19_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1h_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -513,7 +513,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
         </span>
       </span>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_19_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1h_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -534,7 +534,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </div>
     </div>
     <span
-      class="ant-actions-copy ant-actions ant-actions-item css-var-_r_19_ css-var-_r_19_"
+      class="ant-actions-copy ant-actions ant-actions-item css-var-_r_1h_ css-var-_r_1h_"
     >
       <span
         class="ant-actions-copy-actions"
@@ -566,7 +566,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
           </span>
         </button>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_19_ ant-tooltip-placement-top"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1h_ ant-tooltip-placement-top"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -589,7 +589,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </span>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-_r_19_ ant-actions ant-actions-audio css-var-_r_19_ ant-actions-audio-default ant-actions ant-actions-item"
+      class="ant-actions-button-item css-var-_r_1h_ ant-actions ant-actions-audio css-var-_r_1h_ ant-actions-audio-default ant-actions ant-actions-item"
     >
       <span
         aria-label="muted"
@@ -613,7 +613,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </span>
     </div>
     <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_19_ ant-tooltip-placement-top"
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1h_ ant-tooltip-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -634,7 +634,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
     </div>
     <div
       aria-describedby="test-id"
-      class="ant-actions-button-item css-var-_r_19_ ant-actions ant-actions-item"
+      class="ant-actions-button-item css-var-_r_1h_ ant-actions ant-actions-item"
     >
       <span
         aria-label="share-alt"
@@ -657,7 +657,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 1`]
       </span>
     </div>
     <div
-      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_19_ ant-tooltip-placement-top"
+      class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_1h_ ant-tooltip-placement-top"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <div
@@ -684,7 +684,7 @@ exports[`renders components/actions/demo/preset.tsx extend context correctly 2`]
 
 exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = `
 <div
-  class="ant-actions css-var-_r_m_"
+  class="ant-actions css-var-_r_u_"
 >
   <div
     class="ant-actions-list ant-actions-variant-borderless"
@@ -717,7 +717,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_u_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -765,7 +765,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_u_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -813,11 +813,11 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
       </div>
     </div>
     <div
-      class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_m_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
+      class="ant-dropdown ant-slide-up-appear ant-slide-up-appear-prepare ant-slide-up css-var-_r_u_ ant-dropdown-css-var ant-dropdown-placement-bottomLeft"
       style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
     >
       <ul
-        class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_m_ ant-dropdown-css-var css-var-_r_m_ ant-dropdown-menu-css-var"
+        class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light css-var-_r_u_ ant-dropdown-css-var css-var-_r_u_ ant-dropdown-menu-css-var"
         data-menu-list="true"
         role="menu"
         tabindex="0"
@@ -855,7 +855,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_u_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -886,7 +886,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_u_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -936,7 +936,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
           </span>
         </li>
         <div
-          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
+          class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_u_ ant-dropdown-menu-inline-collapsed-tooltip ant-tooltip-placement-right"
           style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
         >
           <div
@@ -987,7 +987,7 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 1`] = 
         </span>
       </div>
       <div
-        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-tooltip-placement-top"
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_u_ ant-tooltip-placement-top"
         style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
       >
         <div
@@ -1016,6 +1016,142 @@ exports[`renders components/actions/demo/sub.tsx extend context correctly 2`] = 
   "Unknown event handler property \`%s\`. It will be ignored.",
 ]
 `;
+
+exports[`renders components/actions/demo/tooltip.tsx extend context correctly 1`] = `
+<div
+  class="ant-actions css-var-_r_m_"
+>
+  <div
+    class="ant-actions-list ant-actions-variant-borderless"
+  >
+    <div
+      class="ant-actions-item"
+    >
+      <div
+        aria-describedby="test-id"
+        class="ant-actions-icon"
+      >
+        <span
+          aria-label="redo"
+          class="anticon anticon-redo"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="redo"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M758.2 839.1C851.8 765.9 912 651.9 912 523.9 912 303 733.5 124.3 512.6 124 291.4 123.7 112 302.8 112 523.9c0 125.2 57.5 236.9 147.6 310.2 3.5 2.8 8.6 2.2 11.4-1.3l39.4-50.5c2.7-3.4 2.1-8.3-1.2-11.1-8.1-6.6-15.9-13.7-23.4-21.2a318.64 318.64 0 01-68.6-101.7C200.4 609 192 567.1 192 523.9s8.4-85.1 25.1-124.5c16.1-38.1 39.2-72.3 68.6-101.7 29.4-29.4 63.6-52.5 101.7-68.6C426.9 212.4 468.8 204 512 204s85.1 8.4 124.5 25.1c38.1 16.1 72.3 39.2 101.7 68.6 29.4 29.4 52.5 63.6 68.6 101.7 16.7 39.4 25.1 81.3 25.1 124.5s-8.4 85.1-25.1 124.5a318.64 318.64 0 01-68.6 101.7c-9.3 9.3-19.1 18-29.3 26L668.2 724a8 8 0 00-14.1 3l-39.6 162.2c-1.2 5 2.6 9.9 7.7 9.9l167 .8c6.7 0 10.5-7.7 6.3-12.9l-37.3-47.9z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-css-var css-var-_r_m_ ant-tooltip-placement-top"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <div
+          class="ant-tooltip-arrow"
+          style="position: absolute; bottom: 0px; left: 0px;"
+        >
+          <span
+            class="ant-tooltip-arrow-content"
+          />
+        </div>
+        <div
+          class="ant-tooltip-container"
+          id="test-id"
+          role="tooltip"
+        >
+          Click to retry
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-actions-item"
+    >
+      <div
+        aria-describedby="test-id"
+        class="ant-actions-icon"
+      >
+        <span
+          aria-label="edit"
+          class="anticon anticon-edit"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="edit"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="ant-tooltip ant-zoom-big-fast-appear ant-zoom-big-fast-appear-prepare ant-zoom-big-fast ant-tooltip-blue ant-tooltip-css-var css-var-_r_m_ ant-tooltip-placement-bottom"
+        style="--arrow-x: 0px; --arrow-y: 0px; left: -1000vw; top: -1000vh; right: auto; bottom: auto; box-sizing: border-box;"
+      >
+        <div
+          class="ant-tooltip-arrow"
+          style="position: absolute; top: 0px; left: 0px;"
+        >
+          <span
+            class="ant-tooltip-arrow-content"
+          />
+        </div>
+        <div
+          class="ant-tooltip-container"
+          id="test-id"
+          role="tooltip"
+        >
+          Edit content
+        </div>
+      </div>
+    </div>
+    <div
+      class="ant-actions-item"
+    >
+      <div
+        class="ant-actions-icon"
+      >
+        <span
+          aria-label="edit"
+          class="anticon anticon-edit"
+          role="img"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon="edit"
+            fill="currentColor"
+            focusable="false"
+            height="1em"
+            viewBox="64 64 896 896"
+            width="1em"
+          >
+            <path
+              d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 14.9 9.9 23.8 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
+            />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders components/actions/demo/tooltip.tsx extend context correctly 2`] = `[]`;
 
 exports[`renders components/actions/demo/variant.tsx extend context correctly 1`] = `
 <div
