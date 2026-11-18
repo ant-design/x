@@ -400,4 +400,50 @@ describe('Conversations Component', () => {
       jest.restoreAllMocks();
     });
   });
+
+  describe('groupable.collapsible controlled mode', () => {
+    it('should not trigger onExpand during render', () => {
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const App: React.FC = () => {
+        const [expandedKeys, setExpandedKeys] = React.useState<string[]>(['pinned']);
+        return (
+          <Conversations
+            items={items}
+            groupable={{
+              collapsible: true,
+              expandedKeys,
+              onExpand: setExpandedKeys,
+            }}
+          />
+        );
+      };
+      const { container } = render(<App />);
+
+      const title = container.querySelector('.ant-conversations-group-title');
+      const trigger = container.querySelector('.ant-conversations-group-collapse-trigger');
+      expect(trigger).toHaveClass('ant-conversations-group-collapse-trigger-open');
+
+      // Toggle twice in one batch. React eagerly evaluates the first updater,
+      // but the second one runs during the render phase. With the old
+      // implementation onExpand was called inside the updater, so it fired
+      // during render and made the controlled parent setState in render phase.
+      // Both clicks read the same stale expandedKeys=['pinned'], so the batch
+      // collapses the group.
+      act(() => {
+        fireEvent.click(title);
+        fireEvent.click(title);
+      });
+
+      const renderPhaseWarnings = errorSpy.mock.calls.filter((args) =>
+        args.some((arg) => typeof arg === 'string' && arg.includes('Cannot update a component')),
+      );
+      expect(renderPhaseWarnings).toHaveLength(0);
+      expect(trigger).toHaveClass('ant-conversations-group-collapse-trigger-close');
+
+      // A separately flushed click reads the fresh state and toggles back.
+      fireEvent.click(title);
+      expect(trigger).toHaveClass('ant-conversations-group-collapse-trigger-open');
+      errorSpy.mockRestore();
+    });
+  });
 });
