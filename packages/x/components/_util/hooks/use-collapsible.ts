@@ -72,11 +72,20 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
   >(defaultExpandedKeys || [], isThoughtChainUnControlled ? undefined : customizeExpandedKeys);
 
   // ============================ Event ============================
+  // Batched toggles must chain on each other. The committed state (or the
+  // controlled prop) is stale within one batch, so keep the pending result
+  // in a ref as the base for the next toggle.
+  const pendingExpandedKeysRef = React.useRef<string[] | null>(null);
+
   const onItemExpand = (curKey: string) => {
-    const targetPreKeys = isThoughtChainUnControlled ? mergedExpandedKeys : customizeExpandedKeys;
-    const keys = targetPreKeys.includes(curKey)
-      ? targetPreKeys.filter((key) => key !== curKey)
-      : [...targetPreKeys, curKey];
+    const isUncontrolled = isThoughtChainUnControlled;
+    const base =
+      (isUncontrolled ? pendingExpandedKeysRef.current : null) ??
+      (isUncontrolled ? mergedExpandedKeys : customizeExpandedKeys);
+    const keys = base.includes(curKey) ? base.filter((key) => key !== curKey) : [...base, curKey];
+    if (isUncontrolled) {
+      pendingExpandedKeysRef.current = keys;
+    }
     setMergedExpandedKeys(keys);
     // Fire outside of the state updater. Updater functions run during render,
     // which would trigger user callbacks in the render phase (#2045).
