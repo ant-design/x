@@ -427,6 +427,8 @@ describe('Conversations Component', () => {
       // but the second one runs during the render phase. With the old
       // implementation onExpand was called inside the updater, so it fired
       // during render and made the controlled parent setState in render phase.
+      // Both clicks read the same stale expandedKeys=['pinned'], so the batch
+      // collapses the group.
       act(() => {
         fireEvent.click(title);
         fireEvent.click(title);
@@ -436,8 +438,10 @@ describe('Conversations Component', () => {
         args.some((arg) => typeof arg === 'string' && arg.includes('Cannot update a component')),
       );
       expect(renderPhaseWarnings).toHaveLength(0);
+      expect(trigger).toHaveClass('ant-conversations-group-collapse-trigger-close');
 
-      // Functional sanity: two toggles return to the initial expanded keys.
+      // A separately flushed click reads the fresh state and toggles back.
+      fireEvent.click(title);
       expect(trigger).toHaveClass('ant-conversations-group-collapse-trigger-open');
       errorSpy.mockRestore();
     });
