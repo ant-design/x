@@ -87,6 +87,7 @@
     "@rc-component/motion": "^1.1.6",
     "@rc-component/util": "^1.4.0",
     "@rc-component/resize-observer": "^1.0.1",
+    "@rc-component/virtual-list": "^1.0.2",
     "react-syntax-highlighter": "^16.1.0",
     "mermaid": "^11.12.1"
   },
@@ -109,7 +110,6 @@
     "@rc-component/np": "^1.0.3",
     "@rc-component/table": "^1.9.0",
     "@rc-component/trigger": "^3.7.1",
-    "@rc-component/virtual-list": "^1.0.2",
     "@stackblitz/sdk": "^1.11.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
