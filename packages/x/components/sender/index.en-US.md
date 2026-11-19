@@ -79,7 +79,8 @@ interface SkillType {
     | boolean
     | {
         closeIcon?: React.ReactNode;
-        onClose?: React.MouseEventHandler<HTMLDivElement>;
+        // Triggered when the skill is removed by clicking the close button or pressing Backspace
+        onClose?: (event: React.SyntheticEvent<HTMLDivElement>) => void;
         disabled?: boolean;
       };
 }
