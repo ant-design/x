@@ -123,7 +123,7 @@ type ActionsComponents = {
 | --- | --- | --- | --- | --- |
 | type | 节点类型，决定渲染组件类型，必填 | 'text' \| 'input' \| 'select' \| 'tag' \| 'content' \| 'custom' | - | 2.0.0 |
 | key | 唯一标识，type 为 text 时可省略 | string | - | - |
-| formatResult | 格式化最终结果，对所有词槽类型（含 `content`）生效 | (value: any) => string | - | 2.0.0 |
+| formatResult | 格式化最终结果，对所有词槽类型生效；用于 `content` 词槽时，接收编辑后的文本内容。 | (value: any) => string | - | 2.0.0 |
 
 ##### text 节点属性
 
